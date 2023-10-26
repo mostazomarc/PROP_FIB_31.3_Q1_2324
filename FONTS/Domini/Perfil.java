@@ -1,6 +1,7 @@
 
 
-[public] class Perfil {
+public class Perfil {
+
     private String Usuari;
     private String Contrasenya;
     private Frecuencia[] Frecuencies;
