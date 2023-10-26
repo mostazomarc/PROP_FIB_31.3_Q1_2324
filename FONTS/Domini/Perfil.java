@@ -1,6 +1,10 @@
+
+
 [public] class Perfil {
     private String Usuari;
     private String Contrasenya;
+    private Frecuencia[] Frecuencies;
+
 
     //Crear usuari amb nom i contrasenya
     public Perfil (String User, String pswd) {
@@ -12,4 +16,5 @@
     public Perfil (String User) {
         Usuari = User;
     }
+
 }
