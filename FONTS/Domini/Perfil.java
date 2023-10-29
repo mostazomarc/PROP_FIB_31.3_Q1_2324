@@ -1,21 +1,33 @@
-
+package Domini;
 
 public class Perfil {
 
     private String Usuari;
     private String Contrasenya;
-    private Frecuencia[] Frecuencies;
+    //private Frequencia[] Frequencies;
 
-
-    //Crear usuari amb nom i contrasenya
     public Perfil (String User, String pswd) {
         Usuari = User;
         Contrasenya = pswd;
     }
 
-    //Crear Usuari sense contrasenya
     public Perfil (String User) {
         Usuari = User;
     }
 
+    public String getUsuari() {
+        return Usuari;
+    }
+
+    public String getContrasenya() {
+        return Contrasenya;
+    }
+
+    public void canviaUsuari (String newUs) {
+        Usuari = newUs;
+    }
+
+    public void canviaContrasenya (String newCon) {
+        Contrasenya = newCon;
+    }
 }

@@ -1,8 +1,9 @@
+package Domini;
 
 import java.util.HashSet;
 import java.util.Set;
 //import java.util.Vector;
-package Domini
+
 public class Alfabet {
     private String idioma;
     private Set<char> lletres;
