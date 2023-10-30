@@ -45,4 +45,10 @@ public class CtrlDomini {
         if (PerfilsActius.containsKey(id)) return PerfilsActius.get(id);
         else return null //perfil no existeix
     }
+
+    //Pre:
+    //Post: Retorna el nom de l'estrategia per fer la distribució de teclat
+    public String getEstrategiaActual() {
+        return Estrategia;
+    }
 }
