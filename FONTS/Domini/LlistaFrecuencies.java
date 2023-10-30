@@ -7,11 +7,22 @@ public class LlistaFrecuencies {
     private String nom;
     private Map<String, int> LListaParaules;
 
+
+    //Pre:
+    //Post: Es crea una LlistaFrecuencies amb nom
     public LlistaFrecuencies (String nom) {
-        //input arxius
+        this.nom = nom;
     }
 
-    public LlistaFrecuencies (String nom, Map<pair<char,char>, int> LListaParaules) {
-
+    //Pre: LlistaParaules es una llista valida
+    //Post: Es crea una LlistaFrecuencies amb nom i llista paraules
+    public LlistaFrecuencies (String nom, Map<String, int> LListaParaules) {
+        this.nom = nom;
+        this.LListaParaules = LListaParaules;
     }
+
+    public  Map<String, int> getFrecuencies() {
+        return LlistaParaules;
+    }
+
 }
