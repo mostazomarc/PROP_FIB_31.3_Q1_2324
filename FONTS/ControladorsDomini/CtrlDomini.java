@@ -1,5 +1,7 @@
 package ControladorsDomini;
 
+import java.util.HashMap;
+import java.util.Map;
 import Domini.*;
 
 public class CtrlDomini {
