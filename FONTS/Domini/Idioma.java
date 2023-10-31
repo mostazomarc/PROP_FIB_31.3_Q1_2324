@@ -17,7 +17,7 @@ public class Idioma {
 
     //Retorna el nom de l'idioma
     public void getNom() {
-        return nom:
+        return nom;
     }
 
     //Retorna les lletres que té l'alfabet de l'idioma

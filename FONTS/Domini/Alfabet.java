@@ -17,7 +17,7 @@ public class Alfabet {
 
     //Pre:
     //Post: s'ha afegit l'idioma language al conjunt d'Idiomes de l'alfabet
-    public afegirIdioma(Idioma language) {
+    public void afegirIdioma(Idioma language) {
         idiomes.add(language);
     }
 
