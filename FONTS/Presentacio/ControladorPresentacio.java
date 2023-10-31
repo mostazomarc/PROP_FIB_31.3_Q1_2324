@@ -1,4 +1,4 @@
-package presentacio;
+package Presentacio;
 import java.io.FileNotFoundException;
 
 import ControladorsDomini.CtrlDomini;
@@ -15,5 +15,9 @@ public class ControladorPresentacio {
         vt = new VistaTerminal(this);
         iniciaInstancia();
         vt.inicialitzaTerminal();
+    }
+
+    public void iniciaInstancia() {
+        System.out.println("\n nova instancia controlador domini \n");
     }
 }
