@@ -1,7 +1,6 @@
 package Presentacio;
 import java.io.FileNotFoundException;
 
-import ControladorsDomini.CtrlDomini;
 import Domini.FactoriaController;
 
 public class ControladorPresentacio {
