@@ -8,6 +8,8 @@ public class ControladorPresentacio {
     private VistaTerminal vt;
     private CtrlDomini controladorDomini;
 
+    //Pre:
+    //Post: S'obtenen els controladors de factoria, Domini i es crea i inicialitza una vista de terminal
     public ControladorPresentacio() throws FileNotFoundException {
         FactoriaController fc = FactoriaController.getInstance(); //retorna el factoriaControler o es crea
         fc.CrearControladorDomini(); //Crea el controlador de domini
@@ -17,7 +19,21 @@ public class ControladorPresentacio {
         vt.inicialitzaTerminal();
     }
 
+    //Pre:
+    //Post: S'inicia una instancia amb el perfil x
     public void iniciaInstancia() {
-        System.out.println("\n nova instancia controlador domini \n");
+        controladorDomini.iniciaInstancia("Marc");
+    }
+
+    //Pre:
+    //Post: S'obte l'estrategia actuall del sistema
+    public String getEstrategiaActual() {
+        return controladorDomini.getEstrategiaActual();
+    }
+
+    //Pre: Ja s'ha iniciat una instancia amb un perfil
+    //Post: S'obte l'usuari actiu actual del sistema
+    public String getPerfilActual() {
+        return controladorDomini.getPerfilActual();
     }
 }

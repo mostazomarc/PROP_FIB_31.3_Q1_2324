@@ -2,12 +2,12 @@ package ControladorsDomini;
 
 import java.util.HashMap;
 import java.util.Map;
-//import Domini.*;
+import Domini.*;
 
 public class CtrlDomini {
-    //private Perfil PerfilActual; //Perfil que esta usant actualment el programa
+    private Perfil PerfilActual; //Perfil que esta usant actualment el programa
     private String Estrategia; //Estrategia utilitzada en la fabricació del teclat
-    //private HashMap <String, Perfil> PerfilsActius; //Conjunt d'usuaris registrats
+    private HashMap <String, Perfil> PerfilsActius; //Conjunt d'usuaris registrats
     private static CtrlDomini singletonObject;
 
 
@@ -30,9 +30,17 @@ public class CtrlDomini {
     //Post: S'inicialitzen les variables necessaries.
     public void inicialitzar() {
         Estrategia = "QAP"; //estrategia per defecte
-        //PerfilsActius = new HashMap<String, Perfil>();
+        PerfilsActius = new HashMap<String, Perfil>();
     }
-    /*
+
+    //Pre: Es rep un nom d'usuari
+    //Post: Es crea l'usuari amb el nom rebut
+    public void iniciaInstancia(String nom) {
+        System.out.println("inicia sessio: " + nom +"\n");
+        PerfilActual = new Perfil(nom);
+        PerfilsActius.put(nom,PerfilActual);
+    }
+
 
     //Pre:
     //Post: Retorna el conjunt de perfils.
@@ -48,10 +56,15 @@ public class CtrlDomini {
     }
 
     //Pre:
+    //Post: Retorna la instancia del Perfil Actual.
+    public String getPerfilActual() {
+        return "Marc";
+    }
+
+    //Pre:
     //Post: Retorna el nom de l'estrategia per fer la distribució de teclat
     public String getEstrategiaActual() {
         return Estrategia;
     }
 
-     */
 }
