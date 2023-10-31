@@ -5,10 +5,10 @@ import java.util.*;
 
 public class VistaTerminal {
     private ControladorPresentacio ctrlP;
-    private scanner s;
+    //private scanner s;
     public VistaTerminal(ControladorPresentacio cp) {
         ctrlP = cp;
-        s = new Scanner(System.in);
+        //s = new Scanner(System.in);
     };
 
     public void inicialitzaTerminal() {

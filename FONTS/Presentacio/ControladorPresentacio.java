@@ -2,6 +2,7 @@ package Presentacio;
 import java.io.FileNotFoundException;
 
 import Domini.FactoriaController;
+import ControladorsDomini.CtrlDomini;
 
 public class ControladorPresentacio {
     private VistaTerminal vt;
