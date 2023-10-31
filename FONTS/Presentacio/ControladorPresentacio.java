@@ -9,7 +9,11 @@ public class ControladorPresentacio {
     private CtrlDomini controladorDomini;
 
     public ControladorPresentacio() throws FileNotFoundException {
-        FactoriaController fc = FactoriaController.getInstance();
-
+        FactoriaController fc = FactoriaController.getInstance(); //retorna el factoriaControler o es crea
+        fc.CrearControladorDomini(); //Crea el controlador de domini
+        controladorDomini = fc.getControladorDomini();
+        vt = new VistaTerminal(this);
+        iniciaInstancia();
+        vt.inicialitzaTerminal();
     }
 }
