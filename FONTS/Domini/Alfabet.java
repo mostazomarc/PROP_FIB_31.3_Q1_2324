@@ -1,28 +1,28 @@
 package Domini;
 
-import java.util.HashSet;
 import java.util.Set;
-//import java.util.Vector;
+import java.util.HashSet;
 
 public class Alfabet {
     private Set<Idioma> idiomes;
-    private Set<char> lletres;
+    private Set<Character> lletres;
 
     //Pre: letters conté totes les lletres de l'alfabet que es vol afegir
     //Post: Es crea un alfabet amb Lletres = letters i amb l'idioma donat
-    public Alfabet (Idioma language, Set<char> letters) {
-        idiomes.add(language);
-        lletres = letters;
+    public Alfabet (Idioma idioma, Set<Character> lletres) {
+        idiomes = new HashSet<Idioma>();
+        idiomes.add(idioma);
+        this.lletres = lletres;
     }
 
     //Pre:
     //Post: s'ha afegit l'idioma language al conjunt d'Idiomes de l'alfabet
-    public void afegirIdioma(Idioma language) {
-        idiomes.add(language);
+    public void afegirIdioma(Idioma idioma) {
+        idiomes.add(idioma);
     }
 
     //Retorna les lletres de l'alfabet
-    public Set<char> getLletres() {
+    public Set<Character> getLletres() {
         return lletres;
     }
 
