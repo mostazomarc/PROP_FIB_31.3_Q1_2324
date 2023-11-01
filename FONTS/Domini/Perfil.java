@@ -4,7 +4,7 @@ public class Perfil {
 
     private String Usuari;
     private String Contrasenya;
-    //private Frequencia[] Frequencies;
+    private LlistaFrequencies[] Frequencies;
 
     public Perfil (String User, String pswd) {
         Usuari = User;
