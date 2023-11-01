@@ -36,4 +36,8 @@ public class ControladorPresentacio {
     public String getPerfilActual() {
         return controladorDomini.getPerfilActual();
     }
+
+    public void llegirLlistaFreq(String tipusArxiu, String filename)  {
+       controladorDomini.llegirLlistaFreq(tipusArxiu,filename);
+    }
 }

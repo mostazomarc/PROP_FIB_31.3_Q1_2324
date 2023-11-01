@@ -1,14 +1,16 @@
 package ControladorsDomini;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.io.*;
 import Domini.*;
+import Dades.*;
 
 public class CtrlDomini {
     private Perfil PerfilActual; //Perfil que esta usant actualment el programa
     private String Estrategia; //Estrategia utilitzada en la fabricació del teclat
     private HashMap <String, Perfil> PerfilsActius; //Conjunt d'usuaris registrats
     private static CtrlDomini singletonObject;
+    private CtrlFreqFile ctrlFreqFile;
 
 
     //Pre:
@@ -29,6 +31,7 @@ public class CtrlDomini {
     //Pre:
     //Post: S'inicialitzen les variables necessaries.
     public void inicialitzar() {
+        ctrlFreqFile = CtrlFreqFile.getInstance();
         Estrategia = "QAP"; //estrategia per defecte
         PerfilsActius = new HashMap<String, Perfil>();
     }
@@ -67,4 +70,24 @@ public class CtrlDomini {
         return Estrategia;
     }
 
+    public void llegirAriuFreq(String filename) {
+        System.out.println("Llegint arxiu "+ filename +"\n");
+        List<String> LlistaFrequencies = ctrlFreqFile.llegirArxiuFreq(filename);
+
+        for (String linia : LlistaFrequencies) {
+            String[] parella = linia.split(" ");
+            System.out.println(parella[0] + " " + parella[1]);
+        }
+    }
+
+    public void llegirLlistaFreq(String tipusArxiu, String filename) {
+        System.out.println("Llegint arxiu "+ filename +"\n");
+        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiuFreq(filename);
+
+        for (String linia : LlistaLlegida) {
+            String[] parella = linia.split(" ");
+            System.out.println(parella[0] + " " + parella[1]);
+        }
+
+    }
 }
