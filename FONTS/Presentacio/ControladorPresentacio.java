@@ -1,6 +1,8 @@
 package Presentacio;
 import java.io.FileNotFoundException;
 
+import java.util.*;
+
 import Domini.FactoriaController;
 import ControladorsDomini.CtrlDomini;
 
@@ -39,5 +41,9 @@ public class ControladorPresentacio {
 
     public void llegirLlistaFreq(String tipusArxiu, String filename)  {
        controladorDomini.llegirLlistaFreq(tipusArxiu,filename);
+    }
+
+    public Set<String> getNomLlistesGuardades() {
+        return controladorDomini.getNomLlistesGuardades();
     }
 }

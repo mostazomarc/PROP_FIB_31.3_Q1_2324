@@ -37,6 +37,7 @@ public class VistaTerminal {
         System.out.println("3. Gestionar dades");
         System.out.println("4. Consultar dades");
         System.out.println("5. Canviar estrategia");
+        System.out.println("6. Sortir");
     }
 
 
@@ -51,8 +52,14 @@ public class VistaTerminal {
         else if (num== 1) System.out.println("1. Gestionar teclats");
         else if (num== 2) System.out.println("2. Consultar teclats");
         else if (num== 3) gestionarDades();
-        else if (num== 4) System.out.println("4. Consultar dades");
+        else if (num== 4) consultarDades();
         else if (num== 5) System.out.println("5. Canviar estrategia");
+        if (num!= 6) {
+            System.out.println("\n####################################");
+            System.out.println("Desitja fer algo més?\n");
+            printMenu();
+            repinstruccions();
+        }
     }
 
     public void gestionarDades() {
@@ -72,7 +79,6 @@ public class VistaTerminal {
     public void esperarSeleccioGestionarDades() {
         System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
-        System.out.println("Seleccionat:");
         netejaTerminal();
         if (num== 0) afegirLlistaFrecuencies();
     }
@@ -101,4 +107,39 @@ public class VistaTerminal {
             //llegir manual
         }
     }
+
+    public void consultarDades() {
+        System.out.println("### Consultar Dades ###");
+        printMenuConsultarDades();
+        esperarSeleccioConsultarDades();
+    }
+
+    //Pre:
+    //Post: S'imprimeixen les diferents opcions disponibles de consultar Dades
+    public void printMenuConsultarDades() {
+        System.out.println("0. Llistar Llistes de Frecuencies");
+    }
+
+    //Pre:
+    //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
+    public void esperarSeleccioConsultarDades() {
+        System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
+        int num = s.nextInt();
+        netejaTerminal();
+        if (num== 0) llistarLlistes();
+    }
+
+    public void llistarLlistes() {
+        Set<String> nomLlistes = ctrlP.getNomLlistesGuardades();
+        if (nomLlistes.isEmpty()) System.out.println("No n'hi han llistes guardades");
+        else {
+            int i = 1;
+            for (String nom : nomLlistes) {
+                System.out.println(i + ": " + nom);
+                ++i;
+            }
+        }
+    }
+
+
 }

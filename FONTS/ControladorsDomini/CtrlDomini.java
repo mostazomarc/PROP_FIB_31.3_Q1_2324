@@ -103,15 +103,12 @@ public class CtrlDomini {
             }
         } else {}
 
-        //per provar
-        for (Map.Entry<String, Integer> entry : novesEntrades.entrySet()) {
-            String clave = entry.getKey();
-            Integer valor = entry.getValue();
-            System.out.println("Clave: " + clave + ", Valor: " + valor);
-        }
+        PerfilActual.afegirLlistaFreq(filename,novesEntrades);
 
+    }
 
-
+    public Set<String> getNomLlistesGuardades() {
+        return PerfilActual.getNomAllLlistes();
     }
 
 

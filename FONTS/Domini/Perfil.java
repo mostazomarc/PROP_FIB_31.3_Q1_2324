@@ -1,18 +1,23 @@
 package Domini;
 
+import java.util.*;
+import java.util.Set;
+
 public class Perfil {
 
     private String Usuari;
     private String Contrasenya;
-    private LlistaFrequencies[] Frequencies;
+    private Map<String, LlistaFrequencies>  frequencies;
 
     public Perfil (String User, String pswd) {
         Usuari = User;
         Contrasenya = pswd;
+        frequencies = new HashMap<>();
     }
 
     public Perfil (String User) {
         Usuari = User;
+        frequencies = new HashMap<>();
     }
 
     public String getUsuari() {
@@ -29,5 +34,21 @@ public class Perfil {
 
     public void canviaContrasenya (String newCon) {
         Contrasenya = newCon;
+    }
+
+    //Pre:
+    //Post: S'afegeixen les noves entrades a la llista de frequencies name o es crea
+    public void afegirLlistaFreq (String name, Map<String, Integer> novesEntrades) {
+        if (frequencies.containsKey(name)) frequencies.get(name).insertarFrequencies(novesEntrades);
+        else {
+            frequencies.put(name,new LlistaFrequencies(name));
+            frequencies.get(name).insertarFrequencies(novesEntrades);
+        }
+    }
+
+    //Pre:
+    //Post: Es retorna el nom de les llistes guardades al perfil
+    public Set<String> getNomAllLlistes() {
+        return frequencies.keySet();
     }
 }

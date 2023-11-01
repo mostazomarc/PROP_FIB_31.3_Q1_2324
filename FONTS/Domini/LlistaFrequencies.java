@@ -45,7 +45,23 @@ public class LlistaFrequencies {
                 freq += FrecVella;
             }
 
+
+
             LlistaParaules.put(paraula,freq);
+        }
+
+
+    }
+
+    //Pre:
+    //Post: Es retorna la llista de paraules i frequencies
+    public void llegirFrequencies() {
+
+        //per provar
+        for (Map.Entry<String, Integer> entry : LlistaParaules.entrySet()) {
+            String clave = entry.getKey();
+            Integer valor = entry.getValue();
+            System.out.println("Clave: " + clave + ", Valor: " + valor);
         }
     }
 
