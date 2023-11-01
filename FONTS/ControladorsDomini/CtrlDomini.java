@@ -83,11 +83,37 @@ public class CtrlDomini {
     public void llegirLlistaFreq(String tipusArxiu, String filename) {
         System.out.println("Llegint arxiu "+ filename +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiuFreq(filename);
+        Map<String, Integer> novesEntrades = new HashMap<>();
 
-        for (String linia : LlistaLlegida) {
-            String[] parella = linia.split(" ");
-            System.out.println(parella[0] + " " + parella[1]);
+
+        if (tipusArxiu == "llista") {
+            for (String linia : LlistaLlegida) {
+                String[] parella = linia.split(" ");
+                String paraula = parella[0];
+                Integer frequencia = Integer.parseInt(parella[1]);
+
+                if (novesEntrades.containsKey(paraula)) {
+                    // Si la paraula ja existeix obtenir frequencia actual
+                    int FrecVella = novesEntrades.get(paraula);
+                    // Sumar la nova vella frequencia a la nova
+                    frequencia += FrecVella;
+                }
+
+                novesEntrades.put(paraula,frequencia);
+            }
+        } else {}
+
+        //per provar
+        for (Map.Entry<String, Integer> entry : novesEntrades.entrySet()) {
+            String clave = entry.getKey();
+            Integer valor = entry.getValue();
+            System.out.println("Clave: " + clave + ", Valor: " + valor);
         }
 
+
+
     }
+
+
+
 }

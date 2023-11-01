@@ -32,7 +32,21 @@ public class LlistaFrequencies {
     //Pre:
     //Post: Les paraules i frequencies introduides son afegides a la llista
     public void insertarFrequencies(Map<String, Integer> novesEntrades) {
-        LlistaParaules.putAll(novesEntrades);
+
+        //iterar per cada nova entrada i comprovar si la paraula ja existeix
+        for (Map.Entry<String, Integer> entrada : novesEntrades.entrySet()) {
+            String paraula = entrada.getKey();
+            Integer freq = entrada.getValue();
+
+            if (LlistaParaules.containsKey(paraula)) {
+                // Si la paraula ja existeix obtenir frequencia actual
+                int FrecVella = LlistaParaules.get(paraula);
+                // Sumar la nova vella frequencia a la nova
+                freq += FrecVella;
+            }
+
+            LlistaParaules.put(paraula,freq);
+        }
     }
 
 }
