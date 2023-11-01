@@ -1,10 +1,10 @@
 package Dades;
 
-import java.io*;
+import java.io.*;
 import java.util.*;
 
 public class CtrlFreqFile {
-    private statis CtrlFreqFile singletonObject;
+    private static CtrlFreqFile singletonObject;
 
 
     //Pre:
@@ -19,13 +19,19 @@ public class CtrlFreqFile {
 
     private CtrlFreqFile() {}
 
+    //Pre: filename es el nom d'un arxiu que existeix
+    //Post: Retorna totes les paraules del fitxer en un map de paraules i frequencies
     public Map<String, Integer> llegirArxiuFreq(String filename) throws FileNotFoundException {
-        Map<String,Integer> LlistaParaules = new HashMap<>();
+        Map<String,Integer> LlistaEntrada = new HashMap<>();
 
-        FileReader fr = new FileReader("../../DATA/"+filename);
+        //suposant que el directori d'execució es subgrup
+        FileReader fr = new FileReader("./DATA/"+filename);
         Scanner scan = new Scanner(fr);
-        while (scan.hasNextLine()) System.out.println(new String(Scan.nextLine()));
-        scan.close();
-        return LlistaParaules;
+        while (scan.hasNextLine()) {
+            String paraula = new String(scan.next());
+            Integer num = Integer.parseInt(scan.next());
+            LlistaEntrada.put(paraula,num);
+        }
+        return LlistaEntrada;
     }
 }
