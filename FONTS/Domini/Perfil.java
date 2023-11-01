@@ -47,7 +47,7 @@ public class Perfil {
     }
 
     //Pre:
-    //Post: Es retorna el nom de les llistes guardades al perfil
+    //Post: Es retorna el conjunt de noms de les llistes guardades al perfil
     public Set<String> getNomAllLlistes() {
         return frequencies.keySet();
     }

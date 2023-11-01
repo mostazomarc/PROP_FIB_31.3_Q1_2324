@@ -70,16 +70,9 @@ public class CtrlDomini {
         return Estrategia;
     }
 
-    public void llegirAriuFreq(String filename) {
-        System.out.println("Llegint arxiu "+ filename +"\n");
-        List<String> LlistaFrequencies = ctrlFreqFile.llegirArxiuFreq(filename);
 
-        for (String linia : LlistaFrequencies) {
-            String[] parella = linia.split(" ");
-            System.out.println(parella[0] + " " + parella[1]);
-        }
-    }
-
+    //Pre: tipus arxiu es un tipus vàlid i filename existeix i esta en un format vàid
+    //Post: S'afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual
     public void llegirLlistaFreq(String tipusArxiu, String filename) {
         System.out.println("Llegint arxiu "+ filename +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiuFreq(filename);
@@ -107,6 +100,8 @@ public class CtrlDomini {
 
     }
 
+    //Pre:
+    //Post: S'obté un set dels noms de les llistes guardades del perfil actual
     public Set<String> getNomLlistesGuardades() {
         return PerfilActual.getNomAllLlistes();
     }

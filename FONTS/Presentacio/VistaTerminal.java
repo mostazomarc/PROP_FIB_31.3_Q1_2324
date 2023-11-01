@@ -24,6 +24,8 @@ public class VistaTerminal {
         repinstruccions();
     }
 
+    //Pre:
+    //Post: Es neteja la terminal
     private void netejaTerminal() {
         System.out.print("\033[H\033[2J");
     }
@@ -62,6 +64,8 @@ public class VistaTerminal {
         }
     }
 
+    //Pre:
+    //Post: Es mostra el menu de consultar dades i s'executa la opció escollida
     public void gestionarDades() {
         System.out.println("### Gestionar Dades ###");
         printMenuGestionarDades();
@@ -84,7 +88,7 @@ public class VistaTerminal {
     }
 
     //Pre:
-    //Post:
+    //Post: Es mostren les diferents opcions per afegir una llista i s'afegeix de la manera seleccionada
     public void afegirLlistaFrecuencies() {
         System.out.println("### Afegir Llista Frequencies ###");
         System.out.println("Com la vols afegir?");
@@ -108,6 +112,8 @@ public class VistaTerminal {
         }
     }
 
+    //Pre:
+    //Post: Es mostra el menu de consultar dades i s'executa la opció escollida
     public void consultarDades() {
         System.out.println("### Consultar Dades ###");
         printMenuConsultarDades();
@@ -129,6 +135,8 @@ public class VistaTerminal {
         if (num== 0) llistarLlistes();
     }
 
+    //Pre:
+    //Post: Es llisten els noms de les llistes guardades del perfil actiu
     public void llistarLlistes() {
         Set<String> nomLlistes = ctrlP.getNomLlistesGuardades();
         if (nomLlistes.isEmpty()) System.out.println("No n'hi han llistes guardades");

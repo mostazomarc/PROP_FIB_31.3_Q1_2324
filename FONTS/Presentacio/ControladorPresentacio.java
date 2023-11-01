@@ -43,6 +43,8 @@ public class ControladorPresentacio {
        controladorDomini.llegirLlistaFreq(tipusArxiu,filename);
     }
 
+    //Pre:
+    //Post: S'obté un set dels noms de les llistes guardades del perfil actiu
     public Set<String> getNomLlistesGuardades() {
         return controladorDomini.getNomLlistesGuardades();
     }
