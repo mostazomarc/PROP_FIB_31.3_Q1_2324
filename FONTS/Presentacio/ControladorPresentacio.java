@@ -1,6 +1,8 @@
 package Presentacio;
 import java.io.FileNotFoundException;
 
+import java.util.*;
+
 import Domini.FactoriaController;
 import ControladorsDomini.CtrlDomini;
 
@@ -35,5 +37,15 @@ public class ControladorPresentacio {
     //Post: S'obte l'usuari actiu actual del sistema
     public String getPerfilActual() {
         return controladorDomini.getPerfilActual();
+    }
+
+    public void llegirLlistaFreq(String tipusArxiu, String filename)  {
+       controladorDomini.llegirLlistaFreq(tipusArxiu,filename);
+    }
+
+    //Pre:
+    //Post: S'obté un set dels noms de les llistes guardades del perfil actiu
+    public Set<String> getNomLlistesGuardades() {
+        return controladorDomini.getNomLlistesGuardades();
     }
 }

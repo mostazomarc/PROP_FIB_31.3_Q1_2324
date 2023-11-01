@@ -28,11 +28,41 @@ public class LlistaFrequencies {
         return LlistaParaules;
     }
 
-    /*
+
     //Pre:
     //Post: Les paraules i frequencies introduides son afegides a la llista
-    public insertarFrequencies(Map<string, int> novesEntrades) {
-        LlistaFrequencies.union(novesEntrades);
+    public void insertarFrequencies(Map<String, Integer> novesEntrades) {
+
+        //iterar per cada nova entrada i comprovar si la paraula ja existeix
+        for (Map.Entry<String, Integer> entrada : novesEntrades.entrySet()) {
+            String paraula = entrada.getKey();
+            Integer freq = entrada.getValue();
+
+            if (LlistaParaules.containsKey(paraula)) {
+                // Si la paraula ja existeix obtenir frequencia actual
+                int FrecVella = LlistaParaules.get(paraula);
+                // Sumar la nova vella frequencia a la nova
+                freq += FrecVella;
+            }
+
+
+
+            LlistaParaules.put(paraula,freq);
+        }
+
+
     }
-    */
+
+    //Pre:
+    //Post: Es retorna la llista de paraules i frequencies
+    public void llegirFrequencies() {
+
+        //per provar
+        for (Map.Entry<String, Integer> entry : LlistaParaules.entrySet()) {
+            String clave = entry.getKey();
+            Integer valor = entry.getValue();
+            System.out.println("Clave: " + clave + ", Valor: " + valor);
+        }
+    }
+
 }
