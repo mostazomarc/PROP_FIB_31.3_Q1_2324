@@ -5,26 +5,26 @@ import java.util.Map;
 
 public class LlistaFrequencies {
     private String nom;
-    private Map<String, int> LListaParaules;
+    private Map<String, Integer> LlistaParaules;
 
 
     //Pre:
     //Post: Es crea una LlistaFrecuencies amb nom
     public LlistaFrequencies (String nom) {
         this.nom = nom;
-        LListaParaules = new HashMap<>();
+        LlistaParaules = new HashMap<>();
     }
 
     //Pre: LlistaParaules es una llista valida
     //Post: Es crea una LlistaFrecuencies amb nom i llista paraules
-    public LlistaFrequencies (String nom, Map<String, int> LListaParaules) {
+    public LlistaFrequencies (String nom, Map<String, Integer> LlistaParaules) {
         this.nom = nom;
-        this.LListaParaules = LListaParaules;
+        this.LlistaParaules = LlistaParaules;
     }
 
     // Pre:
     //Post: Es retorna la llista de paraules i frequencies
-    public  Map<String, int> getFrequencies() {
+    public  Map<String, Integer> getFrequencies() {
         return LlistaParaules;
     }
 
