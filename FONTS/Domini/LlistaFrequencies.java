@@ -28,11 +28,11 @@ public class LlistaFrequencies {
         return LlistaParaules;
     }
 
-    /*
+
     //Pre:
     //Post: Les paraules i frequencies introduides son afegides a la llista
-    public insertarFrequencies(Map<string, int> novesEntrades) {
-        LlistaFrequencies.union(novesEntrades);
+    public void insertarFrequencies(Map<String, Integer> novesEntrades) {
+        LlistaParaules.putAll(novesEntrades);
     }
-    */
+
 }
