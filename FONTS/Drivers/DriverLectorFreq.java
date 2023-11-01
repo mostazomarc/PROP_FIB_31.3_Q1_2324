@@ -10,13 +10,11 @@ public class DriverLectorFreq {
     public void llegirArxiuFreq() throws FileNotFoundException {
         prova = prova.getInstance();
         System.out.println("Llegint arxiu LlistatFrequencies.txt\n");
-        Map<String,Integer> LlistaParaules = prova.llegirArxiuFreq("LlistatFrequencies.txt");
+        List<String> LlistaFrequencies = prova.llegirArxiuFreq("LlistatFrequencies.txt");
 
-        // Itera sobre el map i imprimeix la paraula i la frequencia
-        for (Map.Entry<String, Integer> entry : LlistaParaules.entrySet()) {
-            String paraula = entry.getKey();
-            Integer freq = entry.getValue();
-            System.out.println("Paraula: " + paraula + ", Frecuencia: " + freq);
+        for (String linia : LlistaFrequencies) {
+            String[] parella = linia.split(" ");
+            System.out.println(parella[0] + " " + parella[1]);
         }
     }
 

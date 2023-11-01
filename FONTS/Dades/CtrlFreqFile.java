@@ -20,18 +20,15 @@ public class CtrlFreqFile {
     private CtrlFreqFile() {}
 
     //Pre: filename es el nom d'un arxiu que existeix
-    //Post: Retorna totes les paraules del fitxer en un map de paraules i frequencies
-    public Map<String, Integer> llegirArxiuFreq(String filename) throws FileNotFoundException {
-        Map<String,Integer> LlistaEntrada = new HashMap<>();
+    //Post: Retorna totes les linies del fitxer en una llista
+    public List<String> llegirArxiuFreq(String filename) throws FileNotFoundException {
+        LinkedList<String> linies = new LinkedList<String>();
 
         //suposant que el directori d'execució es subgrup
         FileReader fr = new FileReader("./DATA/"+filename);
         Scanner scan = new Scanner(fr);
-        while (scan.hasNextLine()) {
-            String paraula = new String(scan.next());
-            Integer num = Integer.parseInt(scan.next());
-            LlistaEntrada.put(paraula,num);
-        }
-        return LlistaEntrada;
+        while (scan.hasNextLine()) linies.add(new String(scan.nextLine()));
+        scan.close();
+        return linies;
     }
 }
