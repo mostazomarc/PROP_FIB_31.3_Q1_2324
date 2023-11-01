@@ -6,11 +6,11 @@ import java.util.Set;
 
 public class Alfabet {
     private Set<Idioma> idiomes;
-    private Set<char> lletres;
+    private Set<Character> lletres;
 
     //Pre: letters conté totes les lletres de l'alfabet que es vol afegir
     //Post: Es crea un alfabet amb Lletres = letters i amb l'idioma donat
-    public Alfabet (Idioma language, Set<char> letters) {
+    public Alfabet (Idioma language, Set<Character> letters) {
         idiomes.add(language);
         lletres = letters;
     }
@@ -22,7 +22,7 @@ public class Alfabet {
     }
 
     //Retorna les lletres de l'alfabet
-    public Set<char> getLletres() {
+    public Set<Character> getLletres() {
         return lletres;
     }
 
