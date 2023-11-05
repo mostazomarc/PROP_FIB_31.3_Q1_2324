@@ -49,6 +49,8 @@ public class ControladorPresentacio {
         return controladorDomini.getNomLlistesGuardades();
     }
 
+    //Pre:
+    //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
     public Map<String, Integer> consultaLlista(String nomSeleccio) {
         return controladorDomini.consultaLlista(nomSeleccio);
     }

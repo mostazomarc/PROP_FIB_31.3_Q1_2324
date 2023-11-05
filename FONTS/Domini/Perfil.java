@@ -63,6 +63,8 @@ public class Perfil {
         return new ArrayList<>(noms);
     }
 
+    //Pre:
+    //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
     public Map<String, Integer> consultaLlista(String nomSeleccio) {
         return frequencies.get(nomSeleccio).getFrequencies();
     }

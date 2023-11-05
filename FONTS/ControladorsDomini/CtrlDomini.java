@@ -125,6 +125,8 @@ public class CtrlDomini {
         return PerfilActual.getNomAllLlistes();
     }
 
+    //Pre:
+    //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
     public Map<String, Integer> consultaLlista(String nomSeleccio) {
         return PerfilActual.consultaLlista(nomSeleccio);
     }
