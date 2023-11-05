@@ -97,7 +97,7 @@ public class CtrlDomini {
                 novesEntrades.put(paraula,frequencia);
             }
         } else {
-            Pattern patron = Pattern.compile("\\p{L}+|\\p{P}+");
+            Pattern patron = Pattern.compile("\\p{L}+");
 
             for (String linea : LlistaLlegida) {
                 Matcher matcher = patron.matcher(linea);
