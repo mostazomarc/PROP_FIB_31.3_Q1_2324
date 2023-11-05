@@ -57,8 +57,12 @@ public class VistaTerminal {
         else if (num== 4) consultarDades();
         else if (num== 5) System.out.println("5. Canviar estrategia");
         if (num!= 6) {
-            System.out.println("\n####################################");
-            System.out.println("Desitja fer algo més?\n");
+            System.out.println("####################################");
+            System.out.print("Presioni Enter per continuar...\n");
+            s.nextLine();
+            s.nextLine();
+            netejaTerminal();
+            System.out.print("Vol fer algo més?\n");
             printMenu();
             repinstruccions();
         }
@@ -76,6 +80,7 @@ public class VistaTerminal {
     //Post: S'imprimeixen les diferents opcions disponibles de gestionar Dades
     public void printMenuGestionarDades() {
         System.out.println("0. Afegir Llista de Frecuencies");
+        System.out.println("6. Sortir");
     }
 
     //Pre:
@@ -95,6 +100,7 @@ public class VistaTerminal {
         System.out.println("1. Text");
         System.out.println("2. Llista");
         System.out.println("3. Entrada manual");
+        System.out.println("6. Sortir");
         int num = s.nextInt();
         netejaTerminal();
         if (num == 1 || num == 2) {
@@ -139,6 +145,7 @@ public class VistaTerminal {
     //Post: Es llisten els noms de les llistes guardades del perfil actiu
     public void llistarLlistes() {
         List<String> nomLlistes = ctrlP.getNomLlistesGuardades();
+        netejaTerminal();
         if (nomLlistes.isEmpty()) System.out.println("No n'hi han llistes guardades");
         else {
             int i = 1;
@@ -149,6 +156,7 @@ public class VistaTerminal {
             System.out.println("Si vol consultar una llista en detall entri el numero, si no entri '0':");
             int num = s.nextInt();
             if (num != 0) {
+                netejaTerminal();
                 if (nomLlistes.size() < num) System.out.println("ERROR");
                 else {
                     String nomSeleccio = nomLlistes.get(num - 1);
