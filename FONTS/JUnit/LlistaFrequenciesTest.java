@@ -7,8 +7,10 @@ import org.junit.Test;
 
 public class LlistaFrequenciesTest {
     @Test
-    public void creadora() {
+    public void creadoraLlistaPerfil() {
         LlistaFrequencies llistaEsperada = new LlistaFrequencies("NovaLlista");
-        LlistaFrequencies llistaProva = new LlistaFrequencies("novallista");
+        Perfil perfilProva = new Perfil("Prova");
+        LlistaFrequencies resultat = perfilProva.crearLlistaFreq("NovaLlista");
+        assertEquals(llistaEsperada.getNom(),resultat.getNom());
     }
 }

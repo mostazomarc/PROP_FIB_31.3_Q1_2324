@@ -22,6 +22,12 @@ public class LlistaFrequencies {
         this.LlistaParaules = LlistaParaules;
     }
 
+    //Pre:
+    //Post: Es retorna el nom de la llista
+    public String getNom() {
+        return this.nom;
+    }
+
     // Pre:
     //Post: Es retorna la llista de paraules i frequencies
     public  Map<String, Integer> getFrequencies() {

@@ -47,6 +47,16 @@ public class Perfil {
     }
 
     //Pre:
+    //Post: Es crea una llista amb nom, buida
+    public LlistaFrequencies crearLlistaFreq (String name) {
+        if (frequencies.containsKey(name)) return null;
+        else {
+            frequencies.put(name,new LlistaFrequencies(name));
+            return frequencies.get(name);
+        }
+    }
+
+    //Pre:
     //Post: Es retorna el conjunt de noms de les llistes guardades al perfil
     public Set<String> getNomAllLlistes() {
         return frequencies.keySet();
