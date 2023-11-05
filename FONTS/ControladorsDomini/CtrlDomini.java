@@ -2,6 +2,8 @@ package ControladorsDomini;
 
 import java.util.*;
 import java.io.*;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import Domini.*;
 import Dades.*;
 
@@ -94,7 +96,24 @@ public class CtrlDomini {
 
                 novesEntrades.put(paraula,frequencia);
             }
-        } else {}
+        } else {
+            Pattern patron = Pattern.compile("\\p{L}+|\\p{P}+");
+
+            for (String linea : LlistaLlegida) {
+                Matcher matcher = patron.matcher(linea);
+
+                while (matcher.find()) {
+                    String paraula = matcher.group();
+                    int freq = 1;
+                    if (novesEntrades.containsKey(paraula)) {
+                        // Si la paraula ja existeix obtenir frequencia actual
+                        freq += novesEntrades.get(paraula);
+                    }
+
+                    novesEntrades.put(paraula,freq);
+                }
+            }
+        }
 
         PerfilActual.afegirLlistaFreq(filename,novesEntrades);
 
@@ -102,10 +121,13 @@ public class CtrlDomini {
 
     //Pre:
     //Post: S'obté un set dels noms de les llistes guardades del perfil actual
-    public Set<String> getNomLlistesGuardades() {
+    public List<String> getNomLlistesGuardades() {
         return PerfilActual.getNomAllLlistes();
     }
 
+    public Map<String, Integer> consultaLlista(String nomSeleccio) {
+        return PerfilActual.consultaLlista(nomSeleccio);
+    }
 
 
 }

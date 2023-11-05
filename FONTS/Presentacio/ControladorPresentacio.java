@@ -45,7 +45,11 @@ public class ControladorPresentacio {
 
     //Pre:
     //Post: S'obté un set dels noms de les llistes guardades del perfil actiu
-    public Set<String> getNomLlistesGuardades() {
+    public List<String> getNomLlistesGuardades() {
         return controladorDomini.getNomLlistesGuardades();
+    }
+
+    public Map<String, Integer> consultaLlista(String nomSeleccio) {
+        return controladorDomini.consultaLlista(nomSeleccio);
     }
 }

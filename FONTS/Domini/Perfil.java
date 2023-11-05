@@ -58,7 +58,12 @@ public class Perfil {
 
     //Pre:
     //Post: Es retorna el conjunt de noms de les llistes guardades al perfil
-    public Set<String> getNomAllLlistes() {
-        return frequencies.keySet();
+    public List<String> getNomAllLlistes() {
+        Set<String> noms = frequencies.keySet();
+        return new ArrayList<>(noms);
+    }
+
+    public Map<String, Integer> consultaLlista(String nomSeleccio) {
+        return frequencies.get(nomSeleccio).getFrequencies();
     }
 }

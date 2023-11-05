@@ -123,7 +123,7 @@ public class VistaTerminal {
     //Pre:
     //Post: S'imprimeixen les diferents opcions disponibles de consultar Dades
     public void printMenuConsultarDades() {
-        System.out.println("0. Llistar Llistes de Frecuencies");
+        System.out.println("0. Llistes de Frecuencies");
     }
 
     //Pre:
@@ -138,7 +138,7 @@ public class VistaTerminal {
     //Pre:
     //Post: Es llisten els noms de les llistes guardades del perfil actiu
     public void llistarLlistes() {
-        Set<String> nomLlistes = ctrlP.getNomLlistesGuardades();
+        List<String> nomLlistes = ctrlP.getNomLlistesGuardades();
         if (nomLlistes.isEmpty()) System.out.println("No n'hi han llistes guardades");
         else {
             int i = 1;
@@ -146,7 +146,23 @@ public class VistaTerminal {
                 System.out.println(i + ": " + nom);
                 ++i;
             }
+            System.out.println("Si vol consultar una llista en detall entri el numero, si no entri '0':");
+            int num = s.nextInt();
+            if (num != 0) {
+                if (nomLlistes.size() < num) System.out.println("ERROR");
+                else {
+                    String nomSeleccio = nomLlistes.get(num - 1);
+                    Map<String, Integer> llista = ctrlP.consultaLlista(nomSeleccio);
+                    //per provar
+                    for (Map.Entry<String, Integer> entry : llista.entrySet()) {
+                        String clave = entry.getKey();
+                        Integer valor = entry.getValue();
+                        System.out.println("Paraula: " + clave + ", Frequencia: " + valor);
+                    }
+                }
+            }
         }
+
     }
 
 
