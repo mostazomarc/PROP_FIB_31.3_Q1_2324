@@ -180,7 +180,6 @@ public class VistaTerminal {
     public String obteNomAlfabet() {
         System.out.println("Nom de l'alfabet:");
         String inputString = s.nextLine();
-        System.out.println("El nou alfabet tindrà nom:" + inputString);
         return inputString;
     }
 
