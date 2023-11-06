@@ -9,7 +9,7 @@ public class VistaTerminal {
     public VistaTerminal(ControladorPresentacio cp) {
         ctrlP = cp;
         s = new Scanner(System.in);
-    };
+    }
 
     //Pre:
     //Post: S'inicialitza la terminal
@@ -80,6 +80,7 @@ public class VistaTerminal {
     //Post: S'imprimeixen les diferents opcions disponibles de gestionar Dades
     public void printMenuGestionarDades() {
         System.out.println("0. Afegir Llista de Frecuencies");
+        System.out.println("1. Afegir Alfabet");
         System.out.println("6. Sortir");
     }
 
@@ -90,6 +91,7 @@ public class VistaTerminal {
         int num = s.nextInt();
         netejaTerminal();
         if (num== 0) afegirLlistaFrecuencies();
+        if (num == 1) ctrlP.afegirAlfabet();
     }
 
     //Pre:
@@ -130,6 +132,7 @@ public class VistaTerminal {
     //Post: S'imprimeixen les diferents opcions disponibles de consultar Dades
     public void printMenuConsultarDades() {
         System.out.println("0. Llistes de Frecuencies");
+        System.out.println("1. Alfabets + num de lletres");
     }
 
     //Pre:
@@ -139,6 +142,7 @@ public class VistaTerminal {
         int num = s.nextInt();
         netejaTerminal();
         if (num== 0) llistarLlistes();
+        else if (num == 1) ctrlP.consultaAlfabets();
     }
 
     //Pre:
@@ -171,6 +175,41 @@ public class VistaTerminal {
             }
         }
 
+    }
+
+    public String obteNomAlfabet() {
+        System.out.println("Nom de l'alfabet");
+        String nomAlfabet = s.nextLine();
+        return nomAlfabet;
+    }
+
+    public Set<Character> obteLletresAlfabet() {
+        Set<Character> lletres = new HashSet<>();
+        System.out.println("Ingressa lletres una per una (presioni Enter després de cada lletra):");
+        System.out.println("Presiona '.' i Enter per sortir");
+
+        char inputChar;
+        while (true) {
+            String input = s.nextLine();
+            if (input.length() == 1) {
+                inputChar = input.charAt(0);
+                if (inputChar == '.') break;
+                lletres.add(inputChar);
+            }
+            else {
+                System.out.println("Si us plau, ingresi una única lletra");
+            }
+        }
+        return lletres;
+    }
+
+    public void mostrarMissatge(String m) {
+        System.out.println(m);
+    }
+
+    public void mostrarDadesAlfabets(Vector<String> dades) {
+        int n = dades.size();
+        for (int i=0; i < n; ++i) System.out.println(dades.get(i));
     }
 
 

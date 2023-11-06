@@ -15,6 +15,10 @@ public class Alfabet {
         this.lletres = lletres;
     }
 
+    public Alfabet (Set<Character> lletres) {
+        this.lletres = lletres;
+    }
+
     //Pre:
     //Post: s'ha afegit l'idioma language al conjunt d'Idiomes de l'alfabet
     public void afegirIdioma(Idioma idioma) {
@@ -29,5 +33,9 @@ public class Alfabet {
     //Retorna els idiomes de l'alfabet
     public Set<Idioma> getIdiomes() {
         return idiomes;
+    }
+
+    public int getNumLletres() {
+        return lletres.size();
     }
 }

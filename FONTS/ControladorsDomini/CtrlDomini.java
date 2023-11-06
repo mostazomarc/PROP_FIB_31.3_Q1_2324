@@ -14,6 +14,9 @@ public class CtrlDomini {
     private static CtrlDomini singletonObject;
     private CtrlFreqFile ctrlFreqFile;
 
+    private TreeMap<String, Alfabet> Alfabets;
+    private TreeMap<String, Idioma> Idiomes;
+
 
     //Pre:
     //Post: Es crea una instancia de domini.
@@ -36,6 +39,7 @@ public class CtrlDomini {
         ctrlFreqFile = CtrlFreqFile.getInstance();
         Estrategia = "QAP"; //estrategia per defecte
         PerfilsActius = new HashMap<String, Perfil>();
+        Alfabets = new TreeMap<String, Alfabet>();
     }
 
     //Pre: Es rep un nom d'usuari
@@ -131,5 +135,32 @@ public class CtrlDomini {
         return PerfilActual.consultaLlista(nomSeleccio);
     }
 
+    public int afegirAlfabet(String nomAlfa, Set<Character> lletres) {
+        if (existeixAlfabet(nomAlfa)) return 1;
+        else {
+            Alfabet nouAlfa = new Alfabet(lletres);
+            Alfabets.put(nomAlfa, nouAlfa);
+        }
+        return 0;
+    }
+
+    public boolean existeixAlfabet(String nomAlfa) {
+        return Alfabets.containsKey(nomAlfa);
+    }
+
+    public Vector<String> consultaAlfabets() {
+        Vector<String> sdades = new Vector<String>();
+        Set<String> setkeys = Alfabets.keySet();
+        Iterator<String> iterkeys = setkeys.iterator();
+        while (iterkeys.hasNext()) {
+            String nomAlfa = iterkeys.next();
+            Alfabet alfa = Alfabets.get(nomAlfa);
+            String s = "";
+            s += nomAlfa; s += " ";
+            s += alfa.getNumLletres();
+            sdades.add(s);
+        }
+        return sdades;
+    }
 
 }

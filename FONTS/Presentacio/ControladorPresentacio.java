@@ -54,4 +54,24 @@ public class ControladorPresentacio {
     public Map<String, Integer> consultaLlista(String nomSeleccio) {
         return controladorDomini.consultaLlista(nomSeleccio);
     }
+
+    public void afegirAlfabet() {
+        vt.mostrarMissatge("Afegir Alfabet");
+        String nomAlfabet = vt.obteNomAlfabet();
+        Set<Character> lletres = vt.obteLletresAlfabet();
+
+        int codierr = controladorDomini.afegirAlfabet(nomAlfabet, lletres);
+
+        switch (codierr) {
+            case 0: vt.mostrarMissatge("Nou Alfabet afegit"); break;
+            case 1: vt.mostrarMissatge("Alfabet ja existeix"); break;
+            default: vt.mostrarMissatge("Error imposible " + codierr); break;
+        }
+    }
+
+    public void consultaAlfabets() {
+        vt.mostrarMissatge("Consulta d'Alfabets");
+        Vector<String> dades = controladorDomini.consultaAlfabets();
+        vt.mostrarDadesAlfabets(dades);
+    }
 }
