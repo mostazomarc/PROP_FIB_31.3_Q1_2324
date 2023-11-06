@@ -57,10 +57,10 @@ public class ControladorPresentacio {
 
     public void afegirAlfabet() {
         vt.mostrarMissatge("Afegir Alfabet");
-        String nomAlfabet = vt.obteNomAlfabet();
+        String nomalf = vt.obteNomAlfabet();
         Set<Character> lletres = vt.obteLletresAlfabet();
 
-        int codierr = controladorDomini.afegirAlfabet(nomAlfabet, lletres);
+        int codierr = controladorDomini.afegirAlfabet(nomalf, lletres);
 
         switch (codierr) {
             case 0: vt.mostrarMissatge("Nou Alfabet afegit"); break;
