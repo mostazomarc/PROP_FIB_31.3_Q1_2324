@@ -186,20 +186,22 @@ public class VistaTerminal {
 
     public Set<Character> obteLletresAlfabet() {
         Set<Character> lletres = new HashSet<>();
-        System.out.println("Ingressa lletres una per una (presioni Enter després de cada lletra):");
-        System.out.println("Presiona '.' i Enter per sortir");
+        System.out.println("Ingressi el nom de l'arxiu (de la carpeta DATA) que conté les lletres de l'alfabet, separades per comes i sense espais: ");
+        s.nextLine();
+        String filename = s.nextLine();
 
-        char inputChar;
-        while (true) {
-            String input = s.nextLine();
-            if (input.length() == 1) {
-                inputChar = input.charAt(0);
-                if (inputChar == '.') break;
-                lletres.add(inputChar);
+        try (BufferedReader br = new BufferedReader(new FileReader("./DATA/" + filename))) {
+            int character;
+            while ((character = br.read()) != -1) {
+                char lletra = (char) character;
+                if (lletra == ',') {
+                    continue;
+                }
+                lletres.add(lletra);
             }
-            else {
-                System.out.println("Si us plau, ingresi una única lletra");
-            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
         return lletres;
     }
