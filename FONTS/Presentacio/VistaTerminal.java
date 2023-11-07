@@ -190,7 +190,7 @@ public class VistaTerminal {
         s.nextLine();
         String filename = s.nextLine();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("./DATA/" + filename))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("../DATA/" + filename))) {
             int character;
             while ((character = br.read()) != -1) {
                 char lletra = (char) character;
