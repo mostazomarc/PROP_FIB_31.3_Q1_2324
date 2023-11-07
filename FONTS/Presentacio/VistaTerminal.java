@@ -178,7 +178,8 @@ public class VistaTerminal {
     }
 
     public String obteNomAlfabet() {
-        System.out.println("Nom de l'alfabet:");
+        System.out.println("Introdueixi el nom de l'alfabet: ");
+        s.nextLine();
         String inputString = s.nextLine();
         return inputString;
     }
