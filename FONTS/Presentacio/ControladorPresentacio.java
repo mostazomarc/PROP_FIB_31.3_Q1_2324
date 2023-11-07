@@ -1,6 +1,9 @@
 package Presentacio;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 import Domini.FactoriaController;
@@ -58,7 +61,7 @@ public class ControladorPresentacio {
     public void afegirAlfabet() {
         vt.mostrarMissatge("Afegir Alfabet");
         String nomalf = vt.obteNomAlfabet();
-        Set<Character> lletres = vt.obteLletresAlfabet();
+        Set<Character> lletres = obteLletresAlfabet();
 
         int codierr = controladorDomini.afegirAlfabet(nomalf, lletres);
 
@@ -73,5 +76,25 @@ public class ControladorPresentacio {
         vt.mostrarMissatge("Consulta d'Alfabets");
         Vector<String> dades = controladorDomini.consultaAlfabets();
         vt.mostrarDadesAlfabets(dades);
+    }
+
+    private Set<Character> obteLletresAlfabet() {
+        Set<Character> lletres = new HashSet<>();
+        String filename = vt.obteNomArxiu();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("../DATA/" + filename))) {
+            int character;
+            while ((character = br.read()) != -1) {
+                char lletra = (char) character;
+                if (lletra == ',') {
+                    continue;
+                }
+                lletres.add(lletra);
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lletres;
     }
 }

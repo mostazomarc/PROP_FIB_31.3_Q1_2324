@@ -184,26 +184,11 @@ public class VistaTerminal {
         return inputString;
     }
 
-    public Set<Character> obteLletresAlfabet() {
-        Set<Character> lletres = new HashSet<>();
+    public String obteNomArxiu() {
         System.out.println("Ingressi el nom de l'arxiu (de la carpeta DATA) que conté les lletres de l'alfabet, separades per comes i sense espais: ");
         s.nextLine();
         String filename = s.nextLine();
-
-        try (BufferedReader br = new BufferedReader(new FileReader("../DATA/" + filename))) {
-            int character;
-            while ((character = br.read()) != -1) {
-                char lletra = (char) character;
-                if (lletra == ',') {
-                    continue;
-                }
-                lletres.add(lletra);
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lletres;
+        return filename;
     }
 
     public void mostrarMissatge(String m) {
