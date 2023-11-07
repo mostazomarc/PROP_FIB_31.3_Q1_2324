@@ -10,4 +10,6 @@ public class IdiomaStub {
     public char[] getLletres() {
         return lletres;
     }
+
+    public IdiomaStub() {}
 }

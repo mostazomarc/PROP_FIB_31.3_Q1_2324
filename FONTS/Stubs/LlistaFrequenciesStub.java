@@ -1,4 +1,4 @@
-package Domini;
+package Stubs;
 
 import org.junit.Before;
 
@@ -13,6 +13,9 @@ public class LlistaFrequenciesStub {
     //Pre:
     //Post: Es crea una LlistaFrecuencies amb nom
     public LlistaFrequenciesStub (String nom) {
+    }
+
+    public LlistaFrequenciesStub () {
     }
 
     //Pre: LlistaParaules es una llista valida

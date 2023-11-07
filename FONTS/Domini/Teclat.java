@@ -17,7 +17,8 @@ public class Teclat {
 
     //Pre:
     //Post: es crea un teclat amb nom a partir d'una llista de freqüencies i un idioma
-    public Teclat(String nom, LlistaFrequencies freq, IdiomaStub i) {
+    public Teclat(String nom, LlistaFrequenciesStub freq, IdiomaStub i) {
+        creadora = new CreadoraTeclatStub();
         this.nom = nom;
         idioma = i;
         disposicio = creadora.crearTeclat(freq,i.getLletres());
@@ -36,4 +37,10 @@ public class Teclat {
         return disposicio;
     }
 
+    //Pre:
+    //Post: es canvia la disposició del teclat
+    public char[][] canviaDisposicioTeclat() {
+
+        return null;
+    }
 }

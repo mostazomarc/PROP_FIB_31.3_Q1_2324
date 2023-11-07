@@ -1,10 +1,12 @@
 package Stubs;
 
-import Domini.LlistaFrequencies;
+import Stubs.LlistaFrequenciesStub;
 
 import java.util.*;
 
 public class CreadoraTeclatStub {
+
+    public CreadoraTeclatStub() {}
 
     private char[][] teclatQWERTY = {
             {'q', 'w', 'e','r', 't', 'y','u', 'i', 'o', 'p'},
@@ -12,7 +14,7 @@ public class CreadoraTeclatStub {
             {'z', 'x', 'c','v','b','n','m'}
     };
 
-    public char[][] crearTeclat(LlistaFrequencies l, char[] i) {
+    public char[][] crearTeclat(LlistaFrequenciesStub l, char[] i) {
         return teclatQWERTY;
     }
 }
