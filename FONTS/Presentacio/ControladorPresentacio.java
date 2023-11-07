@@ -24,7 +24,7 @@ public class ControladorPresentacio {
     //Pre:
     //Post: S'inicia una instancia amb el perfil x
     public void iniciaInstancia() {
-        controladorDomini.iniciaInstancia("Marc");
+        controladorDomini.iniciaInstancia("Prova");
     }
 
     //Pre:

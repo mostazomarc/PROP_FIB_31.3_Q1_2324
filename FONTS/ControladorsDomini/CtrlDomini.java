@@ -63,7 +63,7 @@ public class CtrlDomini {
     //Pre:
     //Post: Retorna la instancia del Perfil Actual.
     public String getPerfilActual() {
-        return "Marc";
+        return PerfilActual.getUsuari();
     }
 
     //Pre:
