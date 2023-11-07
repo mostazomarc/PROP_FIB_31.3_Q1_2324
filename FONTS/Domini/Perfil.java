@@ -8,6 +8,7 @@ public class Perfil {
     private String Usuari;
     private String Contrasenya;
     private Map<String, LlistaFrequencies>  frequencies;
+    private Map<String, Teclat>  teclats;
 
     public Perfil (String User, String pswd) {
         Usuari = User;
@@ -67,5 +68,10 @@ public class Perfil {
     //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
     public Map<String, Integer> consultaLlista(String nomSeleccio) {
         return frequencies.get(nomSeleccio).getFrequencies();
+    }
+
+    public void crearTeclat(String NomTeclat, String NomLlista, Idioma idioma) {
+        LlistaFrequencies llista = frequencies.get(NomLlista);
+        //teclats.put(NomTeclat,new Teclat(NomTeclat,llista,idioma));
     }
 }

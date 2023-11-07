@@ -103,4 +103,10 @@ public class PerfilTest {
         Map<String,Integer> resultat = perfilProva.consultaLlista("LlistaProva");
         assertEquals(resultat,llistaParaulesProva);
     }
+
+    @Test
+    //obtenir la llista de paraules i frequencies
+    public void crearTeclat() {
+
+    }
 }
