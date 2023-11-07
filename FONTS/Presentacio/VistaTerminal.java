@@ -187,8 +187,7 @@ public class VistaTerminal {
     public Set<Character> obteLletresAlfabet() {
 
         Set<Character> SetLletres = new HashSet<>();
-        System.out.println("Ingressi les lletres de l'alfabet, separades per comes (per exemple: a, b, c)");
-        System.out.println("Per acabar premeu Enter sense ingressar una lletra:");
+        System.out.println("Ingressi les lletres de l'alfabet, separades per comes (per exemple: a, b, c) i amb un punt '.' al final");
 
         while (true) {
             String input = s.next().trim();
@@ -197,6 +196,7 @@ public class VistaTerminal {
             char[] lletres = input.toCharArray();
 
             for (char lletra : lletres) {
+                if (lletra == '.') break;
                 if (lletra != ',') SetLletres.add(lletra);
             }
         }
