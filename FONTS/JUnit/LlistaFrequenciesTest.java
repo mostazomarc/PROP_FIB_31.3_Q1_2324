@@ -35,6 +35,7 @@ public class LlistaFrequenciesTest {
     public void creadoraLlistaNomLlista() {
 
         LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista", llistaParaulesProva);
+        assertEquals("NovaLlista",resultat.getNom());
         assertEquals(llistaParaulesProva,resultat.getFrequencies());
     }
 
