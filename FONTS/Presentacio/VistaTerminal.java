@@ -185,23 +185,22 @@ public class VistaTerminal {
     }
 
     public Set<Character> obteLletresAlfabet() {
-        Set<Character> lletres = new HashSet<>();
-        System.out.println("Ingressa lletres una per una (presioni Enter després de cada lletra):");
-        System.out.println("Presiona '.' i Enter per sortir");
 
-        char inputChar;
+        Set<Character> SetLletres = new HashSet<>();
+        System.out.println("Ingressi les lletres de l'alfabet, separades per comes (per exemple: a, b, c)");
+        System.out.println("Per acabar premeu Enter sense ingressar una lletra:");
+
         while (true) {
-            String input = s.nextLine();
-            if (input.length() == 1) {
-                inputChar = input.charAt(0);
-                if (inputChar == '.') break;
-                lletres.add(inputChar);
-            }
-            else {
-                System.out.println("Si us plau, ingresi una única lletra");
+            String input = s.next().trim();
+            if (input.isEmpty()) break;
+
+            char[] lletres = input.toCharArray();
+
+            for (char lletra : lletres) {
+                if (lletra != ',') SetLletres.add(lletra);
             }
         }
-        return lletres;
+        return SetLletres;
     }
 
     public void mostrarMissatge(String m) {
