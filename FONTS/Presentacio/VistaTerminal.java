@@ -189,15 +189,13 @@ public class VistaTerminal {
         Set<Character> SetLletres = new HashSet<>();
         System.out.println("Ingressi les lletres de l'alfabet, separades per comes (per exemple: a, b, c) i amb un punt '.' al final");
 
-        while (true) {
-            String input = s.next().trim();
-            if (input.isEmpty()) break;
+        String input = s.nextLine();
+        String[] letras = input.split(",");
 
-            char[] lletres = input.toCharArray();
-
-            for (char lletra : lletres) {
-                if (lletra == '.') break;
-                if (lletra != ',') SetLletres.add(lletra);
+        for (String letra : letras) {
+            letra = letra.trim(); // Eliminar espacios en blanco
+            if (!letra.isEmpty()) {
+                SetLletres.add(letra.charAt(0)); // Agregar la primera letra (ignorando las demás)
             }
         }
         return SetLletres;
