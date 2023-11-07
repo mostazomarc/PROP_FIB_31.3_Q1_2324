@@ -187,7 +187,7 @@ public class VistaTerminal {
     public Set<Character> obteLletresAlfabet() {
 
         Set<Character> SetLletres = new HashSet<>();
-        System.out.println("Ingressi les lletres de l'alfabet, separades per comes (per exemple: a, b, c) i amb un punt '.' al final");
+        System.out.println("Ingressi les lletres de l'alfabet, separades per comes (per exemple: a, b, c) i prem Enter per acabar");
 
         String input = s.nextLine();
         String[] letras = input.split(",");
