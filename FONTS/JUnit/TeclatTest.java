@@ -11,4 +11,24 @@ import java.util.*;
 
 public class TeclatTest {
 
+
+    @Test
+    public void crearTeclat() {
+
+    }
+
+    @Test
+    public void obtenirDisposicióTeclat() {
+
+    }
+
+    @Test
+    public void obtenirNomTeclat() {
+
+    }
+
+    @Test
+    public void canviarTeclat() {
+
+    }
 }
