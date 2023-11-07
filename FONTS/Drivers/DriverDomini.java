@@ -1,4 +1,4 @@
-//Driver que ha de probar les funcionalitats principals del programa
+//Driver que ha de provar les funcionalitats principals del programa
 
 package Drivers;
 import ControladorsDomini.CtrlDomini;
