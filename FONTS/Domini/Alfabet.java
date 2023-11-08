@@ -27,4 +27,6 @@ public class Alfabet {
         return lletres;
     }
 
+    public int getNumLletres() { return lletres.size(); }
+
 }
