@@ -38,6 +38,8 @@ public class CtrlDomini {
         ctrlFreqFile = CtrlFreqFile.getInstance();
         Estrategia = "QAP"; //estrategia per defecte
         PerfilsActius = new HashMap<String, Perfil>();
+        Alfabets = new TreeMap<String, Alfabet>();
+        Idiomes = new TreeMap<String, Idioma>();
     }
 
     //Pre: Es rep un nom d'usuari
