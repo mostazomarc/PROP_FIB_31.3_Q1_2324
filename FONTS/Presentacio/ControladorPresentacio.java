@@ -43,6 +43,12 @@ public class ControladorPresentacio {
        controladorDomini.llegirLlistaFreq(tipusArxiu,filename);
     }
 
+    public void afegirAlfabet(String filename) {
+        controladorDomini.afegirAlfabet(filename);
+    }
+
+    public void afegirIdioma(String nomIdioma, String nomAlfabet) { controladorDomini.afegirIdioma(nomIdioma, nomAlfabet); }
+
     //Pre:
     //Post: S'obté un set dels noms de les llistes guardades del perfil actiu
     public List<String> getNomLlistesGuardades() {
@@ -53,5 +59,11 @@ public class ControladorPresentacio {
     //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
     public Map<String, Integer> consultaLlista(String nomSeleccio) {
         return controladorDomini.consultaLlista(nomSeleccio);
+    }
+
+    public void consultaIdiomes() {
+        vt.mostrarMissatge("### Consultar Idiomes ###");
+        Vector<String> dades = controladorDomini.consultaIdiomes();
+        vt.mostraDadesIdiomes(dades);
     }
 }
