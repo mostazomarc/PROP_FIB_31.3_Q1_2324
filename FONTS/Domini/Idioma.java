@@ -25,6 +25,8 @@ public class Idioma {
         return nom;
     }
 
+    public Alfabet getAlfabet() { return alfabet; }
+
     //Retorna les lletres que té l'alfabet de l'idioma
     public Set<Character> getLletres() {
         return alfabet.getLletres();

@@ -14,6 +14,8 @@ public class CtrlDomini {
     private static CtrlDomini singletonObject;
     private CtrlFreqFile ctrlFreqFile;
 
+    private TreeMap<String, Alfabet> Alfabets;
+    private TreeMap<String, Idioma> Idiomes;
 
     //Pre:
     //Post: Es crea una instancia de domini.
@@ -129,6 +131,44 @@ public class CtrlDomini {
     //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
     public Map<String, Integer> consultaLlista(String nomSeleccio) {
         return PerfilActual.consultaLlista(nomSeleccio);
+    }
+
+    public void afegirAlfabet(String filename) {
+        System.out.println("Llegint arxiu "+ filename +"\n");
+        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiuFreq(filename);
+
+        Set<Character> lletres = new HashSet<Character>();
+        String nomAlfabet = filename.substring(0, filename.length() - 4);
+
+        for (char lletra : LlistaLlegida.get(0).toCharArray()) {
+            lletres.add(lletra);
+        }
+
+        Alfabet nouAlfabet = new Alfabet(nomAlfabet, lletres);
+        Alfabets.put(nomAlfabet, nouAlfabet);
+    }
+
+    public void afegirIdioma(String nomIdioma, String nomAlfabet) {
+        Alfabet alfabetIdioma = Alfabets.get(nomAlfabet);
+        Idioma nouIdioma = new Idioma(nomIdioma, alfabetIdioma);
+        Idiomes.put(nomIdioma, nouIdioma);
+    }
+
+    public Vector<String> consultaIdiomes() {
+        Vector<String> sdades = new Vector<String>();
+        Set<String> setkeys = Idiomes.keySet();
+        Iterator<String> iterkeys = setkeys.iterator();
+        while (iterkeys.hasNext()) {
+            String nomIdioma = iterkeys.next();
+            Idioma i = Idiomes.get(nomIdioma);
+            Alfabet a = i.getAlfabet();
+            String s = "";
+            s += nomIdioma; s += " ";
+            s += a.getNomAlfabet(); s += " ";
+            s += a.getNumLletres();
+            sdades.add(s);
+        }
+        return sdades;
     }
 
 
