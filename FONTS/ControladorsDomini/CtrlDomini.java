@@ -140,8 +140,10 @@ public class CtrlDomini {
         Set<Character> lletres = new HashSet<Character>();
         String nomAlfabet = filename.substring(0, filename.length() - 4);
 
-        for (char lletra : LlistaLlegida.get(0).toCharArray()) {
-            lletres.add(lletra);
+        for (String linia : LlistaLlegida) {
+            for (char lletra : linia.toCharArray()) {
+                lletres.add(lletra);
+            }
         }
 
         Alfabet nouAlfabet = new Alfabet(nomAlfabet, lletres);
