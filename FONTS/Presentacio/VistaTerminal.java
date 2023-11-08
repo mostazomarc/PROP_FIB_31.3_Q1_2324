@@ -122,22 +122,6 @@ public class VistaTerminal {
         }
     }
 
-    public void afegirAlfabet() {
-        System.out.println("### Afegir Alfabet ###");
-        System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
-        String filename = s.next();
-        ctrlP.afegirAlfabet(filename);
-    }
-
-    public void afegirIdioma() {
-        System.out.println("### Afegir Idioma ###");
-        System.out.println("Introdueixi el nom de l'Idioma: ");
-        String nomIdioma = s.next();
-        System.out.println("Introdueixi el nom de l'Alfabet que té l'idioma: ");
-        String nomAlfabet = s.next();
-        ctrlP.afegirIdioma(nomIdioma, nomAlfabet);
-    }
-
     //Pre:
     //Post: Es mostra el menu de consultar dades i s'executa la opció escollida
     public void consultarDades() {
@@ -193,6 +177,22 @@ public class VistaTerminal {
             }
         }
 
+    }
+
+    public void afegirAlfabet() {
+        System.out.println("### Afegir Alfabet ###");
+        System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
+        String filename = s.next();
+        ctrlP.afegirAlfabet(filename);
+    }
+
+    public void afegirIdioma() {
+        System.out.println("### Afegir Idioma ###");
+        System.out.println("Introdueixi el nom de l'Idioma: ");
+        String nomIdioma = s.next();
+        System.out.println("Introdueixi el nom de l'Alfabet que té l'idioma: ");
+        String nomAlfabet = s.next();
+        ctrlP.afegirIdioma(nomIdioma, nomAlfabet);
     }
 
     public void mostraDadesIdiomes(Vector<String> dades) {
