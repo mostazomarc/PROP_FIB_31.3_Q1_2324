@@ -172,9 +172,10 @@ public class CtrlDomini {
         Alfabets.put(nomAlfabet, nouAlfabet);
     }
 
-    public void afegirIdioma(String nomIdioma, String nomAlfabet) {
+    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) {
         Alfabet alfabetIdioma = Alfabets.get(nomAlfabet);
-        Idioma nouIdioma = new Idioma(nomIdioma, alfabetIdioma);
+        Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
+        Idioma nouIdioma = new Idioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
         Idiomes.put(nomIdioma, nouIdioma);
     }
 
