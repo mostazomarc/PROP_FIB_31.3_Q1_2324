@@ -16,10 +16,17 @@ public class DriverDomini {
         s = new Scanner(System.in);
 
         controlador.iniciaInstancia("Prova");
+        controlador.afegirAlfabet("Llatí.txt");
+        controlador.afegirIdioma("Català","Llatí","llista","catalaFreq.txt");
+
+
         System.out.println("\n ##################### BENVINGUT AL SISTEMA CREADOR DE TECLATS ##################### \n");
-        System.out.println("\nLa configuració actual del programa es la següent:");
+        System.out.println("\nLa configuració actual del programa per fer proves es la següent:");
         System.out.println("## Perfil: " + controlador.getPerfilActual());
         System.out.println("## Estratègia: " + controlador.getEstrategiaActual());
+        System.out.println("## Alfabet: Llatí");
+        System.out.println("## Idioma: Català");
+        System.out.println("## Llista Predeterminada Català: catalaFreq.txt");
 
         System.out.println("\nEl driver disposa de les següents funcions:\n");
         printMenu();
@@ -67,9 +74,159 @@ public class DriverDomini {
         }
     }
 
-    public void gestionarDades() {}
+    //Pre:
+    //Post: Es mostra el menu de consultar dades i s'executa la opció escollida
+    public void gestionarDades() {
+        System.out.println("### Gestionar Dades ###");
+        printMenuGestionarDades();
+        esperarSeleccioGestionarDades();
+    }
 
-    public void consultarDades() {}
+    //Pre:
+    //Post: S'imprimeixen les diferents opcions disponibles de gestionar Dades
+    public void printMenuGestionarDades() {
+        System.out.println("0. Info de les funcions");
+        System.out.println("1. Afegir Llista de Frecuencies");
+        System.out.println("2. Afegir Alfabet");
+        System.out.println("3. Afegir Idioma");
+        System.out.println("6. Sortir");
+    }
+
+    //Pre:
+    //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
+    public void esperarSeleccioGestionarDades() {
+        System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
+        int num = s.nextInt();
+        netejaTerminal();
+        if (num== 0) System.out.println("0. Info de les funcions");
+        else if (num== 1) afegirLlistaFrecuencies();
+        else if (num == 2) afegirAlfabet();
+        else if (num == 3) afegirIdioma();
+    }
+
+    //Pre:
+    //Post: Es mostren les diferents opcions per afegir una llista i s'afegeix de la manera seleccionada
+    public void afegirLlistaFrecuencies() {
+        System.out.println("### Afegir Llista Frequencies ###");
+        System.out.println("Com la vols afegir?");
+        System.out.println("1. Text");
+        System.out.println("2. Llista");
+        System.out.println("3. Entrada manual");
+        System.out.println("6. Sortir");
+        int num = s.nextInt();
+        netejaTerminal();
+        if (num == 1 || num == 2) {
+            System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
+            String filename = s.next();
+            System.out.println("Introdueixi el nom de l'IDIOMA");
+            //Llistar Idiomes existents
+            String idioma = s.next();
+            if (num == 1) {
+                controlador.novaLlistaPerfil("text", filename,idioma);
+            }
+            if (num == 2) {
+                controlador.novaLlistaPerfil("llista", filename,idioma);
+            }
+        }
+        else if (num== 3) {
+            //llegir manual
+        }
+    }
+
+    //Pre:
+    //Post: Es mostra el menu de consultar dades i s'executa la opció escollida
+    public void consultarDades() {
+        System.out.println("### Consultar Dades ###");
+        printMenuConsultarDades();
+        esperarSeleccioConsultarDades();
+    }
+
+    //Pre:
+    //Post: S'imprimeixen les diferents opcions disponibles de consultar Dades
+    public void printMenuConsultarDades() {
+        System.out.println("0. Info de les funcions");
+        System.out.println("1. Llistes de Frecuencies");
+        System.out.println("2. Idiomes amb alfabet associat i num de lletres de l'alfabet");
+    }
+
+    //Pre:
+    //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
+    public void esperarSeleccioConsultarDades() {
+        System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
+        int num = s.nextInt();
+        netejaTerminal();
+        if (num== 0) System.out.println("0. Info de les funcions");
+        else if(num == 1) llistarLlistes();
+        else if (num == 2) consultaIdiomes();
+    }
+
+    //Pre:
+    //Post: Es llisten els noms de les llistes guardades del perfil actiu
+    public void llistarLlistes() {
+        List<String> nomLlistes = controlador.getNomLlistesGuardades();
+        netejaTerminal();
+        if (nomLlistes.isEmpty()) System.out.println("No n'hi han llistes guardades");
+        else {
+            int i = 1;
+            for (String nom : nomLlistes) {
+                System.out.println(i + ": " + nom);
+                ++i;
+            }
+            System.out.println("Si vol consultar una llista en detall entri el numero, si no entri '0':");
+            int num = s.nextInt();
+            if (num != 0) {
+                netejaTerminal();
+                if (nomLlistes.size() < num) System.out.println("ERROR");
+                else {
+                    String nomSeleccio = nomLlistes.get(num - 1);
+                    Map<String, Integer> llista = controlador.consultaLlista(nomSeleccio);
+                    System.out.println("Paraula: , Frequencia: ");
+                    for (Map.Entry<String, Integer> entry : llista.entrySet()) {
+                        String clave = entry.getKey();
+                        Integer valor = entry.getValue();
+                        System.out.println(clave + ", " + valor);
+                    }
+                }
+            }
+        }
+
+    }
+
+    public void consultaIdiomes() {
+        System.out.println("### Consultar Idiomes ###");
+        Vector<String> dades = controlador.consultaIdiomes();
+        mostraDadesIdiomes(dades);
+    }
+
+    public void afegirAlfabet() {
+        System.out.println("### Afegir Alfabet ###");
+        System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
+        String filename = s.next();
+        controlador.afegirAlfabet(filename);
+    }
+
+    public void afegirIdioma() {
+        System.out.println("### Afegir Idioma ###");
+        System.out.println("Introdueixi el nom de l'Idioma: ");
+        String nomIdioma = s.next();
+        System.out.println("Introdueixi el nom de l'Alfabet que té l'idioma: ");
+        String nomAlfabet = s.next();
+        System.out.println("Introdueixi el nom de l'Arxiu que conté la llista de Frequències predeterminada de l'idioma: ");
+        String filename = s.next();
+        System.out.println("Introdueixi qui tipus d'arxiu 'text' o 'llista': ");
+        String tipusArxiu = s.next();
+        controlador.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
+    }
+
+    public void mostraDadesIdiomes(Vector<String> dades) {
+        int n = dades.size();
+        for (int i=0; i < n; ++i) System.out.println(dades.get(i));
+    }
+
+    public void mostrarMissatge(String m) {
+        System.out.println(m);
+    }
+
 
     public static void main(String[] args) {
         DriverDomini dd = new DriverDomini();
