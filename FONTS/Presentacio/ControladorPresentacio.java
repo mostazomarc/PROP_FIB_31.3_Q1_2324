@@ -39,8 +39,8 @@ public class ControladorPresentacio {
         return controladorDomini.getPerfilActual();
     }
 
-    public void llegirLlistaFreq(String tipusArxiu, String filename)  {
-       controladorDomini.llegirLlistaFreq(tipusArxiu,filename);
+    public void llegirLlistaFreq(String tipusArxiu, String filename, String idioma)  {
+       controladorDomini.llegirLlistaFreq(tipusArxiu,filename,idioma);
     }
 
     public void afegirAlfabet(String filename) {

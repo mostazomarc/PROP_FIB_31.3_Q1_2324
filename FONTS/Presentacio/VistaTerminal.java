@@ -110,11 +110,14 @@ public class VistaTerminal {
         if (num == 1 || num == 2) {
             System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
             String filename = s.next();
+            System.out.println("Introdueixi el nom de l'IDIOMA");
+            //Llistar Idiomes existents
+            String idioma = s.next();
                 if (num == 1) {
-                    ctrlP.llegirLlistaFreq("text", filename);
+                    ctrlP.llegirLlistaFreq("text", filename,idioma);
                 }
                 if (num == 2) {
-                    ctrlP.llegirLlistaFreq("llista", filename);
+                    ctrlP.llegirLlistaFreq("llista", filename,idioma);
                 }
         }
         else if (num== 3) {
