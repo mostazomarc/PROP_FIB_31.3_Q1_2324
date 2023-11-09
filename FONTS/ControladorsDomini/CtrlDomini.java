@@ -76,9 +76,51 @@ public class CtrlDomini {
         return Estrategia;
     }
 
+    //Pre: LlistaLlegida es una llista de frequencies llegida en format vàlid
+    //Post: es passa la llista llegida a llista de frequencies
+    private Map<String,Integer> llistaToEntrades(Map<String, Integer> novesEntrades, List<String> LlistaLlegida) {
+        for (String linia : LlistaLlegida) {
+            String[] parella = linia.split(" ");
+            String paraula = parella[0];
+            Integer frequencia = Integer.parseInt(parella[1]);
+
+            if (novesEntrades.containsKey(paraula)) {
+                // Si la paraula ja existeix obtenir frequencia actual
+                int FrecVella = novesEntrades.get(paraula);
+                // Sumar la nova vella frequencia a la nova
+                frequencia += FrecVella;
+            }
+
+            novesEntrades.put(paraula, frequencia);
+        }
+        return novesEntrades;
+    }
+
+    //Pre: La llista llegida es un text que es vol passar a frequencies
+    //Post: Es passa la llista de string llegits a les entrades de llista de frequencies
+    private Map<String,Integer> textToEntrades(Map<String, Integer> novesEntrades, List<String> LlistaLlegida) {
+        Pattern patron = Pattern.compile("\\p{L}+");
+
+        for (String linea : LlistaLlegida) {
+            Matcher matcher = patron.matcher(linea);
+
+            while (matcher.find()) {
+                String paraula = matcher.group();
+                int freq = 1;
+                if (novesEntrades.containsKey(paraula)) {
+                    // Si la paraula ja existeix obtenir frequencia actual
+                    freq += novesEntrades.get(paraula);
+                }
+
+                novesEntrades.put(paraula,freq);
+            }
+        }
+        return novesEntrades;
+    }
+
 
     //Pre: tipus arxiu es un tipus vàlid i filename existeix i esta en un format vàid
-    //Post: S'afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual
+    //Post: Es llegeix l'informacio de llista de l'arxiu i es retorna
     public Map<String,Integer> llegirLlistaFreq(String tipusArxiu, String filename) {
         System.out.println("Llegint arxiu "+ filename +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiuFreq(filename);
@@ -86,43 +128,16 @@ public class CtrlDomini {
 
 
         if (tipusArxiu == "llista") {
-            for (String linia : LlistaLlegida) {
-                String[] parella = linia.split(" ");
-                String paraula = parella[0];
-                Integer frequencia = Integer.parseInt(parella[1]);
-
-                if (novesEntrades.containsKey(paraula)) {
-                    // Si la paraula ja existeix obtenir frequencia actual
-                    int FrecVella = novesEntrades.get(paraula);
-                    // Sumar la nova vella frequencia a la nova
-                    frequencia += FrecVella;
-                }
-
-                novesEntrades.put(paraula,frequencia);
-            }
-        } else {
-            Pattern patron = Pattern.compile("\\p{L}+");
-
-            for (String linea : LlistaLlegida) {
-                Matcher matcher = patron.matcher(linea);
-
-                while (matcher.find()) {
-                    String paraula = matcher.group();
-                    int freq = 1;
-                    if (novesEntrades.containsKey(paraula)) {
-                        // Si la paraula ja existeix obtenir frequencia actual
-                        freq += novesEntrades.get(paraula);
-                    }
-
-                    novesEntrades.put(paraula,freq);
-                }
-            }
+            novesEntrades = llistaToEntrades(novesEntrades,LlistaLlegida);
+        }
+         else {
+            novesEntrades = textToEntrades(novesEntrades,LlistaLlegida);
         }
         return novesEntrades;
-
-
     }
 
+    //Pre: tipus arxiu es un tipus vàlid i filename existeix i esta en un format vàid
+    //Post: S'afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual
     public void novaLlistaPerfil(String tipusArxiu, String filename, String i) {
         Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
         PerfilActual.afegirLlistaFreq(filename,Idiomes.get(i),novesEntrades);
