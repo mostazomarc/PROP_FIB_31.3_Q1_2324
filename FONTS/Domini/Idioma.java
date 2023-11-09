@@ -1,6 +1,7 @@
 package Domini;
 
 import java.util.Set;
+import java.util.Map;
 import java.util.HashSet;
 
 public class Idioma {
@@ -13,10 +14,26 @@ public class Idioma {
         this.alfabet = alfabet;
     }
 
+    public Idioma (String nom, Alfabet alfabet, LlistaFrequencies llistaPred) {
+        this.nom = nom;
+        this.alfabet = alfabet;
+        llistaFreqPredeterminada = llistaPred;
+    }
+
+    public Idioma (String nom, Alfabet alfabet, String nomLlista, Map<String, Integer> llistaParaules) {
+        this.nom = nom;
+        this.alfabet = alfabet;
+        new LlistaFrequencies(nomLlista, this, llistaParaules); //Aquesta creadora ja vincula la llista de freqüències a aquest idioma
+    }
+
     //Pre: No existeix un idioma amb nomIdioma. Existeix l'alfabet alphabet. Existeix la llista de freqüències FreqList
     //Post: S'ha creat un idioma amb nom = nomIdioma, alfabet = alphabet i llistaFreq = FreqList
     //      i s'afegeix aquest idioma a l'alfabet donat
     public void afegirLlistaFreqPredeterminada (LlistaFrequencies llistaFreq) {
+        if (llistaFreqPredeterminada == null) llistaFreqPredeterminada = llistaFreq;
+    }
+
+    public void canviarLlistaFreqPredeterminada (LlistaFrequencies llistaFreq) {
         llistaFreqPredeterminada = llistaFreq;
     }
 
