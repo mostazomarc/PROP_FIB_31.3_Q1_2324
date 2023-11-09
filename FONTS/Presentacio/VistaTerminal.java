@@ -199,7 +199,7 @@ public class VistaTerminal {
         String filename = s.next();
         System.out.println("Introdueixi qui tipus d'arxiu 'text' o 'llista': ");
         String tipusArxiu = s.next();
-        ctrlP.afegirIdioma(nomIdioma, nomAlfabet, tipusArxi, filename);
+        ctrlP.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
     }
 
     public void mostraDadesIdiomes(Vector<String> dades) {
