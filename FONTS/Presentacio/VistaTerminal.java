@@ -195,7 +195,11 @@ public class VistaTerminal {
         String nomIdioma = s.next();
         System.out.println("Introdueixi el nom de l'Alfabet que té l'idioma: ");
         String nomAlfabet = s.next();
-        ctrlP.afegirIdioma(nomIdioma, nomAlfabet);
+        System.out.println("Introdueixi el nom de l'Arxiu que conté la llista de Frequències predeterminada de l'idioma: ");
+        String filename = s.next();
+        System.out.println("Introdueixi qui tipus d'arxiu 'text' o 'llista': ");
+        String tipusArxiu = s.next();
+        ctrlP.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
     }
 
     public void mostraDadesIdiomes(Vector<String> dades) {

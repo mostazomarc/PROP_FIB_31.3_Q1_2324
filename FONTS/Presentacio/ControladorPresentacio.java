@@ -47,7 +47,9 @@ public class ControladorPresentacio {
         controladorDomini.afegirAlfabet(filename);
     }
 
-    public void afegirIdioma(String nomIdioma, String nomAlfabet) { controladorDomini.afegirIdioma(nomIdioma, nomAlfabet); }
+    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) {
+        controladorDomini.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
+    }
 
     //Pre:
     //Post: S'obté un set dels noms de les llistes guardades del perfil actiu
