@@ -46,9 +46,22 @@ public class LlistaFrequenciesTest {
     }
 
     @Test
+    //Creadora LLista amb nom i idioma ja té llista Predeterminada
+    public void creadoraLlistaIdiomaJaTePred() {
+        LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva);
+        LlistaFrequencies resultat2 = new LlistaFrequencies("SegonaLlista",idiomaProva);
+        assertEquals("NovaLlista",resultat.getNom());
+        assertEquals(idiomaProva,resultat.getIdioma());
+        assertEquals(resultat,idiomaProva.getLlistaFreq());
+
+        assertEquals("SegonaLlista",resultat2.getNom());
+        assertEquals(idiomaProva,resultat2.getIdioma());
+        assertNotEquals(resultat2,idiomaProva.getLlistaFreq());
+    }
+
+    @Test
     //Creadora LLista amb nom i Llista de paraules i getFrequencies
     public void creadoraLlistaNomLlista() {
-
         LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva, llistaParaulesProva);
         assertEquals("NovaLlista",resultat.getNom());
         assertEquals(llistaParaulesProva,resultat.getFrequencies());
