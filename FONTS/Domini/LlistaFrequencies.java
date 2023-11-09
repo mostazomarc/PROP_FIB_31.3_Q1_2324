@@ -10,7 +10,7 @@ public class LlistaFrequencies {
 
 
     //Pre:
-    //Post: Es crea una LlistaFrecuencies amb nom
+    //Post: Es crea una LlistaFrecuencies amb nom i idioma i s'afegeix la llista a l'idioma si l'idioma no té llista predeterminada
     public LlistaFrequencies (String nom, Idioma i) {
         this.nom = nom;
         LlistaParaules = new HashMap<>();
@@ -19,7 +19,7 @@ public class LlistaFrequencies {
     }
 
     //Pre: LlistaParaules es una llista valida
-    //Post: Es crea una LlistaFrecuencies amb nom i llista paraules
+    //Post: Es crea una LlistaFrecuencies amb nom, llista paraules i idoma i s'afegeix la llista a l'idioma si l'idioma no té llista predeterminada
     public LlistaFrequencies (String nom, Idioma i, Map<String, Integer> LlistaParaules) {
         this.nom = nom;
         this.LlistaParaules = LlistaParaules;

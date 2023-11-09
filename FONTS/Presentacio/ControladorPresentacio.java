@@ -40,7 +40,7 @@ public class ControladorPresentacio {
     }
 
     public void llegirLlistaFreq(String tipusArxiu, String filename, String idioma)  {
-       controladorDomini.llegirLlistaFreq(tipusArxiu,filename,idioma);
+       controladorDomini.novaLlistaPerfil(tipusArxiu,filename,idioma);
     }
 
     public void afegirAlfabet(String filename) {

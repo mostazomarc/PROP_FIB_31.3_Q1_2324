@@ -79,7 +79,7 @@ public class CtrlDomini {
 
     //Pre: tipus arxiu es un tipus vàlid i filename existeix i esta en un format vàid
     //Post: S'afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual
-    public void llegirLlistaFreq(String tipusArxiu, String filename, String i) {
+    public Map<String,Integer> llegirLlistaFreq(String tipusArxiu, String filename) {
         System.out.println("Llegint arxiu "+ filename +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiuFreq(filename);
         Map<String, Integer> novesEntrades = new HashMap<>();
@@ -118,9 +118,14 @@ public class CtrlDomini {
                 }
             }
         }
+        return novesEntrades;
 
+
+    }
+
+    public void novaLlistaPerfil(String tipusArxiu, String filename, String i) {
+        Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
         PerfilActual.afegirLlistaFreq(filename,Idiomes.get(i),novesEntrades);
-
     }
 
     //Pre:
