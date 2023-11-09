@@ -41,6 +41,8 @@ public class LlistaFrequenciesTest {
     public void creadoraLlistaNom() {
         LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva);
         assertEquals("NovaLlista",resultat.getNom());
+        assertEquals(idiomaProva,resultat.getIdioma());
+        assertEquals(resultat,idiomaProva.getLlistaFreq());
     }
 
     @Test
@@ -50,6 +52,8 @@ public class LlistaFrequenciesTest {
         LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva, llistaParaulesProva);
         assertEquals("NovaLlista",resultat.getNom());
         assertEquals(llistaParaulesProva,resultat.getFrequencies());
+        assertEquals(idiomaProva,resultat.getIdioma());
+        assertEquals(resultat,idiomaProva.getLlistaFreq());
     }
 
     @Test

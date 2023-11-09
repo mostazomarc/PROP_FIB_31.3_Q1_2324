@@ -6,7 +6,7 @@ import java.util.Map;
 public class LlistaFrequencies {
     private String nom;
     private Map<String, Integer> LlistaParaules;
-    Idioma idioma;
+    private Idioma idioma;
 
 
     //Pre:
@@ -39,6 +39,11 @@ public class LlistaFrequencies {
         return LlistaParaules;
     }
 
+    // Pre:
+    //Post: Es retorna l'idioma de la llista'
+    public  Idioma getIdioma() {
+        return idioma;
+    }
 
     //Pre:
     //Post: Les paraules i frequencies introduides son afegides a la llista
