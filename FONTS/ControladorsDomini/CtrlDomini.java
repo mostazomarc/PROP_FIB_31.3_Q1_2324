@@ -81,8 +81,10 @@ public class CtrlDomini {
     private Map<String,Integer> llistaToEntrades(Map<String, Integer> novesEntrades, List<String> LlistaLlegida) {
         for (String linia : LlistaLlegida) {
             String[] parella = linia.split(" ");
-            String paraula = parella[0];
-            Integer frequencia = Integer.parseInt(parella[1]);
+            int n = parella.length;
+            String paraula = parella[n - 2];
+            Integer frequencia = Integer.parseInt(parella[n-1]);
+           //System.out.println(parella[n-2]+ " " + parella[n-1]);
 
             if (novesEntrades.containsKey(paraula)) {
                 // Si la paraula ja existeix obtenir frequencia actual
