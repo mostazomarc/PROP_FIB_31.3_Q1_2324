@@ -57,7 +57,7 @@ public class DriverDomini {
         else if (num== 4) consultarDades();
         else if (num== 5) System.out.println("5. Canviar estrategia");
         if (num!= 6) {
-            System.out.println("################\"Presioni Enter per continuar...\\n\"####################");
+            System.out.println("################Presioni Enter per continuar...####################");
             s.nextLine();
             s.nextLine();
             netejaTerminal();

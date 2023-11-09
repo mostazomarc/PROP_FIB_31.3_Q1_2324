@@ -79,9 +79,10 @@ public class VistaTerminal {
     //Pre:
     //Post: S'imprimeixen les diferents opcions disponibles de gestionar Dades
     public void printMenuGestionarDades() {
-        System.out.println("0. Afegir Llista de Frecuencies");
-        System.out.println("1. Afegir Alfabet");
-        System.out.println("2. Afegir Idioma");
+        System.out.println("0. Info de les funcions");
+        System.out.println("1. Afegir Llista de Frecuencies");
+        System.out.println("2. Afegir Alfabet");
+        System.out.println("3. Afegir Idioma");
         System.out.println("6. Sortir");
     }
 
@@ -91,9 +92,10 @@ public class VistaTerminal {
         System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
-        if (num== 0) afegirLlistaFrecuencies();
-        else if (num == 1) afegirAlfabet();
-        else if (num == 2) afegirIdioma();
+        if (num== 0) System.out.println("0. Info de les funcions");
+        else if (num== 1) afegirLlistaFrecuencies();
+        else if (num == 2) afegirAlfabet();
+        else if (num == 3) afegirIdioma();
     }
 
     //Pre:
@@ -136,8 +138,9 @@ public class VistaTerminal {
     //Pre:
     //Post: S'imprimeixen les diferents opcions disponibles de consultar Dades
     public void printMenuConsultarDades() {
-        System.out.println("0. Llistes de Frecuencies");
-        System.out.println("1. Idiomes amb alfabet associat i num de lletres de l'alfabet");
+        System.out.println("0. Info de les funcions");
+        System.out.println("1. Llistes de Frecuencies");
+        System.out.println("2. Idiomes amb alfabet associat i num de lletres de l'alfabet");
     }
 
     //Pre:
@@ -146,8 +149,9 @@ public class VistaTerminal {
         System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
-        if (num== 0) llistarLlistes();
-        else if (num == 1) ctrlP.consultaIdiomes();
+        if (num== 0) System.out.println("0. Info de les funcions");
+        else if(num == 1) llistarLlistes();
+        else if (num == 2) ctrlP.consultaIdiomes();
     }
 
     //Pre:
