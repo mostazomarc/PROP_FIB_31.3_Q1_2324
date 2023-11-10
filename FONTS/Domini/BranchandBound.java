@@ -1,18 +1,16 @@
 package Domini;
 
-import java.util.HashSet;
-import java.util.PriorityQueue;
-import java.util.Set;
-import java.util.Map;
+import java.util.*;
+
 import Domini.Teclat;
 
 public class BranchandBound implements Estrategia {
     // Atributos
     private Teclat keyboard;
-    private double[][] Mat_dist;
-    private double[][] Mat_traf;
-    private char[][] best_sol;
-    private double best_cost;
+    private double[][] Mat_dist; //Matriz de distancia entre las ubicaciones
+    private double[][] Mat_traf;  //Matriz de tráfico entre las instalaciones
+    private char[][] best_sol;  //Layout resultante del algoritmo
+    private double best_cost; // mejor cota hasta el momento
 
     //Métodos
 
@@ -23,15 +21,15 @@ public class BranchandBound implements Estrategia {
         private Set<Character> letres_usades;
 
         public Nodo(char[][] matriz, double cota,Set<Character> ini) {
-            layout = matriz;
+            this.layout = new char[matriz.length][matriz[0].length];
+            for(int i = 0; i < matriz.length; i++){
+                for(int j = 0; j < matriz[0].length; j++)
+                    layout[i][j] = matriz[i][j];
+            }
             this.cota = cota;
             letres_usades = new HashSet<>(ini);
 
         }
-    }
-
-    private boolean es_solucion(char[][] matriz){
-        return false;
     }
 
     private double calcular_cota(char[][] matriz){
@@ -48,9 +46,18 @@ public class BranchandBound implements Estrategia {
         return nuevoNodo;
     }
 
+    class NodoComparator implements Comparator<Nodo> {
+
+        @Override
+        public int compare(Nodo o1, Nodo o2) {
+            return Double.compare(o1.cota, o2.cota);
+        }
+    }
+
     private void algoritm_bab(int n_filas, int n_columnas, Set<Character> lletres){
-        PriorityQueue<Nodo> q = new PriorityQueue<>();
+        PriorityQueue<Nodo> q = new PriorityQueue<>(new NodoComparator());
         boolean finalizar = false;
+        int n = lletres.size();
         char[][] matriz = new char[n_filas][n_columnas];
         for(int i = 0; i < n_filas; i++) {
             for(int j = 0; j < n_columnas; j++)
@@ -61,7 +68,7 @@ public class BranchandBound implements Estrategia {
         q.add(nodo_inicial);
         while(!q.isEmpty() && !finalizar){
             Nodo nodo_actual = q.poll();
-            if(es_solucion(nodo_inicial.layout)){
+            if(nodo_actual.letres_usades.size() == n){
                 //es la solución óptima
                 this.best_sol = nodo_actual.layout;
                 finalizar = true;
@@ -90,7 +97,7 @@ public class BranchandBound implements Estrategia {
 
     }
     //Inicializa la matriz de tráfico
-    private double[][] calculaMatTraf(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n) {
+    private double[][] calculaMatTraf(Map<String, Integer> palabrasFrec, Map<Character, Integer> lletres, int n) {
 
 
         //inicializada a 0 por defecto
@@ -101,11 +108,10 @@ public class BranchandBound implements Estrategia {
 
             for (int i = 0; i < palabra.length() - 1; i++) {
                 //guardamos los índices de cada letra en el abecedario
-                /*int letra1 = lletres.indexOf(palabra.charAt(i));
-                int letra2 = lletres.indexOf(palabra.charAt(i + 1));
+                int letra1 = lletres.get(palabra.charAt(i));
+                int letra2 = lletres.get(palabra.charAt(i + 1));
 
                 trafficMatrix[letra1][letra2] += frecuencia;
-
             }
         }
 
@@ -113,7 +119,7 @@ public class BranchandBound implements Estrategia {
     }
 
     //Inicializa la matriz de distancias
-    private double[][] calculaMatDist(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n, int n_filas, int n_columnas) {
+    private double[][] calculaMatDist( int n, int n_filas, int n_columnas) {
         //inicializada a 0 por defecto
         double[][] distanceMatrix = new double[n][n];
 
@@ -144,19 +150,28 @@ public class BranchandBound implements Estrategia {
     }
 
 
+   @Override
     public void solve(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas) {
         //declaramos una solucion inicial
         this.best_sol = new char[n_filas][n_columnas];
-        //le ponemos valor = infinito
+        //le ponemos valor = infinito a la cota inicial
         this.best_cost = Double.POSITIVE_INFINITY;
 
         int n = lletres.size();
+        int i = 0;
+        //Map de cada letra con su índice
+        Map<Character, Integer> letra_pos = new HashMap<>();
+        for(char letra : lletres){
+            letra_pos.put(letra, i);
+            ++i;
+        }
 
         //Inicializamos la matriz de tráfico
-        Mat_traf = calculaMatTraf(palabrasFrec, lletres, n);
+        Mat_traf = calculaMatTraf(palabrasFrec, letra_pos, n);
         //Inicializamos la matriz de distancias
-        Mat_dist = calculaMatDist(palabrasFrec, lletres, n, n_filas, n_columnas);
-
+        Mat_dist = calculaMatDist(n, n_filas, n_columnas);
+        
+        // realizamos el algoritmo Branch and Bound
         this.algoritm_bab(n_filas, n_columnas, lletres);
     }
 
