@@ -54,4 +54,9 @@ public class Idioma {
         return llistaFreqPredeterminada;
     }
 
+    //Retorna la llista de paraules amb frequències de l
+    public  Map<String, Integer> getFrequencies() {
+        return llistaFreqPredeterminada.getFrequencies();
+    }
+
 }
