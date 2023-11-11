@@ -10,7 +10,6 @@ import org.junit.Test;
 import java.util.*;
 
 public class AlfabetTest {
-    private String nomAlfabet;
     private Set<Character> lletresProva = new HashSet<Character>();
 
     @Before
