@@ -14,38 +14,91 @@ public class BranchandBound implements Estrategia {
 
     //Métodos
 
+    class pos{
+        private int x;
+        private int y;
+
+        public pos(int pos_x, int pos_y){
+            this.x = pos_x;
+            this.y = pos_y;
+        }
+    }
+
     class Nodo{
         private char[][] layout;
         private double cota;
 
-        private Set<Character> letres_usades;
+        private Map<Character, pos> letres_usades;
 
-        public Nodo(char[][] matriz, double cota,Set<Character> ini) {
+        public Nodo(char[][] matriz, double cota, Map<Character, pos> ini) {
             this.layout = new char[matriz.length][matriz[0].length];
             for(int i = 0; i < matriz.length; i++){
                 for(int j = 0; j < matriz[0].length; j++)
                     layout[i][j] = matriz[i][j];
             }
             this.cota = cota;
-            letres_usades = new HashSet<>(ini);
+            letres_usades = new HashMap<>(ini);
 
         }
     }
 
-    private double calcular_cota(char[][] matriz){
-        return 1;
-    }
-
-    public Nodo clonarNodo(Nodo nodoOriginal) {
-        if (nodoOriginal == null) {
-            return null;
+    private double calcular_cota(char[][] matriz, Map<Character, pos> letres_usades, Map<Character, Integer> letra_pos){
+        double termino_1 = 0.0;
+        //Cálculo del valor del término 1
+        for(Map.Entry<Character, pos> entry : letres_usades.entrySet()){
+            char letra = entry.getKey();
+            int pos_x = entry.getValue().x;
+            int pos_y = entry.getValue().y;
+            //recorremos las instalaciones ya colocadas y con letra distinta a la actual
+            for(int i = 0; i < matriz.length; i++){
+                for(int j = 0; j < matriz[0].length; j++)
+                    if(matriz[i][j] != ' ' && matriz[i][j] != letra){
+                        //frecuencia entre la letra actual y la letra en la instalación actual
+                        double frecuencia = Mat_traf[letra_pos.get(letra)][letra_pos.get(matriz[i][j])];
+                        // distancia entre la letra actual y la letra en la instalación actual
+                        double distancia = Mat_dist[(pos_x * matriz[0].length) + pos_y][(i * matriz[0].length) + j];
+                        termino_1 += frecuencia * distancia;
+                    }
+            }
+        }
+        //Cálculo de la matriz C1
+        double[][] Mat_c1;
+        int m = letra_pos.size() - letres_usades.size(); // número de letras sin utilizar
+        if(m != 0){
+            Mat_c1 = new double[m][m];
+            int letra_num, posicion;
+            letra_num = posicion = 0;
+            for(Map.Entry<Character, Integer> entry : letra_pos.entrySet() ){
+                char letra_actual = entry.getKey();
+                if(!letres_usades.containsKey(letra_actual)){
+                    for(int i = 0; i < matriz.length; i++){
+                        for(int j = 0; j < matriz[0].length; j++) {
+                            if (matriz[i][j] == ' ') {
+                                double suma = 0.0;
+                                for (Map.Entry<Character, pos> entry_2 : letres_usades.entrySet()) {
+                                    char letra = entry_2.getKey();
+                                    int pos_x = entry_2.getValue().x;
+                                    int pos_y = entry_2.getValue().y;
+                                    //frecuencia entre la letra actual y la letra usada en la que estamos
+                                    double frecuencia = Mat_traf[letra_pos.get(letra_actual)][letra_pos.get(letra)];
+                                    // distancia entre la posicion de la letra actual y la letra usada en su instalación
+                                    double distancia = Mat_dist[(i * matriz[0].length) + j][(pos_x * matriz[0].length) + pos_y];
+                                    suma += frecuencia * distancia;
+                                }
+                                Mat_c1[letra_num][posicion] = suma;
+                                ++posicion;
+                            }
+                        }
+                    }
+                    ++letra_num;
+                }
+            }
         }
 
-        Nodo nuevoNodo = new Nodo(nodoOriginal.layout, nodoOriginal.cota, nodoOriginal.letres_usades);
+        //Cálculo de la matriz C2
 
-        return nuevoNodo;
+        return termino_1;
     }
-
     class NodoComparator implements Comparator<Nodo> {
 
         @Override
@@ -54,7 +107,7 @@ public class BranchandBound implements Estrategia {
         }
     }
 
-    private void algoritm_bab(int n_filas, int n_columnas, Set<Character> lletres){
+    private void algoritm_bab(int n_filas, int n_columnas, Set<Character> lletres, Map<Character, Integer> letra_pos){
         PriorityQueue<Nodo> q = new PriorityQueue<>(new NodoComparator());
         boolean finalizar = false;
         int n = lletres.size();
@@ -63,7 +116,7 @@ public class BranchandBound implements Estrategia {
             for(int j = 0; j < n_columnas; j++)
                 matriz[i][j] = ' ';
         }
-        Set<Character> ini = new HashSet<>();
+        Map <Character, pos> ini = new HashMap<>();
         Nodo nodo_inicial = new Nodo(matriz, best_cost, ini);
         q.add(nodo_inicial);
         while(!q.isEmpty() && !finalizar){
@@ -75,16 +128,17 @@ public class BranchandBound implements Estrategia {
             }
             else{
                 for(char letra : lletres) {
-                    if(!nodo_actual.letres_usades.contains(letra)) {
+                    if(!nodo_actual.letres_usades.containsKey(letra)) {
                         for (int i = 0; i < n_filas; i++) {
                             for (int j = 0; j < n_columnas; j++) {
                                 if (nodo_actual.layout[i][j] == ' ') {
-                                    Nodo nuevo = clonarNodo(nodo_actual);
+                                    Nodo nuevo = new Nodo(nodo_actual.layout, nodo_actual.cota, nodo_actual.letres_usades);
                                     nuevo.layout[i][j] = letra;
-                                    double cota = calcular_cota(nuevo.layout);
+                                    pos p = new pos(i, j);
+                                    nuevo.letres_usades.put(letra, p);
+                                    double cota = calcular_cota(nuevo.layout, nuevo.letres_usades, letra_pos);
                                     if (cota < best_cost) {
                                         nuevo.cota = cota;
-                                        nuevo.letres_usades.add(letra);
                                         q.add(nuevo);
                                     }
                                 }
@@ -172,7 +226,7 @@ public class BranchandBound implements Estrategia {
         Mat_dist = calculaMatDist(n, n_filas, n_columnas);
         
         // realizamos el algoritmo Branch and Bound
-        this.algoritm_bab(n_filas, n_columnas, lletres);
+        this.algoritm_bab(n_filas, n_columnas, lletres, letra_pos);
     }
 
 }
