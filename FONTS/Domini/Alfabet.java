@@ -29,4 +29,9 @@ public class Alfabet {
 
     public int getNumLletres() { return lletres.size(); }
 
+    //Retorna informació (Nom i lletres) de l'Alfabet
+    public String getInfo() {
+        return "Nom de l'Alfabet: " + nomAlfabet + "    Lletres (" + getNumLletres() + "): " + lletres;
+    }
+
 }
