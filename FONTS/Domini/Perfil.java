@@ -63,6 +63,8 @@ public class Perfil {
         return new ArrayList<>(noms);
     }
 
+    //Pre: La llista amb nom nomLlista existeix
+    //Post: Es retorna el nom de l'idioma de la llista amb nom nomLlista
     public String getNomIdiomaLlista(String nomLlista) {
         return frequencies.get(nomLlista).getNomIdioma();
     }

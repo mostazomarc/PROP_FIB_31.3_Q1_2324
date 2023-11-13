@@ -46,7 +46,7 @@ public class LlistaFrequencies {
     }
 
     // Pre:
-    //Post: Es retorna l'idioma de la llista'
+    //Post: Es retorna el nom de l'idioma de la llista'
     public  String getNomIdioma() {
         return idioma.getNom();
     }

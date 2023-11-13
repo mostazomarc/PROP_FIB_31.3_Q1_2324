@@ -104,6 +104,8 @@ public class DriverDomini {
         else if (num == 3) afegirIdioma();
     }
 
+    //Pre:
+    //Post: S'imprimeixen els idiomes disponibles i es retorna l'escollit per l'usuari
     public String selectorIdioma() {
         consultaIdiomes();
         System.out.println("Selecciona l'idioma desitjat escrivint el seu nom:");
@@ -144,6 +146,8 @@ public class DriverDomini {
         }
     }
 
+    //Pre:
+    //Post: es llegeixen les entrades manuals per crear una llista de frequencies
     public Map<String,Integer> llistaManual(Map<String, Integer> novesEntrades) {
         System.out.println("##### Introduir freqüències manualment #####");
         System.out.println("##### Introduir paraules i freqüències que es vulguin entrar #####");

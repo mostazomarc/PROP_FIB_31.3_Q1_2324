@@ -151,6 +151,8 @@ public class CtrlDomini {
         return PerfilActual.getNomAllLlistes();
     }
 
+    //Pre: La llista amb nom nomLlista existeix
+    //Post: Es retorna el nom de l'idioma de la llista amb nom nomllista
     public String getNomIdiomaLlista(String nomllista) {
         return PerfilActual.getNomIdiomaLlista(nomllista);
     }
