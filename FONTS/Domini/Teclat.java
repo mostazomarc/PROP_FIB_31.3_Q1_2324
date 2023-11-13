@@ -17,8 +17,8 @@ public class Teclat {
 
     //Pre:
     //Post: es crea un teclat amb nom a partir d'una llista de freqüencies i un idioma
-    public Teclat(String nom, LlistaFrequenciesStub freq, IdiomaStub i) {
-        creadora = new CreadoraTeclatStub();
+    public Teclat(String nom, Map<String,Integer> freq, IdiomaStub i) {
+        creadora = new Estrategia();
         this.nom = nom;
         idioma = i;
         disposicio = creadora.crearTeclat(freq,i.getLletres());

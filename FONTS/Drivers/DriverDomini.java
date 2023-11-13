@@ -16,7 +16,6 @@ public class DriverDomini {
         System.out.println("\nLa configuració actual del programa es la següent:");
         System.out.println("## Perfil: " + controlador.getPerfilActual());
         System.out.println("## Estratègia: " + controlador.getEstrategiaActual());
-
         System.out.println("\nEl driver disposa de les següents funcions:\n");
         printMenu();
         //repinstruccions();
