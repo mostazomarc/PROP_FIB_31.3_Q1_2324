@@ -183,20 +183,28 @@ public class CtrlDomini {
 
     public Vector<String> consultaIdiomes() {
         Vector<String> sdades = new Vector<String>();
-        Set<String> setkeys = Idiomes.keySet();
-        Iterator<String> iterkeys = setkeys.iterator();
-        while (iterkeys.hasNext()) {
-            String nomIdioma = iterkeys.next();
-            Idioma i = Idiomes.get(nomIdioma);
-            Alfabet a = i.getAlfabet();
-            String s = "";
-            s += nomIdioma; s += " ";
-            s += a.getNomAlfabet(); s += " ";
-            s += a.getNumLletres();
-            sdades.add(s);
+
+        int i = 1;
+        for (Map.Entry<String, Idioma> idioma : Idiomes.entrySet()) {
+            Idioma id = idioma.getValue();
+            sdades.add(i + ". " + id.getInfo());
+            ++i;
         }
+
         return sdades;
     }
 
+    public Vector<String> consultaAlfabets() {
+        Vector<String> sdades = new Vector<String>();
+
+        int i = 1;
+        for (Map.Entry<String, Alfabet> alfabet : Alfabets.entrySet()) {
+            Alfabet a = alfabet.getValue();
+            sdades.add(i +". " + a.getInfo());
+            ++i;
+        }
+
+        return sdades;
+    }
 
 }

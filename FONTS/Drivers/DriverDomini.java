@@ -146,18 +146,20 @@ public class DriverDomini {
     public void printMenuConsultarDades() {
         System.out.println("0. Info de les funcions");
         System.out.println("1. Llistes de Frecuencies");
-        System.out.println("2. Idiomes amb alfabet associat i num de lletres de l'alfabet");
+        System.out.println("2. Alfabets");
+        System.out.println("3. Idiomes");
     }
 
     //Pre:
     //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
     public void esperarSeleccioConsultarDades() {
-        System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
+        System.out.println("Escolleix una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
         if (num== 0) System.out.println("0. Info de les funcions");
         else if(num == 1) llistarLlistes();
-        else if (num == 2) consultaIdiomes();
+        else if (num == 2) consultaAlfabets();
+        else if (num == 3) consultaIdiomes();
     }
 
     //Pre:
@@ -195,6 +197,12 @@ public class DriverDomini {
     public void consultaIdiomes() {
         System.out.println("### Consultar Idiomes ###");
         Vector<String> dades = controlador.consultaIdiomes();
+        mostraDadesIdiomes(dades);
+    }
+
+    public void  consultaAlfabets() {
+        System.out.println("### Consultar Alfabets ###");
+        Vector<String> dades = controlador.consultaAlfabets();
         mostraDadesIdiomes(dades);
     }
 
