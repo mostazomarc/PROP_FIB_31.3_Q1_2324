@@ -55,7 +55,7 @@ public class DriverDomini {
     //Pre:
     //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
     public void repinstruccions() {
-        System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
+        System.out.println("Escull una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
         if (num== 0) {
@@ -141,7 +141,7 @@ public class DriverDomini {
     //Pre:
     //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
     public void esperarSeleccioGestionarDades() {
-        System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
+        System.out.println("Escull una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
         if (num== 0) {
@@ -259,7 +259,7 @@ public class DriverDomini {
     //Pre:
     //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
     public void esperarSeleccioConsultarDades() {
-        System.out.println("Escolleix una funcionalitat indicant el seu numero corresponent:");
+        System.out.println("Escull una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
         if (num== 0) {
