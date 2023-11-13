@@ -82,18 +82,20 @@ public class CtrlDomini {
         for (String linia : LlistaLlegida) {
             String[] parella = linia.split(" ");
             int n = parella.length;
-            String paraula = parella[n - 2];
-            Integer frequencia = Integer.parseInt(parella[n-1]);
-           //System.out.println(parella[n-2]+ " " + parella[n-1]);
+            if (n - 2 >= 0) {
+                String paraula = parella[n - 2];
+                Integer frequencia = Integer.parseInt(parella[n - 1]);
+                //System.out.println(parella[n-2]+ " " + parella[n-1]);
 
-            if (novesEntrades.containsKey(paraula)) {
-                // Si la paraula ja existeix obtenir frequencia actual
-                int FrecVella = novesEntrades.get(paraula);
-                // Sumar la nova vella frequencia a la nova
-                frequencia += FrecVella;
+                if (novesEntrades.containsKey(paraula)) {
+                    // Si la paraula ja existeix obtenir frequencia actual
+                    int FrecVella = novesEntrades.get(paraula);
+                    // Sumar la nova vella frequencia a la nova
+                    frequencia += FrecVella;
+                }
+
+                novesEntrades.put(paraula, frequencia);
             }
-
-            novesEntrades.put(paraula, frequencia);
         }
         return novesEntrades;
     }
