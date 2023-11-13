@@ -98,7 +98,10 @@ public class DriverDomini {
         System.out.println("1. Afegir Llista de Frequencies");
         System.out.println("2. Afegir Alfabet");
         System.out.println("3. Afegir Idioma");
-        System.out.println("6. Sortir");
+        System.out.println("4. Eliminar Llista de Frequencies");
+        System.out.println("5. Eliminar Alfabet");
+        System.out.println("6. Eliminar Idioma");
+        System.out.println("7. Sortir");
     }
 
     //Pre:
@@ -113,12 +116,16 @@ public class DriverDomini {
             System.out.println("1. Afegir Llista de Frequencies ---> Afegir una nova llista de frequencies a partir de text/llista o manualment");
             System.out.println("2. Afegir Alfabet ---> Afegir un nou alfabet");
             System.out.println("3. Afegir Idioma ---> Afegir un nou idioma a partir d'un Alfabet i creat amb una llista de frequencies predeterminada");
-            System.out.println("6. Sortir ---> Surt de consultar dades");
+            System.out.println("4. Eliminar Llista de Frequencies");
+            System.out.println("5. Eliminar Alfabet");
+            System.out.println("6. Eliminar Idioma");
+            System.out.println("7. Sortir ---> Surt de consultar dades");
             esperarSeleccioGestionarDades();
         }
         else if (num== 1) afegirLlistaFrecuencies();
         else if (num == 2) afegirAlfabet();
         else if (num == 3) afegirIdioma();
+        else if (num == 4) eliminarLlista();
     }
 
     //Pre:
@@ -161,6 +168,15 @@ public class DriverDomini {
             String nom = s.next();
             controlador.novaLlistaPerfil("Manual", nom,idioma,novesEntrades);
         }
+    }
+
+    //Pre:
+    //Post: Es llisten les llistes guardades i s'elimina l'indicada per el usuari
+    public void eliminarLlista() {
+        llistarLlistes();
+        System.out.println("Selecciona la llista a esborrar escrivint el seu nom:");
+        String nomLlista = s.next();
+        controlador.eliminarLlista(nomLlista);
     }
 
     //Pre:

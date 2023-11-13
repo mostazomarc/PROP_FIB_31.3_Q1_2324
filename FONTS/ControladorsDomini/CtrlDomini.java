@@ -163,6 +163,10 @@ public class CtrlDomini {
         return PerfilActual.consultaLlista(nomSeleccio);
     }
 
+    public void eliminarLlista(String nomLlista) {
+        PerfilActual.eliminaLlista(nomLlista);
+    }
+
     public void afegirAlfabet(String filename) {
         System.out.println("Llegint arxiu "+ filename +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiuFreq(filename);

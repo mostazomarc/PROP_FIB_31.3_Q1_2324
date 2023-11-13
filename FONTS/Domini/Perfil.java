@@ -56,6 +56,10 @@ public class Perfil {
         }
     }
 
+    public void eliminaLlista(String nomLlista) {
+        frequencies.remove(nomLlista);
+    }
+
     //Pre:
     //Post: Es retorna el conjunt de noms de les llistes guardades al perfil
     public List<String> getNomAllLlistes() {
