@@ -38,7 +38,8 @@ public class ControladorPresentacio {
     }
 
     public void llegirLlistaFreq(String tipusArxiu, String filename, String idioma)  {
-       controladorDomini.novaLlistaPerfil(tipusArxiu,filename,idioma);
+        Map<String, Integer> novesEntrades = new HashMap<>();
+       controladorDomini.novaLlistaPerfil(tipusArxiu,filename,idioma,novesEntrades);
     }
 
     public void afegirAlfabet(String filename) {

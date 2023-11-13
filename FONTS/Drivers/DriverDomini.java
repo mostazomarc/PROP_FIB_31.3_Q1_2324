@@ -104,6 +104,10 @@ public class DriverDomini {
         else if (num == 3) afegirIdioma();
     }
 
+    public String selectorIdioma() {
+
+    }
+
     //Pre:
     //Post: Es mostren les diferents opcions per afegir una llista i s'afegeix de la manera seleccionada
     public void afegirLlistaFrecuencies() {
@@ -115,22 +119,51 @@ public class DriverDomini {
         System.out.println("6. Sortir");
         int num = s.nextInt();
         netejaTerminal();
+        Map<String, Integer> novesEntrades = new HashMap<>();
+
+        System.out.println("Introdueixi el nom de l'IDIOMA");
+        //Llistar Idiomes existents
+        String idioma = s.next();
         if (num == 1 || num == 2) {
             System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
             String filename = s.next();
-            System.out.println("Introdueixi el nom de l'IDIOMA");
-            //Llistar Idiomes existents
-            String idioma = s.next();
             if (num == 1) {
-                controlador.novaLlistaPerfil("text", filename,idioma);
+                controlador.novaLlistaPerfil("text", filename,idioma, novesEntrades);
             }
             if (num == 2) {
-                controlador.novaLlistaPerfil("llista", filename,idioma);
+                controlador.novaLlistaPerfil("llista", filename,idioma,novesEntrades);
             }
         }
         else if (num== 3) {
             //llegir manual
+            novesEntrades = llistaManual(novesEntrades);
+            System.out.println("##### Introduir el nom de la llista: #####");
+            String nom = s.next();
+            controlador.novaLlistaPerfil("Manual", nom,idioma,novesEntrades);
         }
+    }
+
+    public Map<String,Integer> llistaManual(Map<String, Integer> novesEntrades) {
+        System.out.println("##### Introduir freqüències manualment #####");
+        System.out.println("##### Introduir paraules i freqüències que es vulguin entrar #####");
+        System.out.println("##### Per acabar escriure: 'X' #####");
+        while (true) {
+            String paraula = s.next();
+            if (paraula.equals("X")) {
+                break;
+            }
+            Integer freq = s.nextInt();
+            if (novesEntrades.containsKey(paraula)) {
+                // Si la paraula ja existeix obtenir frequencia actual
+                freq += novesEntrades.get(paraula);
+            }
+            System.out.println("#### Paraula = "+paraula+", Freqüencia = " +freq + " ####");
+            novesEntrades.put(paraula,freq);
+        }
+        if (novesEntrades.isEmpty()) return null;
+
+        return novesEntrades;
+
     }
 
     //Pre:
