@@ -39,22 +39,25 @@ public class Perfil {
 
     //Pre:
     //Post: S'afegeixen les noves entrades a la llista de frequencies name o es crea
-    public void afegirLlistaFreq (String name, Map<String, Integer> novesEntrades) {
+    public void afegirLlistaFreq (String name, Idioma i, Map<String, Integer> novesEntrades) {
         if (frequencies.containsKey(name)) frequencies.get(name).insertarFrequencies(novesEntrades);
         else {
-            frequencies.put(name,new LlistaFrequencies(name));
-            frequencies.get(name).insertarFrequencies(novesEntrades);
+            frequencies.put(name,new LlistaFrequencies(name,i,novesEntrades));
         }
     }
 
     //Pre:
     //Post: Es crea una llista amb nom, buida
-    public LlistaFrequencies crearLlistaFreq (String name) {
+    public LlistaFrequencies crearLlistaFreq (String name, Idioma i) {
         if (frequencies.containsKey(name)) return null;
         else {
-            frequencies.put(name,new LlistaFrequencies(name));
+            frequencies.put(name,new LlistaFrequencies(name,i));
             return frequencies.get(name);
         }
+    }
+
+    public void eliminaLlista(String nomLlista) {
+        frequencies.remove(nomLlista);
     }
 
     //Pre:
@@ -62,6 +65,12 @@ public class Perfil {
     public List<String> getNomAllLlistes() {
         Set<String> noms = frequencies.keySet();
         return new ArrayList<>(noms);
+    }
+
+    //Pre: La llista amb nom nomLlista existeix
+    //Post: Es retorna el nom de l'idioma de la llista amb nom nomLlista
+    public String getNomIdiomaLlista(String nomLlista) {
+        return frequencies.get(nomLlista).getNomIdioma();
     }
 
     //Pre:

@@ -15,6 +15,16 @@ import java.util.*;
 public class PerfilTest {
     Perfil perfilProva;
     private Map<String, Integer> llistaParaulesProva = new HashMap<>();
+    Idioma idiomaProva;
+
+    private Set<Character> lletresProva = new HashSet<Character>();
+
+    @Before
+    public void omplirLletres() {
+        for (char lletra = 'a'; lletra <= 'z'; lletra++) lletresProva.add(lletra);
+        Alfabet AlfabetProva = new Alfabet("Prova", lletresProva);
+        idiomaProva = new Idioma("ESPAÑOL",AlfabetProva);
+    }
 
     @Before
     public void omplirLlistaProva() {
@@ -64,7 +74,7 @@ public class PerfilTest {
     @Test
     //afegir llista freq amb nom i llista de paraules
     public void afegirLlistaFreq() {
-        perfilProva.afegirLlistaFreq("LlistaProva",llistaParaulesProva);
+        perfilProva.afegirLlistaFreq("LlistaProva",idiomaProva,llistaParaulesProva);
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
         assertEquals(llistaNoms,perfilProva.getNomAllLlistes());
@@ -74,7 +84,7 @@ public class PerfilTest {
     @Test
     //afegir llista nomes amb nom
     public void crearLlistaFreq() {
-        perfilProva.crearLlistaFreq("LlistaProva");
+        perfilProva.crearLlistaFreq("LlistaProva",idiomaProva);
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
         assertEquals(llistaNoms,perfilProva.getNomAllLlistes());
@@ -83,9 +93,9 @@ public class PerfilTest {
     @Test
     //get el nomes de totes les llistes del perfil
     public void getNomAllLlistes() {
-        perfilProva.crearLlistaFreq("LlistaProva");
-        perfilProva.crearLlistaFreq("LlistaProva3");
-        perfilProva.crearLlistaFreq("LlistaProva4");
+        perfilProva.crearLlistaFreq("LlistaProva",idiomaProva);
+        perfilProva.crearLlistaFreq("LlistaProva3",idiomaProva);
+        perfilProva.crearLlistaFreq("LlistaProva4",idiomaProva);
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
         llistaNoms.add("LlistaProva3");
@@ -99,7 +109,7 @@ public class PerfilTest {
     @Test
     //obtenir la llista de paraules i frequencies
     public void consultarLlista() {
-        perfilProva.afegirLlistaFreq("LlistaProva",llistaParaulesProva);
+        perfilProva.afegirLlistaFreq("LlistaProva",idiomaProva,llistaParaulesProva);
         Map<String,Integer> resultat = perfilProva.consultaLlista("LlistaProva");
         assertEquals(resultat,llistaParaulesProva);
     }

@@ -79,7 +79,10 @@ public class VistaTerminal {
     //Pre:
     //Post: S'imprimeixen les diferents opcions disponibles de gestionar Dades
     public void printMenuGestionarDades() {
-        System.out.println("0. Afegir Llista de Frecuencies");
+        System.out.println("0. Info de les funcions");
+        System.out.println("1. Afegir Llista de Frecuencies");
+        System.out.println("2. Afegir Alfabet");
+        System.out.println("3. Afegir Idioma");
         System.out.println("6. Sortir");
     }
 
@@ -89,7 +92,10 @@ public class VistaTerminal {
         System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
-        if (num== 0) afegirLlistaFrecuencies();
+        if (num== 0) System.out.println("0. Info de les funcions");
+        else if (num== 1) afegirLlistaFrecuencies();
+        else if (num == 2) afegirAlfabet();
+        else if (num == 3) afegirIdioma();
     }
 
     //Pre:
@@ -106,11 +112,14 @@ public class VistaTerminal {
         if (num == 1 || num == 2) {
             System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
             String filename = s.next();
+            System.out.println("Introdueixi el nom de l'IDIOMA");
+            //Llistar Idiomes existents
+            String idioma = s.next();
                 if (num == 1) {
-                    ctrlP.llegirLlistaFreq("text", filename);
+                    ctrlP.llegirLlistaFreq("text", filename,idioma);
                 }
                 if (num == 2) {
-                    ctrlP.llegirLlistaFreq("llista", filename);
+                    ctrlP.llegirLlistaFreq("llista", filename,idioma);
                 }
         }
         else if (num== 3) {
@@ -129,7 +138,9 @@ public class VistaTerminal {
     //Pre:
     //Post: S'imprimeixen les diferents opcions disponibles de consultar Dades
     public void printMenuConsultarDades() {
-        System.out.println("0. Llistes de Frecuencies");
+        System.out.println("0. Info de les funcions");
+        System.out.println("1. Llistes de Frecuencies");
+        System.out.println("2. Idiomes amb alfabet associat i num de lletres de l'alfabet");
     }
 
     //Pre:
@@ -138,7 +149,9 @@ public class VistaTerminal {
         System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
-        if (num== 0) llistarLlistes();
+        if (num== 0) System.out.println("0. Info de les funcions");
+        else if(num == 1) llistarLlistes();
+        else if (num == 2) ctrlP.consultaIdiomes();
     }
 
     //Pre:
@@ -173,5 +186,33 @@ public class VistaTerminal {
 
     }
 
+    public void afegirAlfabet() {
+        System.out.println("### Afegir Alfabet ###");
+        System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
+        String filename = s.next();
+        ctrlP.afegirAlfabet(filename);
+    }
+
+    public void afegirIdioma() {
+        System.out.println("### Afegir Idioma ###");
+        System.out.println("Introdueixi el nom de l'Idioma: ");
+        String nomIdioma = s.next();
+        System.out.println("Introdueixi el nom de l'Alfabet que té l'idioma: ");
+        String nomAlfabet = s.next();
+        System.out.println("Introdueixi el nom de l'Arxiu que conté la llista de Frequències predeterminada de l'idioma: ");
+        String filename = s.next();
+        System.out.println("Introdueixi qui tipus d'arxiu 'text' o 'llista': ");
+        String tipusArxiu = s.next();
+        ctrlP.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
+    }
+
+    public void mostraDadesIdiomes(Vector<String> dades) {
+        int n = dades.size();
+        for (int i=0; i < n; ++i) System.out.println(dades.get(i));
+    }
+
+    public void mostrarMissatge(String m) {
+        System.out.println(m);
+    }
 
 }

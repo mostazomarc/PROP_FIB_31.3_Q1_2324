@@ -6,20 +6,25 @@ import java.util.Map;
 public class LlistaFrequencies {
     private String nom;
     private Map<String, Integer> LlistaParaules;
+    private Idioma idioma;
 
 
     //Pre:
-    //Post: Es crea una LlistaFrecuencies amb nom
-    public LlistaFrequencies (String nom) {
+    //Post: Es crea una LlistaFrecuencies amb nom i idioma i s'afegeix la llista a l'idioma si l'idioma no té llista predeterminada
+    public LlistaFrequencies (String nom, Idioma i) {
         this.nom = nom;
         LlistaParaules = new HashMap<>();
+        idioma = i;
+        i.afegirLlistaFreqPredeterminada(this);
     }
 
     //Pre: LlistaParaules es una llista valida
-    //Post: Es crea una LlistaFrecuencies amb nom i llista paraules
-    public LlistaFrequencies (String nom, Map<String, Integer> LlistaParaules) {
+    //Post: Es crea una LlistaFrecuencies amb nom, llista paraules i idoma i s'afegeix la llista a l'idioma si l'idioma no té llista predeterminada
+    public LlistaFrequencies (String nom, Idioma i, Map<String, Integer> LlistaParaules) {
         this.nom = nom;
         this.LlistaParaules = LlistaParaules;
+        idioma = i;
+        i.afegirLlistaFreqPredeterminada(this);
     }
 
     //Pre:
@@ -34,6 +39,17 @@ public class LlistaFrequencies {
         return LlistaParaules;
     }
 
+    // Pre:
+    //Post: Es retorna l'idioma de la llista'
+    public  Idioma getIdioma() {
+        return idioma;
+    }
+
+    // Pre:
+    //Post: Es retorna el nom de l'idioma de la llista'
+    public  String getNomIdioma() {
+        return idioma.getNom();
+    }
 
     //Pre:
     //Post: Les paraules i frequencies introduides son afegides a la llista
