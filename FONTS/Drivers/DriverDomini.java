@@ -105,7 +105,10 @@ public class DriverDomini {
     }
 
     public String selectorIdioma() {
-
+        consultaIdiomes();
+        System.out.println("Selecciona l'idioma desitjat escrivint el seu nom:");
+        String idioma = s.next();
+        return idioma;
     }
 
     //Pre:
@@ -121,9 +124,7 @@ public class DriverDomini {
         netejaTerminal();
         Map<String, Integer> novesEntrades = new HashMap<>();
 
-        System.out.println("Introdueixi el nom de l'IDIOMA");
-        //Llistar Idiomes existents
-        String idioma = s.next();
+        String idioma = selectorIdioma();
         if (num == 1 || num == 2) {
             System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
             String filename = s.next();
