@@ -15,11 +15,11 @@ JUNIT_TESTS = ./FONTS/JUnit/*.java
 
 
 all:
-	javac -d $(CLASS_OUTPUT) $(CLASS_INPUT)
+	javac -d $(CLASS_OUTPUT) -cp FONTS $(CLASS_INPUT)
 	javac -cp $(JUNIT_JARS) -d $(CLASS_OUTPUT) $(CLASS_INPUT) $(JUNIT_TESTS)
 
 executaDriverDomini:
-	java -cp ../EXE Drivers.DriverDomini
+	java -cp ./EXE Drivers.DriverDomini
 
 
 fulltest: all
