@@ -43,18 +43,22 @@ public class CtrlDomini {
     }
 
     //Pre: Es rep un nom d'usuari
-    //Post: Es crea l'usuari amb el nom rebut
+    //Post: S'inicia instancia amb l'usuari rebut, si no existeix es crea
     public void iniciaInstancia(String nom) {
         System.out.println("inicia sessio: " + nom +"\n");
-        PerfilActual = new Perfil(nom);
-        PerfilsActius.put(nom,PerfilActual);
+        if (!PerfilsActius.containsKey(nom)) {
+            PerfilActual = new Perfil(nom);
+            PerfilsActius.put(nom, PerfilActual);
+        }else {
+            PerfilActual = PerfilsActius.get(nom);
+        }
     }
 
 
     //Pre:
-    //Post: Retorna el conjunt de perfils.
-    public HashMap<String, Perfil> getAllPerfils() {
-        return PerfilsActius;
+    //Post: Retorna el conjunt de noms dels perfils.
+    public List<String> getAllPerfils() {
+        return new ArrayList<>(PerfilsActius.keySet());
     }
 
     //Pre:

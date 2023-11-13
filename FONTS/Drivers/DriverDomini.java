@@ -48,7 +48,8 @@ public class DriverDomini {
         System.out.println("3. Gestionar dades");
         System.out.println("4. Consultar dades");
         System.out.println("5. Canviar estrategia");
-        System.out.println("6. Sortir");
+        System.out.println("6. Canviar Perfil");
+        System.out.println("7. Sortir");
     }
 
     //Pre:
@@ -72,7 +73,10 @@ public class DriverDomini {
         else if (num== 3) gestionarDades();
         else if (num== 4) consultarDades();
         else if (num== 5) System.out.println("5. Canviar estrategia");
-        if (num!= 6) {
+        else if (num== 6) {
+            canviarPerfil();
+        }
+        if (num!= 7) {
             System.out.println("################Presioni Enter per continuar...####################");
             s.nextLine();
             s.nextLine();
@@ -81,6 +85,36 @@ public class DriverDomini {
             printMenu();
             repinstruccions();
         }
+    }
+
+    //Pre:
+    //Post: Es canvia al perfil que s'especifiqui i si no existeix es crea
+    public void canviarPerfil() {
+        llistarPerfils();
+        System.out.println("### Selecciona un Perfil o crea un nou escrivint el nom d'aquest###");
+        String nomPerfil = s.next();
+        List<String> nomsPerfils = controlador.getAllPerfils();
+        if (nomsPerfils.contains(nomPerfil)) controlador.iniciaInstancia(nomPerfil);
+        else {
+            System.out.println("Es crearà el Perfil: " + nomPerfil);
+            System.out.println("Està segur? Si/No");
+            String resposta = s.next();
+            if (resposta.equals("Si") || resposta.equals("si")) {
+                controlador.iniciaInstancia(nomPerfil);
+                System.out.println("Creat Perfil: " + nomPerfil);
+            }
+            else System.out.println("No s'han fet canvis");
+        }
+    }
+
+    public void llistarPerfils() {
+        List<String> nomsPerfils = controlador.getAllPerfils();
+        System.out.println("Perfils al sistema: \n");
+        for (String nom : nomsPerfils) {
+            System.out.println("Perfil: " + nom);
+        }
+
+        System.out.println("\nPerfil Actual: " + controlador.getPerfilActual());
     }
 
     //Pre:
