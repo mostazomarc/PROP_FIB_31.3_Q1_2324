@@ -13,9 +13,7 @@ public class ControladorPresentacio {
     //Pre:
     //Post: S'obtenen els controladors de factoria, Domini i es crea i inicialitza una vista de terminal
     public ControladorPresentacio() throws FileNotFoundException {
-        FactoriaController fc = FactoriaController.getInstance(); //retorna el factoriaControler o es crea
-        fc.CrearControladorDomini(); //Crea el controlador de domini
-        controladorDomini = fc.getControladorDomini();
+        controladorDomini = controladorDomini.getInstance();
         vt = new VistaTerminal(this);
         iniciaInstancia();
         vt.inicialitzaTerminal();

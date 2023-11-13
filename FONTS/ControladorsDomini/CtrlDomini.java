@@ -36,7 +36,7 @@ public class CtrlDomini {
     //Post: S'inicialitzen les variables necessaries.
     public void inicialitzar() {
         ctrlFreqFile = CtrlFreqFile.getInstance();
-        Estrategia = "QAP"; //estrategia per defecte
+        Estrategia = "BranchAndBound"; //estrategia per defecte
         PerfilsActius = new HashMap<String, Perfil>();
         Alfabets = new TreeMap<String, Alfabet>();
         Idiomes = new TreeMap<String, Idioma>();
