@@ -57,7 +57,16 @@ public class DriverDomini {
         System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
-        if (num== 0) System.out.println("0. Info de les funcions");
+        if (num== 0) {
+            System.out.println("#### Info de les funcions de Consultar Dades ####");
+            System.out.println("0. Info de les funcions ---> Explicació de les funcions del programa");
+            System.out.println("1. Gestionar teclats ---> ");
+            System.out.println("2. Consultar teclats ---> ");
+            System.out.println("3. Gestionar dades ---> Entra en el menú gestionar dades que permet gestionar les dades del sistema i el perfil");
+            System.out.println("4. Consultar dades ---> Entra en el menú consultar dades que permet consultar les dades del sistema i el perfil");
+            System.out.println("5. Canviar estratègia ---> Es canvia d'estratègia per confeccionar teclats");
+            System.out.println("6. Sortir ---> Surt de consultar dades");
+        }
         else if (num== 1) System.out.println("1. Gestionar teclats");
         else if (num== 2) System.out.println("2. Consultar teclats");
         else if (num== 3) gestionarDades();
@@ -68,7 +77,7 @@ public class DriverDomini {
             s.nextLine();
             s.nextLine();
             netejaTerminal();
-            System.out.print("Vol fer algo més?\n");
+            System.out.println("Vol fer algo més?\n");
             printMenu();
             repinstruccions();
         }
@@ -86,7 +95,7 @@ public class DriverDomini {
     //Post: S'imprimeixen les diferents opcions disponibles de gestionar Dades
     public void printMenuGestionarDades() {
         System.out.println("0. Info de les funcions");
-        System.out.println("1. Afegir Llista de Frecuencies");
+        System.out.println("1. Afegir Llista de Frequencies");
         System.out.println("2. Afegir Alfabet");
         System.out.println("3. Afegir Idioma");
         System.out.println("6. Sortir");
@@ -98,7 +107,15 @@ public class DriverDomini {
         System.out.println("Escolleig una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
-        if (num== 0) System.out.println("0. Info de les funcions");
+        if (num== 0) {
+            System.out.println("#### Info de les funcions de Gestionar Dades ####");
+            System.out.println("0. Info de les funcions ---> Explicació de les funcions de Gestionar Dades");
+            System.out.println("1. Afegir Llista de Frequencies ---> Afegir una nova llista de frequencies a partir de text/llista o manualment");
+            System.out.println("2. Afegir Alfabet ---> Afegir un nou alfabet");
+            System.out.println("3. Afegir Idioma ---> Afegir un nou idioma a partir d'un Alfabet i creat amb una llista de frequencies predeterminada");
+            System.out.println("6. Sortir ---> Surt de consultar dades");
+            esperarSeleccioGestionarDades();
+        }
         else if (num== 1) afegirLlistaFrecuencies();
         else if (num == 2) afegirAlfabet();
         else if (num == 3) afegirIdioma();
@@ -186,6 +203,7 @@ public class DriverDomini {
         System.out.println("1. Llistes de Frecuencies");
         System.out.println("2. Alfabets");
         System.out.println("3. Idiomes");
+        System.out.println("6. Sortir");
     }
 
     //Pre:
@@ -194,10 +212,20 @@ public class DriverDomini {
         System.out.println("Escolleix una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
-        if (num== 0) System.out.println("0. Info de les funcions");
+        if (num== 0) {
+            System.out.println("#### Info de les funcions de Consultar Dades ####");
+            System.out.println("0. Info de les funcions ---> Explicació de les funcions de Consultar Dades");
+            System.out.println("1. Llistes de Frequencies ---> Es llisten les llistes guardades del perfil i es pot consultar el seu contingut");
+            System.out.println("2. Alfabets ---> Es llisten els alfabets guardats del sistema i les seves lletres");
+            System.out.println("3. Idioma ---> Es llisten els diferents idiomes guardats al sistema amb els seus respectius alfabets");
+            System.out.println("6. Sortir ---> Surt de consultar dades");
+            esperarSeleccioConsultarDades();
+        }
         else if(num == 1) llistarLlistes();
         else if (num == 2) consultaAlfabets();
         else if (num == 3) consultaIdiomes();
+        else if (num == 6) {}
+
     }
 
     //Pre:
