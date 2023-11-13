@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 
 import java.util.*;
 
-import Domini.FactoriaController;
 import ControladorsDomini.CtrlDomini;
 
 public class ControladorPresentacio {
