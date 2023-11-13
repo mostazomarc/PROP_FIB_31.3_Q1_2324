@@ -173,28 +173,39 @@ public class CtrlDomini {
         PerfilActual.eliminaLlista(nomLlista);
     }
 
-    public void afegirAlfabet(String filename) {
-        System.out.println("Llegint arxiu "+ filename +"\n");
+    public int afegirAlfabet(String filename) {
+
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiuFreq(filename);
 
         Set<Character> lletres = new HashSet<Character>();
         String nomAlfabet = filename.substring(0, filename.length() - 4);
 
+        if (Alfabets.containsKey(nomAlfabet.toLowerCase())) return 1; //L'Alfabet amb filename ja existeix
+
         for (String linia : LlistaLlegida) {
             for (char lletra : linia.toCharArray()) {
-                lletres.add(lletra);
+                if (Character.isLetter(lletra)) lletres.add(Character.toLowerCase(lletra));
             }
         }
 
         Alfabet nouAlfabet = new Alfabet(nomAlfabet, lletres);
-        Alfabets.put(nomAlfabet, nouAlfabet);
+        Alfabets.put(nomAlfabet.toLowerCase(), nouAlfabet);
+
+        return 0;
     }
 
-    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) {
-        Alfabet alfabetIdioma = Alfabets.get(nomAlfabet);
+    public int afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) {
+        Alfabet alfabetIdioma = Alfabets.get(nomAlfabet.toLowerCase());
+
+        if (Idiomes.containsKey(nomIdioma.toLowerCase())) return 1; //L'idioma amb nomIdioma ja existeix
+        else if (!Alfabets.containsKey(nomAlfabet.toLowerCase())) return 2; //L'alfabet amb nomAlfabet no existeix
+
         Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
         Idioma nouIdioma = new Idioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
-        Idiomes.put(nomIdioma, nouIdioma);
+        Idiomes.put(nomIdioma.toLowerCase(), nouIdioma);
+
+        System.out.println("Afegit Idioma amb nom " + nomIdioma + " amb Alfabet " + alfabetIdioma.getNomAlfabet() + " i Llista de Freqüència predeterminada " + filename);
+        return 0;
     }
 
     public Vector<String> consultaIdiomes() {
