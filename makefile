@@ -44,4 +44,4 @@ teclattest: all
 	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.TeclatTest
 
 clean:
-	rm -r ../../EXE/*
+	rm -r ./EXE/*
