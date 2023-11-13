@@ -45,6 +45,12 @@ public class LlistaFrequencies {
         return idioma;
     }
 
+    // Pre:
+    //Post: Es retorna l'idioma de la llista'
+    public  String getNomIdioma() {
+        return idioma.getNom();
+    }
+
     //Pre:
     //Post: Les paraules i frequencies introduides son afegides a la llista
     public void insertarFrequencies(Map<String, Integer> novesEntrades) {

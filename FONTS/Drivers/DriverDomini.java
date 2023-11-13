@@ -205,7 +205,8 @@ public class DriverDomini {
         else {
             int i = 1;
             for (String nom : nomLlistes) {
-                System.out.println(i + ": " + nom);
+                String idioma = controlador.getNomIdiomaLlista(nom);
+                System.out.println(i + ": " + nom + " Idioma: " + idioma);
                 ++i;
             }
             System.out.println("Si vol consultar una llista en detall entri el numero, si no entri '0':");
