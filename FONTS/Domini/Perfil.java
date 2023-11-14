@@ -14,11 +14,13 @@ public class Perfil {
         Usuari = User;
         Contrasenya = pswd;
         frequencies = new HashMap<>();
+        teclats = new HashMap<>();
     }
 
     public Perfil (String User) {
         Usuari = User;
         frequencies = new HashMap<>();
+        teclats = new HashMap<>();
     }
 
     public String getUsuari() {
