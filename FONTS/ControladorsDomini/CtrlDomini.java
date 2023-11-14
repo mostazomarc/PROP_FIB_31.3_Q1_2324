@@ -209,6 +209,10 @@ public class CtrlDomini {
 
         return sdades;
     }
+    public void crearTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq) {
+        Idioma idiomaTeclat = Idiomes.get(nomIdioma);
+        PerfilActual.crearTeclat(nomTeclat, nomLlistaFreq, idiomaTeclat);
+    }
 
     public Vector<String> consultaAlfabets() {
         Vector<String> sdades = new Vector<String>();
