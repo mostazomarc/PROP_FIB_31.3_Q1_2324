@@ -13,7 +13,7 @@ public class CtrlDomini {
     private HashMap <String, Perfil> PerfilsActius; //Conjunt d'usuaris registrats
     private static CtrlDomini singletonObject;
     private CtrlFreqFile ctrlFreqFile;
-
+    //private HashMap<String, Teclat> Teclats; //Conjunt de teclats
     private TreeMap<String, Alfabet> Alfabets;
     private TreeMap<String, Idioma> Idiomes;
 
@@ -196,6 +196,12 @@ public class CtrlDomini {
         Idioma nouIdioma = new Idioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
         Idiomes.put(nomIdioma, nouIdioma);
     }
+
+    public void crearTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq) {
+        Idioma idiomaTeclat = Idiomes.get(nomIdioma);
+        PerfilActual.crearTeclat(nomTeclat, nomLlistaFreq, idiomaTeclat);
+    }
+
 
     public Vector<String> consultaIdiomes() {
         Vector<String> sdades = new Vector<String>();

@@ -11,16 +11,14 @@ public class Teclat {
     private char[][] disposicio;
     private int dimX;
     private int dimY;
-    IdiomaStub idioma;
-
-    private CreadoraTeclatStub creadora;
+    private Idioma idioma;
 
     //Pre:
     //Post: es crea un teclat amb nom a partir d'una llista de freqüencies i un idioma
-    public Teclat(String nom, LlistaFrequenciesStub freq, IdiomaStub i) {
+    public Teclat(String nom, Map<String, Integer> llistafreq, Idioma i) {
         this.nom = nom;
         idioma = i;
-        // disposicio = creadora.crearTeclat(freq,i.getLletres());
+        //disposicio = estrategia.crearTeclat(llistafreq,i.getLletres());
     }
 
 
