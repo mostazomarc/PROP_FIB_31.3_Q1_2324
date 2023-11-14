@@ -12,8 +12,8 @@ public class CtrlDomini {
     private String Estrategia; //Estrategia utilitzada en la fabricació del teclat
     private HashMap <String, Perfil> PerfilsActius; //Conjunt d'usuaris registrats
     private static CtrlDomini singletonObject;
-    private CtrlFreqFile ctrlFreqFile;
-    //private HashMap<String, Teclat> Teclats; //Conjunt de teclats
+    private CtrlFile ctrlFreqFile;
+
     private TreeMap<String, Alfabet> Alfabets;
     private TreeMap<String, Idioma> Idiomes;
 
@@ -35,7 +35,7 @@ public class CtrlDomini {
     //Pre:
     //Post: S'inicialitzen les variables necessaries.
     public void inicialitzar() {
-        ctrlFreqFile = CtrlFreqFile.getInstance();
+        ctrlFreqFile = CtrlFile.getInstance();
         Estrategia = "BranchAndBound"; //estrategia per defecte
         PerfilsActius = new HashMap<String, Perfil>();
         Alfabets = new TreeMap<String, Alfabet>();
@@ -131,7 +131,7 @@ public class CtrlDomini {
     //Post: Es llegeix l'informacio de llista de l'arxiu i es retorna
     public Map<String,Integer> llegirLlistaFreq(String tipusArxiu, String filename) {
         System.out.println("Llegint arxiu "+ filename +"\n");
-        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiuFreq(filename);
+        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
         Map<String, Integer> novesEntrades = new HashMap<>();
 
 
@@ -175,7 +175,7 @@ public class CtrlDomini {
 
     public void afegirAlfabet(String filename) {
         System.out.println("Llegint arxiu "+ filename +"\n");
-        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiuFreq(filename);
+        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
 
         Set<Character> lletres = new HashSet<Character>();
         String nomAlfabet = filename.substring(0, filename.length() - 4);
@@ -196,12 +196,6 @@ public class CtrlDomini {
         Idioma nouIdioma = new Idioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
         Idiomes.put(nomIdioma, nouIdioma);
     }
-
-    public void crearTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq) {
-        Idioma idiomaTeclat = Idiomes.get(nomIdioma);
-        PerfilActual.crearTeclat(nomTeclat, nomLlistaFreq, idiomaTeclat);
-    }
-
 
     public Vector<String> consultaIdiomes() {
         Vector<String> sdades = new Vector<String>();

@@ -80,7 +80,7 @@ public class Perfil {
     }
 
     public void crearTeclat(String NomTeclat, String NomLlista, Idioma idioma) {
-        LlistaFrequencies llista = frequencies.get(NomLlista);
-        teclats.put(NomTeclat,new Teclat(NomTeclat,llista,idioma));
+        Map<String,Integer> freqllista = frequencies.get(NomLlista).getFrequencies();
+        //teclats.put(NomTeclat,new Teclat(NomTeclat,freqllista,idioma));
     }
 }
