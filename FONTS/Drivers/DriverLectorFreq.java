@@ -1,16 +1,16 @@
 package Drivers;
-import Dades.CtrlFreqFile;
+import Dades.CtrlFile;
 
 import java.util.*;
 import java.io.*;
 
 public class DriverLectorFreq {
-    private CtrlFreqFile prova;
+    private CtrlFile prova;
 
     public void llegirArxiuFreq() throws FileNotFoundException {
         prova = prova.getInstance();
         System.out.println("Llegint arxiu LlistatFrequencies.txt\n");
-        List<String> LlistaFrequencies = prova.llegirArxiuFreq("LlistatFrequencies.txt");
+        List<String> LlistaFrequencies = prova.llegirArxiu("LlistatFrequencies.txt");
 
         for (String linia : LlistaFrequencies) {
             String[] parella = linia.split(" ");
