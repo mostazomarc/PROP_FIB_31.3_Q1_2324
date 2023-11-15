@@ -20,6 +20,8 @@ public class DriverDomini {
             controlador.iniciaInstancia("Prova");
             controlador.afegirAlfabet("Llatí.txt");
             controlador.afegirIdioma("Català","Llatí","llista","catalaFreq.txt");
+            Map<String, Integer> novesEntrades = new HashMap<>();
+            controlador.novaLlistaPerfil("llista","catalaFreq.txt", "Català", novesEntrades);
         } catch (PerfilJaExisteix e1 ) {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (PerfilNoExisteix e2 ) {
