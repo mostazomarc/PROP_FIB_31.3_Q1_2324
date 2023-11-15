@@ -46,3 +46,5 @@ public class LlistaFrequenciesStub {
     public void insertarFrequencies(Map<String, Integer> novesEntrades) {}
 
 }
+
+//Classe Programada per: Marc

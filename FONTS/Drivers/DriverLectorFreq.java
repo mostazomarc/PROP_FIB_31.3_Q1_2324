@@ -24,3 +24,5 @@ public class DriverLectorFreq {
         dl.llegirArxiuFreq();
     }
 }
+
+//Classe Programada per: Marc

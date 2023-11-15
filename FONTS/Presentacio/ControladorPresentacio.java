@@ -1,3 +1,4 @@
+/*
 package Presentacio;
 import java.io.FileNotFoundException;
 
@@ -68,3 +69,5 @@ public class ControladorPresentacio {
         vt.mostraDadesIdiomes(dades);
     }
 }
+
+ */

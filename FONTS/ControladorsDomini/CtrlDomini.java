@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import Domini.*;
 import Dades.*;
-import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.*;
 
 public class CtrlDomini {
     private Perfil PerfilActual; //Perfil que esta usant actualment el programa
@@ -45,12 +45,14 @@ public class CtrlDomini {
 
     //Pre: Es rep un nom d'usuari
     //Post: S'inicia instancia amb l'usuari rebut, si no existeix es crea
-    public void iniciaInstancia(String nom) {
+    public void iniciaInstancia(String nom) throws ExcepcionsCreadorTeclat{
         System.out.println("inicia sessio: " + nom +"\n");
         if (!PerfilsActius.containsKey(nom)) {
+            if (PerfilsActius.containsKey(nom)) throw new PerfilJaExisteix(nom);
             PerfilActual = new Perfil(nom);
             PerfilsActius.put(nom, PerfilActual);
         }else {
+            if (!PerfilsActius.containsKey(nom)) throw new PerfilNoExisteix(nom);
             PerfilActual = PerfilsActius.get(nom);
         }
     }
@@ -81,26 +83,41 @@ public class CtrlDomini {
         return Estrategia;
     }
 
+    //Pre:
+    //Post: Retorna true si l'String' un numero
+    private static boolean esNumero(String paraula) {
+        try {
+            Double.parseDouble(paraula);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     //Pre: LlistaLlegida es una llista de frequencies llegida en format vàlid
     //Post: es passa la llista llegida a llista de frequencies
-    private Map<String,Integer> llistaToEntrades(Map<String, Integer> novesEntrades, List<String> LlistaLlegida) {
-        for (String linia : LlistaLlegida) {
-            String[] parella = linia.split(" ");
-            int n = parella.length;
-            if (n - 2 >= 0) {
-                String paraula = parella[n - 2];
-                Integer frequencia = Integer.parseInt(parella[n - 1]);
-                //System.out.println(parella[n-2]+ " " + parella[n-1]);
+    private Map<String,Integer> llistaToEntrades(Map<String, Integer> novesEntrades, List<String> LlistaLlegida) throws FormatNoValid{
+        try {
+            for (String linia : LlistaLlegida) {
+                String[] parella = linia.split(" ");
+                int n = parella.length;
+                if (n - 2 >= 0) {
+                    String paraula = parella[n - 2];
+                    Integer frequencia = Integer.parseInt(parella[n - 1]);
+                    //System.out.println(parella[n-2]+ " " + parella[n-1]);
 
-                if (novesEntrades.containsKey(paraula)) {
-                    // Si la paraula ja existeix obtenir frequencia actual
-                    int FrecVella = novesEntrades.get(paraula);
-                    // Sumar la nova vella frequencia a la nova
-                    frequencia += FrecVella;
+                    if (novesEntrades.containsKey(paraula)) {
+                        // Si la paraula ja existeix obtenir frequencia actual
+                        int FrecVella = novesEntrades.get(paraula);
+                        // Sumar la nova vella frequencia a la nova
+                        frequencia += FrecVella;
+                    }
+
+                    novesEntrades.put(paraula, frequencia);
                 }
-
-                novesEntrades.put(paraula, frequencia);
             }
+        } catch (NumberFormatException e) {
+            throw new FormatNoValid("Llista");
         }
         return novesEntrades;
     }
@@ -116,12 +133,14 @@ public class CtrlDomini {
             while (matcher.find()) {
                 String paraula = matcher.group();
                 int freq = 1;
-                if (novesEntrades.containsKey(paraula)) {
-                    // Si la paraula ja existeix obtenir frequencia actual
-                    freq += novesEntrades.get(paraula);
-                }
+                if (!esNumero(paraula)) { //aixi no afegim numeros a la llista de freqüencies
+                    if (novesEntrades.containsKey(paraula)) {
+                        // Si la paraula ja existeix obtenir frequencia actual
+                        freq += novesEntrades.get(paraula);
+                    }
 
-                novesEntrades.put(paraula,freq);
+                    novesEntrades.put(paraula, freq);
+                }
             }
         }
         return novesEntrades;
@@ -130,7 +149,7 @@ public class CtrlDomini {
 
     //Pre: tipus arxiu es un tipus vàlid i filename existeix i esta en un format vàid
     //Post: Es llegeix l'informacio de llista de l'arxiu i es retorna
-    public Map<String,Integer> llegirLlistaFreq(String tipusArxiu, String filename) {
+    public Map<String,Integer> llegirLlistaFreq(String tipusArxiu, String filename) throws FormatNoValid {
         System.out.println("Llegint arxiu "+ filename +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
         Map<String, Integer> novesEntrades = new HashMap<>();
@@ -147,7 +166,7 @@ public class CtrlDomini {
 
     //Pre: tipus arxiu es un tipus vàlid i filename existeix i esta en un format vàid
     //Post: S'afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual
-    public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) {
+    public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
         if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
         PerfilActual.afegirLlistaFreq(filename,Idiomes.get(i),novesEntrades);
     }
@@ -170,7 +189,7 @@ public class CtrlDomini {
         return PerfilActual.consultaLlista(nomSeleccio);
     }
 
-    public void eliminarLlista(String nomLlista) {
+    public void eliminarLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
         PerfilActual.eliminaLlista(nomLlista);
     }
 
@@ -191,9 +210,9 @@ public class CtrlDomini {
         Alfabets.put(nomAlfabet, nouAlfabet);
     }
 
-    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) {
+    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws ExcepcionsCreadorTeclat {
         Alfabet alfabetIdioma = Alfabets.get(nomAlfabet);
-        Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
+        Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filename);
         Idioma nouIdioma = new Idioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
         Idiomes.put(nomIdioma, nouIdioma);
     }
@@ -210,7 +229,7 @@ public class CtrlDomini {
 
         return sdades;
     }
-    public void crearTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq) {
+    public void crearTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = Idiomes.get(nomIdioma);
         PerfilActual.crearTeclat(nomTeclat, nomLlistaFreq, idiomaTeclat);
     }

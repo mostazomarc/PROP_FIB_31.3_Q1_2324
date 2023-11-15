@@ -14,3 +14,5 @@ public abstract class ExcepcionsCreadorTeclat extends Exception{
         super(s);
     }
 }
+
+//Classe Programada per: Marc

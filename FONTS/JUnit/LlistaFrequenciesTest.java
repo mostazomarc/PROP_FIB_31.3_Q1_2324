@@ -80,3 +80,5 @@ public class LlistaFrequenciesTest {
 
 
 }
+
+//Classe Programada per: Marc
