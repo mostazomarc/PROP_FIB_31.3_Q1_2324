@@ -1,3 +1,4 @@
+/*
 package Presentacio;
 import java.io.FileNotFoundException;
 
@@ -8,3 +9,5 @@ public class Main{
         ControladorPresentacio c = new ControladorPresentacio();
     }
 }
+
+ */

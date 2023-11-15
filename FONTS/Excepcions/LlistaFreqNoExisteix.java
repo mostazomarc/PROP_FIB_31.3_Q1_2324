@@ -10,7 +10,7 @@ public class LlistaFreqNoExisteix extends ExcepcionsCreadorTeclat{
         super("La llista de freqüències no existeix");
     }
 
-    public LlistaFreqNoExisteix(String s, String u) {
+    public LlistaFreqNoExisteix(String s) {
         super("La llista de freqüències amb id "+ s + " no existeix");
     }
 

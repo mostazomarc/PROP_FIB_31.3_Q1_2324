@@ -2,7 +2,7 @@
 
 package Drivers;
 import ControladorsDomini.CtrlDomini;
-import Excepcions.LlistaFreqNoExisteix;
+import Excepcions.*;
 
 import java.util.*;
 import java.io.*;
@@ -16,9 +16,19 @@ public class DriverDomini {
         controlador = controlador.getInstance();
         s = new Scanner(System.in);
 
-        controlador.iniciaInstancia("Prova");
-        controlador.afegirAlfabet("Llatí.txt");
-        controlador.afegirIdioma("Català","Llatí","llista","catalaFreq.txt");
+        try {
+            controlador.iniciaInstancia("Prova");
+            controlador.afegirAlfabet("Llatí.txt");
+            controlador.afegirIdioma("Català","Llatí","llista","catalaFreq.txt");
+        } catch (PerfilJaExisteix e1 ) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (PerfilNoExisteix e2 ) {
+            System.out.println("ERROR: " + e2.getMessage());
+        } catch (FormatNoValid e2 ) {
+            System.out.println("ERROR: " + e2.getMessage());
+        } catch (Exception e) {
+            System.out.println("ERROR");
+        }
 
 
         System.out.println("\n ##################### BENVINGUT AL SISTEMA CREADOR DE TECLATS ##################### \n");
@@ -95,17 +105,26 @@ public class DriverDomini {
         System.out.println("### Selecciona un Perfil o crea un nou escrivint el nom d'aquest###");
         String nomPerfil = s.next();
         List<String> nomsPerfils = controlador.getAllPerfils();
-        if (nomsPerfils.contains(nomPerfil)) controlador.iniciaInstancia(nomPerfil);
-        else {
-            System.out.println("Es crearà el Perfil: " + nomPerfil);
-            System.out.println("Està segur? Si/No");
-            String resposta = s.next();
-            if (resposta.equals("Si") || resposta.equals("si")) {
-                controlador.iniciaInstancia(nomPerfil);
-                System.out.println("Creat Perfil: " + nomPerfil);
+        try {
+            if (nomsPerfils.contains(nomPerfil)) controlador.iniciaInstancia(nomPerfil);
+            else {
+                System.out.println("Es crearà el Perfil: " + nomPerfil);
+                System.out.println("Està segur? Si/No");
+                String resposta = s.next();
+                if (resposta.equals("Si") || resposta.equals("si")) {
+                    controlador.iniciaInstancia(nomPerfil);
+                    System.out.println("Creat Perfil: " + nomPerfil);
+                }
+                else System.out.println("No s'han fet canvis");
             }
-            else System.out.println("No s'han fet canvis");
+        } catch (PerfilJaExisteix e1 ) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (PerfilNoExisteix e2 ) {
+            System.out.println("ERROR: " + e2.getMessage());
+        } catch (Exception e) {
+            System.out.println("ERROR");
         }
+
     }
 
     public void llistarPerfils() {
@@ -278,33 +297,57 @@ public class DriverDomini {
         netejaTerminal();
         Map<String, Integer> novesEntrades = new HashMap<>();
 
-        String idioma = selectorIdioma();
-        if (num == 1 || num == 2) {
-            System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
-            String filename = s.next();
-            if (num == 1) {
-                controlador.novaLlistaPerfil("text", filename,idioma, novesEntrades);
+        try {
+            String idioma = selectorIdioma();
+
+            if (num == 1 || num == 2) {
+                System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
+                String filename = s.next();
+                if (num == 1) {
+                    controlador.novaLlistaPerfil("text", filename, idioma, novesEntrades);
+                }
+                if (num == 2) {
+                    controlador.novaLlistaPerfil("llista", filename, idioma, novesEntrades);
+                }
+            } else if (num == 3) {
+                //llegir manual
+                novesEntrades = llistaManual(novesEntrades);
+                System.out.println("##### Introduir el nom de la llista: #####");
+                String nom = s.next();
+                controlador.novaLlistaPerfil("Manual", nom, idioma, novesEntrades);
             }
-            if (num == 2) {
-                controlador.novaLlistaPerfil("llista", filename,idioma,novesEntrades);
-            }
-        }
-        else if (num== 3) {
-            //llegir manual
-            novesEntrades = llistaManual(novesEntrades);
-            System.out.println("##### Introduir el nom de la llista: #####");
-            String nom = s.next();
-            controlador.novaLlistaPerfil("Manual", nom,idioma,novesEntrades);
-        }
+        } catch (LlistaFreqJaExisteix e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        } //catch IDIOMA NO EXISTEIX
     }
 
     //Pre:
     //Post: Es llisten les llistes guardades i s'elimina l'indicada per el usuari
     public void eliminarLlista() {
-        llistarLlistes();
-        System.out.println("Selecciona la llista a esborrar escrivint el seu nom:");
-        String nomLlista = s.next();
-        controlador.eliminarLlista(nomLlista);
+        if (llistarLlistes()) {
+            System.out.println("Selecciona la llista a esborrar escrivint el seu nom:");
+            String nomLlista = s.next();
+            try {
+                controlador.eliminarLlista(nomLlista);
+            } catch (LlistaFreqNoExisteix e1) {
+                System.out.println("ERROR: " + e1.getMessage());
+            } catch (Exception e2) {
+                System.out.println("ERROR");
+            }
+        }
+    }
+
+    //Pre:
+    //Post: Retorna true si l'String' un numero
+    private static boolean esNumero(String paraula) {
+        try {
+            Double.parseDouble(paraula);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     //Pre:
@@ -314,17 +357,25 @@ public class DriverDomini {
         System.out.println("##### Introduir paraules i freqüències que es vulguin entrar #####");
         System.out.println("##### Per acabar escriure: 'X' #####");
         while (true) {
-            String paraula = s.next();
-            if (paraula.equals("X")) {
-                break;
+            try {
+                String paraula = s.next();
+                if (paraula.equals("X")) {
+                    break;
+                }
+                Integer freq = s.nextInt();
+                if (esNumero(paraula)) {
+                    throw new FormatNoValid("Paraula");}
+                if (novesEntrades.containsKey(paraula)) {
+                    // Si la paraula ja existeix obtenir frequencia actual
+                    freq += novesEntrades.get(paraula);
+                }
+                System.out.println("#### Paraula = " + paraula + ", Freqüencia = " + freq + " ####");
+                novesEntrades.put(paraula, freq);
+            } catch (FormatNoValid e1) {
+                System.out.println("ERROR: La paraula no és una paraula");
+            } catch (InputMismatchException e2) {
+                System.out.println("ERROR: La freqüència no és un número ");
             }
-            Integer freq = s.nextInt();
-            if (novesEntrades.containsKey(paraula)) {
-                // Si la paraula ja existeix obtenir frequencia actual
-                freq += novesEntrades.get(paraula);
-            }
-            System.out.println("#### Paraula = "+paraula+", Freqüencia = " +freq + " ####");
-            novesEntrades.put(paraula,freq);
         }
         if (novesEntrades.isEmpty()) return null;
 
@@ -374,10 +425,13 @@ public class DriverDomini {
 
     //Pre:
     //Post: Es llisten els noms de les llistes guardades del perfil actiu
-    public void llistarLlistes() {
+    public boolean llistarLlistes() {
         List<String> nomLlistes = controlador.getNomLlistesGuardades();
         netejaTerminal();
-        if (nomLlistes.isEmpty()) System.out.println("No n'hi han llistes guardades");
+        if (nomLlistes.isEmpty()) {
+            System.out.println("No n'hi han llistes guardades");
+            return false;
+        }
         else {
             try {
                 int i = 1;
@@ -402,11 +456,12 @@ public class DriverDomini {
 
                 }
             } catch (LlistaFreqNoExisteix e1) {
-            System.out.println("Llista No Existeix");
+                System.out.println("ERROR: " + e1.getMessage());
             } catch (Exception e2) {
                 System.out.println("ERROR");
             }
         }
+        return true;
     }
 
     public void consultaIdiomes() {
@@ -438,7 +493,13 @@ public class DriverDomini {
         String filename = s.next();
         System.out.println("Introdueixi qui tipus d'arxiu 'text' o 'llista': ");
         String tipusArxiu = s.next();
-        controlador.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
+        try {
+            controlador.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
+        } catch (FormatNoValid e) {
+            System.out.println("ERROR: " + e.getMessage());
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
     }
 
     public void mostraDadesIdiomes(Vector<String> dades) {
