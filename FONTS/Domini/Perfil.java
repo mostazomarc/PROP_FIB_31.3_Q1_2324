@@ -98,6 +98,8 @@ public class Perfil {
         Map<String,Integer> freqllista = frequencies.get(NomLlista).getFrequencies();
         teclats.put(NomTeclat,new Teclat(NomTeclat,freqllista,idioma));
     }
+
+    public void llistarTeclats() {}
 }
 
 //Classe Programada per: Marc
