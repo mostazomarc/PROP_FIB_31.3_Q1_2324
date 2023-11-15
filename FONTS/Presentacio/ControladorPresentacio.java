@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 import ControladorsDomini.CtrlDomini;
+import Excepcions.ExcepcionsCreadorTeclat;
 
 public class ControladorPresentacio {
     private VistaTerminal vt;
@@ -57,7 +58,7 @@ public class ControladorPresentacio {
 
     //Pre:
     //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
-    public Map<String, Integer> consultaLlista(String nomSeleccio) {
+    public Map<String, Integer> consultaLlista(String nomSeleccio) throws ExcepcionsCreadorTeclat {
         return controladorDomini.consultaLlista(nomSeleccio);
     }
 

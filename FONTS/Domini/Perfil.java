@@ -1,5 +1,8 @@
 package Domini;
 
+import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.LlistaFreqNoExisteix;
+
 import java.util.*;
 import java.util.Set;
 
@@ -75,7 +78,8 @@ public class Perfil {
 
     //Pre:
     //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
-    public Map<String, Integer> consultaLlista(String nomSeleccio) {
+    public Map<String, Integer> consultaLlista(String nomSeleccio) throws ExcepcionsCreadorTeclat {
+        if (!frequencies.containsKey(nomSeleccio)) throw new LlistaFreqNoExisteix();
         return frequencies.get(nomSeleccio).getFrequencies();
     }
 

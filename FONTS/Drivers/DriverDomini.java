@@ -2,6 +2,7 @@
 
 package Drivers;
 import ControladorsDomini.CtrlDomini;
+import Excepcions.LlistaFreqNoExisteix;
 
 import java.util.*;
 import java.io.*;
@@ -295,20 +296,24 @@ public class DriverDomini {
             int num = s.nextInt();
             if (num != 0) {
                 netejaTerminal();
-                if (nomLlistes.size() < num) System.out.println("ERROR");
-                else {
-                    String nomSeleccio = nomLlistes.get(num - 1);
-                    Map<String, Integer> llista = controlador.consultaLlista(nomSeleccio);
-                    System.out.println("Paraula: , Frequencia: ");
-                    for (Map.Entry<String, Integer> entry : llista.entrySet()) {
-                        String clave = entry.getKey();
-                        Integer valor = entry.getValue();
-                        System.out.println(clave + ", " + valor);
-                    }
+                try {
+                    if (nomLlistes.size() < num) throw new LlistaFreqNoExisteix();
+                        String nomSeleccio = nomLlistes.get(num - 1);
+                        Map<String, Integer> llista = controlador.consultaLlista(nomSeleccio);
+                        System.out.println("Paraula: , Frequencia: ");
+                        for (Map.Entry<String, Integer> entry : llista.entrySet()) {
+                            String clave = entry.getKey();
+                            Integer valor = entry.getValue();
+                            System.out.println(clave + ", " + valor);
+                        }
+                }  catch(LlistaFreqNoExisteix e1){
+                    System.out.println("Llista No Existeix");
+                } catch(Exception e2){
+                    System.out.println("ERROR");
                 }
             }
-        }
 
+        }
     }
 
     public void consultaIdiomes() {

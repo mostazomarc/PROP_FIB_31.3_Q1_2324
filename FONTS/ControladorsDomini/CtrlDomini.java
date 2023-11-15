@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import Domini.*;
 import Dades.*;
+import Excepcions.ExcepcionsCreadorTeclat;
 
 public class CtrlDomini {
     private Perfil PerfilActual; //Perfil que esta usant actualment el programa
@@ -165,7 +166,7 @@ public class CtrlDomini {
 
     //Pre:
     //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
-    public Map<String, Integer> consultaLlista(String nomSeleccio) {
+    public Map<String, Integer> consultaLlista(String nomSeleccio) throws ExcepcionsCreadorTeclat {
         return PerfilActual.consultaLlista(nomSeleccio);
     }
 
