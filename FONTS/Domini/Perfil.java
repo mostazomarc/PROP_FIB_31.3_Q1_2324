@@ -72,7 +72,8 @@ public class Perfil {
 
     //Pre: La llista amb nom nomLlista existeix
     //Post: Es retorna el nom de l'idioma de la llista amb nom nomLlista
-    public String getNomIdiomaLlista(String nomLlista) {
+    public String getNomIdiomaLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
+        if (!frequencies.containsKey(nomLlista)) throw new LlistaFreqNoExisteix();
         return frequencies.get(nomLlista).getNomIdioma();
     }
 

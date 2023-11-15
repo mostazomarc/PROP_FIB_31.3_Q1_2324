@@ -160,7 +160,7 @@ public class CtrlDomini {
 
     //Pre: La llista amb nom nomLlista existeix
     //Post: Es retorna el nom de l'idioma de la llista amb nom nomllista
-    public String getNomIdiomaLlista(String nomllista) {
+    public String getNomIdiomaLlista(String nomllista) throws ExcepcionsCreadorTeclat{
         return PerfilActual.getNomIdiomaLlista(nomllista);
     }
 
