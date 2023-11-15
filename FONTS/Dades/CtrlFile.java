@@ -32,7 +32,6 @@ public class CtrlFile {
             scan.close();
         } catch (FileNotFoundException e) {
             System.err.println("Error al obrir l'arxiu: " + e.getMessage());
-            linies = null;
         }
         return linies;
     }
