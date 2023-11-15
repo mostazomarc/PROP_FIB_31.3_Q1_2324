@@ -8,18 +8,27 @@ import java.util.List;
 
 public class HungarianAlgorithm {
 
-    int[][] matriu; // matriu inicial (matriu de costos)
-
+    double[][] matriu; // matriu inicial (matriu de costos)
+    double [][] aux;
     // vectors auxiliars per construir la matriu
     int[] quadratInFila, quadratInColumna, filaCoberta, columnaCoberta, zerosAstarEnFila;
 
-    public HungarianAlgorithm(int[][] matriu) {
+    double valoroptim;
+    public HungarianAlgorithm(double[][] matriu) {
         if (matriu.length != matriu[0].length) {
             try {
                 throw new IllegalAccessException("La matriu no és quadrada!");
             } catch (IllegalAccessException ex) {
                 System.err.println(ex);
                 System.exit(1);
+            }
+        }
+        valoroptim = 0;
+
+        aux = new double [matriu.length][matriu.length];
+        for (int i = 0; i < matriu.length; ++i) {
+            for (int j = 0; j < matriu.length; ++j) {
+                aux[i][j] = matriu[i][j];
             }
         }
 
@@ -41,7 +50,7 @@ public class HungarianAlgorithm {
      *
      * @return assignació òptima
      */
-    public int[][] trobarAssignacioOptima() {
+    public double trobarAssignacioOptima() {
         pas1();    // redueix la matriu
         pas2();    // marca els zeros independents
         pas3();    // cobreix les columnes que contenen un zero marcat
@@ -69,7 +78,11 @@ public class HungarianAlgorithm {
         for (int i = 0; i < quadratInColumna.length; i++) {
             assignacioOptima[i] = new int[]{i, quadratInColumna[i]};
         }
-        return assignacioOptima;
+        for (int i = 0; i < assignacioOptima.length; i++) {
+            valoroptim += aux[assignacioOptima[i][1]][assignacioOptima[i][0]];
+        }
+
+        return valoroptim;
     }
 
     /**
@@ -97,7 +110,7 @@ public class HungarianAlgorithm {
         // files
         for (int i = 0; i < matriu.length; i++) {
             // troba el valor mínim de la fila actual
-            int minActualFila = Integer.MAX_VALUE;
+            double minActualFila = Double.MAX_VALUE;
             for (int j = 0; j < matriu[i].length; j++) {
                 if (matriu[i][j] < minActualFila) {
                     minActualFila = matriu[i][j];
@@ -112,7 +125,7 @@ public class HungarianAlgorithm {
         // columnes
         for (int i = 0; i < matriu[0].length; i++) {
             // troba el valor mínim de la columna actual
-            int minActualColumna = Integer.MAX_VALUE;
+            double minActualColumna = Double.MAX_VALUE;
             for (int j = 0; j < matriu.length; j++) {
                 if (matriu[j][i] < minActualColumna) {
                     minActualColumna = matriu[j][i];
@@ -136,7 +149,7 @@ public class HungarianAlgorithm {
         for (int i = 0; i < matriu.length; i++) {
             for (int j = 0; j < matriu.length; j++) {
                 // marca si el valor actual == 0 i no hi ha altres zeros marcats a la mateixa fila o columna
-                if (matriu[i][j] == 0 && filaTeQuadrat[i] == 0 && columnaTeQuadrat[j] == 0) {
+                if (matriu[i][j] == 0.0 && filaTeQuadrat[i] == 0 && columnaTeQuadrat[j] == 0) {
                     filaTeQuadrat[i] = 1;
                     columnaTeQuadrat[j] = 1;
                     quadratInFila[i] = j; // guarda la posició de la fila del zero
@@ -165,7 +178,7 @@ public class HungarianAlgorithm {
      */
     private void pas7() {
         // Troba el valor no cobert més petit de la matriu
-        int minimValorNoCobert = Integer.MAX_VALUE;
+        double minimValorNoCobert = Double.MAX_VALUE;
         for (int i = 0; i < matriu.length; i++) {
             if (filaCoberta[i] == 1) {
                 continue;
@@ -202,7 +215,7 @@ public class HungarianAlgorithm {
         for (int i = 0; i < matriu.length; i++) {
             if (filaCoberta[i] == 0) {
                 for (int j = 0; j < matriu[i].length; j++) {
-                    if (matriu[i][j] == 0 && columnaCoberta[j] == 0) {
+                    if (matriu[i][j] == 0.0 && columnaCoberta[j] == 0) {
                         zerosAstarEnFila[i] = j; // marca com 0*
                         return new int[]{i, j};
                     }

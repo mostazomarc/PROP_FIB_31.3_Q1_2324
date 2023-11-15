@@ -25,6 +25,9 @@ executaDriverDomini:
 executaDriverHungarianAlgorithm:
 	java -cp ./EXE Drivers.DriverHungarianAlgorithm
 
+executaDriverAlgorismeQAP:
+	java -cp ./EXE Drivers.DriverAlgorismeQAP
+
 fulltest: all
 	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.MasterTestSuite
 

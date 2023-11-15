@@ -6,5 +6,5 @@ import java.util.Set;
 public interface Estrategia {
 
 
-    public void solve(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas);
+    public char[][] solve(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas);
 }

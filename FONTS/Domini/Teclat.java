@@ -18,7 +18,9 @@ public class Teclat {
     public Teclat(String nom, Map<String, Integer> llistafreq, Idioma i) {
         this.nom = nom;
         idioma = i;
-        //disposicio = estrategia.crearTeclat(llistafreq,i.getLletres());
+        Estrategia estrategia = new BranchandBound();
+        disposicio = estrategia.solve(llistafreq, i.getLletres(), 3, 10);
+
     }
 
 

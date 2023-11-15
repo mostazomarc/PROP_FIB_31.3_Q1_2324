@@ -3,6 +3,7 @@ package Domini;
 import java.util.*;
 
 import Domini.Teclat;
+import Domini.HungarianAlgorithm;
 
 public class BranchandBound implements Estrategia {
     // Atributos
@@ -173,8 +174,16 @@ public class BranchandBound implements Estrategia {
             double[][] suma = sumaMatrices(Mat_c1, Mat_c2);
 
             //resolvemos el coste de la asignación lineal óptima de c1 + c2 mediante algoritmo hungarian
-
-            //coste_termino_2 = hungarian(suma);
+            for (int i=0; i<suma.length; ++i) {
+                for (int j=0; j<suma.length; ++j) {
+                    System.out.print(suma[i][j]);
+                }
+                System.out.println();
+            }
+            HungarianAlgorithm ha = new HungarianAlgorithm(suma);
+            double valoroptim = ha.trobarAssignacioOptima();
+            coste_termino_2 = valoroptim;
+            System.out.println ( "coste termino 2: " + coste_termino_2 + "\n");
         }
 
         return termino_1 + coste_termino_2;
@@ -246,12 +255,14 @@ public class BranchandBound implements Estrategia {
         for (String palabra : palabrasFrec.keySet()) {
             int frecuencia = palabrasFrec.get(palabra);
 
-            for (int i = 0; i < palabra.length() - 1; i++) {
-                //guardamos los índices de cada letra en el abecedario
-                int letra1 = lletres.get(palabra.charAt(i));
-                int letra2 = lletres.get(palabra.charAt(i + 1));
+            if(palabra.length() != 1) {
+                for (int i = 0; i < palabra.length() - 1; i++) {
+                    //guardamos los índices de cada letra en el abecedario
+                    int letra1 = lletres.get(palabra.charAt(i));
+                    int letra2 = lletres.get(palabra.charAt(i + 1));
 
-                trafficMatrix[letra1][letra2] += frecuencia;
+                    trafficMatrix[letra1][letra2] += frecuencia;
+                }
             }
         }
 
@@ -291,7 +302,7 @@ public class BranchandBound implements Estrategia {
 
 
    @Override
-    public void solve(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas) {
+    public char[][] solve(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas) {
         //declaramos una solucion inicial
         this.best_sol = new char[n_filas][n_columnas];
         //le ponemos valor = infinito a la cota inicial
@@ -313,6 +324,8 @@ public class BranchandBound implements Estrategia {
         
         // realizamos el algoritmo Branch and Bound
         this.algoritm_bab(n_filas, n_columnas, lletres, letra_pos);
+
+        return this.best_sol;
     }
 
 }
