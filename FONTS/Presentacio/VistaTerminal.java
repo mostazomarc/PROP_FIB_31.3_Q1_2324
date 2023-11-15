@@ -1,3 +1,4 @@
+/*
 package Presentacio;
 
 import java.io.*;
@@ -156,7 +157,7 @@ public class VistaTerminal {
 
     //Pre:
     //Post: Es llisten els noms de les llistes guardades del perfil actiu
-    public void llistarLlistes() {
+    public void llistarLlistes() throws Exception {
         List<String> nomLlistes = ctrlP.getNomLlistesGuardades();
         netejaTerminal();
         if (nomLlistes.isEmpty()) System.out.println("No n'hi han llistes guardades");
@@ -216,3 +217,5 @@ public class VistaTerminal {
     }
 
 }
+
+ */
