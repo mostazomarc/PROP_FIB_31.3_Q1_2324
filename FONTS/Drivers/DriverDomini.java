@@ -18,15 +18,17 @@ public class DriverDomini {
 
         try {
             controlador.iniciaInstancia("Prova");
+            controlador.afegirAlfabet("Llatí.txt");
+            controlador.afegirIdioma("Català","Llatí","llista","catalaFreq.txt");
         } catch (PerfilJaExisteix e1 ) {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (PerfilNoExisteix e2 ) {
             System.out.println("ERROR: " + e2.getMessage());
+        } catch (FormatNoValid e2 ) {
+            System.out.println("ERROR: " + e2.getMessage());
         } catch (Exception e) {
             System.out.println("ERROR");
         }
-        controlador.afegirAlfabet("Llatí.txt");
-        controlador.afegirIdioma("Català","Llatí","llista","catalaFreq.txt");
 
 
         System.out.println("\n ##################### BENVINGUT AL SISTEMA CREADOR DE TECLATS ##################### \n");
@@ -224,7 +226,7 @@ public class DriverDomini {
         } catch (LlistaFreqJaExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (Exception e2) {
-            System.out.println("ERROR");
+            e2.printStackTrace();
         } //catch IDIOMA NO EXISTEIX
     }
 
@@ -379,7 +381,13 @@ public class DriverDomini {
         String filename = s.next();
         System.out.println("Introdueixi qui tipus d'arxiu 'text' o 'llista': ");
         String tipusArxiu = s.next();
-        controlador.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
+        try {
+            controlador.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
+        } catch (FormatNoValid e) {
+            System.out.println("ERROR: " + e.getMessage());
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
     }
 
     public void mostraDadesIdiomes(Vector<String> dades) {
