@@ -65,6 +65,8 @@ public class Perfil {
         return frequencies.get(name);
     }
 
+    //Pre:
+    //Post: S'elimina la llista indicada per nomLlista
     public void eliminaLlista(String nomLlista) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(nomLlista);
         frequencies.remove(nomLlista);
