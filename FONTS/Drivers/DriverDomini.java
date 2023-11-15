@@ -2,7 +2,7 @@
 
 package Drivers;
 import ControladorsDomini.CtrlDomini;
-import Excepcions.LlistaFreqNoExisteix;
+import Excepcions.*;
 
 import java.util.*;
 import java.io.*;
@@ -185,33 +185,46 @@ public class DriverDomini {
         netejaTerminal();
         Map<String, Integer> novesEntrades = new HashMap<>();
 
-        String idioma = selectorIdioma();
-        if (num == 1 || num == 2) {
-            System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
-            String filename = s.next();
-            if (num == 1) {
-                controlador.novaLlistaPerfil("text", filename,idioma, novesEntrades);
+        try {
+            String idioma = selectorIdioma();
+
+            if (num == 1 || num == 2) {
+                System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
+                String filename = s.next();
+                if (num == 1) {
+                    controlador.novaLlistaPerfil("text", filename, idioma, novesEntrades);
+                }
+                if (num == 2) {
+                    controlador.novaLlistaPerfil("llista", filename, idioma, novesEntrades);
+                }
+            } else if (num == 3) {
+                //llegir manual
+                novesEntrades = llistaManual(novesEntrades);
+                System.out.println("##### Introduir el nom de la llista: #####");
+                String nom = s.next();
+                controlador.novaLlistaPerfil("Manual", nom, idioma, novesEntrades);
             }
-            if (num == 2) {
-                controlador.novaLlistaPerfil("llista", filename,idioma,novesEntrades);
-            }
-        }
-        else if (num== 3) {
-            //llegir manual
-            novesEntrades = llistaManual(novesEntrades);
-            System.out.println("##### Introduir el nom de la llista: #####");
-            String nom = s.next();
-            controlador.novaLlistaPerfil("Manual", nom,idioma,novesEntrades);
-        }
+        } catch (LlistaFreqJaExisteix e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (Exception e2) {
+            System.out.println("ERROR");
+        } //catch IDIOMA NO EXISTEIX
     }
 
     //Pre:
     //Post: Es llisten les llistes guardades i s'elimina l'indicada per el usuari
     public void eliminarLlista() {
-        llistarLlistes();
-        System.out.println("Selecciona la llista a esborrar escrivint el seu nom:");
-        String nomLlista = s.next();
-        controlador.eliminarLlista(nomLlista);
+        if (llistarLlistes()) {
+            System.out.println("Selecciona la llista a esborrar escrivint el seu nom:");
+            String nomLlista = s.next();
+            try {
+                controlador.eliminarLlista(nomLlista);
+            } catch (LlistaFreqNoExisteix e1) {
+                System.out.println("ERROR: " + e1.getMessage());
+            } catch (Exception e2) {
+                System.out.println("ERROR");
+            }
+        }
     }
 
     //Pre:
@@ -281,10 +294,13 @@ public class DriverDomini {
 
     //Pre:
     //Post: Es llisten els noms de les llistes guardades del perfil actiu
-    public void llistarLlistes() {
+    public boolean llistarLlistes() {
         List<String> nomLlistes = controlador.getNomLlistesGuardades();
         netejaTerminal();
-        if (nomLlistes.isEmpty()) System.out.println("No n'hi han llistes guardades");
+        if (nomLlistes.isEmpty()) {
+            System.out.println("No n'hi han llistes guardades");
+            return false;
+        }
         else {
             try {
                 int i = 1;
@@ -309,11 +325,12 @@ public class DriverDomini {
 
                 }
             } catch (LlistaFreqNoExisteix e1) {
-            System.out.println("Llista No Existeix");
+                System.out.println("ERROR: " + e1.getMessage());
             } catch (Exception e2) {
                 System.out.println("ERROR");
             }
         }
+        return true;
     }
 
     public void consultaIdiomes() {

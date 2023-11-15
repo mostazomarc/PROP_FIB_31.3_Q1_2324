@@ -1,7 +1,7 @@
 package Domini;
 
 import Excepcions.ExcepcionsCreadorTeclat;
-import Excepcions.LlistaFreqNoExisteix;
+import Excepcions.*;
 
 import java.util.*;
 import java.util.Set;
@@ -12,6 +12,14 @@ public class Perfil {
     private String Contrasenya;
     private Map<String, LlistaFrequencies>  frequencies;
     private Map<String, Teclat>  teclats;
+
+    private void comprovaLlistaNoExisteix(String nomLlista) throws LlistaFreqNoExisteix {
+        if (!frequencies.containsKey(nomLlista)) throw new LlistaFreqNoExisteix(nomLlista);
+    }
+
+    private void comprovaLlistaJaExisteix(String nomLlista) throws LlistaFreqJaExisteix {
+        if (frequencies.containsKey(nomLlista)) throw new LlistaFreqJaExisteix(nomLlista);
+    }
 
     public Perfil (String User, String pswd) {
         Usuari = User;
@@ -42,24 +50,21 @@ public class Perfil {
 
     //Pre:
     //Post: S'afegeixen les noves entrades a la llista de frequencies name o es crea
-    public void afegirLlistaFreq (String name, Idioma i, Map<String, Integer> novesEntrades) {
-        if (frequencies.containsKey(name)) frequencies.get(name).insertarFrequencies(novesEntrades);
-        else {
-            frequencies.put(name,new LlistaFrequencies(name,i,novesEntrades));
-        }
+    public void afegirLlistaFreq (String name, Idioma i, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
+        comprovaLlistaJaExisteix(name);
+        frequencies.put(name,new LlistaFrequencies(name,i,novesEntrades));
     }
 
     //Pre:
     //Post: Es crea una llista amb nom, buida
-    public LlistaFrequencies crearLlistaFreq (String name, Idioma i) {
-        if (frequencies.containsKey(name)) return null;
-        else {
-            frequencies.put(name,new LlistaFrequencies(name,i));
-            return frequencies.get(name);
-        }
+    public LlistaFrequencies crearLlistaFreq (String name, Idioma i) throws ExcepcionsCreadorTeclat{
+        comprovaLlistaJaExisteix(name);
+        frequencies.put(name,new LlistaFrequencies(name,i));
+        return frequencies.get(name);
     }
 
-    public void eliminaLlista(String nomLlista) {
+    public void eliminaLlista(String nomLlista) throws ExcepcionsCreadorTeclat {
+        comprovaLlistaNoExisteix(nomLlista);
         frequencies.remove(nomLlista);
     }
 
@@ -73,18 +78,19 @@ public class Perfil {
     //Pre: La llista amb nom nomLlista existeix
     //Post: Es retorna el nom de l'idioma de la llista amb nom nomLlista
     public String getNomIdiomaLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
-        if (!frequencies.containsKey(nomLlista)) throw new LlistaFreqNoExisteix();
+        comprovaLlistaNoExisteix(nomLlista);
         return frequencies.get(nomLlista).getNomIdioma();
     }
 
     //Pre:
     //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
     public Map<String, Integer> consultaLlista(String nomSeleccio) throws ExcepcionsCreadorTeclat {
-        if (!frequencies.containsKey(nomSeleccio)) throw new LlistaFreqNoExisteix();
+        comprovaLlistaNoExisteix(nomSeleccio);
         return frequencies.get(nomSeleccio).getFrequencies();
     }
 
-    public void crearTeclat(String NomTeclat, String NomLlista, Idioma idioma) {
+    public void crearTeclat(String NomTeclat, String NomLlista, Idioma idioma) throws ExcepcionsCreadorTeclat {
+        comprovaLlistaNoExisteix(NomTeclat);
         Map<String,Integer> freqllista = frequencies.get(NomLlista).getFrequencies();
         //teclats.put(NomTeclat,new Teclat(NomTeclat,freqllista,idioma));
     }

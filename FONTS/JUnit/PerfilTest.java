@@ -5,6 +5,7 @@ import Domini.*;
 import static org.junit.Assert.*;
 
 import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.LlistaFreqNoExisteix;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -85,7 +86,13 @@ public class PerfilTest {
     @Test
     //afegir llista nomes amb nom
     public void crearLlistaFreq() {
-        perfilProva.crearLlistaFreq("LlistaProva",idiomaProva);
+        try {
+            perfilProva.crearLlistaFreq("LlistaProva", idiomaProva);
+        } catch (LlistaFreqNoExisteix e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (Exception e2) {
+            System.out.println("ERROR");
+        }
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
         assertEquals(llistaNoms,perfilProva.getNomAllLlistes());
@@ -94,9 +101,15 @@ public class PerfilTest {
     @Test
     //get el nomes de totes les llistes del perfil
     public void getNomAllLlistes() {
-        perfilProva.crearLlistaFreq("LlistaProva",idiomaProva);
-        perfilProva.crearLlistaFreq("LlistaProva3",idiomaProva);
-        perfilProva.crearLlistaFreq("LlistaProva4",idiomaProva);
+        try {
+            perfilProva.crearLlistaFreq("LlistaProva",idiomaProva);
+            perfilProva.crearLlistaFreq("LlistaProva3",idiomaProva);
+            perfilProva.crearLlistaFreq("LlistaProva4",idiomaProva);
+        } catch (LlistaFreqNoExisteix e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (Exception e2) {
+            System.out.println("ERROR");
+        }
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
         llistaNoms.add("LlistaProva3");
