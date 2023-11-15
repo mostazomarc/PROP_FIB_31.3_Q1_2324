@@ -2,7 +2,8 @@ CLASS_INPUT =	./FONTS/Domini/*.java \
 				./FONTS/Drivers/*.java \
 				./FONTS/ControladorsDomini/*.java \
 				./FONTS/Dades/*.java \
-				./FONTS/Stubs/*.java
+				./FONTS/Stubs/*.java \
+				./FONTS/Excepcions/*.java
 
 CLASS_OUTPUT =	./EXE/
 

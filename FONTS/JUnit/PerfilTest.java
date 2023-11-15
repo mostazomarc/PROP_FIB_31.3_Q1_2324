@@ -4,6 +4,7 @@ import Domini.*;
 
 import static org.junit.Assert.*;
 
+import Excepcions.ExcepcionsCreadorTeclat;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -73,7 +74,7 @@ public class PerfilTest {
 
     @Test
     //afegir llista freq amb nom i llista de paraules
-    public void afegirLlistaFreq() {
+    public void afegirLlistaFreq() throws ExcepcionsCreadorTeclat{
         perfilProva.afegirLlistaFreq("LlistaProva",idiomaProva,llistaParaulesProva);
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
@@ -108,7 +109,7 @@ public class PerfilTest {
 
     @Test
     //obtenir la llista de paraules i frequencies
-    public void consultarLlista() {
+    public void consultarLlista() throws ExcepcionsCreadorTeclat {
         perfilProva.afegirLlistaFreq("LlistaProva",idiomaProva,llistaParaulesProva);
         Map<String,Integer> resultat = perfilProva.consultaLlista("LlistaProva");
         assertEquals(resultat,llistaParaulesProva);

@@ -1,5 +1,8 @@
 package Domini;
 
+import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.LlistaFreqNoExisteix;
+
 import java.util.*;
 import java.util.Set;
 
@@ -69,13 +72,15 @@ public class Perfil {
 
     //Pre: La llista amb nom nomLlista existeix
     //Post: Es retorna el nom de l'idioma de la llista amb nom nomLlista
-    public String getNomIdiomaLlista(String nomLlista) {
+    public String getNomIdiomaLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
+        if (!frequencies.containsKey(nomLlista)) throw new LlistaFreqNoExisteix();
         return frequencies.get(nomLlista).getNomIdioma();
     }
 
     //Pre:
     //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
-    public Map<String, Integer> consultaLlista(String nomSeleccio) {
+    public Map<String, Integer> consultaLlista(String nomSeleccio) throws ExcepcionsCreadorTeclat {
+        if (!frequencies.containsKey(nomSeleccio)) throw new LlistaFreqNoExisteix();
         return frequencies.get(nomSeleccio).getFrequencies();
     }
 

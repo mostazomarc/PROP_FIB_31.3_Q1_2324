@@ -2,6 +2,7 @@
 
 package Drivers;
 import ControladorsDomini.CtrlDomini;
+import Excepcions.LlistaFreqNoExisteix;
 
 import java.util.*;
 import java.io.*;
@@ -285,30 +286,34 @@ public class DriverDomini {
         netejaTerminal();
         if (nomLlistes.isEmpty()) System.out.println("No n'hi han llistes guardades");
         else {
-            int i = 1;
-            for (String nom : nomLlistes) {
-                String idioma = controlador.getNomIdiomaLlista(nom);
-                System.out.println(i + ": " + nom + " Idioma: " + idioma);
-                ++i;
-            }
-            System.out.println("Si vol consultar una llista en detall entri el numero, si no entri '0':");
-            int num = s.nextInt();
-            if (num != 0) {
-                netejaTerminal();
-                if (nomLlistes.size() < num) System.out.println("ERROR");
-                else {
-                    String nomSeleccio = nomLlistes.get(num - 1);
-                    Map<String, Integer> llista = controlador.consultaLlista(nomSeleccio);
-                    System.out.println("Paraula: , Frequencia: ");
-                    for (Map.Entry<String, Integer> entry : llista.entrySet()) {
-                        String clave = entry.getKey();
-                        Integer valor = entry.getValue();
-                        System.out.println(clave + ", " + valor);
-                    }
+            try {
+                int i = 1;
+                for (String nom : nomLlistes) {
+                    String idioma = controlador.getNomIdiomaLlista(nom);
+                    System.out.println(i + ": " + nom + " Idioma: " + idioma);
+                    ++i;
                 }
+                System.out.println("Si vol consultar una llista en detall entri el numero, si no entri '0':");
+                int num = s.nextInt();
+                if (num != 0) {
+                    netejaTerminal();
+                        if (nomLlistes.size() < num) throw new LlistaFreqNoExisteix();
+                        String nomSeleccio = nomLlistes.get(num - 1);
+                        Map<String, Integer> llista = controlador.consultaLlista(nomSeleccio);
+                        System.out.println("Paraula: , Frequencia: ");
+                        for (Map.Entry<String, Integer> entry : llista.entrySet()) {
+                            String clave = entry.getKey();
+                            Integer valor = entry.getValue();
+                            System.out.println(clave + ", " + valor);
+                        }
+
+                }
+            } catch (LlistaFreqNoExisteix e1) {
+            System.out.println("Llista No Existeix");
+            } catch (Exception e2) {
+                System.out.println("ERROR");
             }
         }
-
     }
 
     public void consultaIdiomes() {
