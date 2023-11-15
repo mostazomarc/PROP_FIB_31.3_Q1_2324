@@ -69,7 +69,7 @@ public class DriverDomini {
             System.out.println("6. Sortir ---> Surt de consultar dades");
         }
         else if (num== 1) gestionarTeclats();
-        //else if (num== 2) consultarTeclats();
+        else if (num== 2) consultarTeclats();
         else if (num== 3) gestionarDades();
         else if (num== 4) consultarDades();
         else if (num== 5) System.out.println("5. Canviar estrategia");
@@ -168,6 +168,12 @@ public class DriverDomini {
         System.out.println("Introdueixi el nom de la llista de frequències que vol utilitzar: ");
         String nomLlistaFreq = s.next();
         controlador.crearTeclat(nomTeclat, nomIdioma, nomLlistaFreq);
+    }
+
+    public void consultarTeclats() {
+        System.out.println("### Consultar Teclats ###");
+        //printMenuConsultarTeclats();
+        //esperarSeleccioConsultarTeclats();
     }
 
 

@@ -1,3 +1,5 @@
+package Domini;
+
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -274,72 +276,6 @@ public class HungarianAlgorithm {
         Arrays.fill(zerosAstarEnFila, -1);
         Arrays.fill(filaCoberta, 0);
         Arrays.fill(columnaCoberta, 0);
-    }
-
-    public static void main(String[] args) {
-
-        // el problema està escrit en forma de matriu
-        List<List<List<Integer>>> tests = new ArrayList<>();
-
-        // Afegir una matriu tridimensional a la llista
-        tests.add(List.of(
-                List.of(25, 40, 35),
-                List.of(40, 60, 35),
-                List.of(20, 40, 25)
-        ));
-
-        tests.add(List.of(
-                List.of(64, 18, 75),
-                List.of(97, 60, 24),
-                List.of(87, 63, 15)
-        ));
-
-        tests.add(List.of(
-                List.of(85, 51, 67, 10),
-                List.of(29, 81, 86, 68),
-                List.of(64, 88, 99, 89),
-                List.of(93, 75, 22, 94)
-        ));
-        tests.add(List.of(
-                List.of(77, 81, 27, 88),
-                List.of(16, 39, 26, 38),
-                List.of(41, 87, 20, 60),
-                List.of(77, 11, 41, 72)
-        ));
-
-        int testNumber = 1;
-        // trobar l'assignació òptima
-        for (List<List<Integer>> m : tests) {
-            System.out.println("\n");
-            System.out.print("PROVA " + testNumber +"\n");
-            System.out.println("----------------- \n");
-            int[][] matriu = convertirLlistaAMatriuBidimensional(m);
-            HungarianAlgorithm ha = new HungarianAlgorithm(matriu);
-            int[][] assignacio = ha.trobarAssignacioOptima();
-
-            if (assignacio.length > 0) {
-                // imprimir l'assignació
-                for (int i = 0; i < assignacio.length; i++) {
-                    System.out.print("Posició (columna): " + assignacio[i][0] + " => Lletra (fila): " + assignacio[i][1]);
-                    System.out.print("\n");
-                }
-            } else {
-                System.out.println("Cap assignació trobada!");
-            }
-            ++testNumber;
-        }
-    }
-
-    private static int[][] convertirLlistaAMatriuBidimensional(List<List<Integer>> llista) {
-        int[][] array = new int[llista.size()][];
-        for (int i = 0; i < llista.size(); i++) {
-            List<Integer> fila = llista.get(i);
-            array[i] = new int[fila.size()];
-            for (int j = 0; j < fila.size(); j++) {
-                array[i][j] = fila.get(j);
-            }
-        }
-        return array;
     }
 }
 
