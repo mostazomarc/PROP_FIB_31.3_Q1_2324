@@ -325,33 +325,36 @@ public class DriverDomini {
 
     public void afegirAlfabet() {
         System.out.println("### Afegir Alfabet ###");
-        System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
+        System.out.println("Introdueixi el nom de l'arxiu (que serà el nom de l'Alfabet) que contingui les lletres de l'alfabet i aseguri's de que és a la carpeta DATA");
         String filename = s.next();
-        controlador.afegirAlfabet(filename);
+        int res = controlador.afegirAlfabet(filename);
+
+        if (res == 0) System.out.println("Afegit Alfabet amb nom " + filename.substring(0, filename.length() - 4));
+        else if (res == 1) System.out.println("ERROR: L'Alfabet amb el nom indicat ja existeix");
     }
 
     public void afegirIdioma() {
         System.out.println("### Afegir Idioma ###");
         System.out.println("Introdueixi el nom de l'Idioma: ");
         String nomIdioma = s.next();
-        System.out.println("Introdueixi el nom de l'Alfabet que té l'idioma: ");
+        System.out.println("Introdueixi el nom de l'Alfabet que té l'Idioma, recorda que els Alfabets disponibles són: ");
+        Vector<String> dades = controlador.consultaAlfabets();
+        mostraDadesIdiomes(dades);
         String nomAlfabet = s.next();
-        System.out.println("Introdueixi el nom de l'Arxiu que conté la llista de Frequències predeterminada de l'idioma: ");
+        System.out.println("Introdueixi el nom de l'Arxiu que conté la Llista de Frequències predeterminada de l'Idioma: ");
         String filename = s.next();
         System.out.println("Introdueixi qui tipus d'arxiu 'text' o 'llista': ");
         String tipusArxiu = s.next();
-        controlador.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
+        int res = controlador.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
+
+        if (res == 1) System.out.println("ERROR: L'Idioma amb el nom indicat ja existeix");
+        else if (res == 2) System.out.println("ERROR: L'Alfabet amb el nom indicat no existeix");
     }
 
     public void mostraDadesIdiomes(Vector<String> dades) {
         int n = dades.size();
         for (int i=0; i < n; ++i) System.out.println(dades.get(i));
     }
-
-    public void mostrarMissatge(String m) {
-        System.out.println(m);
-    }
-
 
     public static void main(String[] args) {
         DriverDomini dd = new DriverDomini();
