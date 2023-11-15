@@ -11,7 +11,7 @@ public class FormatNoValid extends ExcepcionsCreadorTeclat{
     }
 
     public FormatNoValid(String s) {
-        super("L'arxiu no està en un format "+ s + " vàlid");
+        super("L'Input introdüit no està en un format "+ s + " vàlid");
     }
 
 }

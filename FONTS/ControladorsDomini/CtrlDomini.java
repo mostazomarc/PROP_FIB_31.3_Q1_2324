@@ -83,6 +83,17 @@ public class CtrlDomini {
         return Estrategia;
     }
 
+    //Pre:
+    //Post: Retorna true si l'String' un numero
+    private static boolean esNumero(String paraula) {
+        try {
+            Double.parseDouble(paraula);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     //Pre: LlistaLlegida es una llista de frequencies llegida en format vàlid
     //Post: es passa la llista llegida a llista de frequencies
     private Map<String,Integer> llistaToEntrades(Map<String, Integer> novesEntrades, List<String> LlistaLlegida) throws FormatNoValid{
@@ -122,12 +133,14 @@ public class CtrlDomini {
             while (matcher.find()) {
                 String paraula = matcher.group();
                 int freq = 1;
-                if (novesEntrades.containsKey(paraula)) {
-                    // Si la paraula ja existeix obtenir frequencia actual
-                    freq += novesEntrades.get(paraula);
-                }
+                if (!esNumero(paraula)) { //aixi no afegim numeros a la llista de freqüencies
+                    if (novesEntrades.containsKey(paraula)) {
+                        // Si la paraula ja existeix obtenir frequencia actual
+                        freq += novesEntrades.get(paraula);
+                    }
 
-                novesEntrades.put(paraula,freq);
+                    novesEntrades.put(paraula, freq);
+                }
             }
         }
         return novesEntrades;

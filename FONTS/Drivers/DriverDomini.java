@@ -247,23 +247,42 @@ public class DriverDomini {
     }
 
     //Pre:
+    //Post: Retorna true si l'String' un numero
+    private static boolean esNumero(String paraula) {
+        try {
+            Double.parseDouble(paraula);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    //Pre:
     //Post: es llegeixen les entrades manuals per crear una llista de frequencies
     public Map<String,Integer> llistaManual(Map<String, Integer> novesEntrades) {
         System.out.println("##### Introduir freqüències manualment #####");
         System.out.println("##### Introduir paraules i freqüències que es vulguin entrar #####");
         System.out.println("##### Per acabar escriure: 'X' #####");
         while (true) {
-            String paraula = s.next();
-            if (paraula.equals("X")) {
-                break;
+            try {
+                String paraula = s.next();
+                if (paraula.equals("X")) {
+                    break;
+                }
+                Integer freq = s.nextInt();
+                if (esNumero(paraula)) {
+                    throw new FormatNoValid("Paraula");}
+                if (novesEntrades.containsKey(paraula)) {
+                    // Si la paraula ja existeix obtenir frequencia actual
+                    freq += novesEntrades.get(paraula);
+                }
+                System.out.println("#### Paraula = " + paraula + ", Freqüencia = " + freq + " ####");
+                novesEntrades.put(paraula, freq);
+            } catch (FormatNoValid e1) {
+                System.out.println("ERROR: La paraula no és una paraula");
+            } catch (InputMismatchException e2) {
+                System.out.println("ERROR: La freqüència no és un número ");
             }
-            Integer freq = s.nextInt();
-            if (novesEntrades.containsKey(paraula)) {
-                // Si la paraula ja existeix obtenir frequencia actual
-                freq += novesEntrades.get(paraula);
-            }
-            System.out.println("#### Paraula = "+paraula+", Freqüencia = " +freq + " ####");
-            novesEntrades.put(paraula,freq);
         }
         if (novesEntrades.isEmpty()) return null;
 
