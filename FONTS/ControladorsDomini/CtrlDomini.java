@@ -175,7 +175,7 @@ public class CtrlDomini {
 
     public int afegirAlfabet(String filename) {
 
-        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiuFreq(filename);
+        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
 
         Set<Character> lletres = new HashSet<Character>();
         String nomAlfabet = filename.substring(0, filename.length() - 4);
