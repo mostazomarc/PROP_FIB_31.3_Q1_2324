@@ -11,3 +11,5 @@ import org.junit.runners.Suite.SuiteClasses;
         AlfabetTest.class, IdiomaTest.class, LlistaFrequenciesTest.class, PerfilTest.class, //TeclatTest.class
 })
 public class MasterTestSuite {}
+
+//Classe Programada per: Marc

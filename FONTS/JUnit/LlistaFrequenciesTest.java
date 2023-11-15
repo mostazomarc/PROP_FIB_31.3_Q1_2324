@@ -45,6 +45,33 @@ public class LlistaFrequenciesTest {
         assertEquals(resultat,idiomaProva.getLlistaFreq());
     }
 
+
+    @Test
+    //Creadora LLista amb nom i getNom
+    public void getNom() {
+        LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva);
+        assertEquals("NovaLlista",resultat.getNom());
+    }
+
+    //Creadora LLista amb nom i getNom
+    public void getFrequencies() {
+        LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva);
+        assertEquals(resultat,idiomaProva.getLlistaFreq());
+    }
+
+    //Creadora LLista amb nom i getNom
+    public void getIdioma() {
+        LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva);
+        assertEquals(idiomaProva,resultat.getIdioma());
+    }
+
+    //Creadora LLista amb nom i getNom
+    public void getNomIdioma() {
+        LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva);
+        assertEquals("ESPAÑOL",resultat.getNomIdioma());
+    }
+
+
     @Test
     //Creadora LLista amb nom i idioma ja té llista Predeterminada
     public void creadoraLlistaIdiomaJaTePred() {
@@ -80,3 +107,5 @@ public class LlistaFrequenciesTest {
 
 
 }
+
+//Classe Programada per: Marc

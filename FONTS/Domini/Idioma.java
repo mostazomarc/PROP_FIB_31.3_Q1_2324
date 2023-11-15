@@ -65,3 +65,5 @@ public class Idioma {
     }
 
 }
+
+//Classe Programada per: Arnau

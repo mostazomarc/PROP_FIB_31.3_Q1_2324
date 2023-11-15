@@ -5,6 +5,7 @@ import Domini.*;
 import static org.junit.Assert.*;
 
 import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.LlistaFreqNoExisteix;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,6 +42,22 @@ public class PerfilTest {
         perfilProva = new Perfil("Prova","12345");
     }
 
+    /* NO DEIXA PROVAR PERQUE ES PRIVADA
+    @Test
+    //Creadora Perfil amb usuari i contrasenya i getUsuari i getContrasenya
+    public void comprovaLlistaNoExisteix() {
+        Perfil perfilResultat = new Perfil("Prova","12345");
+        try {
+            perfilResultat.comprovaLlistaNoExisteix("llista");
+            assertEquals(true,false); //si arribem aqui no ha saltat l'excepció
+        }   catch (LlistaFreqNoExisteix e1) {
+            assertEquals(true,true);
+        }
+    }
+
+     */
+
+
     @Test
     //Creadora Perfil amb usuari i contrasenya i getUsuari i getContrasenya
     public void creadoraPerfilContrasenya() {
@@ -54,6 +71,20 @@ public class PerfilTest {
     public void creadoraPerfil() {
         Perfil perfilResultat = new Perfil("Prova");
         assertEquals("Prova",perfilResultat.getUsuari());
+    }
+
+    @Test
+    //GetUsuari
+    public void getUsuari() {
+        Perfil perfilResultat = new Perfil("Prova");
+        assertEquals("Prova",perfilResultat.getUsuari());
+    }
+
+    @Test
+    //GetContrasenya
+    public void getContrasenya() {
+        Perfil perfilResultat = new Perfil("Prova","12345");
+        assertEquals("12345",perfilResultat.getContrasenya());
     }
 
     @Test
@@ -85,18 +116,44 @@ public class PerfilTest {
     @Test
     //afegir llista nomes amb nom
     public void crearLlistaFreq() {
-        perfilProva.crearLlistaFreq("LlistaProva",idiomaProva);
+        try {
+            perfilProva.crearLlistaFreq("LlistaProva", idiomaProva);
+        } catch (LlistaFreqNoExisteix e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (Exception e2) {
+            System.out.println("ERROR");
+        }
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
         assertEquals(llistaNoms,perfilProva.getNomAllLlistes());
     }
 
     @Test
+    //eliminar llista amb nom
+    public void eliminarLlistaFreq() {
+        try {
+            perfilProva.crearLlistaFreq("LlistaProva", idiomaProva);
+            perfilProva.eliminaLlista("LlistaProva");
+        } catch (LlistaFreqNoExisteix e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (Exception e2) {
+            System.out.println("ERROR");
+        }
+        assertTrue(perfilProva.getNomAllLlistes().isEmpty());
+    }
+
+    @Test
     //get el nomes de totes les llistes del perfil
     public void getNomAllLlistes() {
-        perfilProva.crearLlistaFreq("LlistaProva",idiomaProva);
-        perfilProva.crearLlistaFreq("LlistaProva3",idiomaProva);
-        perfilProva.crearLlistaFreq("LlistaProva4",idiomaProva);
+        try {
+            perfilProva.crearLlistaFreq("LlistaProva",idiomaProva);
+            perfilProva.crearLlistaFreq("LlistaProva3",idiomaProva);
+            perfilProva.crearLlistaFreq("LlistaProva4",idiomaProva);
+        } catch (LlistaFreqNoExisteix e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (Exception e2) {
+            System.out.println("ERROR");
+        }
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
         llistaNoms.add("LlistaProva3");
@@ -105,6 +162,13 @@ public class PerfilTest {
         Collections.sort(llistaNoms);
         Collections.sort(llistaResultat);
         assertEquals(llistaNoms,llistaResultat);
+    }
+
+    @Test
+    //obtenir la llista de paraules i frequencies
+    public void getNomIdiomaLlista() throws ExcepcionsCreadorTeclat {
+        perfilProva.afegirLlistaFreq("LlistaProva",idiomaProva,llistaParaulesProva);
+        assertEquals("ESPAÑOL",perfilProva.getNomIdiomaLlista("LlistaProva"));
     }
 
     @Test
@@ -121,3 +185,5 @@ public class PerfilTest {
 
     }
 }
+
+//Classe Programada per: Marc
