@@ -148,7 +148,7 @@ public class CtrlDomini {
     //Post: S'afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual
     public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) {
         if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
-        PerfilActual.afegirLlistaFreq(filename,Idiomes.get(i),novesEntrades);
+        if (Idiomes.containsValue(i)) PerfilActual.afegirLlistaFreq(filename,Idiomes.get(i),novesEntrades);
     }
 
     //Pre:
