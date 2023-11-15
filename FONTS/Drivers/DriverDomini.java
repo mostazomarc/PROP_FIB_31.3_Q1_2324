@@ -27,7 +27,7 @@ public class DriverDomini {
         } catch (FormatNoValid e2 ) {
             System.out.println("ERROR: " + e2.getMessage());
         } catch (Exception e) {
-            System.out.println("ERROR");
+            e.printStackTrace();
         }
 
 
@@ -122,7 +122,7 @@ public class DriverDomini {
         } catch (PerfilNoExisteix e2 ) {
             System.out.println("ERROR: " + e2.getMessage());
         } catch (Exception e) {
-            System.out.println("ERROR");
+            e.printStackTrace();
         }
 
     }
@@ -187,7 +187,13 @@ public class DriverDomini {
         String nomIdioma = s.next();
         System.out.println("Introdueixi el nom de la llista de frequències que vol utilitzar: ");
         String nomLlistaFreq = s.next();
-        controlador.crearTeclat(nomTeclat, nomIdioma, nomLlistaFreq);
+        try {
+            controlador.crearTeclat(nomTeclat, nomIdioma, nomLlistaFreq);
+        } catch (LlistaFreqNoExisteix e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void consultarTeclats() {
@@ -334,7 +340,7 @@ public class DriverDomini {
             } catch (LlistaFreqNoExisteix e1) {
                 System.out.println("ERROR: " + e1.getMessage());
             } catch (Exception e2) {
-                System.out.println("ERROR");
+                e2.printStackTrace();
             }
         }
     }
@@ -458,7 +464,7 @@ public class DriverDomini {
             } catch (LlistaFreqNoExisteix e1) {
                 System.out.println("ERROR: " + e1.getMessage());
             } catch (Exception e2) {
-                System.out.println("ERROR");
+                e2.printStackTrace();
             }
         }
         return true;
