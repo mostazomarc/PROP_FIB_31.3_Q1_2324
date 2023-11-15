@@ -15,3 +15,5 @@ public class LlistaFreqJaExisteix extends ExcepcionsCreadorTeclat{
     }
 
 }
+
+//Classe Programada per: Marc

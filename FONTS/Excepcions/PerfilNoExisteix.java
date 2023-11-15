@@ -15,3 +15,5 @@ public class PerfilNoExisteix extends ExcepcionsCreadorTeclat{
     }
 
 }
+
+//Classe Programada per: Marc

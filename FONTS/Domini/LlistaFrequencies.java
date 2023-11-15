@@ -76,3 +76,5 @@ public class LlistaFrequencies {
     }
 
 }
+
+//Classe Programada per: Marc

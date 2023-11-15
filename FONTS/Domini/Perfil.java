@@ -97,3 +97,5 @@ public class Perfil {
         teclats.put(NomTeclat,new Teclat(NomTeclat,freqllista,idioma));
     }
 }
+
+//Classe Programada per: Marc
