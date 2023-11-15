@@ -17,11 +17,13 @@ public class Perfil {
         Usuari = User;
         Contrasenya = pswd;
         frequencies = new HashMap<>();
+        teclats = new HashMap<>();
     }
 
     public Perfil (String User) {
         Usuari = User;
         frequencies = new HashMap<>();
+        teclats = new HashMap<>();
     }
 
     public String getUsuari() {
@@ -86,6 +88,6 @@ public class Perfil {
 
     public void crearTeclat(String NomTeclat, String NomLlista, Idioma idioma) {
         Map<String,Integer> freqllista = frequencies.get(NomLlista).getFrequencies();
-        //teclats.put(NomTeclat,new Teclat(NomTeclat,freqllista,idioma));
+        teclats.put(NomTeclat,new Teclat(NomTeclat,freqllista,idioma));
     }
 }
