@@ -16,7 +16,15 @@ public class DriverDomini {
         controlador = controlador.getInstance();
         s = new Scanner(System.in);
 
-        controlador.iniciaInstancia("Prova");
+        try {
+            controlador.iniciaInstancia("Prova");
+        } catch (PerfilJaExisteix e1 ) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (PerfilNoExisteix e2 ) {
+            System.out.println("ERROR: " + e2.getMessage());
+        } catch (Exception e) {
+            System.out.println("ERROR");
+        }
         controlador.afegirAlfabet("Llatí.txt");
         controlador.afegirIdioma("Català","Llatí","llista","catalaFreq.txt");
 
@@ -95,17 +103,26 @@ public class DriverDomini {
         System.out.println("### Selecciona un Perfil o crea un nou escrivint el nom d'aquest###");
         String nomPerfil = s.next();
         List<String> nomsPerfils = controlador.getAllPerfils();
-        if (nomsPerfils.contains(nomPerfil)) controlador.iniciaInstancia(nomPerfil);
-        else {
-            System.out.println("Es crearà el Perfil: " + nomPerfil);
-            System.out.println("Està segur? Si/No");
-            String resposta = s.next();
-            if (resposta.equals("Si") || resposta.equals("si")) {
-                controlador.iniciaInstancia(nomPerfil);
-                System.out.println("Creat Perfil: " + nomPerfil);
+        try {
+            if (nomsPerfils.contains(nomPerfil)) controlador.iniciaInstancia(nomPerfil);
+            else {
+                System.out.println("Es crearà el Perfil: " + nomPerfil);
+                System.out.println("Està segur? Si/No");
+                String resposta = s.next();
+                if (resposta.equals("Si") || resposta.equals("si")) {
+                    controlador.iniciaInstancia(nomPerfil);
+                    System.out.println("Creat Perfil: " + nomPerfil);
+                }
+                else System.out.println("No s'han fet canvis");
             }
-            else System.out.println("No s'han fet canvis");
+        } catch (PerfilJaExisteix e1 ) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (PerfilNoExisteix e2 ) {
+            System.out.println("ERROR: " + e2.getMessage());
+        } catch (Exception e) {
+            System.out.println("ERROR");
         }
+
     }
 
     public void llistarPerfils() {

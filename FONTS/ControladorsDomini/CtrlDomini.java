@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import Domini.*;
 import Dades.*;
-import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.*;
 
 public class CtrlDomini {
     private Perfil PerfilActual; //Perfil que esta usant actualment el programa
@@ -45,12 +45,14 @@ public class CtrlDomini {
 
     //Pre: Es rep un nom d'usuari
     //Post: S'inicia instancia amb l'usuari rebut, si no existeix es crea
-    public void iniciaInstancia(String nom) {
+    public void iniciaInstancia(String nom) throws ExcepcionsCreadorTeclat{
         System.out.println("inicia sessio: " + nom +"\n");
         if (!PerfilsActius.containsKey(nom)) {
+            if (PerfilsActius.containsKey(nom)) throw new PerfilJaExisteix(nom);
             PerfilActual = new Perfil(nom);
             PerfilsActius.put(nom, PerfilActual);
         }else {
+            if (!PerfilsActius.containsKey(nom)) throw new PerfilNoExisteix(nom);
             PerfilActual = PerfilsActius.get(nom);
         }
     }
