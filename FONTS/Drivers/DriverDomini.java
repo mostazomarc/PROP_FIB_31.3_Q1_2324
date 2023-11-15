@@ -172,11 +172,43 @@ public class DriverDomini {
 
     public void consultarTeclats() {
         System.out.println("### Consultar Teclats ###");
-        //printMenuConsultarTeclats();
-        //esperarSeleccioConsultarTeclats();
+        printMenuConsultarTeclats();
+        esperarSeleccioConsultarTeclats();
+    }
+
+    public void printMenuConsultarTeclats() {
+        System.out.println("0. Info de les funcions");
+        System.out.println("1. Llistar Teclats");
+        System.out.println("2. Buscar Teclat");
+        System.out.println("3. Sortir");
+    }
+
+    public void esperarSeleccioConsultarTeclats() {
+        System.out.println("Escull una funcionalitat indicant el seu numero corresponent:");
+        int num = s.nextInt();
+        netejaTerminal();
+        if (num== 0) {
+            System.out.println("#### Info de les funcions de Consultar Dades ####");
+            System.out.println("0. Info de les funcions ---> Explicació de les funcions de Consultar Teclats");
+            System.out.println("1. Llistar Teclats ---> Es llisten els Teclats creats");
+            System.out.println("2. Buscar Teclat ---> S'imprimeix el Teclat a partir del seu nom");
+            System.out.println("6. Sortir ---> Surt de consultar dades");
+            esperarSeleccioConsultarDades();
+        }
+        else if(num == 1) llistarTeclats();
+        else if (num == 2) buscarTeclat();
+        else if (num == 6) {}
     }
 
 
+    public void llistarTeclats() {
+        System.out.println("### Llistar Teclats ###");
+        //controlador.llistarTeclats();
+    }
+
+    public void buscarTeclat() {
+        System.out.println("### Buscar Teclat ###");
+    }
 
     //Pre:
     //Post: Es mostra el menu de consultar dades i s'executa la opció escollida
