@@ -42,6 +42,19 @@ public class BranchandBound implements Estrategia {
         }
     }
 
+    public double[][] sumaMatrices(double[][] mat1, double[][] mat2) {
+
+        double[][] suma = new double[mat1.length][mat1[0].length];
+
+        for (int i = 0; i < mat1.length; i++) {
+            for (int j = 0; j < mat1[0].length; j++) {
+                suma[i][j] = mat1[i][j] + mat2[i][j];
+            }
+        }
+
+        return suma;
+    }
+
     private double calcular_cota(char[][] matriz, Map<Character, pos> letres_usades, Map<Character, Integer> letra_pos){
         double termino_1 = 0.0;
         //Cálculo del valor del término 1
@@ -61,19 +74,32 @@ public class BranchandBound implements Estrategia {
                     }
             }
         }
-        //Cálculo de la matriz C1
-        double[][] Mat_c1;
+        ArrayList<pos> pos_libres = new ArrayList<>();
+        ArrayList<Character> letras_libres = new ArrayList<>();
+
+        double[][] Mat_c1, Mat_c2;
+        double coste_termino_2 = 0.0;
         int m = letra_pos.size() - letres_usades.size(); // número de letras sin utilizar
+
         if(m != 0){
             Mat_c1 = new double[m][m];
+            Mat_c2 = new double[m][m];
+
+            //Cálculo de la matriz C1
+
             int letra_num, posicion;
             letra_num = posicion = 0;
             for(Map.Entry<Character, Integer> entry : letra_pos.entrySet() ){
                 char letra_actual = entry.getKey();
                 if(!letres_usades.containsKey(letra_actual)){
+                    letras_libres.add(letra_actual);
                     for(int i = 0; i < matriz.length; i++){
                         for(int j = 0; j < matriz[0].length; j++) {
                             if (matriz[i][j] == ' ') {
+                                if(pos_libres.size() != m){
+                                    pos p = new pos(i, j);
+                                    pos_libres.add(p);
+                                }
                                 double suma = 0.0;
                                 for (Map.Entry<Character, pos> entry_2 : letres_usades.entrySet()) {
                                     char letra = entry_2.getKey();
@@ -91,13 +117,67 @@ public class BranchandBound implements Estrategia {
                         }
                     }
                     ++letra_num;
+                    posicion = 0;
                 }
             }
+
+
+
+            //Cálculo de la matriz C2
+
+            //recorremos las letras libres(sin usar)
+            for(int i = 0; i < m; ++i){
+
+                //CÁCULO DEL VECTOR T
+
+                PriorityQueue<Double> T = new PriorityQueue<>();
+                //recorremos el resto de letras/instalaciones no emplazadas
+                for(int h = 0; h < m; ++h){
+                    if(h != i){
+                        T.add(Mat_traf[letra_pos.get(letras_libres.get(i))][letra_pos.get(letras_libres.get(h))]);
+                    }
+                }
+                //recorremos las posiciones libres
+                for(int j = 0; j < m; ++j){
+                    PriorityQueue<Double> D = new PriorityQueue<>(Comparator.reverseOrder());
+
+                    //CÁCULO DEL VECTOR D
+
+                    //recorremos las ubicaciones no ocupadas
+                    for(int h = 0; h < m; ++h){
+                        if(j != h){
+                            pos ubicacion_actual = pos_libres.get(j);
+                            pos ubicacion_resto = pos_libres.get(h);
+                            D.add(Mat_dist[(ubicacion_actual.x * matriz[0].length) + ubicacion_actual.y][(ubicacion_resto.x * matriz[0].length) + ubicacion_resto.y]);
+                        }
+                    }
+
+                    //Realizamos el producto escalar de T y D
+
+                    Iterator<Double> iterator_T = T.iterator();
+                    Iterator<Double> iterator_D = D.iterator();
+                    double acumulado = 0.0;
+                    while(iterator_T.hasNext()){
+                        Double elemento_T = iterator_T.next();
+                        Double elemento_D = iterator_D.next();
+                        acumulado += elemento_T * elemento_D;
+                    }
+
+                    //asignamos el valor del producto escalar de D y T a la letra no emplazada i y la ubicación j
+                    Mat_c2[i][j] = acumulado;
+                }
+            }
+
+            //Sumamos las 2 matrices C1 y C2
+
+            double[][] suma = sumaMatrices(Mat_c1, Mat_c2);
+
+            //resolvemos el coste de la asignación lineal óptima de c1 + c2 mediante algoritmo hungarian
+
+            //coste_termino_2 = hungarian(suma);
         }
 
-        //Cálculo de la matriz C2
-
-        return termino_1;
+        return termino_1 + coste_termino_2;
     }
     class NodoComparator implements Comparator<Nodo> {
 
@@ -127,21 +207,27 @@ public class BranchandBound implements Estrategia {
                 finalizar = true;
             }
             else{
-                for(char letra : lletres) {
-                    if(!nodo_actual.letres_usades.containsKey(letra)) {
-                        for (int i = 0; i < n_filas; i++) {
-                            for (int j = 0; j < n_columnas; j++) {
-                                if (nodo_actual.layout[i][j] == ' ') {
-                                    Nodo nuevo = new Nodo(nodo_actual.layout, nodo_actual.cota, nodo_actual.letres_usades);
-                                    nuevo.layout[i][j] = letra;
-                                    pos p = new pos(i, j);
-                                    nuevo.letres_usades.put(letra, p);
-                                    double cota = calcular_cota(nuevo.layout, nuevo.letres_usades, letra_pos);
-                                    if (cota < best_cost) {
-                                        nuevo.cota = cota;
-                                        q.add(nuevo);
-                                    }
-                                }
+                boolean espera = false;
+                Iterator<Map.Entry<Character, Integer>> iterator = letra_pos.entrySet().iterator();
+                char letra = ' ';
+                while(!espera){
+                    Map.Entry<Character, Integer> entry = iterator.next();
+                    letra = entry.getKey();
+                    if(!nodo_actual.letres_usades.containsKey(letra))
+                        espera = true;
+                }
+
+                for (int i = 0; i < n_filas; i++) {
+                    for (int j = 0; j < n_columnas; j++) {
+                        if (nodo_actual.layout[i][j] == ' ') {
+                            Nodo nuevo = new Nodo(nodo_actual.layout, nodo_actual.cota, nodo_actual.letres_usades);
+                            nuevo.layout[i][j] = letra;
+                            pos p = new pos(i, j);
+                            nuevo.letres_usades.put(letra, p);
+                            double cota = calcular_cota(nuevo.layout, nuevo.letres_usades, letra_pos);
+                            if (cota < best_cost) {
+                                nuevo.cota = cota;
+                                q.add(nuevo);
                             }
                         }
                     }
