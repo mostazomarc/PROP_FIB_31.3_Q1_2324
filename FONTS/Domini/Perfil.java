@@ -94,10 +94,29 @@ public class Perfil {
     }
 
     public void crearTeclat(String NomTeclat, String NomLlista, Idioma idioma) throws ExcepcionsCreadorTeclat {
-        comprovaLlistaNoExisteix(NomTeclat);
+        comprovaLlistaNoExisteix(NomLlista);
+        if (!teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
         Map<String,Integer> freqllista = frequencies.get(NomLlista).getFrequencies();
-        teclats.put(NomTeclat,new Teclat(NomTeclat,freqllista,idioma));
+        teclats.put(NomTeclat,new Teclat(NomTeclat,NomLlista, freqllista, idioma));
     }
+
+    public List<String> getNomsTeclats()  {
+        Set<String> noms = teclats.keySet();
+        return new ArrayList<>(noms);
+    }
+
+    public String getIdiomaTeclat (String nomTeclat) throws ExcepcionsCreadorTeclat {
+        if (!teclats.containsKey(nomTeclat)) throw new TeclatNoExisteix(nomTeclat);
+        return teclats.get(nomTeclat).getNomIdioma();
+    }
+
+
+    public String getLlistaTeclat (String nomTeclat) throws ExcepcionsCreadorTeclat {
+        if (!teclats.containsKey(nomTeclat)) throw new TeclatNoExisteix(nomTeclat);
+        return teclats.get(nomTeclat).getNomLlistaFreq();
+    }
+
+
 }
 
 //Classe Programada per: Marc
