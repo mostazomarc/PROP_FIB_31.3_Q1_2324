@@ -231,13 +231,21 @@ public class CtrlDomini {
         return sdades;
     }
     
-    public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq) throws ExcepcionsCreadorTeclat{
+    public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
-        PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat);
+        PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat, n, m);
+    }
+    public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, int n, int m) throws ExcepcionsCreadorTeclat{
+        Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
+        PerfilActual.crearTeclatLlistaIdioma(nomTeclat, idiomaTeclat, n, m);
     }
 
     public void llistarTeclats() {
         //PerfilActual.llistarTeclats();
+    }
+
+    public char[][] consultaTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat {
+        return PerfilActual.consultaTeclat(nomTeclat);
     }
 
     public Vector<String> consultaAlfabets() {

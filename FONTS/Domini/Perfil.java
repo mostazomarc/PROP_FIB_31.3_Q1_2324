@@ -91,12 +91,18 @@ public class Perfil {
         return controlador.getLlista(nomSeleccio).getFrequencies();
     }
 
-    public void crearTeclatLlistaPropia(String NomTeclat, String NomLlista, Idioma idioma) throws ExcepcionsCreadorTeclat {
+    public void crearTeclatLlistaPropia(String NomTeclat, String NomLlista, Idioma idioma, int n, int m) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(NomLlista);
         if (teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
         Map<String,Integer> freqllista = controlador.getLlista(NomLlista).getFrequencies();
-        teclats.put(NomTeclat,new Teclat(NomTeclat,NomLlista, freqllista, idioma));
+        teclats.put(NomTeclat,new Teclat(NomTeclat,NomLlista, freqllista, idioma, n, m));
     }
+
+    public void crearTeclatLlistaIdioma(String NomTeclat, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat {
+        if (teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
+        teclats.put(NomTeclat,new Teclat(NomTeclat, i, n, m));
+    }
+
 
     public List<String> getNomsTeclats()  {
         Set<String> noms = teclats.keySet();
@@ -114,6 +120,10 @@ public class Perfil {
         return teclats.get(nomTeclat).getNomLlistaFreq();
     }
 
+    public char[][] consultaTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat {
+        if (!teclats.containsKey(nomTeclat)) throw new TeclatNoExisteix(nomTeclat);
+        return teclats.get(nomTeclat).getDisposicio();
+    }
 
 }
 

@@ -16,21 +16,24 @@ public class Teclat {
 
     //Pre:
     //Post: es crea un teclat amb nom a partir d'una llista de freqüencies i un idioma
-    public Teclat(String nom, String nomll, Map<String, Integer> llistafreq, Idioma i) {
+    public Teclat(String nom, String nomll, Map<String, Integer> llistafreq, Idioma i, int n, int m) {
         this.nom = nom;
         idioma = i;
         nomllista = nomll;
+        dimX = n;
+        dimY = m;
         Estrategia estrategia = new BranchandBound();
-        disposicio = estrategia.solve(llistafreq, i.getLletres(), 3, 10);
-
+        disposicio = estrategia.solve(llistafreq, i.getLletres(), dimX, dimY);
     }
 
-    public Teclat(String nom, Idioma i) {
+    public Teclat(String nom, Idioma i, int n, int m) {
         this.nom = nom;
         idioma = i;
+        dimX = n;
+        dimY = m;
         Estrategia estrategia = new BranchandBound();
         nomllista = i.getLlistaFreq().getNom();
-        disposicio = estrategia.solve(i.getFrequencies(), i.getLletres(), 3, 10);
+        disposicio = estrategia.solve(i.getFrequencies(), i.getLletres(), dimX, dimY);
 
     }
 
@@ -46,7 +49,7 @@ public class Teclat {
 
     //Pre:
     //Post: es retorna la disposició de teclat
-    public char[][] getTeclat() {
+    public char[][] getDisposicio() {
         return disposicio;
     }
 

@@ -189,7 +189,7 @@ public class DriverDomini {
         System.out.println("Introdueixi el nom de la llista de frequències que vol utilitzar: ");
         String nomLlistaFreq = s.next();
         try {
-            controlador.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq);
+            controlador.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq, 4, 10);
         } catch (LlistaFreqNoExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (Exception e) {
