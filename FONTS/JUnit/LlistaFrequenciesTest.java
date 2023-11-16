@@ -41,7 +41,7 @@ public class LlistaFrequenciesTest {
     public void creadoraLlistaNom() {
         LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva);
         assertEquals("NovaLlista",resultat.getNom());
-        assertEquals(idiomaProva,resultat.getIdioma());
+        assertEquals("ESPAÑOL",resultat.getNomIdioma());
         assertEquals(resultat,idiomaProva.getLlistaFreq());
     }
 
@@ -59,11 +59,6 @@ public class LlistaFrequenciesTest {
         assertEquals(resultat,idiomaProva.getLlistaFreq());
     }
 
-    //Creadora LLista amb nom i getNom
-    public void getIdioma() {
-        LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva);
-        assertEquals(idiomaProva,resultat.getIdioma());
-    }
 
     //Creadora LLista amb nom i getNom
     public void getNomIdioma() {
@@ -78,11 +73,11 @@ public class LlistaFrequenciesTest {
         LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva);
         LlistaFrequencies resultat2 = new LlistaFrequencies("SegonaLlista",idiomaProva);
         assertEquals("NovaLlista",resultat.getNom());
-        assertEquals(idiomaProva,resultat.getIdioma());
+        assertEquals("ESPAÑOL",resultat.getNomIdioma());
         assertEquals(resultat,idiomaProva.getLlistaFreq());
 
         assertEquals("SegonaLlista",resultat2.getNom());
-        assertEquals(idiomaProva,resultat2.getIdioma());
+        assertEquals("ESPAÑOL",resultat.getNomIdioma());
         assertNotEquals(resultat2,idiomaProva.getLlistaFreq());
     }
 
@@ -92,7 +87,7 @@ public class LlistaFrequenciesTest {
         LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva, llistaParaulesProva);
         assertEquals("NovaLlista",resultat.getNom());
         assertEquals(llistaParaulesProva,resultat.getFrequencies());
-        assertEquals(idiomaProva,resultat.getIdioma());
+        assertEquals("ESPAÑOL",resultat.getNomIdioma());
         assertEquals(resultat,idiomaProva.getLlistaFreq());
     }
 
