@@ -81,20 +81,20 @@ public class Perfil {
     //Post: Es retorna el nom de l'idioma de la llista amb nom nomLlista
     public String getNomIdiomaLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
         comprovaLlistaNoExisteix(nomLlista);
-        return frequencies.get(nomLlista).getNomIdioma();
+        return controlador.getLlista(nomLlista).getNomIdioma();
     }
 
     //Pre:
     //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
     public Map<String, Integer> consultaLlista(String nomSeleccio) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(nomSeleccio);
-        return frequencies.get(nomSeleccio).getFrequencies();
+        return controlador.getLlista(nomSeleccio).getFrequencies();
     }
 
     public void crearTeclat(String NomTeclat, String NomLlista, Idioma idioma) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(NomLlista);
         if (teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
-        Map<String,Integer> freqllista = frequencies.get(NomLlista).getFrequencies();
+        Map<String,Integer> freqllista = controlador.getLlista(NomLlista).getFrequencies();
         teclats.put(NomTeclat,new Teclat(NomTeclat,NomLlista, freqllista, idioma));
     }
 
