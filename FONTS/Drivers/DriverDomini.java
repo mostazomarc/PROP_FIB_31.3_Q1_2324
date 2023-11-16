@@ -15,7 +15,6 @@ public class DriverDomini {
     public void iniciaDriverDomini() throws Exception {
         controlador = controlador.getInstance();
         s = new Scanner(System.in);
-
         try {
             controlador.iniciaInstancia("Prova");
             controlador.afegirAlfabet("Llatí.txt");
@@ -172,7 +171,7 @@ public class DriverDomini {
             System.out.println("4. Sortir ---> Surt de la gestió de teclats");
             esperarSeleccioGestionarDades();
         }
-        else if (num== 1) crearTeclat();
+        else if (num== 1) crearTeclatLlistaPropia();
         //else if (num == 2) modificarTeclat();
         //else if (num == 3) eliminarTeclat();
         //sortir implementar?
@@ -181,7 +180,7 @@ public class DriverDomini {
 
     //Pre:
     //Post:
-    public void crearTeclat() {
+    public void crearTeclatLlistaPropia() {
         System.out.println("### Crear Teclat ###");
         System.out.println("Introdueixi el nom del Teclat: ");
         String nomTeclat= s.next();
@@ -190,7 +189,7 @@ public class DriverDomini {
         System.out.println("Introdueixi el nom de la llista de frequències que vol utilitzar: ");
         String nomLlistaFreq = s.next();
         try {
-            controlador.crearTeclat(nomTeclat, nomIdioma, nomLlistaFreq);
+            controlador.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq);
         } catch (LlistaFreqNoExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (Exception e) {
@@ -548,7 +547,6 @@ public class DriverDomini {
     public void mostrarMissatge(String m) {
         System.out.println(m);
     }
-
 
     public static void main(String[] args) throws Exception {
         DriverDomini dd = new DriverDomini();
