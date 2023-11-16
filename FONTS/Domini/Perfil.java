@@ -100,7 +100,6 @@ public class Perfil {
         teclats.put(NomTeclat,new Teclat(NomTeclat,NomLlista, freqllista, idioma));
     }
 
-<<<<<<< HEAD
     public List<String> getNomsTeclats()  {
         Set<String> noms = teclats.keySet();
         return new ArrayList<>(noms);
@@ -108,7 +107,7 @@ public class Perfil {
 
     public String getIdiomaTeclat (String nomTeclat) throws ExcepcionsCreadorTeclat {
         if (!teclats.containsKey(nomTeclat)) throw new TeclatNoExisteix(nomTeclat);
-        return teclats.get(nomTeclat).getNomIdioma();
+        return teclats.get(nomTeclat).getNomIdiomaTeclat();
     }
 
 
