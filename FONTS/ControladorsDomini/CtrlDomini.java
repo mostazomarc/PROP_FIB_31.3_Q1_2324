@@ -12,10 +12,12 @@ public class CtrlDomini {
     private Perfil PerfilActual; //Perfil que esta usant actualment el programa
     private String Estrategia; //Estrategia utilitzada en la fabricació del teclat
     private CtrlPersPerfil perfils; //Controlador Persistencia Perfils registrats
+
+    private CtrlPersAlfabets alfabets; //Controlador de Persistencia d'Alfabets
     private static CtrlDomini singletonObject;
     private CtrlFile ctrlFreqFile;
 
-    private TreeMap<String, Alfabet> Alfabets;
+    //private TreeMap<String, Alfabet> Alfabets;
     private TreeMap<String, Idioma> Idiomes;
 
     //Pre:
@@ -38,8 +40,8 @@ public class CtrlDomini {
     public void inicialitzar() {
         ctrlFreqFile = CtrlFile.getInstance();
         perfils = CtrlPersPerfil.getInstance();
+        alfabets = CtrlPersAlfabets.getInstance();
         Estrategia = "BranchAndBound"; //estrategia per defecte
-        Alfabets = new TreeMap<String, Alfabet>();
         Idiomes = new TreeMap<String, Idioma>();
     }
 
@@ -198,27 +200,14 @@ public class CtrlDomini {
     public void afegirAlfabet(String filename) throws ExcepcionsCreadorTeclat {
         System.out.println("Llegint arxiu "+ filename +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
-
-        Set<Character> lletres = new HashSet<Character>();
-        String nomAlfabet = filename.substring(0, filename.length() - 4);
-
-        if (Alfabets.containsKey(nomAlfabet.toLowerCase())) throw new AlfabetJaExisteix(nomAlfabet);
-
-        for (String linia : LlistaLlegida) {
-            for (char lletra : linia.toCharArray()) {
-                lletres.add(lletra);
-            }
-        }
-
-        Alfabet nouAlfabet = new Alfabet(nomAlfabet, lletres);
-        Alfabets.put(nomAlfabet.toLowerCase(), nouAlfabet);
+        alfabets.afegirAlfabet(filename, LlistaLlegida);
     }
 
     public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws ExcepcionsCreadorTeclat {
         if (Idiomes.containsKey(nomIdioma)) throw new IdiomaJaExisteix(nomIdioma);
-        else if (!Alfabets.containsKey(nomAlfabet.toLowerCase())) throw new AlfabetNoExisteix(nomAlfabet);
+        if (!alfabets.existeix(nomAlfabet)) throw new AlfabetNoExisteix(nomAlfabet);
 
-        Alfabet alfabetIdioma = Alfabets.get(nomAlfabet);
+        Alfabet alfabetIdioma = alfabets.getAlfabet(nomAlfabet);
         Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filename);
         Idioma nouIdioma = new Idioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
         Idiomes.put(nomIdioma, nouIdioma);
@@ -248,6 +237,7 @@ public class CtrlDomini {
 
     public Vector<String> consultaAlfabets() {
         Vector<String> sdades = new Vector<String>();
+        TreeMap<String, Alfabet> Alfabets = alfabets.getAlfabets();
 
         int i = 1;
         for (Map.Entry<String, Alfabet> alfabet : Alfabets.entrySet()) {
