@@ -40,7 +40,6 @@ public class CtrlDomini {
         ctrlFreqFile = CtrlFile.getInstance();
         perfils = CtrlPersPerfil.getInstance(this);
         llistes = CtrlPersFreq.getInstance();
-        perfils = CtrlPersPerfil.getInstance();
         alfabets = CtrlPersAlfabets.getInstance();
         idiomes = CtrlPersIdiomes.getInstance();
         Estrategia = "BranchAndBound"; //estrategia per defecte
