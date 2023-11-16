@@ -1,5 +1,6 @@
 package Domini;
 
+import ControladorsDomini.CtrlDomini;
 import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.*;
 
@@ -10,28 +11,33 @@ public class Perfil {
 
     private String Usuari;
     private String Contrasenya;
-    //private Map<String, LlistaFrequencies>  frequencies;
+    private Set<String>  frequencies;
     private Map<String, Teclat>  teclats;
 
+    private CtrlDomini controlador;
+
     private void comprovaLlistaNoExisteix(String nomLlista) throws LlistaFreqNoExisteix {
-        if (!frequencies.containsKey(nomLlista)) throw new LlistaFreqNoExisteix(nomLlista);
+        if (!frequencies.contains(nomLlista)) throw new LlistaFreqNoExisteix(nomLlista);
     }
 
     private void comprovaLlistaJaExisteix(String nomLlista) throws LlistaFreqJaExisteix {
-        if (frequencies.containsKey(nomLlista)) throw new LlistaFreqJaExisteix(nomLlista);
+        if (frequencies.contains(nomLlista)) throw new LlistaFreqJaExisteix(nomLlista);
     }
 
-    public Perfil (String User, String pswd) {
+
+    public Perfil (String User, String pswd, CtrlDomini cd) {
         Usuari = User;
         Contrasenya = pswd;
-        frequencies = new HashMap<>();
+        frequencies = new HashSet<>();
         teclats = new HashMap<>();
+        controlador = cd;
     }
 
-    public Perfil (String User) {
+    public Perfil (String User, CtrlDomini cd) {
         Usuari = User;
-        frequencies = new HashMap<>();
+        frequencies = new HashSet<>();
         teclats = new HashMap<>();
+        controlador = cd;
     }
 
     public String getUsuari() {
@@ -52,18 +58,11 @@ public class Perfil {
 
     //Pre:
     //Post: S'afegeixen les noves entrades a la llista de frequencies name o es crea
-    public void afegirLlistaFreq (String name, Idioma i, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
+    public void afegirLlistaFreq (String name) throws ExcepcionsCreadorTeclat {
         comprovaLlistaJaExisteix(name);
-        frequencies.put(name,new LlistaFrequencies(name,i,novesEntrades));
+        frequencies.add(name);
     }
 
-    //Pre:
-    //Post: Es crea una llista amb nom, buida
-    public LlistaFrequencies crearLlistaFreq (String name, Idioma i) throws ExcepcionsCreadorTeclat{
-        comprovaLlistaJaExisteix(name);
-        frequencies.put(name,new LlistaFrequencies(name,i));
-        return frequencies.get(name);
-    }
 
     //Pre:
     //Post: S'elimina la llista indicada per nomLlista
@@ -75,8 +74,7 @@ public class Perfil {
     //Pre:
     //Post: Es retorna el conjunt de noms de les llistes guardades al perfil
     public List<String> getNomAllLlistes() {
-        Set<String> noms = frequencies.keySet();
-        return new ArrayList<>(noms);
+        return new ArrayList<>(frequencies);
     }
 
     //Pre: La llista amb nom nomLlista existeix

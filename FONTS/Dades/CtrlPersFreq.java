@@ -1,7 +1,7 @@
 package Dades;
 
 import Domini.LlistaFrequencies;
-import Domini.Perfil;
+import Domini.Idioma;
 import Excepcions.*;
 
 import java.io.*;
@@ -10,16 +10,15 @@ import java.util.*;
 public class CtrlPersFreq {
     private static CtrlPersFreq singletonObject;
 
-    private Map<String, Map<String,LlistaFrequencies>>  frequencies; //Mapa <Usuari,totes les llistes de frequencies del usuari<NomLlista,llista>>
-
-    private Map<String,LlistaFrequencies> llistesPerfilActual;
+    //si canviesis de perfil tindires una nova llista
+    private Map<String,LlistaFrequencies> frequencies;
 
     private void comprovaLlistaNoExisteix(String nomLlista) throws LlistaFreqNoExisteix {
-        if (!llistesPerfilActual.containsKey(nomLlista)) throw new LlistaFreqNoExisteix(nomLlista);
+        if (!frequencies.containsKey(nomLlista)) throw new LlistaFreqNoExisteix(nomLlista);
     }
 
     private void comprovaLlistaJaExisteix(String nomLlista) throws LlistaFreqJaExisteix {
-        if (llistesPerfilActual.containsKey(nomLlista)) throw new LlistaFreqJaExisteix(nomLlista);
+        if (frequencies.containsKey(nomLlista)) throw new LlistaFreqJaExisteix(nomLlista);
     }
 
     //Pre:
@@ -37,22 +36,33 @@ public class CtrlPersFreq {
     }
 
 
+    //Pre:
+    //Post: Crea una llista de llistes per al nou perfil i guarda la del perfil anterior si n'hi ha
     public void nouPerfil(String usuari) {
-        frequencies.put(usuari, new HashMap<>());
-        llistesPerfilActual = frequencies.get(usuari);
     }
 
+    //Pre:
+    //Post: Guarda la llista de llites del perfil actual i carrega la del perfil nou
     public void canviaPerfil(String usuari) {
-        llistesPerfilActual = frequencies.get(usuari);
+
     }
 
-    public void afegirLlistaFreq(LlistaFrequencies llista) {
-        llistesPerfilActual.put(llista.getNom(),llista);
+    public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i) {
+        LlistaFrequencies llista = new LlistaFrequencies(nomLlista,i);
+        frequencies.put(llista.getNom(),llista);
+        return llista;
     }
+
+    public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i, Map<String, Integer> novesEntrades) {
+        LlistaFrequencies llista = new LlistaFrequencies(nomLlista,i,novesEntrades);
+        frequencies.put(llista.getNom(),llista);
+        return llista;
+    }
+
 
 
     public LlistaFrequencies getLlistaFreq(String nomLlista) {
-        return llistesPerfilActual.get(nomLlista);
+        return frequencies.get(nomLlista);
     }
 
 }

@@ -39,7 +39,7 @@ public class CtrlDomini {
     //Post: S'inicialitzen les variables necessaries.
     public void inicialitzar() {
         ctrlFreqFile = CtrlFile.getInstance();
-        perfils = CtrlPersPerfil.getInstance();
+        perfils = CtrlPersPerfil.getInstance(this);
         llistes = CtrlPersFreq.getInstance();
         Estrategia = "BranchAndBound"; //estrategia per defecte
         Alfabets = new TreeMap<String, Alfabet>();
@@ -57,6 +57,10 @@ public class CtrlDomini {
             PerfilActual = perfils.afegirPerfil(nom);
             llistes.nouPerfil(nom);
         }
+    }
+
+    public LlistaFrequencies getLlista(String nomLlista) {
+        return llistes.getLlistaFreq(nomLlista);
     }
 
 
@@ -173,7 +177,8 @@ public class CtrlDomini {
     //Post: S'afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual
     public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
         if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
-        PerfilActual.afegirLlistaFreq(filename,Idiomes.get(i),novesEntrades);
+        LlistaFrequencies llista = llistes.afegirLlistaFreq(filename,Idiomes.get(i),novesEntrades);
+        PerfilActual.afegirLlistaFreq(llista.getNom());
     }
 
     public List<String> getNomsTeclats() { return PerfilActual.getNomsTeclats();}

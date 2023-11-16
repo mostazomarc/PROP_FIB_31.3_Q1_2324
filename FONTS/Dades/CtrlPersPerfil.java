@@ -1,5 +1,6 @@
 package Dades;
 
+import ControladorsDomini.CtrlDomini;
 import Domini.Perfil;
 import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.PerfilJaExisteix;
@@ -11,27 +12,29 @@ import java.util.*;
 public class CtrlPersPerfil {
     private static CtrlPersPerfil singletonObject;
 
+    private CtrlDomini controlador;
+
     private HashMap <String, Perfil> PerfilsActius;
 
     //Pre:
     //Post: Retorna la instancia de CtrlFreqFile, si no existeix cap CtrlFreqFile es crea.
-    public static CtrlPersPerfil getInstance(){
+    public static CtrlPersPerfil getInstance(CtrlDomini c){
         if(singletonObject == null)
-            singletonObject = new CtrlPersPerfil(){
-
+            singletonObject = new CtrlPersPerfil(c){
             };
         return singletonObject;
     }
 
-    private CtrlPersPerfil() {
+    private CtrlPersPerfil(CtrlDomini c) {
         PerfilsActius = new HashMap<>();
+        controlador = c;
     }
 
     //Pre:
     //Post: s'afegeix el perfil identificat per nomPerfil
     public Perfil afegirPerfil (String nomPerfil) throws ExcepcionsCreadorTeclat {
         if (PerfilsActius.containsKey(nomPerfil)) throw new PerfilJaExisteix(nomPerfil);
-        Perfil nouPerfil = new Perfil(nomPerfil);
+        Perfil nouPerfil = new Perfil(nomPerfil,controlador);
         PerfilsActius.put(nomPerfil, nouPerfil);
         return nouPerfil;
     }

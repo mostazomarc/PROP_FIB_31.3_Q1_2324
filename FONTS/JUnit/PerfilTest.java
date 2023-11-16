@@ -9,6 +9,7 @@ import Excepcions.LlistaFreqNoExisteix;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.naming.ldap.Control;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
