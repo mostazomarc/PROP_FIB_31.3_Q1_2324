@@ -287,7 +287,7 @@ public class DriverDades {
         }
     }
 
-    public void afegirIdioma() {
+    public void afegirIdioma() throws Exception {
         System.out.println("### Afegir Idioma ###");
         System.out.println("Introdueixi el nom de l'Idioma: ");
         String nomIdioma = s.next();
@@ -299,10 +299,15 @@ public class DriverDades {
         String tipusArxiu = s.next();
         try {
             controlador.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
-        } catch (FormatNoValid e) {
+        }
+        catch (IdiomaJaExisteix e) {
             System.out.println("ERROR: " + e.getMessage());
-        } catch (Exception e2) {
-            e2.printStackTrace();
+        }
+        catch (AlfabetNoExisteix e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        }
+        catch (FormatNoValid e2) {
+            System.out.println("ERROR: " + e2.getMessage());
         }
     }
 

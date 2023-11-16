@@ -225,7 +225,7 @@ public class CtrlDomini {
     }
 
     public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws ExcepcionsCreadorTeclat {
-        if (Idiomes.containsKey(nomIdioma.toLowerCase())) throw new IdiomaNoExisteix(nomIdioma);
+        if (Idiomes.containsKey(nomIdioma)) throw new IdiomaJaExisteix(nomIdioma);
         else if (!Alfabets.containsKey(nomAlfabet.toLowerCase())) throw new AlfabetNoExisteix(nomAlfabet);
 
         Alfabet alfabetIdioma = Alfabets.get(nomAlfabet);
@@ -247,6 +247,7 @@ public class CtrlDomini {
         return sdades;
     }
     public void crearTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq) throws ExcepcionsCreadorTeclat{
+        if (!Idiomes.containsKey(nomIdioma)) throw new IdiomaNoExisteix(nomIdioma);
         Idioma idiomaTeclat = Idiomes.get(nomIdioma);
         PerfilActual.crearTeclat(nomTeclat, nomLlistaFreq, idiomaTeclat);
     }
