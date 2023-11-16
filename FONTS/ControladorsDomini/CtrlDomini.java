@@ -12,6 +12,8 @@ public class CtrlDomini {
     private Perfil PerfilActual; //Perfil que esta usant actualment el programa
     private String Estrategia; //Estrategia utilitzada en la fabricació del teclat
     private CtrlPersPerfil perfils; //Controlador Persistencia Perfils registrats
+
+    private CtrlPersFreq llistes;
     private static CtrlDomini singletonObject;
     private CtrlFile ctrlFreqFile;
 
@@ -38,6 +40,7 @@ public class CtrlDomini {
     public void inicialitzar() {
         ctrlFreqFile = CtrlFile.getInstance();
         perfils = CtrlPersPerfil.getInstance();
+        llistes = CtrlPersFreq.getInstance();
         Estrategia = "BranchAndBound"; //estrategia per defecte
         Alfabets = new TreeMap<String, Alfabet>();
         Idiomes = new TreeMap<String, Idioma>();
@@ -49,8 +52,10 @@ public class CtrlDomini {
         System.out.println("inicia sessio: " + nom +"\n");
         try {
             PerfilActual = perfils.getPerfil(nom);
+            llistes.canviaPerfil(nom);
         } catch (PerfilNoExisteix e1) {
             PerfilActual = perfils.afegirPerfil(nom);
+            llistes.nouPerfil(nom);
         }
     }
 

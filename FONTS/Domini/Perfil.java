@@ -10,7 +10,7 @@ public class Perfil {
 
     private String Usuari;
     private String Contrasenya;
-    private Map<String, LlistaFrequencies>  frequencies;
+    //private Map<String, LlistaFrequencies>  frequencies;
     private Map<String, Teclat>  teclats;
 
     private void comprovaLlistaNoExisteix(String nomLlista) throws LlistaFreqNoExisteix {
