@@ -91,7 +91,7 @@ public class Perfil {
         return controlador.getLlista(nomSeleccio).getFrequencies();
     }
 
-    public void crearTeclat(String NomTeclat, String NomLlista, Idioma idioma) throws ExcepcionsCreadorTeclat {
+    public void crearTeclatLlistaPropia(String NomTeclat, String NomLlista, Idioma idioma) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(NomLlista);
         if (teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
         Map<String,Integer> freqllista = controlador.getLlista(NomLlista).getFrequencies();
