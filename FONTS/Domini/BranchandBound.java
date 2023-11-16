@@ -11,7 +11,6 @@ public class BranchandBound implements Estrategia {
     private double[][] Mat_dist; //Matriz de distancia entre las ubicaciones
     private double[][] Mat_traf;  //Matriz de tráfico entre las instalaciones
     private char[][] best_sol;  //Layout resultante del algoritmo
-    private double best_cost; // mejor cota hasta el momento
 
     //Métodos
 
@@ -56,7 +55,7 @@ public class BranchandBound implements Estrategia {
         return suma;
     }
 
-    private double calcular_cota(char[][] matriz, Map<Character, pos> letres_usades, Map<Character, Integer> letra_pos){
+    private double calcular_cota(char[][] matriz, Map<Character, pos> letres_usades, Map<Character, Integer> letra_pos, int n_columnas){
         double termino_1 = 0.0;
         //Cálculo del valor del término 1
         for(Map.Entry<Character, pos> entry : letres_usades.entrySet()){
@@ -66,7 +65,7 @@ public class BranchandBound implements Estrategia {
             //recorremos las instalaciones ya colocadas y con letra distinta a la actual
             for(int i = 0; i < matriz.length; i++){
                 for(int j = 0; j < matriz[0].length; j++)
-                    if(matriz[i][j] != ' ' && matriz[i][j] != letra){
+                    if(matriz[i][j] != ' ' && matriz[i][j] != letra && pos_valida(i, j, n_columnas, letra_pos.size())){
                         //frecuencia entre la letra actual y la letra en la instalación actual
                         double frecuencia = Mat_traf[letra_pos.get(letra)][letra_pos.get(matriz[i][j])];
                         // distancia entre la letra actual y la letra en la instalación actual
@@ -96,7 +95,7 @@ public class BranchandBound implements Estrategia {
                     letras_libres.add(letra_actual);
                     for(int i = 0; i < matriz.length; i++){
                         for(int j = 0; j < matriz[0].length; j++) {
-                            if (matriz[i][j] == ' ') {
+                            if (matriz[i][j] == ' ' && pos_valida(i, j, n_columnas, letra_pos.size())) {
                                 if(pos_libres.size() != m){
                                     pos p = new pos(i, j);
                                     pos_libres.add(p);
@@ -174,16 +173,9 @@ public class BranchandBound implements Estrategia {
             double[][] suma = sumaMatrices(Mat_c1, Mat_c2);
 
             //resolvemos el coste de la asignación lineal óptima de c1 + c2 mediante algoritmo hungarian
-            for (int i=0; i<suma.length; ++i) {
-                for (int j=0; j<suma.length; ++j) {
-                    System.out.print(suma[i][j]);
-                }
-                System.out.println();
-            }
             HungarianAlgorithm ha = new HungarianAlgorithm(suma);
             double valoroptim = ha.trobarAssignacioOptima();
             coste_termino_2 = valoroptim;
-            System.out.println ( "coste termino 2: " + coste_termino_2 + "\n");
         }
 
         return termino_1 + coste_termino_2;
@@ -206,7 +198,7 @@ public class BranchandBound implements Estrategia {
                 matriz[i][j] = ' ';
         }
         Map <Character, pos> ini = new HashMap<>();
-        Nodo nodo_inicial = new Nodo(matriz, best_cost, ini);
+        Nodo nodo_inicial = new Nodo(matriz, 0, ini);
         q.add(nodo_inicial);
         while(!q.isEmpty() && !finalizar){
             Nodo nodo_actual = q.poll();
@@ -226,25 +218,33 @@ public class BranchandBound implements Estrategia {
                         espera = true;
                 }
 
+                double mejor_cost = Double.POSITIVE_INFINITY;
+                char[][] mat = new char[n_filas][n_columnas];
+                Map<Character, pos> inicial = new HashMap<>();
+                Nodo el_mejor = new Nodo(mat , 0, inicial);
+
                 for (int i = 0; i < n_filas; i++) {
                     for (int j = 0; j < n_columnas; j++) {
-                        if (nodo_actual.layout[i][j] == ' ') {
+                        if (nodo_actual.layout[i][j] == ' ' && pos_valida(i, j, n_columnas, letra_pos.size())) {
                             Nodo nuevo = new Nodo(nodo_actual.layout, nodo_actual.cota, nodo_actual.letres_usades);
                             nuevo.layout[i][j] = letra;
                             pos p = new pos(i, j);
                             nuevo.letres_usades.put(letra, p);
-                            double cota = calcular_cota(nuevo.layout, nuevo.letres_usades, letra_pos);
-                            if (cota < best_cost) {
+                            double cota = calcular_cota(nuevo.layout, nuevo.letres_usades, letra_pos, n_columnas);
+                            if (cota < mejor_cost) {
+                                mejor_cost = cota;
                                 nuevo.cota = cota;
-                                q.add(nuevo);
+                                el_mejor = nuevo;
                             }
                         }
                     }
                 }
+                q.add(el_mejor);
             }
         }
 
     }
+    //Inicializa la matriz de tráfico
     //Inicializa la matriz de tráfico
     private double[][] calculaMatTraf(Map<String, Integer> palabrasFrec, Map<Character, Integer> lletres, int n) {
 
@@ -254,14 +254,95 @@ public class BranchandBound implements Estrategia {
 
         for (String palabra : palabrasFrec.keySet()) {
             int frecuencia = palabrasFrec.get(palabra);
-
+            System.out.println(palabra);
+            palabra = palabra.toLowerCase();
+            System.out.println(palabra);
             if(palabra.length() != 1) {
                 for (int i = 0; i < palabra.length() - 1; i++) {
                     //guardamos los índices de cada letra en el abecedario
-                    int letra1 = lletres.get(palabra.charAt(i));
-                    int letra2 = lletres.get(palabra.charAt(i + 1));
 
-                    trafficMatrix[letra1][letra2] += frecuencia;
+                    char c1 = palabra.charAt(i);
+                    char c2 = palabra.charAt(i + 1);
+                    if(c1 == 'à'){
+                        c1 = 'a';
+                    }
+                    else if(c1 == 'á'){
+                        c1 = 'a';
+                    }
+                    else if(c1 == 'è'){
+                        c1 = 'e';
+                    }
+                    else if(c1 == 'é'){
+                        c1 = 'e';
+                    }
+                    else if(c1 == 'ó'){
+                        c1 = 'o';
+                    }
+                    else if(c1 == 'ò'){
+                        c1 = 'o';
+                    }
+                    else if(c1 == 'ï'){
+                        c1 = 'i';
+                    }
+                    else if(c1 == 'ü'){
+                        c1 = 'u';
+                    }
+                    else if(c1 == 'ú'){
+                        c1 = 'u';
+                    }
+                    else if(c1 == 'í'){
+                        c1 = 'i';
+                    }
+                    else if(c1 == 'ñ'){
+                        c1 = 'n';
+                    }
+                    else if(c1 == 'ç'){
+                        c1 = 'c';
+                    }
+
+                    if(c2 == 'à'){
+                        c2 = 'a';
+                    }
+                    else if(c2 == 'á'){
+                        c2 = 'a';
+                    }
+                    else if(c2 == 'è'){
+                        c2 = 'e';
+                    }
+                    else if(c2 == 'é'){
+                        c2 = 'e';
+                    }
+                    else if(c2 == 'ó'){
+                        c2 = 'o';
+                    }
+                    else if(c2 == 'ò'){
+                        c2 = 'o';
+                    }
+                    else if(c2 == 'ï'){
+                        c2 = 'i';
+                    }
+                    else if(c2 == 'ü'){
+                        c2 = 'u';
+                    }
+                    else if(c2 == 'ú'){
+                        c2 = 'u';
+                    }
+                    else if(c2 == 'í'){
+                        c2 = 'i';
+                    }
+                    else if(c2 == 'ñ'){
+                        c2 = 'n';
+                    }
+                    else if(c2 == 'ç'){
+                        c2 = 'c';
+                    }
+
+                    if(c1 != '-' && c2 != '-' && c1 != '·' && c2 != '·'){
+                        int letra1 = lletres.get(c1);
+                        int letra2 = lletres.get(c2);
+                        trafficMatrix[letra1][letra2] += frecuencia;
+                    }
+
                 }
             }
         }
@@ -300,13 +381,17 @@ public class BranchandBound implements Estrategia {
         return distanceMatrix;
     }
 
+    public boolean pos_valida(Integer i, Integer j, Integer n_columnas, Integer n){
+        return ((i*n_columnas) + j) < n;
+    }
 
-   @Override
+
+
+    @Override
     public char[][] solve(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas) {
         //declaramos una solucion inicial
         this.best_sol = new char[n_filas][n_columnas];
         //le ponemos valor = infinito a la cota inicial
-        this.best_cost = Double.POSITIVE_INFINITY;
 
         int n = lletres.size();
         int i = 0;

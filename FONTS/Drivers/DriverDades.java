@@ -7,43 +7,19 @@ import Excepcions.*;
 import java.util.*;
 import java.io.*;
 
-public class DriverDomini {
+public class DriverDades {
     private CtrlDomini controlador;
 
     private Scanner s;
 
-    public void iniciaDriverDomini() throws Exception {
+    public DriverDades() {
+        iniciaDriverDades();
+    }
+
+    public void iniciaDriverDades() {
         controlador = controlador.getInstance();
         s = new Scanner(System.in);
 
-        try {
-            controlador.iniciaInstancia("Prova");
-            controlador.afegirAlfabet("Llatí.txt");
-            controlador.afegirIdioma("Català","llatí","llista","catalaFreq.txt");
-            Map<String, Integer> novesEntrades = new HashMap<>();
-            controlador.novaLlistaPerfil("llista","catalaFreq.txt", "Català", novesEntrades);
-        } catch (PerfilJaExisteix e1 ) {
-            System.out.println("ERROR: " + e1.getMessage());
-        } catch (PerfilNoExisteix e2 ) {
-            System.out.println("ERROR: " + e2.getMessage());
-        } catch (FormatNoValid e2 ) {
-            System.out.println("ERROR: " + e2.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        System.out.println("\n ##################### BENVINGUT AL SISTEMA CREADOR DE TECLATS ##################### \n");
-        System.out.println("\nLa configuració actual del programa per fer proves es la següent:");
-        System.out.println("## Perfil: " + controlador.getPerfilActual());
-        System.out.println("## Estratègia: " + controlador.getEstrategiaActual());
-        System.out.println("## Alfabet: Llatí");
-        System.out.println("## Idioma: Català");
-        System.out.println("## Llista Predeterminada Català: catalaFreq.txt");
-
-        System.out.println("\nEl driver disposa de les següents funcions:\n");
-        printMenu();
-        repinstruccions();
     }
 
     //Pre:
@@ -52,210 +28,6 @@ public class DriverDomini {
         System.out.print("\033[H\033[2J");
     }
 
-    //Pre:
-    //Post: S'imprimeixen les diferents opcions disponibles del driver
-    public void printMenu() {
-        System.out.println("0. Info de les funcions");
-        System.out.println("1. Gestionar teclats");
-        System.out.println("2. Consultar teclats");
-        System.out.println("3. Gestionar dades");
-        System.out.println("4. Consultar dades");
-        System.out.println("5. Canviar estrategia");
-        System.out.println("6. Canviar Perfil");
-        System.out.println("7. Sortir");
-    }
-
-    //Pre:
-    //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
-    public void repinstruccions() throws Exception {
-        System.out.println("Escull una funcionalitat indicant el seu numero corresponent:");
-        int num = s.nextInt();
-        netejaTerminal();
-        if (num== 0) {
-            System.out.println("#### Info de les funcions de Consultar Dades ####");
-            System.out.println("0. Info de les funcions ---> Explicació de les funcions del programa");
-            System.out.println("1. Gestionar teclats ---> Entra en el menú gestionar teclats que permet gestionar els teclats");
-            System.out.println("2. Consultar teclats ---> Entra en el menú consultar teclats que permet consultar els teclats");
-            System.out.println("3. Gestionar dades ---> Entra en el menú gestionar dades que permet gestionar les dades del sistema i el perfil");
-            System.out.println("4. Consultar dades ---> Entra en el menú consultar dades que permet consultar les dades del sistema i el perfil");
-            System.out.println("5. Canviar estratègia ---> Es canvia d'estratègia per confeccionar teclats");
-            System.out.println("6. Sortir ---> Surt de consultar dades");
-        }
-        else if (num== 1) gestionarTeclats();
-        else if (num== 2) consultarTeclats();
-        else if (num== 3) gestionarDades();
-        else if (num== 4) consultarDades();
-        else if (num== 5) System.out.println("5. Canviar estrategia");
-        else if (num== 6) {
-            canviarPerfil();
-        }
-        if (num!= 7) {
-            System.out.println("################Presioni Enter per continuar...####################");
-            s.nextLine();
-            s.nextLine();
-            netejaTerminal();
-            System.out.println("Vol fer algo més?\n");
-            printMenu();
-            repinstruccions();
-        }
-    }
-
-    //Pre:
-    //Post: Es canvia al perfil que s'especifiqui i si no existeix es crea
-    public void canviarPerfil() {
-        llistarPerfils();
-        System.out.println("### Selecciona un Perfil o crea un nou escrivint el nom d'aquest###");
-        String nomPerfil = s.next();
-        List<String> nomsPerfils = controlador.getAllPerfils();
-        try {
-            if (nomsPerfils.contains(nomPerfil)) controlador.iniciaInstancia(nomPerfil);
-            else {
-                System.out.println("Es crearà el Perfil: " + nomPerfil);
-                System.out.println("Està segur? Si/No");
-                String resposta = s.next();
-                if (resposta.equals("Si") || resposta.equals("si")) {
-                    controlador.iniciaInstancia(nomPerfil);
-                    System.out.println("Creat Perfil: " + nomPerfil);
-                }
-                else System.out.println("No s'han fet canvis");
-            }
-        } catch (PerfilJaExisteix e1 ) {
-            System.out.println("ERROR: " + e1.getMessage());
-        } catch (PerfilNoExisteix e2 ) {
-            System.out.println("ERROR: " + e2.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void llistarPerfils() {
-        List<String> nomsPerfils = controlador.getAllPerfils();
-        System.out.println("Perfils al sistema: \n");
-        for (String nom : nomsPerfils) {
-            System.out.println("Perfil: " + nom);
-        }
-
-        System.out.println("\nPerfil Actual: " + controlador.getPerfilActual());
-    }
-
-    //Pre:
-    //Post: Es mostra el menu consultar teclats i s'executa l'opció escollida
-    public void gestionarTeclats() throws Exception {
-        System.out.println("### Gestionar Teclats ###");
-        printMenuGestionarTeclats();
-        esperarSeleccioGestionarTeclats();
-    }
-
-    //Pre:
-    //Post: S'imprimeixen les diferents opcions disponibles de gestionar Teclats
-    public void printMenuGestionarTeclats() {
-        System.out.println("0. Info de les funcions");
-        System.out.println("1. Crear nou Teclat");
-        System.out.println("2. Modificar Teclat");
-        System.out.println("3. Eliminar Teclat");
-        System.out.println("4. Sortir");
-    }
-
-    //Pre:
-    //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
-    public void esperarSeleccioGestionarTeclats() throws Exception {
-        System.out.println("Escull una funcionalitat indicant el seu numero corresponent:");
-        int num = s.nextInt();
-        netejaTerminal();
-        if (num== 0) {
-            System.out.println("#### Info de les funcions de Gestionar Teclats ####");
-            System.out.println("0. Info de les funcions ---> Explicació de les funcions de Gestionar Teclats");
-            System.out.println("1. Crear Teclat ---> Afegir un nou Teclat a partir d'un idioma i llista de freqüències");
-            System.out.println("2. Modificar Teclat ---> Modificar el layout del Teclat");
-            System.out.println("3. Eliminar Teclat ---> Eliminar teclat");
-            System.out.println("4. Sortir ---> Surt de la gestió de teclats");
-            esperarSeleccioGestionarDades();
-        }
-        else if (num== 1) crearTeclat();
-        //else if (num == 2) modificarTeclat();
-        //else if (num == 3) eliminarTeclat();
-        //sortir implementar?
-    }
-
-
-    //Pre:
-    //Post:
-    public void crearTeclat() {
-        System.out.println("### Crear Teclat ###");
-        System.out.println("Introdueixi el nom del Teclat: ");
-        String nomTeclat= s.next();
-        System.out.println("Introdueixi el nom de l'idioma que vol utilitzar: ");
-        String nomIdioma = s.next();
-        System.out.println("Introdueixi el nom de la llista de frequències que vol utilitzar: ");
-        String nomLlistaFreq = s.next();
-        try {
-            controlador.crearTeclat(nomTeclat, nomIdioma, nomLlistaFreq);
-        } catch (LlistaFreqNoExisteix e1) {
-            System.out.println("ERROR: " + e1.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void consultarTeclats() throws Exception {
-        System.out.println("### Consultar Teclats ###");
-        printMenuConsultarTeclats();
-        esperarSeleccioConsultarTeclats();
-    }
-
-    public void printMenuConsultarTeclats() {
-        System.out.println("0. Info de les funcions");
-        System.out.println("1. Llistar Teclats");
-        System.out.println("2. Buscar Teclat");
-        System.out.println("3. Sortir");
-    }
-
-    public void esperarSeleccioConsultarTeclats() throws Exception {
-        System.out.println("Escull una funcionalitat indicant el seu numero corresponent:");
-        int num = s.nextInt();
-        netejaTerminal();
-        if (num== 0) {
-            System.out.println("#### Info de les funcions de Consultar Teclats ####");
-            System.out.println("0. Info de les funcions ---> Explicació de les funcions de Consultar Teclats");
-            System.out.println("1. Llistar Teclats ---> Es llisten els Teclats creats");
-            System.out.println("2. Buscar Teclat ---> S'imprimeix el Teclat a partir del seu nom");
-            System.out.println("6. Sortir ---> Surt de consultar dades");
-            esperarSeleccioConsultarDades();
-        }
-        else if(num == 1) llistarTeclats();
-        else if (num == 2) buscarTeclat();
-        else if (num == 6) {}
-    }
-
-
-    public void llistarTeclats() throws Exception {
-        System.out.println("### Llistar Teclats ###");
-        List<String> nomTeclats = controlador.getNomsTeclats();
-        netejaTerminal();
-        if (nomTeclats.isEmpty()) {
-            System.out.println("No hi ha teclats guardats");
-        }
-        else {
-            try {
-                int i = 1;
-                for (String nomt : nomTeclats) {
-                    String idioma = controlador.getNomIdiomaTeclat(nomt);
-                    String llistafreq = controlador.getNomLListaTeclat(nomt);
-                    System.out.println(i + ": " + nomt + " Idioma: " + idioma + " Llista de Freqüències" + llistafreq);
-                    ++i;
-                }
-            }
-            catch(TeclatNoExisteix e1) {
-                System.out.println("ERROR: " + e1.getMessage());
-            }
-        }
-    }
-
-
-    public void buscarTeclat() {
-        System.out.println("### Buscar Teclat ###");
-    }
 
     //Pre:
     //Post: Es mostra el menu de consultar dades i s'executa la opció escollida
@@ -471,15 +243,15 @@ public class DriverDomini {
                 int num = s.nextInt();
                 if (num != 0) {
                     netejaTerminal();
-                        if (nomLlistes.size() < num) throw new LlistaFreqNoExisteix();
-                        String nomSeleccio = nomLlistes.get(num - 1);
-                        Map<String, Integer> llista = controlador.consultaLlista(nomSeleccio);
-                        System.out.println("Paraula: , Frequencia: ");
-                        for (Map.Entry<String, Integer> entry : llista.entrySet()) {
-                            String clave = entry.getKey();
-                            Integer valor = entry.getValue();
-                            System.out.println(clave + ", " + valor);
-                        }
+                    if (nomLlistes.size() < num) throw new LlistaFreqNoExisteix();
+                    String nomSeleccio = nomLlistes.get(num - 1);
+                    Map<String, Integer> llista = controlador.consultaLlista(nomSeleccio);
+                    System.out.println("Paraula: , Frequencia: ");
+                    for (Map.Entry<String, Integer> entry : llista.entrySet()) {
+                        String clave = entry.getKey();
+                        Integer valor = entry.getValue();
+                        System.out.println(clave + ", " + valor);
+                    }
 
                 }
             } catch (LlistaFreqNoExisteix e1) {
@@ -528,7 +300,7 @@ public class DriverDomini {
         try {
             controlador.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
         }
-        catch (IdiomaNoExisteix e) {
+        catch (IdiomaJaExisteix e) {
             System.out.println("ERROR: " + e.getMessage());
         }
         catch (AlfabetNoExisteix e1) {
@@ -537,7 +309,6 @@ public class DriverDomini {
         catch (FormatNoValid e2) {
             System.out.println("ERROR: " + e2.getMessage());
         }
-
     }
 
     public void mostraDadesIdiomes(Vector<String> dades) {
@@ -545,14 +316,12 @@ public class DriverDomini {
         for (int i=0; i < n; ++i) System.out.println(dades.get(i));
     }
 
-    public void mostrarMissatge(String m) {
-        System.out.println(m);
-    }
 
 
-    public static void main(String[] args) throws Exception {
-        DriverDomini dd = new DriverDomini();
+
+    public static void main(String[] args) {
+        DriverDades dd = new DriverDades();
         System.out.println("Estas provant el driver del controlador de la capa domini\n");
-        dd.iniciaDriverDomini();
+        dd.iniciaDriverDades();
     }
 }

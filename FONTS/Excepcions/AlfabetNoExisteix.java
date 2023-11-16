@@ -1,6 +1,6 @@
 package Excepcions;
 
-public class AlfabetNoExisteix extends ExcepcionsIdiomesAlfabets {
+public class AlfabetNoExisteix extends ExcepcionsCreadorTeclat {
     public String getTipusExcepcio() {
         return "AlfabetNoExisteix";
     }
