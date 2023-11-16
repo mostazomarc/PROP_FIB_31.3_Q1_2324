@@ -1,5 +1,5 @@
 //Driver que ha de provar les funcionalitats principals del programa
-
+/*
 package Drivers;
 import ControladorsDomini.CtrlDomini;
 import Excepcions.*;
@@ -554,3 +554,5 @@ public class DriverDomini {
         dd.iniciaDriverDomini();
     }
 }
+
+ */
