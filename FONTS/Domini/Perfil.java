@@ -95,7 +95,7 @@ public class Perfil {
 
     public void crearTeclat(String NomTeclat, String NomLlista, Idioma idioma) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(NomLlista);
-        if (!teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
+        if (teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
         Map<String,Integer> freqllista = frequencies.get(NomLlista).getFrequencies();
         teclats.put(NomTeclat,new Teclat(NomTeclat,NomLlista, freqllista, idioma));
     }
