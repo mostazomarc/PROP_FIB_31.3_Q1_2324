@@ -25,6 +25,15 @@ public class Teclat {
 
     }
 
+    public Teclat(String nom, Idioma i) {
+        this.nom = nom;
+        idioma = i;
+        Estrategia estrategia = new BranchandBound();
+        nomllista = i.getLlistaFreq().getNom();
+        disposicio = estrategia.solve(i.getFrequencies(), i.getLletres(), 3, 10);
+
+    }
+
     //Pre:
     //Post:
     public String getNomLlistaFreq() {return nomllista; }

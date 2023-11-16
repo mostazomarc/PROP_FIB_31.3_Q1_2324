@@ -254,9 +254,7 @@ public class BranchandBound implements Estrategia {
 
         for (String palabra : palabrasFrec.keySet()) {
             int frecuencia = palabrasFrec.get(palabra);
-            System.out.println(palabra);
             palabra = palabra.toLowerCase();
-            System.out.println(palabra);
             if(palabra.length() != 1) {
                 for (int i = 0; i < palabra.length() - 1; i++) {
                     //guardamos los índices de cada letra en el abecedario

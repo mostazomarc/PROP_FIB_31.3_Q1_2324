@@ -41,10 +41,11 @@ public class DriverTeclats {
     //Post: S'imprimeixen les diferents opcions disponibles de gestionar Teclats
     public void printMenuGestionarTeclats() {
         System.out.println("0. Info de les funcions");
-        System.out.println("1. Crear nou Teclat");
-        System.out.println("2. Modificar Teclat");
-        System.out.println("3. Eliminar Teclat");
-        System.out.println("4. Sortir");
+        System.out.println("1. Crear Teclat amb llista pròpia");
+        System.out.println("2. Crear Teclat sense llista pròpia");
+        System.out.println("3. Modificar Teclat");
+        System.out.println("4. Eliminar Teclat");
+        System.out.println("5. Sortir");
     }
 
     //Pre:
@@ -56,13 +57,15 @@ public class DriverTeclats {
         if (num== 0) {
             System.out.println("#### Info de les funcions de Gestionar Dades ####");
             System.out.println("0. Info de les funcions ---> Explicació de les funcions de Gestionar Teclats");
-            System.out.println("1. Crear Teclat ---> Afegir un nou Teclat a partir d'un idioma i llista de freqüències");
-            System.out.println("2. Modificar Teclat ---> Modificar el layout del Teclat");
-            System.out.println("3. Eliminar Teclat ---> Eliminar teclat");
-            System.out.println("4. Sortir ---> Surt de la gestió de teclats");
+            System.out.println("1. Crear Teclat amb llista pròpia ---> Afegir un nou Teclat a partir d'un idioma i llista de freqüències");
+            System.out.println("2. Crear Teclat sense llista pròpia ---> Afegir un nou Teclat a partir de l'idioma");
+            System.out.println("3. Modificar Teclat ---> Modificar el layout del Teclat");
+            System.out.println("4. Eliminar Teclat ---> Eliminar teclat");
+            System.out.println("5. Sortir ---> Surt de la gestió de teclats");
             esperarSeleccioGestionarTeclats();
         }
-        else if (num== 1) crearTeclat();
+        else if (num== 1) crearTeclatLlistaPropia();
+        //else if (num == 2) crearTeclatSenseLlistaPropia();
         //else if (num == 2) modificarTeclat();
         //else if (num == 3) eliminarTeclat();
         //sortir implementar?
@@ -71,7 +74,7 @@ public class DriverTeclats {
 
     //Pre:
     //Post:
-    public void crearTeclat() {
+    public void crearTeclatLlistaPropia() {
         System.out.println("### Crear Teclat ###");
         System.out.println("Introdueixi el nom del Teclat: ");
         String nomTeclat= s.next();
@@ -80,7 +83,7 @@ public class DriverTeclats {
         System.out.println("Introdueixi el nom de la llista de frequències que vol utilitzar: ");
         String nomLlistaFreq = s.next();
         try {
-            controlador.crearTeclat(nomTeclat, nomIdioma, nomLlistaFreq);
+            controlador.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq);
         } catch (LlistaFreqNoExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (IdiomaNoExisteix e2 ) {
@@ -91,7 +94,7 @@ public class DriverTeclats {
         }
     }
 
-    public void consultarTeclats() {
+    public void consultarTeclats() throws Exception {
         System.out.println("### Consultar Teclats ###");
         printMenuConsultarTeclats();
         esperarSeleccioConsultarTeclats();
@@ -104,32 +107,45 @@ public class DriverTeclats {
         System.out.println("3. Sortir");
     }
 
-    public void esperarSeleccioConsultarTeclats() {
+    public void esperarSeleccioConsultarTeclats() throws Exception {
         System.out.println("Escull una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
         if (num== 0) {
-            System.out.println("#### Info de les funcions de Consultar Dades ####");
+            System.out.println("#### Info de les funcions de Consultar Teclats ####");
             System.out.println("0. Info de les funcions ---> Explicació de les funcions de Consultar Teclats");
             System.out.println("1. Llistar Teclats ---> Es llisten els Teclats creats");
             System.out.println("2. Buscar Teclat ---> S'imprimeix el Teclat a partir del seu nom");
-            System.out.println("6. Sortir ---> Surt de consultar dades");
+            System.out.println("6. Sortir ---> Surt de consultar teclats");
             esperarSeleccioConsultarTeclats();
         }
         else if(num == 1) llistarTeclats();
-        else if (num == 2) buscarTeclat();
+//        else if (num == 2) buscarTeclat();
         else if (num == 6) {}
     }
 
 
-    public void llistarTeclats() {
+    public void llistarTeclats() throws Exception {
         System.out.println("### Llistar Teclats ###");
-        //controlador.llistarTeclats();
-    }
-
-
-    public void buscarTeclat() {
-        System.out.println("### Buscar Teclat ###");
+        List<String> nomTeclats = controlador.getNomsTeclats();
+        netejaTerminal();
+        if (nomTeclats.isEmpty()) {
+            System.out.println("No hi ha teclats guardats");
+        }
+        else {
+            try {
+                int i = 1;
+                for (String nomt : nomTeclats) {
+                    String idioma = controlador.getNomIdiomaTeclat(nomt);
+                    String llistafreq = controlador.getNomLListaTeclat(nomt);
+                    System.out.println(i + "Nom: " + nomt + " Idioma: " + idioma + " Llista de Freqüències: " + llistafreq);
+                    ++i;
+                }
+            }
+            catch(TeclatNoExisteix e1) {
+                System.out.println("ERROR: " + e1.getMessage());
+            }
+        }
     }
 
 
