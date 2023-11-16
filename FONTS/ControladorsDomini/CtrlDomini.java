@@ -193,12 +193,14 @@ public class CtrlDomini {
         PerfilActual.eliminaLlista(nomLlista);
     }
 
-    public void afegirAlfabet(String filename) {
+    public void afegirAlfabet(String filename) throws ExcepcionsCreadorTeclat {
         System.out.println("Llegint arxiu "+ filename +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
 
         Set<Character> lletres = new HashSet<Character>();
         String nomAlfabet = filename.substring(0, filename.length() - 4);
+
+        if (Alfabets.containsKey(nomAlfabet.toLowerCase())) throw new AlfabetJaExisteix(nomAlfabet);
 
         for (String linia : LlistaLlegida) {
             for (char lletra : linia.toCharArray()) {
@@ -207,10 +209,13 @@ public class CtrlDomini {
         }
 
         Alfabet nouAlfabet = new Alfabet(nomAlfabet, lletres);
-        Alfabets.put(nomAlfabet, nouAlfabet);
+        Alfabets.put(nomAlfabet.toLowerCase(), nouAlfabet);
     }
 
     public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws ExcepcionsCreadorTeclat {
+        if (Idiomes.containsKey(nomIdioma.toLowerCase())) throw new IdiomaNoExisteix(nomIdioma);
+        else if (!Alfabets.containsKey(nomAlfabet.toLowerCase())) throw new AlfabetNoExisteix(nomAlfabet);
+
         Alfabet alfabetIdioma = Alfabets.get(nomAlfabet);
         Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filename);
         Idioma nouIdioma = new Idioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
