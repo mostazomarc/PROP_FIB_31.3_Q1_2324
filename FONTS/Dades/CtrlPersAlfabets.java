@@ -13,7 +13,7 @@ public class CtrlPersAlfabets {
 
     //Pre:
     //Post: Retorna la instancia de CtrlPersAlfabets, si no existeix cap CtrlPersAlfabets es crea.
-    public static CtrlPersAlfabets getInstance(){
+    public static CtrlPersAlfabets getInstance() {
         if(singletonObject == null)
             singletonObject = new CtrlPersAlfabets(){
 
@@ -21,16 +21,16 @@ public class CtrlPersAlfabets {
         return singletonObject;
     }
     private CtrlPersAlfabets() {
-        Alfabets = new TreeMap<String, Alfabet>();;
+        Alfabets = new TreeMap<String, Alfabet>();
     }
 
     //Pre:
-    //Post: s'afegeix l'Alfabet identificat per filename.length() - 4
+    //Post: S'afegeix l'Alfabet identificat per filename.length() - 4
     public void afegirAlfabet(String filename, List<String> LlistaLlegida) throws ExcepcionsCreadorTeclat {
 
         String nomAlfabet = filename.substring(0, filename.length() - 4);
 
-        if (Alfabets.containsKey(nomAlfabet.toLowerCase())) throw new AlfabetJaExisteix(nomAlfabet);
+        if (existeix(nomAlfabet)) throw new AlfabetJaExisteix(nomAlfabet);
 
         Set<Character> lletres = new HashSet<Character>();
 
@@ -46,7 +46,7 @@ public class CtrlPersAlfabets {
 
     //Pre:
     //Post: Retorna TRUE si existeix un Alfabet amb nomAlfabet, FALSE en cas contrari
-    public boolean existeix(String nomAlfabet) throws ExcepcionsCreadorTeclat {
+    public boolean existeix(String nomAlfabet) {
         if (Alfabets.containsKey(nomAlfabet.toLowerCase())) return true;
         return false;
     }
@@ -54,8 +54,8 @@ public class CtrlPersAlfabets {
     //Pre:
     //Post: Retorna l'Alfabet identificat per nomAlfabet
     public Alfabet getAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
-        if (!existeix(nomAlfabet)) throw new AlfabetNoExisteix(nomAlfabet);
-        return Alfabets.get(nomAlfabet);
+        if (!existeix(nomAlfabet)) throw new AlfabetNoExisteix();
+        return Alfabets.get(nomAlfabet.toLowerCase());
     }
 
     //Pre:
