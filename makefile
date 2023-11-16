@@ -22,6 +22,9 @@ all:
 executaDriverDomini:
 	java -cp ./EXE Drivers.DriverDomini
 
+executaDriverDominiv2:
+	java -cp ./EXE Drivers.DriverDominiv2
+
 executaDriverHungarianAlgorithm:
 	java -cp ./EXE Drivers.DriverHungarianAlgorithm
 
