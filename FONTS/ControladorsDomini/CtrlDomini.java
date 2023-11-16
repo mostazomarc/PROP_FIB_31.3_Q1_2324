@@ -236,10 +236,10 @@ public class CtrlDomini {
 
         return sdades;
     }
-    public void crearTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq) throws ExcepcionsCreadorTeclat{
+    public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq) throws ExcepcionsCreadorTeclat{
         if (!Idiomes.containsKey(nomIdioma)) throw new IdiomaNoExisteix(nomIdioma);
         Idioma idiomaTeclat = Idiomes.get(nomIdioma);
-        PerfilActual.crearTeclat(nomTeclat, nomLlistaFreq, idiomaTeclat);
+        PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat);
     }
 
     public void llistarTeclats() {
