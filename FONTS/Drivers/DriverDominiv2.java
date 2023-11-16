@@ -23,7 +23,7 @@ public class DriverDominiv2 {
         try {
             controlador.iniciaInstancia("Prova");
             controlador.afegirAlfabet("Llatí.txt");
-            controlador.afegirIdioma("Català","Llatí","llista","catalaFreq.txt");
+            controlador.afegirIdioma("Català","llatí","llista","catalaFreq.txt");
             Map<String, Integer> novesEntrades = new HashMap<>();
             controlador.novaLlistaPerfil("llista","catalaFreq.txt", "Català", novesEntrades);
         } catch (PerfilJaExisteix e1 ) {
