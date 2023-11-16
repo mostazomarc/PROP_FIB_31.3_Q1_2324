@@ -1,18 +1,12 @@
 package Domini;
-
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.ArrayList;
-import java.util.List;
-
 public class HungarianAlgorithm {
-
     double[][] matriu; // matriu inicial (matriu de costos)
-    double [][] aux;
-    // vectors auxiliars per construir la matriu
-    int[] quadratInFila, quadratInColumna, filaCoberta, columnaCoberta, zerosAstarEnFila;
-
+    double [][] copiamatriu;
+    // vectors copiamatriuiliars per construir la matriu
+    int[] zeroFila, zeroColumna, filaCoberta, columnaCoberta, zerosEstrellaEnFila;
     double valoroptim;
     public HungarianAlgorithm(double[][] matriu) {
         if (matriu.length != matriu[0].length) {
@@ -24,32 +18,27 @@ public class HungarianAlgorithm {
             }
         }
         valoroptim = 0;
-
-        aux = new double [matriu.length][matriu.length];
+        copiamatriu = new double [matriu.length][matriu.length];
         for (int i = 0; i < matriu.length; ++i) {
             for (int j = 0; j < matriu.length; ++j) {
-                aux[i][j] = matriu[i][j];
+                copiamatriu[i][j] = matriu[i][j];
             }
         }
-
         this.matriu = matriu;
 
-        quadratInFila = new int[matriu.length];       // quadratInFila & quadratInColumna indiquen la posició
-        quadratInColumna = new int[matriu[0].length]; // dels zeros marcats
+        zeroFila = new int[matriu.length];       // zeroFila & zeroColumna indiquen la posició
+        zeroColumna = new int[matriu[0].length]; // dels zeros marcats
 
         filaCoberta = new int[matriu.length];      // indica si una fila està coberta
         columnaCoberta = new int[matriu[0].length]; // indica si una columna està coberta
-        zerosAstarEnFila = new int[matriu.length];  // emmagatzema els 0*
-        Arrays.fill(zerosAstarEnFila, -1);
-        Arrays.fill(quadratInFila, -1);
-        Arrays.fill(quadratInColumna, -1);
+        zerosEstrellaEnFila = new int[matriu.length];  // emmagatzema els 0*
+        Arrays.fill(zerosEstrellaEnFila, -1);
+        Arrays.fill(zeroFila, -1);
+        Arrays.fill(zeroColumna, -1);
     }
 
-    /**
-     * Troba una assignació òptima
-     *
-     * @return valor òptim (suma dels costos optims)
-     */
+    //Pre:
+    //Post: retorna el valor òptim
     public double trobarAssignacioOptima() {
         pas1();    // redueix la matriu
         pas2();    // marca els zeros independents
@@ -61,7 +50,7 @@ public class HungarianAlgorithm {
                 pas7();
                 zeroPrincipal = pas4();
             }
-            if (quadratInFila[zeroPrincipal[0]] == -1) {
+            if (zeroFila[zeroPrincipal[0]] == -1) {
                 // no hi ha cap zero marcat a la fila zeroPrincipal
                 pas6(zeroPrincipal);
                 pas3();    // cobreix les columnes que contenen un zero marcat
@@ -69,28 +58,23 @@ public class HungarianAlgorithm {
                 // hi ha un zero marcat a la fila zeroPrincipal
                 // pas 5
                 filaCoberta[zeroPrincipal[0]] = 1;  // cobreix la fila de zeroPrincipal
-                columnaCoberta[quadratInFila[zeroPrincipal[0]]] = 0;  // descobreix la columna de zeroPrincipal
+                columnaCoberta[zeroFila[zeroPrincipal[0]]] = 0;  // descobreix la columna de zeroPrincipal
                 pas7();
             }
         }
-
         int[][] assignacioOptima = new int[matriu.length][];
-        for (int i = 0; i < quadratInColumna.length; i++) {
-            assignacioOptima[i] = new int[]{i, quadratInColumna[i]};
+        for (int i = 0; i < zeroColumna.length; i++) {
+            assignacioOptima[i] = new int[]{i, zeroColumna[i]};
         }
         for (int i = 0; i < assignacioOptima.length; i++) {
-            valoroptim += aux[assignacioOptima[i][1]][assignacioOptima[i][0]];
+            valoroptim += copiamatriu[assignacioOptima[i][1]][assignacioOptima[i][0]];
         }
 
         return valoroptim;
     }
 
-    /**
-     * Comprova si totes les columnes estan cobertes. Si és així, llavors la
-          * solució òptima s'ha trobat
-     *
-     * @return true o false
-     */
+    //Pre:
+    //Post: retorna true si totes les columnes estan cobertes, false en cas contrari
     private boolean totesLesColumnesEstanCobertes() {
         for (int i : columnaCoberta) {
             if (i == 0) {
@@ -140,20 +124,20 @@ public class HungarianAlgorithm {
 
     /**
      * Pas 2:
-     * Marca cada 0 amb un "quadrat", si no hi ha altres zeros marcats a la mateixa fila o columna
+     * Marca cada 0 que troba, si no hi ha altres zeros marcats a la mateixa fila o columna
      */
     private void pas2() {
-        int[] filaTeQuadrat = new int[matriu.length];
-        int[] columnaTeQuadrat = new int[matriu[0].length];
+        int[] filaTeZero = new int[matriu.length];
+        int[] columnaTeZero = new int[matriu[0].length];
 
         for (int i = 0; i < matriu.length; i++) {
             for (int j = 0; j < matriu.length; j++) {
                 // marca si el valor actual == 0 i no hi ha altres zeros marcats a la mateixa fila o columna
-                if (matriu[i][j] == 0.0 && filaTeQuadrat[i] == 0 && columnaTeQuadrat[j] == 0) {
-                    filaTeQuadrat[i] = 1;
-                    columnaTeQuadrat[j] = 1;
-                    quadratInFila[i] = j; // guarda la posició de la fila del zero
-                    quadratInColumna[j] = i; // guarda la posició de la columna del zero
+                if (matriu[i][j] == 0.0 && filaTeZero[i] == 0 && columnaTeZero[j] == 0) {
+                    filaTeZero[i] = 1;
+                    columnaTeZero[j] = 1;
+                    zeroFila[i] = j; // guarda la posició de la fila del zero
+                    zeroColumna[j] = i; // guarda la posició de la columna del zero
                     continue; // salta a la següent fila
                 }
             }
@@ -162,12 +146,76 @@ public class HungarianAlgorithm {
 
     /**
      * Pas 3:
-     * Cobra totes les columnes que estan marcades amb un "quadrat"
+     * Cobreix totes les columnes que tenen un 0
      */
     private void pas3() {
-        for (int i = 0; i < quadratInColumna.length; i++) {
-            columnaCoberta[i] = quadratInColumna[i] != -1 ? 1 : 0;
+        for (int i = 0; i < zeroColumna.length; i++) {
+            columnaCoberta[i] = zeroColumna[i] != -1 ? 1 : 0;
         }
+    }
+
+    /**
+     * Pas 4:
+     * Troba el 0 i  el marca com a "0*". Retorna la posicio del 0*
+     */
+    private int[] pas4() {
+        for (int i = 0; i < matriu.length; i++) {
+            if (filaCoberta[i] == 0) {
+                for (int j = 0; j < matriu[i].length; j++) {
+                    if (matriu[i][j] == 0.0 && columnaCoberta[j] == 0) {
+                        zerosEstrellaEnFila[i] = j; // marca com 0*
+                        return new int[]{i, j};
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Pas 6:
+     * Crea una cadena K de "Zeros" i "0*" zeroPrincipal => primer zero no cobert
+     */
+    private void pas6(int[] zeroPrincipal) {
+        int i = zeroPrincipal[0];
+        int j = zeroPrincipal[1];
+
+        Set<int[]> K = new LinkedHashSet<>();
+        K.add(zeroPrincipal);
+        boolean trobat = false;
+        do {
+            if (zeroColumna[j] != -1) {
+                K.add(new int[]{zeroColumna[j], j});
+                trobat = true;
+            }
+            else trobat = false;
+            if (!trobat) {break;}
+
+            i = zeroColumna[j];
+            j = zerosEstrellaEnFila[i];
+            if (j != -1) {
+                K.add(new int[]{i, j});
+                trobat = true;
+            }
+            else trobat = false;
+        }
+        while (trobat); //sempre que no es trobin nous zeros marcats
+        for (int[] zero : K) {
+            // eliminar tots els marcats "Zero" a K
+            if (zeroColumna[zero[1]] == zero[0]) {
+                zeroColumna[zero[1]] = -1;
+                zeroFila[zero[0]] = -1;
+            }
+            // substitueix els marcats 0* a K amb marcats "Zero"
+            if (zerosEstrellaEnFila[zero[0]] == zero[1]) {
+                zeroFila[zero[0]] = zero[1];
+                zeroColumna[zero[1]] = zero[0];
+            }
+        }
+        // eliminar tots els marcats
+        Arrays.fill(zerosEstrellaEnFila, -1);
+        Arrays.fill(filaCoberta, 0);
+        Arrays.fill(columnaCoberta, 0);
     }
 
     /**
@@ -189,7 +237,6 @@ public class HungarianAlgorithm {
                 }
             }
         }
-
         if (minimValorNoCobert > 0) {
             for (int i = 0; i < matriu.length; i++) {
                 for (int j = 0; j < matriu[0].length; j++) {
@@ -203,92 +250,6 @@ public class HungarianAlgorithm {
                 }
             }
         }
-    }
-
-    /**
-     * Pas 4:
-     * Troba el valor zero Z_0 i marca'l com a "0*".
-     *
-     * @return posició de Z_0 a la matriu
-     */
-    private int[] pas4() {
-        for (int i = 0; i < matriu.length; i++) {
-            if (filaCoberta[i] == 0) {
-                for (int j = 0; j < matriu[i].length; j++) {
-                    if (matriu[i][j] == 0.0 && columnaCoberta[j] == 0) {
-                        zerosAstarEnFila[i] = j; // marca com 0*
-                        return new int[]{i, j};
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Pas 6:
-     * Crea una cadena K de "quadrats" i "0*"
-     *
-     * @param zeroPrincipal => Z_0 del pas 4
-     */
-    private void pas6(int[] zeroPrincipal) {
-        int i = zeroPrincipal[0];
-        int j = zeroPrincipal[1];
-
-        Set<int[]> K = new LinkedHashSet<>();
-        //(a)
-        // afegir Z_0 a K
-        K.add(zeroPrincipal);
-        boolean trobat = false;
-        do {
-            // (b)
-            // afegir Z_1 a K si
-            // hi ha un zero Z_1 que està marcat amb un "quadrat" a la columna de Z_0
-            if (quadratInColumna[j] != -1) {
-                K.add(new int[]{quadratInColumna[j], j});
-                trobat = true;
-            } else {
-                trobat = false;
-            }
-
-            // si no hi ha cap element zero Z_1 marcat amb "quadrat" a la columna de Z_0, llavors cancel·la el bucle
-            if (!trobat) {
-                break;
-            }
-
-            // (c)
-            // substitueix Z_0 amb el 0* a la fila de Z_1
-            i = quadratInColumna[j];
-            j = zerosAstarEnFila[i];
-            // afegir el nou Z_0 a K
-            if (j != -1) {
-                K.add(new int[]{i, j});
-                trobat = true;
-            } else {
-                trobat = false;
-            }
-
-        } while (trobat); // (d) sempre que no es trobin nous marcats "quadrat"
-
-        // (e)
-        for (int[] zero : K) {
-            // eliminar tots els marcats "quadrat" a K
-            if (quadratInColumna[zero[1]] == zero[0]) {
-                quadratInColumna[zero[1]] = -1;
-                quadratInFila[zero[0]] = -1;
-            }
-            // substitueix els marcats 0* a K amb marcats "quadrat"
-            if (zerosAstarEnFila[zero[0]] == zero[1]) {
-                quadratInFila[zero[0]] = zero[1];
-                quadratInColumna[zero[1]] = zero[0];
-            }
-        }
-
-        // (f)
-        // eliminar tots els marcats
-        Arrays.fill(zerosAstarEnFila, -1);
-        Arrays.fill(filaCoberta, 0);
-        Arrays.fill(columnaCoberta, 0);
     }
 }
 
