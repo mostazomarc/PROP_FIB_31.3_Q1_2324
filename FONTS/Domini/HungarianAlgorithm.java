@@ -3,8 +3,6 @@ package Domini;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.ArrayList;
-import java.util.List;
 
 public class HungarianAlgorithm {
 
@@ -12,7 +10,6 @@ public class HungarianAlgorithm {
     double [][] aux;
     // vectors auxiliars per construir la matriu
     int[] quadratInFila, quadratInColumna, filaCoberta, columnaCoberta, zerosAstarEnFila;
-
     double valoroptim;
     public HungarianAlgorithm(double[][] matriu) {
         if (matriu.length != matriu[0].length) {
@@ -24,7 +21,6 @@ public class HungarianAlgorithm {
             }
         }
         valoroptim = 0;
-
         aux = new double [matriu.length][matriu.length];
         for (int i = 0; i < matriu.length; ++i) {
             for (int j = 0; j < matriu.length; ++j) {
@@ -56,7 +52,7 @@ public class HungarianAlgorithm {
         pas3();    // cobreix les columnes que contenen un zero marcat
 
         while (!totesLesColumnesEstanCobertes()) {
-            int[] zeroPrincipal = pas4();
+            int[] zeroPrincipal = pas4(); //primer zero trobat (sense actualitzar quadratinfila ni quadratin columna
             while (zeroPrincipal == null) {      // mentre no es trobi cap zero a pas4
                 pas7();
                 zeroPrincipal = pas4();
@@ -87,7 +83,7 @@ public class HungarianAlgorithm {
 
     /**
      * Comprova si totes les columnes estan cobertes. Si és així, llavors la
-          * solució òptima s'ha trobat
+     * solució òptima s'ha trobat
      *
      * @return true o false
      */
