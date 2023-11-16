@@ -12,6 +12,7 @@ public class CtrlDomini {
     private Perfil PerfilActual; //Perfil que esta usant actualment el programa
     private String Estrategia; //Estrategia utilitzada en la fabricació del teclat
     private HashMap <String, Perfil> PerfilsActius; //Conjunt d'usuaris registrats
+    private CtrlPersPerfil perfils;
     private static CtrlDomini singletonObject;
     private CtrlFile ctrlFreqFile;
 
@@ -37,8 +38,9 @@ public class CtrlDomini {
     //Post: S'inicialitzen les variables necessaries.
     public void inicialitzar() {
         ctrlFreqFile = CtrlFile.getInstance();
+        perfils = CtrlPersPerfil.getInstance();
         Estrategia = "BranchAndBound"; //estrategia per defecte
-        PerfilsActius = new HashMap<String, Perfil>();
+        //PerfilsActius = new HashMap<String, Perfil>();
         Alfabets = new TreeMap<String, Alfabet>();
         Idiomes = new TreeMap<String, Idioma>();
     }
@@ -47,13 +49,10 @@ public class CtrlDomini {
     //Post: S'inicia instancia amb l'usuari rebut, si no existeix es crea
     public void iniciaInstancia(String nom) throws ExcepcionsCreadorTeclat{
         System.out.println("inicia sessio: " + nom +"\n");
-        if (!PerfilsActius.containsKey(nom)) {
-            if (PerfilsActius.containsKey(nom)) throw new PerfilJaExisteix(nom);
-            PerfilActual = new Perfil(nom);
-            PerfilsActius.put(nom, PerfilActual);
-        }else {
-            if (!PerfilsActius.containsKey(nom)) throw new PerfilNoExisteix(nom);
-            PerfilActual = PerfilsActius.get(nom);
+        try {
+            PerfilActual = perfils.getPerfil(nom);
+        } catch (PerfilNoExisteix e1) {
+            PerfilActual = perfils.afegirPerfil(nom);
         }
     }
 
@@ -61,14 +60,7 @@ public class CtrlDomini {
     //Pre:
     //Post: Retorna el conjunt de noms dels perfils.
     public List<String> getAllPerfils() {
-        return new ArrayList<>(PerfilsActius.keySet());
-    }
-
-    //Pre:
-    //Post: Retorna la instancia del Perfil.
-    public Perfil getPerfil(String id) {
-        if (PerfilsActius.containsKey(id)) return PerfilsActius.get(id);
-        else return null; //perfil no existeix
+        return perfils.getAllPerfils();
     }
 
     //Pre:
