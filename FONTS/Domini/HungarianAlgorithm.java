@@ -48,7 +48,7 @@ public class HungarianAlgorithm {
     /**
      * Troba una assignació òptima
      *
-     * @return assignació òptima
+     * @return valor òptim (suma dels costos optims)
      */
     public double trobarAssignacioOptima() {
         pas1();    // redueix la matriu

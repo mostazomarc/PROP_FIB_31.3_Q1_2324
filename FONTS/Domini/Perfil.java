@@ -100,6 +100,7 @@ public class Perfil {
         teclats.put(NomTeclat,new Teclat(NomTeclat,NomLlista, freqllista, idioma));
     }
 
+<<<<<<< HEAD
     public List<String> getNomsTeclats()  {
         Set<String> noms = teclats.keySet();
         return new ArrayList<>(noms);
