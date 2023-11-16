@@ -31,7 +31,7 @@ public class DriverDades {
 
     //Pre:
     //Post: Es mostra el menu de consultar dades i s'executa la opció escollida
-    public void gestionarDades() {
+    public void gestionarDades() throws Exception {
         System.out.println("### Gestionar Dades ###");
         printMenuGestionarDades();
         esperarSeleccioGestionarDades();
@@ -52,7 +52,7 @@ public class DriverDades {
 
     //Pre:
     //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
-    public void esperarSeleccioGestionarDades() {
+    public void esperarSeleccioGestionarDades() throws Exception {
         System.out.println("Escull una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
@@ -275,11 +275,16 @@ public class DriverDades {
         mostraDadesIdiomes(dades);
     }
 
-    public void afegirAlfabet() {
+    public void afegirAlfabet() throws Exception {
         System.out.println("### Afegir Alfabet ###");
         System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
         String filename = s.next();
-        controlador.afegirAlfabet(filename);
+        try {
+            controlador.afegirAlfabet(filename);
+        }
+        catch (AlfabetJaExisteix e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        }
     }
 
     public void afegirIdioma() {
