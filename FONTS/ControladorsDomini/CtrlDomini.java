@@ -232,8 +232,7 @@ public class CtrlDomini {
     }
     
     public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq) throws ExcepcionsCreadorTeclat{
-        if (!Idiomes.containsKey(nomIdioma)) throw new IdiomaNoExisteix(nomIdioma);
-        Idioma idiomaTeclat = Idiomes.getIdioma(nomIdioma);
+        Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
         PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat);
     }
 
