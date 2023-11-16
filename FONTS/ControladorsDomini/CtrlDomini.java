@@ -11,8 +11,7 @@ import Excepcions.*;
 public class CtrlDomini {
     private Perfil PerfilActual; //Perfil que esta usant actualment el programa
     private String Estrategia; //Estrategia utilitzada en la fabricació del teclat
-    private HashMap <String, Perfil> PerfilsActius; //Conjunt d'usuaris registrats
-    private CtrlPersPerfil perfils;
+    private CtrlPersPerfil perfils; //Controlador Persistencia Perfils registrats
     private static CtrlDomini singletonObject;
     private CtrlFile ctrlFreqFile;
 
