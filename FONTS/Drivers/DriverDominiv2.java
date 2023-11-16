@@ -14,7 +14,7 @@ public class DriverDominiv2 {
 
     private Scanner s;
 
-    public void iniciaDriverDomini() {
+    public void iniciaDriverDomini() throws Exception {
         controlador = controlador.getInstance();
         dTeclats = new DriverTeclats();
         dDades = new DriverDades();
@@ -71,7 +71,7 @@ public class DriverDominiv2 {
 
     //Pre:
     //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
-    public void repinstruccions() {
+    public void repinstruccions() throws Exception {
         System.out.println("Escull una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
@@ -143,7 +143,7 @@ public class DriverDominiv2 {
         System.out.println("\nPerfil Actual: " + controlador.getPerfilActual());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         DriverDominiv2 dd = new DriverDominiv2();
         System.out.println("Estas provant el driver del controlador de la capa domini\n");
         dd.iniciaDriverDomini();
