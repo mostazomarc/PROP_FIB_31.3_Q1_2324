@@ -94,6 +94,16 @@ public class CtrlDomini {
         }
     }
 
+    public String getNomIdiomaTeclat(String nomt) throws ExcepcionsCreadorTeclat{
+        String idioma = PerfilActual.getIdiomaTeclat(nomt);
+        return idioma;
+    }
+
+    public String getNomLListaTeclat(String nomt) throws ExcepcionsCreadorTeclat{
+        String nomllistafreq = PerfilActual.getLlistaTeclat(nomt);
+        return nomllistafreq;
+    }
+
     //Pre: LlistaLlegida es una llista de frequencies llegida en format vàlid
     //Post: es passa la llista llegida a llista de frequencies
     private Map<String,Integer> llistaToEntrades(Map<String, Integer> novesEntrades, List<String> LlistaLlegida) throws FormatNoValid{
@@ -170,6 +180,8 @@ public class CtrlDomini {
         if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
         PerfilActual.afegirLlistaFreq(filename,Idiomes.get(i),novesEntrades);
     }
+
+    public List<String> getNomsTeclats() { return PerfilActual.getNomsTeclats();}
 
     //Pre:
     //Post: S'obté un set dels noms de les llistes guardades del perfil actual
