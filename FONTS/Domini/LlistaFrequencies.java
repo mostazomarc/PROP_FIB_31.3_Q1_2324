@@ -6,7 +6,7 @@ import java.util.Map;
 public class LlistaFrequencies {
     private String nom;
     private Map<String, Integer> LlistaParaules;
-    private Idioma idioma;
+    private String idioma;
 
 
     //Pre:
@@ -14,7 +14,7 @@ public class LlistaFrequencies {
     public LlistaFrequencies (String nom, Idioma i) {
         this.nom = nom;
         LlistaParaules = new HashMap<>();
-        idioma = i;
+        idioma = i.getNom();
         i.afegirLlistaFreqPredeterminada(this);
     }
 
@@ -23,7 +23,7 @@ public class LlistaFrequencies {
     public LlistaFrequencies (String nom, Idioma i, Map<String, Integer> LlistaParaules) {
         this.nom = nom;
         this.LlistaParaules = LlistaParaules;
-        idioma = i;
+        idioma = i.getNom();
         i.afegirLlistaFreqPredeterminada(this);
     }
 
@@ -39,16 +39,12 @@ public class LlistaFrequencies {
         return LlistaParaules;
     }
 
-    // Pre:
-    //Post: Es retorna l'idioma de la llista'
-    public  Idioma getIdioma() {
-        return idioma;
-    }
+
 
     // Pre:
     //Post: Es retorna el nom de l'idioma de la llista'
     public  String getNomIdioma() {
-        return idioma.getNom();
+        return idioma;
     }
 
     //Pre:
