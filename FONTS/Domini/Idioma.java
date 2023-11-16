@@ -61,9 +61,10 @@ public class Idioma {
 
     //Retorna informació (Nom de l'Idioma, nom de l'Alfabet i nom de la Llista de Freqüències predeterminada) de l'Idioma
     public String getInfo() {
-        return "Nom de l'Idioma: " + nom + "    Nom de l'Alfabet associat: " + alfabet.getNomAlfabet() + "    Nom de la Llista de Freqüències predeterminada: " + llistaFreqPredeterminada.getNom();
+        return "Nom de l'Idioma: " + nom + "    Nom de l'Alfabet associat: " + alfabet.getNomAlfabet() +
+                "    Nom de la Llista de Freqüències predeterminada: " + llistaFreqPredeterminada.getNom();
     }
 
 }
 
-//Classe Programada per: Arnau
+//Classe Programada per: Arnau Tajahuerce

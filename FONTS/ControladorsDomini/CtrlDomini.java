@@ -14,11 +14,10 @@ public class CtrlDomini {
     private CtrlPersPerfil perfils; //Controlador Persistencia Perfils registrats
 
     private CtrlPersFreq llistes;
+    private CtrlPersAlfabets alfabets; //Controlador de Persistencia d'Alfabets
+    private CtrlPersIdiomes idiomes; //Controlador de Persistencia d'Idiomes
     private static CtrlDomini singletonObject;
     private CtrlFile ctrlFreqFile;
-
-    private TreeMap<String, Alfabet> Alfabets;
-    private TreeMap<String, Idioma> Idiomes;
 
     //Pre:
     //Post: Es crea una instancia de domini.
@@ -41,9 +40,10 @@ public class CtrlDomini {
         ctrlFreqFile = CtrlFile.getInstance();
         perfils = CtrlPersPerfil.getInstance(this);
         llistes = CtrlPersFreq.getInstance();
+        perfils = CtrlPersPerfil.getInstance();
+        alfabets = CtrlPersAlfabets.getInstance();
+        idiomes = CtrlPersIdiomes.getInstance();
         Estrategia = "BranchAndBound"; //estrategia per defecte
-        Alfabets = new TreeMap<String, Alfabet>();
-        Idiomes = new TreeMap<String, Idioma>();
     }
 
     //Pre: Es rep un nom d'usuari
@@ -177,7 +177,8 @@ public class CtrlDomini {
     //Post: S'afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual
     public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
         if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
-        LlistaFrequencies llista = llistes.afegirLlistaFreq(filename,Idiomes.get(i),novesEntrades);
+        Idioma idiomaLlista = idiomes.getIdioma(i);
+        LlistaFrequencies llista = llistes.afegirLlistaFreq(filename,idiomaLlista,novesEntrades);
         PerfilActual.afegirLlistaFreq(llista.getNom());
     }
 
@@ -208,34 +209,18 @@ public class CtrlDomini {
     public void afegirAlfabet(String filename) throws ExcepcionsCreadorTeclat {
         System.out.println("Llegint arxiu "+ filename +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
-
-        Set<Character> lletres = new HashSet<Character>();
-        String nomAlfabet = filename.substring(0, filename.length() - 4);
-
-        if (Alfabets.containsKey(nomAlfabet.toLowerCase())) throw new AlfabetJaExisteix(nomAlfabet);
-
-        for (String linia : LlistaLlegida) {
-            for (char lletra : linia.toCharArray()) {
-                lletres.add(lletra);
-            }
-        }
-
-        Alfabet nouAlfabet = new Alfabet(nomAlfabet, lletres);
-        Alfabets.put(nomAlfabet.toLowerCase(), nouAlfabet);
+        alfabets.afegirAlfabet(filename, LlistaLlegida);
     }
 
     public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws ExcepcionsCreadorTeclat {
-        if (Idiomes.containsKey(nomIdioma)) throw new IdiomaJaExisteix(nomIdioma);
-        else if (!Alfabets.containsKey(nomAlfabet.toLowerCase())) throw new AlfabetNoExisteix(nomAlfabet);
-
-        Alfabet alfabetIdioma = Alfabets.get(nomAlfabet);
+        Alfabet alfabetIdioma = alfabets.getAlfabet(nomAlfabet);
         Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filename);
-        Idioma nouIdioma = new Idioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
-        Idiomes.put(nomIdioma, nouIdioma);
+        idiomes.afegirIdioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
     }
 
     public Vector<String> consultaIdiomes() {
         Vector<String> sdades = new Vector<String>();
+        TreeMap<String, Idioma> Idiomes = idiomes.getIdiomes();
 
         int i = 1;
         for (Map.Entry<String, Idioma> idioma : Idiomes.entrySet()) {
@@ -247,8 +232,7 @@ public class CtrlDomini {
         return sdades;
     }
     public void crearTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq) throws ExcepcionsCreadorTeclat{
-        if (!Idiomes.containsKey(nomIdioma)) throw new IdiomaNoExisteix(nomIdioma);
-        Idioma idiomaTeclat = Idiomes.get(nomIdioma);
+        Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
         PerfilActual.crearTeclat(nomTeclat, nomLlistaFreq, idiomaTeclat);
     }
 
@@ -258,6 +242,7 @@ public class CtrlDomini {
 
     public Vector<String> consultaAlfabets() {
         Vector<String> sdades = new Vector<String>();
+        TreeMap<String, Alfabet> Alfabets = alfabets.getAlfabets();
 
         int i = 1;
         for (Map.Entry<String, Alfabet> alfabet : Alfabets.entrySet()) {

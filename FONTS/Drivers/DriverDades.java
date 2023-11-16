@@ -285,6 +285,9 @@ public class DriverDades {
         catch (AlfabetJaExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
         }
+        catch (FormatNoValid e2) {
+            System.out.println("ERROR: " + e2.getMessage());
+        }
     }
 
     public void afegirIdioma() throws Exception {
