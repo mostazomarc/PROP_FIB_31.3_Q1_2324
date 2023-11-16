@@ -83,7 +83,10 @@ public class DriverTeclats {
             controlador.crearTeclat(nomTeclat, nomIdioma, nomLlistaFreq);
         } catch (LlistaFreqNoExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
-        } catch (Exception e) {
+        } catch (IdiomaNoExisteix e2 ) {
+            System.out.println("ERROR: " + e2.getMessage());
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }

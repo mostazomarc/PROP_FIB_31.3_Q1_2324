@@ -11,12 +11,13 @@ import Excepcions.*;
 public class CtrlDomini {
     private Perfil PerfilActual; //Perfil que esta usant actualment el programa
     private String Estrategia; //Estrategia utilitzada en la fabricació del teclat
-    private HashMap <String, Perfil> PerfilsActius; //Conjunt d'usuaris registrats
+    private CtrlPersPerfil perfils; //Controlador Persistencia Perfils registrats
+
+    private CtrlPersFreq llistes;
+    private CtrlPersAlfabets alfabets; //Controlador de Persistencia d'Alfabets
+    private CtrlPersIdiomes idiomes; //Controlador de Persistencia d'Idiomes
     private static CtrlDomini singletonObject;
     private CtrlFile ctrlFreqFile;
-
-    private TreeMap<String, Alfabet> Alfabets;
-    private TreeMap<String, Idioma> Idiomes;
 
     //Pre:
     //Post: Es crea una instancia de domini.
@@ -37,38 +38,35 @@ public class CtrlDomini {
     //Post: S'inicialitzen les variables necessaries.
     public void inicialitzar() {
         ctrlFreqFile = CtrlFile.getInstance();
+        perfils = CtrlPersPerfil.getInstance(this);
+        llistes = CtrlPersFreq.getInstance();
+        alfabets = CtrlPersAlfabets.getInstance();
+        idiomes = CtrlPersIdiomes.getInstance();
         Estrategia = "BranchAndBound"; //estrategia per defecte
-        PerfilsActius = new HashMap<String, Perfil>();
-        Alfabets = new TreeMap<String, Alfabet>();
-        Idiomes = new TreeMap<String, Idioma>();
     }
 
     //Pre: Es rep un nom d'usuari
     //Post: S'inicia instancia amb l'usuari rebut, si no existeix es crea
     public void iniciaInstancia(String nom) throws ExcepcionsCreadorTeclat{
         System.out.println("inicia sessio: " + nom +"\n");
-        if (!PerfilsActius.containsKey(nom)) {
-            if (PerfilsActius.containsKey(nom)) throw new PerfilJaExisteix(nom);
-            PerfilActual = new Perfil(nom);
-            PerfilsActius.put(nom, PerfilActual);
-        }else {
-            if (!PerfilsActius.containsKey(nom)) throw new PerfilNoExisteix(nom);
-            PerfilActual = PerfilsActius.get(nom);
+        try {
+            PerfilActual = perfils.getPerfil(nom);
+            llistes.canviaPerfil(nom);
+        } catch (PerfilNoExisteix e1) {
+            PerfilActual = perfils.afegirPerfil(nom);
+            llistes.nouPerfil(nom);
         }
+    }
+
+    public LlistaFrequencies getLlista(String nomLlista) {
+        return llistes.getLlistaFreq(nomLlista);
     }
 
 
     //Pre:
     //Post: Retorna el conjunt de noms dels perfils.
     public List<String> getAllPerfils() {
-        return new ArrayList<>(PerfilsActius.keySet());
-    }
-
-    //Pre:
-    //Post: Retorna la instancia del Perfil.
-    public Perfil getPerfil(String id) {
-        if (PerfilsActius.containsKey(id)) return PerfilsActius.get(id);
-        else return null; //perfil no existeix
+        return perfils.getAllPerfils();
     }
 
     //Pre:
@@ -178,7 +176,9 @@ public class CtrlDomini {
     //Post: S'afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual
     public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
         if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
-        PerfilActual.afegirLlistaFreq(filename,Idiomes.get(i),novesEntrades);
+        Idioma idiomaLlista = idiomes.getIdioma(i);
+        LlistaFrequencies llista = llistes.afegirLlistaFreq(filename,idiomaLlista,novesEntrades);
+        PerfilActual.afegirLlistaFreq(llista.getNom());
     }
 
     public List<String> getNomsTeclats() { return PerfilActual.getNomsTeclats();}
@@ -205,32 +205,21 @@ public class CtrlDomini {
         PerfilActual.eliminaLlista(nomLlista);
     }
 
-    public void afegirAlfabet(String filename) {
+    public void afegirAlfabet(String filename) throws ExcepcionsCreadorTeclat {
         System.out.println("Llegint arxiu "+ filename +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
-
-        Set<Character> lletres = new HashSet<Character>();
-        String nomAlfabet = filename.substring(0, filename.length() - 4);
-
-        for (String linia : LlistaLlegida) {
-            for (char lletra : linia.toCharArray()) {
-                lletres.add(lletra);
-            }
-        }
-
-        Alfabet nouAlfabet = new Alfabet(nomAlfabet, lletres);
-        Alfabets.put(nomAlfabet, nouAlfabet);
+        alfabets.afegirAlfabet(filename, LlistaLlegida);
     }
 
     public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws ExcepcionsCreadorTeclat {
-        Alfabet alfabetIdioma = Alfabets.get(nomAlfabet);
+        Alfabet alfabetIdioma = alfabets.getAlfabet(nomAlfabet);
         Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filename);
-        Idioma nouIdioma = new Idioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
-        Idiomes.put(nomIdioma, nouIdioma);
+        idiomes.afegirIdioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
     }
 
     public Vector<String> consultaIdiomes() {
         Vector<String> sdades = new Vector<String>();
+        TreeMap<String, Idioma> Idiomes = idiomes.getIdiomes();
 
         int i = 1;
         for (Map.Entry<String, Idioma> idioma : Idiomes.entrySet()) {
@@ -242,7 +231,7 @@ public class CtrlDomini {
         return sdades;
     }
     public void crearTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq) throws ExcepcionsCreadorTeclat{
-        Idioma idiomaTeclat = Idiomes.get(nomIdioma);
+        Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
         PerfilActual.crearTeclat(nomTeclat, nomLlistaFreq, idiomaTeclat);
     }
 
@@ -252,6 +241,7 @@ public class CtrlDomini {
 
     public Vector<String> consultaAlfabets() {
         Vector<String> sdades = new Vector<String>();
+        TreeMap<String, Alfabet> Alfabets = alfabets.getAlfabets();
 
         int i = 1;
         for (Map.Entry<String, Alfabet> alfabet : Alfabets.entrySet()) {
