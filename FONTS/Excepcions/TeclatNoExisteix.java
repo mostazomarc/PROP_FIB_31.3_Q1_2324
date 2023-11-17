@@ -3,7 +3,7 @@ package Excepcions;
 public class TeclatNoExisteix extends ExcepcionsCreadorTeclat{
 
     public String getTipusExcepcio() {
-        return "PerfilNoExisteix";
+        return "TeclatNoExisteix";
     }
 
     public TeclatNoExisteix() {
@@ -16,4 +16,3 @@ public class TeclatNoExisteix extends ExcepcionsCreadorTeclat{
 
 }
 
-//Classe Programada per: Marc
