@@ -190,6 +190,11 @@ public class CtrlDomini {
         PerfilActual.afegirLlistaFreq(llista);
     }
 
+    public void modificarLlistaPerfil(String tipusArxiu, String filename, String nomLlista, Map<String,Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
+        if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
+        PerfilActual.modificarLlista(nomLlista, novesEntrades);
+    }
+
     public List<String> getNomsTeclats() { return PerfilActual.getNomsTeclats();}
 
     //Pre:

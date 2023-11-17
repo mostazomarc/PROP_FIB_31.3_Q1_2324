@@ -77,6 +77,13 @@ public class Perfil {
     }
 
     //Pre:
+    //Post: Es modifica la llista indicada per nomLlista
+    public void modificarLlista(String nomLlista, Map<String,Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
+        comprovaLlistaNoExisteix(nomLlista);
+        frequencies.get(nomLlista).modificarLlista(novesEntrades);
+    }
+
+    //Pre:
     //Post: Es retorna el conjunt de noms de les llistes guardades al perfil
     public List<String> getNomAllLlistes() {
         Set<String> noms = frequencies.keySet();
