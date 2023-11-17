@@ -91,6 +91,7 @@ public class LlistaFrequenciesTest {
         assertEquals(resultat,idiomaProva.getLlistaFreq());
     }
 
+    /*
     @Test
     //Insertar llista de frequencies a una llista ja creada
     public void insertarFrequencies() {
@@ -99,6 +100,8 @@ public class LlistaFrequenciesTest {
         llistaProva.insertarFrequencies(llistaParaulesProva);
         assertEquals(llistaParaulesProva,llistaProva.getFrequencies());
     }
+
+     */
 
 
 }

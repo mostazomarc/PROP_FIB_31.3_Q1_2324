@@ -53,6 +53,7 @@ public class LlistaFrequencies {
         LlistaParaules = novaLlista;
     }
 
+    /*
     //Pre:
     //Post: Les paraules i frequencies introduides son afegides a la llista
     public void insertarFrequencies(Map<String, Integer> novesEntrades) {
@@ -76,6 +77,8 @@ public class LlistaFrequencies {
 
 
     }
+
+     */
 
 }
 
