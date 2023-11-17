@@ -2,8 +2,11 @@ package Domini;
 
 import java.util.*;
 
+
 import Domini.Teclat;
 import Domini.HungarianAlgorithm;
+import Domini.Nodo;
+import Domini.pos;
 
 public class BranchandBound implements Estrategia {
     // Atributos
@@ -14,33 +17,6 @@ public class BranchandBound implements Estrategia {
 
     //Métodos
 
-    class pos{
-        private int x;
-        private int y;
-
-        public pos(int pos_x, int pos_y){
-            this.x = pos_x;
-            this.y = pos_y;
-        }
-    }
-
-    class Nodo{
-        private char[][] layout;
-        private double cota;
-
-        private Map<Character, pos> letres_usades;
-
-        public Nodo(char[][] matriz, double cota, Map<Character, pos> ini) {
-            this.layout = new char[matriz.length][matriz[0].length];
-            for(int i = 0; i < matriz.length; i++){
-                for(int j = 0; j < matriz[0].length; j++)
-                    layout[i][j] = matriz[i][j];
-            }
-            this.cota = cota;
-            letres_usades = new HashMap<>(ini);
-
-        }
-    }
 
     public double[][] sumaMatrices(double[][] mat1, double[][] mat2) {
 
@@ -258,7 +234,6 @@ public class BranchandBound implements Estrategia {
             if(palabra.length() != 1) {
                 for (int i = 0; i < palabra.length() - 1; i++) {
                     //guardamos los índices de cada letra en el abecedario
-
                     char c1 = palabra.charAt(i);
                     char c2 = palabra.charAt(i + 1);
                     if(c1 == 'à'){
