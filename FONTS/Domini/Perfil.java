@@ -111,10 +111,14 @@ public class Perfil {
     }
 
     public void crearTeclatLlistaIdioma(String NomTeclat, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat {
-        if (teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
+        if (teclats.containsKey(NomTeclat)) throw new TeclatJaExisteix(NomTeclat);
         teclats.put(NomTeclat,new Teclat(NomTeclat, i, n, m));
     }
 
+    public void eliminarTeclat(String NomTeclat) throws ExcepcionsCreadorTeclat{
+        if (teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
+        teclats.remove(NomTeclat);
+    }
 
     public List<String> getNomsTeclats()  {
         Set<String> noms = teclats.keySet();
