@@ -85,7 +85,7 @@ public class DriverDades {
 
     //Pre:
     //Post: Es mostren les diferents opcions per afegir una llista i s'afegeix de la manera seleccionada
-    public void afegirLlistaFrecuencies() {
+    public void afegirLlistaFrecuencies() throws Exception {
         System.out.println("### Afegir Llista Frequencies ###");
         System.out.println("Com la vols afegir?");
         System.out.println("1. Text");
@@ -117,14 +117,12 @@ public class DriverDades {
             }
         } catch (LlistaFreqJaExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
-        } catch (Exception e2) {
-            e2.printStackTrace();
         } //catch IDIOMA NO EXISTEIX
     }
 
     //Pre:
     //Post: Es llisten les llistes guardades i s'elimina l'indicada per el usuari
-    public void eliminarLlista() {
+    public void eliminarLlista()throws Exception {
         if (llistarLlistes()) {
             System.out.println("Selecciona la llista a esborrar escrivint el seu nom:");
             String nomLlista = s.next();
@@ -134,8 +132,6 @@ public class DriverDades {
                 System.out.println("ERROR: " + e1.getMessage());
             } catch (LlistaFreqEnUs e2 ) {
                 System.out.println("ERROR: " + e2.getMessage());
-            } catch (Exception e2) {
-                e2.printStackTrace();
             }
         }
     }
@@ -186,7 +182,7 @@ public class DriverDades {
 
     //Pre:
     //Post: Es mostra el menu de consultar dades i s'executa la opció escollida
-    public void consultarDades() {
+    public void consultarDades() throws Exception {
         System.out.println("### Consultar Dades ###");
         printMenuConsultarDades();
         esperarSeleccioConsultarDades();
@@ -204,7 +200,7 @@ public class DriverDades {
 
     //Pre:
     //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
-    public void esperarSeleccioConsultarDades() {
+    public void esperarSeleccioConsultarDades() throws Exception {
         System.out.println("Escull una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
@@ -226,7 +222,7 @@ public class DriverDades {
 
     //Pre:
     //Post: Es llisten els noms de les llistes guardades del perfil actiu
-    public boolean llistarLlistes() {
+    public boolean llistarLlistes() throws Exception {
         List<String> nomLlistes = controlador.getNomLlistesGuardades();
         netejaTerminal();
         if (nomLlistes.isEmpty()) {
@@ -258,8 +254,6 @@ public class DriverDades {
                 }
             } catch (LlistaFreqNoExisteix e1) {
                 System.out.println("ERROR: " + e1.getMessage());
-            } catch (Exception e2) {
-                e2.printStackTrace();
             }
         }
         return true;
