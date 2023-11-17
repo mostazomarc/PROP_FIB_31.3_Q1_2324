@@ -167,7 +167,7 @@ public class CtrlDomini {
     //Pre: tipus arxiu es un tipus vàlid i filename existeix i esta en un format vàid
     //Post: Es llegeix l'informacio de llista de l'arxiu i es retorna
     public Map<String,Integer> llegirLlistaFreq(String tipusArxiu, String filename) throws FormatNoValid {
-        System.out.println("Llegint arxiu "+ filename +"\n");
+        System.out.println("Llegint arxiu "+ filename);
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
         Map<String, Integer> novesEntrades = new HashMap<>();
 

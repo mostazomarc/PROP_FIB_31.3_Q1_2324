@@ -73,6 +73,9 @@ public class CtrlPersFreq {
         frequencies.remove(nomLlista);
     }
 
+    //Pre:
+    //Post: Comprova que l'idioma identificat per nomIdioma no està en ús en cap llista de frequencies
+    // (de moment no comprova llistes de frequencies d'altres usuaris perquè fa falta capa de persistencia)
     public void comprovarUsIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat{
         for (Map.Entry<String, LlistaFrequencies> llista : frequencies.entrySet()) {
             if (llista.getValue().getNomIdioma().equals(nomIdioma)) throw new IdiomaEnUs(nomIdioma);

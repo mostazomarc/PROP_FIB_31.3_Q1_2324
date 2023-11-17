@@ -99,27 +99,35 @@ public class DriverDades {
         Map<String, Integer> novesEntrades = new HashMap<>();
 
         try {
-            String idioma = selectorIdioma();
 
             if (num == 1 || num == 2) {
+                String idioma = selectorIdioma();
                 System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
                 String filename = s.next();
                 if (num == 1) {
                     controlador.novaLlistaPerfil("text", filename, idioma, novesEntrades);
+                    System.out.println("Afegida la llista a partir de text amb nom: " +filename+ " i idioma: " + idioma);
                 }
                 if (num == 2) {
                     controlador.novaLlistaPerfil("llista", filename, idioma, novesEntrades);
+                    System.out.println("Afegida la llista a partir d'una llista amb nom: " +filename+ " i idioma: " + idioma);
                 }
             } else if (num == 3) {
                 //llegir manual
+                String idioma = selectorIdioma();
                 novesEntrades = llistaManual(novesEntrades);
                 System.out.println("##### Introduir el nom de la llista: #####");
                 String nom = s.next();
                 controlador.novaLlistaPerfil("Manual", nom, idioma, novesEntrades);
+                System.out.println("Afegida manualment la llista amb nom: " +nom+ " i idioma: " + idioma);
             }
         } catch (LlistaFreqJaExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
-        } //catch IDIOMA NO EXISTEIX
+        } catch (IdiomaNoExisteix e2) {
+            System.out.println("ERROR: " + e2.getMessage());
+        } catch (FormatNoValid e3) {
+            System.out.println("ERROR: " + e3.getMessage());
+        }
     }
 
     //Pre:
@@ -130,6 +138,7 @@ public class DriverDades {
             String nomLlista = s.next();
             try {
                 controlador.eliminarLlista(nomLlista);
+                System.out.println("Eliminada la llista amb nom: " + nomLlista);
             } catch (LlistaFreqNoExisteix e1) {
                 System.out.println("ERROR: " + e1.getMessage());
             } catch (LlistaFreqEnUs e2 ) {
@@ -151,7 +160,7 @@ public class DriverDades {
 
     //Pre:
     //Post: es llegeixen les entrades manuals per crear una llista de frequencies
-    public Map<String,Integer> llistaManual(Map<String, Integer> novesEntrades) {
+    public Map<String,Integer> llistaManual(Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat{
         System.out.println("##### Introduir freqüències manualment #####");
         System.out.println("##### Introduir paraules i freqüències que es vulguin entrar #####");
         System.out.println("##### Per acabar escriure: 'X' #####");
@@ -176,7 +185,7 @@ public class DriverDades {
                 System.out.println("ERROR: La freqüència no és un número ");
             }
         }
-        if (novesEntrades.isEmpty()) return null;
+        if (novesEntrades.isEmpty()) throw new FormatNoValid("LLISTA NO BUIDA");
 
         return novesEntrades;
 
