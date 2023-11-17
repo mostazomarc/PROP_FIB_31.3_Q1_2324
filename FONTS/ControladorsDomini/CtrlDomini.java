@@ -203,6 +203,7 @@ public class CtrlDomini {
 
     public void eliminarLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
         PerfilActual.eliminaLlista(nomLlista);
+        llistes.eliminarLlista(nomLlista);
     }
 
     public void afegirAlfabet(String filename) throws ExcepcionsCreadorTeclat {
