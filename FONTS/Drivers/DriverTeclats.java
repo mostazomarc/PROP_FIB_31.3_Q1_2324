@@ -133,8 +133,7 @@ public class DriverTeclats {
     public void printMenuConsultarTeclats() {
         System.out.println("0. Info de les funcions");
         System.out.println("1. Llistar Teclats");
-        System.out.println("2. Buscar Teclat");
-        System.out.println("3. Sortir");
+        System.out.println("2. Sortir");
     }
 
     public void esperarSeleccioConsultarTeclats() throws Exception {
@@ -149,8 +148,6 @@ public class DriverTeclats {
             esperarSeleccioConsultarTeclats();
         }
         else if(num == 1)  llistarTeclats();
-//        else if (num == 2) buscarTeclat();
-        else if (num == 6) {}
     }
 
 
