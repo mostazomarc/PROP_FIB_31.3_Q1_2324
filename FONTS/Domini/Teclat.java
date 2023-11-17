@@ -18,7 +18,7 @@ public class Teclat {
 //        System.out.println(n);
 //        System.out.println(m);
         System.out.println(size);
-        if (size > n*m) throw new LayoutNoValid();
+        if (size > n*m) throw new LayoutNoValid(size, n, m);
     }
 
     //Pre:

@@ -5,6 +5,6 @@ public class LayoutNoValid extends ExcepcionsCreadorTeclat {
         return "LayoutNoValid";
     }
 
-    public LayoutNoValid() {super(" Layout No Valid ");}
+    public LayoutNoValid(int size, int n, int m) {super("Layout No Valid: el nombre de lletres =  " + size  + " supera les " +n*m+ " posicions disponibles" );}
 
 }
