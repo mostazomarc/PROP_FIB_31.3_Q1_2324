@@ -30,6 +30,10 @@ public class CtrlPersPerfil {
         controlador = c;
     }
 
+    public void carregarPerfil() throws ExcepcionsCreadorTeclat {
+        controlador.iniciaInstancia("Prova");
+    }
+
     //Pre:
     //Post: s'afegeix el perfil identificat per nomPerfil
     public Perfil afegirPerfil (String nomPerfil) throws ExcepcionsCreadorTeclat {

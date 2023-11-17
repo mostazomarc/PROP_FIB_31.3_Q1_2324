@@ -1,5 +1,6 @@
 package Dades;
 
+import ControladorsDomini.CtrlDomini;
 import Domini.Alfabet;
 import Domini.Idioma;
 import Excepcions.AlfabetNoExisteix;
@@ -13,19 +14,25 @@ import java.util.TreeMap;
 public class CtrlPersIdiomes {
     private static CtrlPersIdiomes singletonObject;
     private TreeMap<String, Idioma> Idiomes;
+    private CtrlDomini controlador;
 
     //Pre:
     //Post: Retorna la instancia de CtrlPersAlfabets, si no existeix cap CtrlPersAlfabets es crea.
-    public static CtrlPersIdiomes getInstance() {
+    public static CtrlPersIdiomes getInstance(CtrlDomini c) {
         if(singletonObject == null)
-            singletonObject = new CtrlPersIdiomes(){
+            singletonObject = new CtrlPersIdiomes(c){
 
             };
         return singletonObject;
     }
 
-    private CtrlPersIdiomes() {
+    private CtrlPersIdiomes(CtrlDomini c) {
         Idiomes = new TreeMap<String, Idioma>();
+        controlador = c;
+    }
+
+    public void carregarIdiomes() throws ExcepcionsCreadorTeclat{
+        controlador.afegirIdioma("Català","llatí","llista","catalaFreq.txt");
     }
 
     //Pre:

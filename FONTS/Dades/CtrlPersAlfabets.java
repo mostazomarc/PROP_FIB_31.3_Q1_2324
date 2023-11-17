@@ -1,5 +1,6 @@
 package Dades;
 
+import ControladorsDomini.CtrlDomini;
 import Domini.Alfabet;
 import Excepcions.AlfabetJaExisteix;
 import Excepcions.AlfabetNoExisteix;
@@ -10,18 +11,22 @@ import java.util.*;
 public class CtrlPersAlfabets {
     private static CtrlPersAlfabets singletonObject;
     private TreeMap<String, Alfabet> Alfabets;
+    private CtrlDomini controlador;
 
     //Pre:
     //Post: Retorna la instancia de CtrlPersAlfabets, si no existeix cap CtrlPersAlfabets es crea.
-    public static CtrlPersAlfabets getInstance() {
+    public static CtrlPersAlfabets getInstance(CtrlDomini c) {
         if(singletonObject == null)
-            singletonObject = new CtrlPersAlfabets(){
-
-            };
+            singletonObject = new CtrlPersAlfabets(c);
         return singletonObject;
     }
-    private CtrlPersAlfabets() {
+    private CtrlPersAlfabets(CtrlDomini c) {
         Alfabets = new TreeMap<String, Alfabet>();
+        controlador = c;
+    }
+
+    public void carregarAlfabets() throws ExcepcionsCreadorTeclat {
+        controlador.afegirAlfabet("Llatí.txt");
     }
 
     //Pre:

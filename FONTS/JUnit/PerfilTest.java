@@ -26,6 +26,8 @@ public class PerfilTest {
     CtrlPersFreq llistes;
 
     LlistaFrequencies llista;
+    LlistaFrequencies llista2;
+    LlistaFrequencies llista3;
     private Set<Character> lletresProva = new HashSet<Character>();
 
     @Before
@@ -47,8 +49,10 @@ public class PerfilTest {
     @Before
     public void crearPerfilProva() {
         controlador = CtrlDomini.getInstance();
-        llistes = CtrlPersFreq.getInstance();
+        llistes = CtrlPersFreq.getInstance(controlador);
         llista = llistes.afegirLlistaFreq("LlistaProva",idiomaProva,llistaParaulesProva);
+        llista2 = llistes.afegirLlistaFreq("LlistaProva3",idiomaProva,llistaParaulesProva);
+        llista3 = llistes.afegirLlistaFreq("LlistaProva4",idiomaProva,llistaParaulesProva);
         perfilProva = new Perfil("Prova","12345", controlador);
     }
 
@@ -157,8 +161,8 @@ public class PerfilTest {
     public void getNomAllLlistes() {
         try {
             perfilProva.afegirLlistaFreq(llista);
-            perfilProva.afegirLlistaFreq(llista);
-            perfilProva.afegirLlistaFreq(llista);
+            perfilProva.afegirLlistaFreq(llista2);
+            perfilProva.afegirLlistaFreq(llista3);
         } catch (LlistaFreqNoExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (Exception e2) {
