@@ -111,7 +111,7 @@ public class Perfil {
 
     public String getIdiomaTeclat (String nomTeclat) throws ExcepcionsCreadorTeclat {
         if (!teclats.containsKey(nomTeclat)) throw new TeclatNoExisteix(nomTeclat);
-        return teclats.get(nomTeclat).getNomIdiomaTeclat();
+        return teclats.get(nomTeclat).getNomIdioma();
     }
 
 
@@ -123,6 +123,11 @@ public class Perfil {
     public char[][] consultaTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat {
         if (!teclats.containsKey(nomTeclat)) throw new TeclatNoExisteix(nomTeclat);
         return teclats.get(nomTeclat).getDisposicio();
+    }
+
+    public void modificarLayoutTeclat(String nomTeclat, String llista, Map<String,Integer> llistafreq, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat {
+        teclats.remove(nomTeclat);
+        teclats.put(nomTeclat,new Teclat(nomTeclat, llista, llistafreq, i, n, m));
     }
 
 }

@@ -248,6 +248,12 @@ public class CtrlDomini {
         return PerfilActual.consultaTeclat(nomTeclat);
     }
 
+    public void modificarLayoutTeclat(String nomTeclat, int n, int m) throws ExcepcionsCreadorTeclat {
+        Idioma idiomaTeclat = idiomes.getIdioma(PerfilActual.getIdiomaTeclat(nomTeclat));
+        LlistaFrequencies llista = llistes.getLlistaFreq(PerfilActual.getLlistaTeclat(nomTeclat));
+        PerfilActual.modificarLayoutTeclat(nomTeclat, llista.getNom(), llista.getFrequencies(), idiomaTeclat, n, m);
+    }
+
     public Vector<String> consultaAlfabets() {
         Vector<String> sdades = new Vector<String>();
         TreeMap<String, Alfabet> Alfabets = alfabets.getAlfabets();

@@ -51,7 +51,7 @@ public class Teclat {
 
     //Pre:
     //Post: es retorna el nom del teclat
-    public String getNomTeclat() {
+    public String getNom() {
         return nom;
     }
 
@@ -67,7 +67,11 @@ public class Teclat {
         return null;
     }
 
-    public String getNomIdiomaTeclat() {
+    public String getNomIdioma() {
         return idioma.getNom();
+    }
+
+    public void modificarLayout(int n, int m) {
+
     }
 }

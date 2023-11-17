@@ -102,7 +102,12 @@ public class DriverTeclats {
                 System.out.println();
             }
             System.out.println();
-            System.out.println("El layout del teclat es de " + teclat.length + " files x " + teclat[0].length + " columnes");
+            System.out.println("El layout del teclat ara mateix es de " + teclat.length + " files x " + teclat[0].length + " columnes");
+            System.out.println("Introdueix el nou nombre de files:");
+            int numf = s.nextInt();
+            System.out.println("Introdueix el nou nombre de columnes:");
+            int numc = s.nextInt();
+            controlador.modificarLayoutTeclat(nomSeleccio, numf, numc);
         }
     }
 
