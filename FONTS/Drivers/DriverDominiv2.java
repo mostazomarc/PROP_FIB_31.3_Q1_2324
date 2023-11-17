@@ -18,14 +18,8 @@ public class DriverDominiv2 {
         controlador = controlador.getInstance();
         dTeclats = new DriverTeclats();
         dDades = new DriverDades();
-        s = new Scanner(System.in);
-
         try {
-            controlador.iniciaInstancia("Prova");
-            controlador.afegirAlfabet("Llatí.txt");
-            controlador.afegirIdioma("Català","llatí","llista","catalaFreq.txt");
-            Map<String, Integer> novesEntrades = new HashMap<>();
-            controlador.novaLlistaPerfil("llista","catalaFreq.txt", "Català", novesEntrades);
+            controlador.carregarDades();
         } catch (PerfilJaExisteix e1 ) {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (PerfilNoExisteix e2 ) {
@@ -35,6 +29,8 @@ public class DriverDominiv2 {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        s = new Scanner(System.in);
+
 
 
         System.out.println("\n ##################### BENVINGUT AL SISTEMA CREADOR DE TECLATS ##################### \n");

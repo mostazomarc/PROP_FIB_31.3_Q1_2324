@@ -21,13 +21,13 @@ public class CtrlDomini {
 
     //Pre:
     //Post: Es crea una instancia de domini.
-    public CtrlDomini(){
+    public CtrlDomini() {
         inicialitzar();
     }
 
     //Pre:
     //Post: Retorna la instancia de Controlador Domini. Si no existeix cap instancia de CtrlDomini, es crea.
-    public static CtrlDomini getInstance(){ //CtrlDomini es singleton
+    public static CtrlDomini getInstance() { //CtrlDomini es singleton
         if(singletonObject == null){
             singletonObject = new CtrlDomini();
         }
@@ -36,13 +36,22 @@ public class CtrlDomini {
 
     //Pre:
     //Post: S'inicialitzen les variables necessaries.
-    public void inicialitzar() {
+    public void inicialitzar(){
         ctrlFreqFile = CtrlFile.getInstance();
         perfils = CtrlPersPerfil.getInstance(this);
-        llistes = CtrlPersFreq.getInstance();
-        alfabets = CtrlPersAlfabets.getInstance();
-        idiomes = CtrlPersIdiomes.getInstance();
+        llistes = CtrlPersFreq.getInstance(this);
+        alfabets = CtrlPersAlfabets.getInstance(this);
+        idiomes = CtrlPersIdiomes.getInstance(this);
         Estrategia = "BranchAndBound"; //estrategia per defecte
+    }
+
+    //Pre:
+    //Post: Es carreguen les dades guardades del sitema a memòria
+    public void carregarDades() throws ExcepcionsCreadorTeclat{
+        perfils.carregarPerfil();
+        alfabets.carregarAlfabets();
+        idiomes.carregarIdiomes();
+        llistes.carregarFrequencies();
     }
 
     //Pre: Es rep un nom d'usuari

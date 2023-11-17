@@ -3,6 +3,7 @@ package Dades;
 import Domini.LlistaFrequencies;
 import Domini.Idioma;
 import Excepcions.*;
+import ControladorsDomini.CtrlDomini;
 
 import java.io.*;
 import java.util.*;
@@ -12,6 +13,8 @@ public class CtrlPersFreq {
 
     //si canviesis de perfil tindires una nova llista
     private Map<String,LlistaFrequencies> frequencies;
+
+    private CtrlDomini controlador;
 
     private void comprovaLlistaNoExisteix(String nomLlista) throws LlistaFreqNoExisteix {
         if (!frequencies.containsKey(nomLlista)) throw new LlistaFreqNoExisteix(nomLlista);
@@ -23,16 +26,22 @@ public class CtrlPersFreq {
 
     //Pre:
     //Post: Retorna la instancia de CtrlFreqFile, si no existeix cap CtrlFreqFile es crea.
-    public static CtrlPersFreq getInstance(){
+    public static CtrlPersFreq getInstance(CtrlDomini c){
         if(singletonObject == null)
-            singletonObject = new CtrlPersFreq(){
+            singletonObject = new CtrlPersFreq(c){
 
             };
         return singletonObject;
     }
 
-    private CtrlPersFreq() {
+    private CtrlPersFreq(CtrlDomini c) {
         frequencies = new HashMap<>();
+        controlador = c;
+    }
+
+    public void carregarFrequencies() throws ExcepcionsCreadorTeclat {
+        Map<String, Integer> novesEntrades = new HashMap<>();
+        controlador.novaLlistaPerfil("llista","catalaFreq.txt", "Català", novesEntrades);
     }
 
 
