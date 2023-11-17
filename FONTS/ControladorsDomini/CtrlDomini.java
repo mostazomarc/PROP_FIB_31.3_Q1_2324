@@ -221,6 +221,12 @@ public class CtrlDomini {
         idiomes.afegirIdioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
     }
 
+    public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
+        if (!idiomes.existeix(nomIdioma)) throw new IdiomaNoExisteix();
+        // if (teclats.idiomaEnUs(nomIdioma) || llistes.idiomaEnUs(nomIdioma)) throw new IdiomaEnUs();
+        idiomes.eliminarIdioma(nomIdioma);
+    }
+
     public Vector<String> consultaIdiomes() {
         Vector<String> sdades = new Vector<String>();
         TreeMap<String, Idioma> Idiomes = idiomes.getIdiomes();

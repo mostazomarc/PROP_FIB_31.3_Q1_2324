@@ -36,6 +36,13 @@ public class CtrlPersIdiomes {
         Idiomes.put(nomIdioma, nouIdioma);
     }
 
+    public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
+        Idioma i = getIdioma(nomIdioma);
+        Alfabet a = i.getAlfabet();
+        a.treureIdioma(nomIdioma);
+        Idiomes.remove(nomIdioma);
+    }
+
     //Pre:
     //Post: Retorna TRUE si existeix un Idioma amb nomIdioma, FALSE en cas contrari
     public boolean existeix(String nomIdioma) {

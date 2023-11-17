@@ -73,6 +73,7 @@ public class DriverDades {
         else if (num == 3) afegirIdioma();
         else if (num == 4) eliminarLlista();
         else if (num == 5) eliminarAlfabet();
+        else if (num == 6) eliminarIdioma();
     }
 
     //Pre:
@@ -327,6 +328,21 @@ public class DriverDades {
         }
         catch (FormatNoValid e2) {
             System.out.println("ERROR: " + e2.getMessage());
+        }
+    }
+
+    public void eliminarIdioma() throws Exception {
+        System.out.println("### Eliminar Idioma ###");
+        System.out.println("Introdueixi el nom de l'Idioma: ");
+        String nomIdioma = s.next();
+        try {
+            controlador.eliminarIdioma(nomIdioma);
+        }
+        catch (IdiomaNoExisteix e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+        catch (AlfabetEnUs e1) {
+            System.out.println("ERROR: " + e1.getMessage());
         }
     }
 
