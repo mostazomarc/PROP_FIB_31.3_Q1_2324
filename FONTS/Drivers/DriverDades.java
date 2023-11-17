@@ -320,8 +320,6 @@ public class DriverDades {
     }
 
 
-
-
     public static void main(String[] args) {
         DriverDades dd = new DriverDades();
         System.out.println("Estas provant el driver del controlador de la capa domini\n");

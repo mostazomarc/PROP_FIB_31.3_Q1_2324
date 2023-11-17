@@ -1,7 +1,7 @@
 package Domini;
 
-import Domini.*;
-import Stubs.*;
+import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.*;
 
 import java.util.*;
 
@@ -14,21 +14,32 @@ public class Teclat {
     private Idioma idioma;
     private String nomllista;
 
+    private void comprovaLayoutValid(int size, int n, int m) throws LayoutNoValid{
+//        System.out.println(n);
+//        System.out.println(m);
+        System.out.println(size);
+        if (size > n*m) throw new LayoutNoValid();
+    }
+
     //Pre:
     //Post: es crea un teclat amb nom a partir d'una llista de freqüencies i un idioma
-    public Teclat(String nom, String nomll, Map<String, Integer> llistafreq, Idioma i, int n, int m) {
+    public Teclat(String nom, String nomll, Map<String, Integer> llistafreq, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat{
         this.nom = nom;
         idioma = i;
         nomllista = nomll;
+        int size = (i.getLletres()).size();
+        comprovaLayoutValid(size,n,m);
         dimX = n;
         dimY = m;
         Estrategia estrategia = new BranchandBound();
         disposicio = estrategia.solve(llistafreq, i.getLletres(), dimX, dimY);
     }
 
-    public Teclat(String nom, Idioma i, int n, int m) {
+    public Teclat(String nom, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat{
         this.nom = nom;
         idioma = i;
+        int size = (i.getLletres()).size();
+        comprovaLayoutValid(size,n,m);
         dimX = n;
         dimY = m;
         Estrategia estrategia = new BranchandBound();

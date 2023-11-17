@@ -31,7 +31,7 @@ public class DriverTeclats {
 
     //Pre:
     //Post: Es mostra el menu consultar teclats i s'executa l'opció escollida
-    public void gestionarTeclats() {
+    public void gestionarTeclats() throws Exception{
         System.out.println("### Gestionar Teclats ###");
         printMenuGestionarTeclats();
         esperarSeleccioGestionarTeclats();
@@ -50,7 +50,7 @@ public class DriverTeclats {
 
     //Pre:
     //Post: S'espera que l'usuari indiqui la funcionalitat que vol executar i l'executa
-    public void esperarSeleccioGestionarTeclats() {
+    public void esperarSeleccioGestionarTeclats() throws Exception{
         System.out.println("Escull una funcionalitat indicant el seu numero corresponent:");
         int num = s.nextInt();
         netejaTerminal();
@@ -74,7 +74,7 @@ public class DriverTeclats {
 
     //Pre:
     //Post:
-    public void crearTeclatLlistaPropia() {
+    public void crearTeclatLlistaPropia() throws Exception{
         System.out.println("### Crear Teclat Llista Pròpia ###");
         System.out.println("Introdueixi el nom del Teclat: ");
         String nomTeclat= s.next();
@@ -92,13 +92,15 @@ public class DriverTeclats {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (IdiomaNoExisteix e2 ) {
             System.out.println("ERROR: " + e2.getMessage());
+        } catch (LayoutNoValid e3) {
+            System.out.println("ERROR: " + e3.getMessage());
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void crearTeclatSenseLlistaPropia() {
+    public void crearTeclatSenseLlistaPropia() throws Exception{
         System.out.println("### Crear Teclat Llista Pròpia ###");
         System.out.println("Introdueixi el nom del Teclat: ");
         String nomTeclat= s.next();
@@ -114,6 +116,8 @@ public class DriverTeclats {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (IdiomaNoExisteix e2 ) {
             System.out.println("ERROR: " + e2.getMessage());
+        } catch (LayoutNoValid e3) {
+            System.out.println("ERROR: " + e3.getMessage());
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -164,7 +168,7 @@ public class DriverTeclats {
                     String idioma = controlador.getNomIdiomaTeclat(nomt);
                     String llistafreq = controlador.getNomLListaTeclat(nomt);
                     System.out.println();
-                    System.out.println(i + ". Nom: " + nomt + " Idioma: " + idioma + " Llista de Freqüències: " + llistafreq);
+                    System.out.println(i + ".  Nom: " + nomt + " Idioma: " + idioma + " Llista de Freqüències: " + llistafreq);
                     System.out.println();
                     ++i;
                 }
