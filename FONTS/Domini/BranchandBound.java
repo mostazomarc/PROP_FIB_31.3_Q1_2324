@@ -7,6 +7,7 @@ import Domini.Teclat;
 import Domini.HungarianAlgorithm;
 import Domini.Nodo;
 import Domini.pos;
+import Domini.NodoComparator;
 
 public class BranchandBound implements Estrategia {
     // Atributos
@@ -155,13 +156,6 @@ public class BranchandBound implements Estrategia {
         }
 
         return termino_1 + coste_termino_2;
-    }
-    class NodoComparator implements Comparator<Nodo> {
-
-        @Override
-        public int compare(Nodo o1, Nodo o2) {
-            return Double.compare(o1.cota, o2.cota);
-        }
     }
 
     private void algoritm_bab(int n_filas, int n_columnas, Set<Character> lletres, Map<Character, Integer> letra_pos){
