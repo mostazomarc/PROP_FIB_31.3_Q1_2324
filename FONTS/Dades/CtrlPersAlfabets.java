@@ -48,7 +48,7 @@ public class CtrlPersAlfabets {
     public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
         Alfabet a = getAlfabet(nomAlfabet);
         if (a.numIdiomes() != 0) throw new AlfabetEnUs(nomAlfabet);
-        Alfabets.remove(nomAlfabet);
+        Alfabets.remove(nomAlfabet.toLowerCase());
     }
 
     //Pre:
