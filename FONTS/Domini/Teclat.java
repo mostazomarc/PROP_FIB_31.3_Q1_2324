@@ -15,9 +15,6 @@ public class Teclat {
     private String nomllista;
 
     private void comprovaLayoutValid(int size, int n, int m) throws LayoutNoValid{
-//        System.out.println(n);
-//        System.out.println(m);
-        System.out.println(size);
         if (size > n*m) throw new LayoutNoValid(size, n, m);
     }
 
@@ -67,7 +64,6 @@ public class Teclat {
     //Pre:
     //Post: es canvia la disposició del teclat
     public char[][] canviaDisposicioTeclat() {
-
         return null;
     }
 
