@@ -67,6 +67,11 @@ public class Perfil {
     //Post: S'elimina la llista indicada per nomLlista
     public void eliminaLlista(String nomLlista) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(nomLlista);
+        for (Map.Entry<String, Teclat> Teclat : teclats.entrySet()) {
+            String nom = Teclat.getKey();
+            Teclat teclat = Teclat.getValue();
+            if (teclat.getNomLlistaFreq().equals(nomLlista)) throw new LlistaFreqEnUs(nomLlista);
+        }
         frequencies.remove(nomLlista);
     }
 

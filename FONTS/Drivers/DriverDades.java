@@ -132,6 +132,8 @@ public class DriverDades {
                 controlador.eliminarLlista(nomLlista);
             } catch (LlistaFreqNoExisteix e1) {
                 System.out.println("ERROR: " + e1.getMessage());
+            } catch (LlistaFreqEnUs e2 ) {
+                System.out.println("ERROR: " + e2.getMessage());
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
