@@ -73,6 +73,12 @@ public class CtrlPersFreq {
         frequencies.remove(nomLlista);
     }
 
+    public void comprovarUsIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat{
+        for (Map.Entry<String, LlistaFrequencies> llista : frequencies.entrySet()) {
+            if (llista.getValue().getNomIdioma().equals(nomIdioma)) throw new IdiomaEnUs(nomIdioma);
+        }
+    }
+
 
 
     public LlistaFrequencies getLlistaFreq(String nomLlista) {
