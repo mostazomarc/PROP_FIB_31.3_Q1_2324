@@ -11,31 +11,31 @@ public class Perfil {
 
     private String Usuari;
     private String Contrasenya;
-    private Set<String>  frequencies;
+    private Map<String, LlistaFrequencies>  frequencies;
     private Map<String, Teclat>  teclats;
 
     private CtrlDomini controlador;
 
     private void comprovaLlistaNoExisteix(String nomLlista) throws LlistaFreqNoExisteix {
-        if (!frequencies.contains(nomLlista)) throw new LlistaFreqNoExisteix(nomLlista);
+        if (!frequencies.containsKey(nomLlista)) throw new LlistaFreqNoExisteix(nomLlista);
     }
 
     private void comprovaLlistaJaExisteix(String nomLlista) throws LlistaFreqJaExisteix {
-        if (frequencies.contains(nomLlista)) throw new LlistaFreqJaExisteix(nomLlista);
+        if (frequencies.containsKey(nomLlista)) throw new LlistaFreqJaExisteix(nomLlista);
     }
 
 
     public Perfil (String User, String pswd, CtrlDomini cd) {
         Usuari = User;
         Contrasenya = pswd;
-        frequencies = new HashSet<>();
+        frequencies = new HashMap<>();
         teclats = new HashMap<>();
         controlador = cd;
     }
 
     public Perfil (String User, CtrlDomini cd) {
         Usuari = User;
-        frequencies = new HashSet<>();
+        frequencies = new HashMap<>();
         teclats = new HashMap<>();
         controlador = cd;
     }
@@ -58,9 +58,9 @@ public class Perfil {
 
     //Pre:
     //Post: S'afegeixen les noves entrades a la llista de frequencies name o es crea
-    public void afegirLlistaFreq (String name) throws ExcepcionsCreadorTeclat {
-        comprovaLlistaJaExisteix(name);
-        frequencies.add(name);
+    public void afegirLlistaFreq (LlistaFrequencies llista) throws ExcepcionsCreadorTeclat {
+        comprovaLlistaJaExisteix(llista.getNom());
+        frequencies.put(llista.getNom(),llista);
     }
 
 
@@ -68,34 +68,39 @@ public class Perfil {
     //Post: S'elimina la llista indicada per nomLlista
     public void eliminaLlista(String nomLlista) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(nomLlista);
+        for (Map.Entry<String, Teclat> Teclat : teclats.entrySet()) {
+            String nom = Teclat.getKey();
+            Teclat teclat = Teclat.getValue();
+            if (teclat.getNomLlistaFreq().equals(nomLlista)) throw new LlistaFreqEnUs(nomLlista);
+        }
         frequencies.remove(nomLlista);
     }
 
     //Pre:
     //Post: Es retorna el conjunt de noms de les llistes guardades al perfil
     public List<String> getNomAllLlistes() {
-        return new ArrayList<>(frequencies);
+        Set<String> noms = frequencies.keySet();
+        return new ArrayList<>(noms);
     }
 
     //Pre: La llista amb nom nomLlista existeix
     //Post: Es retorna el nom de l'idioma de la llista amb nom nomLlista
     public String getNomIdiomaLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
         comprovaLlistaNoExisteix(nomLlista);
-        return controlador.getLlista(nomLlista).getNomIdioma();
+        return frequencies.get(nomLlista).getNomIdioma();
     }
 
     //Pre:
     //Post: S'obte la Llista de paraules i les seves frequencies amb nom nomSeleccio
     public Map<String, Integer> consultaLlista(String nomSeleccio) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(nomSeleccio);
-        return controlador.getLlista(nomSeleccio).getFrequencies();
+        return frequencies.get(nomSeleccio).getFrequencies();
     }
 
     public void crearTeclatLlistaPropia(String NomTeclat, String NomLlista, Idioma idioma, int n, int m) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(NomLlista);
-        if (teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
-        Map<String,Integer> freqllista = controlador.getLlista(NomLlista).getFrequencies();
-        teclats.put(NomTeclat,new Teclat(NomTeclat,NomLlista, freqllista, idioma, n, m));
+        if (teclats.containsKey(NomTeclat)) throw new TeclatJaExisteix(NomTeclat);
+        teclats.put(NomTeclat,new Teclat(NomTeclat,NomLlista, frequencies.get(NomLlista).getFrequencies(), idioma, n, m));
     }
 
     public void crearTeclatLlistaIdioma(String NomTeclat, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat {

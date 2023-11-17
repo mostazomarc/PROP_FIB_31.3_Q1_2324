@@ -59,6 +59,11 @@ public class CtrlPersFreq {
         return llista;
     }
 
+    public void eliminarLlista(String nomLlista) throws ExcepcionsCreadorTeclat {
+        comprovaLlistaNoExisteix(nomLlista);
+        frequencies.remove(nomLlista);
+    }
+
 
 
     public LlistaFrequencies getLlistaFreq(String nomLlista) {

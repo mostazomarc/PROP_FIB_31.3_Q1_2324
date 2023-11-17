@@ -178,7 +178,7 @@ public class CtrlDomini {
         if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
         Idioma idiomaLlista = idiomes.getIdioma(i);
         LlistaFrequencies llista = llistes.afegirLlistaFreq(filename,idiomaLlista,novesEntrades);
-        PerfilActual.afegirLlistaFreq(llista.getNom());
+        PerfilActual.afegirLlistaFreq(llista);
     }
 
     public List<String> getNomsTeclats() { return PerfilActual.getNomsTeclats();}
@@ -203,6 +203,7 @@ public class CtrlDomini {
 
     public void eliminarLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
         PerfilActual.eliminaLlista(nomLlista);
+        llistes.eliminarLlista(nomLlista);
     }
 
     public void afegirAlfabet(String filename) throws ExcepcionsCreadorTeclat {
