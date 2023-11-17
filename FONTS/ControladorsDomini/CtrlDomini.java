@@ -220,6 +220,11 @@ public class CtrlDomini {
         llistes.eliminarLlista(nomLlista);
     }
 
+    public void eliminarTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat{
+        PerfilActual.eliminarTeclat(nomTeclat);
+        //ELIMINAR TECLAT DE CONTROLADOR DE PERSISTENCIA
+    }
+
     public void afegirAlfabet(String filename) throws ExcepcionsCreadorTeclat {
         System.out.println("Llegint arxiu "+ filename +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);

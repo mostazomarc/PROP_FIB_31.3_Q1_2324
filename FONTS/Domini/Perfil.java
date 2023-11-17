@@ -116,7 +116,7 @@ public class Perfil {
     }
 
     public void eliminarTeclat(String NomTeclat) throws ExcepcionsCreadorTeclat{
-        if (teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
+        if (!teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
         teclats.remove(NomTeclat);
     }
 
