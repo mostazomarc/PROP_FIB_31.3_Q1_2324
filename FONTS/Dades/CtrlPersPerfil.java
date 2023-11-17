@@ -30,6 +30,8 @@ public class CtrlPersPerfil {
         controlador = c;
     }
 
+    //Pre:
+    //Post: Carrèga els perfils dels arxius on estàn guardats (de moment crea noves, funcionarà al tenir capa de persistencia)
     public void carregarPerfil() throws ExcepcionsCreadorTeclat {
         controlador.iniciaInstancia("Prova");
     }

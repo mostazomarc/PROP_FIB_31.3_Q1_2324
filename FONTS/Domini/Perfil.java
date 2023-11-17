@@ -16,10 +16,14 @@ public class Perfil {
 
     private CtrlDomini controlador;
 
+    //Pre:
+    //Post: Si la llista idetificada per nomLlista no existeix llença una excepció
     private void comprovaLlistaNoExisteix(String nomLlista) throws LlistaFreqNoExisteix {
         if (!frequencies.containsKey(nomLlista)) throw new LlistaFreqNoExisteix(nomLlista);
     }
 
+    //Pre:
+    //Post: Si la llista idetificada per nomLlista ja existeix llença una excepció
     private void comprovaLlistaJaExisteix(String nomLlista) throws LlistaFreqJaExisteix {
         if (frequencies.containsKey(nomLlista)) throw new LlistaFreqJaExisteix(nomLlista);
     }
@@ -40,18 +44,26 @@ public class Perfil {
         controlador = cd;
     }
 
+    //Pre:
+    //Post: S'obté el nom d'usuari del perfil
     public String getUsuari() {
         return Usuari;
     }
 
+    //Pre:
+    //Post: S'obté la contrasenya del perfil
     public String getContrasenya() {
         return Contrasenya;
     }
 
+    //Pre:
+    //Post: Es canvia el nom d'usuari del perfil
     public void canviaUsuari (String newUs) {
         Usuari = newUs;
     }
 
+    //Pre:
+    //Post: Es canvia la contrasenya del perfil
     public void canviaContrasenya (String newCon) {
         Contrasenya = newCon;
     }
@@ -104,38 +116,51 @@ public class Perfil {
         return frequencies.get(nomSeleccio).getFrequencies();
     }
 
+    //Pre:
+    //Post: Es crea un teclat amb nom: NomTeclat i a partir de la llista identificada per NomLlista, l'idioma idioma i amb layout n*m
     public void crearTeclatLlistaPropia(String NomTeclat, String NomLlista, Idioma idioma, int n, int m) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(NomLlista);
         if (teclats.containsKey(NomTeclat)) throw new TeclatJaExisteix(NomTeclat);
         teclats.put(NomTeclat,new Teclat(NomTeclat,NomLlista, frequencies.get(NomLlista).getFrequencies(), idioma, n, m));
     }
 
+    //Pre:
+    //Post: Es crea un teclat amb nom: NomTeclat i a partir de la llista de l'idioma i l'idioma idioma i amb layout n*m
     public void crearTeclatLlistaIdioma(String NomTeclat, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat {
         if (teclats.containsKey(NomTeclat)) throw new TeclatJaExisteix(NomTeclat);
         teclats.put(NomTeclat,new Teclat(NomTeclat, i, n, m));
     }
 
+    //Pre:
+    //Post: S'elimina el teclat identificat per NomTeclat
     public void eliminarTeclat(String NomTeclat) throws ExcepcionsCreadorTeclat{
         if (!teclats.containsKey(NomTeclat)) throw new TeclatNoExisteix(NomTeclat);
         teclats.remove(NomTeclat);
     }
 
+    //Pre:
+    //Post: S'obté una llist aamb els noms de tots els teclats del perfil
     public List<String> getNomsTeclats()  {
         Set<String> noms = teclats.keySet();
         return new ArrayList<>(noms);
     }
 
+    //Pre:
+    //Post: S'obté el nom de l'idioma del teclat identificat per nomTeclat
     public String getIdiomaTeclat (String nomTeclat) throws ExcepcionsCreadorTeclat {
         if (!teclats.containsKey(nomTeclat)) throw new TeclatNoExisteix(nomTeclat);
         return teclats.get(nomTeclat).getNomIdiomaTeclat();
     }
 
-
+    //Pre:
+    //Post: S'obté la el nom de la llista utilitzada per crear el teclat identificat per nomTeclat
     public String getLlistaTeclat (String nomTeclat) throws ExcepcionsCreadorTeclat {
         if (!teclats.containsKey(nomTeclat)) throw new TeclatNoExisteix(nomTeclat);
         return teclats.get(nomTeclat).getNomLlistaFreq();
     }
 
+    //Pre:
+    //Post: S'obté la disposició del teclat identficat per nomTeclat
     public char[][] consultaTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat {
         if (!teclats.containsKey(nomTeclat)) throw new TeclatNoExisteix(nomTeclat);
         return teclats.get(nomTeclat).getDisposicio();

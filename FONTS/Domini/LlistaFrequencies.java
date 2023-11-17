@@ -47,6 +47,8 @@ public class LlistaFrequencies {
         return idioma.getNom();
     }
 
+    //Pre:
+    //Post: Es modifica la llista amb les noves entrades: novaLlista, es sobrescriu la llista de paraules anterior
     public void modificarLlista(Map<String,Integer> novaLlista) {
         LlistaParaules = novaLlista;
     }

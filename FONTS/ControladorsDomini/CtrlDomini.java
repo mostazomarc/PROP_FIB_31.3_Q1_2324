@@ -67,9 +67,6 @@ public class CtrlDomini {
         }
     }
 
-    public LlistaFrequencies getLlista(String nomLlista) {
-        return llistes.getLlistaFreq(nomLlista);
-    }
 
 
     //Pre:
@@ -190,6 +187,8 @@ public class CtrlDomini {
         PerfilActual.afegirLlistaFreq(llista);
     }
 
+    //Pre:
+    //Post: Es modifica el la llista identidicada per nomLlista amb les dades entrades
     public void modificarLlistaPerfil(String tipusArxiu, String filename, String nomLlista, Map<String,Integer> novesEntrades) throws Exception {
         if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
         PerfilActual.modificarLlista(nomLlista, novesEntrades);
@@ -215,11 +214,15 @@ public class CtrlDomini {
         return PerfilActual.consultaLlista(nomSeleccio);
     }
 
+    //Pre:
+    //Post: S'elimina la llista identificada per nomLlista
     public void eliminarLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
         PerfilActual.eliminaLlista(nomLlista);
         llistes.eliminarLlista(nomLlista);
     }
 
+    //Pre:
+    //Post: S'elimina el teclat identificat per nomTeclat
     public void eliminarTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat{
         PerfilActual.eliminarTeclat(nomTeclat);
         //ELIMINAR TECLAT DE CONTROLADOR DE PERSISTENCIA

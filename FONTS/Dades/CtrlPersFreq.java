@@ -16,10 +16,14 @@ public class CtrlPersFreq {
 
     private CtrlDomini controlador;
 
+    //Pre:
+    //Post: Si la llista idetificada per nomLlista no existeix llença una excepció
     private void comprovaLlistaNoExisteix(String nomLlista) throws LlistaFreqNoExisteix {
         if (!frequencies.containsKey(nomLlista)) throw new LlistaFreqNoExisteix(nomLlista);
     }
 
+    //Pre:
+    //Post: Si la llista idetificada per nomLlista ja existeix llença una excepció
     private void comprovaLlistaJaExisteix(String nomLlista) throws LlistaFreqJaExisteix {
         if (frequencies.containsKey(nomLlista)) throw new LlistaFreqJaExisteix(nomLlista);
     }
@@ -34,11 +38,15 @@ public class CtrlPersFreq {
         return singletonObject;
     }
 
+    //Pre:
+    //Post: Crea un conjunt de llistes de frequencies i guarda el controlador
     private CtrlPersFreq(CtrlDomini c) {
         frequencies = new HashMap<>();
         controlador = c;
     }
 
+    //Pre:
+    //Post: Carrèga les llistes de freqüencia dels arxius on estàn guardades (de moment crea noves, funcionarà al tenir capa de persistencia)
     public void carregarFrequencies() throws Exception {
         Map<String, Integer> novesEntrades = new HashMap<>();
         controlador.novaLlistaPerfil("llista","catalaFreq.txt", "Català", novesEntrades);
@@ -57,18 +65,24 @@ public class CtrlPersFreq {
 
     }
 
+    //Pre:
+    //Post: S'afegeix una nova llista de frequencies amb nomLlista i idioma
     public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i) {
         LlistaFrequencies llista = new LlistaFrequencies(nomLlista,i);
         frequencies.put(llista.getNom(),llista);
         return llista;
     }
 
+    //Pre:
+    //Post: Es crea i s'afegeix una nova llista amb  nom: nomLlista, idioma: i i frequencies: novesEntrades
     public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i, Map<String, Integer> novesEntrades) {
         LlistaFrequencies llista = new LlistaFrequencies(nomLlista,i,novesEntrades);
         frequencies.put(llista.getNom(),llista);
         return llista;
     }
 
+    //Pre:
+    //Post: S'elimina la llista identificada per nomLlista
     public void eliminarLlista(String nomLlista) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(nomLlista);
         frequencies.remove(nomLlista);
@@ -83,8 +97,8 @@ public class CtrlPersFreq {
         }
     }
 
-
-
+    //Pre:
+    //Post: S'obtè la llista identificada per nomLlista
     public LlistaFrequencies getLlistaFreq(String nomLlista) {
         return frequencies.get(nomLlista);
     }
