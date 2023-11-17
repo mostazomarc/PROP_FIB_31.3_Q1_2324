@@ -31,7 +31,7 @@ public class CtrlPersIdiomes {
         controlador = c;
     }
 
-    public void carregarIdiomes() throws ExcepcionsCreadorTeclat{
+    public void carregarIdiomes() throws Exception {
         controlador.afegirIdioma("Català","llatí","llista","catalaFreq.txt");
     }
 

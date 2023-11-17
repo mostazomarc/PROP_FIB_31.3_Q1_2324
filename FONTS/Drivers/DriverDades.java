@@ -111,6 +111,8 @@ public class DriverDades {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (FormatNoValid e2) {
             System.out.println("ERROR: " + e2.getMessage());
+        } catch (FileNotFoundException e3) {
+            System.out.println("ERROR: " + e3.getMessage());
         }
     }
 
@@ -164,6 +166,8 @@ public class DriverDades {
         } catch (IdiomaNoExisteix e2) {
             System.out.println("ERROR: " + e2.getMessage());
         } catch (FormatNoValid e3) {
+            System.out.println("ERROR: " + e3.getMessage());
+        } catch (FileNotFoundException e3) {
             System.out.println("ERROR: " + e3.getMessage());
         }
     }
@@ -333,6 +337,8 @@ public class DriverDades {
         }
         catch (FormatNoValid e2) {
             System.out.println("ERROR: " + e2.getMessage());
+        } catch (FileNotFoundException e3) {
+            System.out.println("ERROR: " + e3.getMessage());
         }
     }
 
@@ -372,6 +378,8 @@ public class DriverDades {
         }
         catch (FormatNoValid e2) {
             System.out.println("ERROR: " + e2.getMessage());
+        } catch (FileNotFoundException e3) {
+            System.out.println("ERROR: " + e3.getMessage());
         }
     }
 

@@ -7,10 +7,15 @@ import java.io.*;
 public class DriverLectorFreq {
     private CtrlFile prova;
 
-    public void llegirArxiuFreq() throws FileNotFoundException {
+    public void llegirArxiuFreq() throws Exception {
         prova = prova.getInstance();
         System.out.println("Llegint arxiu LlistatFrequencies.txt\n");
-        List<String> LlistaFrequencies = prova.llegirArxiu("LlistatFrequencies.txt");
+        List<String> LlistaFrequencies = new ArrayList<>();
+        try {
+            LlistaFrequencies = prova.llegirArxiu("LlistatFrequencies.txt");
+        } catch (FileNotFoundException e3) {
+            System.out.println("ERROR: " + e3.getMessage());
+        }
 
         for (String linia : LlistaFrequencies) {
             String[] parella = linia.split(" ");
@@ -18,7 +23,7 @@ public class DriverLectorFreq {
         }
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws Exception {
         DriverLectorFreq dl = new DriverLectorFreq();
         System.out.println("Estas provant el driver de la classe CtrlFreqFile\n");
         dl.llegirArxiuFreq();

@@ -39,9 +39,10 @@ public class CtrlPersFreq {
         controlador = c;
     }
 
-    public void carregarFrequencies() throws ExcepcionsCreadorTeclat {
+    public void carregarFrequencies() throws Exception {
         Map<String, Integer> novesEntrades = new HashMap<>();
         controlador.novaLlistaPerfil("llista","catalaFreq.txt", "Català", novesEntrades);
+
     }
 
 

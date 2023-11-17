@@ -26,7 +26,7 @@ public class CtrlPersAlfabets {
         controlador = c;
     }
 
-    public void carregarAlfabets() throws ExcepcionsCreadorTeclat {
+    public void carregarAlfabets() throws Exception {
         controlador.afegirAlfabet("Llatí.txt");
     }
 
