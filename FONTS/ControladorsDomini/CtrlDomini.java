@@ -221,10 +221,20 @@ public class CtrlDomini {
         alfabets.afegirAlfabet(filename, LlistaLlegida);
     }
 
+    public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
+        alfabets.eliminarAlfabet(nomAlfabet);
+    }
+
     public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws ExcepcionsCreadorTeclat {
         Alfabet alfabetIdioma = alfabets.getAlfabet(nomAlfabet);
         Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filename);
         idiomes.afegirIdioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
+    }
+
+    public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
+        if (!idiomes.existeix(nomIdioma)) throw new IdiomaNoExisteix();
+        // if (teclats.idiomaEnUs(nomIdioma) || llistes.idiomaEnUs(nomIdioma)) throw new IdiomaEnUs();
+        idiomes.eliminarIdioma(nomIdioma);
     }
 
     public Vector<String> consultaIdiomes() {

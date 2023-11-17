@@ -72,6 +72,8 @@ public class DriverDades {
         else if (num == 2) afegirAlfabet();
         else if (num == 3) afegirIdioma();
         else if (num == 4) eliminarLlista();
+        else if (num == 5) eliminarAlfabet();
+        else if (num == 6) eliminarIdioma();
     }
 
     //Pre:
@@ -286,6 +288,21 @@ public class DriverDades {
         }
     }
 
+    public void eliminarAlfabet() throws Exception {
+        System.out.println("### Eliminar Alfabet ###");
+        System.out.println("Introdueixi el nom de l'Alfabet: ");
+        String nomAlfabet = s.next();
+        try {
+            controlador.eliminarAlfabet(nomAlfabet);
+        }
+        catch (AlfabetNoExisteix e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+        catch (AlfabetEnUs e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        }
+    }
+
     public void afegirIdioma() throws Exception {
         System.out.println("### Afegir Idioma ###");
         System.out.println("Introdueixi el nom de l'Idioma: ");
@@ -307,6 +324,21 @@ public class DriverDades {
         }
         catch (FormatNoValid e2) {
             System.out.println("ERROR: " + e2.getMessage());
+        }
+    }
+
+    public void eliminarIdioma() throws Exception {
+        System.out.println("### Eliminar Idioma ###");
+        System.out.println("Introdueixi el nom de l'Idioma: ");
+        String nomIdioma = s.next();
+        try {
+            controlador.eliminarIdioma(nomIdioma);
+        }
+        catch (IdiomaNoExisteix e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+        catch (AlfabetEnUs e1) {
+            System.out.println("ERROR: " + e1.getMessage());
         }
     }
 

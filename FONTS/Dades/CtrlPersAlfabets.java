@@ -2,6 +2,7 @@ package Dades;
 
 import ControladorsDomini.CtrlDomini;
 import Domini.Alfabet;
+import Excepcions.AlfabetEnUs;
 import Excepcions.AlfabetJaExisteix;
 import Excepcions.AlfabetNoExisteix;
 import Excepcions.ExcepcionsCreadorTeclat;
@@ -47,6 +48,12 @@ public class CtrlPersAlfabets {
 
         Alfabet nouAlfabet = new Alfabet(nomAlfabet, lletres);
         Alfabets.put(nomAlfabet.toLowerCase(), nouAlfabet);
+    }
+
+    public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
+        Alfabet a = getAlfabet(nomAlfabet);
+        if (a.numIdiomes() != 0) throw new AlfabetEnUs(nomAlfabet);
+        Alfabets.remove(nomAlfabet.toLowerCase());
     }
 
     //Pre:
