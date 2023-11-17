@@ -5,7 +5,7 @@ CLASS_INPUT =	./FONTS/Domini/*.java \
 				./FONTS/Stubs/*.java \
 				./FONTS/Excepcions/*.java
 
-CLASS_OUTPUT =	./EXE/
+CLASS_OUTPUT =	./EXE/out/
 
 JAR_OUTPUT =	./EXE/
 
@@ -19,14 +19,18 @@ all:
 	javac -d $(CLASS_OUTPUT) -cp FONTS $(CLASS_INPUT)
 	javac -cp $(JUNIT_JARS) -d $(CLASS_OUTPUT) $(CLASS_INPUT) $(JUNIT_TESTS)
 
+jars:
+	javac -d $(CLASS_OUTPUT) $(CLASS_INPUT) ./FONTS/Drivers/DriverAlgorismeQAP.java ./FONTS/Drivers/DriverHungarianAlgorithm.java ./FONTS/Drivers/DriverDades.java ./FONTS/Drivers/DriverTeclats.java ./FONTS/Drivers/DriverDominiv2.java
+	jar cmvf ./FONTS/Drivers/MF/DriverHungarianAlgorithm.mf $(JAR_OUTPUT)DriverHungarianAlgorithm.jar -C $(CLASS_OUTPUT) .
+
+executaDriverHungarianAlgorithm:
+	java -jar $(JAR_OUTPUT)DriverHungarianAlgorithm.jar
+
 executaDriverDomini:
 	java -cp ./EXE Drivers.DriverDomini
 
 executaDriverDominiv2:
 	java -cp ./EXE Drivers.DriverDominiv2
-
-executaDriverHungarianAlgorithm:
-	java -cp ./EXE Drivers.DriverHungarianAlgorithm
 
 executaDriverAlgorismeQAP:
 	java -cp ./EXE Drivers.DriverAlgorismeQAP
@@ -54,3 +58,4 @@ teclattest: all
 
 clean:
 	rm -r ./EXE/*
+
