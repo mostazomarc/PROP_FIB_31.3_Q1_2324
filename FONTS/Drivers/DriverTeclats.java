@@ -168,7 +168,7 @@ public class DriverTeclats {
                     String idioma = controlador.getNomIdiomaTeclat(nomt);
                     String llistafreq = controlador.getNomLListaTeclat(nomt);
                     System.out.println();
-                    System.out.println(i + ".  Nom: " + nomt + " Idioma: " + idioma + " Llista de Freqüències: " + llistafreq);
+                    System.out.println(i + ". Nom: " + nomt + " Idioma: " + idioma + " Llista de Freqüències: " + llistafreq);
                     System.out.println();
                     ++i;
                 }
@@ -178,6 +178,9 @@ public class DriverTeclats {
                     netejaTerminal();
                     if (nomTeclats.size() < num) throw new TeclatNoExisteix();
                     String nomSeleccio = nomTeclats.get(num - 1);
+                    String idioma = controlador.getNomIdiomaTeclat(nomSeleccio);
+                    String llistafreq = controlador.getNomLListaTeclat(nomSeleccio);
+                    System.out.println(num + ". Nom: " + nomSeleccio + " Idioma: " + idioma + " Llista de Freqüències: " + llistafreq + "\n" );
                     char[][] teclat = controlador.consultaTeclat(nomSeleccio);
                     System.out.println("Disposicio: ");
                     for (int k=0; k<teclat.length; ++k) {
