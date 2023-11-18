@@ -8,12 +8,11 @@ import java.util.*;
 
 public class Teclat {
     private String nom;
-    private char[][] disposicio;
     private int dimX;
     private int dimY;
+    private char[][] disposicio;
     private Idioma idioma;
     private String nomllista;
-
     private Map<String, Integer> llistafreq;
 
     private void comprovaLayoutValid(int n, int m) throws LayoutNoValid{
