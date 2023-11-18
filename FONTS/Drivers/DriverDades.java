@@ -312,6 +312,8 @@ public class DriverDades {
                 }
             } catch (LlistaFreqNoExisteix e1) {
                 System.out.println("ERROR: " + e1.getMessage());
+            } catch (InputMismatchException e) {
+                System.out.println("ERROR: Has d'entrar un número");
             }
         }
         return true;
