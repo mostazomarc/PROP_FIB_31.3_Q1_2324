@@ -251,7 +251,7 @@ public class CtrlDomini {
     public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
         if (!idiomes.existeix(nomIdioma)) throw new IdiomaNoExisteix();
         llistes.comprovarUsIdioma(nomIdioma);
-        //teclats.comprovarUsIdioma(nomIdioma)
+        teclats.comprovarUsIdioma(nomIdioma);
         idiomes.eliminarIdioma(nomIdioma);
         llistes.eliminarLlista("LlistaPred"+nomIdioma);
     }
