@@ -7,6 +7,7 @@ import Domini.*;
 import static org.junit.Assert.*;
 
 import Excepcions.*;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,6 +44,16 @@ public class PerfilTest {
         llistaParaulesProva.put("Adeu", 30);
         llistaParaulesProva.put("Menjar", 30);
         llistaParaulesProva.put("Fideu", 30);
+    }
+
+    //S'eliminen les llistes creades per poder tornarles a crear
+    @After
+    public void eliminarLlistaProva() throws Exception{
+        try {
+            llistes.eliminarLlista("LlistaProva");
+            llistes.eliminarLlista("LlistaProva3");
+            llistes.eliminarLlista("LlistaProva4");
+        } catch (Exception e) {}
     }
 
     @Before
