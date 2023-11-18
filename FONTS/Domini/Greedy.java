@@ -11,6 +11,10 @@ import java.util.Iterator;
 public class Greedy {
     public Nodo solucion_inicial(double[][] mat_traf, double[][] mat_dist, int n_filas, int n_col, Set<Character> lletres){
         char[][] matriz_inicial = new char[n_filas][n_col];
+        for(int i = 0; i < n_filas; i++) {
+            for(int j = 0; j < n_col; j++)
+                matriz_inicial[i][j] = ' ';
+        }
         int peor_posicion = 0;
         int mejor_posicion = 0;
         double total_mejor_pos = Double.MAX_VALUE;
@@ -60,12 +64,12 @@ public class Greedy {
 
         //asignamos la letra con más frecuencia a la mejor posición
         matriz_inicial[mejor_posicion / n_col][mejor_posicion % n_col] = mas_frec;
-        pos p = new pos(mejor_posicion, mejor_posicion % n_col);
+        pos p = new pos(mejor_posicion / n_col, mejor_posicion % n_col);
         ini.put(mas_frec, p);
 
        //asignamos la letra con menor frecuencia a la peor posición
         matriz_inicial[peor_posicion / n_col][peor_posicion % n_col] = menos_frec;
-        pos p1 = new pos(peor_posicion, peor_posicion % n_col);
+        pos p1 = new pos(peor_posicion / n_col, peor_posicion % n_col);
         ini.put(menos_frec, p1);
 
         Nodo nodo_inicial = new Nodo(matriz_inicial, 0, ini);
