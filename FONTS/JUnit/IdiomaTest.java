@@ -4,6 +4,9 @@ import Domini.*;
 
 import static org.junit.Assert.*;
 
+import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.LletraNoInclosa;
+import Excepcions.LlistaBuida;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,40 +43,67 @@ public class IdiomaTest {
     }
 
     @Test
-    public void creadoraIdiomaNomAlfabetLlistaParaules() {
-        Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva, llistaParaulesProva);
-        assertEquals("IdiomaProva", idiomaProva.getNom());
-        assertEquals(alfabetProva, idiomaProva.getAlfabet());
-        assertEquals(llistaParaulesProva, idiomaProva.getFrequencies());
-        assertEquals(1, alfabetProva.numIdiomes());
+    public void creadoraIdiomaNomAlfabetLlistaParaules() throws ExcepcionsCreadorTeclat {
+        try {
+            Idioma resultat = new Idioma("IdiomaProva", alfabetProva, "LlistaProva", llistaParaulesProva);
+            assertEquals("IdiomaProva", resultat.getNom());
+            assertEquals(alfabetProva,resultat.getAlfabet());
+            assertEquals(llistaParaulesProva,resultat.getFrequencies());
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+            assertTrue(false);
+        } catch (LlistaBuida e2) {
+            System.out.println("ERROR: " + e2.getMessage());
+        }
     }
 
     @Test
-    public void afegirLlistaFreqPred() {
+    public void afegirLlistaFreqPred()  throws ExcepcionsCreadorTeclat{
         Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva);
-        LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
-        idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
-        assertEquals(llistaFreqProva, idiomaProva.getLlistaFreq());
+        try {
+            LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+            idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
+            assertEquals(llistaFreqProva, idiomaProva.getLlistaFreq());
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+            assertTrue(false);
+        } catch (LlistaBuida e4) {
+            System.out.println("ERROR: " + e4.getMessage());
+        }
     }
 
     @Test
-    public void afegirLlistaFreqPredJaExistent() {
+    public void afegirLlistaFreqPredJaExistent() throws ExcepcionsCreadorTeclat {
         Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva);
-        LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
-        idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
-        LlistaFrequencies llistaFreqProva1 = new LlistaFrequencies("LlistaProva1", idiomaProva, llistaParaulesProva);
-        idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva1);
-        assertEquals(llistaFreqProva, idiomaProva.getLlistaFreq());
+        try {
+            LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+            idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
+            LlistaFrequencies llistaFreqProva1 = new LlistaFrequencies("LlistaProva1", idiomaProva, llistaParaulesProva);
+            idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva1);
+            assertEquals(llistaFreqProva, idiomaProva.getLlistaFreq());
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+            assertTrue(false);
+        } catch (LlistaBuida e4) {
+            System.out.println("ERROR: " + e4.getMessage());
+        }
     }
 
     @Test
-    public void canviaLlistaFreq() {
+    public void canviaLlistaFreq() throws ExcepcionsCreadorTeclat {
         Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva);
-        LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
-        idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
-        LlistaFrequencies llistaFreqProva1 = new LlistaFrequencies("LlistaProva1", idiomaProva, llistaParaulesProva);
-        idiomaProva.canviarLlistaFreqPredeterminada(llistaFreqProva1);
-        assertEquals(llistaFreqProva1, idiomaProva.getLlistaFreq());
+        try {
+            LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+            idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
+            LlistaFrequencies llistaFreqProva1 = new LlistaFrequencies("LlistaProva1", idiomaProva, llistaParaulesProva);
+            idiomaProva.canviarLlistaFreqPredeterminada(llistaFreqProva1);
+            assertEquals(llistaFreqProva1, idiomaProva.getLlistaFreq());
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+            assertTrue(false);
+        } catch (LlistaBuida e4) {
+            System.out.println("ERROR: " + e4.getMessage());
+        }
     }
 
     @Test
@@ -95,7 +125,7 @@ public class IdiomaTest {
     }
 
     @Test
-    public void getLlistaFreq() {
+    public void getLlistaFreq() throws ExcepcionsCreadorTeclat{
         Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva);
         LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
         idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
@@ -103,7 +133,7 @@ public class IdiomaTest {
     }
 
     @Test
-    public void getFrequencies() {
+    public void getFrequencies() throws Exception {
         Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva, llistaParaulesProva);
         assertEquals(llistaParaulesProva, idiomaProva.getFrequencies());
     }

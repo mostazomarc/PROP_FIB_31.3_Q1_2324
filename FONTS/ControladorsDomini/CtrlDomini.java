@@ -16,6 +16,7 @@ public class CtrlDomini {
     private CtrlPersFreq llistes;
     private CtrlPersAlfabets alfabets; //Controlador de Persistencia d'Alfabets
     private CtrlPersIdiomes idiomes; //Controlador de Persistencia d'Idiomes
+    private CtrlPersTeclats teclats; //Controlador de Persistencia d'Idiomes
     private static CtrlDomini singletonObject;
     private CtrlFile ctrlFreqFile;
 
@@ -42,6 +43,7 @@ public class CtrlDomini {
         llistes = CtrlPersFreq.getInstance(this);
         alfabets = CtrlPersAlfabets.getInstance(this);
         idiomes = CtrlPersIdiomes.getInstance(this);
+        teclats = CtrlPersTeclats.getInstance(this);
         Estrategia = "BranchAndBound"; //estrategia per defecte
     }
 
@@ -57,7 +59,6 @@ public class CtrlDomini {
     //Pre: Es rep un nom d'usuari
     //Post: S'inicia instancia amb l'usuari rebut, si no existeix es crea
     public void iniciaInstancia(String nom) throws ExcepcionsCreadorTeclat{
-        System.out.println("inicia sessio: " + nom +"\n");
         try {
             PerfilActual = perfils.getPerfil(nom);
             llistes.canviaPerfil(nom);
@@ -225,7 +226,7 @@ public class CtrlDomini {
     //Post: S'elimina el teclat identificat per nomTeclat
     public void eliminarTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat{
         PerfilActual.eliminarTeclat(nomTeclat);
-        //ELIMINAR TECLAT DE CONTROLADOR DE PERSISTENCIA
+        teclats.eliminarTeclat(nomTeclat);//ELIMINAR TECLAT DE CONTROLADOR DE PERSISTENCIA
     }
 
     public void afegirAlfabet(String filename) throws Exception {
@@ -271,11 +272,14 @@ public class CtrlDomini {
     
     public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
-        PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat, n, m);
+        Teclat nouTeclat = PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat, n, m);
+        teclats.afegirTeclat(nouTeclat);
+
     }
     public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, int n, int m) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
-        PerfilActual.crearTeclatLlistaIdioma(nomTeclat, idiomaTeclat, n, m);
+        Teclat nouTeclat = PerfilActual.crearTeclatLlistaIdioma(nomTeclat, idiomaTeclat, n, m);
+        teclats.afegirTeclat(nouTeclat);
     }
 
     public void llistarTeclats() {

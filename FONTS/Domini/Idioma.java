@@ -1,5 +1,8 @@
 package Domini;
 
+import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.LletraNoInclosa;
+
 import java.util.Set;
 import java.util.Map;
 import java.util.HashSet;
@@ -19,11 +22,20 @@ public class Idioma {
 
     //Pre:
     //Post: Es crea un Idioma amb nom, alfabet i una NOVA llista de freqüències predeterimnada
-    public Idioma (String nom, Alfabet alfabet, Map<String, Integer> llistaParaules) {
+    public Idioma (String nom, Alfabet alfabet, Map<String, Integer> llistaParaules) throws ExcepcionsCreadorTeclat{
         this.nom = nom;
         this.alfabet = alfabet;
         alfabet.afegirIdioma(nom);
         new LlistaFrequencies("LlistaPred"+nom, this, llistaParaules); //Aquesta creadora ja vincula la llista de freqüències a aquest idioma
+    }
+
+    //Pre:
+    //Post: Es crea un Idioma amb nom, alfabet
+    public Idioma (String nom, Alfabet alfabet, String nomLlista, Map<String, Integer> llistaParaules) throws ExcepcionsCreadorTeclat {
+        this.nom = nom;
+        this.alfabet = alfabet;
+        alfabet.afegirIdioma(nom);
+        new LlistaFrequencies(nomLlista, this, llistaParaules); //Aquesta creadora ja vincula la llista de freqüències a aquest idioma
     }
 
     //Pre: La llistaFreq existeix
@@ -56,7 +68,7 @@ public class Idioma {
         return llistaFreqPredeterminada;
     }
 
-    //Retorna la llista de paraules amb freqüències de l
+    //Retorna la llista de paraules amb freqüències de l'idioma
     public  Map<String, Integer> getFrequencies() {
         return llistaFreqPredeterminada.getFrequencies();
     }

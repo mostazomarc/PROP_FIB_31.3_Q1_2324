@@ -6,8 +6,8 @@ import Domini.*;
 
 import static org.junit.Assert.*;
 
-import Excepcions.ExcepcionsCreadorTeclat;
-import Excepcions.LlistaFreqNoExisteix;
+import Excepcions.*;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -46,30 +46,32 @@ public class PerfilTest {
         llistaParaulesProva.put("Fideu", 30);
     }
 
+    //S'eliminen les llistes creades per poder tornarles a crear
+    @After
+    public void eliminarLlistaProva() throws Exception{
+        try {
+            llistes.eliminarLlista("LlistaProva");
+            llistes.eliminarLlista("LlistaProva3");
+            llistes.eliminarLlista("LlistaProva4");
+        } catch (Exception e) {}
+    }
+
     @Before
-    public void crearPerfilProva() {
+    public void crearPerfilProva() throws ExcepcionsCreadorTeclat {
         controlador = CtrlDomini.getInstance();
         llistes = CtrlPersFreq.getInstance(controlador);
-        llista = llistes.afegirLlistaFreq("LlistaProva",idiomaProva,llistaParaulesProva);
-        llista2 = llistes.afegirLlistaFreq("LlistaProva3",idiomaProva,llistaParaulesProva);
-        llista3 = llistes.afegirLlistaFreq("LlistaProva4",idiomaProva,llistaParaulesProva);
+        try {
+            llista = llistes.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
+            llista2 = llistes.afegirLlistaFreq("LlistaProva3", idiomaProva, llistaParaulesProva);
+            llista3 = llistes.afegirLlistaFreq("LlistaProva4", idiomaProva, llistaParaulesProva);
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+        } catch (Exception e2) {
+            System.out.println("ERROR: " + e2.getMessage());
+        }
         perfilProva = new Perfil("Prova","12345", controlador);
     }
 
-    /* NO DEIXA PROVAR PERQUE ES PRIVADA
-    @Test
-    //Creadora Perfil amb usuari i contrasenya i getUsuari i getContrasenya
-    public void comprovaLlistaNoExisteix() {
-        Perfil perfilResultat = new Perfil("Prova","12345");
-        try {
-            perfilResultat.comprovaLlistaNoExisteix("llista");
-            assertEquals(true,false); //si arribem aqui no ha saltat l'excepció
-        }   catch (LlistaFreqNoExisteix e1) {
-            assertEquals(true,true);
-        }
-    }
-
-     */
 
 
     @Test
@@ -129,13 +131,11 @@ public class PerfilTest {
 
     @Test
     //afegir llista nomes amb nom
-    public void crearLlistaFreq() {
+    public void crearLlistaFreq()throws Exception {
         try {
             perfilProva.afegirLlistaFreq(llista);
         } catch (LlistaFreqNoExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
-        } catch (Exception e2) {
-            System.out.println("ERROR");
         }
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
@@ -144,29 +144,25 @@ public class PerfilTest {
 
     @Test
     //eliminar llista amb nom
-    public void eliminarLlistaFreq() {
+    public void eliminarLlistaFreq() throws Exception{
         try {
             perfilProva.afegirLlistaFreq(llista);
-            perfilProva.eliminaLlista("LlistaProva");
+            perfilProva.eliminaLlista(llista.getNom());
         } catch (LlistaFreqNoExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
-        } catch (Exception e2) {
-            System.out.println("ERROR");
         }
         assertTrue(perfilProva.getNomAllLlistes().isEmpty());
     }
 
     @Test
     //get el nomes de totes les llistes del perfil
-    public void getNomAllLlistes() {
+    public void getNomAllLlistes() throws Exception {
         try {
             perfilProva.afegirLlistaFreq(llista);
             perfilProva.afegirLlistaFreq(llista2);
             perfilProva.afegirLlistaFreq(llista3);
         } catch (LlistaFreqNoExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
-        } catch (Exception e2) {
-            System.out.println("ERROR");
         }
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
@@ -195,9 +191,107 @@ public class PerfilTest {
 
     @Test
     //obtenir la llista de paraules i frequencies
-    public void crearTeclat() {
+    public void crearTeclatLlistaPropia() throws Exception{
+        perfilProva.afegirLlistaFreq(llista);
+        perfilProva.crearTeclatLlistaPropia("TeclatProva","LlistaProva",idiomaProva,3,10);
+        List<String> nomsEsperats = new ArrayList<>();
+        nomsEsperats.add("TeclatProva");
+        assertEquals(perfilProva.getNomsTeclats(),nomsEsperats);
+    }
+
+    @Test
+    public void crearTeclatLlistaIdioma() throws Exception {
+        perfilProva.crearTeclatLlistaIdioma("TeclatProva",idiomaProva,3,10);
+        List<String> nomsEsperats = new ArrayList<>();
+        nomsEsperats.add("TeclatProva");
+        assertEquals(perfilProva.getNomsTeclats(),nomsEsperats);
+    }
+
+    @Test
+    //modificar un teclat
+    public void modificarTeclat() {
 
     }
+
+    @Test
+    //eliminar un teclat
+    public void eliminaTeclat() throws Exception{
+        perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
+        perfilProva.eliminarTeclat("TeclatProva");
+        assertTrue(!perfilProva.getNomsTeclats().contains("TeclatProva"));
+        assertTrue(perfilProva.getNomsTeclats().isEmpty());
+    }
+
+    @Test
+    //modificar una llista
+    public void modificarllista() throws Exception{
+        perfilProva.afegirLlistaFreq(llista);
+        llistaParaulesProva.put("NovaParaula", 40);
+        perfilProva.modificarLlista("LlistaProva", llistaParaulesProva);
+        assertTrue(true);
+    }
+
+//    Excepcions limit
+//    - Crear dos listas ambas el mateix nom
+//    - Crear dos teclats amb el mateix nom
+//    - Eliminar teclat que no existeix
+//    - Eliminar lista que no existe
+//    - Modificar lista que no existe
+
+    @Test
+    public void llistesMateixNom() throws Exception {
+        try {
+            perfilProva.afegirLlistaFreq(llista);
+            perfilProva.afegirLlistaFreq(llista);
+            assertTrue(false);
+        } catch (LlistaFreqJaExisteix e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void teclatsMateixNom() throws Exception {
+        try {
+            perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
+            perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
+            assertTrue(false);
+        } catch (TeclatJaExisteix e2) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void eliminaTeclatInexistent() throws Exception{
+        try {
+            perfilProva.eliminarTeclat("teclat");
+            assertTrue(false);
+        } catch (TeclatNoExisteix e2) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void eliminaLlistaInexistent() throws Exception {
+        try {
+            perfilProva.afegirLlistaFreq(llista);
+            perfilProva.eliminaLlista("paprika"); //nom d'una llista no present a perfil
+            assertTrue(false);
+        } catch (LlistaFreqNoExisteix e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void modificaLlistaInexistent() throws Exception{
+        try {
+            perfilProva.afegirLlistaFreq(llista);
+            perfilProva.modificarLlista("paprika", llistaParaulesProva);
+            assertTrue(false);
+        } catch (LlistaFreqNoExisteix e) {
+            assertTrue(true);
+        }
+    }
+
 }
 
 //Classe Programada per: Marc

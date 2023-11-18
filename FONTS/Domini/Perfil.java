@@ -118,17 +118,19 @@ public class Perfil {
 
     //Pre:
     //Post: Es crea un teclat amb nom: NomTeclat i a partir de la llista identificada per NomLlista, l'idioma idioma i amb layout n*m
-    public void crearTeclatLlistaPropia(String NomTeclat, String NomLlista, Idioma idioma, int n, int m) throws ExcepcionsCreadorTeclat {
+    public Teclat crearTeclatLlistaPropia(String NomTeclat, String NomLlista, Idioma idioma, int n, int m) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(NomLlista);
         if (teclats.containsKey(NomTeclat)) throw new TeclatJaExisteix(NomTeclat);
         teclats.put(NomTeclat,new Teclat(NomTeclat, frequencies.get(NomLlista), idioma, n, m));
+        return teclats.get(NomTeclat);
     }
 
     //Pre:
     //Post: Es crea un teclat amb nom: NomTeclat i a partir de la llista de l'idioma i l'idioma idioma i amb layout n*m
-    public void crearTeclatLlistaIdioma(String NomTeclat, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat {
+    public Teclat crearTeclatLlistaIdioma(String NomTeclat, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat {
         if (teclats.containsKey(NomTeclat)) throw new TeclatJaExisteix(NomTeclat);
         teclats.put(NomTeclat,new Teclat(NomTeclat, i, n, m));
+        return teclats.get(NomTeclat);
     }
 
     //Pre:
