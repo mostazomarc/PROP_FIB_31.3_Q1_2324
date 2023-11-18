@@ -218,6 +218,7 @@ public class CtrlDomini {
     //Pre:
     //Post: S'elimina la llista identificada per nomLlista
     public void eliminarLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
+        teclats.comprovarUsLlista(nomLlista);
         PerfilActual.eliminaLlista(nomLlista);
         llistes.eliminarLlista(nomLlista);
     }
