@@ -6,7 +6,11 @@ public class HungarianAlgorithm {
     double[][] matriu; // matriu inicial (matriu de costos)
     double [][] copiamatriu;
     // vectors copiamatriuiliars per construir la matriu
-    int[] zeroFila, zeroColumna, filaCoberta, columnaCoberta, zerosEstrellaEnFila;
+    public int[] zeroFila;
+    public int[] zeroColumna;
+    int[] filaCoberta;
+    public int[] columnaCoberta;
+    int[] zerosEstrellaEnFila;
     double valoroptim;
     public HungarianAlgorithm(double[][] matriu) {
         if (matriu.length != matriu[0].length) {
@@ -126,7 +130,7 @@ public class HungarianAlgorithm {
      * Pas 2:
      * Marca cada 0 que troba, si no hi ha altres zeros marcats a la mateixa fila o columna
      */
-    private void pas2() {
+    public void pas2() {
         int[] filaTeZero = new int[matriu.length];
         int[] columnaTeZero = new int[matriu[0].length];
 
@@ -148,7 +152,7 @@ public class HungarianAlgorithm {
      * Pas 3:
      * Cobreix totes les columnes que tenen un 0
      */
-    private void pas3() {
+    public void pas3() {
         for (int i = 0; i < zeroColumna.length; i++) {
             columnaCoberta[i] = zeroColumna[i] != -1 ? 1 : 0;
         }

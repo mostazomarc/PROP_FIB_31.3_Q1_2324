@@ -36,6 +36,22 @@ public class HungarianAlgorithmTest {
             assertArrayEquals(expected[i], resultat[i], 0.01);
         }
     }
+    @Test
+    public void pas2_MarksZerosCorrectly_ShouldMarkZerosInMatrix() {
+        double[][] matrix = {
+                {4.3, 1.8, 0.1, 0.0},
+                {0.0, 0.0, 2.3, 2.2},
+                {3.9, 0.7, 0.0, 0.3},
+                {0.0, 2.1, 1.3, 1.9},
+        };
 
-    // Agrega más pruebas para los demás métodos según su lógica y comportamiento esperado
+        HungarianAlgorithm ha = new HungarianAlgorithm(matrix);
+        ha.pas2();
+
+        int[] expectedZeroFila = {3,0,2,-1};
+        int[] expectedZeroColumna = {1,-1,2,0};
+
+        assertArrayEquals(expectedZeroFila, ha.zeroFila);
+        assertArrayEquals(expectedZeroColumna, ha.zeroColumna);
+    }
 }
