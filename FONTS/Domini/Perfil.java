@@ -149,7 +149,7 @@ public class Perfil {
     //Post: S'obté el nom de l'idioma del teclat identificat per nomTeclat
     public String getIdiomaTeclat (String nomTeclat) throws ExcepcionsCreadorTeclat {
         if (!teclats.containsKey(nomTeclat)) throw new TeclatNoExisteix(nomTeclat);
-        return teclats.get(nomTeclat).getNomIdiomaTeclat();
+        return teclats.get(nomTeclat).getNomIdioma();
     }
 
     //Pre:
@@ -164,6 +164,10 @@ public class Perfil {
     public char[][] consultaTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat {
         if (!teclats.containsKey(nomTeclat)) throw new TeclatNoExisteix(nomTeclat);
         return teclats.get(nomTeclat).getDisposicio();
+    }
+
+    public void modificarLayoutTeclat(String nomTeclat, int n, int m) throws ExcepcionsCreadorTeclat {
+        teclats.get(nomTeclat).modificarLayout(n, m);
     }
 
 }

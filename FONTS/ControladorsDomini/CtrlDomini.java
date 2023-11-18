@@ -281,6 +281,10 @@ public class CtrlDomini {
         return PerfilActual.consultaTeclat(nomTeclat);
     }
 
+    public void modificarLayoutTeclat(String nomTeclat, int n, int m) throws ExcepcionsCreadorTeclat {
+        PerfilActual.modificarLayoutTeclat(nomTeclat, n, m);
+    }
+
     public Vector<String> consultaAlfabets() {
         Vector<String> sdades = new Vector<String>();
         TreeMap<String, Alfabet> Alfabets = alfabets.getAlfabets();
