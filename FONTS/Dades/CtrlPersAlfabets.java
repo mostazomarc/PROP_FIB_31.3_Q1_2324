@@ -27,7 +27,9 @@ public class CtrlPersAlfabets {
     }
 
     public void carregarAlfabets() throws Exception {
-        controlador.afegirAlfabet("Llatí.txt");
+        controlador.afegirAlfabet("LlatíGenèric.txt");
+        controlador.afegirAlfabet("alfabetEspañol.txt");
+        controlador.afegirAlfabet("alfabetCatala.txt");
     }
 
     //Pre:
