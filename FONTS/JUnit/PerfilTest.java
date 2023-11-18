@@ -2,39 +2,35 @@ package JUnit;
 
 import ControladorsDomini.CtrlDomini;
 import Dades.CtrlPersFreq;
-import Domini.*;
-
-import static org.junit.Assert.*;
-
+import Domini.Alfabet;
+import Domini.Idioma;
+import Domini.LlistaFrequencies;
+import Domini.Perfil;
 import Excepcions.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.naming.ldap.Control;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.*;
+
+import static org.junit.Assert.*;
 
 public class PerfilTest {
     Perfil perfilProva;
-    private Map<String, Integer> llistaParaulesProva = new HashMap<>();
     Idioma idiomaProva;
-
     CtrlDomini controlador;
     CtrlPersFreq llistes;
-
     LlistaFrequencies llista;
     LlistaFrequencies llista2;
     LlistaFrequencies llista3;
-    private Set<Character> lletresProva = new HashSet<Character>();
+    private final Map<String, Integer> llistaParaulesProva = new HashMap<>();
+    private final Set<Character> lletresProva = new HashSet<Character>();
 
     @Before
     public void omplirLletres() {
         for (char lletra = 'a'; lletra <= 'z'; lletra++) lletresProva.add(lletra);
         Alfabet AlfabetProva = new Alfabet("Prova", lletresProva);
-        idiomaProva = new Idioma("ESPAÑOL",AlfabetProva);
+        idiomaProva = new Idioma("ESPAÑOL", AlfabetProva);
     }
 
     @Before
@@ -48,12 +44,13 @@ public class PerfilTest {
 
     //S'eliminen les llistes creades per poder tornarles a crear
     @After
-    public void eliminarLlistaProva() throws Exception{
+    public void eliminarLlistaProva() throws Exception {
         try {
             llistes.eliminarLlista("LlistaProva");
             llistes.eliminarLlista("LlistaProva3");
             llistes.eliminarLlista("LlistaProva4");
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     @Before
@@ -69,69 +66,68 @@ public class PerfilTest {
         } catch (Exception e2) {
             System.out.println("ERROR: " + e2.getMessage());
         }
-        perfilProva = new Perfil("Prova","12345", controlador);
+        perfilProva = new Perfil("Prova", "12345", controlador);
     }
-
 
 
     @Test
     //Creadora Perfil amb usuari i contrasenya i getUsuari i getContrasenya
     public void creadoraPerfilContrasenya() {
-        Perfil perfilResultat = new Perfil("Prova","12345", controlador);
-        assertEquals("Prova",perfilResultat.getUsuari());
-        assertEquals("12345",perfilResultat.getContrasenya());
+        Perfil perfilResultat = new Perfil("Prova", "12345", controlador);
+        assertEquals("Prova", perfilResultat.getUsuari());
+        assertEquals("12345", perfilResultat.getContrasenya());
     }
 
     @Test
     //Creadora Perfil amb usuari i getNom
     public void creadoraPerfil() {
-        Perfil perfilResultat = new Perfil("Prova",controlador);
-        assertEquals("Prova",perfilResultat.getUsuari());
+        Perfil perfilResultat = new Perfil("Prova", controlador);
+        assertEquals("Prova", perfilResultat.getUsuari());
     }
 
     @Test
     //GetUsuari
     public void getUsuari() {
-        Perfil perfilResultat = new Perfil("Prova",controlador);
-        assertEquals("Prova",perfilResultat.getUsuari());
+        Perfil perfilResultat = new Perfil("Prova", controlador);
+        assertEquals("Prova", perfilResultat.getUsuari());
     }
 
     @Test
     //GetContrasenya
     public void getContrasenya() {
-        Perfil perfilResultat = new Perfil("Prova","12345",controlador);
-        assertEquals("12345",perfilResultat.getContrasenya());
+        Perfil perfilResultat = new Perfil("Prova", "12345", controlador);
+        assertEquals("12345", perfilResultat.getContrasenya());
     }
 
     @Test
     //canvia usuari
     public void canviaUsuari() {
         perfilProva.canviaUsuari("newProva");
-        assertEquals("newProva",perfilProva.getUsuari());
-        assertNotEquals("Prova",perfilProva.getUsuari());
+        assertEquals("newProva", perfilProva.getUsuari());
+        assertNotEquals("Prova", perfilProva.getUsuari());
     }
 
     @Test
     //canvia contrasenya
     public void canviaContrasenya() {
         perfilProva.canviaContrasenya("newContrasenya");
-        assertEquals("newContrasenya",perfilProva.getContrasenya());
-        assertNotEquals("12345",perfilProva.getContrasenya());
+        assertEquals("newContrasenya", perfilProva.getContrasenya());
+        assertNotEquals("12345", perfilProva.getContrasenya());
     }
 
     @Test
     //afegir llista freq amb nom i llista de paraules
-    public void afegirLlistaFreq() throws ExcepcionsCreadorTeclat{
+    public void afegirLlistaFreq() throws ExcepcionsCreadorTeclat {
         perfilProva.afegirLlistaFreq(llista);
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
-        assertEquals(llistaNoms,perfilProva.getNomAllLlistes());
-        assertEquals(llistaParaulesProva,perfilProva.consultaLlista("LlistaProva"));
+        assertEquals(llistaNoms, perfilProva.getNomAllLlistes());
+        assertEquals(llistaParaulesProva, perfilProva.consultaLlista("LlistaProva"));
     }
 
     @Test
     //afegir llista nomes amb nom
-    public void crearLlistaFreq()throws Exception {
+    public void crearLlistaFreq() throws Exception {
         try {
             perfilProva.afegirLlistaFreq(llista);
         } catch (LlistaFreqNoExisteix e1) {
@@ -139,12 +135,12 @@ public class PerfilTest {
         }
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
-        assertEquals(llistaNoms,perfilProva.getNomAllLlistes());
+        assertEquals(llistaNoms, perfilProva.getNomAllLlistes());
     }
 
     @Test
     //eliminar llista amb nom
-    public void eliminarLlistaFreq() throws Exception{
+    public void eliminarLlistaFreq() throws Exception {
         try {
             perfilProva.afegirLlistaFreq(llista);
             perfilProva.eliminaLlista(llista.getNom());
@@ -171,40 +167,40 @@ public class PerfilTest {
         List<String> llistaResultat = perfilProva.getNomAllLlistes();
         Collections.sort(llistaNoms);
         Collections.sort(llistaResultat);
-        assertEquals(llistaNoms,llistaResultat);
+        assertEquals(llistaNoms, llistaResultat);
     }
 
     @Test
     //obtenir la llista de paraules i frequencies
     public void getNomIdiomaLlista() throws ExcepcionsCreadorTeclat {
         perfilProva.afegirLlistaFreq(llista);
-        assertEquals("ESPAÑOL",perfilProva.getNomIdiomaLlista("LlistaProva"));
+        assertEquals("ESPAÑOL", perfilProva.getNomIdiomaLlista("LlistaProva"));
     }
 
     @Test
     //obtenir la llista de paraules i frequencies
     public void consultarLlista() throws ExcepcionsCreadorTeclat {
         perfilProva.afegirLlistaFreq(llista);
-        Map<String,Integer> resultat = perfilProva.consultaLlista("LlistaProva");
-        assertEquals(resultat,llistaParaulesProva);
+        Map<String, Integer> resultat = perfilProva.consultaLlista("LlistaProva");
+        assertEquals(resultat, llistaParaulesProva);
     }
 
     @Test
     //obtenir la llista de paraules i frequencies
-    public void crearTeclatLlistaPropia() throws Exception{
+    public void crearTeclatLlistaPropia() throws Exception {
         perfilProva.afegirLlistaFreq(llista);
-        perfilProva.crearTeclatLlistaPropia("TeclatProva","LlistaProva",idiomaProva,3,10);
+        perfilProva.crearTeclatLlistaPropia("TeclatProva", "LlistaProva", idiomaProva, 3, 10);
         List<String> nomsEsperats = new ArrayList<>();
         nomsEsperats.add("TeclatProva");
-        assertEquals(perfilProva.getNomsTeclats(),nomsEsperats);
+        assertEquals(perfilProva.getNomsTeclats(), nomsEsperats);
     }
 
     @Test
     public void crearTeclatLlistaIdioma() throws Exception {
-        perfilProva.crearTeclatLlistaIdioma("TeclatProva",idiomaProva,3,10);
+        perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
         List<String> nomsEsperats = new ArrayList<>();
         nomsEsperats.add("TeclatProva");
-        assertEquals(perfilProva.getNomsTeclats(),nomsEsperats);
+        assertEquals(perfilProva.getNomsTeclats(), nomsEsperats);
     }
 
     @Test
@@ -215,16 +211,16 @@ public class PerfilTest {
 
     @Test
     //eliminar un teclat
-    public void eliminaTeclat() throws Exception{
+    public void eliminaTeclat() throws Exception {
         perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
         perfilProva.eliminarTeclat("TeclatProva");
-        assertTrue(!perfilProva.getNomsTeclats().contains("TeclatProva"));
+        assertFalse(perfilProva.getNomsTeclats().contains("TeclatProva"));
         assertTrue(perfilProva.getNomsTeclats().isEmpty());
     }
 
     @Test
     //modificar una llista
-    public void modificarllista() throws Exception{
+    public void modificarllista() throws Exception {
         perfilProva.afegirLlistaFreq(llista);
         llistaParaulesProva.put("NovaParaula", 40);
         perfilProva.modificarLlista("LlistaProva", llistaParaulesProva);
@@ -243,7 +239,7 @@ public class PerfilTest {
         try {
             perfilProva.afegirLlistaFreq(llista);
             perfilProva.afegirLlistaFreq(llista);
-            assertTrue(false);
+            fail();
         } catch (LlistaFreqJaExisteix e) {
             assertTrue(true);
         }
@@ -254,17 +250,17 @@ public class PerfilTest {
         try {
             perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
             perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
-            assertTrue(false);
+            fail();
         } catch (TeclatJaExisteix e2) {
             assertTrue(true);
         }
     }
 
     @Test
-    public void eliminaTeclatInexistent() throws Exception{
+    public void eliminaTeclatInexistent() throws Exception {
         try {
             perfilProva.eliminarTeclat("teclat");
-            assertTrue(false);
+            fail();
         } catch (TeclatNoExisteix e2) {
             assertTrue(true);
         }
@@ -275,18 +271,18 @@ public class PerfilTest {
         try {
             perfilProva.afegirLlistaFreq(llista);
             perfilProva.eliminaLlista("paprika"); //nom d'una llista no present a perfil
-            assertTrue(false);
+            fail();
         } catch (LlistaFreqNoExisteix e) {
             assertTrue(true);
         }
     }
 
     @Test
-    public void modificaLlistaInexistent() throws Exception{
+    public void modificaLlistaInexistent() throws Exception {
         try {
             perfilProva.afegirLlistaFreq(llista);
             perfilProva.modificarLlista("paprika", llistaParaulesProva);
-            assertTrue(false);
+            fail();
         } catch (LlistaFreqNoExisteix e) {
             assertTrue(true);
         }

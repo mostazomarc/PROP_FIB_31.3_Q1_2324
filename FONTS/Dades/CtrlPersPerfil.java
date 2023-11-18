@@ -6,28 +6,29 @@ import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.PerfilJaExisteix;
 import Excepcions.PerfilNoExisteix;
 
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class CtrlPersPerfil {
     private static CtrlPersPerfil singletonObject;
 
-    private CtrlDomini controlador;
+    private final CtrlDomini controlador;
 
-    private HashMap <String, Perfil> PerfilsActius;
-
-    //Pre:
-    //Post: Retorna la instancia de CtrlFreqFile, si no existeix cap CtrlFreqFile es crea.
-    public static CtrlPersPerfil getInstance(CtrlDomini c){
-        if(singletonObject == null)
-            singletonObject = new CtrlPersPerfil(c){
-            };
-        return singletonObject;
-    }
+    private final HashMap<String, Perfil> PerfilsActius;
 
     private CtrlPersPerfil(CtrlDomini c) {
         PerfilsActius = new HashMap<>();
         controlador = c;
+    }
+
+    //Pre:
+    //Post: Retorna la instancia de CtrlFreqFile, si no existeix cap CtrlFreqFile es crea.
+    public static CtrlPersPerfil getInstance(CtrlDomini c) {
+        if (singletonObject == null)
+            singletonObject = new CtrlPersPerfil(c) {
+            };
+        return singletonObject;
     }
 
     //Pre:
@@ -38,16 +39,16 @@ public class CtrlPersPerfil {
 
     //Pre:
     //Post: s'afegeix el perfil identificat per nomPerfil
-    public Perfil afegirPerfil (String nomPerfil) throws ExcepcionsCreadorTeclat {
+    public Perfil afegirPerfil(String nomPerfil) throws ExcepcionsCreadorTeclat {
         if (PerfilsActius.containsKey(nomPerfil)) throw new PerfilJaExisteix(nomPerfil);
-        Perfil nouPerfil = new Perfil(nomPerfil,controlador);
+        Perfil nouPerfil = new Perfil(nomPerfil, controlador);
         PerfilsActius.put(nomPerfil, nouPerfil);
         return nouPerfil;
     }
 
     //Pre:
     //Post: s'obté el perfi identificat per nomPerfil
-    public Perfil getPerfil (String nomPerfil) throws ExcepcionsCreadorTeclat {
+    public Perfil getPerfil(String nomPerfil) throws ExcepcionsCreadorTeclat {
         if (!PerfilsActius.containsKey(nomPerfil)) throw new PerfilNoExisteix(nomPerfil);
         Perfil nouPerfil = PerfilsActius.get(nomPerfil);
         return nouPerfil;
