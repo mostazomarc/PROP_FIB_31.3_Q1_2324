@@ -66,7 +66,7 @@ public class TeclatTest {
         assertEquals(numc, (int) resultat.getDimY());
         assertEquals("LlistaProva", resultat.getNomLlistaFreq());
         assertEquals("ESPAÑOL", resultat.getNomIdioma());
-        assertEquals(expected, resultat.getDisposicio());
+        assertArrayEquals(expected, resultat.getDisposicio());
     }
 
 

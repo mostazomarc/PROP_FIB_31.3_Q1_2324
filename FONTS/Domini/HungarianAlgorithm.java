@@ -90,7 +90,7 @@ public class HungarianAlgorithm {
      * 1. resta la mínima de cada fila a cada element de la fila
      * 2. resta la mínima de cada columna a cada element de la columna
      */
-    private void pas1() {
+    public void pas1() {
         // files
         for (int i = 0; i < matriu.length; i++) {
             // troba el valor mínim de la fila actual
