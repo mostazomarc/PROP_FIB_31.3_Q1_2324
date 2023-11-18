@@ -33,23 +33,26 @@ public class TeclatTest {
         llistaParaulesProva.put("Adeu", 30);
         llistaParaulesProva.put("Menjar", 30);
         llistaParaulesProva.put("Fideu", 30);
-        idiomaProva = new Idioma("ESPAÑOL",AlfabetProva, "LlistaProva", llistaParaulesProva);
+        idiomaProva = new Idioma("ESPAÑOL", AlfabetProva, "LlistaProva", llistaParaulesProva);
         try {
             llistaprova = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
         } catch (LletraNoInclosa e) {
             System.out.println("ERROR: " + e.getMessage());
         }
     }
+
     @Test
     public void crearTeclatLlistaPropia() throws ExcepcionsCreadorTeclat {
         int numf = 3;
         int numc = 10;
         Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, numf, numc);
+        char[][] expected = {{'f','c','g','h','k','p','q','t','v','b'},{'j','a','i','d','e','m','w','x','y','z'}, {'r','n','l','o','s','u', ' ', ' ', ' ', ' '}};
         assertEquals("agus", resultat.getNom());
-        assertEquals(numf, (int)resultat.getDimX());
-        assertEquals(numc, (int)resultat.getDimY());
+        assertEquals(numf, (int) resultat.getDimX());
+        assertEquals(numc, (int) resultat.getDimY());
         assertEquals("LlistaProva", resultat.getNomLlistaFreq());
         assertEquals("ESPAÑOL", resultat.getNomIdioma());
+        assertEquals(expected, resultat.getDisposicio());
     }
 
     @Test
@@ -57,42 +60,67 @@ public class TeclatTest {
         int numf = 3;
         int numc = 10;
         Teclat resultat = new Teclat("agus", idiomaProva, numf, numc);
+        char[][] expected = {{'f','c','g','h','k','p','q','t','v','b'},{'j','a','i','d','e','m','w','x','y','z'}, {'r','n','l','o','s','u', ' ', ' ', ' ', ' '}};
         assertEquals("agus", resultat.getNom());
-        assertEquals(numf, (int)resultat.getDimX());
-        assertEquals(numc, (int)resultat.getDimY());
+        assertEquals(numf, (int) resultat.getDimX());
+        assertEquals(numc, (int) resultat.getDimY());
         assertEquals("LlistaProva", resultat.getNomLlistaFreq());
         assertEquals("ESPAÑOL", resultat.getNomIdioma());
+        assertEquals(expected, resultat.getDisposicio());
     }
 
 
     //Pre:
     //Post:
-//    @Test
-//    public String getNomLlistaFreq() {return llistafreq.getNom(); }
-//
-//
-//    //Pre:
-//    //Post: es retorna el nom del teclat
-//    @Test
-//    public String getNom() {
-//        return nom;
-//    }
-//
-//    //Pre:
-//    //Post: es retorna la disposició de teclat
-//    @Test
-//    public char[][] getDisposicio() {
-//        return disposicio;
-//    }
-//
-//    @Test
-//    public String getNomIdioma() {
-//        return idioma.getNom();
-//    }
-//
-//    @Test
-//    public Integer getDimX() {return dimX; }
-//
-//    @Test
-//    public Integer getDimY() {return dimY; }
+    @Test
+    public void getNomLlistaFreq() throws ExcepcionsCreadorTeclat {
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        assertEquals("LlistaProva", resultat.getNomLlistaFreq());
+    }
+
+
+    //Pre:
+    //Post: es retorna el nom del teclat
+    @Test
+    public void getNom() throws ExcepcionsCreadorTeclat {
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        assertEquals("agus", resultat.getNom());
+    }
+
+    //Pre:
+    //Post: es retorna la disposició de teclat
+    @Test
+    public void getDisposicio() throws ExcepcionsCreadorTeclat {
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        char[][] expected = {{'f','c','g','h','k','p','q','t','v','b'},{'j','a','i','d','e','m','w','x','y','z'}, {'r','n','l','o','s','u', ' ', ' ', ' ', ' '}};
+        assertArrayEquals(expected, resultat.getDisposicio());
+    }
+
+    @Test
+    public void getNomIdioma() throws ExcepcionsCreadorTeclat {
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        assertEquals("ESPAÑOL", resultat.getNomIdioma());
+    }
+
+    @Test
+    public void getDimX() throws ExcepcionsCreadorTeclat {
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        assertEquals(3, (int)resultat.getDimX());
+    }
+
+    @Test
+    public void getDimY() throws ExcepcionsCreadorTeclat {
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        assertEquals(10, (int)resultat.getDimY());
+    }
+
+    @Test
+    public void modificarLayout() throws ExcepcionsCreadorTeclat {
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        resultat.modificarLayout(3,9);
+        assertEquals(3, (int)resultat.getDimX());
+        assertEquals(9, (int)resultat.getDimY());
+    }
 }
+
+
