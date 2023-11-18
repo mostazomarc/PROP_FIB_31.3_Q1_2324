@@ -2,6 +2,8 @@ package JUnit;
 
 import Domini.*;
 import Domini.LlistaFrequencies;
+import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.LletraNoInclosa;
 import Stubs.*;
 
 import static org.junit.Assert.*;
@@ -13,18 +15,13 @@ import java.util.*;
 
 public class TeclatTest {
 
-    private String nom;
-    private int dimX;
-    private int dimY;
-    private char[][] disposicio;
-    private Idioma idioma;
-    private LlistaFrequencies llistafreq;
-
     private Set<Character> lletresProva = new HashSet<Character>();
 
     Idioma idiomaProva;
 
     private Map<String, Integer> llistaParaulesProva = new HashMap<>();
+
+    LlistaFrequencies llistaprova;
 
 
     @Before
@@ -43,35 +40,17 @@ public class TeclatTest {
         llistaParaulesProva.put("Fideu", 30);
     }
     @Test
-    public void crearTeclatLlistaPròpia() {
-        LlistaFrequenciesStub llista = new LlistaFrequenciesStub();
-        IdiomaStub idioma = new IdiomaStub();
-        Teclat resultat = new Teclat("nom",llista,idioma);
-        assertEquals("nom",resultat.getNomTeclat());
-        assertEquals(teclatQWERTY,resultat.getTeclat());
-    }
-
-    @Test
-    public void crearTeclatLlistaIdioma() {
-        LlistaFrequenciesStub llista = new LlistaFrequenciesStub();
-        IdiomaStub idioma = new IdiomaStub();
-        Teclat resultat = new Teclat("nom",llista,idioma);
-        assertEquals(teclatQWERTY,resultat.getTeclat());
-    }
-
-    @Test
-    public void obtenirNomTeclat() {
-        LlistaFrequenciesStub llista = new LlistaFrequenciesStub();
-        IdiomaStub idioma = new IdiomaStub();
-        Teclat resultat = new Teclat("nom",llista,idioma);
-        assertEquals("nom",resultat.getNomTeclat());
-    }
-
-    @Test
-    public void canviarTeclat() {
-        LlistaFrequenciesStub llista = new LlistaFrequenciesStub();
-        IdiomaStub idioma = new IdiomaStub();
-        Teclat prova = new Teclat("nom",llista,idioma);
-        assertNotNull(prova.canviaDisposicioTeclat());
+    public void crearTeclatLlistaPropia() throws ExcepcionsCreadorTeclat {
+        try {
+            llistaprova = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        assertEquals("agus", resultat.getNom());
+        assertEquals(3, resultat.getDimX());
+        assertEquals(10, resultat.getDimY());
+        assertEquals("LlistaProva", resultat.getNomLlistaFreq());
+        assertEquals("ESPAÑOL", resultat.getNomIdioma());
     }
 }

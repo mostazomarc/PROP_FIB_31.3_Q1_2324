@@ -29,7 +29,6 @@ public class Teclat {
         this.nom = nom;
         idioma = i;
         this.llistafreq = llistafreq;
-        int size = (i.getLletres()).size();
         comprovaLayoutValid(n,m);
         dimX = n;
         dimY = m;
@@ -40,7 +39,6 @@ public class Teclat {
     public Teclat(String nom, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat{
         this.nom = nom;
         idioma = i;
-        int size = (i.getLletres()).size();
         comprovaLayoutValid(n,m);
         dimX = n;
         dimY = m;
@@ -53,7 +51,6 @@ public class Teclat {
     //Pre:
     //Post:
     public String getNomLlistaFreq() {return llistafreq.getNom(); }
-
 
     //Pre:
     //Post: es retorna el nom del teclat
@@ -70,6 +67,10 @@ public class Teclat {
     public String getNomIdioma() {
         return idioma.getNom();
     }
+
+    public Integer getDimX() {return dimX; }
+
+    public Integer getDimY() {return dimY; }
 
     public void modificarLayout(int n, int m) throws ExcepcionsCreadorTeclat {
         comprovaLayoutValid(n, m);
