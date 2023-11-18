@@ -60,6 +60,17 @@ perfiltest: all
 teclattest: all
 	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.TeclatTest
 
-clean:
-	rm -r ./EXE/*
+persistenciaFreqtest: all
+	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersFreqTest
 
+persistenciaPerfiltest: all
+	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersPerfilTest
+
+persistenciaTeclatstest: all
+	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersTeclatsTest
+
+clean:
+	rm -r ./EXE/out/*
+
+distclean:
+	rm -r ./EXE/*
