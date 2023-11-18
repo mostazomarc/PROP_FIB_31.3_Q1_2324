@@ -1,12 +1,54 @@
 package Domini;
 
+import Excepcions.LletraNoInclosa;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.text.Normalizer;
+
 
 public class LlistaFrequencies {
     private String nom;
     private Map<String, Integer> LlistaParaules;
     private Idioma idioma;
+
+    public static String quitarTilde(char c) {
+        String s = String.valueOf(c);
+        String normalized = Normalizer.normalize(s, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("[\\p{M}]");
+        Matcher matcher = pattern.matcher(normalized);
+        return matcher.replaceAll("");
+    }
+
+
+    //Pre:
+    //Post: Comprova que totes les lletres de les paraules estan a lletres de l'idioma
+    private void comprovarLletres(Set<String> paraules, Idioma i) throws LletraNoInclosa {
+        Set<Character> lletres = i.getLletres();
+        System.out.println("COMPROVANT LLETRES");
+        if (paraules.isEmpty()) System.out.println("ERROR");
+        for (String paraula : paraules) {
+            // obte cada lletra de la paraula
+            char[] letrasClave = paraula.toCharArray();
+            System.out.println("COMPROVANT PARAULA " + paraula);
+
+            // Verificar si totes les lletres estan a lletres
+            for (char lletra : letrasClave) {
+                if(Character.isLetter(lletra)) {
+                    lletra = Character.toLowerCase(lletra);
+                    System.out.println("COMPROVANT LLETRA " + lletra);
+                    if (Character.isUnicodeIdentifierPart(lletra) && !lletres.contains(lletra)) {
+                        String caracterSinTilde = quitarTilde(lletra);
+                        lletra = caracterSinTilde.charAt(0);
+                        if (!lletres.contains(lletra)) throw new LletraNoInclosa(lletra, i.getNom());
+                    }
+                }
+            }
+        }
+    }
 
 
     //Pre:
@@ -20,7 +62,8 @@ public class LlistaFrequencies {
 
     //Pre: LlistaParaules es una llista valida
     //Post: Es crea una LlistaFrecuencies amb nom, llista paraules i idoma i s'afegeix la llista a l'idioma si l'idioma no té llista predeterminada
-    public LlistaFrequencies (String nom, Idioma i, Map<String, Integer> LlistaParaules) {
+    public LlistaFrequencies (String nom, Idioma i, Map<String, Integer> LlistaParaules) throws LletraNoInclosa{
+        comprovarLletres(LlistaParaules.keySet(),i);
         this.nom = nom;
         this.LlistaParaules = LlistaParaules;
         idioma = i;
