@@ -4,19 +4,14 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class Alfabet {
-    private String nomAlfabet;
+    private String nom;
     private Set<Character> lletres;
     private Set<String> idiomes;
 
-    public Alfabet() {
-        nomAlfabet = "";
-        lletres = new HashSet<Character>();
-    }
-
     //Pre: lletres conté totes les lletres de l'alfabet que es vol afegir
     //Post: Es crea un alfabet amb el nom i les lletres donades
-    public Alfabet (String nomAlfabet, Set<Character> lletres) {
-        this.nomAlfabet = nomAlfabet;
+    public Alfabet (String nom, Set<Character> lletres) {
+        this.nom = nom;
         this.lletres = lletres;
         idiomes = new HashSet<String>();
     }
@@ -39,7 +34,7 @@ public class Alfabet {
     }
 
     //Retorna el nom de l'alfabet
-    public String getNomAlfabet() { return nomAlfabet; }
+    public String getNomAlfabet() { return nom; }
 
     //Retorna les lletres de l'alfabet
     public Set<Character> getLletres() {
@@ -51,7 +46,7 @@ public class Alfabet {
 
     //Retorna informació (Nom i lletres) de l'Alfabet
     public String getInfo() {
-        return "Nom de l'Alfabet: " + nomAlfabet + "    Lletres (" + getNumLletres() + "): " + lletres;
+        return "Nom de l'Alfabet: " + nom + "    Lletres (" + getNumLletres() + "): " + lletres;
     }
 
 }
