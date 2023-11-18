@@ -69,6 +69,9 @@ persistenciaPerfiltest: all
 persistenciaTeclatstest: all
 	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersTeclatsTest
 
+hungariantest: all
+	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.HungarianAlgorithmTest
+
 clean:
 	rm -r ./EXE/out/*
 

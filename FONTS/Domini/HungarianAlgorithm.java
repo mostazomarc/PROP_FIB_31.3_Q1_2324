@@ -3,11 +3,15 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 public class HungarianAlgorithm {
-    double[][] matriu; // matriu inicial (matriu de costos)
-    double [][] copiamatriu;
+    public double[][] matriu; // matriu inicial (matriu de costos)
+    public double [][] copiamatriu;
     // vectors copiamatriuiliars per construir la matriu
-    int[] zeroFila, zeroColumna, filaCoberta, columnaCoberta, zerosEstrellaEnFila;
-    double valoroptim;
+    public int[] zeroFila;
+    public int[] zeroColumna;
+    public int[] filaCoberta;
+    public int[] columnaCoberta;
+    public int[] zerosEstrellaEnFila;
+    public double valoroptim;
     public HungarianAlgorithm(double[][] matriu) {
         if (matriu.length != matriu[0].length) {
             try {
@@ -90,7 +94,7 @@ public class HungarianAlgorithm {
      * 1. resta la mínima de cada fila a cada element de la fila
      * 2. resta la mínima de cada columna a cada element de la columna
      */
-    private void pas1() {
+    public void pas1() {
         // files
         for (int i = 0; i < matriu.length; i++) {
             // troba el valor mínim de la fila actual
@@ -126,7 +130,7 @@ public class HungarianAlgorithm {
      * Pas 2:
      * Marca cada 0 que troba, si no hi ha altres zeros marcats a la mateixa fila o columna
      */
-    private void pas2() {
+    public void pas2() {
         int[] filaTeZero = new int[matriu.length];
         int[] columnaTeZero = new int[matriu[0].length];
 
@@ -148,7 +152,7 @@ public class HungarianAlgorithm {
      * Pas 3:
      * Cobreix totes les columnes que tenen un 0
      */
-    private void pas3() {
+    public void pas3() {
         for (int i = 0; i < zeroColumna.length; i++) {
             columnaCoberta[i] = zeroColumna[i] != -1 ? 1 : 0;
         }
