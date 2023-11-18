@@ -40,10 +40,12 @@ public class CtrlPersIdiomes {
     //Post: S'afegeix l'Idioma identificat per nomIdioma
     public void afegirIdioma(String nomIdioma, Alfabet a, String filename, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
         if (existeix(nomIdioma)) throw new IdiomaJaExisteix(nomIdioma);
-        Idioma nouIdioma = new Idioma(nomIdioma, a, filename, novesEntrades);
+        Idioma nouIdioma = new Idioma(nomIdioma, a, novesEntrades);
         Idiomes.put(nomIdioma, nouIdioma);
     }
 
+    //Pre:
+    //Post: S'elimina l'Idioma identificat per nomIdioma
     public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
         Idioma i = getIdioma(nomIdioma);
         Alfabet a = i.getAlfabet();
@@ -59,7 +61,7 @@ public class CtrlPersIdiomes {
     }
 
     //Pre:
-    //Post: Retorna l'Alfabet identificat per nomIdioma
+    //Post: Retorna l'Idioma identificat per nomIdioma
     public Idioma getIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
         if (!existeix(nomIdioma)) throw new IdiomaNoExisteix(nomIdioma);
         return Idiomes.get(nomIdioma);
