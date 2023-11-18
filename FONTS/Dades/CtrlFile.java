@@ -21,18 +21,15 @@ public class CtrlFile {
 
     //Pre: filename es el nom d'un arxiu que existeix
     //Post: Retorna totes les linies del fitxer en una llista
-    public List<String> llegirArxiu(String filename)  {
+    public List<String> llegirArxiu(String filename) throws Exception  {
         LinkedList<String> linies = new LinkedList<String>();
 
-        try {//suposant que el directori d'execució es subgrup
-            FileReader fr = new FileReader("./DATA/" + filename);
+        //suposant que el directori d'execució es subgrup
+        FileReader fr = new FileReader("./DATA/" + filename);
 
-            Scanner scan = new Scanner(fr);
-            while (scan.hasNextLine()) linies.add(new String(scan.nextLine()));
-            scan.close();
-        } catch (FileNotFoundException e) {
-            System.err.println("Error al obrir l'arxiu: " + e.getMessage());
-        }
+        Scanner scan = new Scanner(fr);
+        while (scan.hasNextLine()) linies.add(new String(scan.nextLine()));
+        scan.close();
         return linies;
     }
 }

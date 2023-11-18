@@ -6,6 +6,7 @@ import java.util.HashSet;
 public class Alfabet {
     private String nomAlfabet;
     private Set<Character> lletres;
+    private Set<String> idiomes;
 
     public Alfabet() {
         nomAlfabet = "";
@@ -17,6 +18,23 @@ public class Alfabet {
     public Alfabet (String nomAlfabet, Set<Character> lletres) {
         this.nomAlfabet = nomAlfabet;
         this.lletres = lletres;
+        idiomes = new HashSet<String>();
+    }
+
+    public void afegirIdioma(String nomIdioma) {
+        idiomes.add(nomIdioma);
+    }
+
+    public void treureIdioma(String nomIdioma) {
+        idiomes.remove(nomIdioma);
+    }
+
+    public int numIdiomes() {
+        return idiomes.size();
+    }
+
+    public boolean teIdioma(String nomIdioma) {
+        return idiomes.contains(nomIdioma);
     }
 
     //Retorna el nom de l'alfabet

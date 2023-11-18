@@ -1,5 +1,6 @@
 package Dades;
 
+import ControladorsDomini.CtrlDomini;
 import Domini.Alfabet;
 import Domini.Idioma;
 import Excepcions.AlfabetNoExisteix;
@@ -13,19 +14,26 @@ import java.util.TreeMap;
 public class CtrlPersIdiomes {
     private static CtrlPersIdiomes singletonObject;
     private TreeMap<String, Idioma> Idiomes;
+    private CtrlDomini controlador;
 
     //Pre:
     //Post: Retorna la instancia de CtrlPersAlfabets, si no existeix cap CtrlPersAlfabets es crea.
-    public static CtrlPersIdiomes getInstance() {
+    public static CtrlPersIdiomes getInstance(CtrlDomini c) {
         if(singletonObject == null)
-            singletonObject = new CtrlPersIdiomes(){
+            singletonObject = new CtrlPersIdiomes(c){
 
             };
         return singletonObject;
     }
 
-    private CtrlPersIdiomes() {
+    private CtrlPersIdiomes(CtrlDomini c) {
         Idiomes = new TreeMap<String, Idioma>();
+        controlador = c;
+    }
+
+    public void carregarIdiomes() throws Exception {
+        controlador.afegirIdioma("Català","alfabetCatala","llista","catalaFreq.txt");
+        controlador.afegirIdioma("Español","alfabetEspañol","llista","españolFreq.txt");
     }
 
     //Pre:
@@ -34,6 +42,13 @@ public class CtrlPersIdiomes {
         if (existeix(nomIdioma)) throw new IdiomaJaExisteix(nomIdioma);
         Idioma nouIdioma = new Idioma(nomIdioma, a, filename, novesEntrades);
         Idiomes.put(nomIdioma, nouIdioma);
+    }
+
+    public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
+        Idioma i = getIdioma(nomIdioma);
+        Alfabet a = i.getAlfabet();
+        a.treureIdioma(nomIdioma);
+        Idiomes.remove(nomIdioma);
     }
 
     //Pre:

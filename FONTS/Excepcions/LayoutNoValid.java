@@ -5,10 +5,6 @@ public class LayoutNoValid extends ExcepcionsCreadorTeclat {
         return "LayoutNoValid";
     }
 
-    public LayoutNoValid() {super("El teclat ja existeix");}
-
-    public LayoutNoValid(String s) {
-        super("El teclat amb id "+ s + " ja existeix");
-    }
+    public LayoutNoValid(int size, int n, int m) {super("Layout No Valid: el nombre de lletres =  " + size  + " supera les " +n*m+ " posicions disponibles" );}
 
 }

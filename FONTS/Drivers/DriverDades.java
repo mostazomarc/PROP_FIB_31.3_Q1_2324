@@ -42,12 +42,13 @@ public class DriverDades {
     public void printMenuGestionarDades() {
         System.out.println("0. Info de les funcions");
         System.out.println("1. Afegir Llista de Frequencies");
-        System.out.println("2. Afegir Alfabet");
-        System.out.println("3. Afegir Idioma");
-        System.out.println("4. Eliminar Llista de Frequencies");
-        System.out.println("5. Eliminar Alfabet");
-        System.out.println("6. Eliminar Idioma");
-        System.out.println("7. Sortir");
+        System.out.println("2. Modificar Llista de Frequencies");
+        System.out.println("3. Afegir Alfabet");
+        System.out.println("4. Afegir Idioma");
+        System.out.println("5. Eliminar Llista de Frequencies");
+        System.out.println("6. Eliminar Alfabet");
+        System.out.println("7. Eliminar Idioma");
+        System.out.println("8. Sortir");
     }
 
     //Pre:
@@ -60,18 +61,59 @@ public class DriverDades {
             System.out.println("#### Info de les funcions de Gestionar Dades ####");
             System.out.println("0. Info de les funcions ---> Explicació de les funcions de Gestionar Dades");
             System.out.println("1. Afegir Llista de Frequencies ---> Afegir una nova llista de frequencies a partir de text/llista o manualment");
-            System.out.println("2. Afegir Alfabet ---> Afegir un nou alfabet");
-            System.out.println("3. Afegir Idioma ---> Afegir un nou idioma a partir d'un Alfabet i creat amb una llista de frequencies predeterminada");
-            System.out.println("4. Eliminar Llista de Frequencies");
-            System.out.println("5. Eliminar Alfabet");
-            System.out.println("6. Eliminar Idioma");
-            System.out.println("7. Sortir ---> Surt de consultar dades");
+            System.out.println("2. Modificar Llista de Frequencies ---> Sobrescriure les dades d'una llista de frequencies");
+            System.out.println("3. Afegir Alfabet ---> Afegir un nou alfabet");
+            System.out.println("4. Afegir Idioma ---> Afegir un nou idioma a partir d'un Alfabet i creat amb una llista de frequencies predeterminada");
+            System.out.println("5. Eliminar Llista de Frequencies");
+            System.out.println("6. Eliminar Alfabet");
+            System.out.println("7. Eliminar Idioma");
+            System.out.println("8. Sortir ---> Surt de consultar dades");
             esperarSeleccioGestionarDades();
         }
         else if (num== 1) afegirLlistaFrecuencies();
-        else if (num == 2) afegirAlfabet();
-        else if (num == 3) afegirIdioma();
-        else if (num == 4) eliminarLlista();
+        else if (num == 2) modificarLlistaFrequencies();
+        else if (num == 3) afegirAlfabet();
+        else if (num == 4) afegirIdioma();
+        else if (num == 5) eliminarLlista();
+        else if (num == 6) eliminarAlfabet();
+        else if (num == 7) eliminarIdioma();
+    }
+
+    //Pre:
+    //Post: Es modifica una llista existen sobrescrivint la llista amb la nova informació obtinguda
+    public void modificarLlistaFrequencies() throws Exception{
+        System.out.println("#### Modificar Llista ####");
+        llistarLlistes();
+        System.out.println("Introdueixi el nom de la llista a modificar o X per cancelar");
+        String nomllista = s.next();
+        if (nomllista.equals("X")) return;
+        System.out.println("Selecciona el tipus d'arxiu:");
+        System.out.println("1. Text");
+        System.out.println("2. Llista");
+        System.out.println("3. Manual");
+        int num = s.nextInt();
+
+        try {
+            String nomArxiu = "";
+            if (num ==1 || num == 2) {
+                System.out.println("Introdueixi el nom de l'arxiu que vol llegir o X per cancelar");
+                nomArxiu = s.next();
+            }
+            if (num == 1) controlador.modificarLlistaPerfil("text", nomArxiu, nomllista, new HashMap<>());
+            else if (num == 2) controlador.modificarLlistaPerfil("llista", nomArxiu, nomllista, new HashMap<>());
+            else if (num == 3) {
+                Map<String, Integer> novesEntrades = new HashMap<>();
+                novesEntrades = llistaManual(novesEntrades);
+                controlador.modificarLlistaPerfil("Manual", nomArxiu, nomllista, novesEntrades);
+            }
+            System.out.println("Llista " + nomllista + " modificada correctament");
+        } catch (LlistaFreqNoExisteix e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        } catch (FormatNoValid e2) {
+            System.out.println("ERROR: " + e2.getMessage());
+        } catch (FileNotFoundException e3) {
+            System.out.println("ERROR: " + e3.getMessage());
+        }
     }
 
     //Pre:
@@ -97,37 +139,49 @@ public class DriverDades {
         Map<String, Integer> novesEntrades = new HashMap<>();
 
         try {
-            String idioma = selectorIdioma();
 
             if (num == 1 || num == 2) {
+                String idioma = selectorIdioma();
                 System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
                 String filename = s.next();
                 if (num == 1) {
                     controlador.novaLlistaPerfil("text", filename, idioma, novesEntrades);
+                    System.out.println("Afegida la llista a partir de text amb nom: " +filename+ " i idioma: " + idioma);
                 }
                 if (num == 2) {
                     controlador.novaLlistaPerfil("llista", filename, idioma, novesEntrades);
+                    System.out.println("Afegida la llista a partir d'una llista amb nom: " +filename+ " i idioma: " + idioma);
                 }
             } else if (num == 3) {
                 //llegir manual
+                String idioma = selectorIdioma();
                 novesEntrades = llistaManual(novesEntrades);
                 System.out.println("##### Introduir el nom de la llista: #####");
                 String nom = s.next();
                 controlador.novaLlistaPerfil("Manual", nom, idioma, novesEntrades);
+                System.out.println("Afegida manualment la llista amb nom: " +nom+ " i idioma: " + idioma);
             }
         } catch (LlistaFreqJaExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
-        } //catch IDIOMA NO EXISTEIX
+        } catch (IdiomaNoExisteix e2) {
+            System.out.println("ERROR: " + e2.getMessage());
+        } catch (FormatNoValid e3) {
+            System.out.println("ERROR: " + e3.getMessage());
+        } catch (FileNotFoundException e3) {
+            System.out.println("ERROR: " + e3.getMessage());
+        }
     }
 
     //Pre:
     //Post: Es llisten les llistes guardades i s'elimina l'indicada per el usuari
     public void eliminarLlista()throws Exception {
         if (llistarLlistes()) {
-            System.out.println("Selecciona la llista a esborrar escrivint el seu nom:");
+            System.out.println("Selecciona la llista a esborrar escrivint el seu nom o X per cancelar:");
             String nomLlista = s.next();
+            if (nomLlista.equals("X")) return;
             try {
                 controlador.eliminarLlista(nomLlista);
+                System.out.println("Eliminada la llista amb nom: " + nomLlista);
             } catch (LlistaFreqNoExisteix e1) {
                 System.out.println("ERROR: " + e1.getMessage());
             } catch (LlistaFreqEnUs e2 ) {
@@ -149,7 +203,7 @@ public class DriverDades {
 
     //Pre:
     //Post: es llegeixen les entrades manuals per crear una llista de frequencies
-    public Map<String,Integer> llistaManual(Map<String, Integer> novesEntrades) {
+    public Map<String,Integer> llistaManual(Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat{
         System.out.println("##### Introduir freqüències manualment #####");
         System.out.println("##### Introduir paraules i freqüències que es vulguin entrar #####");
         System.out.println("##### Per acabar escriure: 'X' #####");
@@ -174,7 +228,7 @@ public class DriverDades {
                 System.out.println("ERROR: La freqüència no és un número ");
             }
         }
-        if (novesEntrades.isEmpty()) return null;
+        if (novesEntrades.isEmpty()) throw new FormatNoValid("LLISTA NO BUIDA");
 
         return novesEntrades;
 
@@ -226,7 +280,7 @@ public class DriverDades {
         List<String> nomLlistes = controlador.getNomLlistesGuardades();
         netejaTerminal();
         if (nomLlistes.isEmpty()) {
-            System.out.println("No n'hi han llistes guardades");
+            System.out.println("No hi ha llistes guardades");
             return false;
         }
         else {
@@ -283,6 +337,23 @@ public class DriverDades {
         }
         catch (FormatNoValid e2) {
             System.out.println("ERROR: " + e2.getMessage());
+        } catch (FileNotFoundException e3) {
+            System.out.println("ERROR: " + e3.getMessage());
+        }
+    }
+
+    public void eliminarAlfabet() throws Exception {
+        System.out.println("### Eliminar Alfabet ###");
+        System.out.println("Introdueixi el nom de l'Alfabet: ");
+        String nomAlfabet = s.next();
+        try {
+            controlador.eliminarAlfabet(nomAlfabet);
+        }
+        catch (AlfabetNoExisteix e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+        catch (AlfabetEnUs e1) {
+            System.out.println("ERROR: " + e1.getMessage());
         }
     }
 
@@ -307,6 +378,23 @@ public class DriverDades {
         }
         catch (FormatNoValid e2) {
             System.out.println("ERROR: " + e2.getMessage());
+        } catch (FileNotFoundException e3) {
+            System.out.println("ERROR: " + e3.getMessage());
+        }
+    }
+
+    public void eliminarIdioma() throws Exception {
+        System.out.println("### Eliminar Idioma ###");
+        System.out.println("Introdueixi el nom de l'Idioma: ");
+        String nomIdioma = s.next();
+        try {
+            controlador.eliminarIdioma(nomIdioma);
+        }
+        catch (IdiomaNoExisteix e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+        catch (AlfabetEnUs e1) {
+            System.out.println("ERROR: " + e1.getMessage());
         }
     }
 
@@ -316,11 +404,9 @@ public class DriverDades {
     }
 
 
-
-
     public static void main(String[] args) {
         DriverDades dd = new DriverDades();
-        System.out.println("Estas provant el driver del controlador de la capa domini\n");
+        System.out.println("Estas provant el driver de les dades \n");
         dd.iniciaDriverDades();
     }
 }

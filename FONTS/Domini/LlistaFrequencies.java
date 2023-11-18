@@ -48,6 +48,13 @@ public class LlistaFrequencies {
     }
 
     //Pre:
+    //Post: Es modifica la llista amb les noves entrades: novaLlista, es sobrescriu la llista de paraules anterior
+    public void modificarLlista(Map<String,Integer> novaLlista) {
+        LlistaParaules = novaLlista;
+    }
+
+    /*
+    //Pre:
     //Post: Les paraules i frequencies introduides son afegides a la llista
     public void insertarFrequencies(Map<String, Integer> novesEntrades) {
 
@@ -70,6 +77,8 @@ public class LlistaFrequencies {
 
 
     }
+
+     */
 
 }
 
