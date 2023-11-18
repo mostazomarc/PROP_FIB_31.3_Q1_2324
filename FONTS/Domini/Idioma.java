@@ -18,15 +18,6 @@ public class Idioma {
     }
 
     //Pre:
-    //Post: Es crea un Idioma amb nom, alfabet i llista de freqüències predeterimnada
-    public Idioma (String nom, Alfabet alfabet, LlistaFrequencies llistaPred) {
-        this.nom = nom;
-        this.alfabet = alfabet;
-        alfabet.afegirIdioma(nom);
-        llistaFreqPredeterminada = llistaPred;
-    }
-
-    //Pre:
     //Post: Es crea un Idioma amb nom, alfabet i una NOVA llista de freqüències predeterimnada
     public Idioma (String nom, Alfabet alfabet, Map<String, Integer> llistaParaules) {
         this.nom = nom;
