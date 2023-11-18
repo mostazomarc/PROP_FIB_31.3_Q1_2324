@@ -337,13 +337,19 @@ public class DriverDades {
         }
         catch (FormatNoValid e2) {
             System.out.println("ERROR: " + e2.getMessage());
-        } catch (FileNotFoundException e3) {
+        }
+        catch (FileNotFoundException e3) {
             System.out.println("ERROR: " + e3.getMessage());
+        }
+        catch (CaracterInvalid e4) {
+            System.out.println("ERROR: " + e4.getMessage());
+            System.out.println("Comprova que no hi hagi caràcters especials (espais en blanc, accents, símbols...)");
         }
     }
 
     public void eliminarAlfabet() throws Exception {
         System.out.println("### Eliminar Alfabet ###");
+        consultaAlfabets();
         System.out.println("Introdueixi el nom de l'Alfabet: ");
         String nomAlfabet = s.next();
         try {
@@ -361,6 +367,7 @@ public class DriverDades {
         System.out.println("### Afegir Idioma ###");
         System.out.println("Introdueixi el nom de l'Idioma: ");
         String nomIdioma = s.next();
+        consultaAlfabets();
         System.out.println("Introdueixi el nom de l'Alfabet que té l'idioma: ");
         String nomAlfabet = s.next();
         System.out.println("Introdueixi el nom de l'Arxiu que conté la llista de Frequències predeterminada de l'idioma: ");
@@ -378,13 +385,15 @@ public class DriverDades {
         }
         catch (FormatNoValid e2) {
             System.out.println("ERROR: " + e2.getMessage());
-        } catch (FileNotFoundException e3) {
+        }
+        catch (FileNotFoundException e3) {
             System.out.println("ERROR: " + e3.getMessage());
         }
     }
 
     public void eliminarIdioma() throws Exception {
         System.out.println("### Eliminar Idioma ###");
+        consultaIdiomes();
         System.out.println("Introdueixi el nom de l'Idioma: ");
         String nomIdioma = s.next();
         try {

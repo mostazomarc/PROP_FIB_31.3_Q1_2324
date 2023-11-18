@@ -6,6 +6,8 @@ import Excepcions.AlfabetEnUs;
 import Excepcions.AlfabetJaExisteix;
 import Excepcions.AlfabetNoExisteix;
 import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.CaracterInvalid;
+import java.text.Normalizer;
 
 import java.util.*;
 
@@ -44,12 +46,21 @@ public class CtrlPersAlfabets {
 
         for (String linia : LlistaLlegida) {
             for (char lletra : linia.toCharArray()) {
+                if (!lletraValida(lletra)) throw new CaracterInvalid(filename);
                 lletres.add(lletra);
             }
         }
 
         Alfabet nouAlfabet = new Alfabet(nomAlfabet, lletres);
         Alfabets.put(nomAlfabet.toLowerCase(), nouAlfabet);
+    }
+
+    private boolean lletraValida(char c) {
+        char c1 = Character.toLowerCase(c);
+        if (!Character.isLetter(c)) return false; // Mira que és una lletra
+        String caracterNormalizado = Normalizer.normalize(String.valueOf(c1), Normalizer.Form.NFD);
+        if (!caracterNormalizado.equals(String.valueOf(c1)) && c1 != 'ñ' && c1 != 'ç') return false; //Mira que no té accent
+        return true;
     }
 
     public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {

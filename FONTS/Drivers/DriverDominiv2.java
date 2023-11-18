@@ -31,15 +31,14 @@ public class DriverDominiv2 {
         }
         s = new Scanner(System.in);
 
-
-
         System.out.println("\n ##################### BENVINGUT AL SISTEMA CREADOR DE TECLATS ##################### \n");
         System.out.println("\nLa configuració actual del programa per fer proves es la següent:");
         System.out.println("## Perfil: " + controlador.getPerfilActual());
         System.out.println("## Estratègia: " + controlador.getEstrategiaActual());
-        System.out.println("## Alfabet: Llatí");
-        System.out.println("## Idioma: Català");
-        System.out.println("## Llista Predeterminada Català: catalaFreq.txt");
+        System.out.println("## Alfabet: alfabetCatala, alfabetEspañol");
+        System.out.println("## Idioma: Català, Español");
+        System.out.println("## Llista Predeterminada Català: LlistaPredCatalà");
+        System.out.println("## Llista Predeterminada Català: LlistaPredEspañol");
 
         System.out.println("\nEl driver disposa de les següents funcions:\n");
         printMenu();
