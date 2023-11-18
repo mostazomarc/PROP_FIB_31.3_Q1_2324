@@ -42,14 +42,14 @@ public class CtrlPersTeclats {
     }
 
     //Pre:
-    //Post:
+    //Post: Inicialitza el conjunt de teclats i es guarda el controlador de domini
     private CtrlPersTeclats(CtrlDomini c) {
         teclats = new HashMap<>();
         controlador = c;
     }
 
     //Pre:
-    //Post:
+    //Post: Carrega els teclats guardats per la capa de persistencia
     public void carregarTeclats() throws Exception {
 
 
@@ -68,14 +68,14 @@ public class CtrlPersTeclats {
     }
 
     //Pre:
-    //Post: Es crea i s'afegeix una nova llista amb  nom: nomLlista, idioma: i i frequencies: novesEntrades
+    //Post: Es guarda el teclat t al conjunt de teclats (Si no existia ja)
     public void afegirTeclat(Teclat t) throws ExcepcionsCreadorTeclat {
         comprovaTeclatJaExisteix(t.getNom());
         teclats.put(t.getNom(),t);
     }
 
     //Pre:
-    //Post:
+    //Post: S'elimina el teclat identificat per nomTeclat de el conjunt de teclats
     public void eliminarTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat {
         comprovaTeclatNoExisteix(nomTeclat);
         teclats.remove(nomTeclat);
@@ -91,7 +91,7 @@ public class CtrlPersTeclats {
     }
 
     //Pre:
-    //Post:
+    //Post: s'obté el teclat identificat per nomTeclat
     public Teclat getTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat{
         comprovaTeclatNoExisteix(nomTeclat);
         return teclats.get(nomTeclat);
