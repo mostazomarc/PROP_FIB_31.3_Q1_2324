@@ -76,7 +76,7 @@ public class CtrlPersTeclats {
 
     //Pre:
     //Post:
-    public void eliminarLlista(String nomTeclat) throws ExcepcionsCreadorTeclat {
+    public void eliminarTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat {
         comprovaTeclatNoExisteix(nomTeclat);
         teclats.remove(nomTeclat);
     }

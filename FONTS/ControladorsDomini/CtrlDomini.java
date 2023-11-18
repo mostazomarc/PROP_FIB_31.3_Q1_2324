@@ -226,7 +226,7 @@ public class CtrlDomini {
     //Post: S'elimina el teclat identificat per nomTeclat
     public void eliminarTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat{
         PerfilActual.eliminarTeclat(nomTeclat);
-        //ELIMINAR TECLAT DE CONTROLADOR DE PERSISTENCIA
+        teclats.eliminarTeclat(nomTeclat);//ELIMINAR TECLAT DE CONTROLADOR DE PERSISTENCIA
     }
 
     public void afegirAlfabet(String filename) throws Exception {
