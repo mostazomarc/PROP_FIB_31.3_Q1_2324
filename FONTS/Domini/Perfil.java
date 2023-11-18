@@ -121,7 +121,7 @@ public class Perfil {
     public void crearTeclatLlistaPropia(String NomTeclat, String NomLlista, Idioma idioma, int n, int m) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(NomLlista);
         if (teclats.containsKey(NomTeclat)) throw new TeclatJaExisteix(NomTeclat);
-        teclats.put(NomTeclat,new Teclat(NomTeclat,NomLlista, frequencies, idioma, n, m));
+        teclats.put(NomTeclat,new Teclat(NomTeclat, frequencies.get(NomLlista), idioma, n, m));
     }
 
     //Pre:

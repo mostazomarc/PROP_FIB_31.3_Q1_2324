@@ -134,7 +134,9 @@ public class DriverTeclats {
             System.out.println("La disposicio del teclat generat ha estat la següent: \n");
             for (int k=0; k<teclat.length; ++k) {
                 for (int j=0; j<teclat[0].length; ++j) {
-                    System.out.print("[" + teclat[k][j] + "]");
+                    if (teclat[k][j] != ' ') {
+                        System.out.print("[" + teclat[k][j] + "]");
+                    }
                 }
                 System.out.println();
             }
@@ -145,9 +147,8 @@ public class DriverTeclats {
             System.out.println("ERROR: " + e2.getMessage());
         } catch (LayoutNoValid e3) {
             System.out.println("ERROR: " + e3.getMessage());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+        } catch (IdiomesDiferents e4) {
+            System.out.println("ERROR: " + e4.getMessage());
         }
     }
 
@@ -181,9 +182,6 @@ public class DriverTeclats {
             System.out.println("ERROR: " + e2.getMessage());
         } catch (LayoutNoValid e3) {
             System.out.println("ERROR: " + e3.getMessage());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
