@@ -1,6 +1,8 @@
 package Domini;
 
+import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.LletraNoInclosa;
+import Excepcions.LlistaBuida;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,9 +28,9 @@ public class LlistaFrequencies {
 
     //Pre:
     //Post: Comprova que totes les lletres de les paraules estan a lletres de l'idioma (pero les lletres ñ i ç les pasa a n i c llavors no es pot provar aixi)
-    private void comprovarLletres(Set<String> paraules, Idioma i) throws LletraNoInclosa {
+    private void comprovarLletres(Set<String> paraules, Idioma i) throws ExcepcionsCreadorTeclat {
         Set<Character> lletres = i.getLletres();
-        if (paraules.isEmpty()) throw new LletraNoInclosa('e', "LLISTA BUIDA");
+        if (paraules.isEmpty()) throw new LlistaBuida();
         for (String paraula : paraules) {
             // obte cada lletra de la paraula
             char[] letrasClave = paraula.toCharArray();
@@ -59,7 +61,7 @@ public class LlistaFrequencies {
 
     //Pre: LlistaParaules es una llista valida
     //Post: Es crea una LlistaFrecuencies amb nom, llista paraules i idoma i s'afegeix la llista a l'idioma si l'idioma no té llista predeterminada
-    public LlistaFrequencies (String nom, Idioma i, Map<String, Integer> LlistaParaules) throws LletraNoInclosa{
+    public LlistaFrequencies (String nom, Idioma i, Map<String, Integer> LlistaParaules) throws ExcepcionsCreadorTeclat{
         comprovarLletres(LlistaParaules.keySet(),i);
         this.nom = nom;
         this.LlistaParaules = LlistaParaules;

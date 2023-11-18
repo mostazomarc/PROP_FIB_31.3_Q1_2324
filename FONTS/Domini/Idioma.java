@@ -1,5 +1,6 @@
 package Domini;
 
+import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.LletraNoInclosa;
 
 import java.util.Set;
@@ -24,7 +25,7 @@ public class Idioma {
         llistaFreqPredeterminada = llistaPred;
     }
 
-    public Idioma (String nom, Alfabet alfabet, String nomLlista, Map<String, Integer> llistaParaules) throws LletraNoInclosa {
+    public Idioma (String nom, Alfabet alfabet, String nomLlista, Map<String, Integer> llistaParaules) throws ExcepcionsCreadorTeclat {
         this.nom = nom;
         this.alfabet = alfabet;
         alfabet.afegirIdioma(nom);

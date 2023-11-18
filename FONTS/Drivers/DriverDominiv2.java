@@ -20,6 +20,7 @@ public class DriverDominiv2 {
         dDades = new DriverDades();
         try {
             controlador.carregarDades();
+            System.out.println("Inicia sessió: " + "Prova");
         } catch (PerfilJaExisteix e1 ) {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (PerfilNoExisteix e2 ) {
@@ -110,7 +111,10 @@ public class DriverDominiv2 {
         List<String> nomsPerfils = controlador.getAllPerfils();
         try {
             if (nomPerfil.toLowerCase().equals("sortir")){}
-            else if (nomsPerfils.contains(nomPerfil)) controlador.iniciaInstancia(nomPerfil);
+            else if (nomsPerfils.contains(nomPerfil)) {
+                controlador.iniciaInstancia(nomPerfil);
+                System.out.println("Inicia sessió: " + nomPerfil);
+            }
             else {
                 System.out.println("Es crearà el Perfil: " + nomPerfil);
                 System.out.println("Està segur? Si/No");
@@ -118,6 +122,7 @@ public class DriverDominiv2 {
                 if (resposta.equals("Si") || resposta.equals("si")) {
                     controlador.iniciaInstancia(nomPerfil);
                     System.out.println("Creat Perfil: " + nomPerfil);
+                    System.out.println("Inicia sessió: " + nomPerfil);
                 }
                 else System.out.println("No s'han fet canvis");
             }
@@ -128,7 +133,6 @@ public class DriverDominiv2 {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void llistarPerfils() {

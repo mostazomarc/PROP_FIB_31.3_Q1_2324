@@ -1,7 +1,7 @@
 package JUnit;
 
 import Domini.*;
-
+import Excepcions.*;
 import static org.junit.Assert.*;
 
 import Excepcions.LletraNoInclosa;
@@ -84,7 +84,7 @@ public class LlistaFrequenciesTest {
 
     @Test
     //Creadora LLista amb nom i Llista de paraules i getFrequencies
-    public void creadoraLlistaNomLlista() {
+    public void creadoraLlistaNomLlista() throws ExcepcionsCreadorTeclat {
         try {
             LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista", idiomaProva, llistaParaulesProva);
             assertEquals("NovaLlista", resultat.getNom());
@@ -97,18 +97,37 @@ public class LlistaFrequenciesTest {
         }
     }
 
-    /*
-    @Test
-    //Insertar llista de frequencies a una llista ja creada
-    public void insertarFrequencies() {
+    //### Extrems
 
-        LlistaFrequencies llistaProva = new LlistaFrequencies("NovaLlista",idiomaProva);
-        llistaProva.insertarFrequencies(llistaParaulesProva);
-        assertEquals(llistaParaulesProva,llistaProva.getFrequencies());
+//    - Lista de freuquencies con letras que no son part de l’idioma
+//    - Crear una lista con una lista vacía
+
+
+
+    @Test
+    public void llistaLletresNoIdioma () throws ExcepcionsCreadorTeclat {
+        llistaParaulesProva.put("Caña", 30); //ficem la lletra ñ no inclosa a l'Alfabet Prova
+        try {
+            LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista", idiomaProva, llistaParaulesProva);
+            assertTrue(false); //si arriba aqui no ha detectat la lletra no inclosa
+        } catch (LletraNoInclosa e) {
+            assertTrue(true); //si arriba aqui ha detectat la lletra no inclosa
+        }
     }
 
-     */
 
+    @Test
+    public void llistaBuida () throws ExcepcionsCreadorTeclat {
+        llistaParaulesProva = new HashMap<>();
+        try {
+            LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista", idiomaProva, llistaParaulesProva);
+            assertTrue(false); //si arriba aqui no ha detectat la lletra no inclosa
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+        } catch (LlistaBuida e3) {
+            assertTrue(true);
+        }
+    }
 
 }
 
