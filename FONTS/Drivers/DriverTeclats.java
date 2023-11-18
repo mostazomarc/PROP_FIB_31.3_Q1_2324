@@ -168,7 +168,7 @@ public class DriverTeclats {
             controlador.crearTeclatLlistaIdioma(nomTeclat, nomIdioma, n, m);
             char[][] teclat = controlador.consultaTeclat(nomTeclat);
             System.out.println();
-            System.out.println("La disposicio del teclat generat ha estat la següent: \n");
+            System.out.println("La disposició del teclat generat ha estat la següent: \n");
             for (int k=0; k<teclat.length; ++k) {
                 for (int j=0; j<teclat[0].length; ++j) {
                     if (teclat[k][j] != ' ') {
@@ -245,7 +245,7 @@ public class DriverTeclats {
                     String llistafreq = controlador.getNomLListaTeclat(nomSeleccio);
                     System.out.println(num + ". Nom: " + nomSeleccio + " Idioma: " + idioma + " Llista de Freqüències: " + llistafreq + "\n" );
                     char[][] teclat = controlador.consultaTeclat(nomSeleccio);
-                    System.out.println("Disposicio: ");
+                    System.out.println("Disposició: ");
                     for (int k=0; k<teclat.length; ++k) {
                         for (int j=0; j<teclat[0].length; ++j) {
                             if (teclat[k][j] != ' ') {
@@ -255,6 +255,7 @@ public class DriverTeclats {
                         System.out.println();
                     }
                     System.out.println();
+                    System.out.println("El layout és de " + teclat.length + " files per " + teclat[0].length + " columnes\n");
                 }
             } catch(TeclatNoExisteix e1) {
                 System.out.println("ERROR: " + e1.getMessage());
@@ -279,7 +280,7 @@ public class DriverTeclats {
                     System.out.println();
                     ++i;
                 }
-                System.out.println("Si vol eliminar un teclat entri el numero, si no entri '0':");
+                System.out.println("Si vol eliminar un teclat entri el número, si no entri '0':");
                 int num = s.nextInt();
                 if (num != 0) {
                     netejaTerminal();
