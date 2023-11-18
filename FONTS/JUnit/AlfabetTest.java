@@ -19,18 +19,46 @@ public class AlfabetTest {
 
     @Test
     public void creadoraAlfebetNomLletres() {
-        Alfabet resultat = new Alfabet("Llatí", lletresProva);
-        assertEquals("Llatí",resultat.getNomAlfabet());
+        Alfabet resultat = new Alfabet("AlfabetProva", lletresProva);
+        assertEquals("AlfabetProva",resultat.getNomAlfabet());
         assertEquals(lletresProva,resultat.getLletres());
     }
 
     @Test
+    public void afegirIdioma() {
+        Alfabet resultat = new Alfabet("AlfabeProva", lletresProva);
+        String nomIdioma = "IdiomaProva";
+        resultat.afegirIdioma(nomIdioma);
+        assertEquals(1,resultat.numIdiomes());
+    }
+
+    @Test
+    public void treureIdioma() {
+        Alfabet resultat = new Alfabet("AlfabeProva", lletresProva);
+        resultat.afegirIdioma("IdiomaProva");
+        assertEquals(1,resultat.numIdiomes());
+        resultat.treureIdioma("IdiomaProva");
+        assertEquals(0,resultat.numIdiomes());
+    }
+
+    @Test
+    public void getNomAlfabet() {
+        Alfabet resultat = new Alfabet("AlfabeProva", lletresProva);
+        assertEquals("AlfabeProva",resultat.getNomAlfabet());
+    }
+
+    @Test
+    public void getLletres() {
+        Alfabet resultat = new Alfabet("AlfabeProva", lletresProva);
+        assertEquals(lletresProva, resultat.getLletres());
+    }
+
+    @Test
     public void getNumLletres() {
-        int numLletres = 26;
-        Alfabet resultat = new Alfabet("Llatí", lletresProva);
-        assertEquals(numLletres,resultat.getNumLletres());
+        Alfabet resultat = new Alfabet("AlfabeProva", lletresProva);
+        assertEquals(lletresProva.size(),resultat.getNumLletres());
     }
 
 }
 
-//Classe Programada per: Arnau
+//Classe Programada per: Arnau Tajahuerce
