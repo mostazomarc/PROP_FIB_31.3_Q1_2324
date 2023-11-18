@@ -3,15 +3,15 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 public class HungarianAlgorithm {
-    double[][] matriu; // matriu inicial (matriu de costos)
-    double [][] copiamatriu;
+    public double[][] matriu; // matriu inicial (matriu de costos)
+    public double [][] copiamatriu;
     // vectors copiamatriuiliars per construir la matriu
     public int[] zeroFila;
     public int[] zeroColumna;
-    int[] filaCoberta;
+    public int[] filaCoberta;
     public int[] columnaCoberta;
-    int[] zerosEstrellaEnFila;
-    double valoroptim;
+    public int[] zerosEstrellaEnFila;
+    public double valoroptim;
     public HungarianAlgorithm(double[][] matriu) {
         if (matriu.length != matriu[0].length) {
             try {
