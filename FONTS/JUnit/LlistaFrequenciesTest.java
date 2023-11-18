@@ -99,9 +99,7 @@ public class LlistaFrequenciesTest {
 
     //### Extrems
 
-//        - Lista de freuquencies con letras que no son part de l’idioma
-//    - Entrar una paraula dos vegades
-//    - Todas las funciones
+//    - Lista de freuquencies con letras que no son part de l’idioma
 //    - Crear una lista con una lista vacía
 
 
