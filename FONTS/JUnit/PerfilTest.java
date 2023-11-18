@@ -48,7 +48,7 @@ public class PerfilTest {
     }
 
     @Before
-    public void crearPerfilProva() {
+    public void crearPerfilProva() throws ExcepcionsCreadorTeclat {
         controlador = CtrlDomini.getInstance();
         llistes = CtrlPersFreq.getInstance(controlador);
         try {
