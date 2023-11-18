@@ -149,6 +149,8 @@ public class DriverTeclats {
             System.out.println("ERROR: " + e3.getMessage());
         } catch (IdiomesDiferents e4) {
             System.out.println("ERROR: " + e4.getMessage());
+        } catch (TeclatJaExisteix e5) {
+            System.out.println("ERROR: " + e5.getMessage());
         }
     }
 
@@ -182,6 +184,8 @@ public class DriverTeclats {
             System.out.println("ERROR: " + e2.getMessage());
         } catch (LayoutNoValid e3) {
             System.out.println("ERROR: " + e3.getMessage());
+        } catch (TeclatJaExisteix e5) {
+            System.out.println("ERROR: " + e5.getMessage());
         }
     }
 

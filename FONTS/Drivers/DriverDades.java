@@ -169,6 +169,8 @@ public class DriverDades {
             System.out.println("ERROR: " + e3.getMessage());
         } catch (FileNotFoundException e3) {
             System.out.println("ERROR: " + e3.getMessage());
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
         }
     }
 

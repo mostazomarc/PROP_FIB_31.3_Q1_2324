@@ -4,6 +4,7 @@ import Domini.*;
 
 import static org.junit.Assert.*;
 
+import Excepcions.LletraNoInclosa;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,38 +42,58 @@ public class IdiomaTest {
 
     @Test
     public void creadoraIdiomaNomAlfabetLlistaParaules() {
-        Idioma resultat = new Idioma("IdiomaProva", alfabetProva, "LlistaProva", llistaParaulesProva);
-        assertEquals("IdiomaProva", resultat.getNom());
-        assertEquals(alfabetProva,resultat.getAlfabet());
-        assertEquals(llistaParaulesProva,resultat.getFrequencies());
+        try {
+            Idioma resultat = new Idioma("IdiomaProva", alfabetProva, "LlistaProva", llistaParaulesProva);
+            assertEquals("IdiomaProva", resultat.getNom());
+            assertEquals(alfabetProva,resultat.getAlfabet());
+            assertEquals(llistaParaulesProva,resultat.getFrequencies());
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+            assertTrue(false);
+        }
     }
 
     @Test
     public void afegirLlistaFreqPred() {
         Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva);
-        LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
-        idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
-        assertEquals(llistaFreqProva, idiomaProva.getLlistaFreq());
+        try {
+            LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+            idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
+            assertEquals(llistaFreqProva, idiomaProva.getLlistaFreq());
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+            assertTrue(false);
+        }
     }
 
     @Test
     public void afegirLlistaFreqPredJaExistent() {
         Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva);
-        LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
-        idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
-        LlistaFrequencies llistaFreqProva1 = new LlistaFrequencies("LlistaProva1", idiomaProva, llistaParaulesProva);
-        idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva1);
-        assertEquals(llistaFreqProva, idiomaProva.getLlistaFreq());
+        try {
+            LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+            idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
+            LlistaFrequencies llistaFreqProva1 = new LlistaFrequencies("LlistaProva1", idiomaProva, llistaParaulesProva);
+            idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva1);
+            assertEquals(llistaFreqProva, idiomaProva.getLlistaFreq());
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+            assertTrue(false);
+        }
     }
 
     @Test
     public void canviaLlistaFreq() {
         Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva);
-        LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
-        idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
-        LlistaFrequencies llistaFreqProva1 = new LlistaFrequencies("LlistaProva1", idiomaProva, llistaParaulesProva);
-        idiomaProva.canviarLlistaFreqPredeterminada(llistaFreqProva1);
-        assertEquals(llistaFreqProva1, idiomaProva.getLlistaFreq());
+        try {
+            LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+            idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
+            LlistaFrequencies llistaFreqProva1 = new LlistaFrequencies("LlistaProva1", idiomaProva, llistaParaulesProva);
+            idiomaProva.canviarLlistaFreqPredeterminada(llistaFreqProva1);
+            assertEquals(llistaFreqProva1, idiomaProva.getLlistaFreq());
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+            assertTrue(false);
+        }
     }
 
 }
