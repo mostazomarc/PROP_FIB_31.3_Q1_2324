@@ -2,7 +2,10 @@ package Domini;
 
 import java.util.*;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import java.text.Normalizer;
 import Domini.Teclat;
 import Domini.HungarianAlgorithm;
 import Domini.Nodo;
@@ -79,6 +82,14 @@ public class BranchandBound implements Estrategia {
         }
 
     }
+
+    public static String quitarTilde(char c) {
+        String s = String.valueOf(c);
+        String normalized = Normalizer.normalize(s, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("[\\p{M}]");
+        Matcher matcher = pattern.matcher(normalized);
+        return matcher.replaceAll("");
+    }
     //Inicializa la matriz de tráfico
     //Inicializa la matriz de tráfico
     private double[][] calculaMatTraf(Map<String, Integer> palabrasFrec, Map<Character, Integer> lletres, int n) {
@@ -95,81 +106,16 @@ public class BranchandBound implements Estrategia {
                     //guardamos los índices de cada letra en el abecedario
                     char c1 = palabra.charAt(i);
                     char c2 = palabra.charAt(i + 1);
-                    if(c1 == 'à'){
-                        c1 = 'a';
-                    }
-                    else if(c1 == 'á'){
-                        c1 = 'a';
-                    }
-                    else if(c1 == 'è'){
-                        c1 = 'e';
-                    }
-                    else if(c1 == 'é'){
-                        c1 = 'e';
-                    }
-                    else if(c1 == 'ó'){
-                        c1 = 'o';
-                    }
-                    else if(c1 == 'ò'){
-                        c1 = 'o';
-                    }
-                    else if(c1 == 'ï'){
-                        c1 = 'i';
-                    }
-                    else if(c1 == 'ü'){
-                        c1 = 'u';
-                    }
-                    else if(c1 == 'ú'){
-                        c1 = 'u';
-                    }
-                    else if(c1 == 'í'){
-                        c1 = 'i';
-                    }
-                    else if(c1 == 'ñ'){
-                        c1 = 'n';
-                    }
-                    else if(c1 == 'ç'){
-                        c1 = 'c';
-                    }
 
-                    if(c2 == 'à'){
-                        c2 = 'a';
-                    }
-                    else if(c2 == 'á'){
-                        c2 = 'a';
-                    }
-                    else if(c2 == 'è'){
-                        c2 = 'e';
-                    }
-                    else if(c2 == 'é'){
-                        c2 = 'e';
-                    }
-                    else if(c2 == 'ó'){
-                        c2 = 'o';
-                    }
-                    else if(c2 == 'ò'){
-                        c2 = 'o';
-                    }
-                    else if(c2 == 'ï'){
-                        c2 = 'i';
-                    }
-                    else if(c2 == 'ü'){
-                        c2 = 'u';
-                    }
-                    else if(c2 == 'ú'){
-                        c2 = 'u';
-                    }
-                    else if(c2 == 'í'){
-                        c2 = 'i';
-                    }
-                    else if(c2 == 'ñ'){
-                        c2 = 'n';
-                    }
-                    else if(c2 == 'ç'){
-                        c2 = 'c';
-                    }
-
-                    if(c1 != '-' && c2 != '-' && c1 != '·' && c2 != '·'){
+                    if(Character.isLetter(c1) && Character.isLetter(c2)){
+                        if(Character.isUnicodeIdentifierPart(c1) && !lletres.containsKey(c1)){
+                            String caracterSinTilde = quitarTilde(c1);
+                            c1 = caracterSinTilde.charAt(0);
+                        }
+                        if(Character.isUnicodeIdentifierPart(c2) && !lletres.containsKey(c2)){
+                            String caracterSinTilde = quitarTilde(c2);
+                            c2 = caracterSinTilde.charAt(0);
+                        }
                         int letra1 = lletres.get(c1);
                         int letra2 = lletres.get(c2);
                         trafficMatrix[letra1][letra2] += frecuencia;
