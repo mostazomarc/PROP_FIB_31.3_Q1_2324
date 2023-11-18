@@ -13,28 +13,29 @@ public class Alfabet {
         lletres = new HashSet<Character>();
     }
 
-    //Pre: letters conté totes les lletres de l'alfabet que es vol afegir
-    //Post: Es crea un alfabet amb Lletres = letters i amb l'idioma donat
+    //Pre: lletres conté totes les lletres de l'alfabet que es vol afegir
+    //Post: Es crea un alfabet amb el nom i les lletres donades
     public Alfabet (String nomAlfabet, Set<Character> lletres) {
         this.nomAlfabet = nomAlfabet;
         this.lletres = lletres;
         idiomes = new HashSet<String>();
     }
 
+    //Pre: És un nom d'idioma vàlid
+    //Post: S'afegeix a idiomes el nomIdioma
     public void afegirIdioma(String nomIdioma) {
         idiomes.add(nomIdioma);
     }
 
+    //Pre: nomIdioma és al set d'idiomes
+    //Post: S'elimina d'idiomes el nomIdioma
     public void treureIdioma(String nomIdioma) {
         idiomes.remove(nomIdioma);
     }
 
+    //Retorna el número d'idiomes que utilitzen l'alfabet
     public int numIdiomes() {
         return idiomes.size();
-    }
-
-    public boolean teIdioma(String nomIdioma) {
-        return idiomes.contains(nomIdioma);
     }
 
     //Retorna el nom de l'alfabet
@@ -45,6 +46,7 @@ public class Alfabet {
         return lletres;
     }
 
+    //Retorna el número de lletres de l'alfabet
     public int getNumLletres() { return lletres.size(); }
 
     //Retorna informació (Nom i lletres) de l'Alfabet
@@ -54,4 +56,4 @@ public class Alfabet {
 
 }
 
-//Classe Programada per: Arnau
+//Classe Programada per: Arnau Tajahuerce
