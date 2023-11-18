@@ -25,24 +25,21 @@ public class LlistaFrequencies {
 
 
     //Pre:
-    //Post: Comprova que totes les lletres de les paraules estan a lletres de l'idioma
+    //Post: Comprova que totes les lletres de les paraules estan a lletres de l'idioma (pero les lletres ñ i ç les pasa a n i c llavors no es pot provar aixi)
     private void comprovarLletres(Set<String> paraules, Idioma i) throws LletraNoInclosa {
         Set<Character> lletres = i.getLletres();
-        System.out.println("COMPROVANT LLETRES");
-        if (paraules.isEmpty()) System.out.println("ERROR");
+        if (paraules.isEmpty()) throw new LletraNoInclosa('e', "LLISTA BUIDA");
         for (String paraula : paraules) {
             // obte cada lletra de la paraula
             char[] letrasClave = paraula.toCharArray();
-            System.out.println("COMPROVANT PARAULA " + paraula);
 
             // Verificar si totes les lletres estan a lletres
             for (char lletra : letrasClave) {
                 if(Character.isLetter(lletra)) {
                     lletra = Character.toLowerCase(lletra);
-                    System.out.println("COMPROVANT LLETRA " + lletra);
                     if (Character.isUnicodeIdentifierPart(lletra) && !lletres.contains(lletra)) {
                         String caracterSinTilde = quitarTilde(lletra);
-                        lletra = caracterSinTilde.charAt(0);
+                        if (lletra != 'ñ' && lletra != 'ç')lletra = caracterSinTilde.charAt(0);
                         if (!lletres.contains(lletra)) throw new LletraNoInclosa(lletra, i.getNom());
                     }
                 }
