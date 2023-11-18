@@ -5,6 +5,7 @@ import Dades.CtrlPersAlfabets;
 import Domini.Alfabet;
 import Excepcions.AlfabetJaExisteix;
 import Excepcions.AlfabetNoExisteix;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,6 +40,15 @@ public class CtrlPersAlfabetsTest {
         cP = CtrlPersAlfabets.getInstance(cD);
     }
 
+    @After
+    public void eliminarAlfabetProva() throws Exception {
+        try {
+            cP.eliminarAlfabet("AlfabetProva");
+        } catch (Exception e) {
+        }
+    }
+
+    //S'eliminen els alfabets creats per poderr tornar-los a crear
     @Test
     public void getControladorUnCopCreat() {
         assertSame(cP, CtrlPersAlfabets.getInstance(cD));
