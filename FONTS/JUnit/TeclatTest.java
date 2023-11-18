@@ -25,7 +25,7 @@ public class TeclatTest {
 
 
     @Before
-    public void omplirLletres() throws LletraNoInclosa {
+    public void omplirLletres() throws Exception {
         for (char lletra = 'a'; lletra <= 'z'; lletra++) lletresProva.add(lletra);
         Alfabet AlfabetProva = new Alfabet("Prova", lletresProva);
         llistaParaulesProva.put("Hola", 10);
