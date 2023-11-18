@@ -7,6 +7,7 @@ import Domini.*;
 import static org.junit.Assert.*;
 
 import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.LletraNoInclosa;
 import Excepcions.LlistaFreqNoExisteix;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,9 +51,13 @@ public class PerfilTest {
     public void crearPerfilProva() {
         controlador = CtrlDomini.getInstance();
         llistes = CtrlPersFreq.getInstance(controlador);
-        llista = llistes.afegirLlistaFreq("LlistaProva",idiomaProva,llistaParaulesProva);
-        llista2 = llistes.afegirLlistaFreq("LlistaProva3",idiomaProva,llistaParaulesProva);
-        llista3 = llistes.afegirLlistaFreq("LlistaProva4",idiomaProva,llistaParaulesProva);
+        try {
+            llista = llistes.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
+            llista2 = llistes.afegirLlistaFreq("LlistaProva3", idiomaProva, llistaParaulesProva);
+            llista3 = llistes.afegirLlistaFreq("LlistaProva4", idiomaProva, llistaParaulesProva);
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
         perfilProva = new Perfil("Prova","12345", controlador);
     }
 

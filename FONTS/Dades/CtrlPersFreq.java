@@ -75,7 +75,7 @@ public class CtrlPersFreq {
 
     //Pre:
     //Post: Es crea i s'afegeix una nova llista amb  nom: nomLlista, idioma: i i frequencies: novesEntrades
-    public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i, Map<String, Integer> novesEntrades) {
+    public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i, Map<String, Integer> novesEntrades) throws LletraNoInclosa {
         LlistaFrequencies llista = new LlistaFrequencies(nomLlista,i,novesEntrades);
         frequencies.put(llista.getNom(),llista);
         return llista;

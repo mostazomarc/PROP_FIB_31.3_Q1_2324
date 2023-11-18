@@ -4,6 +4,7 @@ import Domini.*;
 
 import static org.junit.Assert.*;
 
+import Excepcions.LletraNoInclosa;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -84,11 +85,16 @@ public class LlistaFrequenciesTest {
     @Test
     //Creadora LLista amb nom i Llista de paraules i getFrequencies
     public void creadoraLlistaNomLlista() {
-        LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista",idiomaProva, llistaParaulesProva);
-        assertEquals("NovaLlista",resultat.getNom());
-        assertEquals(llistaParaulesProva,resultat.getFrequencies());
-        assertEquals("ESPAÑOL",resultat.getNomIdioma());
-        assertEquals(resultat,idiomaProva.getLlistaFreq());
+        try {
+            LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista", idiomaProva, llistaParaulesProva);
+            assertEquals("NovaLlista", resultat.getNom());
+            assertEquals(llistaParaulesProva, resultat.getFrequencies());
+            assertEquals("ESPAÑOL", resultat.getNomIdioma());
+            assertEquals(resultat, idiomaProva.getLlistaFreq());
+        } catch (LletraNoInclosa e) {
+            System.out.println("ERROR: " + e.getMessage());
+            assertTrue(false);
+        }
     }
 
     /*
