@@ -52,6 +52,7 @@ public class Teclat {
     //Post:
     public String getNomLlistaFreq() {return llistafreq.getNom(); }
 
+
     //Pre:
     //Post: es retorna el nom del teclat
     public String getNom() {
