@@ -81,6 +81,12 @@ public class CtrlPersFreq {
         return llista;
     }
 
+    //Pre: No existeix la llista
+    //Post: S'afegeix una nova llista de frequencies
+    public void afegirLlistaFreq(LlistaFrequencies llista) {
+        frequencies.put(llista.getNom(), llista);
+    }
+
     //Pre:
     //Post: S'elimina la llista identificada per nomLlista
     public void eliminarLlista(String nomLlista) throws ExcepcionsCreadorTeclat {
@@ -93,7 +99,7 @@ public class CtrlPersFreq {
     // (de moment no comprova llistes de frequencies d'altres usuaris perquè fa falta capa de persistencia)
     public void comprovarUsIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat{
         for (Map.Entry<String, LlistaFrequencies> llista : frequencies.entrySet()) {
-            if (llista.getValue().getNomIdioma().equals(nomIdioma)) throw new IdiomaEnUs(nomIdioma);
+            if (llista.getValue().getNomIdioma().equals(nomIdioma) && !llista.getValue().getNom().equals("LlistaPred"+nomIdioma)) throw new IdiomaEnUs(nomIdioma);
         }
     }
 

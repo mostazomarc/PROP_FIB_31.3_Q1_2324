@@ -9,12 +9,16 @@ public class Idioma {
     private Alfabet alfabet;
     private LlistaFrequencies llistaFreqPredeterminada;
 
+    //Pre:
+    //Post: Es crea un Idioma amb nom i alfabet
     public Idioma (String nom, Alfabet alfabet) {
         this.nom = nom;
         this.alfabet = alfabet;
         alfabet.afegirIdioma(nom);
     }
 
+    //Pre:
+    //Post: Es crea un Idioma amb nom, alfabet i llista de frequencies predeterimnada
     public Idioma (String nom, Alfabet alfabet, LlistaFrequencies llistaPred) {
         this.nom = nom;
         this.alfabet = alfabet;
@@ -22,11 +26,13 @@ public class Idioma {
         llistaFreqPredeterminada = llistaPred;
     }
 
+    //Pre:
+    //Post: Es crea un Idioma amb nom, alfabet i una nova llista de frequencies predeterimnada
     public Idioma (String nom, Alfabet alfabet, String nomLlista, Map<String, Integer> llistaParaules) {
         this.nom = nom;
         this.alfabet = alfabet;
         alfabet.afegirIdioma(nom);
-        new LlistaFrequencies(nomLlista, this, llistaParaules); //Aquesta creadora ja vincula la llista de freqüències a aquest idioma
+        new LlistaFrequencies("LlistaPred"+nom, this, llistaParaules); //Aquesta creadora ja vincula la llista de freqüències a aquest idioma
     }
 
     //Pre: No existeix un idioma amb nomIdioma. Existeix l'alfabet alphabet. Existeix la llista de freqüències FreqList

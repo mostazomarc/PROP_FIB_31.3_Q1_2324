@@ -396,6 +396,9 @@ public class DriverDades {
         catch (AlfabetEnUs e1) {
             System.out.println("ERROR: " + e1.getMessage());
         }
+        catch (IdiomaEnUs e2) {
+            System.out.println("ERROR: " + e2.getMessage());
+        }
     }
 
     public void mostraDadesIdiomes(Vector<String> dades) {
