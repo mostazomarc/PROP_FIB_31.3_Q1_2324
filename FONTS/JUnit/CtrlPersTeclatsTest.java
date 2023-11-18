@@ -8,6 +8,7 @@ import Domini.LlistaFrequencies;
 import Domini.Teclat;
 import Excepcions.IdiomaEnUs;
 import Excepcions.LlistaFreqEnUs;
+import Excepcions.TeclatJaExisteix;
 import Excepcions.TeclatNoExisteix;
 import org.junit.After;
 import org.junit.Before;
@@ -96,6 +97,17 @@ public class CtrlPersTeclatsTest {
         assertEquals("LlistaProva", resultat.getNomLlistaFreq());
     }
 
+    @Test
+    public void afegirTeclatDuplicat() throws Exception {
+        cP.afegirTeclat(teclatProva);
+        try {
+            cP.afegirTeclat(teclatProva);
+            assertTrue(false);
+        } catch (TeclatJaExisteix e) {
+            assertTrue(true);
+        }
+    }
+
 
     @Test
     public void eliminaTeclat() throws Exception {
@@ -103,6 +115,16 @@ public class CtrlPersTeclatsTest {
         cP.eliminarTeclat("nouTeclat");
         try {
             cP.getTeclat("nouTeclat");
+            fail();
+        } catch (TeclatNoExisteix e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void eliminaTeclatInexistent() throws Exception {
+        try {
+            cP.eliminarTeclat("Inexistent");
             fail();
         } catch (TeclatNoExisteix e) {
             assertTrue(true);
@@ -138,6 +160,16 @@ public class CtrlPersTeclatsTest {
         assertEquals("nouTeclat", resultat.getNom());
         assertEquals("ESPAÑOL", resultat.getNomIdioma());
         assertEquals("LlistaProva", resultat.getNomLlistaFreq());
+    }
+
+    @Test
+    public void getTeclatInexistent() throws Exception {
+        try {
+            Teclat resultat = cP.getTeclat("inexistent");
+            assertTrue(false);
+        } catch (TeclatNoExisteix e) {
+            assertTrue(true);
+        }
     }
 
 

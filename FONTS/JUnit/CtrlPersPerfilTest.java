@@ -3,6 +3,7 @@ package JUnit;
 import ControladorsDomini.CtrlDomini;
 import Dades.CtrlPersPerfil;
 import Domini.Perfil;
+import Excepcions.PerfilJaExisteix;
 import Excepcions.PerfilNoExisteix;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,11 +50,36 @@ public class CtrlPersPerfilTest {
         assertEquals(perfil.getUsuari(), "NouPerfil");
     }
 
+
+    @Test
+    public void afegirPerfilDuplicat() throws Exception {
+        CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
+        cP.afegirPerfil("PerfilDuplicat");
+        try {
+            cP.afegirPerfil("PerfilDuplicat");
+            assertTrue(false);
+        } catch (PerfilJaExisteix e) {
+            assertTrue(true);
+        }
+    }
+
+
     @Test
     public void getPerfil() throws Exception {
         CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
         Perfil perfil = cP.getPerfil("NouPerfil");
         assertEquals(perfil.getUsuari(), "NouPerfil");
+    }
+
+    @Test
+    public void getPerfilInexistent() throws Exception {
+        CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
+        try {
+            Perfil perfil = cP.getPerfil("Inexistent");
+            assertTrue(false);
+        } catch (PerfilNoExisteix e) {
+            assertTrue(true);
+        }
     }
 
     @Test
