@@ -14,7 +14,6 @@ import java.util.*;
 
 public class IdiomaTest {
     Alfabet alfabetProva;
-    LlistaFrequencies llistaFreqProva;
 
     private Set<Character> lletresProva = new HashSet<Character>();
 
@@ -23,7 +22,7 @@ public class IdiomaTest {
     @Before
     public void omplirLletres() {
         for (char lletra = 'a'; lletra <= 'z'; lletra++) lletresProva.add(lletra);
-        alfabetProva = new Alfabet("Prova", lletresProva);
+        alfabetProva = new Alfabet("AlfabetProva", lletresProva);
     }
 
     @Before
@@ -37,9 +36,10 @@ public class IdiomaTest {
 
     @Test
     public void creadoraIdiomaNomAlfabet() {
-        Idioma resultat = new Idioma("Prova", alfabetProva);
-        assertEquals("Prova", resultat.getNom());
+        Idioma resultat = new Idioma("IdiomaProva", alfabetProva);
+        assertEquals("IdiomaProva", resultat.getNom());
         assertEquals(alfabetProva,resultat.getAlfabet());
+        assertEquals(1,alfabetProva.numIdiomes());
     }
 
     @Test
@@ -106,6 +106,38 @@ public class IdiomaTest {
         }
     }
 
+    @Test
+    public void getNom() {
+        Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva);
+        assertEquals("IdiomaProva", idiomaProva.getNom());
+    }
+
+    @Test
+    public void getAlfabet() {
+        Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva);
+        assertEquals(alfabetProva, idiomaProva.getAlfabet());
+    }
+
+    @Test
+    public void getLletres() {
+        Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva);
+        assertEquals(lletresProva, idiomaProva.getLletres());
+    }
+
+    @Test
+    public void getLlistaFreq() throws ExcepcionsCreadorTeclat{
+        Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva);
+        LlistaFrequencies llistaFreqProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+        idiomaProva.afegirLlistaFreqPredeterminada(llistaFreqProva);
+        assertEquals(llistaFreqProva, idiomaProva.getLlistaFreq());
+    }
+
+    @Test
+    public void getFrequencies() throws Exception {
+        Idioma idiomaProva = new Idioma("IdiomaProva", alfabetProva, llistaParaulesProva);
+        assertEquals(llistaParaulesProva, idiomaProva.getFrequencies());
+    }
+
 }
 
-//Classe Programada per: Arnau
+//Classe Programada per: Arnau Tajahuerce

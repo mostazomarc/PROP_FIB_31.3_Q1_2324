@@ -6,6 +6,8 @@ import Excepcions.AlfabetEnUs;
 import Excepcions.AlfabetJaExisteix;
 import Excepcions.AlfabetNoExisteix;
 import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.CaracterInvalid;
+import java.text.Normalizer;
 
 import java.util.*;
 
@@ -44,6 +46,7 @@ public class CtrlPersAlfabets {
 
         for (String linia : LlistaLlegida) {
             for (char lletra : linia.toCharArray()) {
+                if (!lletraValida(lletra)) throw new CaracterInvalid(filename);
                 lletres.add(lletra);
             }
         }
@@ -52,27 +55,35 @@ public class CtrlPersAlfabets {
         Alfabets.put(nomAlfabet.toLowerCase(), nouAlfabet);
     }
 
+    //Retorna TRUE si c és una lletra sense accent, FALSE si és un número, símbol, lletra amb accent...
+    private boolean lletraValida(char c) {
+        char c1 = Character.toLowerCase(c);
+        if (!Character.isLetter(c)) return false; // Mira que és una lletra
+        String caracterNormalizado = Normalizer.normalize(String.valueOf(c1), Normalizer.Form.NFD);
+        if (!caracterNormalizado.equals(String.valueOf(c1)) && c1 != 'ñ' && c1 != 'ç') return false; //Mira que no té accent
+        return true;
+    }
+
+    //Pre:
+    //Post: S'elimina l'alfabet identificat per nomAlfabet
     public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
         Alfabet a = getAlfabet(nomAlfabet);
         if (a.numIdiomes() != 0) throw new AlfabetEnUs(nomAlfabet);
         Alfabets.remove(nomAlfabet.toLowerCase());
     }
 
-    //Pre:
     //Post: Retorna TRUE si existeix un Alfabet amb nomAlfabet, FALSE en cas contrari
     public boolean existeix(String nomAlfabet) {
         if (Alfabets.containsKey(nomAlfabet.toLowerCase())) return true;
         return false;
     }
 
-    //Pre:
     //Post: Retorna l'Alfabet identificat per nomAlfabet
     public Alfabet getAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
         if (!existeix(nomAlfabet)) throw new AlfabetNoExisteix();
         return Alfabets.get(nomAlfabet.toLowerCase());
     }
 
-    //Pre:
     //Post: Retorna el conjunt d'Alfabets
     public TreeMap<String, Alfabet> getAlfabets() {
         return Alfabets;

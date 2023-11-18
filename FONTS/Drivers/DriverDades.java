@@ -319,16 +319,26 @@ public class DriverDades {
         return true;
     }
 
-    public void consultaIdiomes() {
+    public boolean consultaIdiomes() {
         System.out.println("### Consultar Idiomes ###");
         Vector<String> dades = controlador.consultaIdiomes();
-        mostraDadesIdiomes(dades);
+        if (dades.isEmpty()) {
+            System.out.println("No hi ha idiomes en el sistema");
+            return false;
+        }
+        else mostraDades(dades);
+        return true;
     }
 
-    public void  consultaAlfabets() {
+    public boolean consultaAlfabets() {
         System.out.println("### Consultar Alfabets ###");
         Vector<String> dades = controlador.consultaAlfabets();
-        mostraDadesIdiomes(dades);
+        if (dades.isEmpty()) {
+            System.out.println("No hi ha alfabets en el sistema");
+            return false;
+        }
+        else mostraDades(dades);
+        return true;
     }
 
     public void afegirAlfabet() throws Exception {
@@ -337,29 +347,38 @@ public class DriverDades {
         String filename = s.next();
         try {
             controlador.afegirAlfabet(filename);
+            System.out.println("S'ha afegit al sistema l'idioma amb nom: " + filename.substring(0, filename.length() - 4));
         }
         catch (AlfabetJaExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
         }
         catch (FormatNoValid e2) {
             System.out.println("ERROR: " + e2.getMessage());
-        } catch (FileNotFoundException e3) {
+        }
+        catch (FileNotFoundException e3) {
             System.out.println("ERROR: " + e3.getMessage());
+        }
+        catch (CaracterInvalid e4) {
+            System.out.println("ERROR: " + e4.getMessage());
+            System.out.println("Comprova que no hi hagi caràcters especials (espais en blanc, accents, símbols...)");
         }
     }
 
     public void eliminarAlfabet() throws Exception {
         System.out.println("### Eliminar Alfabet ###");
-        System.out.println("Introdueixi el nom de l'Alfabet: ");
-        String nomAlfabet = s.next();
-        try {
-            controlador.eliminarAlfabet(nomAlfabet);
-        }
-        catch (AlfabetNoExisteix e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
-        catch (AlfabetEnUs e1) {
-            System.out.println("ERROR: " + e1.getMessage());
+        if (consultaAlfabets()) {
+            System.out.println("Introdueixi el nom de l'Alfabet: ");
+            String nomAlfabet = s.next();
+            try {
+                controlador.eliminarAlfabet(nomAlfabet);
+                System.out.println("S'ha eliminat del sistema l'alfabet amb nom: " + nomAlfabet);
+            }
+            catch (AlfabetNoExisteix e) {
+                System.out.println("ERROR: " + e.getMessage());
+            }
+            catch (AlfabetEnUs e1) {
+                System.out.println("ERROR: " + e1.getMessage());
+            }
         }
     }
 
@@ -367,48 +386,54 @@ public class DriverDades {
         System.out.println("### Afegir Idioma ###");
         System.out.println("Introdueixi el nom de l'Idioma: ");
         String nomIdioma = s.next();
-        System.out.println("Introdueixi el nom de l'Alfabet que té l'idioma: ");
-        String nomAlfabet = s.next();
-        System.out.println("Introdueixi el nom de l'Arxiu que conté la llista de Frequències predeterminada de l'idioma: ");
-        String filename = s.next();
-        System.out.println("Introdueixi qui tipus d'arxiu 'text' o 'llista': ");
-        String tipusArxiu = s.next();
-        try {
-            controlador.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
-        }
-        catch (IdiomaJaExisteix e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
-        catch (AlfabetNoExisteix e1) {
-            System.out.println("ERROR: " + e1.getMessage());
-        }
-        catch (FormatNoValid e2) {
-            System.out.println("ERROR: " + e2.getMessage());
-        } catch (FileNotFoundException e3) {
-            System.out.println("ERROR: " + e3.getMessage());
-        } catch (LletraNoInclosa e3) {
-            System.out.println("ERROR: " + e3.getMessage());
-        } catch (LlistaBuida e4) {
-            System.out.println("ERROR: " + e4.getMessage());
+        if (consultaAlfabets()) {
+            System.out.println("Introdueixi el nom de l'Alfabet que té l'idioma: ");
+            String nomAlfabet = s.next();
+            System.out.println("Introdueixi el nom de l'Arxiu que conté la llista de Frequències predeterminada de l'idioma: ");
+            String filename = s.next();
+            System.out.println("Introdueixi qui tipus d'arxiu 'text' o 'llista': ");
+            String tipusArxiu = s.next();
+            try {
+                controlador.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
+                System.out.println("S'ha afegit al sistema l'idioma amb nom: " + nomIdioma);
+            } catch (IdiomaJaExisteix e) {
+                System.out.println("ERROR: " + e.getMessage());
+            } catch (AlfabetNoExisteix e1) {
+                System.out.println("ERROR: " + e1.getMessage());
+            } catch (FormatNoValid e2) {
+                System.out.println("ERROR: " + e2.getMessage());
+            } catch (FileNotFoundException e3) {
+                System.out.println("ERROR: " + e3.getMessage());
+            } catch (LletraNoInclosa e3) {
+                System.out.println("ERROR: " + e3.getMessage());
+            } catch (LlistaBuida e4) {
+                System.out.println("ERROR: " + e4.getMessage());
+            }
         }
     }
 
     public void eliminarIdioma() throws Exception {
         System.out.println("### Eliminar Idioma ###");
-        System.out.println("Introdueixi el nom de l'Idioma: ");
-        String nomIdioma = s.next();
-        try {
-            controlador.eliminarIdioma(nomIdioma);
-        }
-        catch (IdiomaNoExisteix e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
-        catch (AlfabetEnUs e1) {
-            System.out.println("ERROR: " + e1.getMessage());
+        if (consultaIdiomes()) {
+            System.out.println("Introdueixi el nom de l'Idioma: ");
+            String nomIdioma = s.next();
+            try {
+                controlador.eliminarIdioma(nomIdioma);
+                System.out.println("S'ha eliminat del sistema l'idioma amb nom: " + nomIdioma);
+            }
+            catch (IdiomaNoExisteix e) {
+                System.out.println("ERROR: " + e.getMessage());
+            }
+            catch (AlfabetEnUs e1) {
+                System.out.println("ERROR: " + e1.getMessage());
+            }
+            catch (IdiomaEnUs e2) {
+                System.out.println("ERROR: " + e2.getMessage());
+            }
         }
     }
 
-    public void mostraDadesIdiomes(Vector<String> dades) {
+    public void mostraDades(Vector<String> dades) {
         int n = dades.size();
         for (int i=0; i < n; ++i) System.out.println(dades.get(i));
     }
