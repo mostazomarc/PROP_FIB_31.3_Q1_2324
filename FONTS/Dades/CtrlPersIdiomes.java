@@ -33,7 +33,7 @@ public class CtrlPersIdiomes {
 
     public void carregarIdiomes() throws Exception {
         controlador.afegirIdioma("Català","alfabetCatala","llista","catalaFreq.txt");
-        controlador.afegirIdioma("Català","alfabetEspañol","llista","catalaFreq.txt");
+        controlador.afegirIdioma("Español","alfabetEspañol","llista","españolFreq.txt");
     }
 
     //Pre:
