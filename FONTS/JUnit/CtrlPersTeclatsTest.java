@@ -122,6 +122,17 @@ public class CtrlPersTeclatsTest {
     }
 
     @Test
+    public void comprovarUsLlista() throws Exception{
+        cP.afegirTeclat(teclatProva);
+        try {
+            cP.comprovarUsLlista(llistaProva.getNom());
+            assertTrue(false);
+        } catch (LlistaFreqEnUs e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
     public void getTeclat() throws Exception{
         cP.afegirTeclat(teclatProva);
         Teclat resultat = cP.getTeclat(teclatProva.getNom());
