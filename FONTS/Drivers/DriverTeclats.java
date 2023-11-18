@@ -67,7 +67,7 @@ public class DriverTeclats {
         else if (num== 1) crearTeclatLlistaPropia();
         else if (num == 2) crearTeclatSenseLlistaPropia();
         else if (num == 3) modificarLayoutTeclat();
-        //else if (num == 3) eliminarTeclat();
+        else if (num == 4) eliminarTeclat();
         //sortir implementar?
     }
 
@@ -256,6 +256,42 @@ public class DriverTeclats {
         }
         return true;
     }
+
+    public void eliminarTeclat() throws Exception {
+        List<String> nomTeclats = controlador.getNomsTeclats();
+        netejaTerminal();
+        if (nomTeclats.isEmpty()) {
+            System.out.println("No hi ha teclats guardats");
+        } else {
+            try {
+                int i = 1;
+                for (String nomt : nomTeclats) {
+                    String idioma = controlador.getNomIdiomaTeclat(nomt);
+                    String llistafreq = controlador.getNomLListaTeclat(nomt);
+                    System.out.println();
+                    System.out.println(i + ". Nom: " + nomt + " Idioma: " + idioma + " Llista de Freqüències: " + llistafreq);
+                    System.out.println();
+                    ++i;
+                }
+                System.out.println("Si vol eliminar un teclat entri el numero, si no entri '0':");
+                int num = s.nextInt();
+                if (num != 0) {
+                    netejaTerminal();
+                    if (nomTeclats.size() < num) throw new TeclatNoExisteix();
+                    String nomSeleccio = nomTeclats.get(num - 1);
+                    controlador.eliminarTeclat(nomSeleccio);
+                    System.out.println("Eliminat teclat amb nom: " + nomSeleccio);
+                }
+            } catch (TeclatNoExisteix e1) {
+                System.out.println("ERROR: " + e1.getMessage());
+            }
+            System.out.println();
+        }
+    }
+
+
+
+
 
     public static void main(String[] args) {
         DriverTeclats dt = new DriverTeclats();

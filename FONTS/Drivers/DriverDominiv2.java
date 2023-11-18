@@ -18,14 +18,8 @@ public class DriverDominiv2 {
         controlador = controlador.getInstance();
         dTeclats = new DriverTeclats();
         dDades = new DriverDades();
-        s = new Scanner(System.in);
-
         try {
-            controlador.iniciaInstancia("Prova");
-            controlador.afegirAlfabet("Llatí.txt");
-            controlador.afegirIdioma("Català","llatí","llista","catalaFreq.txt");
-            Map<String, Integer> novesEntrades = new HashMap<>();
-            controlador.novaLlistaPerfil("llista","catalaFreq.txt", "Català", novesEntrades);
+            controlador.carregarDades();
         } catch (PerfilJaExisteix e1 ) {
             System.out.println("ERROR: " + e1.getMessage());
         } catch (PerfilNoExisteix e2 ) {
@@ -35,6 +29,8 @@ public class DriverDominiv2 {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        s = new Scanner(System.in);
+
 
 
         System.out.println("\n ##################### BENVINGUT AL SISTEMA CREADOR DE TECLATS ##################### \n");
@@ -108,11 +104,13 @@ public class DriverDominiv2 {
     //Post: Es canvia al perfil que s'especifiqui i si no existeix es crea
     public void canviarPerfil() {
         llistarPerfils();
-        System.out.println("### Selecciona un Perfil o crea un nou escrivint el nom d'aquest###");
+        System.out.println("### Selecciona un Perfil o crea un nou escrivint el nom d'aquest o sortir per cancelar ###");
+        System.out.println("### WARNING: Aquesta versió del program careix de capa de persistencia i per tant no podrà crear llistes/teclats amb el mateix nom que un altre usuari!!!!!! ###");
         String nomPerfil = s.next();
         List<String> nomsPerfils = controlador.getAllPerfils();
         try {
-            if (nomsPerfils.contains(nomPerfil)) controlador.iniciaInstancia(nomPerfil);
+            if (nomPerfil.toLowerCase().equals("sortir")){}
+            else if (nomsPerfils.contains(nomPerfil)) controlador.iniciaInstancia(nomPerfil);
             else {
                 System.out.println("Es crearà el Perfil: " + nomPerfil);
                 System.out.println("Està segur? Si/No");

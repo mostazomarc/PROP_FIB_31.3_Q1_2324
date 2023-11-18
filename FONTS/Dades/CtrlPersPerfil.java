@@ -31,6 +31,12 @@ public class CtrlPersPerfil {
     }
 
     //Pre:
+    //Post: Carrèga els perfils dels arxius on estàn guardats (de moment crea noves, funcionarà al tenir capa de persistencia)
+    public void carregarPerfil() throws ExcepcionsCreadorTeclat {
+        controlador.iniciaInstancia("Prova");
+    }
+
+    //Pre:
     //Post: s'afegeix el perfil identificat per nomPerfil
     public Perfil afegirPerfil (String nomPerfil) throws ExcepcionsCreadorTeclat {
         if (PerfilsActius.containsKey(nomPerfil)) throw new PerfilJaExisteix(nomPerfil);

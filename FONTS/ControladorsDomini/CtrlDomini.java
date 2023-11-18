@@ -21,13 +21,13 @@ public class CtrlDomini {
 
     //Pre:
     //Post: Es crea una instancia de domini.
-    public CtrlDomini(){
+    public CtrlDomini() {
         inicialitzar();
     }
 
     //Pre:
     //Post: Retorna la instancia de Controlador Domini. Si no existeix cap instancia de CtrlDomini, es crea.
-    public static CtrlDomini getInstance(){ //CtrlDomini es singleton
+    public static CtrlDomini getInstance() { //CtrlDomini es singleton
         if(singletonObject == null){
             singletonObject = new CtrlDomini();
         }
@@ -36,13 +36,22 @@ public class CtrlDomini {
 
     //Pre:
     //Post: S'inicialitzen les variables necessaries.
-    public void inicialitzar() {
+    public void inicialitzar(){
         ctrlFreqFile = CtrlFile.getInstance();
         perfils = CtrlPersPerfil.getInstance(this);
-        llistes = CtrlPersFreq.getInstance();
-        alfabets = CtrlPersAlfabets.getInstance();
-        idiomes = CtrlPersIdiomes.getInstance();
+        llistes = CtrlPersFreq.getInstance(this);
+        alfabets = CtrlPersAlfabets.getInstance(this);
+        idiomes = CtrlPersIdiomes.getInstance(this);
         Estrategia = "BranchAndBound"; //estrategia per defecte
+    }
+
+    //Pre:
+    //Post: Es carreguen les dades guardades del sitema a memòria
+    public void carregarDades() throws Exception{
+        perfils.carregarPerfil();
+        alfabets.carregarAlfabets();
+        idiomes.carregarIdiomes();
+        llistes.carregarFrequencies();
     }
 
     //Pre: Es rep un nom d'usuari
@@ -58,9 +67,6 @@ public class CtrlDomini {
         }
     }
 
-    public LlistaFrequencies getLlista(String nomLlista) {
-        return llistes.getLlistaFreq(nomLlista);
-    }
 
 
     //Pre:
@@ -157,8 +163,8 @@ public class CtrlDomini {
 
     //Pre: tipus arxiu es un tipus vàlid i filename existeix i esta en un format vàid
     //Post: Es llegeix l'informacio de llista de l'arxiu i es retorna
-    public Map<String,Integer> llegirLlistaFreq(String tipusArxiu, String filename) throws FormatNoValid {
-        System.out.println("Llegint arxiu "+ filename +"\n");
+    public Map<String,Integer> llegirLlistaFreq(String tipusArxiu, String filename) throws Exception {
+        System.out.println("Llegint arxiu "+ filename);
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
         Map<String, Integer> novesEntrades = new HashMap<>();
 
@@ -174,11 +180,18 @@ public class CtrlDomini {
 
     //Pre: tipus arxiu es un tipus vàlid i filename existeix i esta en un format vàid
     //Post: S'afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual
-    public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
+    public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) throws Exception {
         if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
         Idioma idiomaLlista = idiomes.getIdioma(i);
         LlistaFrequencies llista = llistes.afegirLlistaFreq(filename,idiomaLlista,novesEntrades);
-        PerfilActual.afegirLlistaFreq(llista.getNom());
+        PerfilActual.afegirLlistaFreq(llista);
+    }
+
+    //Pre:
+    //Post: Es modifica el la llista identidicada per nomLlista amb les dades entrades
+    public void modificarLlistaPerfil(String tipusArxiu, String filename, String nomLlista, Map<String,Integer> novesEntrades) throws Exception {
+        if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
+        PerfilActual.modificarLlista(nomLlista, novesEntrades);
     }
 
     public List<String> getNomsTeclats() { return PerfilActual.getNomsTeclats();}
@@ -201,20 +214,40 @@ public class CtrlDomini {
         return PerfilActual.consultaLlista(nomSeleccio);
     }
 
+    //Pre:
+    //Post: S'elimina la llista identificada per nomLlista
     public void eliminarLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
         PerfilActual.eliminaLlista(nomLlista);
+        llistes.eliminarLlista(nomLlista);
     }
 
-    public void afegirAlfabet(String filename) throws ExcepcionsCreadorTeclat {
+    //Pre:
+    //Post: S'elimina el teclat identificat per nomTeclat
+    public void eliminarTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat{
+        PerfilActual.eliminarTeclat(nomTeclat);
+        //ELIMINAR TECLAT DE CONTROLADOR DE PERSISTENCIA
+    }
+
+    public void afegirAlfabet(String filename) throws Exception {
         System.out.println("Llegint arxiu "+ filename +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
         alfabets.afegirAlfabet(filename, LlistaLlegida);
     }
 
-    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws ExcepcionsCreadorTeclat {
+    public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
+        alfabets.eliminarAlfabet(nomAlfabet);
+    }
+
+    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws Exception {
         Alfabet alfabetIdioma = alfabets.getAlfabet(nomAlfabet);
         Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filename);
         idiomes.afegirIdioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
+    }
+
+    public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
+        if (!idiomes.existeix(nomIdioma)) throw new IdiomaNoExisteix();
+        // if (teclats.idiomaEnUs(nomIdioma) || llistes.idiomaEnUs(nomIdioma)) throw new IdiomaEnUs();
+        idiomes.eliminarIdioma(nomIdioma);
     }
 
     public Vector<String> consultaIdiomes() {

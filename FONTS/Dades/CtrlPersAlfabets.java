@@ -1,6 +1,8 @@
 package Dades;
 
+import ControladorsDomini.CtrlDomini;
 import Domini.Alfabet;
+import Excepcions.AlfabetEnUs;
 import Excepcions.AlfabetJaExisteix;
 import Excepcions.AlfabetNoExisteix;
 import Excepcions.ExcepcionsCreadorTeclat;
@@ -10,18 +12,22 @@ import java.util.*;
 public class CtrlPersAlfabets {
     private static CtrlPersAlfabets singletonObject;
     private TreeMap<String, Alfabet> Alfabets;
+    private CtrlDomini controlador;
 
     //Pre:
     //Post: Retorna la instancia de CtrlPersAlfabets, si no existeix cap CtrlPersAlfabets es crea.
-    public static CtrlPersAlfabets getInstance() {
+    public static CtrlPersAlfabets getInstance(CtrlDomini c) {
         if(singletonObject == null)
-            singletonObject = new CtrlPersAlfabets(){
-
-            };
+            singletonObject = new CtrlPersAlfabets(c);
         return singletonObject;
     }
-    private CtrlPersAlfabets() {
+    private CtrlPersAlfabets(CtrlDomini c) {
         Alfabets = new TreeMap<String, Alfabet>();
+        controlador = c;
+    }
+
+    public void carregarAlfabets() throws Exception {
+        controlador.afegirAlfabet("Llatí.txt");
     }
 
     //Pre:
@@ -42,6 +48,12 @@ public class CtrlPersAlfabets {
 
         Alfabet nouAlfabet = new Alfabet(nomAlfabet, lletres);
         Alfabets.put(nomAlfabet.toLowerCase(), nouAlfabet);
+    }
+
+    public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
+        Alfabet a = getAlfabet(nomAlfabet);
+        if (a.numIdiomes() != 0) throw new AlfabetEnUs(nomAlfabet);
+        Alfabets.remove(nomAlfabet.toLowerCase());
     }
 
     //Pre:

@@ -12,17 +12,20 @@ public class Idioma {
     public Idioma (String nom, Alfabet alfabet) {
         this.nom = nom;
         this.alfabet = alfabet;
+        alfabet.afegirIdioma(nom);
     }
 
     public Idioma (String nom, Alfabet alfabet, LlistaFrequencies llistaPred) {
         this.nom = nom;
         this.alfabet = alfabet;
+        alfabet.afegirIdioma(nom);
         llistaFreqPredeterminada = llistaPred;
     }
 
     public Idioma (String nom, Alfabet alfabet, String nomLlista, Map<String, Integer> llistaParaules) {
         this.nom = nom;
         this.alfabet = alfabet;
+        alfabet.afegirIdioma(nom);
         new LlistaFrequencies(nomLlista, this, llistaParaules); //Aquesta creadora ja vincula la llista de freqüències a aquest idioma
     }
 
