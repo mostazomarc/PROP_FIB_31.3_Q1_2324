@@ -316,13 +316,13 @@ public class DriverDades {
     public void consultaIdiomes() {
         System.out.println("### Consultar Idiomes ###");
         Vector<String> dades = controlador.consultaIdiomes();
-        mostraDadesIdiomes(dades);
+        mostraDades(dades);
     }
 
     public void  consultaAlfabets() {
         System.out.println("### Consultar Alfabets ###");
         Vector<String> dades = controlador.consultaAlfabets();
-        mostraDadesIdiomes(dades);
+        mostraDades(dades);
     }
 
     public void afegirAlfabet() throws Exception {
@@ -410,7 +410,7 @@ public class DriverDades {
         }
     }
 
-    public void mostraDadesIdiomes(Vector<String> dades) {
+    public void mostraDades(Vector<String> dades) {
         int n = dades.size();
         for (int i=0; i < n; ++i) System.out.println(dades.get(i));
     }
