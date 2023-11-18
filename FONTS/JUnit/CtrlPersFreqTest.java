@@ -7,6 +7,7 @@ import Domini.Idioma;
 import Domini.LlistaFrequencies;
 import Excepcions.IdiomaEnUs;
 import Excepcions.LlistaFreqNoExisteix;
+import Excepcions.LlistaFreqJaExisteix;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -121,6 +122,30 @@ public class CtrlPersFreqTest {
         cP.eliminarLlista("LlistaProva");
         try {
             cP.getLlistaFreq("LlistaProva");
+            fail();
+        } catch (LlistaFreqNoExisteix e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void afegirLlistaDuplicada() throws Exception {
+        CtrlPersFreq cP = CtrlPersFreq.getInstance(cD);
+        cP.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
+        try {
+            cP.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
+            cP.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
+            fail();
+        } catch (LlistaFreqJaExisteix e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void eliminaLlistaInexistent() throws Exception {
+        CtrlPersFreq cP = CtrlPersFreq.getInstance(cD);
+        try {
+            cP.eliminarLlista("LlistaProva");
             fail();
         } catch (LlistaFreqNoExisteix e) {
             assertTrue(true);
