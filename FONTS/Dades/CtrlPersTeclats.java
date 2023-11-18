@@ -91,6 +91,15 @@ public class CtrlPersTeclats {
     }
 
     //Pre:
+    //Post: Comprova que la llista identificada per nomLlista no està en ús en cap teclat
+    // (de moment no comprova teclats d'altres usuaris perquè fa falta capa de persistencia)
+    public void comprovarUsLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
+        for (Map.Entry<String, Teclat> llista : teclats.entrySet()) {
+            if (llista.getValue().getNomLlistaFreq().equals(nomLlista)) throw new LlistaFreqEnUs(nomLlista);
+        }
+    }
+
+    //Pre:
     //Post: s'obté el teclat identificat per nomTeclat
     public Teclat getTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat{
         comprovaTeclatNoExisteix(nomTeclat);
