@@ -171,6 +171,8 @@ public class DriverDades {
             System.out.println("ERROR: " + e3.getMessage());
         } catch (LletraNoInclosa e) {
             System.out.println("ERROR: " + e.getMessage());
+        } catch (LlistaBuida e4) {
+            System.out.println("ERROR: " + e4.getMessage());
         }
     }
 
@@ -382,6 +384,10 @@ public class DriverDades {
             System.out.println("ERROR: " + e2.getMessage());
         } catch (FileNotFoundException e3) {
             System.out.println("ERROR: " + e3.getMessage());
+        } catch (LletraNoInclosa e3) {
+            System.out.println("ERROR: " + e3.getMessage());
+        } catch (LlistaBuida e4) {
+            System.out.println("ERROR: " + e4.getMessage());
         }
     }
 
