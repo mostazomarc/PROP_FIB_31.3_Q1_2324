@@ -14,8 +14,10 @@ public class Teclat {
     private Idioma idioma;
     private String nomllista;
 
-    private void comprovaLayoutValid(int size, int n, int m) throws LayoutNoValid{
-        if (size > n*m) throw new LayoutNoValid(size, n, m);
+    private Map<String, Integer> llistafreq;
+
+    private void comprovaLayoutValid(int n, int m) throws LayoutNoValid{
+        if (idioma.getLletres().size() > n*m) throw new LayoutNoValid(idioma.getLletres().size(), n, m);
     }
 
     //Pre:
@@ -24,24 +26,26 @@ public class Teclat {
         this.nom = nom;
         idioma = i;
         nomllista = nomll;
+        this.llistafreq = llistafreq;
         int size = (i.getLletres()).size();
-        comprovaLayoutValid(size,n,m);
+        comprovaLayoutValid(n,m);
         dimX = n;
         dimY = m;
         Estrategia estrategia = new BranchandBound();
-        disposicio = estrategia.solve(llistafreq, i.getLletres(), dimX, dimY);
+        disposicio = estrategia.solve(this.llistafreq, idioma.getLletres(), dimX, dimY);
     }
 
     public Teclat(String nom, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat{
         this.nom = nom;
         idioma = i;
         int size = (i.getLletres()).size();
-        comprovaLayoutValid(size,n,m);
+        comprovaLayoutValid(n,m);
         dimX = n;
         dimY = m;
+        this.llistafreq = i.getFrequencies();
         Estrategia estrategia = new BranchandBound();
         nomllista = i.getLlistaFreq().getNom();
-        disposicio = estrategia.solve(i.getFrequencies(), i.getLletres(), dimX, dimY);
+        disposicio = estrategia.solve(this.llistafreq, i.getLletres(), dimX, dimY);
 
     }
 
@@ -71,7 +75,11 @@ public class Teclat {
         return idioma.getNom();
     }
 
-    public void modificarLayout(int n, int m) {
-
+    public void modificarLayout(int n, int m) throws ExcepcionsCreadorTeclat {
+        comprovaLayoutValid(n, m);
+        Estrategia estrategia = new BranchandBound();
+        dimX = n;
+        dimY = m;
+        disposicio = estrategia.solve(this.llistafreq, idioma.getLletres(), n, m);
     }
 }

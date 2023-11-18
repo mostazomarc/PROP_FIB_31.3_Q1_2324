@@ -228,7 +228,7 @@ public class DriverDades {
         List<String> nomLlistes = controlador.getNomLlistesGuardades();
         netejaTerminal();
         if (nomLlistes.isEmpty()) {
-            System.out.println("No n'hi han llistes guardades");
+            System.out.println("No hi ha llistes guardades");
             return false;
         }
         else {
@@ -322,7 +322,7 @@ public class DriverDades {
 
     public static void main(String[] args) {
         DriverDades dd = new DriverDades();
-        System.out.println("Estas provant el driver del controlador de la capa domini\n");
+        System.out.println("Estas provant el driver de les dades \n");
         dd.iniciaDriverDades();
     }
 }

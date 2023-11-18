@@ -249,9 +249,7 @@ public class CtrlDomini {
     }
 
     public void modificarLayoutTeclat(String nomTeclat, int n, int m) throws ExcepcionsCreadorTeclat {
-        Idioma idiomaTeclat = idiomes.getIdioma(PerfilActual.getIdiomaTeclat(nomTeclat));
-        LlistaFrequencies llista = llistes.getLlistaFreq(PerfilActual.getLlistaTeclat(nomTeclat));
-        PerfilActual.modificarLayoutTeclat(nomTeclat, llista.getNom(), llista.getFrequencies(), idiomaTeclat, n, m);
+        PerfilActual.modificarLayoutTeclat(nomTeclat, n, m);
     }
 
     public Vector<String> consultaAlfabets() {

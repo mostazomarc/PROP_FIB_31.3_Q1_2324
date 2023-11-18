@@ -125,9 +125,8 @@ public class Perfil {
         return teclats.get(nomTeclat).getDisposicio();
     }
 
-    public void modificarLayoutTeclat(String nomTeclat, String llista, Map<String,Integer> llistafreq, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat {
-        teclats.remove(nomTeclat);
-        teclats.put(nomTeclat,new Teclat(nomTeclat, llista, llistafreq, i, n, m));
+    public void modificarLayoutTeclat(String nomTeclat, int n, int m) throws ExcepcionsCreadorTeclat {
+        teclats.get(nomTeclat).modificarLayout(n, m);
     }
 
 }
