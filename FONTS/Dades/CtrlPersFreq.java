@@ -1,20 +1,40 @@
 package Dades;
 
-import Domini.LlistaFrequencies;
-import Domini.Idioma;
-import Excepcions.*;
 import ControladorsDomini.CtrlDomini;
+import Domini.Idioma;
+import Domini.LlistaFrequencies;
+import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.IdiomaEnUs;
+import Excepcions.LlistaFreqJaExisteix;
+import Excepcions.LlistaFreqNoExisteix;
 
-import java.io.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CtrlPersFreq {
     private static CtrlPersFreq singletonObject;
 
     //si canviesis de perfil tindires una nova llista
-    private Map<String,LlistaFrequencies> frequencies;
+    private final Map<String, LlistaFrequencies> frequencies;
 
-    private CtrlDomini controlador;
+    private final CtrlDomini controlador;
+
+    //Pre:
+    //Post: Crea un conjunt de llistes de frequencies i guarda el controlador
+    private CtrlPersFreq(CtrlDomini c) {
+        frequencies = new HashMap<>();
+        controlador = c;
+    }
+
+    //Pre:
+    //Post: Retorna la instancia de CtrlFreqFile, si no existeix cap CtrlFreqFile es crea.
+    public static CtrlPersFreq getInstance(CtrlDomini c) {
+        if (singletonObject == null)
+            singletonObject = new CtrlPersFreq(c) {
+
+            };
+        return singletonObject;
+    }
 
     //Pre:
     //Post: Si la llista idetificada per nomLlista no existeix llença una excepció
@@ -29,27 +49,10 @@ public class CtrlPersFreq {
     }
 
     //Pre:
-    //Post: Retorna la instancia de CtrlFreqFile, si no existeix cap CtrlFreqFile es crea.
-    public static CtrlPersFreq getInstance(CtrlDomini c){
-        if(singletonObject == null)
-            singletonObject = new CtrlPersFreq(c){
-
-            };
-        return singletonObject;
-    }
-
-    //Pre:
-    //Post: Crea un conjunt de llistes de frequencies i guarda el controlador
-    private CtrlPersFreq(CtrlDomini c) {
-        frequencies = new HashMap<>();
-        controlador = c;
-    }
-
-    //Pre:
     //Post: Carrèga les llistes de freqüencia dels arxius on estàn guardades (de moment crea noves, funcionarà al tenir capa de persistencia)
     public void carregarFrequencies() throws Exception {
         Map<String, Integer> novesEntrades = new HashMap<>();
-        controlador.novaLlistaPerfil("llista","catalaFreq.txt", "Català", novesEntrades);
+        controlador.novaLlistaPerfil("llista", "catalaFreq.txt", "Català", novesEntrades);
 
     }
 
@@ -67,10 +70,10 @@ public class CtrlPersFreq {
 
     //Pre:
     //Post: S'afegeix una nova llista de frequencies amb nomLlista i idioma
-    public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i) throws ExcepcionsCreadorTeclat{
+    public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i) throws ExcepcionsCreadorTeclat {
         comprovaLlistaJaExisteix(nomLlista);
-        LlistaFrequencies llista = new LlistaFrequencies(nomLlista,i);
-        frequencies.put(llista.getNom(),llista);
+        LlistaFrequencies llista = new LlistaFrequencies(nomLlista, i);
+        frequencies.put(llista.getNom(), llista);
         return llista;
     }
 
@@ -78,8 +81,8 @@ public class CtrlPersFreq {
     //Post: Es crea i s'afegeix una nova llista amb  nom: nomLlista, idioma: i i frequencies: novesEntrades
     public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
         comprovaLlistaJaExisteix(nomLlista);
-        LlistaFrequencies llista = new LlistaFrequencies(nomLlista,i,novesEntrades);
-        frequencies.put(llista.getNom(),llista);
+        LlistaFrequencies llista = new LlistaFrequencies(nomLlista, i, novesEntrades);
+        frequencies.put(llista.getNom(), llista);
         return llista;
     }
 
@@ -99,7 +102,7 @@ public class CtrlPersFreq {
     //Pre:
     //Post: Comprova que l'idioma identificat per nomIdioma no està en ús en cap llista de frequencies
     // (de moment no comprova llistes de frequencies d'altres usuaris perquè fa falta capa de persistencia)
-    public void comprovarUsIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat{
+    public void comprovarUsIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
         for (Map.Entry<String, LlistaFrequencies> llista : frequencies.entrySet()) {
             if (llista.getValue().getNomIdioma().equals(nomIdioma) && !llista.getValue().getNom().equals("LlistaPred"+nomIdioma)) throw new IdiomaEnUs(nomIdioma);
         }
@@ -107,7 +110,7 @@ public class CtrlPersFreq {
 
     //Pre:
     //Post: S'obtè la llista identificada per nomLlista
-    public LlistaFrequencies getLlistaFreq(String nomLlista) throws LlistaFreqNoExisteix{
+    public LlistaFrequencies getLlistaFreq(String nomLlista) throws LlistaFreqNoExisteix {
         comprovaLlistaNoExisteix(nomLlista);
         return frequencies.get(nomLlista);
     }

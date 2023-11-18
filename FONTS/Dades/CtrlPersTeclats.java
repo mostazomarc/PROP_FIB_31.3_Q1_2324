@@ -1,23 +1,35 @@
 package Dades;
 
-import Domini.LlistaFrequencies;
-import Domini.Idioma;
+import ControladorsDomini.CtrlDomini;
 import Domini.Teclat;
 import Excepcions.*;
-import ControladorsDomini.CtrlDomini;
 
-import java.io.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CtrlPersTeclats {
     private static CtrlPersTeclats singletonObject;
-
-    //si canviesis de perfil tindires una nova llista
-    private Map<String, Teclat> teclats;
-
     CtrlDomini controlador;
+    //si canviesis de perfil tindires una nova llista
+    private final Map<String, Teclat> teclats;
 
 
+    //Pre:
+    //Post: Inicialitza el conjunt de teclats i es guarda el controlador de domini
+    private CtrlPersTeclats(CtrlDomini c) {
+        teclats = new HashMap<>();
+        controlador = c;
+    }
+
+    //Pre:
+    //Post: Retorna la instancia de CtrlFreqTeclats, si no existeix cap CtrlFreqFile es crea.
+    public static CtrlPersTeclats getInstance(CtrlDomini c) {
+        if (singletonObject == null)
+            singletonObject = new CtrlPersTeclats(c) {
+
+            };
+        return singletonObject;
+    }
 
     //Pre:
     //Post: Si el teclat identificat per nomTeclat no existeix llença una excepció
@@ -29,23 +41,6 @@ public class CtrlPersTeclats {
     //Post: Si el teclat identificat per nomTeclat ja existeix llença una excepció
     private void comprovaTeclatJaExisteix(String nomTeclat) throws TeclatJaExisteix {
         if (teclats.containsKey(nomTeclat)) throw new TeclatJaExisteix(nomTeclat);
-    }
-
-    //Pre:
-    //Post: Retorna la instancia de CtrlFreqTeclats, si no existeix cap CtrlFreqFile es crea.
-    public static CtrlPersTeclats getInstance(CtrlDomini c){
-        if(singletonObject == null)
-            singletonObject = new CtrlPersTeclats(c){
-
-            };
-        return singletonObject;
-    }
-
-    //Pre:
-    //Post: Inicialitza el conjunt de teclats i es guarda el controlador de domini
-    private CtrlPersTeclats(CtrlDomini c) {
-        teclats = new HashMap<>();
-        controlador = c;
     }
 
     //Pre:
@@ -71,7 +66,7 @@ public class CtrlPersTeclats {
     //Post: Es guarda el teclat t al conjunt de teclats (Si no existia ja)
     public void afegirTeclat(Teclat t) throws ExcepcionsCreadorTeclat {
         comprovaTeclatJaExisteix(t.getNom());
-        teclats.put(t.getNom(),t);
+        teclats.put(t.getNom(), t);
     }
 
     //Pre:
@@ -84,7 +79,7 @@ public class CtrlPersTeclats {
     //Pre:
     //Post: Comprova que l'idioma identificat per nomIdioma no està en ús en cap teclat
     // (de moment no comprova teclats d'altres usuaris perquè fa falta capa de persistencia)
-    public void comprovarUsIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat{
+    public void comprovarUsIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
         for (Map.Entry<String, Teclat> llista : teclats.entrySet()) {
             if (llista.getValue().getNomIdioma().equals(nomIdioma)) throw new IdiomaEnUs(nomIdioma);
         }
@@ -93,7 +88,7 @@ public class CtrlPersTeclats {
     //Pre:
     //Post: Comprova que la llista identificada per nomLlista no està en ús en cap teclat
     // (de moment no comprova teclats d'altres usuaris perquè fa falta capa de persistencia)
-    public void comprovarUsLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
+    public void comprovarUsLlista(String nomLlista) throws ExcepcionsCreadorTeclat {
         for (Map.Entry<String, Teclat> llista : teclats.entrySet()) {
             if (llista.getValue().getNomLlistaFreq().equals(nomLlista)) throw new LlistaFreqEnUs(nomLlista);
         }
@@ -101,7 +96,7 @@ public class CtrlPersTeclats {
 
     //Pre:
     //Post: s'obté el teclat identificat per nomTeclat
-    public Teclat getTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat{
+    public Teclat getTeclat(String nomTeclat) throws ExcepcionsCreadorTeclat {
         comprovaTeclatNoExisteix(nomTeclat);
         return teclats.get(nomTeclat);
     }

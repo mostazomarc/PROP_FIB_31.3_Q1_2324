@@ -2,19 +2,15 @@ package JUnit;
 
 import ControladorsDomini.CtrlDomini;
 import Dades.CtrlPersPerfil;
-import Domini.*;
-
-import static org.junit.Assert.*;
-
-import Excepcions.*;
+import Domini.Perfil;
+import Excepcions.PerfilNoExisteix;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.naming.ldap.Control;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.*;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class CtrlPersPerfilTest {
 
@@ -26,39 +22,38 @@ public class CtrlPersPerfilTest {
     }
 
 
-
     @Test
     public void getControladorUnCopCreat() {
         CtrlPersPerfil cP;
         cP = CtrlPersPerfil.getInstance(cD);
-        assertSame(cP,CtrlPersPerfil.getInstance(cD));
+        assertSame(cP, CtrlPersPerfil.getInstance(cD));
     }
 
     @Test
-    public void carregarPerfils() throws Exception{
+    public void carregarPerfils() throws Exception {
         CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
         cP.carregarPerfil();
         try {
             cP.getPerfil("Prova");
             assertTrue(true);
         } catch (PerfilNoExisteix e) {
-            assertTrue(false);
+            fail();
         }
     }
 
     @Test
-    public void afegirPerfil() throws Exception{
+    public void afegirPerfil() throws Exception {
         CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
         cP.afegirPerfil("NouPerfil");
         Perfil perfil = cP.getPerfil("NouPerfil");
-        assertEquals(perfil.getUsuari(),"NouPerfil");
+        assertEquals(perfil.getUsuari(), "NouPerfil");
     }
 
     @Test
-    public void getPerfil() throws Exception{
+    public void getPerfil() throws Exception {
         CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
         Perfil perfil = cP.getPerfil("NouPerfil");
-        assertEquals(perfil.getUsuari(),"NouPerfil");
+        assertEquals(perfil.getUsuari(), "NouPerfil");
     }
 
     @Test
