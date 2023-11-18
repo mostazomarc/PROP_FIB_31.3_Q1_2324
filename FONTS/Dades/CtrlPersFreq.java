@@ -67,7 +67,8 @@ public class CtrlPersFreq {
 
     //Pre:
     //Post: S'afegeix una nova llista de frequencies amb nomLlista i idioma
-    public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i) {
+    public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i) throws ExcepcionsCreadorTeclat{
+        comprovaLlistaJaExisteix(nomLlista);
         LlistaFrequencies llista = new LlistaFrequencies(nomLlista,i);
         frequencies.put(llista.getNom(),llista);
         return llista;
@@ -76,6 +77,7 @@ public class CtrlPersFreq {
     //Pre:
     //Post: Es crea i s'afegeix una nova llista amb  nom: nomLlista, idioma: i i frequencies: novesEntrades
     public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
+        comprovaLlistaJaExisteix(nomLlista);
         LlistaFrequencies llista = new LlistaFrequencies(nomLlista,i,novesEntrades);
         frequencies.put(llista.getNom(),llista);
         return llista;
@@ -99,7 +101,8 @@ public class CtrlPersFreq {
 
     //Pre:
     //Post: S'obtè la llista identificada per nomLlista
-    public LlistaFrequencies getLlistaFreq(String nomLlista) {
+    public LlistaFrequencies getLlistaFreq(String nomLlista) throws LlistaFreqNoExisteix{
+        comprovaLlistaNoExisteix(nomLlista);
         return frequencies.get(nomLlista);
     }
 
