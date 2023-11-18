@@ -16,6 +16,7 @@ public class CtrlDomini {
     private CtrlPersFreq llistes;
     private CtrlPersAlfabets alfabets; //Controlador de Persistencia d'Alfabets
     private CtrlPersIdiomes idiomes; //Controlador de Persistencia d'Idiomes
+    private CtrlPersTeclats teclats; //Controlador de Persistencia d'Idiomes
     private static CtrlDomini singletonObject;
     private CtrlFile ctrlFreqFile;
 
@@ -42,6 +43,7 @@ public class CtrlDomini {
         llistes = CtrlPersFreq.getInstance(this);
         alfabets = CtrlPersAlfabets.getInstance(this);
         idiomes = CtrlPersIdiomes.getInstance(this);
+        teclats = CtrlPersTeclats.getInstance(this);
         Estrategia = "BranchAndBound"; //estrategia per defecte
     }
 
@@ -265,11 +267,14 @@ public class CtrlDomini {
     
     public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
-        PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat, n, m);
+        Teclat nouTeclat = PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat, n, m);
+        teclats.afegirTeclat(nouTeclat);
+
     }
     public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, int n, int m) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
-        PerfilActual.crearTeclatLlistaIdioma(nomTeclat, idiomaTeclat, n, m);
+        Teclat nouTeclat = PerfilActual.crearTeclatLlistaIdioma(nomTeclat, idiomaTeclat, n, m);
+        teclats.afegirTeclat(nouTeclat);
     }
 
     public void llistarTeclats() {
