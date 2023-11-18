@@ -55,6 +55,7 @@ public class CtrlPersAlfabets {
         Alfabets.put(nomAlfabet.toLowerCase(), nouAlfabet);
     }
 
+    //Retorna TRUE si c és una lletra sense accent, FALSE si és un número, símbol, lletra amb accent...
     private boolean lletraValida(char c) {
         char c1 = Character.toLowerCase(c);
         if (!Character.isLetter(c)) return false; // Mira que és una lletra
@@ -63,27 +64,26 @@ public class CtrlPersAlfabets {
         return true;
     }
 
+    //Pre:
+    //Post: S'elimina l'alfabet identificat per nomAlfabet
     public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
         Alfabet a = getAlfabet(nomAlfabet);
         if (a.numIdiomes() != 0) throw new AlfabetEnUs(nomAlfabet);
         Alfabets.remove(nomAlfabet.toLowerCase());
     }
 
-    //Pre:
     //Post: Retorna TRUE si existeix un Alfabet amb nomAlfabet, FALSE en cas contrari
     public boolean existeix(String nomAlfabet) {
         if (Alfabets.containsKey(nomAlfabet.toLowerCase())) return true;
         return false;
     }
 
-    //Pre:
     //Post: Retorna l'Alfabet identificat per nomAlfabet
     public Alfabet getAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
         if (!existeix(nomAlfabet)) throw new AlfabetNoExisteix();
         return Alfabets.get(nomAlfabet.toLowerCase());
     }
 
-    //Pre:
     //Post: Retorna el conjunt d'Alfabets
     public TreeMap<String, Alfabet> getAlfabets() {
         return Alfabets;
