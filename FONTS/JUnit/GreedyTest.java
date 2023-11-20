@@ -98,7 +98,7 @@ public class GreedyTest {
     public void algoritmo_Greedy(){
         Greedy g = new Greedy();
         Nodo n = g.solucion_inicial(Mat_traf, mat_dist, n_filas, n_columnas, conjuntoLetras);
-        Nodo n2 = g.solucion_inicial(Mat_traf2, mat_dist2 n_filas2, n_columnas2, conjuntoLetras2);
+        Nodo n2 = g.solucion_inicial(Mat_traf2, mat_dist2 ,n_filas2, n_columnas2, conjuntoLetras2);
         char[][] esperado = {
             {'a',' '},
             {' ', 'h'}
@@ -113,8 +113,5 @@ public class GreedyTest {
         assertArrayEquals(esperado, n.layout);
         assertArrayEquals(esperado2, n2.layout);
     }
-
-
-
 
 }

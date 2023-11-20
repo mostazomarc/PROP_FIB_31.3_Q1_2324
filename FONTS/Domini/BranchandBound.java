@@ -147,7 +147,7 @@ public class BranchandBound implements Estrategia {
                         double dist_filas = Math.abs(i/n_columnas - j/n_columnas);
                         //número de columnas de distancia
                         double dist_columnas = Math.abs((i % n_columnas) - (j % n_columnas));
-                        //distancia según teorema de Pitágoras
+                        //distancia según la ley Euclidiana, al ser el resto de variables de la ley de Fitts constantes
                         distancia = Math.sqrt(Math.pow(dist_filas,2) + Math.pow(dist_columnas, 2));
                     }
                     distanceMatrix[i][j] = distancia;
