@@ -36,8 +36,8 @@ public class BranchandBoundTest {
 
     @Before
     public void omplirFilas_Columnas() {
-        n_filas = 3;
-        n_columnas = 10;
+        n_filas = 2;
+        n_columnas = 2;
     }
 
     @Test
@@ -45,7 +45,7 @@ public class BranchandBoundTest {
         BranchandBound b = new BranchandBound();
         int n = conjuntoLetras.size();
         double[][] matriz_dist = new double[n][n];
-        matriz_dist = b.calculaMatDist( n, 2, 2);
+        matriz_dist = b.calculaMatDist( n, n_filas, n_columnas);
         double[][] matrizEsperada = {
                 {0.0 ,1.0, 1.0, 1.4142135623730951},
                 {1.0, 0.0, 1.4142135623730951, 1.0},
@@ -61,7 +61,7 @@ public class BranchandBoundTest {
         BranchandBound b = new BranchandBound();
         int n = conjuntoLetras.size();
         double[][] matriz_frec = new double[n][n];
-        matriz_frec = b.calculaMatDist( n, 2, 2);
+        matriz_frec = b.calculaMatDist( n, n_filas, n_columnas);
         double[][] matrizEsperada = {
                 {0.0, 0.0, 2.0, 0.0},
                 {5.0, 0.0, 0.0, 1.0},
@@ -86,15 +86,8 @@ public class BranchandBoundTest {
         BranchandBound b = new BranchandBound();
         String s = b.quitarTilde('á');
         String s2 = b.quitarTilde('ü');
-        assertEquals(false, s);
-        assertEquals(true, s2);
+        assertEquals("a", s);
+        assertEquals("u", s2);
     }
-
-
-
-
-
-
-
 
 }
