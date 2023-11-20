@@ -129,7 +129,7 @@ public class BranchandBound implements Estrategia {
     }
 
     //Inicializa la matriz de distancias
-    private double[][] calculaMatDist( int n, int n_filas, int n_columnas) {
+    public double[][] calculaMatDist( int n, int n_filas, int n_columnas) {
         //inicializada a 0 por defecto
         double[][] distanceMatrix = new double[n][n];
 

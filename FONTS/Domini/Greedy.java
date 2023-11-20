@@ -38,7 +38,7 @@ public class Greedy {
                 total_mejor_letra = suma;
                 mas_frec = letra;
             }
-            if(suma < total_peor_letra){
+            if(suma <= total_peor_letra){
                 total_peor_letra = suma;
                 menos_frec = letra;
             }
@@ -54,7 +54,7 @@ public class Greedy {
                 total_peor_pos = suma;
                 peor_posicion = i;
             }
-            if(suma < total_mejor_pos){
+            if(suma <= total_mejor_pos){
                 total_mejor_pos = suma;
                 mejor_posicion = i;
             }
