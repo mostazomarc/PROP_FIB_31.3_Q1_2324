@@ -19,11 +19,21 @@ public class BranchandBoundTest {
 
     int n_filas, n_columnas;
 
+    public Map<Character, Integer> letra_pos = new HashMap<>();
+
     @Before
     public void omplirFrecuencias() {
         mapaPalabrasFrec.put("hola", 1);
         mapaPalabrasFrec.put("aloha", 2);
         mapaPalabrasFrec.put("ha", 3);
+    }
+
+    @Before
+    public void omplir_letres_pos(){
+        letra_pos.put('a', 0);
+        letra_pos.put('h', 1);
+        letra_pos.put('l', 2);
+        letra_pos.put('o', 3);
     }
 
     @Before
@@ -61,7 +71,7 @@ public class BranchandBoundTest {
         BranchandBound b = new BranchandBound();
         int n = conjuntoLetras.size();
         double[][] matriz_frec = new double[n][n];
-        matriz_frec = b.calculaMatDist( n, n_filas, n_columnas);
+        matriz_frec = b.calculaMatTraf( mapaPalabrasFrec, letra_pos, n);
         double[][] matrizEsperada = {
                 {0.0, 0.0, 2.0, 0.0},
                 {5.0, 0.0, 0.0, 1.0},

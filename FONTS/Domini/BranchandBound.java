@@ -92,7 +92,7 @@ public class BranchandBound implements Estrategia {
     }
     //Inicializa la matriz de tráfico
     //Inicializa la matriz de tráfico
-    private double[][] calculaMatTraf(Map<String, Integer> palabrasFrec, Map<Character, Integer> lletres, int n) {
+    public double[][] calculaMatTraf(Map<String, Integer> palabrasFrec, Map<Character, Integer> lletres, int n) {
 
 
         //inicializada a 0 por defecto
