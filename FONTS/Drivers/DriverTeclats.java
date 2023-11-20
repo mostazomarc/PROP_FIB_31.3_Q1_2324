@@ -87,29 +87,34 @@ public class DriverTeclats {
             }
             System.out.println("Introdueix el número del teclat a modificar");
             int num = s.nextInt();
-            if (num != 0) {
-                netejaTerminal();
-                if (nomTeclats.size() < num) throw new TeclatNoExisteix();
-                String nomSeleccio = nomTeclats.get(num - 1);
-                String idioma = controlador.getNomIdiomaTeclat(nomSeleccio);
-                String llistafreq = controlador.getNomLListaTeclat(nomSeleccio);
-                System.out.println(num + ". Nom: " + nomSeleccio + " Idioma: " + idioma + " Llista de Freqüències: " + llistafreq + "\n");
-                char[][] teclat = controlador.consultaTeclat(nomSeleccio);
-                System.out.println("Disposicio: ");
-                for (int k = 0; k < teclat.length; ++k) {
-                    for (int j = 0; j < teclat[0].length; ++j) {
-                        System.out.print("[" + teclat[k][j] + "]");
+            try {
+                if (num != 0) {
+                    netejaTerminal();
+                    if (nomTeclats.size() < num) throw new TeclatNoExisteix();
+                    String nomSeleccio = nomTeclats.get(num - 1);
+                    String idioma = controlador.getNomIdiomaTeclat(nomSeleccio);
+                    String llistafreq = controlador.getNomLListaTeclat(nomSeleccio);
+                    System.out.println(num + ". Nom: " + nomSeleccio + " Idioma: " + idioma + " Llista de Freqüències: " + llistafreq + "\n");
+                    char[][] teclat = controlador.consultaTeclat(nomSeleccio);
+                    System.out.println("Disposicio: ");
+                    for (int k = 0; k < teclat.length; ++k) {
+                        for (int j = 0; j < teclat[0].length; ++j) {
+                            System.out.print("[" + teclat[k][j] + "]");
+                        }
+                        System.out.println();
                     }
                     System.out.println();
+                    System.out.println("El layout del teclat ara mateix es de " + teclat.length + " files x " + teclat[0].length + " columnes");
+                    System.out.println("Introdueix el nou nombre de files:");
+                    int numf = s.nextInt();
+                    System.out.println("Introdueix el nou nombre de columnes:");
+                    int numc = s.nextInt();
+                    controlador.modificarLayoutTeclat(nomSeleccio, numf, numc);
                 }
-                System.out.println();
-                System.out.println("El layout del teclat ara mateix es de " + teclat.length + " files x " + teclat[0].length + " columnes");
-                System.out.println("Introdueix el nou nombre de files:");
-                int numf = s.nextInt();
-                System.out.println("Introdueix el nou nombre de columnes:");
-                int numc = s.nextInt();
-                controlador.modificarLayoutTeclat(nomSeleccio, numf, numc);
-            }
+            } catch (TeclatNoExisteix e1) {
+            System.out.println("ERROR: " + e1.getMessage());
+        }
+        System.out.println();
         }
     }
 

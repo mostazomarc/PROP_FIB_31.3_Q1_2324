@@ -12,15 +12,9 @@ public class HungarianAlgorithm {
     public int[] columnaCoberta;
     public int[] zerosEstrellaEnFila;
     public double valoroptim;
+
+    //Pre: La matriu es quadrada, és a dir, matriu.length == matriu[0].length
     public HungarianAlgorithm(double[][] matriu) {
-        if (matriu.length != matriu[0].length) {
-            try {
-                throw new IllegalAccessException("La matriu no és quadrada!");
-            } catch (IllegalAccessException ex) {
-                System.err.println(ex);
-                System.exit(1);
-            }
-        }
         valoroptim = 0;
         copiamatriu = new double [matriu.length][matriu.length];
         for (int i = 0; i < matriu.length; ++i) {
