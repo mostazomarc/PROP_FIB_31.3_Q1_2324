@@ -51,19 +51,19 @@ public class HungarianAlgorithm {
         while (!totesLesColumnesEstanCobertes()) {
             int[] zeroPrincipal = pas4();
             while (zeroPrincipal == null) {      // mentre no es trobi cap zero a pas4
-                pas7();
+                pas6();
                 zeroPrincipal = pas4();
             }
             if (zeroFila[zeroPrincipal[0]] == -1) {
                 // no hi ha cap zero marcat a la fila zeroPrincipal
-                pas6(zeroPrincipal);
+                pas5(zeroPrincipal);
                 pas3();    // cobreix les columnes que contenen un zero marcat
             } else {
                 // hi ha un zero marcat a la fila zeroPrincipal
                 // pas 5
                 filaCoberta[zeroPrincipal[0]] = 1;  // cobreix la fila de zeroPrincipal
                 columnaCoberta[zeroFila[zeroPrincipal[0]]] = 0;  // descobreix la columna de zeroPrincipal
-                pas7();
+                pas6();
             }
         }
         int[][] assignacioOptima = new int[matriu.length][];
@@ -162,7 +162,7 @@ public class HungarianAlgorithm {
      * Pas 4:
      * Troba el 0 i  el marca com a "0*". Retorna la posicio del 0*
      */
-    private int[] pas4() {
+    public int[] pas4() {
         for (int i = 0; i < matriu.length; i++) {
             if (filaCoberta[i] == 0) {
                 for (int j = 0; j < matriu[i].length; j++) {
@@ -177,10 +177,10 @@ public class HungarianAlgorithm {
     }
 
     /**
-     * Pas 6:
+     * Pas 5:
      * Crea una cadena K de "Zeros" i "0*" zeroPrincipal => primer zero no cobert
      */
-    private void pas6(int[] zeroPrincipal) {
+    public void pas5(int[] zeroPrincipal) {
         int i = zeroPrincipal[0];
         int j = zeroPrincipal[1];
 
@@ -223,12 +223,12 @@ public class HungarianAlgorithm {
     }
 
     /**
-     * Pas 7:
+     * Pas 6:
      * 1. Troba el valor no cobert més petit de la matriu.
      * 2. Resta'l a tots els valors no coberts.
      * 3. Suma'l a tots els valors coberts dues vegades.
      */
-    private void pas7() {
+    public void pas6() {
         // Troba el valor no cobert més petit de la matriu
         double minimValorNoCobert = Double.MAX_VALUE;
         for (int i = 0; i < matriu.length; i++) {
