@@ -128,7 +128,7 @@ public class HungarianAlgorithm {
 
     /**
      * Pas 2:
-     * Marca cada 0 que troba, si no hi ha altres zeros marcats a la mateixa fila o columna
+     * Marca cada 0 que troba, si no hi ha altres zeros marcats a la mateixa fila i columna
      */
     public void pas2() {
         int[] filaTeZero = new int[matriu.length];
