@@ -4,6 +4,8 @@ Esta dividit per subdirectoris, un per cada classe a provar amb els executables 
 Els drivers s'han d'executar des del root directory del projecte amb
 java -jar ./EXE/(clase a provar)/NomDriver.jar
 
+Les dades dels jocs d'assaig estan a la carpeta /DATA han d'estar allà per com funciona el sistema
+
 
 Alfabets
 Conte el .jar amb el/s drivers necessaris per fer els jocs de prova de la classe Alfabet
