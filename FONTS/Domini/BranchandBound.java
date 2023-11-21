@@ -92,7 +92,7 @@ public class BranchandBound implements Estrategia {
     }
     //Inicializa la matriz de tráfico
     //Inicializa la matriz de tráfico
-    private double[][] calculaMatTraf(Map<String, Integer> palabrasFrec, Map<Character, Integer> lletres, int n) {
+    public double[][] calculaMatTraf(Map<String, Integer> palabrasFrec, Map<Character, Integer> lletres, int n) {
 
 
         //inicializada a 0 por defecto
@@ -129,7 +129,7 @@ public class BranchandBound implements Estrategia {
     }
 
     //Inicializa la matriz de distancias
-    private double[][] calculaMatDist( int n, int n_filas, int n_columnas) {
+    public double[][] calculaMatDist( int n, int n_filas, int n_columnas) {
         //inicializada a 0 por defecto
         double[][] distanceMatrix = new double[n][n];
 
@@ -147,7 +147,7 @@ public class BranchandBound implements Estrategia {
                         double dist_filas = Math.abs(i/n_columnas - j/n_columnas);
                         //número de columnas de distancia
                         double dist_columnas = Math.abs((i % n_columnas) - (j % n_columnas));
-                        //distancia según teorema de Pitágoras
+                        //distancia según la ley Euclidiana, al ser el resto de variables de la ley de Fitts constantes
                         distancia = Math.sqrt(Math.pow(dist_filas,2) + Math.pow(dist_columnas, 2));
                     }
                     distanceMatrix[i][j] = distancia;
@@ -192,3 +192,5 @@ public class BranchandBound implements Estrategia {
     }
 
 }
+
+//Francisco Torredemer
