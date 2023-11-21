@@ -175,4 +175,4 @@ public class CtrlPersTeclatsTest {
 
 }
 
-//Classe Programada per: Marc
+//Classe Programada per: Agustí Costabella
