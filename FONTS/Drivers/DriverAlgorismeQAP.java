@@ -25,7 +25,8 @@ public class DriverAlgorismeQAP {
         int nColumnas = 2;
 
         Estrategia estrategia = new BranchandBound();
-        char [][] matriz = estrategia.calculaDisposicio(mapaPalabrasFrec, conjuntoLetras, nFilas, nColumnas);
+        char [][] matriz = estrategia.calculaDisposicio(
+                mapaPalabrasFrec, conjuntoLetras, nFilas, nColumnas);
 
         for (int i = 0; i < matriz.length; ++i) {
             for (int j = 0; j < matriz[0].length; ++j) {

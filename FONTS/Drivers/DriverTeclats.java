@@ -72,7 +72,7 @@ public class DriverTeclats {
     }
 
     public void modificarLayoutTeclat() throws Exception {
-        if (llistarTeclats()) {
+        if (!controlador.getNomsTeclats().isEmpty()) {
             System.out.println("### Modificar Layout Teclat ###");
             System.out.println("Aquests són els teclats que tens actualment: ");
             List<String> nomTeclats = controlador.getNomsTeclats();
@@ -112,10 +112,15 @@ public class DriverTeclats {
                     controlador.modificarLayoutTeclat(nomSeleccio, numf, numc);
                 }
             } catch (TeclatNoExisteix e1) {
-            System.out.println("ERROR: " + e1.getMessage());
-        }
+                System.out.println("ERROR: " + e1.getMessage());
+            } catch (LayoutNoValid e2) {
+                System.out.println("ERROR: " + e2.getMessage());
+            } catch (LayoutMassaGran e3) {
+                System.out.println("ERROR: " + e3.getMessage());
+            }
         System.out.println();
         }
+        else System.out.println("No hi ha teclats guardats");
     }
 
     //Pre:

@@ -36,10 +36,10 @@ public class DriverDominiv2 {
         System.out.println("\nLa configuració actual del programa per fer proves es la següent:");
         System.out.println("## Perfil: " + controlador.getPerfilActual());
         System.out.println("## Estratègia: " + controlador.getEstrategiaActual());
-        System.out.println("## Alfabet: alfabetCatala, alfabetEspañol");
+        System.out.println("## Alfabet: alfabetCatala, alfabetEspañol, LlatíGenèric");
         System.out.println("## Idioma: Català, Español");
         System.out.println("## Llista Predeterminada Català: LlistaPredCatalà");
-        System.out.println("## Llista Predeterminada Català: LlistaPredEspañol");
+        System.out.println("## Llista Predeterminada Español: LlistaPredEspañol");
 
         System.out.println("\nEl driver disposa de les següents funcions:\n");
         printMenu();
