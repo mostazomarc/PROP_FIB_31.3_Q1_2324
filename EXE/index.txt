@@ -1,6 +1,10 @@
 Aquest subdirectori conté els executables per provar les classes o funcionalitats implementades.
 Esta dividit per subdirectoris, un per cada classe a provar amb els executables necessaris.
 
+Els drivers s'han d'executar des del root directory del projecte amb
+java -jar ./EXE/(clase a provar)/NomDriver.jar
+
+
 Alfabets
 Conte el .jar amb el/s drivers necessaris per fer els jocs de prova de la classe Alfabet
 
