@@ -12,6 +12,8 @@ JUNIT_JARS = ./FONTS/lib/junit-4.13.2.jar:./FONTS/lib/hamcrest-core-1.3.jar
 
 JUNIT_TESTS = ./FONTS/JUnit/*.java
 
+EXE = ./EXE/
+
 
 
 all:
@@ -89,6 +91,16 @@ nodotest: all
 
 postest: all
 	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.posTest
+
+exe: jars
+	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/Alfabets
+	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/Idiomes
+	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/LlistaFrequencies
+	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/Perfil
+	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/Teclats
+	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(JAR_OUTPUT)/DriverLectorFreq.jar $(EXE)/CtrlFile
+	cp $(JAR_OUTPUT)/DriverAlgorismeQAP.jar $(EXE)/Algorisme
+	cp $(JAR_OUTPUT)/DriverHungarianAlgorithm.jar $(EXE)/Teclats
 
 clean:
 	rm -r ./EXEnoEntrega/out/*
