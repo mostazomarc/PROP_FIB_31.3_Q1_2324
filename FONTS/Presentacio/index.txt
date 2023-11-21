@@ -1,0 +1,10 @@
+Aquest subdirectori conte el codi de les classes de la capa de presentacio
+
+ControladorPresentacio.java
+Codi del controlador de presentacio encarregat de la comunicacio entre capes
+
+Main.java
+Main del programa
+
+VistaTerminal.java
+Codi de la vista de terminal de la presentacio del sistema
