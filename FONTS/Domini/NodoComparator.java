@@ -9,3 +9,6 @@ public class NodoComparator implements Comparator<Nodo> {
         return Double.compare(o1.cota, o2.cota);
     }
 }
+
+
+//Francisco Torredemer

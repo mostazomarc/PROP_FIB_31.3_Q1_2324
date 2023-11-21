@@ -8,3 +8,5 @@ public interface Estrategia {
 
     public char[][] solve(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas);
 }
+
+//Francisco Torredemer

@@ -26,7 +26,7 @@ public class Nodo {
         return ((i*n_columnas) + j) < n;
     }
 
-    public double[][] sumaMatrices(double[][] mat1, double[][] mat2) {
+        public double[][] sumaMatrices(double[][] mat1, double[][] mat2) {
 
         double[][] suma = new double[mat1.length][mat1[0].length];
 
@@ -197,3 +197,5 @@ public class Nodo {
         this.cota =  termino_1 + termino_2;
     }
 }
+
+//Francisco Torredemer

@@ -9,19 +9,30 @@ import java.util.Set;
 import java.util.Iterator;
 
 public class Greedy {
+
+    //Atributs
+
+    int peor_posicion;
+    int mejor_posicion;
+
+    char mas_frec;
+    char menos_frec;
+
+
+    //Métodes
     public Nodo solucion_inicial(double[][] mat_traf, double[][] mat_dist, int n_filas, int n_col, Set<Character> lletres){
         char[][] matriz_inicial = new char[n_filas][n_col];
         for(int i = 0; i < n_filas; i++) {
             for(int j = 0; j < n_col; j++)
                 matriz_inicial[i][j] = ' ';
         }
-        int peor_posicion = 0;
-        int mejor_posicion = 0;
+         peor_posicion = 0;
+        mejor_posicion = 0;
         double total_mejor_pos = Double.MAX_VALUE;
         double total_peor_pos = 0.0;
 
-        char mas_frec = ' ';
-        char menos_frec = ' ';
+        mas_frec = ' ';
+        menos_frec = ' ';
         double total_peor_letra = Double.MAX_VALUE;
         double total_mejor_letra = 0.0;
 
@@ -76,3 +87,5 @@ public class Greedy {
         return nodo_inicial;
     }
 }
+
+//Francisco Torredemer
