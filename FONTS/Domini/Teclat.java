@@ -33,7 +33,7 @@ public class Teclat {
         dimX = n;
         dimY = m;
         Estrategia estrategia = new BranchandBound();
-        disposicio = estrategia.solve(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+        disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
     }
 
     public Teclat(String nom, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat{
@@ -44,7 +44,7 @@ public class Teclat {
         dimY = m;
         this.llistafreq = i.getLlistaFreq();
         Estrategia estrategia = new BranchandBound();
-        disposicio = estrategia.solve(this.llistafreq.getFrequencies(), i.getLletres(), dimX, dimY);
+        disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), i.getLletres(), dimX, dimY);
 
     }
 
@@ -78,6 +78,6 @@ public class Teclat {
         Estrategia estrategia = new BranchandBound();
         dimX = n;
         dimY = m;
-        disposicio = estrategia.solve(this.llistafreq.getFrequencies(), idioma.getLletres(), n, m);
+        disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), n, m);
     }
 }

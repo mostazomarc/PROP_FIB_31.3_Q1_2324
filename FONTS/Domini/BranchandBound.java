@@ -166,7 +166,7 @@ public class BranchandBound implements Estrategia {
 
 
     @Override
-    public char[][] solve(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas) {
+    public char[][] calculaDisposicio(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas) {
         //declaramos una solucion inicial
         this.best_sol = new char[n_filas][n_columnas];
         //le ponemos valor = infinito a la cota inicial
