@@ -1,4 +1,4 @@
-Aquest subdirectori conte el codi de les classes de la capa de presentacio
+Aquest subdirectori conte el codi de les classes de la capa de presentacio (AQUESTA NO CONTA PER AQUESTA ENTREGA)
 
 ControladorPresentacio.java
 Codi del controlador de presentacio encarregat de la comunicacio entre capes
