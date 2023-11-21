@@ -100,10 +100,20 @@ exe: jars
 	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/Teclats
 	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(JAR_OUTPUT)/DriverLectorFreq.jar $(EXE)/CtrlFile
 	cp $(JAR_OUTPUT)/DriverAlgorismeQAP.jar $(EXE)/Algorisme
-	cp $(JAR_OUTPUT)/DriverHungarianAlgorithm.jar $(EXE)/Teclats
+	cp $(JAR_OUTPUT)/DriverHungarianAlgorithm.jar $(EXE)/HungarianAlgorithm
 
 clean:
 	rm -r ./EXEnoEntrega/out/*
+
+cleanExe:
+	rm ./EXE/Alfabets/*
+	rm ./EXE/Algorisme/*
+	rm ./EXE/CtrlFile/*
+	rm ./EXE/HungarianAlgorithm/*
+	rm ./EXE/Idiomes/*
+	rm ./EXE/LlistaFrequencies/*
+	rm ./EXE/Perfil/*
+	rm ./EXE/Teclats/*
 
 distclean:
 	rm -r ./EXEnoEntrega/*
