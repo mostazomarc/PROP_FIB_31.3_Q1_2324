@@ -4,9 +4,9 @@ CLASS_INPUT =	./FONTS/Domini/*.java \
 				./FONTS/Stubs/*.java \
 				./FONTS/Excepcions/*.java
 
-CLASS_OUTPUT =	./EXE/out/
+CLASS_OUTPUT =	./EXEnoEntrega/out/
 
-JAR_OUTPUT =	./EXE/
+JAR_OUTPUT =	./EXEnoEntrega/
 
 JUNIT_JARS = ./FONTS/lib/junit-4.13.2.jar:./FONTS/lib/hamcrest-core-1.3.jar
 
@@ -29,9 +29,6 @@ jars:
 
 executaDriverHungarianAlgorithm:
 	java -jar $(JAR_OUTPUT)DriverHungarianAlgorithm.jar
-
-executaDriverDomini:
-	java -cp ./EXE Drivers.DriverDomini
 
 executaDriverDominiv2:
 	java -jar $(JAR_OUTPUT)DriverDominiv2.jar
@@ -94,7 +91,7 @@ postest: all
 	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.posTest
 
 clean:
-	rm -r ./EXE/out/*
+	rm -r ./EXEnoEntrega/out/*
 
 distclean:
-	rm -r ./EXE/*
+	rm -r ./EXEnoEntrega/*
