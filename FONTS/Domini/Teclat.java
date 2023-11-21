@@ -16,9 +16,24 @@ public class Teclat {
 
     //Pre: n es el nomnbre de files i m el nombre de columnes
     //Post: si n*m < el nombre de lletres retorna l'excepció LayoutNovalid
-    private void comprovaLayoutValid(int n, int m) throws LayoutNoValid{
-        if (idioma.getLletres().size() > n*m) throw new LayoutNoValid(idioma.getLletres().size(), n, m);
+    private void comprovaLayoutValid(int n, int m) throws LayoutNoValid, LayoutMassaGran {
+        int totalLletres = idioma.getLletres().size();
+        int lletresRequerides = n * m;
+
+        if (totalLletres > lletresRequerides) {
+            throw new LayoutNoValid(totalLletres, n, m);
+        } else if (totalLletres < lletresRequerides) {
+            int posbuides = n*m - totalLletres;
+            if (posbuides > 0) {
+                if (n == 1 && m > totalLletres) throw new LayoutMassaGran(totalLletres, n, m);
+                else if (posbuides > m) throw new LayoutMassaGran(totalLletres, n, m);
+            }
+        }
     }
+
+
+
+
 
     //Pre: nomidiomallista és el nom de l'idioma de la llista i nomidiomateclat és el nom de l'idioma del teclat
     //Post: si són idiomes diferents, és a dir, nomidiomallista != nomidiomateclat, retorna l'excepció IdiomesDiferents

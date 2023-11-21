@@ -156,7 +156,10 @@ public class DriverTeclats {
             System.out.println("ERROR: " + e4.getMessage());
         } catch (TeclatJaExisteix e5) {
             System.out.println("ERROR: " + e5.getMessage());
+        } catch (LayoutMassaGran e6) {
+            System.out.println("ERROR: " + e6.getMessage());
         }
+
     }
 
     public void crearTeclatSenseLlistaPropia() throws Exception{
@@ -191,6 +194,8 @@ public class DriverTeclats {
             System.out.println("ERROR: " + e3.getMessage());
         } catch (TeclatJaExisteix e5) {
             System.out.println("ERROR: " + e5.getMessage());
+        } catch (LayoutMassaGran e6) {
+            System.out.println("ERROR: " + e6.getMessage());
         }
     }
 
