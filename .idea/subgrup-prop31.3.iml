@@ -9,6 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/EXEnoEntrega" />
       <excludeFolder url="file://$MODULE_DIR$/FONTS/lib" />
     </content>
+    <content url="file://$MODULE_DIR$/EXE" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
