@@ -36,7 +36,7 @@ public class HungarianAlgorithm {
     }
 
     //Pre:
-    //Post: retorna el valor òptim
+    //Post: retorna el valor òptim, és a dir, la suma total dels costs de l'assignació òptima
     public double trobarAssignacioOptima() {
         pas1();    // redueix la matriu
         pas2();    // marca els zeros independents
@@ -251,3 +251,4 @@ public class HungarianAlgorithm {
     }
 }
 
+//Classe Programada per: Agustí Costabella
