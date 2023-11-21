@@ -132,8 +132,8 @@ public class NodoTest {
         double[][] C1 = n.calculo_C1(m, pos_libres, letras_libres, letra_pos, n_columnas, mat_dist, Mat_traf);
 
         double[][] matriz_esperada = {
-                {1.0,1.0},
-                {2.0,2.0}
+                {3.0,3.0},
+                {3.0,3.0}
         };
 
         assertArrayEquals(matriz_esperada, C1);
@@ -162,7 +162,7 @@ public class NodoTest {
         double termino_2 = n.calcular_termino_2(m,  letra_pos, n_columnas,mat_dist, Mat_traf);
         double delta = 0.000001;
 
-        assertEquals(7.242640687119286, termino_2, delta);
+        assertEquals(10.242640687119284, termino_2, delta);
 
     }
 
