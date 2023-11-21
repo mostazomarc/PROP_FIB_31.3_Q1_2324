@@ -219,8 +219,8 @@ public class HungarianAlgorithm {
     /**
      * Pas 6:
      * 1. Troba el valor no cobert més petit de la matriu.
-     * 2. Resta'l a tots els valors no coberts.
-     * 3. Suma'l a tots els valors coberts dues vegades.
+     * 2. EL resta a tots els valors no coberts.
+     * 3. El suma a tots els valors coberts dues vegades.
      */
     public void pas6() {
         // Troba el valor no cobert més petit de la matriu
