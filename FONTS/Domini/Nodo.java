@@ -83,9 +83,11 @@ public class Nodo {
                                 int pos_y = entry_2.getValue().y;
                                 //frecuencia entre la letra actual y la letra usada en la que estamos
                                 double frecuencia = Mat_traf[letra_pos.get(letra_actual)][letra_pos.get(letra)];
+                                double frecuencia2 = Mat_traf[letra_pos.get(letra)][letra_pos.get(letra_actual)];
                                 // distancia entre la posicion de la letra actual y la letra usada en su instalación
                                 double distancia = Mat_dist[(i * this.layout[0].length) + j][(pos_x * this.layout[0].length) + pos_y];
                                 suma += frecuencia * distancia;
+                                suma += frecuencia2 *distancia;
                             }
                             Mat_c1[letra_num][posicion] = suma;
                             ++posicion;
