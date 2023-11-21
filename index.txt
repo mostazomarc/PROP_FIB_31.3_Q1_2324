@@ -1,4 +1,4 @@
-En aquest directori es troben les diferents carpetes del projecte, el README i el makefile
+En aquest directori es troben les diferents carpetes del projecte, el README i informació del grup
 
 Elements del directori:
 
@@ -20,5 +20,5 @@ excepcions que segueixen l'estructura determinada dels packages.
 
 FONTS:
 Codi de les classes de domini associades a les funcionalitats principals implementades fins al moment. Inclou tambe
-els tests JUnit. Tots els fitxers estan dins dels subdirectoris que segueixen l'estructura de packages, perque el
+els tests JUnit i el makefile. Tots els fitxers estan dins dels subdirectoris que segueixen l'estructura de packages, perque el
 codi sigui recompilable directament.
