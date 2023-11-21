@@ -110,3 +110,5 @@ public class Teclat {
         disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), n, m);
     }
 }
+
+//Classe Programada per: Agustí Costabella
