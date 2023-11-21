@@ -1,0 +1,27 @@
+Aquest es el directori de les classes del Domini
+
+Fitxers:
+Alfabet.java
+ - conte la Classe Alfabet
+BranchandBound.java
+ - conte la classe BranchandBound
+Estrategia.java
+ - conte la classe Estrategia
+Greedy.java
+ - conte la classe Greedy
+HungarianAlgorithm.java
+ - conte la classe HungarianAlgorithm
+Idioma.java
+ - conte la classe Idioma
+LlistaFrequencies.java
+ - conte la classe LlistaFrequencies
+Nodo.java
+ - conte la classe Nodo (node)
+NodoComparator.java
+ - conte la classe NodoComparator (node comparador)
+Perfil.java
+ - conte la classe Perfil
+pos.java
+ - conte la classe pos (posició)
+Teclat.java
+ - conte la classe Teclat
