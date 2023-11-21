@@ -36,6 +36,9 @@ executaDriverDomini:
 executaDriverDominiv2:
 	java -jar $(JAR_OUTPUT)DriverDominiv2.jar
 
+executaDriverLector:
+	java -jar $(JAR_OUTPUT)DriverLectorFreq.jar
+
 executaDriverAlgorismeQAP:
 	java -jar $(JAR_OUTPUT)DriverAlgorismeQAP.jar
 
