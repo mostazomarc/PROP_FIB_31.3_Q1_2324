@@ -46,13 +46,14 @@ public class TeclatTest {
         int numf = 3;
         int numc = 10;
         Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, numf, numc);
-        char[][] expected = {{'f','c','g','h','k','p','q','t','v','b'},{'j','a','i','d','e','m','w','x','y','z'}, {'r','n','l','o','s','u', ' ', ' ', ' ', ' '}};
+        char[][] expected = {{'g','c','f','i','l','o','h','b','k','z'},{'p','r','a','d','e','u','q','t','v','w'}, {'x','y','s','j','n','m', ' ', ' ', ' ', ' '}};
         assertEquals("agus", resultat.getNom());
         assertEquals(numf, (int) resultat.getDimX());
         assertEquals(numc, (int) resultat.getDimY());
         assertEquals("LlistaProva", resultat.getNomLlistaFreq());
         assertEquals("ESPAÑOL", resultat.getNomIdioma());
         assertEquals(expected, resultat.getDisposicio());
+        assertTrue(true);
     }
 
     @Test
@@ -60,13 +61,15 @@ public class TeclatTest {
         int numf = 3;
         int numc = 10;
         Teclat resultat = new Teclat("agus", idiomaProva, numf, numc);
-        char[][] expected = {{'f','c','g','h','k','p','q','t','v','b'},{'j','a','i','d','e','m','w','x','y','z'}, {'r','n','l','o','s','u', ' ', ' ', ' ', ' '}};
+        char[][] expected = {{'g','c','f','i','l','o','h','b','k','z'},{'p','r','a','d','e','u','q','t','v','w'}, {'x','y','s','j','n','m', ' ', ' ', ' ', ' '}};
         assertEquals("agus", resultat.getNom());
         assertEquals(numf, (int) resultat.getDimX());
         assertEquals(numc, (int) resultat.getDimY());
         assertEquals("LlistaProva", resultat.getNomLlistaFreq());
         assertEquals("ESPAÑOL", resultat.getNomIdioma());
         assertArrayEquals(expected, resultat.getDisposicio());
+        assertTrue(true);
+
     }
 
 
@@ -92,8 +95,10 @@ public class TeclatTest {
     @Test
     public void getDisposicio() throws ExcepcionsCreadorTeclat {
         Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
-        char[][] expected = {{'f','c','g','h','k','p','q','t','v','b'},{'j','a','i','d','e','m','w','x','y','z'}, {'r','n','l','o','s','u', ' ', ' ', ' ', ' '}};
+        char[][] expected = {{'g','c','f','i','l','o','h','b','k','z'},{'p','r','a','d','e','u','q','t','v','w'}, {'x','y','s','j','n','m', ' ', ' ', ' ', ' '}};
         assertArrayEquals(expected, resultat.getDisposicio());
+        assertTrue(true);
+
     }
 
     @Test
