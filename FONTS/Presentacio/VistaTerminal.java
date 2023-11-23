@@ -1,9 +1,6 @@
 
 package Presentacio;
 
-import Drivers.DriverDades;
-import Drivers.DriverDominiv2;
-import Drivers.DriverTeclats;
 import Excepcions.FormatNoValid;
 import Excepcions.PerfilJaExisteix;
 import Excepcions.PerfilNoExisteix;
@@ -26,8 +23,6 @@ public class VistaTerminal {
     private void netejaTerminal() {
         System.out.print("\033[H\033[2J");
     }
-
-    private Scanner s;
 
     public void inicialitzaTerminal() throws Exception {
         vDades = new VistaTerminalDades(controlador);

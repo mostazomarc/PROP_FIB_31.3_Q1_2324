@@ -1,7 +1,6 @@
 //Driver que ha de provar les funcionalitats principals del programa
 
 package Presentacio;
-import ControladorsDomini.CtrlDomini;
 import Excepcions.*;
 
 import java.util.*;
