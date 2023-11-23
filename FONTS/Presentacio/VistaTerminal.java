@@ -30,7 +30,6 @@ public class VistaTerminal {
     private Scanner s;
 
     public void inicialitzaTerminal() throws Exception {
-        controlador = controlador.getInstance();
         vDades = new VistaTerminalDades(controlador);
         vTeclats = new VistaTerminalTeclats(controlador);
         try {
