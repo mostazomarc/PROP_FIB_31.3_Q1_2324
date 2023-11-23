@@ -15,14 +15,15 @@ public class ControladorPresentacio {
     public ControladorPresentacio() throws Exception {
         controladorDomini = controladorDomini.getInstance();
         vt = new VistaTerminal(this);
-        iniciaInstancia();
         vt.inicialitzaTerminal();
     }
 
     //Pre:
     //Post: S'inicia una instancia amb el perfil x
-    public void iniciaInstancia() throws Exception{
-        controladorDomini.iniciaInstancia("Prova");
+    public void iniciaInstancia(String nomPerfil) throws Exception{
+        controladorDomini.iniciaInstancia(nomPerfil);
     }
+
+
 }
 
