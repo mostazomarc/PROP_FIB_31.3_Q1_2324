@@ -44,7 +44,7 @@ public class ControladorPresentacio {
 
     //DADES
     public void novaLlistaPerfil(String tipusArxiu, String filename, String idioma, Map<String,Integer> novesEntrades) throws Exception{
-        controladorDomini.novaLlistaPerfil("text", filename, idioma, novesEntrades);
+        controladorDomini.novaLlistaPerfil(tipusArxiu, filename, idioma, novesEntrades);
     }
 
     public void modificarLlistaPerfil(String tipusArxiu, String nomArxiu, String nomllista, Map<String,Integer> novesEntrades) throws Exception {
