@@ -1,5 +1,10 @@
 package Excepcions;
 
+/**
+ * FormatNoValid es una classe que representa una excepció que es llença quan el format d'un arxiu no és el correcte
+ * <p>FormatNoValid exten la classe ExcepcionsCreadorTeclat</p>
+ * @author Marc Mostazo Gonzalez (marc.mostazo@estudiantat.upc.edu)
+ */
 public class FormatNoValid extends ExcepcionsCreadorTeclat{
 
     public String getTipusExcepcio() {

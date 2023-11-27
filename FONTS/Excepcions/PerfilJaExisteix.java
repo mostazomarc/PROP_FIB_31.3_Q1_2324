@@ -1,5 +1,10 @@
 package Excepcions;
 
+/**
+ * PerfilJaExisteix es una classe que representa una excepció que es llença quan el perfil ja existeix
+ * <p>PerfilJaExisteix exten la classe ExcepcionsCreadorTeclat</p>
+ * @author Marc Mostazo Gonzalez (marc.mostazo@estudiantat.upc.edu)
+ */
 public class PerfilJaExisteix extends ExcepcionsCreadorTeclat{
 
     public String getTipusExcepcio() {
