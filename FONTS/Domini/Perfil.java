@@ -213,7 +213,6 @@ public class Perfil {
     /**
      * S'elimina el teclat identificat per NomTeclat
      * @param NomTeclat El nom del teclat
-     * @throws ExcepcionsCreadorTeclat Si el teclat no existeix
      * @throws TeclatNoExisteix Si el teclat no existeix
      */
     public void eliminarTeclat(String NomTeclat) throws TeclatNoExisteix {
@@ -268,7 +267,7 @@ public class Perfil {
      * @param nomTeclat El nom del teclat
      * @param n El nombre de files del teclat
      * @param m El nombre de columnes del teclat
-     * @throws ExcepcionsCreadorTeclat
+     * @throws ExcepcionsCreadorTeclat Excepcio creador teclat
      * @throws TeclatNoExisteix Si el teclat no existeix
      */
     public void modificarLayoutTeclat(String nomTeclat, int n, int m) throws ExcepcionsCreadorTeclat {

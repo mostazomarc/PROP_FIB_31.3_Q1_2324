@@ -52,6 +52,7 @@ public class LlistaFrequencies {
      * @param nom El nom de la llista
      * @param i L'idioma de la llista
      * @param LlistaParaules La llista de paraules i frequencies
+     * @throws ExcepcionsCreadorTeclat Si la llista de paraules no és vàlida
      */
     public LlistaFrequencies(String nom, Idioma i, Map<String, Integer> LlistaParaules) throws ExcepcionsCreadorTeclat {
         comprovarLletres(LlistaParaules.keySet(), i);

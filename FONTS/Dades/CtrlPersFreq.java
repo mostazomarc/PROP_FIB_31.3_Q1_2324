@@ -77,7 +77,7 @@ public class CtrlPersFreq {
 
     /**
      * Carrega les llistes de freqüencia dels arxius on estàn guardades (de moment crea noves, funcionarà al tenir capa de persistencia)
-     * @throws Exception
+     * @throws Exception Error en carregar les llistes
      */
     public void carregarFrequencies() throws Exception {
         Map<String, Integer> novesEntrades = new HashMap<>();
@@ -107,7 +107,7 @@ public class CtrlPersFreq {
      * @param nomLlista El nom de la llista
      * @param i L'idioma de la llista
      * @return La llista de frequencies creada
-     * @throws ExcepcionsCreadorTeclat
+     * @throws ExcepcionsCreadorTeclat Excepció llançada per la classe creadora de llistes de frequencies
      * @throws LlistaFreqJaExisteix Si la llista ja existeix
      */
     public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i) throws ExcepcionsCreadorTeclat {
@@ -123,7 +123,7 @@ public class CtrlPersFreq {
      * @param i L'idioma de la llista
      * @param novesEntrades Les noves entrades de la llista
      * @return La llista de frequencies creada
-     * @throws ExcepcionsCreadorTeclat
+     * @throws ExcepcionsCreadorTeclat Error en crear la llista
      * @throws LlistaFreqJaExisteix Si la llista ja existeix
      */
     public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
