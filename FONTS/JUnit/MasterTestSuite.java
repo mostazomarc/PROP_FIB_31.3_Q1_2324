@@ -11,6 +11,10 @@ import org.junit.runners.Suite.SuiteClasses;
         AlfabetTest.class, BranchandBoundTest.class, CtrlPersAlfabetsTest.class, CtrlPersFreqTest.class, CtrlPersIdiomesTest.class, CtrlPersIdiomesTest.class, CtrlPersPerfilTest.class,
         CtrlPersTeclatsTest.class, GreedyTest.class, HungarianAlgorithmTest.class, IdiomaTest.class, LlistaFrequenciesTest.class, NodoTest.class, PerfilTest.class, posTest.class, TeclatTest.class
 })
+/**
+ * MasterTestSuite es una classe que ens permet testejar tots els tests JUnit
+ * @author Marc Mostazo Gonzalez (marc.mostazo@estudiantat.upc.edu)
+ */
 public class MasterTestSuite {
 }
 

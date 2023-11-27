@@ -15,17 +15,74 @@ import java.util.*;
 
 import static org.junit.Assert.*;
 
+/**
+ * PerfilTest es una classe que ens permet testejar les funcions de la classe Perfil
+ * <p>
+ * Les funcions que testeja són:
+ * <ul>
+ * <li>creadoraPerfilContrasenya</li>
+ * <li>creadoraPerfil</li>
+ * <li>getUsuari</li>
+ * <li>getContrasenya</li>
+ * <li>canviaUsuari</li>
+ * <li>canviaContrasenya</li>
+ * <li>afegirLlistaFreq</li>
+ * <li>crearLlistaFreq</li>
+ * <li>eliminarLlistaFreq</li>
+ * <li>getNomAllLlistes</li>
+ * <li>getNomIdiomaLlista</li>
+ * <li>consultarLlista</li>
+ * <li>crearTeclatLlistaPropia</li>
+ * <li>crearTeclatLlistaIdioma</li>
+ * <li>modificarTeclat</li>
+ * <li>eliminaTeclat</li>
+ * <li>modificarllista</li>
+ * </ul>
+ *
+ * @see Perfil
+ * @author Marc Mostazo Gonzalez (marc.mostazo@estudiantat.upc.edu)
+ */
 public class PerfilTest {
+    /**
+     * Instancia de PerfilProva per fer les proves
+     */
     Perfil perfilProva;
+    /**
+     * Instancia de IdiomaProva per fer les proves
+     */
     Idioma idiomaProva;
+    /**
+     * Instancia de CtrlDomini
+     */
     CtrlDomini controlador;
+    /**
+     * Instancia de CtrlPersFreq
+     */
     CtrlPersFreq llistes;
+    /**
+     * LlistaFreq per fer les proves
+     */
     LlistaFrequencies llista;
+    /**
+     * LlistaFreq per fer les proves
+     */
     LlistaFrequencies llista2;
+    /**
+     * LlistaFreq per fer les proves
+     */
     LlistaFrequencies llista3;
+    /**
+     * Llista de paraules i frequencies per fer les proves
+     */
     private final Map<String, Integer> llistaParaulesProva = new HashMap<>();
+    /**
+     * Conjunt de lletres per fer les proves
+     */
     private final Set<Character> lletresProva = new HashSet<Character>();
 
+    /**
+     * Es crea un idiomaProva
+     */
     @Before
     public void omplirLletres() {
         for (char lletra = 'a'; lletra <= 'z'; lletra++) lletresProva.add(lletra);
@@ -33,6 +90,9 @@ public class PerfilTest {
         idiomaProva = new Idioma("ESPAÑOL", AlfabetProva);
     }
 
+    /**
+     * S'omple la llistaParaulesProva
+     */
     @Before
     public void omplirLlistaProva() {
         llistaParaulesProva.put("Hola", 10);
@@ -42,7 +102,9 @@ public class PerfilTest {
         llistaParaulesProva.put("Fideu", 30);
     }
 
-    //S'eliminen les llistes creades per poder tornarles a crear
+    /**
+     * S'eliminen les llistes creades per poder tornarles a crear
+     */
     @After
     public void eliminarLlistaProva() throws Exception {
         try {
@@ -53,8 +115,11 @@ public class PerfilTest {
         }
     }
 
+    /**
+     * Es crea un perfilProva
+     */
     @Before
-    public void crearPerfilProva() throws ExcepcionsCreadorTeclat {
+    public void crearPerfilProva() {
         controlador = CtrlDomini.getInstance();
         llistes = CtrlPersFreq.getInstance(controlador);
         try {
@@ -69,54 +134,67 @@ public class PerfilTest {
         perfilProva = new Perfil("Prova", "12345", controlador);
     }
 
-
+    /**
+     * Testeja creadora de perfil amb usuari i contrasenya
+     */
     @Test
-    //Creadora Perfil amb usuari i contrasenya i getUsuari i getContrasenya
     public void creadoraPerfilContrasenya() {
         Perfil perfilResultat = new Perfil("Prova", "12345", controlador);
         assertEquals("Prova", perfilResultat.getUsuari());
         assertEquals("12345", perfilResultat.getContrasenya());
     }
 
+    /**
+     * Testeja creadora de perfil amb usuari
+     */
     @Test
-    //Creadora Perfil amb usuari i getNom
     public void creadoraPerfil() {
         Perfil perfilResultat = new Perfil("Prova", controlador);
         assertEquals("Prova", perfilResultat.getUsuari());
     }
 
+    /**
+     * Testeja getUsuari
+     */
     @Test
-    //GetUsuari
     public void getUsuari() {
         Perfil perfilResultat = new Perfil("Prova", controlador);
         assertEquals("Prova", perfilResultat.getUsuari());
     }
 
+    /**
+     * Testeja getContrasenya
+     */
     @Test
-    //GetContrasenya
     public void getContrasenya() {
         Perfil perfilResultat = new Perfil("Prova", "12345", controlador);
         assertEquals("12345", perfilResultat.getContrasenya());
     }
 
+    /**
+     * Testeja canviaUsuari
+     */
     @Test
-    //canvia usuari
     public void canviaUsuari() {
         perfilProva.canviaUsuari("newProva");
         assertEquals("newProva", perfilProva.getUsuari());
         assertNotEquals("Prova", perfilProva.getUsuari());
     }
 
+    /**
+     * Testeja canviaContrasenya
+     */
     @Test
-    //canvia contrasenya
     public void canviaContrasenya() {
         perfilProva.canviaContrasenya("newContrasenya");
         assertEquals("newContrasenya", perfilProva.getContrasenya());
         assertNotEquals("12345", perfilProva.getContrasenya());
     }
 
+    /**
+     * Testeja afegirLlistaFreq
+     */
     @Test
-    //afegir llista freq amb nom i llista de paraules
     public void afegirLlistaFreq() throws ExcepcionsCreadorTeclat {
         perfilProva.afegirLlistaFreq(llista);
         List<String> llistaNoms = new ArrayList<>();
@@ -125,8 +203,10 @@ public class PerfilTest {
         assertEquals(llistaParaulesProva, perfilProva.consultaLlista("LlistaProva"));
     }
 
+    /**
+     * Testeja crearLlistaFreq
+     */
     @Test
-    //afegir llista nomes amb nom
     public void crearLlistaFreq() throws Exception {
         try {
             perfilProva.afegirLlistaFreq(llista);
@@ -138,8 +218,10 @@ public class PerfilTest {
         assertEquals(llistaNoms, perfilProva.getNomAllLlistes());
     }
 
+    /**
+     * Testeja eliminarLlistaFreq
+     */
     @Test
-    //eliminar llista amb nom
     public void eliminarLlistaFreq() throws Exception {
         try {
             perfilProva.afegirLlistaFreq(llista);
@@ -150,8 +232,10 @@ public class PerfilTest {
         assertTrue(perfilProva.getNomAllLlistes().isEmpty());
     }
 
+    /**
+     * Testeja getNomAllLlistes
+     */
     @Test
-    //get el nomes de totes les llistes del perfil
     public void getNomAllLlistes() throws Exception {
         try {
             perfilProva.afegirLlistaFreq(llista);
@@ -170,23 +254,29 @@ public class PerfilTest {
         assertEquals(llistaNoms, llistaResultat);
     }
 
+    /**
+     * Testeja getNomIdiomaLlista
+     */
     @Test
-    //obtenir la llista de paraules i frequencies
     public void getNomIdiomaLlista() throws ExcepcionsCreadorTeclat {
         perfilProva.afegirLlistaFreq(llista);
         assertEquals("ESPAÑOL", perfilProva.getNomIdiomaLlista("LlistaProva"));
     }
 
+    /**
+     * Testeja consultarLlista
+     */
     @Test
-    //obtenir la llista de paraules i frequencies
     public void consultarLlista() throws ExcepcionsCreadorTeclat {
         perfilProva.afegirLlistaFreq(llista);
         Map<String, Integer> resultat = perfilProva.consultaLlista("LlistaProva");
         assertEquals(resultat, llistaParaulesProva);
     }
 
+    /**
+     * Testeja crearTeclatLlistaPropia
+     */
     @Test
-    //obtenir la llista de paraules i frequencies
     public void crearTeclatLlistaPropia() throws Exception {
         perfilProva.afegirLlistaFreq(llista);
         perfilProva.crearTeclatLlistaPropia("TeclatProva", "LlistaProva", idiomaProva, 3, 10);
@@ -195,6 +285,9 @@ public class PerfilTest {
         assertEquals(perfilProva.getNomsTeclats(), nomsEsperats);
     }
 
+    /**
+     * Testeja crearTeclatLlistaIdioma
+     */
     @Test
     public void crearTeclatLlistaIdioma() throws Exception {
         perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
@@ -203,14 +296,18 @@ public class PerfilTest {
         assertEquals(perfilProva.getNomsTeclats(), nomsEsperats);
     }
 
+    /**
+     * Testeja modificarTeclat
+     */
     @Test
-    //modificar un teclat
     public void modificarTeclat() {
 
     }
 
+    /**
+     * Testeja eliminarTeclat
+     */
     @Test
-    //eliminar un teclat
     public void eliminaTeclat() throws Exception {
         perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
         perfilProva.eliminarTeclat("TeclatProva");
@@ -218,8 +315,10 @@ public class PerfilTest {
         assertTrue(perfilProva.getNomsTeclats().isEmpty());
     }
 
+    /**
+     * Testeja modificarllista
+     */
     @Test
-    //modificar una llista
     public void modificarllista() throws Exception {
         perfilProva.afegirLlistaFreq(llista);
         llistaParaulesProva.put("NovaParaula", 40);
@@ -234,6 +333,9 @@ public class PerfilTest {
 //    - Eliminar lista que no existe
 //    - Modificar lista que no existe
 
+    /**
+     * Testeja excepcio crear dos llistes amb el mateix nom
+     */
     @Test
     public void llistesMateixNom() throws Exception {
         try {
@@ -245,6 +347,9 @@ public class PerfilTest {
         }
     }
 
+    /**
+     * Testeja excepcio crear dos teclats amb el mateix nom
+     */
     @Test
     public void teclatsMateixNom() throws Exception {
         try {
@@ -256,6 +361,9 @@ public class PerfilTest {
         }
     }
 
+    /**
+     * Testeja excepcio eliminar teclat que no existeix
+     */
     @Test
     public void eliminaTeclatInexistent() throws Exception {
         try {
@@ -266,6 +374,9 @@ public class PerfilTest {
         }
     }
 
+    /**
+     * Testeja excepcio eliminar llista que no existeix
+     */
     @Test
     public void eliminaLlistaInexistent() throws Exception {
         try {
@@ -277,6 +388,9 @@ public class PerfilTest {
         }
     }
 
+    /**
+     * Testeja excepcio modificar llista que no existeix
+     */
     @Test
     public void modificaLlistaInexistent() throws Exception {
         try {
