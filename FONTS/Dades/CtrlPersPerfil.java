@@ -69,7 +69,7 @@ public class CtrlPersPerfil {
      */
     public Perfil afegirPerfil(String nomPerfil) throws PerfilJaExisteix {
         if (PerfilsActius.containsKey(nomPerfil)) throw new PerfilJaExisteix(nomPerfil);
-        Perfil nouPerfil = new Perfil(nomPerfil, controlador);
+        Perfil nouPerfil = new Perfil(nomPerfil);
         PerfilsActius.put(nomPerfil, nouPerfil);
         return nouPerfil;
     }

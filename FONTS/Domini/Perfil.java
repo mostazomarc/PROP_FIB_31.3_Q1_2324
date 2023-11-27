@@ -33,7 +33,7 @@ public class Perfil {
      * @param User El nom d'usuari del perfil
      * @param pswd La contrasenya del perfil
      */
-    public Perfil(String User, String pswd, CtrlDomini cd) {
+    public Perfil(String User, String pswd) {
         Usuari = User;
         Contrasenya = pswd;
         frequencies = new HashMap<>();
@@ -45,7 +45,7 @@ public class Perfil {
      * <p> Crea un perfil amb nom d'usuari</p>
      * @param User El nom d'usuari del perfil
      */
-    public Perfil(String User, CtrlDomini cd) {
+    public Perfil(String User) {
         Usuari = User;
         frequencies = new HashMap<>();
         teclats = new HashMap<>();

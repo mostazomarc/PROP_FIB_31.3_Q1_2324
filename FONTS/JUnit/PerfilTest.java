@@ -131,7 +131,7 @@ public class PerfilTest {
         } catch (Exception e2) {
             System.out.println("ERROR: " + e2.getMessage());
         }
-        perfilProva = new Perfil("Prova", "12345", controlador);
+        perfilProva = new Perfil("Prova", "12345");
     }
 
     /**
@@ -139,7 +139,7 @@ public class PerfilTest {
      */
     @Test
     public void creadoraPerfilContrasenya() {
-        Perfil perfilResultat = new Perfil("Prova", "12345", controlador);
+        Perfil perfilResultat = new Perfil("Prova", "12345");
         assertEquals("Prova", perfilResultat.getUsuari());
         assertEquals("12345", perfilResultat.getContrasenya());
     }
@@ -149,7 +149,7 @@ public class PerfilTest {
      */
     @Test
     public void creadoraPerfil() {
-        Perfil perfilResultat = new Perfil("Prova", controlador);
+        Perfil perfilResultat = new Perfil("Prova");
         assertEquals("Prova", perfilResultat.getUsuari());
     }
 
@@ -158,7 +158,7 @@ public class PerfilTest {
      */
     @Test
     public void getUsuari() {
-        Perfil perfilResultat = new Perfil("Prova", controlador);
+        Perfil perfilResultat = new Perfil("Prova");
         assertEquals("Prova", perfilResultat.getUsuari());
     }
 
@@ -167,7 +167,7 @@ public class PerfilTest {
      */
     @Test
     public void getContrasenya() {
-        Perfil perfilResultat = new Perfil("Prova", "12345", controlador);
+        Perfil perfilResultat = new Perfil("Prova", "12345");
         assertEquals("12345", perfilResultat.getContrasenya());
     }
 
