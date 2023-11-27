@@ -130,7 +130,7 @@ public class PerfilTest {
     public void crearLlistaFreq() throws Exception {
         try {
             perfilProva.afegirLlistaFreq(llista);
-        } catch (LlistaFreqNoExisteix e1) {
+        } catch (LlistaFreqJaExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
         }
         List<String> llistaNoms = new ArrayList<>();
@@ -144,7 +144,7 @@ public class PerfilTest {
         try {
             perfilProva.afegirLlistaFreq(llista);
             perfilProva.eliminaLlista(llista.getNom());
-        } catch (LlistaFreqNoExisteix e1) {
+        } catch (LlistaFreqJaExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
         }
         assertTrue(perfilProva.getNomAllLlistes().isEmpty());
@@ -157,7 +157,7 @@ public class PerfilTest {
             perfilProva.afegirLlistaFreq(llista);
             perfilProva.afegirLlistaFreq(llista2);
             perfilProva.afegirLlistaFreq(llista3);
-        } catch (LlistaFreqNoExisteix e1) {
+        } catch (LlistaFreqJaExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
         }
         List<String> llistaNoms = new ArrayList<>();
