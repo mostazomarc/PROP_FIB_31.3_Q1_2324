@@ -197,6 +197,7 @@ public class CtrlPersFreq {
         String usuariAntic = this.usuari;
         if (usuariAntic != null) guardar();
         this.usuari = usuari;
+        frequencies = new HashMap<>();
         //carregar llistes del usuari nou
         if (usuariAntic != null) carregar();
     }
