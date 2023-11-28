@@ -184,8 +184,8 @@ public class CtrlDomini {
     public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) throws Exception {
         if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
         Idioma idiomaLlista = idiomes.getIdioma(i);
-        LlistaFrequencies llista = llistes.afegirLlistaFreq(filename,idiomaLlista,novesEntrades);
-        PerfilActual.afegirLlistaFreq(llista);
+        LlistaFrequencies llista = PerfilActual.afegirLlistaFreq(filename,idiomaLlista,novesEntrades);
+        llistes.guardarLlistaFreq(llista);
     }
 
     //Pre:
@@ -246,7 +246,7 @@ public class CtrlDomini {
         idiomes.afegirIdioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
         Idioma i = idiomes.getIdioma(nomIdioma);
         LlistaFrequencies ll = i.getLlistaFreq();
-        llistes.afegirLlistaFreq(ll);
+        llistes.guardarLlistaFreq(ll);
     }
 
     public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {

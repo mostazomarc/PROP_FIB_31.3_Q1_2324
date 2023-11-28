@@ -102,44 +102,13 @@ public class CtrlPersFreq {
 
     }
 
-    /**
-     * Crea i guarda una nova llista de frequencies amb nomLlista i idioma
-     * @param nomLlista El nom de la llista
-     * @param i L'idioma de la llista
-     * @return La llista de frequencies creada
-     * @throws ExcepcionsCreadorTeclat Excepció llançada per la classe creadora de llistes de frequencies
-     * @throws LlistaFreqJaExisteix Si la llista ja existeix
-     */
-    public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i) throws ExcepcionsCreadorTeclat {
-        comprovaLlistaJaExisteix(nomLlista);
-        LlistaFrequencies llista = new LlistaFrequencies(nomLlista, i);
-        frequencies.put(llista.getNom(), llista);
-        return llista;
-    }
-
-    /**
-     * Crea i guarda una nova llista de frequencies amb nomLlista, idioma i novesEntrades
-     * @param nomLlista El nom de la llista
-     * @param i L'idioma de la llista
-     * @param novesEntrades Les noves entrades de la llista
-     * @return La llista de frequencies creada
-     * @throws ExcepcionsCreadorTeclat Error en crear la llista
-     * @throws LlistaFreqJaExisteix Si la llista ja existeix
-     */
-    public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
-        comprovaLlistaJaExisteix(nomLlista);
-        LlistaFrequencies llista = new LlistaFrequencies(nomLlista, i, novesEntrades);
-        frequencies.put(llista.getNom(), llista);
-        return llista;
-    }
-
 
     /**
      * Afegeix una llista de frequencies
      * @param llista La llista de frequencies a afegir
      * @throws LlistaFreqJaExisteix Si la llista ja existeix
      */
-    public void afegirLlistaFreq(LlistaFrequencies llista) throws LlistaFreqJaExisteix{
+    public void guardarLlistaFreq(LlistaFrequencies llista) throws LlistaFreqJaExisteix{
         comprovaLlistaJaExisteix(llista.getNom());
         frequencies.put(llista.getNom(), llista);
     }

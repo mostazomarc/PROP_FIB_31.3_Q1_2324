@@ -103,14 +103,21 @@ public class Perfil {
 
 
     /**
-     * S'afegeix la nova llista de frequencies a les llistes del perfil
-     * @param llista La nova llista de frequencies
-     * @throws LlistaFreqJaExisteix Si la llista ja existeix
+     * Creadora de LlistaFrequencies
+     * <p> Crea una llista de frequencies amb nom: nomLlista, a partir de l'idioma idioma i amb les entrades novesEntrades i la guarda al perfil</p>
+     * @param nomLlista El nom de la llista
+     * @param i L'idioma de la llista
+     * @param novesEntrades Les noves entrades
+     * @return La llista de frequencies creada
+     * @throws ExcepcionsCreadorTeclat Si la llista ja existeix o algun altre error en crear la llista
      */
-    public void afegirLlistaFreq(LlistaFrequencies llista) throws LlistaFreqJaExisteix {
-        comprovaLlistaJaExisteix(llista.getNom());
+    public LlistaFrequencies afegirLlistaFreq(String nomLlista, Idioma i, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
+        comprovaLlistaJaExisteix(nomLlista);
+        LlistaFrequencies llista = new LlistaFrequencies(nomLlista, i, novesEntrades);
         frequencies.put(llista.getNom(), llista);
+        return llista;
     }
+
 
 
     /**
