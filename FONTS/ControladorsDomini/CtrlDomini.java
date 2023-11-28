@@ -48,11 +48,15 @@ public class CtrlDomini {
     }
 
     //Pre:
-    //Post: Es carreguen les dades guardades del sitema a memòria
-    public void carregarDades() throws Exception{
-        perfils.carregarPerfil();
+    //Post: Es carreguen les dades guardades del perfil a memòria
+    public void carregarDadesSistema() throws Exception{
         alfabets.carregarAlfabets();
         idiomes.carregarIdiomes();
+    }
+
+    //Pre:
+    //Post: Es carreguen les dades guardades del sitema a memòria
+    public void carregarDadesPerfil() throws Exception{
         llistes.carregarFrequencies();
         teclats.carregar();
     }

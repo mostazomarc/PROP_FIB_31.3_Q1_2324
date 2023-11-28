@@ -4,6 +4,7 @@ package Presentacio;
 import Excepcions.FormatNoValid;
 import Excepcions.PerfilJaExisteix;
 import Excepcions.PerfilNoExisteix;
+import Excepcions.CapPerfilGuardat;
 
 import java.io.*;
 import java.util.*;
@@ -28,6 +29,10 @@ public class VistaTerminal {
         vDades = new VistaTerminalDades(controlador);
         vTeclats = new VistaTerminalTeclats(controlador);
         try {
+            llistarPerfils(false);
+            System.out.println("Entra el nom del perfil amb el que vols entrar ");
+            String nom = s.next();
+            controlador.iniciaInstancia(nom);
             controlador.carregarDades();
             System.out.println("Inicia sessió: " + "Prova");
         } catch (PerfilJaExisteix e1 ) {
@@ -36,6 +41,12 @@ public class VistaTerminal {
             System.out.println("ERROR: " + e2.getMessage());
         } catch (FormatNoValid e2 ) {
             System.out.println("ERROR: " + e2.getMessage());
+        } catch (CapPerfilGuardat e){
+            System.out.println("CAP PERFIL REGISTRAT");
+            System.out.println("Entra el nom del perfil  a crear: ");
+            String nom = s.next();
+            controlador.iniciaInstancia(nom);
+            controlador.carregarDades();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -108,7 +119,7 @@ public class VistaTerminal {
     //Pre:
     //Post: Es canvia al perfil que s'especifiqui i si no existeix es crea
     public void canviarPerfil() {
-        llistarPerfils();
+        llistarPerfils(true);
         System.out.println("### Selecciona un Perfil o crea un nou escrivint el nom d'aquest o sortir per cancelar ###");
         System.out.println("### WARNING: Aquesta versió del program careix de capa de persistencia i per tant no podrà crear llistes/teclats amb el mateix nom que un altre usuari!!!!!! ###");
         String nomPerfil = s.next();
@@ -139,13 +150,13 @@ public class VistaTerminal {
         }
     }
 
-    public void llistarPerfils() {
+    public void llistarPerfils(boolean inicialitzat) {
         List<String> nomsPerfils = controlador.getAllPerfils();
         System.out.println("Perfils al sistema: \n");
         for (String nom : nomsPerfils) {
             System.out.println("Perfil: " + nom);
         }
 
-        System.out.println("\nPerfil Actual: " + controlador.getPerfilActual());
+        if (inicialitzat) System.out.println("\nPerfil Actual: " + controlador.getPerfilActual());
     }
 }

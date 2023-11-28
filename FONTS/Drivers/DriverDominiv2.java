@@ -19,7 +19,8 @@ public class DriverDominiv2 {
         dTeclats = new DriverTeclats();
         dDades = new DriverDades();
         try {
-            controlador.carregarDades();
+            controlador.carregarDadesSistema();
+            controlador.carregarDadesPerfil();
             System.out.println("Inicia sessió: " + "Prova");
         } catch (PerfilJaExisteix e1 ) {
             System.out.println("ERROR: " + e1.getMessage());

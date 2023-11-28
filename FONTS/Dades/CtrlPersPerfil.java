@@ -135,8 +135,10 @@ public class CtrlPersPerfil {
             }
             if (!trobat) throw new PerfilNoExisteix(nomPerfil);
         } catch (IOException e){
+            throw new PerfilNoExisteix(nomPerfil);
         }
         catch (ParseException e) {
+
         }
         return perfilActual;
     }

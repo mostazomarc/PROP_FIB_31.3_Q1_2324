@@ -26,7 +26,8 @@ public class ControladorPresentacio {
 
     //NORMAL
     public void carregarDades()throws Exception{
-        controladorDomini.carregarDades();
+        controladorDomini.carregarDadesSistema();
+        controladorDomini.carregarDadesPerfil();
     }
 
     public void guardaEstat() {
