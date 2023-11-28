@@ -3,13 +3,16 @@ package Dades;
 import ControladorsDomini.CtrlDomini;
 import Domini.Idioma;
 import Domini.LlistaFrequencies;
-import Excepcions.ExcepcionsCreadorTeclat;
-import Excepcions.IdiomaEnUs;
-import Excepcions.LlistaFreqJaExisteix;
-import Excepcions.LlistaFreqNoExisteix;
+import Excepcions.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * CtrlPersFreq es una classe que permet guardar i carregar llistes de frequencies
@@ -27,12 +30,16 @@ public class CtrlPersFreq {
     /**
      * Mapa de llistes de frequencies guardades
      */
-    private final Map<String, LlistaFrequencies> frequencies;
+    private Map<String, LlistaFrequencies> frequencies;
 
     /**
      * Instància de CtrlDomini
      */
     private final CtrlDomini controlador;
+    /**
+     * Nom d'usuari del perfil actual
+     */
+    String usuari;
 
     /**
      * Creadora de CtrlPersFreq
@@ -81,8 +88,59 @@ public class CtrlPersFreq {
      */
     public void carregarFrequencies() throws Exception {
         Map<String, Integer> novesEntrades = new HashMap<>();
-        controlador.novaLlistaPerfil("llista", "catalaFreq.txt", "Català", novesEntrades);
+        controlador.novaLlistaPerfil("text", "textFreq.txt", "Català", novesEntrades);
 
+    }
+
+
+    public void guardar() {
+        System.out.println("Guardant llistes de frequencies");
+        //guardar totes les llistes
+        JSONParser jsP = new JSONParser();
+        JSONArray CjtUsuaris = new JSONArray();
+        try (FileReader rd = new FileReader("./DATA/Saves/LlistesUsuarisActius.json")){
+            CjtUsuaris = (JSONArray) jsP.parse(rd);
+            boolean trobat = false;
+            for (int i = 0; i < CjtUsuaris.size() && !trobat; ++i){
+                JSONObject next = (JSONObject) CjtUsuaris.get(i); //Obtenim l'objecte de l'usuari iessim
+                String nomUsuari = ((String)next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
+                if(nomUsuari != null && nomUsuari.equals(usuari)){    //Si el nom d'usuari coincideix
+                    CjtUsuaris.remove(next); //L'esborrem i despres l'afegirem
+                    trobat = true;  //Deixem de recorrer el vector
+                }
+            }
+        } catch (IOException e){
+        }
+        catch (ParseException e) {
+        }
+
+        JSONObject nouUsuari = new JSONObject(); //creem un nou objecte JSON per el usuari actual
+        nouUsuari.put ("nomUsuari", usuari);  //guardem el nom d'usuari actual
+        JSONArray llistes = new JSONArray();    //Generem l'array de llistes del perfil
+        for (Map.Entry<String, LlistaFrequencies> llista : frequencies.entrySet()) {
+            if (llista.getKey().equals("textFreq.txt")) {
+                System.out.println("Guardant llista " + llista.getValue().getNom() + " de l'usuari " + usuari);
+                JSONObject llistaJSON = new JSONObject(); //Creem un nou objecte JSON per la llista
+                llistaJSON.put("nomLlista", llista.getValue().getNom()); //Guardem el nom de la llista
+                llistaJSON.put("nomIdioma", llista.getValue().getNomIdioma()); //Guardem el nom de l'idioma de la llista
+                JSONArray paraules = new JSONArray();   //Generem l'array de paraules de la llista
+                for (Map.Entry<String, Integer> paraula : llista.getValue().getFrequencies().entrySet()) {
+                    JSONObject paraulaJSON = new JSONObject(); //Creem un nou objecte JSON per la paraula
+                    paraulaJSON.put("paraula", paraula.getKey()); //Guardem la paraula
+                    paraulaJSON.put("freq", paraula.getValue()); //Guardem la freqüència
+                    paraules.add(paraulaJSON);  //Afegim la paraula a l'array de paraules
+                }
+                llistaJSON.put("paraules", paraules); //Afegim l'array de paraules a l'objecte JSON de la llista
+                llistes.add(llistaJSON);    //Afegim l'objecte JSON de la llista a l'array de llistes
+            }
+        }
+        nouUsuari.put("llistes", llistes);  //Afegim l'array de llistes a l'objecte JSON del usuari
+        CjtUsuaris.add(nouUsuari);  //Afegim l'objecte JSON del usuari al conjunt d'usuaris
+        try (FileWriter file = new FileWriter("./DATA/Saves/LlistesUsuarisActius.json")) {
+            file.write(CjtUsuaris.toJSONString()); //Escribim el conjunt d'usuaris al fitxer
+            file.flush();
+        } catch (IOException e) {
+        }
     }
 
 
@@ -91,6 +149,8 @@ public class CtrlPersFreq {
      * @param usuari El nom d'usuari del perfil
      */
     public void nouPerfil(String usuari) {
+        this.usuari = usuari;
+        //crear arxiu de l'usuari nou
     }
 
     /**
@@ -99,7 +159,11 @@ public class CtrlPersFreq {
      * @param usuari El nom d'usuari del perfil a canviar
      */
     public void canviaPerfil(String usuari) {
-
+        //guardar llistes del usuari antic
+        if (usuari != null) guardar();
+        this.usuari = usuari;
+        //carregar llistes del usuari nou
+        frequencies = new HashMap<>();
     }
 
 

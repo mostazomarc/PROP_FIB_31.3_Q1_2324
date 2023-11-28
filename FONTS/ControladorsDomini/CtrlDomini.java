@@ -64,7 +64,7 @@ public class CtrlDomini {
             llistes.canviaPerfil(nom);
         } catch (PerfilNoExisteix e1) {
             PerfilActual = perfils.afegirPerfil(nom);
-            llistes.nouPerfil(nom);
+            llistes.canviaPerfil(nom);
         }
     }
 
