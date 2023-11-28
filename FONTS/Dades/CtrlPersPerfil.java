@@ -32,11 +32,10 @@ public class CtrlPersPerfil {
      * Controlador de domini
      */
     private final CtrlDomini controlador;
-    /**
-     * Mapa de perfils guardats
-     */
-    //private final HashMap<String, Perfil> PerfilsActius;
 
+    /**
+     * Perfil actual
+     */
     private Perfil perfilActual;
 
     /**
@@ -60,6 +59,11 @@ public class CtrlPersPerfil {
         return singletonObject;
     }
 
+    /**
+     * Comprova si existeix un perfil amb nomPerfil al .json de perfils
+     * @param nomPerfil El nom del perfil
+     * @return TRUE si existeix un perfil amb nomPerfil, FALSE en cas contrari
+     */
     private boolean perfilExisteix(String nomPerfil) {
         JSONParser jsP = new JSONParser();
         JSONArray ConjuntPerfils = new JSONArray();
@@ -86,6 +90,9 @@ public class CtrlPersPerfil {
         controlador.iniciaInstancia("Prova");
     }
 
+    /**
+     * Guarda el perfil actual al .json de perfils
+     */
     public void guardar() {
         System.out.println("Guardant perfil" + perfilActual.getUsuari());
         JSONParser jsP = new JSONParser();
@@ -117,6 +124,12 @@ public class CtrlPersPerfil {
         }
     }
 
+    /**
+     * Carrega el perfil identificat per nomPerfil del .json de perfils
+     * @param nomPerfil El nom del perfil
+     * @return El perfil identificat per nomPerfil
+     * @throws PerfilNoExisteix Si el perfil no existeix
+     */
     public Perfil carregar(String nomPerfil) throws PerfilNoExisteix {
         System.out.println("Carregant perfil" + nomPerfil);
         JSONParser jsP = new JSONParser();
@@ -143,6 +156,12 @@ public class CtrlPersPerfil {
         return perfilActual;
     }
 
+    /**
+     * Crea/carrega i guarda un perfil
+     * @param nomPerfil El nom del perfil
+     * @return El perfil creat/carregat
+     * @throws PerfilJaExisteix Si el perfil ja existeix
+     */
     public Perfil canviaPerfil(String nomPerfil) throws PerfilJaExisteix {
         if (perfilActual != null) guardar();
         try {

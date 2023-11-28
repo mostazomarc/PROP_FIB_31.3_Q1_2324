@@ -57,7 +57,7 @@ public class CtrlDomini {
     //Pre:
     //Post: Es carreguen les dades guardades del sitema a memòria
     public void carregarDadesPerfil() throws Exception{
-        llistes.carregarFrequencies();
+        llistes.carregar();
         teclats.carregar();
     }
 

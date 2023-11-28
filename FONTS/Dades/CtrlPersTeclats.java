@@ -35,6 +35,9 @@ public class CtrlPersTeclats {
      */
     private Map<String, Teclat> teclats;
 
+    /**
+     * Nom d'usuari del perfil actual
+     */
     private String usuari;
 
 
@@ -80,18 +83,10 @@ public class CtrlPersTeclats {
         if (teclats.containsKey(nomTeclat)) throw new TeclatJaExisteix(nomTeclat);
     }
 
-
-    /**
-     * Crea una llista de teclats per al nou perfil i guarda la del perfil anterior si n'hi ha
-     * @param usuari El nom d'usuari del perfil
-     */
-    public void nouPerfil(String usuari) {
-    }
-
     /**
      * Canvia el perfil actual per un altre
      * <p> Guarda el conjunt de teclats del perfil actual i carrega la del perfil nou</p>
-     * @param usuari El nom d'usuari del perfil
+     * @param usuari El nom d'usuari del perfil al que es vol canviar
      */
     public void canviaPerfil(String usuari) {
         //guardar teclats del usuari antic
@@ -103,7 +98,9 @@ public class CtrlPersTeclats {
         if (usuariAntic != null) carregar();
     }
 
-
+    /**
+     * Guarda els teclats del perfil actual al .json de teclats
+     */
     public void guardar() {
         //guardar teclats de l'usuari
         System.out.println("Guardant Teclats de l'usuari: " + usuari );
@@ -158,7 +155,7 @@ public class CtrlPersTeclats {
     }
 
     /**
-     * Carrega els teclats dels arxius on estàn guardats (de moment crea nous, funcionarà al tenir capa de persistencia)
+     * Carrega els teclats del perfil actual del .json de teclats
      *
      */
     public void carregar()  {
@@ -261,5 +258,3 @@ public class CtrlPersTeclats {
     }
 
 }
-
-//Classe Programada per: Agustí Costabella

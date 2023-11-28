@@ -83,15 +83,8 @@ public class CtrlPersFreq {
     }
 
     /**
-     * Carrega les llistes de freqüencia dels arxius on estàn guardades (de moment crea noves, funcionarà al tenir capa de persistencia)
-     * @throws Exception Error en carregar les llistes
+     * Guarda les llistes de frequencies del perfil actual
      */
-    public void carregarFrequencies() throws Exception {
-        carregar();
-
-    }
-
-
     public void guardar() {
         System.out.println("Guardant llistes de frequencies");
         //guardar totes les llistes
@@ -142,6 +135,10 @@ public class CtrlPersFreq {
         }
     }
 
+    /**
+     * Carrega les llistes de frequencies del perfil actual
+     * @throws Exception Si no es pot carregar
+     */
     public void carregar() throws Exception{
         System.out.println("Carregant llistes de frequencies");
         JSONParser jsP = new JSONParser();
@@ -175,16 +172,6 @@ public class CtrlPersFreq {
         } catch (ParseException e) {
 
         }
-    }
-
-
-    /**
-     * Crea una llista de llistes per al nou perfil i guarda la del perfil anterior si n'hi ha
-     * @param usuari El nom d'usuari del perfil
-     */
-    public void nouPerfil(String usuari) {
-        this.usuari = usuari;
-        //crear arxiu de l'usuari nou
     }
 
     /**
@@ -223,7 +210,7 @@ public class CtrlPersFreq {
         frequencies.remove(nomLlista);
     }
 
-    // (de moment no comprova llistes de frequencies d'altres usuaris perquè fa falta capa de persistencia)
+    // (de moment no comprova llistes de frequencies d'altres usuaris perquè fa falta capa de persistencia) FALTA FER-HOOOOO
     /**
      * Comprova que l'idioma identificat per nomIdioma no està en ús en cap llista de frequencies
      * @param nomIdioma El nom de l'idioma
