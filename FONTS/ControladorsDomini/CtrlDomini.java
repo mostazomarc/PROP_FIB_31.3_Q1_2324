@@ -62,7 +62,7 @@ public class CtrlDomini {
 
     //Pre: Es rep un nom d'usuari
     //Post: S'inicia instancia amb l'usuari rebut, si no existeix es crea
-    public void iniciaInstancia(String nom) throws ExcepcionsCreadorTeclat{
+    public void iniciaInstancia(String nom) throws Exception{
         try {
             PerfilActual = perfils.getPerfil(nom);
             llistes.canviaPerfil(nom);

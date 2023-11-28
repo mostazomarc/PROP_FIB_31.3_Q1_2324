@@ -56,7 +56,7 @@ public class CtrlPersPerfil {
      * Carrega els perfils dels arxius on estàn guardats (de moment crea noves, funcionarà al tenir capa de persistencia)
      * @throws ExcepcionsCreadorTeclat Si no es pot crear el perfil
      */
-    public void carregarPerfil() throws ExcepcionsCreadorTeclat {
+    public void carregarPerfil() throws Exception {
         controlador.iniciaInstancia("Prova");
     }
 

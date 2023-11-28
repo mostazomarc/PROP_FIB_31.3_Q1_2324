@@ -142,7 +142,7 @@ public class CtrlPersFreq {
         }
     }
 
-    public void carregar() {
+    public void carregar() throws Exception{
         System.out.println("Carregant llistes de frequencies");
         JSONParser jsP = new JSONParser();
         JSONArray CjtUsuaris = new JSONArray();
@@ -173,7 +173,7 @@ public class CtrlPersFreq {
             }
         } catch (IOException e) {
         } catch (ParseException e) {
-        } catch (Exception e) {
+
         }
     }
 
@@ -192,11 +192,13 @@ public class CtrlPersFreq {
      * <p> Guarda la llista de llistes del perfil actual i carrega la del perfil nou</p>
      * @param usuari El nom d'usuari del perfil a canviar
      */
-    public void canviaPerfil(String usuari) {
+    public void canviaPerfil(String usuari) throws Exception {
         //guardar llistes del usuari antic
-        if (this.usuari != null) guardar();
+        String usuariAntic = this.usuari;
+        if (usuariAntic != null) guardar();
         this.usuari = usuari;
         //carregar llistes del usuari nou
+        if (usuariAntic != null) carregar();
     }
 
 
