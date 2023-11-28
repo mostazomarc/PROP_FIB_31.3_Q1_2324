@@ -197,9 +197,7 @@ public class CtrlPersTeclats {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
         } catch (ParseException e) {
-            e.printStackTrace();
         } catch (ExcepcionsCreadorTeclat e) {
             System.out.println("ERROR: " + e.getMessage());
         }
