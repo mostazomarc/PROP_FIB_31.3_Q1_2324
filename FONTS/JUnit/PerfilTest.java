@@ -103,34 +103,10 @@ public class PerfilTest {
     }
 
     /**
-     * S'eliminen les llistes creades per poder tornarles a crear
-     */
-    @After
-    public void eliminarLlistaProva() throws Exception {
-        try {
-            llistes.eliminarLlista("LlistaProva");
-            llistes.eliminarLlista("LlistaProva3");
-            llistes.eliminarLlista("LlistaProva4");
-        } catch (Exception e) {
-        }
-    }
-
-    /**
      * Es crea un perfilProva
      */
     @Before
     public void crearPerfilProva() {
-        controlador = CtrlDomini.getInstance();
-        llistes = CtrlPersFreq.getInstance(controlador);
-        try {
-            llista = llistes.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
-            llista2 = llistes.afegirLlistaFreq("LlistaProva3", idiomaProva, llistaParaulesProva);
-            llista3 = llistes.afegirLlistaFreq("LlistaProva4", idiomaProva, llistaParaulesProva);
-        } catch (LletraNoInclosa e) {
-            System.out.println("ERROR: " + e.getMessage());
-        } catch (Exception e2) {
-            System.out.println("ERROR: " + e2.getMessage());
-        }
         perfilProva = new Perfil("Prova", "12345");
     }
 
@@ -196,7 +172,7 @@ public class PerfilTest {
      */
     @Test
     public void afegirLlistaFreq() throws ExcepcionsCreadorTeclat {
-        perfilProva.afegirLlistaFreq(llista);
+        perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
         List<String> llistaNoms = new ArrayList<>();
         llistaNoms.add("LlistaProva");
         assertEquals(llistaNoms, perfilProva.getNomAllLlistes());
@@ -209,7 +185,7 @@ public class PerfilTest {
     @Test
     public void crearLlistaFreq() throws Exception {
         try {
-            perfilProva.afegirLlistaFreq(llista);
+            perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
         } catch (LlistaFreqJaExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
         }
@@ -224,7 +200,7 @@ public class PerfilTest {
     @Test
     public void eliminarLlistaFreq() throws Exception {
         try {
-            perfilProva.afegirLlistaFreq(llista);
+            LlistaFrequencies llista = perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
             perfilProva.eliminaLlista(llista.getNom());
         } catch (LlistaFreqJaExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
@@ -238,9 +214,9 @@ public class PerfilTest {
     @Test
     public void getNomAllLlistes() throws Exception {
         try {
-            perfilProva.afegirLlistaFreq(llista);
-            perfilProva.afegirLlistaFreq(llista2);
-            perfilProva.afegirLlistaFreq(llista3);
+            perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
+            perfilProva.afegirLlistaFreq("LlistaProva3", idiomaProva, llistaParaulesProva);
+            perfilProva.afegirLlistaFreq("LlistaProva4", idiomaProva, llistaParaulesProva);
         } catch (LlistaFreqJaExisteix e1) {
             System.out.println("ERROR: " + e1.getMessage());
         }
@@ -259,7 +235,7 @@ public class PerfilTest {
      */
     @Test
     public void getNomIdiomaLlista() throws ExcepcionsCreadorTeclat {
-        perfilProva.afegirLlistaFreq(llista);
+        perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
         assertEquals("ESPAÑOL", perfilProva.getNomIdiomaLlista("LlistaProva"));
     }
 
@@ -268,7 +244,7 @@ public class PerfilTest {
      */
     @Test
     public void consultarLlista() throws ExcepcionsCreadorTeclat {
-        perfilProva.afegirLlistaFreq(llista);
+        perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
         Map<String, Integer> resultat = perfilProva.consultaLlista("LlistaProva");
         assertEquals(resultat, llistaParaulesProva);
     }
@@ -278,7 +254,7 @@ public class PerfilTest {
      */
     @Test
     public void crearTeclatLlistaPropia() throws Exception {
-        perfilProva.afegirLlistaFreq(llista);
+        perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
         perfilProva.crearTeclatLlistaPropia("TeclatProva", "LlistaProva", idiomaProva, 3, 10);
         List<String> nomsEsperats = new ArrayList<>();
         nomsEsperats.add("TeclatProva");
@@ -290,6 +266,7 @@ public class PerfilTest {
      */
     @Test
     public void crearTeclatLlistaIdioma() throws Exception {
+        perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
         perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
         List<String> nomsEsperats = new ArrayList<>();
         nomsEsperats.add("TeclatProva");
@@ -309,6 +286,7 @@ public class PerfilTest {
      */
     @Test
     public void eliminaTeclat() throws Exception {
+        perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
         perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
         perfilProva.eliminarTeclat("TeclatProva");
         assertFalse(perfilProva.getNomsTeclats().contains("TeclatProva"));
@@ -320,7 +298,7 @@ public class PerfilTest {
      */
     @Test
     public void modificarllista() throws Exception {
-        perfilProva.afegirLlistaFreq(llista);
+        perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
         llistaParaulesProva.put("NovaParaula", 40);
         perfilProva.modificarLlista("LlistaProva", llistaParaulesProva);
         assertTrue(true);
@@ -339,8 +317,8 @@ public class PerfilTest {
     @Test
     public void llistesMateixNom() throws Exception {
         try {
-            perfilProva.afegirLlistaFreq(llista);
-            perfilProva.afegirLlistaFreq(llista);
+            perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
+            perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
             fail();
         } catch (LlistaFreqJaExisteix e) {
             assertTrue(true);
@@ -352,6 +330,7 @@ public class PerfilTest {
      */
     @Test
     public void teclatsMateixNom() throws Exception {
+        perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
         try {
             perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
             perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
@@ -380,7 +359,7 @@ public class PerfilTest {
     @Test
     public void eliminaLlistaInexistent() throws Exception {
         try {
-            perfilProva.afegirLlistaFreq(llista);
+            perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
             perfilProva.eliminaLlista("paprika"); //nom d'una llista no present a perfil
             fail();
         } catch (LlistaFreqNoExisteix e) {
@@ -394,7 +373,7 @@ public class PerfilTest {
     @Test
     public void modificaLlistaInexistent() throws Exception {
         try {
-            perfilProva.afegirLlistaFreq(llista);
+            perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
             perfilProva.modificarLlista("paprika", llistaParaulesProva);
             fail();
         } catch (LlistaFreqNoExisteix e) {
