@@ -56,6 +56,10 @@ public class CtrlDomini {
         llistes.carregarFrequencies();
     }
 
+    public void guardaEstat() {
+        llistes.guardar();
+    }
+
     //Pre: Es rep un nom d'usuari
     //Post: S'inicia instancia amb l'usuari rebut, si no existeix es crea
     public void iniciaInstancia(String nom) throws ExcepcionsCreadorTeclat{

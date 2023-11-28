@@ -29,6 +29,10 @@ public class ControladorPresentacio {
         controladorDomini.carregarDades();
     }
 
+    public void guardaEstat() {
+        controladorDomini.guardaEstat();
+    }
+
     public String getPerfilActual() {
         return controladorDomini.getPerfilActual();
     }

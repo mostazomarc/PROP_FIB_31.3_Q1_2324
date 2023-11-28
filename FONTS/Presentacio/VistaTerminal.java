@@ -91,6 +91,8 @@ public class VistaTerminal {
         else if (num== 5) System.out.println("5. Canviar estrategia");
         else if (num== 6) {
             canviarPerfil();
+        } else if (num == 7) {
+            controlador.guardaEstat();
         }
         if (num!= 7) {
             System.out.println("################Presioni Enter per continuar...####################");

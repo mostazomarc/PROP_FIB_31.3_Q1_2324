@@ -117,7 +117,7 @@ public class CtrlPersFreq {
         nouUsuari.put ("nomUsuari", usuari);  //guardem el nom d'usuari actual
         JSONArray llistes = new JSONArray();    //Generem l'array de llistes del perfil
         for (Map.Entry<String, LlistaFrequencies> llista : frequencies.entrySet()) {
-            if (llista.getKey().equals("textFreq.txt")) {
+            if (!llista.getKey().contains("LlistaPred")) {
                 System.out.println("Guardant llista " + llista.getValue().getNom() + " de l'usuari " + usuari);
                 JSONObject llistaJSON = new JSONObject(); //Creem un nou objecte JSON per la llista
                 llistaJSON.put("nomLlista", llista.getValue().getNom()); //Guardem el nom de la llista
