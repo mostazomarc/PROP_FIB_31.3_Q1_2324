@@ -178,6 +178,7 @@ public class CtrlPersFreq {
      * Canvia el perfil actual per un altre
      * <p> Guarda la llista de llistes del perfil actual i carrega la del perfil nou</p>
      * @param usuari El nom d'usuari del perfil a canviar
+     * @throws Exception Si no es pot canviar
      */
     public void canviaPerfil(String usuari) throws Exception {
         //guardar llistes del usuari antic

@@ -176,7 +176,6 @@ public class CtrlPersPerfil {
     /**
      * Crea i guarda un perfil
      * @param nomPerfil El nom del perfil
-     * @return El perfil creat
      * @throws PerfilJaExisteix Si el perfil ja existeix
      */
     private void afegirPerfil(String nomPerfil) throws PerfilJaExisteix {
