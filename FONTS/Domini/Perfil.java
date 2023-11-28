@@ -217,6 +217,13 @@ public class Perfil {
         return teclats.get(NomTeclat);
     }
 
+    public Teclat afegirTeclat(String nomTeclat, LlistaFrequencies llista, Idioma i, int n, int m, char[][] disposicio) throws ExcepcionsCreadorTeclat {
+        if (teclats.containsKey(nomTeclat)) throw new TeclatJaExisteix(nomTeclat);
+        Teclat nouTeclat = new Teclat(nomTeclat,llista,i,n,m,disposicio);
+        teclats.put(nomTeclat,nouTeclat);
+        return nouTeclat;
+    }
+
     /**
      * S'elimina el teclat identificat per NomTeclat
      * @param NomTeclat El nom del teclat

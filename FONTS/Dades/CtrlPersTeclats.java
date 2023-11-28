@@ -3,7 +3,14 @@ package Dades;
 import ControladorsDomini.CtrlDomini;
 import Domini.Teclat;
 import Excepcions.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +33,9 @@ public class CtrlPersTeclats {
     /**
      * Mapa de teclats guardats
      */
-    private final Map<String, Teclat> teclats;
+    private Map<String, Teclat> teclats;
+
+    private String usuari;
 
 
     /**
@@ -71,15 +80,6 @@ public class CtrlPersTeclats {
         if (teclats.containsKey(nomTeclat)) throw new TeclatJaExisteix(nomTeclat);
     }
 
-    /**
-     * Carrega els teclats dels arxius on estàn guardats (de moment crea nous, funcionarà al tenir capa de persistencia)
-     *
-     */
-    public void carregarTeclats()  {
-
-
-    }
-
 
     /**
      * Crea una llista de teclats per al nou perfil i guarda la del perfil anterior si n'hi ha
@@ -94,7 +94,114 @@ public class CtrlPersTeclats {
      * @param usuari El nom d'usuari del perfil
      */
     public void canviaPerfil(String usuari) {
+        //guardar teclats del usuari antic
+        String usuariAntic = this.usuari;
+        if (usuariAntic != null) guardar();
+        this.usuari = usuari;
+        teclats = new HashMap<>();
+        //carregar llistes del usuari nou
+        if (usuariAntic != null) carregar();
+    }
 
+
+    public void guardar() {
+        //guardar teclats de l'usuari
+        System.out.println("Guardant Teclats de l'usuari: " + usuari );
+        JSONParser jsP = new JSONParser();
+        JSONArray CjtUsuaris = new JSONArray();
+        try (FileReader rd = new FileReader("./DATA/Saves/TeclatsUsuarisActius.json")){
+            CjtUsuaris = (JSONArray) jsP.parse(rd);
+            boolean trobat = false;
+            for (int i = 0; i < CjtUsuaris.size() && !trobat; ++i){
+                JSONObject next = (JSONObject) CjtUsuaris.get(i); //Obtenim l'objecte de l'usuari iessim
+                String nomUsuari = ((String)next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
+                if(nomUsuari != null && nomUsuari.equals(usuari)){    //Si el nom d'usuari coincideix
+                    CjtUsuaris.remove(next); //L'esborrem i despres l'afegirem
+                    trobat = true;  //Deixem de recorrer el vector
+                }
+            }
+        } catch (IOException e){
+        }
+        catch (ParseException e) {
+        }
+
+        JSONObject nouUsuari = new JSONObject();
+        nouUsuari.put("nomUsuari", usuari);
+        JSONArray teclatsUsuari = new JSONArray();
+        for (Map.Entry<String, Teclat> llista : teclats.entrySet()) {
+            System.out.println("Guardant Teclat " + llista.getKey());
+            JSONObject nouTeclat = new JSONObject();
+            nouTeclat.put("nomTeclat", llista.getKey());
+            nouTeclat.put("nomIdioma", llista.getValue().getNomIdioma());
+            nouTeclat.put("nomLlistaFreq", llista.getValue().getNomLlistaFreq());
+            JSONArray disposicio = new JSONArray();
+            for (char[] fila : llista.getValue().getDisposicio()) {
+                JSONArray filaJSON = new JSONArray();
+                for (char c : fila) {
+                    filaJSON.add(c);
+                }
+                disposicio.add(filaJSON);
+            }
+            nouTeclat.put("disposicio", disposicio);
+            nouTeclat.put("dimX", llista.getValue().getDimX());
+            nouTeclat.put("dimY", llista.getValue().getDimY());
+
+            teclatsUsuari.add(nouTeclat);
+        }
+        nouUsuari.put("teclats", teclatsUsuari);
+        CjtUsuaris.add(nouUsuari);
+        try (FileWriter file = new FileWriter("./DATA/Saves/TeclatsUsuarisActius.json")) {
+            file.write(CjtUsuaris.toJSONString()); //Escribim el conjunt d'usuaris al fitxer
+            file.flush();
+        } catch (IOException e) {
+        }
+    }
+
+    /**
+     * Carrega els teclats dels arxius on estàn guardats (de moment crea nous, funcionarà al tenir capa de persistencia)
+     *
+     */
+    public void carregar()  {
+        System.out.println("Carregant teclats");
+        JSONParser jsP = new JSONParser();
+        JSONArray CjtUsuaris = new JSONArray();
+        try (FileReader rd = new FileReader("./DATA/Saves/TeclatsUsuarisActius.json")) {
+            CjtUsuaris = (JSONArray) jsP.parse(rd);
+            System.out.println(CjtUsuaris.size());
+            boolean trobat = false;
+            for (int i = 0; i < CjtUsuaris.size() && !trobat; ++i) {
+                System.out.println("carregant teclats de l'usuari: " + usuari);
+                JSONObject next = (JSONObject) CjtUsuaris.get(i); //Obtenim l'objecte de l'usuari iessim
+                String nomUsuari = ((String) next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
+                if (nomUsuari != null && nomUsuari.equals(usuari)) {    //Si el nom d'usuari coincideix
+                    trobat = true;
+                    JSONArray teclatsUsuari = (JSONArray) next.get("teclats");
+                    for (int j = 0; j < teclatsUsuari.size(); ++j) {
+                        JSONObject nextTeclat = (JSONObject) teclatsUsuari.get(j);
+                        String nomTeclat = ((String) nextTeclat.get("nomTeclat"));
+                        System.out.println("Carregant Teclat " + nomTeclat);
+                        String nomIdioma = ((String) nextTeclat.get("nomIdioma"));
+                        String nomLlistaFreq = ((String) nextTeclat.get("nomLlistaFreq"));
+                        int dimX = ((Long) nextTeclat.get("dimX")).intValue();
+                        int dimY = ((Long) nextTeclat.get("dimY")).intValue();
+                        JSONArray disposicio = (JSONArray) nextTeclat.get("disposicio");
+                        char[][] disposicioTeclat = new char[dimX][dimY];
+                        for (int k = 0; k < disposicio.size(); ++k) {
+                            JSONArray fila = (JSONArray) disposicio.get(k);
+                            for (int l = 0; l < fila.size(); ++l) {
+                                disposicioTeclat[k][l] = ((String) fila.get(l)).charAt(0);
+                            }
+                        }
+                        Teclat t = controlador.afegirTeclat(nomTeclat, nomIdioma, nomLlistaFreq, dimX, dimY, disposicioTeclat);
+                        teclats.put(nomTeclat, t);
+                    }
+                }
+            }
+        } catch (IOException e) {
+        } catch (ParseException e) {
+        } catch (ExcepcionsCreadorTeclat e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
     }
 
     /**

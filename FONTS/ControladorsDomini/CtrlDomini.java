@@ -54,11 +54,13 @@ public class CtrlDomini {
         alfabets.carregarAlfabets();
         idiomes.carregarIdiomes();
         llistes.carregarFrequencies();
+        teclats.carregar();
     }
 
     public void guardaEstat() {
         llistes.guardar();
         perfils.guardar();
+        teclats.guardar();
     }
 
     //Pre: Es rep un nom d'usuari
@@ -66,6 +68,7 @@ public class CtrlDomini {
     public void iniciaInstancia(String nom) throws Exception{
         PerfilActual = perfils.canviaPerfil(nom);
         llistes.canviaPerfil(nom);
+        teclats.canviaPerfil(nom);
     }
 
 
@@ -269,6 +272,13 @@ public class CtrlDomini {
         }
 
         return sdades;
+    }
+
+    public Teclat afegirTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m, char[][] disposicio) throws ExcepcionsCreadorTeclat{
+        Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
+        LlistaFrequencies llista = llistes.getLlistaFreq(nomLlistaFreq);
+        Teclat nouTeclat = PerfilActual.afegirTeclat(nomTeclat, llista, idiomaTeclat, n, m, disposicio);
+        return nouTeclat;
     }
     
     public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m) throws ExcepcionsCreadorTeclat{
