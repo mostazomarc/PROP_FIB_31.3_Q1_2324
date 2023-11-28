@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 /**
- * Alfabet es una classe que conte una llista de lletres
+ * Alfabet és una classe que conté una llista de lletres
  * @author Arnau Tajahuerce Brulles (arnau.tajahuerce@estudiantat.upc.edu)
  */
 public class Alfabet {
