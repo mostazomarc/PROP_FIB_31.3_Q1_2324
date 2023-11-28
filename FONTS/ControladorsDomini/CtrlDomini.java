@@ -182,7 +182,7 @@ public class CtrlDomini {
     //Pre: tipus arxiu es un tipus vàlid i filename existeix i esta en un format vàid
     //Post: S'afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual
     public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) throws Exception {
-        if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
+        if (tipusArxiu != "Manual" && tipusArxiu != "Carregada") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
         Idioma idiomaLlista = idiomes.getIdioma(i);
         LlistaFrequencies llista = PerfilActual.afegirLlistaFreq(filename,idiomaLlista,novesEntrades);
         llistes.guardarLlistaFreq(llista);

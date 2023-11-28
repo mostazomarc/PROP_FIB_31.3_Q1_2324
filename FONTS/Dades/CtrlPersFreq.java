@@ -87,8 +87,7 @@ public class CtrlPersFreq {
      * @throws Exception Error en carregar les llistes
      */
     public void carregarFrequencies() throws Exception {
-        Map<String, Integer> novesEntrades = new HashMap<>();
-        controlador.novaLlistaPerfil("text", "textFreq.txt", "Català", novesEntrades);
+        carregar();
 
     }
 
@@ -143,6 +142,41 @@ public class CtrlPersFreq {
         }
     }
 
+    public void carregar() {
+        System.out.println("Carregant llistes de frequencies");
+        JSONParser jsP = new JSONParser();
+        JSONArray CjtUsuaris = new JSONArray();
+        try (FileReader rd = new FileReader("./DATA/Saves/LlistesUsuarisActius.json")) {
+            CjtUsuaris = (JSONArray) jsP.parse(rd);
+            boolean trobat = false;
+            for (int i = 0; i < CjtUsuaris.size() && !trobat; ++i) {
+                JSONObject next = (JSONObject) CjtUsuaris.get(i); //Obtenim l'objecte de l'usuari iessim
+                String nomUsuari = ((String) next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
+                if (nomUsuari != null && nomUsuari.equals(usuari)) {    //Si el nom d'usuari coincideix
+                    JSONArray llistes = (JSONArray) next.get("llistes"); //Obtenim l'array de llistes del usuari
+                    for (int j = 0; j < llistes.size(); ++j) {
+                        JSONObject llista = (JSONObject) llistes.get(j); //Obtenim l'objecte de la llista jessim
+                        String nomLlista = ((String) llista.get("nomLlista"));  //Obtenim el nom de la llista jessim
+                        String nomIdioma = ((String) llista.get("nomIdioma"));  //Obtenim el nom de l'idioma de la llista jessim
+                        JSONArray paraules = (JSONArray) llista.get("paraules"); //Obtenim l'array de paraules de la llista jessim
+                        Map<String, Integer> paraulesLlista = new HashMap<>();
+                        for (int k = 0; k < paraules.size(); ++k) {
+                            JSONObject paraula = (JSONObject) paraules.get(k); //Obtenim l'objecte de la paraula kessim
+                            String paraulaString = ((String) paraula.get("paraula"));  //Obtenim la paraula kessim
+                            Long freq = ((Long) paraula.get("freq"));  //Obtenim la freqüència de la paraula kessim
+                            paraulesLlista.put(paraulaString, freq.intValue()); //Afegim la paraula i la freqüència a la llista
+                        }
+                        System.out.println("Carregant llista " + nomLlista + " de l'usuari " + usuari);
+                        controlador.novaLlistaPerfil("Carregada", nomLlista, nomIdioma, paraulesLlista);
+                    }
+                }
+            }
+        } catch (IOException e) {
+        } catch (ParseException e) {
+        } catch (Exception e) {
+        }
+    }
+
 
     /**
      * Crea una llista de llistes per al nou perfil i guarda la del perfil anterior si n'hi ha
@@ -160,10 +194,9 @@ public class CtrlPersFreq {
      */
     public void canviaPerfil(String usuari) {
         //guardar llistes del usuari antic
-        if (usuari != null) guardar();
+        if (this.usuari != null) guardar();
         this.usuari = usuari;
         //carregar llistes del usuari nou
-        frequencies = new HashMap<>();
     }
 
 
