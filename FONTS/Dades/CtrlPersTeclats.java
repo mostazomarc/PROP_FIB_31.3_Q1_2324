@@ -138,7 +138,7 @@ public class CtrlPersTeclats {
             for (char[] fila : llista.getValue().getDisposicio()) {
                 JSONArray filaJSON = new JSONArray();
                 for (char c : fila) {
-                    filaJSON.add(c);
+                    filaJSON.add(String.valueOf(c));
                 }
                 disposicio.add(filaJSON);
             }
@@ -167,10 +167,9 @@ public class CtrlPersTeclats {
         JSONArray CjtUsuaris = new JSONArray();
         try (FileReader rd = new FileReader("./DATA/Saves/TeclatsUsuarisActius.json")) {
             CjtUsuaris = (JSONArray) jsP.parse(rd);
-            System.out.println(CjtUsuaris.size());
             boolean trobat = false;
             for (int i = 0; i < CjtUsuaris.size() && !trobat; ++i) {
-                System.out.println("carregant teclats de l'usuari: " + usuari);
+                System.out.println("Carregant teclats de l'usuari: " + usuari);
                 JSONObject next = (JSONObject) CjtUsuaris.get(i); //Obtenim l'objecte de l'usuari iessim
                 String nomUsuari = ((String) next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
                 if (nomUsuari != null && nomUsuari.equals(usuari)) {    //Si el nom d'usuari coincideix
@@ -198,7 +197,9 @@ public class CtrlPersTeclats {
                 }
             }
         } catch (IOException e) {
+            e.printStackTrace();
         } catch (ParseException e) {
+            e.printStackTrace();
         } catch (ExcepcionsCreadorTeclat e) {
             System.out.println("ERROR: " + e.getMessage());
         }
