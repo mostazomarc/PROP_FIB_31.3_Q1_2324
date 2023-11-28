@@ -3,52 +3,89 @@ package Domini;
 import java.util.Set;
 import java.util.HashSet;
 
+/**
+ * Alfabet és una classe que conté una llista de lletres
+ * @author Arnau Tajahuerce Brulles (arnau.tajahuerce@estudiantat.upc.edu)
+ */
 public class Alfabet {
+    /**
+     * El nom de l'alfabet
+     */
     private String nom;
+    /**
+     * La llista de lletres
+     */
     private Set<Character> lletres;
+    /**
+     * Els noms dels idiomes que tenen l'alfabet
+     */
     private Set<String> idiomes;
 
-    //Pre: lletres conté totes les lletres de l'alfabet que es vol afegir
-    //Post: Es crea un alfabet amb el nom i les lletres donades
+    /**
+     * Creadora de Alfabet
+     * <p> Crea un alfabet amb nom i lletres</p>
+     * <p> Es necessita que el set de lletres només contingui les lletres de l'alfabet</p>
+     * @param nom El nom de l'alfabet
+     * @param lletres Les lletres de l'alfabet
+     */
     public Alfabet (String nom, Set<Character> lletres) {
         this.nom = nom;
         this.lletres = lletres;
         idiomes = new HashSet<String>();
     }
 
-    //Pre: És un nom d'idioma vàlid
-    //Post: S'afegeix a idiomes el nomIdioma
+    /**
+     * Afegeix a la llista de noms d'idiomes que tenen l'alfabet el nom de l'idioma donat
+     * <p> Es necessita que l'idioma amb el nom proporcionat sigui un idioma del sistema</p>
+     * @param nomIdioma El nom de l'idioma que es vol afegir
+     */
     public void afegirIdioma(String nomIdioma) {
         idiomes.add(nomIdioma);
     }
 
-    //Pre: nomIdioma és al set d'idiomes
-    //Post: S'elimina d'idiomes el nomIdioma
+    /**
+     * Treu de la llista de noms d'idiomes que utilitzen l'alfabet el nom de l'idioma donat
+     * <p> Es necessita que l'idioma amb el nom proporcionat estigui a la llista de noms d'idiomes que tenen l'alfabet</p>
+     * @param nomIdioma El nom de l'idioma que es vol treure
+     */
     public void treureIdioma(String nomIdioma) {
         idiomes.remove(nomIdioma);
     }
 
-    //Retorna el número d'idiomes que utilitzen l'alfabet
+    /**
+     * Obté el nombre d'idiomes que tenen l'alfabet
+     * @return El nombre d'idiomes que tenen l'alfabet
+     */
     public int numIdiomes() {
         return idiomes.size();
     }
 
-    //Retorna el nom de l'alfabet
+    /**
+     * Obté el nom de l'alfabet
+     * @return El nom de l'alfabet
+     */
     public String getNomAlfabet() { return nom; }
 
-    //Retorna les lletres de l'alfabet
+    /**
+     * Obté les lletres de l'alfabet
+     * @return La llista de lletres de l'alfabet
+     */
     public Set<Character> getLletres() {
         return lletres;
     }
 
-    //Retorna el número de lletres de l'alfabet
+    /**
+     * Obté el nombre de lletres que té l'alfabet
+     * @return El nombre de lletres que té l'alfabet
+     */
     public int getNumLletres() { return lletres.size(); }
 
-    //Retorna informació (Nom i lletres) de l'Alfabet
+    /**
+     * Obté text amb informació (nom i lletres) de l'alfabet
+     * @return El text amb la informació de l'alfabet
+     */
     public String getInfo() {
         return "Nom de l'Alfabet: " + nom + "    Lletres (" + getNumLletres() + "): " + lletres;
     }
 
 }
-
-//Classe Programada per: Arnau Tajahuerce
