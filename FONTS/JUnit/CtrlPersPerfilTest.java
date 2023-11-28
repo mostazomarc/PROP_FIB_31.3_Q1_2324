@@ -75,24 +75,9 @@ public class CtrlPersPerfilTest {
     @Test
     public void afegirPerfil() throws Exception {
         CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
-        cP.afegirPerfil("NouPerfil");
+        cP.canviaPerfil("NouPerfil");
         Perfil perfil = cP.getPerfil("NouPerfil");
         assertEquals(perfil.getUsuari(), "NouPerfil");
-    }
-
-    /**
-     * Comprova que no es pot afegir un perfil duplicat
-     */
-    @Test
-    public void afegirPerfilDuplicat() throws Exception {
-        CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
-        cP.afegirPerfil("PerfilDuplicat");
-        try {
-            cP.afegirPerfil("PerfilDuplicat");
-            assertTrue(false);
-        } catch (PerfilJaExisteix e) {
-            assertTrue(true);
-        }
     }
 
     /**
@@ -101,6 +86,7 @@ public class CtrlPersPerfilTest {
     @Test
     public void getPerfil() throws Exception {
         CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
+        cP.canviaPerfil("NouPerfil");
         Perfil perfil = cP.getPerfil("NouPerfil");
         assertEquals(perfil.getUsuari(), "NouPerfil");
     }
@@ -125,8 +111,8 @@ public class CtrlPersPerfilTest {
     @Test
     public void getAllPerfils() throws Exception {
         CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
-        cP.afegirPerfil("SegonPerfil");
-        cP.afegirPerfil("TercerPerfil");
+        cP.canviaPerfil("SegonPerfil");
+        cP.canviaPerfil("TercerPerfil");
         List<String> perfilsEsperats = new ArrayList<>();
         perfilsEsperats.add("NouPerfil");
         perfilsEsperats.add("SegonPerfil");
