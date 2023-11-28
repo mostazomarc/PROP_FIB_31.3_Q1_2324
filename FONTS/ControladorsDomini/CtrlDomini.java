@@ -58,18 +58,14 @@ public class CtrlDomini {
 
     public void guardaEstat() {
         llistes.guardar();
+        perfils.guardar();
     }
 
     //Pre: Es rep un nom d'usuari
     //Post: S'inicia instancia amb l'usuari rebut, si no existeix es crea
     public void iniciaInstancia(String nom) throws Exception{
-        try {
-            PerfilActual = perfils.getPerfil(nom);
-            llistes.canviaPerfil(nom);
-        } catch (PerfilNoExisteix e1) {
-            PerfilActual = perfils.afegirPerfil(nom);
-            llistes.canviaPerfil(nom);
-        }
+        PerfilActual = perfils.canviaPerfil(nom);
+        llistes.canviaPerfil(nom);
     }
 
 
