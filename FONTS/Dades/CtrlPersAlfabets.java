@@ -2,11 +2,7 @@ package Dades;
 
 import ControladorsDomini.CtrlDomini;
 import Domini.Alfabet;
-import Excepcions.AlfabetEnUs;
-import Excepcions.AlfabetJaExisteix;
-import Excepcions.AlfabetNoExisteix;
-import Excepcions.ExcepcionsCreadorTeclat;
-import Excepcions.CaracterInvalid;
+import Excepcions.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -19,23 +15,52 @@ import java.text.Normalizer;
 
 import java.util.*;
 
+/**
+ * CtrlPersAlfabets és una classe que permet guardar i carregar alfabets
+ * <p> Aquesta classe segueix el patró Singleton</p>
+ * <p> Aquesta classe es necessària per a la persistència d'alfabets</p>
+ * @author Arnau Tajahuerce Brulles (arnau.tajahuerce@estudiantat.upc.edu)
+ */
 public class CtrlPersAlfabets {
+    /**
+     * Instància de CtrlPersFreq
+     */
     private static CtrlPersAlfabets singletonObject;
+
+    /**
+     * Mapa dels alfabets del sistema
+     */
     private TreeMap<String, Alfabet> Alfabets;
+
+    /**
+     * Instància de CtrlDomini
+     */
     private CtrlDomini controlador;
 
-    //Pre:
-    //Post: Retorna la instancia de CtrlPersAlfabets, si no existeix cap CtrlPersAlfabets es crea.
+    /**
+     * Retorna la instància de CtrlPersAlfabets, si no existeix cap CtrlPersAlfabets es crea.
+     * @param c El controlador de domini
+     * @return La instància de CtrlPersAlfabets
+     */
     public static CtrlPersAlfabets getInstance(CtrlDomini c) {
         if(singletonObject == null)
             singletonObject = new CtrlPersAlfabets(c);
         return singletonObject;
     }
+
+    /**
+     * Creadora de CtrlPersAlfabets
+     * <p> Crea un conjunt d'idiomes i guarda el controlador</p>
+     * @param c El controlador de domini
+     */
     private CtrlPersAlfabets(CtrlDomini c) {
         Alfabets = new TreeMap<String, Alfabet>();
         controlador = c;
     }
 
+    /**
+     * Guarda els alfabets del sistema
+     */
     public void guardar() {
         System.out.println("Guardant Alfabets");
         JSONObject CjtAlfabets = new JSONObject();
@@ -55,6 +80,9 @@ public class CtrlPersAlfabets {
         }
     }
 
+    /**
+     * Carrega els alfabets del sistema
+     */
     public void carregar() {
         System.out.println("Carregant Alfabets");
         try (FileReader fileReader = new FileReader("./DATA/Saves/AlfabetsSistema.json")) {
@@ -72,12 +100,16 @@ public class CtrlPersAlfabets {
                 Alfabet a = new Alfabet(nomAlfabet, lletres);
                 Alfabets.put(nomAlfabet.toLowerCase(), a);
             }
-        } catch (IOException |ParseException e) {
+        } catch (IOException | ParseException e) {
         }
     }
 
-    //Pre:
-    //Post: S'afegeix l'Alfabet identificat per filename.length() - 4
+    /**
+     * Afegeix un alfabet
+     * @param filename El nom de l'arxiiu que conté les lletres de l'alfabet (Serà el nom de l'alfabet)
+     * @param LlistaLlegida Les lletres de l'alfabet
+     * @throws ExcepcionsCreadorTeclat Si l'alfabet ja existeix o l'arxiu conté algún caràcter invàlid
+     */
     public void afegirAlfabet(String filename, List<String> LlistaLlegida) throws ExcepcionsCreadorTeclat {
 
         String nomAlfabet = filename.substring(0, filename.length() - 4);
@@ -97,7 +129,11 @@ public class CtrlPersAlfabets {
         Alfabets.put(nomAlfabet.toLowerCase(), nouAlfabet);
     }
 
-    //Retorna TRUE si c és una lletra sense accent, FALSE si és un número, símbol, lletra amb accent...
+    /**
+     * Obté si el caràcter c és vàlid
+     * @param c Caràcter del qual es vol saber si és vàlid
+     * @return TRUE si c és una lletra sense accent, FALSE si és un número, símbol, lletra amb accent
+     */
     private boolean lletraValida(char c) {
         char c1 = Character.toLowerCase(c);
         if (!Character.isLetter(c)) return false; // Mira que és una lletra
@@ -106,31 +142,45 @@ public class CtrlPersAlfabets {
         return true;
     }
 
-    //Pre:
-    //Post: S'elimina l'alfabet identificat per nomAlfabet
+    /**
+     * Elimina un alfabet identificat per nomAlfabet
+     * @param nomAlfabet El nom de l'alfabet a eliminar
+     * @throws ExcepcionsCreadorTeclat Si l'alfabet no existeix o és l'alfabet d'algún idioma del sistema
+     */
     public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
         Alfabet a = getAlfabet(nomAlfabet.toLowerCase());
         if (a.numIdiomes() != 0) throw new AlfabetEnUs(nomAlfabet);
         Alfabets.remove(nomAlfabet.toLowerCase());
     }
 
-    //Post: Retorna TRUE si existeix un Alfabet amb nomAlfabet, FALSE en cas contrari
+    /**
+     * Obté si l'alfabet identificat per nomAlfabet existeix
+     * <p> Retorna TRUE si l'alfabet identificat per nomAlfabet existeix en el sistema, FALSE en cas contrari</p>
+     * @param nomAlfabet El nom de l'alfabet del qual es vol saber la seva existència
+     * @return TRUE si l'alfabet existeix, FALSE en cas contrari
+     */
     public boolean existeix(String nomAlfabet) {
         if (Alfabets.containsKey(nomAlfabet.toLowerCase())) return true;
         return false;
     }
 
-    //Post: Retorna l'Alfabet identificat per nomAlfabet
-    public Alfabet getAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
+    /**
+     * Obté l'alfabet identificat per nomAlfabet
+     * @param nomAlfabet El nom de l'alfabet
+     * @return L'alfabet identificat per nomAlfabet
+     * @throws AlfabetNoExisteix Si l'alfabet no existeix
+     */
+    public Alfabet getAlfabet(String nomAlfabet) throws AlfabetNoExisteix {
         if (!existeix(nomAlfabet.toLowerCase())) throw new AlfabetNoExisteix();
         return Alfabets.get(nomAlfabet.toLowerCase());
     }
 
-    //Post: Retorna el conjunt d'Alfabets
+    /**
+     * Obté tots els alfabets del sistema
+     * @return El conjunt d'alfabets del sistema
+     */
     public TreeMap<String, Alfabet> getAlfabets() {
         return Alfabets;
     }
 
 }
-
-//Classe Programada per: Arnau Tajahuerce
