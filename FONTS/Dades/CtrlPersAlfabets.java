@@ -62,13 +62,13 @@ public class CtrlPersAlfabets {
             JSONObject jsonObject = (JSONObject) parser.parse(fileReader);
 
             for (Map.Entry<String, Object> entry : (Set<Map.Entry<String, Object>>) jsonObject.entrySet()) {
-                String key = entry.getKey();
                 JSONObject jsonAlfabet = (JSONObject) entry.getValue();
 
                 String nomAlfabet = (String) jsonAlfabet.get("nom");
                 JSONArray lletresArray = (JSONArray) jsonAlfabet.get("lletres");
                 Set<Character> lletres = new HashSet<>();
                 for (int i = 0; i < lletresArray.size(); ++i) lletres.add(((String) lletresArray.get(i)).charAt(0));
+
                 Alfabet a = new Alfabet(nomAlfabet, lletres);
                 Alfabets.put(nomAlfabet.toLowerCase(), a);
             }
