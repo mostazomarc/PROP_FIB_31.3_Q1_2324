@@ -53,6 +53,14 @@ public class Idioma {
         new LlistaFrequencies("LlistaPred"+nom, this, llistaParaules); //Aquesta creadora ja vincula la llista de freqüències a aquest idioma
     }
 
+    public Idioma (String nom, Alfabet alfabet, String nomLlista, Map<String, Integer> llistaParaules) throws ExcepcionsCreadorTeclat {
+        this.nom = nom;
+        this.alfabet = alfabet;
+        alfabet.afegirIdioma(nom);
+        new LlistaFrequencies(nomLlista, this, llistaParaules); //Aquesta creadora ja vincula la llista de freqüències a aquest idioma
+    }
+
+
     /**
      * Afegeix una llista de paraules i freqüències
      * <p> Es nececssita que la llista de paraules i freqüències proporcionada existeix i és vàlida</p>
