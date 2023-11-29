@@ -10,7 +10,6 @@ public class VistaPrincipal {
     private ControladorPresentacio iCtrlPresentacion;
     private JFrame frameVista = new JFrame("Vista Principal");
     private JPanel panelContenidos = new JPanel();
-    private CardLayout cardLayout = new CardLayout();
     private JButton Info = new JButton("Informació de les funcions");
     private JButton GT = new JButton("Gestionar Teclats");
     private JButton CT = new JButton("Consultar Teclats");
@@ -118,7 +117,7 @@ public class VistaPrincipal {
         }
     }
 
-    public void hacerVisible() {
+    public void setVisible() {
         frameVista.pack();
         frameVista.setVisible(true);
     }

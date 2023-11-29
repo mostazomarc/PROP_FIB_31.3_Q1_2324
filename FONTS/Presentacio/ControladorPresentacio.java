@@ -22,7 +22,7 @@ public class ControladorPresentacio {
     //Post: S'inicia una instancia amb el perfil x
     public void iniciaInstancia(String nomPerfil) throws Exception{
         controladorDomini.iniciaInstancia(nomPerfil);
-        vistaPrincipal.hacerVisible();
+        vistaPrincipal.setVisible();
     }
 
     //NORMAL
