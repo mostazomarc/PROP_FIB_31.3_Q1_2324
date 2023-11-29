@@ -1,5 +1,6 @@
 package ControladorsDomini;
 
+import java.security.PrivilegedExceptionAction;
 import java.util.*;
 import java.io.*;
 import java.util.regex.Pattern;
@@ -66,6 +67,7 @@ public class CtrlDomini {
         perfils.guardar();
         teclats.guardar();
         alfabets.guardar();
+        idiomes.guardar();
     }
 
     //Pre: Es rep un nom d'usuari
@@ -246,6 +248,10 @@ public class CtrlDomini {
 
     public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
         alfabets.eliminarAlfabet(nomAlfabet);
+    }
+
+    public Alfabet getAlfabet(String nom) throws ExcepcionsCreadorTeclat {
+        return alfabets.getAlfabet(nom);
     }
 
     public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws Exception {
