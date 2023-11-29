@@ -19,13 +19,33 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * CtrlPersIdiomes és una classe que permet guardar i carregar idiomes
+ * <p> Aquesta classe segueix el patró singleton</p>
+ * <p> Aquesta classe és necessària per a la persistència d'idiomes</p>
+ * @author Arnau Tajahuerce Brulles (arnau.tajahuerce@estudiantat.upc.edu)
+ */
 public class CtrlPersIdiomes {
+    /**
+     * Instància de CtrlPersIdiomes
+     */
     private static CtrlPersIdiomes singletonObject;
+
+    /**
+     * Mapa dels idiomes del sistema
+     */
     private TreeMap<String, Idioma> Idiomes;
+
+    /**
+     * Instància de CtrlDomini
+     */
     private CtrlDomini controlador;
 
-    //Pre:
-    //Post: Retorna la instancia de CtrlPersAlfabets, si no existeix cap CtrlPersAlfabets es crea.
+    /**
+     * Retorna la instància de CtrlPersIdiomes, si no existeix cap CtrlPersIdiomes es crea.
+     * @param c El controlador de domini
+     * @return La instància de CtrlPersIdiomes
+     */
     public static CtrlPersIdiomes getInstance(CtrlDomini c) {
         if(singletonObject == null)
             singletonObject = new CtrlPersIdiomes(c){
@@ -34,6 +54,11 @@ public class CtrlPersIdiomes {
         return singletonObject;
     }
 
+    /**
+     * Creadora de CtrlPersIdiomes
+     * <p> Crea un conjunt d'idiomes i guarda el controlador</p>
+     * @param c El controlador de domini
+     */
     private CtrlPersIdiomes(CtrlDomini c) {
         Idiomes = new TreeMap<String, Idioma>();
         controlador = c;
@@ -44,6 +69,9 @@ public class CtrlPersIdiomes {
         controlador.afegirIdioma("Español","alfabetEspañol","llista","españolFreq.txt");
     }
 
+    /**
+     * Guarda els idiomes del sistema
+     */
     public void guardar() {
         System.out.println("Guardant Idiomes");
         JSONObject CjtIdiomes = new JSONObject();
@@ -105,42 +133,58 @@ public class CtrlPersIdiomes {
 
      */
 
-    //Pre:
-    //Post: S'afegeix l'Idioma identificat per nomIdioma
+    /**
+     * Afegeix un idioma
+     * @param nomIdioma El nom de l'idioma a afegir
+     * @param a L'alfabet de l'idioma a afegir
+     * @param novesEntrades Llista de freqüències predeterminada de l'idioma a afegir
+     * @throws ExcepcionsCreadorTeclat Si l'idioma ja existeix o hi ha algun problema a l'hora de crear la llista de freqüències
+     */
     public void afegirIdioma(String nomIdioma, Alfabet a, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
         if (existeix(nomIdioma)) throw new IdiomaJaExisteix(nomIdioma);
         Idioma nouIdioma = new Idioma(nomIdioma, a, novesEntrades);
         Idiomes.put(nomIdioma, nouIdioma);
     }
 
-    //Pre:
-    //Post: S'elimina l'Idioma identificat per nomIdioma
-    public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
+    /**
+     * Elimina un idioma identificat per nomIdioma
+     * @param nomIdioma El nom de l'idioma a eliminar
+     * @throws IdiomaNoExisteix Si l'idioma no existeix
+     */
+    public void eliminarIdioma(String nomIdioma) throws IdiomaNoExisteix {
         Idioma i = getIdioma(nomIdioma);
         Alfabet a = i.getAlfabet();
         a.treureIdioma(nomIdioma);
         Idiomes.remove(nomIdioma);
     }
 
-    //Pre:
-    //Post: Retorna TRUE si existeix un Idioma amb nomIdioma, FALSE en cas contrari
+    /**
+     * Obté si l'idioma identificat per nomIdioma existeix
+     * <p> Retorna TRUE si l'idioma identificat per nomIdioma existeix en el sistema, FALSE en cas contrari</p>
+     * @param nomIdioma El nom de l'idioma del qual es vol saber la seva existència
+     * @return TRUE si l'idioma existeix, FALSE en cas contrari
+     */
     public boolean existeix(String nomIdioma) {
         if (Idiomes.containsKey(nomIdioma)) return true;
         return false;
     }
 
-    //Pre:
-    //Post: Retorna l'Idioma identificat per nomIdioma
-    public Idioma getIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
+    /**
+     * Obté l'idioma identificat per nomIdioma
+     * @param nomIdioma El nom de l'idioma
+     * @return L'idioma identificat per nomIdioma
+     * @throws IdiomaNoExisteix Si l'idioma no existeix
+     */
+    public Idioma getIdioma(String nomIdioma) throws IdiomaNoExisteix {
         if (!existeix(nomIdioma)) throw new IdiomaNoExisteix(nomIdioma);
         return Idiomes.get(nomIdioma);
     }
 
-    //Pre:
-    //Post: Retorna el conjunt d'Idiomes
+    /**
+     * Obté tots els idiomes del sistema
+     * @return El conjunt d'idiomes del sistema
+     */
     public TreeMap<String, Idioma> getIdiomes() {
         return Idiomes;
     }
 }
-
-//Classe Programada per: Arnau Tajahuerce
