@@ -75,6 +75,14 @@ public class Alfabet {
     }
 
     /**
+     * Obté els noms dels idiomes de l'alfabet
+     * @return La llista de noms dels idiomes de l'alfabet
+     */
+    public Set<String> getIdiomes() {
+        return idiomes;
+    }
+
+    /**
      * Obté el nombre de lletres que té l'alfabet
      * @return El nombre de lletres que té l'alfabet
      */

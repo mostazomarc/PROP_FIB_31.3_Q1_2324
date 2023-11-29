@@ -7,6 +7,12 @@ import Excepcions.AlfabetJaExisteix;
 import Excepcions.AlfabetNoExisteix;
 import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.CaracterInvalid;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.Normalizer;
 
 import java.util.*;
@@ -32,6 +38,28 @@ public class CtrlPersAlfabets {
         controlador.afegirAlfabet("LlatíGenèric.txt");
         controlador.afegirAlfabet("alfabetEspañol.txt");
         controlador.afegirAlfabet("alfabetCatala.txt");
+    }
+
+    public void guardar() {
+        System.out.println("Guardant Alfabets");
+        JSONObject jsonObject = new JSONObject();
+        for (Map.Entry<String, Alfabet> entry : Alfabets.entrySet()) {
+            Alfabet a = entry.getValue();
+            JSONObject jsonAlfabet = new JSONObject();
+            jsonAlfabet.put("nom", a.getNomAlfabet());
+            JSONArray lletres = new JSONArray();
+            for (char l : a.getLletres()) lletres.add(String.valueOf(l));
+            jsonAlfabet.put("lletres", lletres);
+            JSONArray idiomes = new JSONArray();
+            for (String i : a.getIdiomes()) idiomes.add(String.valueOf(i));
+            jsonAlfabet.put("idiomes", idiomes);
+            jsonObject.put(entry.getKey(), jsonAlfabet);
+        }
+        try (FileWriter fileWriter = new FileWriter("./DATA/Saves/AlfabetsSistema.json")) {
+            fileWriter.write(jsonObject.toJSONString());
+            fileWriter.flush();
+        } catch (IOException e) {
+        }
     }
 
     //Pre:

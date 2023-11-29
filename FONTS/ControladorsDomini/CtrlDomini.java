@@ -65,6 +65,7 @@ public class CtrlDomini {
         llistes.guardar();
         perfils.guardar();
         teclats.guardar();
+        alfabets.guardar();
     }
 
     //Pre: Es rep un nom d'usuari
