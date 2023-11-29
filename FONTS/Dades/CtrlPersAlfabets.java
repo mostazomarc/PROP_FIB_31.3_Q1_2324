@@ -10,7 +10,9 @@ import Excepcions.CaracterInvalid;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.Normalizer;
@@ -42,7 +44,7 @@ public class CtrlPersAlfabets {
 
     public void guardar() {
         System.out.println("Guardant Alfabets");
-        JSONObject jsonObject = new JSONObject();
+        JSONObject CjtAlfabets = new JSONObject();
         for (Map.Entry<String, Alfabet> entry : Alfabets.entrySet()) {
             Alfabet a = entry.getValue();
             JSONObject jsonAlfabet = new JSONObject();
@@ -50,17 +52,39 @@ public class CtrlPersAlfabets {
             JSONArray lletres = new JSONArray();
             for (char l : a.getLletres()) lletres.add(String.valueOf(l));
             jsonAlfabet.put("lletres", lletres);
-            JSONArray idiomes = new JSONArray();
-            for (String i : a.getIdiomes()) idiomes.add(String.valueOf(i));
-            jsonAlfabet.put("idiomes", idiomes);
-            jsonObject.put(entry.getKey(), jsonAlfabet);
+            CjtAlfabets.put(entry.getKey(), jsonAlfabet);
         }
         try (FileWriter fileWriter = new FileWriter("./DATA/Saves/AlfabetsSistema.json")) {
-            fileWriter.write(jsonObject.toJSONString());
+            fileWriter.write(CjtAlfabets.toJSONString());
             fileWriter.flush();
         } catch (IOException e) {
         }
     }
+
+    /*
+    public void carregar() {
+        System.out.println("Carregant Alfabets");
+        JSONParser jsonParser = new JSONParser();
+
+        try (FileReader fileReader = new FileReader("./DATA/Saves/AlfabetsSistema.json")) {
+            Object obj = jsonParser.parse(fileReader);
+            JSONObject cjtAlfabets = (JSONObject) obj;
+
+            for (Object key : cjtAlfabets.keySet()) {
+                String alfabetKey = (String) key;
+                JSONObject jsonAlfabet = (JSONObject) cjtAlfabets.get(alfabetKey);
+                String nomAlfabet = (String) jsonAlfabet.get("nom");
+                Set<Character> lletres = new HashSet<>((JSONArray) jsonAlfabet.get("lletres"));
+                Alfabet a = new Alfabet(nomAlfabet, lletres);
+                Alfabets.put(nomAlfabet.toLowerCase(), a);
+            }
+
+        } catch (IOException e) {
+        } catch (ParseException e) {
+        }
+    }
+
+     */
 
     //Pre:
     //Post: S'afegeix l'Alfabet identificat per filename.length() - 4
