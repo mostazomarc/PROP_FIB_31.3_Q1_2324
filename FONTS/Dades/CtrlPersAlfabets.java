@@ -36,12 +36,6 @@ public class CtrlPersAlfabets {
         controlador = c;
     }
 
-    public void carregarAlfabets() throws Exception {
-        controlador.afegirAlfabet("LlatíGenèric.txt");
-        controlador.afegirAlfabet("alfabetEspañol.txt");
-        controlador.afegirAlfabet("alfabetCatala.txt");
-    }
-
     public void guardar() {
         System.out.println("Guardant Alfabets");
         JSONObject CjtAlfabets = new JSONObject();
@@ -60,31 +54,6 @@ public class CtrlPersAlfabets {
         } catch (IOException e) {
         }
     }
-
-    /*
-    public void carregar() {
-        System.out.println("Carregant Alfabets");
-        JSONParser jsonParser = new JSONParser();
-
-        try (FileReader fileReader = new FileReader("./DATA/Saves/AlfabetsSistema.json")) {
-            Object obj = jsonParser.parse(fileReader);
-            JSONObject cjtAlfabets = (JSONObject) obj;
-
-            for (Object key : cjtAlfabets.keySet()) {
-                String alfabetKey = (String) key;
-                JSONObject jsonAlfabet = (JSONObject) cjtAlfabets.get(alfabetKey);
-                String nomAlfabet = (String) jsonAlfabet.get("nom");
-                Set<Character> lletres = new HashSet<>((JSONArray) jsonAlfabet.get("lletres"));
-                Alfabet a = new Alfabet(nomAlfabet, lletres);
-                Alfabets.put(nomAlfabet.toLowerCase(), a);
-            }
-
-        } catch (IOException e) {
-        } catch (ParseException e) {
-        }
-    }
-
-     */
 
     public void carregar() {
         System.out.println("Carregant Alfabets");
