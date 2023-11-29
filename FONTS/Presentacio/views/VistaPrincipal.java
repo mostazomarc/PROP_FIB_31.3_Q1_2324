@@ -1,11 +1,10 @@
-package Presentacio;
+package Presentacio.views;
+
+import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
-
-import java.util.ArrayList;
 
 public class VistaPrincipal {
     private ControladorPresentacio iCtrlPresentacion;

@@ -1,10 +1,10 @@
 package Presentacio;
-import java.io.FileNotFoundException;
 
 import java.util.*;
 
 import ControladorsDomini.CtrlDomini;
 import Excepcions.ExcepcionsCreadorTeclat;
+import Presentacio.views.VistaPrincipal;
 
 public class ControladorPresentacio {
     private VistaTerminal vt;
