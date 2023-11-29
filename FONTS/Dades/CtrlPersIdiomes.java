@@ -38,7 +38,7 @@ public class CtrlPersIdiomes {
 
     //Pre:
     //Post: S'afegeix l'Idioma identificat per nomIdioma
-    public void afegirIdioma(String nomIdioma, Alfabet a, String filename, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
+    public void afegirIdioma(String nomIdioma, Alfabet a, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
         if (existeix(nomIdioma)) throw new IdiomaJaExisteix(nomIdioma);
         Idioma nouIdioma = new Idioma(nomIdioma, a, novesEntrades);
         Idiomes.put(nomIdioma, nouIdioma);

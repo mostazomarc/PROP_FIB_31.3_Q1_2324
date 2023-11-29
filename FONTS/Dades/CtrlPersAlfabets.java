@@ -86,6 +86,27 @@ public class CtrlPersAlfabets {
 
      */
 
+    public void carregar() {
+        System.out.println("Carregant Alfabets");
+        try (FileReader fileReader = new FileReader("./DATA/Saves/AlfabetsSistema.json")) {
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) parser.parse(fileReader);
+
+            for (Map.Entry<String, Object> entry : (Set<Map.Entry<String, Object>>) jsonObject.entrySet()) {
+                String key = entry.getKey();
+                JSONObject jsonAlfabet = (JSONObject) entry.getValue();
+
+                String nomAlfabet = (String) jsonAlfabet.get("nom");
+                JSONArray lletresArray = (JSONArray) jsonAlfabet.get("lletres");
+                Set<Character> lletres = new HashSet<>();
+                for (int i = 0; i < lletresArray.size(); ++i) lletres.add(((String) lletresArray.get(i)).charAt(0));
+                Alfabet a = new Alfabet(nomAlfabet, lletres);
+                Alfabets.put(nomAlfabet.toLowerCase(), a);
+            }
+        } catch (IOException |ParseException e) {
+        }
+    }
+
     //Pre:
     //Post: S'afegeix l'Alfabet identificat per filename.length() - 4
     public void afegirAlfabet(String filename, List<String> LlistaLlegida) throws ExcepcionsCreadorTeclat {
@@ -119,7 +140,7 @@ public class CtrlPersAlfabets {
     //Pre:
     //Post: S'elimina l'alfabet identificat per nomAlfabet
     public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
-        Alfabet a = getAlfabet(nomAlfabet);
+        Alfabet a = getAlfabet(nomAlfabet.toLowerCase());
         if (a.numIdiomes() != 0) throw new AlfabetEnUs(nomAlfabet);
         Alfabets.remove(nomAlfabet.toLowerCase());
     }
@@ -132,7 +153,7 @@ public class CtrlPersAlfabets {
 
     //Post: Retorna l'Alfabet identificat per nomAlfabet
     public Alfabet getAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
-        if (!existeix(nomAlfabet)) throw new AlfabetNoExisteix();
+        if (!existeix(nomAlfabet.toLowerCase())) throw new AlfabetNoExisteix();
         return Alfabets.get(nomAlfabet.toLowerCase());
     }
 

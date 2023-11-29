@@ -50,7 +50,7 @@ public class CtrlDomini {
     //Pre:
     //Post: Es carreguen les dades guardades del perfil a memòria
     public void carregarDadesSistema() throws Exception{
-        alfabets.carregarAlfabets();
+        alfabets.carregar();
         idiomes.carregarIdiomes();
     }
 
@@ -251,7 +251,7 @@ public class CtrlDomini {
     public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws Exception {
         Alfabet alfabetIdioma = alfabets.getAlfabet(nomAlfabet);
         Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filename);
-        idiomes.afegirIdioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
+        idiomes.afegirIdioma(nomIdioma, alfabetIdioma, novesEntrades);
         Idioma i = idiomes.getIdioma(nomIdioma);
         LlistaFrequencies ll = i.getLlistaFreq();
         llistes.guardarLlistaFreq(ll);
