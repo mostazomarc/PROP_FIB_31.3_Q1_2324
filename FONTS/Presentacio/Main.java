@@ -3,8 +3,29 @@ import java.io.FileNotFoundException;
 
 import Presentacio.ControladorPresentacio;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.*;
+
 public class Main{
     public static void main(String[] args) throws Exception {
-        ControladorPresentacio c = new ControladorPresentacio();
+        javax.swing.SwingUtilities.invokeLater (
+                new Runnable() {
+                    public void run() {
+                        ControladorPresentacio c = null;
+                        try {
+                            c = new ControladorPresentacio();
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                        try {
+                            c.iniciaInstancia("Agus"); //comentar amb marc
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+        );
     }
 }

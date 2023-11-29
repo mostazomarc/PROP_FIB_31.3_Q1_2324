@@ -8,20 +8,21 @@ import Excepcions.ExcepcionsCreadorTeclat;
 
 public class ControladorPresentacio {
     private VistaTerminal vt;
+    private VistaPrincipal vistaPrincipal;
     private CtrlDomini controladorDomini;
 
     //Pre:
     //Post: S'obtenen els controladors de factoria, Domini i es crea i inicialitza una vista de terminal
     public ControladorPresentacio() throws Exception {
         controladorDomini = controladorDomini.getInstance();
-        vt = new VistaTerminal(this);
-        vt.inicialitzaTerminal();
+        vistaPrincipal = new VistaPrincipal(this);
     }
 
     //Pre:
     //Post: S'inicia una instancia amb el perfil x
     public void iniciaInstancia(String nomPerfil) throws Exception{
         controladorDomini.iniciaInstancia(nomPerfil);
+        vistaPrincipal.hacerVisible();
     }
 
     //NORMAL
