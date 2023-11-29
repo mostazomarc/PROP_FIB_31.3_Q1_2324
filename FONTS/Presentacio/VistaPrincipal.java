@@ -11,21 +11,18 @@ public class VistaPrincipal {
     private ControladorPresentacio iCtrlPresentacion;
     private JFrame frameVista = new JFrame("Vista Principal");
     private JPanel panelContenidos = new JPanel();
+
+    private CardLayout cardLayout = new CardLayout();
+
+
     private JButton Info = new JButton("Informació de les funcions");
     private JButton GT = new JButton("Gestionar Teclats");
     private JButton CT = new JButton("Consultar Teclats");
     private JButton GD = new JButton("Gestionar Dades");
     private JButton CD = new JButton("Consultar Dades");
-
-    private JLabel labelPanelInformacion1 = new JLabel("Panel Informacion 1");
-    private JComboBox comboboxInformacion1 = new JComboBox();
-    private JTextArea textareaInformacion1 = new JTextArea(15,25);
-    private JTextField textfieldInformacion2 = new JTextField();
-    private JSlider sliderInformacion2 = new JSlider();
     private JMenuBar menubarVista = new JMenuBar();
     private JMenu menuFile = new JMenu("File");
     private JMenuItem menuitemQuit = new JMenuItem("Quit");
-
     private final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public VistaPrincipal (ControladorPresentacio pCtrlPresentacion) {
@@ -36,6 +33,12 @@ public class VistaPrincipal {
     private void inicializarComponentes() {
         initializeFrame();
         initializeMenuBar();
+
+        //inicialitzar la resta
+
+
+        //assignar listeneres a cada component
+        assign_listenerComponents();
     }
 
     private void initializeFrame() {
@@ -87,6 +90,47 @@ public class VistaPrincipal {
     }
 
 
+    /**
+     * Assigna els listeners als components corresponents.
+     */
+    private void assign_listenerComponents() {
+
+        // Listener pel Frame
+        frameVista.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                frameVista.pack();
+                frameVista.revalidate();
+            }
+        });
+
+
+        GT.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+    }
+
+    public void actionPerformed_buttons (ActionEvent e) throws Exception {
+        Object source = e.getSource();
+        if (GT.equals(source)) {
+            GestionarTeclatsVista gestionarTeclatsVista = new GestionarTeclatsVista();
+            JFrame frameGestionarTeclats = gestionarTeclatsVista.getFrame();
+            frameGestionarTeclats.setVisible(true);
+            frameVista.setVisible(false);
+        }
+    }
+
+    private void mostrarVistaGestionarTeclats() {
+        cardLayout.show(panelContenidos, "GestionarTeclats");
+    }
+
+    private void showExceptions(String msg) {
+        JOptionPane.showMessageDialog(frameVista, msg);
+    }
 
 
     public void hacerVisible() {
