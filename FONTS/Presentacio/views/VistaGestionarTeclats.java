@@ -29,8 +29,6 @@ public class VistaGestionarTeclats extends JFrame {
         iniButtons();
         add(panelContenidos, BorderLayout.CENTER);
 
-
-
         //assignar listeneres a cada component
         assign_listenerComponents();
     }
