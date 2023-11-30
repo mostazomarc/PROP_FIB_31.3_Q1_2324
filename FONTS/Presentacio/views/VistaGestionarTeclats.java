@@ -58,7 +58,6 @@ public class VistaGestionarTeclats extends JFrame {
         constraints.anchor = GridBagConstraints.CENTER; // Center the component within the cell
         constraints.insets = new Insets(10, 10, 10, 10); // Set spacing between buttons
 
-
         // Add the buttons to the grid layout
 
         constraints.gridx = 0;
@@ -92,12 +91,27 @@ public class VistaGestionarTeclats extends JFrame {
                 ex.printStackTrace();
             }
         });
+
+        CLP.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    actionPerformed_buttons(e);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
             ControladorPresentacio.iniPresentacio();
+            setVisible(false);
+        }
+        else if (CLP.equals(source)) {
+            ControladorPresentacio.vistaCrearTeclatLlistaPropia();
             setVisible(false);
         }
     }

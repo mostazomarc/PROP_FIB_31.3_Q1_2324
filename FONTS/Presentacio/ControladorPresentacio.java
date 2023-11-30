@@ -28,23 +28,27 @@ public class ControladorPresentacio {
         VistaPrincipal vp = new VistaPrincipal();
     }
 
-    public static void vistaInfoFuncions() throws Exception {
+    public static void vistaInfoFuncions()  {
         VistaInfoFuncions vgt = new VistaInfoFuncions();
     }
 
-    public static void vistaGestionarTeclats() throws Exception {
+    public static void vistaGestionarTeclats()  {
         VistaGestionarTeclats vgt = new VistaGestionarTeclats();
     }
 
-    public static void vistaConsultarTeclats() throws Exception {
+    public static void vistaCrearTeclatLlistaPropia() {
+        VistaCrearTeclatLlistaPropia vclp = new VistaCrearTeclatLlistaPropia();
+    }
+
+    public static void vistaConsultarTeclats()  {
         VistaConsultarTeclats vgt = new VistaConsultarTeclats();
     }
 
-    public static void vistaGestionarDades() throws Exception {
+    public static void vistaGestionarDades() {
         VistaGestionarDades vgt = new VistaGestionarDades();
     }
 
-    public static void vistaConsultarDades() throws Exception {
+    public static void vistaConsultarDades() {
         VistaConsultarDades vgt = new VistaConsultarDades();
     }
 
