@@ -258,9 +258,6 @@ public class CtrlDomini {
         Alfabet alfabetIdioma = alfabets.getAlfabet(nomAlfabet);
         Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filename);
         idiomes.afegirIdioma(nomIdioma, alfabetIdioma, novesEntrades);
-        Idioma i = idiomes.getIdioma(nomIdioma);
-        LlistaFrequencies ll = i.getLlistaFreq();
-        llistes.guardarLlistaFreq(ll);
     }
 
     public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
@@ -268,7 +265,6 @@ public class CtrlDomini {
         llistes.comprovarUsIdioma(nomIdioma);
         teclats.comprovarUsIdioma(nomIdioma);
         idiomes.eliminarIdioma(nomIdioma);
-        llistes.eliminarLlista("LlistaPred"+nomIdioma);
     }
 
     public Vector<String> consultaIdiomes() {

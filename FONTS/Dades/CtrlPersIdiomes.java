@@ -110,10 +110,9 @@ public class CtrlPersIdiomes {
 
             for (Map.Entry<String, Object> entry : (Set<Map.Entry<String, Object>>) jsonObject.entrySet()) {
                 JSONObject jsonIdioma = (JSONObject) entry.getValue();
+
                 String nomIdioma = (String) jsonIdioma.get("nom");
                 String nomAlfabet = (String) jsonIdioma.get("nomAlfabet");
-                System.out.println(nomIdioma);
-                System.out.println(nomAlfabet);
                 Alfabet a = controlador.getAlfabet(nomAlfabet);
                 a.afegirIdioma(nomIdioma);
                 JSONArray paraules = (JSONArray) jsonIdioma.get("llistaParaules");
@@ -124,6 +123,7 @@ public class CtrlPersIdiomes {
                     Long freq = (Long) jsonParaula.get("freq");
                     llistaParaules.put(paraulaString, freq.intValue());
                 }
+
                 Idioma idioma = new Idioma(nomIdioma, a, llistaParaules);
                 Idiomes.put(nomIdioma, idioma);
             }
