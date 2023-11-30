@@ -5,10 +5,28 @@ import Presentacio.ControladorPresentacio;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 public class VistaCrearTeclatLlistaPropia extends JFrame {
+
+    private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
+
+    private JLabel labelNomTeclat = new JLabel("Nom del teclat");
+    private JTextField inputNomTeclat = new JTextField(20);
+
+    private JLabel labelNomIdioma = new JLabel("Nom de l'idioma");
+    private JTextField inputNomIdioma = new JTextField(20);
+
+    private JLabel labelNomLl = new JLabel("Nom de la llista de freqüències");
+    private JTextField inputNomLl = new JTextField(20);
+
+    private JLabel labelNF = new JLabel("Nombre de files del layout");
+    private JTextField inputNF = new JTextField(20);
+
+    private JLabel labelNC = new JLabel("Nombre de columnes del layout");
+    private JTextField inputNC = new JTextField(20);
     private JButton Enrere = new JButton("Tornar enrere");
     private JPanel panelContenidos = new JPanel();
 
@@ -19,7 +37,9 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
 
     private void iniComponents() {
         iniFrame();
+        panelContenidos.setLayout(new FlowLayout());
         iniEnrere();
+        iniInputs();
         add(panelContenidos, BorderLayout.CENTER);
 
 
@@ -37,12 +57,45 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
 
     private void iniEnrere() {
 
-        panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
-        panelContenidos.add(Box.createVerticalGlue());
-        panelContenidos.add(Box.createHorizontalGlue());
-
+        panelContenidos.add(Enrere);
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
+
+    }
+
+    private void iniInputs() {
+        panelContenidos.setLayout(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL; // Fill the cell horizontally
+        constraints.anchor = GridBagConstraints.CENTER; // Center the component within the cell
+        constraints.insets = new Insets(10, 10, 5, 10); // Set spacing between buttons
+
+        // Add the buttons to the grid layout
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        panelContenidos.add(labelIntro, constraints);
+        constraints.gridy = 2;
+        panelContenidos.add(labelNomTeclat, constraints);
+        constraints.gridy = 3;
+        panelContenidos.add(inputNomTeclat, constraints);
+        constraints.gridy = 4;
+        panelContenidos.add(labelNomIdioma, constraints);
+        constraints.gridy = 5;
+        panelContenidos.add(inputNomIdioma, constraints);
+        constraints.gridy = 6;
+        panelContenidos.add(labelNomLl, constraints);
+        constraints.gridy = 7;
+        panelContenidos.add(inputNomLl, constraints);
+        constraints.gridy = 8;
+        panelContenidos.add(labelNF, constraints);
+        constraints.gridy = 9;
+        panelContenidos.add(inputNF, constraints);
+        constraints.gridy = 10;
+        panelContenidos.add(labelNC, constraints);
+        constraints.gridy = 11;
+        panelContenidos.add(inputNC, constraints);
 
     }
 
