@@ -32,7 +32,7 @@ public class VistaPrincipal extends JFrame{
 
     private void iniFrame() {
         setBounds(500,300,1000,600);
-        setResizable(true);
+        setResizable(false);
     }
 
     private void iniButtons() {

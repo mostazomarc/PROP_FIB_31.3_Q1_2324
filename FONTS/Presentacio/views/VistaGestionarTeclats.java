@@ -21,7 +21,7 @@ public class VistaGestionarTeclats extends JFrame {
 
     private void iniComponents() {
         iniFrame();
-        iniButtons();
+        iniEnrere();
 
         //inicialitzar la resta
 
@@ -32,10 +32,10 @@ public class VistaGestionarTeclats extends JFrame {
 
     private void iniFrame() {
         setBounds(500,300,1000,600);
-        setResizable(true);
+        setResizable(false);
     }
 
-    private void iniButtons() {
+    private void iniEnrere() {
 
         panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
         panelContenidos.add(Box.createVerticalGlue());
