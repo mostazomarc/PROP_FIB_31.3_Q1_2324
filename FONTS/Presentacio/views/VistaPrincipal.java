@@ -14,6 +14,10 @@ public class VistaPrincipal extends JFrame{
     private JButton GD = new JButton("Gestionar Dades");
     private JButton CD = new JButton("Consultar Dades");
 
+    private JButton Sortir = new JButton("Sortir");
+
+    private final JMenuBar menuBar = new JMenuBar();
+
     public VistaPrincipal () {
         setVisible(true);
         iniComponents();
@@ -22,7 +26,7 @@ public class VistaPrincipal extends JFrame{
     private void iniComponents() {
         iniFrame();
         iniButtons();
-
+        add(panelContenidos, BorderLayout.CENTER);
         //inicialitzar la resta
 
 
@@ -36,36 +40,28 @@ public class VistaPrincipal extends JFrame{
     }
 
     private void iniButtons() {
-        Info.setMaximumSize(new Dimension(200, Info.getPreferredSize().height));
-        GT.setMaximumSize(new Dimension(200, GT.getPreferredSize().height));
-        CT.setMaximumSize(new Dimension(200, CT.getPreferredSize().height));
-        GD.setMaximumSize(new Dimension(200, GD.getPreferredSize().height));
-        CD.setMaximumSize(new Dimension(200, CD.getPreferredSize().height));
+        panelContenidos.setLayout(new GridBagLayout());
 
-        Info.setAlignmentX(Component.CENTER_ALIGNMENT);
-        GT.setAlignmentX(Component.CENTER_ALIGNMENT);
-        CT.setAlignmentX(Component.CENTER_ALIGNMENT);
-        GD.setAlignmentX(Component.CENTER_ALIGNMENT);
-        CD.setAlignmentX(Component.CENTER_ALIGNMENT);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(10, 10, 10, 10);
 
-        panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
-        panelContenidos.add(Box.createVerticalGlue());
-        panelContenidos.add(Box.createHorizontalGlue());
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        panelContenidos.add(Info, constraints);
 
-        panelContenidos.add(Box.createRigidArea(new Dimension(0, 10))); // Margen superior
-        panelContenidos.add(Info);
-        panelContenidos.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio entre botones
-        panelContenidos.add(GT);
-        panelContenidos.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio entre botones
-        panelContenidos.add(CT);
-        panelContenidos.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio entre botones
-        panelContenidos.add(GD);
-        panelContenidos.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio entre botones
-        panelContenidos.add(CD);
-        panelContenidos.add(Box.createRigidArea(new Dimension(0, 10))); // Margen inferior
+        constraints.gridy = 2;
+        panelContenidos.add(GT, constraints);
 
-        panelContenidos.add(Box.createVerticalGlue());
-        add(panelContenidos, BorderLayout.CENTER);
+        constraints.gridy = 3;
+        panelContenidos.add(CT, constraints);
+
+        constraints.gridy = 4;
+        panelContenidos.add(GD, constraints);
+
+        constraints.gridy = 5;
+        panelContenidos.add(CD, constraints);
     }
 
     /**

@@ -12,6 +12,10 @@ import java.awt.event.ComponentEvent;
 public class VistaGestionarTeclats extends JFrame {
 
     private JButton Enrere = new JButton("Tornar al menú principal");
+    private JButton CLP = new JButton("Crear teclat amb llista pròpia");
+    private JButton CLNP = new JButton("Crear teclat sense llista pròpia");
+    private JButton ML = new JButton("Modificar Layout teclat");
+    private JButton E = new JButton("Eliminar teclat");
     private JPanel panelContenidos = new JPanel();
 
     public VistaGestionarTeclats () {
@@ -22,8 +26,9 @@ public class VistaGestionarTeclats extends JFrame {
     private void iniComponents() {
         iniFrame();
         iniEnrere();
+        iniButtons();
+        add(panelContenidos, BorderLayout.CENTER);
 
-        //inicialitzar la resta
 
 
         //assignar listeneres a cada component
@@ -44,9 +49,33 @@ public class VistaGestionarTeclats extends JFrame {
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
 
-        add(panelContenidos, BorderLayout.CENTER);
+        //add(panelContenidos, BorderLayout.CENTER);
     }
 
+    private void iniButtons() {
+        panelContenidos.setLayout(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL; // Fill the cell horizontally
+        constraints.anchor = GridBagConstraints.CENTER; // Center the component within the cell
+        constraints.insets = new Insets(10, 10, 10, 10); // Set spacing between buttons
+
+
+        // Add the buttons to the grid layout
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        panelContenidos.add(CLP, constraints);
+
+        constraints.gridy = 2;
+        panelContenidos.add(CLNP, constraints);
+
+        constraints.gridy = 3;
+        panelContenidos.add(ML, constraints);
+
+        constraints.gridy = 4;
+        panelContenidos.add(E, constraints);
+    }
     /**
      * Assigna els listeners als components corresponents.
      */
