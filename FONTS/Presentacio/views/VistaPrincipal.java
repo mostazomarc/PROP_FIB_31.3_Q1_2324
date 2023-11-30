@@ -6,28 +6,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class VistaPrincipal {
-    private ControladorPresentacio iCtrlPresentacion;
-    private JFrame frameVista = new JFrame("Vista Principal");
+public class VistaPrincipal extends JFrame{
     private JPanel panelContenidos = new JPanel();
     private JButton Info = new JButton("Informació de les funcions");
     private JButton GT = new JButton("Gestionar Teclats");
     private JButton CT = new JButton("Consultar Teclats");
     private JButton GD = new JButton("Gestionar Dades");
     private JButton CD = new JButton("Consultar Dades");
-    private JMenuBar menubarVista = new JMenuBar();
-    private JMenu menuFile = new JMenu("File");
-    private JMenuItem menuitemQuit = new JMenuItem("Quit");
-    private final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public VistaPrincipal (ControladorPresentacio pCtrlPresentacion) {
-        iCtrlPresentacion = pCtrlPresentacion;
-        inicializarComponentes();
+    public VistaPrincipal () {
+        setVisible(true);
+        iniComponents();
     }
 
-    private void inicializarComponentes() {
-        initializeFrame();
-        initializeMenuBar();
+    private void iniComponents() {
+        iniFrame();
+        iniButtons();
 
         //inicialitzar la resta
 
@@ -36,20 +30,12 @@ public class VistaPrincipal {
         assign_listenerComponents();
     }
 
-    private void initializeFrame() {
-
-        frameVista.setPreferredSize(new Dimension(screenSize.width, screenSize.height));
-        frameVista.setResizable(false);
-        frameVista.setLayout(new BorderLayout());
-        frameVista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frameVista.pack();
+    private void iniFrame() {
+        setBounds(500,300,1000,600);
+        setResizable(true);
     }
 
-    private void initializeMenuBar() {
-        menuFile.add(menuitemQuit); // Añadir el JMenuItem al JMenu
-        menubarVista.add(menuFile); // Añadir el JMenu a la JMenuBar
-        frameVista.setJMenuBar(menubarVista); // Añadir la JMenuBar al JFrame
-
+    private void iniButtons() {
         Info.setMaximumSize(new Dimension(200, Info.getPreferredSize().height));
         GT.setMaximumSize(new Dimension(200, GT.getPreferredSize().height));
         CT.setMaximumSize(new Dimension(200, CT.getPreferredSize().height));
@@ -62,7 +48,6 @@ public class VistaPrincipal {
         GD.setAlignmentX(Component.CENTER_ALIGNMENT);
         CD.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Configurar el panel para alinear los botones verticalmente
         panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
         panelContenidos.add(Box.createVerticalGlue());
         panelContenidos.add(Box.createHorizontalGlue());
@@ -80,24 +65,20 @@ public class VistaPrincipal {
         panelContenidos.add(Box.createRigidArea(new Dimension(0, 10))); // Margen inferior
 
         panelContenidos.add(Box.createVerticalGlue());
-        frameVista.add(panelContenidos, BorderLayout.CENTER);
-
+        add(panelContenidos, BorderLayout.CENTER);
     }
 
     /**
      * Assigna els listeners als components corresponents.
      */
     private void assign_listenerComponents() {
-
-        // Listener pel Frame
-        frameVista.addComponentListener(new ComponentAdapter() {
+        addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                frameVista.pack();
-                frameVista.revalidate();
+                //pack();
+                revalidate();
             }
         });
-
         GT.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
@@ -110,15 +91,8 @@ public class VistaPrincipal {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (GT.equals(source)) {
-            GestionarTeclatsVista gestionarTeclatsVista = new GestionarTeclatsVista();
-            JFrame frameGestionarTeclats = gestionarTeclatsVista.getFrame();
-            frameGestionarTeclats.setVisible(true);
-            frameVista.setVisible(false);
+            ControladorPresentacio.vistaGestionarTeclats();
+            setVisible(false);
         }
-    }
-
-    public void setVisible() {
-        frameVista.pack();
-        frameVista.setVisible(true);
     }
 }

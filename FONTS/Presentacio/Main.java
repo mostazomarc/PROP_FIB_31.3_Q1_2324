@@ -17,11 +17,14 @@ public class Main{
                         try {
                             c = new ControladorPresentacio();
                         } catch (Exception e) {
+                            e.printStackTrace();
+
                             throw new RuntimeException(e);
                         }
                         try {
                             c.iniciaInstancia("Agus"); //comentar amb marc
                         } catch (Exception e) {
+                            e.printStackTrace();
                             throw new RuntimeException(e);
                         }
                     }

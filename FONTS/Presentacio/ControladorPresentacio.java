@@ -4,7 +4,7 @@ import java.util.*;
 
 import ControladorsDomini.CtrlDomini;
 import Excepcions.ExcepcionsCreadorTeclat;
-import Presentacio.views.VistaPrincipal;
+import Presentacio.views.*;
 
 public class ControladorPresentacio {
     private VistaTerminal vt;
@@ -13,17 +13,25 @@ public class ControladorPresentacio {
 
     //Pre:
     //Post: S'obtenen els controladors de factoria, Domini i es crea i inicialitza una vista de terminal
-    public ControladorPresentacio() throws Exception {
+    public ControladorPresentacio() {
         controladorDomini = controladorDomini.getInstance();
-        vistaPrincipal = new VistaPrincipal(this);
     }
 
     //Pre:
-    //Post: S'inicia una instancia amb el perfil x
-    public void iniciaInstancia(String nomPerfil) throws Exception{
+    //Post: S'inicia la presentació amb el perfil corresponent
+    public void iniciaInstancia(String nomPerfil) throws ExcepcionsCreadorTeclat {
         controladorDomini.iniciaInstancia(nomPerfil);
-        vistaPrincipal.setVisible();
+        VistaPrincipal vp = new VistaPrincipal();
     }
+
+    public static void iniPresentacio() {
+        VistaPrincipal vp = new VistaPrincipal();
+    }
+
+    public static void vistaGestionarTeclats() throws Exception {
+        VistaGestionarTeclats vgt = new VistaGestionarTeclats();
+    }
+
 
     //NORMAL
     public void carregarDades()throws Exception{
