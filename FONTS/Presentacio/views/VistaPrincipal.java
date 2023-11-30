@@ -79,7 +79,35 @@ public class VistaPrincipal extends JFrame{
                 revalidate();
             }
         });
+        Info.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         GT.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        CT.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        GD.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        CD.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
             } catch (Exception ex) {
@@ -90,8 +118,24 @@ public class VistaPrincipal extends JFrame{
 
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
-        if (GT.equals(source)) {
+        if (Info.equals(source)) {
+            ControladorPresentacio.vistaInfoFuncions();
+            setVisible(false);
+        }
+        else if (GT.equals(source)) {
             ControladorPresentacio.vistaGestionarTeclats();
+            setVisible(false);
+        }
+        else if (CT.equals(source)) {
+            ControladorPresentacio.vistaConsultarTeclats();
+            setVisible(false);
+        }
+        else if (GD.equals(source)) {
+            ControladorPresentacio.vistaGestionarDades();
+            setVisible(false);
+        }
+        else if (CD.equals(source)) {
+            ControladorPresentacio.vistaConsultarDades();
             setVisible(false);
         }
     }

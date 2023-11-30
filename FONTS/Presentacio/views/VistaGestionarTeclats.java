@@ -41,8 +41,6 @@ public class VistaGestionarTeclats extends JFrame {
         panelContenidos.add(Box.createVerticalGlue());
         panelContenidos.add(Box.createHorizontalGlue());
 
-
-
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
 
@@ -76,5 +74,4 @@ public class VistaGestionarTeclats extends JFrame {
             setVisible(false);
         }
     }
-
 }
