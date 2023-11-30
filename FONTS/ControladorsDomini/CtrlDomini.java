@@ -52,7 +52,7 @@ public class CtrlDomini {
     //Post: Es carreguen les dades guardades del perfil a memòria
     public void carregarDadesSistema() throws Exception{
         alfabets.carregar();
-        idiomes.carregarIdiomes();
+        idiomes.carregar();
     }
 
     //Pre:

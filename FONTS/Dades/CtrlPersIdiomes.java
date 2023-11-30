@@ -17,6 +17,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -64,11 +65,6 @@ public class CtrlPersIdiomes {
         controlador = c;
     }
 
-    public void carregarIdiomes() throws Exception {
-        controlador.afegirIdioma("Català","alfabetCatala","llista","catalaFreq.txt");
-        controlador.afegirIdioma("Español","alfabetEspañol","llista","españolFreq.txt");
-    }
-
     /**
      * Guarda els idiomes del sistema
      */
@@ -102,18 +98,24 @@ public class CtrlPersIdiomes {
         }
     }
 
-    /*
+    /**
+     * Carrega els idiomes del sistema
+     */
     public void carregar() throws Exception {
         System.out.println("Carregant Idiomes");
-        JSONParser jsonParser = new JSONParser();
-        JSONArray CjtIdiomes = new JSONArray();
-        try (FileReader fileReader = new FileReader("./DATA/Saves/LlistesUsuarisActius.json")) {
-            CjtIdiomes = (JSONArray) jsonParser.parse(fileReader);
-            for (int i = 0; i < CjtIdiomes.size(); ++i) {
-                JSONObject jsonIdioma = (JSONObject) CjtIdiomes.get(i);
+
+        try (FileReader fileReader = new FileReader("./DATA/Saves/IdiomesSistema.json")) {
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) parser.parse(fileReader);
+
+            for (Map.Entry<String, Object> entry : (Set<Map.Entry<String, Object>>) jsonObject.entrySet()) {
+                JSONObject jsonIdioma = (JSONObject) entry.getValue();
                 String nomIdioma = (String) jsonIdioma.get("nom");
                 String nomAlfabet = (String) jsonIdioma.get("nomAlfabet");
+                System.out.println(nomIdioma);
+                System.out.println(nomAlfabet);
                 Alfabet a = controlador.getAlfabet(nomAlfabet);
+                a.afegirIdioma(nomIdioma);
                 JSONArray paraules = (JSONArray) jsonIdioma.get("llistaParaules");
                 Map<String, Integer> llistaParaules = new HashMap<>();
                 for (int k = 0; k < paraules.size(); ++k) {
@@ -122,16 +124,13 @@ public class CtrlPersIdiomes {
                     Long freq = (Long) jsonParaula.get("freq");
                     llistaParaules.put(paraulaString, freq.intValue());
                 }
-                controlador.novaLlista()
-
-
+                Idioma idioma = new Idioma(nomIdioma, a, llistaParaules);
+                Idiomes.put(nomIdioma, idioma);
             }
         } catch (IOException e) {
         } catch (ParseException e) {
         }
     }
-
-     */
 
     /**
      * Afegeix un idioma
