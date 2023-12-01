@@ -7,17 +7,46 @@ import Excepcions.AlfabetNoExisteix;
 import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.IdiomaJaExisteix;
 import Excepcions.IdiomaNoExisteix;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
+/**
+ * CtrlPersIdiomes és una classe que permet guardar i carregar idiomes
+ * <p> Aquesta classe segueix el patró singleton</p>
+ * <p> Aquesta classe és necessària per a la persistència d'idiomes</p>
+ * @author Arnau Tajahuerce Brulles (arnau.tajahuerce@estudiantat.upc.edu)
+ */
 public class CtrlPersIdiomes {
+    /**
+     * Instància de CtrlPersIdiomes
+     */
     private static CtrlPersIdiomes singletonObject;
+
+    /**
+     * Mapa dels idiomes del sistema
+     */
     private TreeMap<String, Idioma> Idiomes;
+
+    /**
+     * Instància de CtrlDomini
+     */
     private CtrlDomini controlador;
 
-    //Pre:
-    //Post: Retorna la instancia de CtrlPersAlfabets, si no existeix cap CtrlPersAlfabets es crea.
+    /**
+     * Retorna la instància de CtrlPersIdiomes, si no existeix cap CtrlPersIdiomes es crea.
+     * @param c El controlador de domini
+     * @return La instància de CtrlPersIdiomes
+     */
     public static CtrlPersIdiomes getInstance(CtrlDomini c) {
         if(singletonObject == null)
             singletonObject = new CtrlPersIdiomes(c){
@@ -26,52 +55,135 @@ public class CtrlPersIdiomes {
         return singletonObject;
     }
 
+    /**
+     * Creadora de CtrlPersIdiomes
+     * <p> Crea un conjunt d'idiomes i guarda el controlador</p>
+     * @param c El controlador de domini
+     */
     private CtrlPersIdiomes(CtrlDomini c) {
         Idiomes = new TreeMap<String, Idioma>();
         controlador = c;
     }
 
-    public void carregarIdiomes() throws Exception {
-        controlador.afegirIdioma("Català","alfabetCatala","llista","catalaFreq.txt");
-        controlador.afegirIdioma("Español","alfabetEspañol","llista","españolFreq.txt");
+    /**
+     * Guarda els idiomes del sistema
+     */
+    public void guardar() {
+        System.out.println("Guardant Idiomes");
+        JSONObject CjtIdiomes = new JSONObject();
+
+        for (Map.Entry<String, Idioma> entry : Idiomes.entrySet()) {
+            Idioma i = entry.getValue();
+            JSONObject jsonIdioma = new JSONObject();
+            jsonIdioma.put("nom", i.getNom());
+            jsonIdioma.put("nomAlfabet", i.getAlfabet().getNomAlfabet());
+
+            Map<String, Integer> llistaParaules = i.getFrequencies();
+
+            JSONArray paraules = new JSONArray();
+            for (Map.Entry<String, Integer> paraula : llistaParaules.entrySet()) {
+                JSONObject jsonParaula = new JSONObject();
+                jsonParaula.put("paraula", paraula.getKey());
+                jsonParaula.put("freq", paraula.getValue());
+                paraules.add(jsonParaula);
+            }
+
+            jsonIdioma.put("llistaParaules", paraules);
+            CjtIdiomes.put(entry.getKey(), jsonIdioma);
+        }
+        try (FileWriter fileWriter = new FileWriter("./DATA/Saves/IdiomesSistema.json")) {
+            fileWriter.write(CjtIdiomes.toJSONString());
+            fileWriter.flush();
+        } catch (IOException e) {
+        }
     }
 
-    //Pre:
-    //Post: S'afegeix l'Idioma identificat per nomIdioma
-    public void afegirIdioma(String nomIdioma, Alfabet a, String filename, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
+    /**
+     * Carrega els idiomes del sistema
+     */
+    public void carregar() throws Exception {
+        System.out.println("Carregant Idiomes");
+
+        try (FileReader fileReader = new FileReader("./DATA/Saves/IdiomesSistema.json")) {
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) parser.parse(fileReader);
+
+            for (Map.Entry<String, Object> entry : (Set<Map.Entry<String, Object>>) jsonObject.entrySet()) {
+                JSONObject jsonIdioma = (JSONObject) entry.getValue();
+
+                String nomIdioma = (String) jsonIdioma.get("nom");
+                String nomAlfabet = (String) jsonIdioma.get("nomAlfabet");
+                Alfabet a = controlador.getAlfabet(nomAlfabet);
+                a.afegirIdioma(nomIdioma);
+                JSONArray paraules = (JSONArray) jsonIdioma.get("llistaParaules");
+                Map<String, Integer> llistaParaules = new HashMap<>();
+                for (int k = 0; k < paraules.size(); ++k) {
+                    JSONObject jsonParaula = (JSONObject) paraules.get(k);
+                    String paraulaString = (String) jsonParaula.get("paraula");
+                    Long freq = (Long) jsonParaula.get("freq");
+                    llistaParaules.put(paraulaString, freq.intValue());
+                }
+
+                Idioma idioma = new Idioma(nomIdioma, a, llistaParaules);
+                Idiomes.put(nomIdioma, idioma);
+            }
+        } catch (IOException e) {
+        } catch (ParseException e) {
+        }
+    }
+
+    /**
+     * Afegeix un idioma
+     * @param nomIdioma El nom de l'idioma a afegir
+     * @param a L'alfabet de l'idioma a afegir
+     * @param novesEntrades Llista de freqüències predeterminada de l'idioma a afegir
+     * @throws ExcepcionsCreadorTeclat Si l'idioma ja existeix o hi ha algun problema a l'hora de crear la llista de freqüències
+     */
+    public void afegirIdioma(String nomIdioma, Alfabet a, Map<String, Integer> novesEntrades) throws ExcepcionsCreadorTeclat {
         if (existeix(nomIdioma)) throw new IdiomaJaExisteix(nomIdioma);
         Idioma nouIdioma = new Idioma(nomIdioma, a, novesEntrades);
         Idiomes.put(nomIdioma, nouIdioma);
     }
 
-    //Pre:
-    //Post: S'elimina l'Idioma identificat per nomIdioma
-    public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
+    /**
+     * Elimina un idioma identificat per nomIdioma
+     * @param nomIdioma El nom de l'idioma a eliminar
+     * @throws IdiomaNoExisteix Si l'idioma no existeix
+     */
+    public void eliminarIdioma(String nomIdioma) throws IdiomaNoExisteix {
         Idioma i = getIdioma(nomIdioma);
         Alfabet a = i.getAlfabet();
         a.treureIdioma(nomIdioma);
         Idiomes.remove(nomIdioma);
     }
 
-    //Pre:
-    //Post: Retorna TRUE si existeix un Idioma amb nomIdioma, FALSE en cas contrari
+    /**
+     * Obté si l'idioma identificat per nomIdioma existeix
+     * <p> Retorna TRUE si l'idioma identificat per nomIdioma existeix en el sistema, FALSE en cas contrari</p>
+     * @param nomIdioma El nom de l'idioma del qual es vol saber la seva existència
+     * @return TRUE si l'idioma existeix, FALSE en cas contrari
+     */
     public boolean existeix(String nomIdioma) {
         if (Idiomes.containsKey(nomIdioma)) return true;
         return false;
     }
 
-    //Pre:
-    //Post: Retorna l'Idioma identificat per nomIdioma
-    public Idioma getIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
+    /**
+     * Obté l'idioma identificat per nomIdioma
+     * @param nomIdioma El nom de l'idioma
+     * @return L'idioma identificat per nomIdioma
+     * @throws IdiomaNoExisteix Si l'idioma no existeix
+     */
+    public Idioma getIdioma(String nomIdioma) throws IdiomaNoExisteix {
         if (!existeix(nomIdioma)) throw new IdiomaNoExisteix(nomIdioma);
         return Idiomes.get(nomIdioma);
     }
 
-    //Pre:
-    //Post: Retorna el conjunt d'Idiomes
+    /**
+     * Obté tots els idiomes del sistema
+     * @return El conjunt d'idiomes del sistema
+     */
     public TreeMap<String, Idioma> getIdiomes() {
         return Idiomes;
     }
 }
-
-//Classe Programada per: Arnau Tajahuerce

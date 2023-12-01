@@ -1,5 +1,6 @@
 package ControladorsDomini;
 
+import java.security.PrivilegedExceptionAction;
 import java.util.*;
 import java.io.*;
 import java.util.regex.Pattern;
@@ -50,8 +51,8 @@ public class CtrlDomini {
     //Pre:
     //Post: Es carreguen les dades guardades del perfil a memòria
     public void carregarDadesSistema() throws Exception{
-        alfabets.carregarAlfabets();
-        idiomes.carregarIdiomes();
+        alfabets.carregar();
+        idiomes.carregar();
     }
 
     //Pre:
@@ -65,6 +66,8 @@ public class CtrlDomini {
         llistes.guardar();
         perfils.guardar();
         teclats.guardar();
+        alfabets.guardar();
+        idiomes.guardar();
     }
 
     //Pre: Es rep un nom d'usuari
@@ -247,13 +250,14 @@ public class CtrlDomini {
         alfabets.eliminarAlfabet(nomAlfabet);
     }
 
+    public Alfabet getAlfabet(String nom) throws ExcepcionsCreadorTeclat {
+        return alfabets.getAlfabet(nom);
+    }
+
     public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws Exception {
         Alfabet alfabetIdioma = alfabets.getAlfabet(nomAlfabet);
         Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filename);
-        idiomes.afegirIdioma(nomIdioma, alfabetIdioma, filename, novesEntrades);
-        Idioma i = idiomes.getIdioma(nomIdioma);
-        LlistaFrequencies ll = i.getLlistaFreq();
-        llistes.guardarLlistaFreq(ll);
+        idiomes.afegirIdioma(nomIdioma, alfabetIdioma, novesEntrades);
     }
 
     public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
@@ -261,7 +265,6 @@ public class CtrlDomini {
         llistes.comprovarUsIdioma(nomIdioma);
         teclats.comprovarUsIdioma(nomIdioma);
         idiomes.eliminarIdioma(nomIdioma);
-        llistes.eliminarLlista("LlistaPred"+nomIdioma);
     }
 
     public Vector<String> consultaIdiomes() {

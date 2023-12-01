@@ -67,7 +67,7 @@ public class CtrlPersIdiomesTest {
 
     @Test
     public void afegirIdioma() throws Exception {
-        cP.afegirIdioma("IdiomaProva", alfabetProva, "llistaParaulesProva.txt", llistaParaulesProva);
+        cP.afegirIdioma("IdiomaProva", alfabetProva, llistaParaulesProva);
         Idioma resultat = cP.getIdioma("IdiomaProva");
         assertEquals("IdiomaProva", resultat.getNom());
         assertEquals(alfabetProva, resultat.getAlfabet());
@@ -77,7 +77,7 @@ public class CtrlPersIdiomesTest {
 
     @Test
     public void eliminarIdioma() throws Exception {
-        cP.afegirIdioma("IdiomaProva", alfabetProva, "llistaParaulesProva.txt", llistaParaulesProva);
+        cP.afegirIdioma("IdiomaProva", alfabetProva, llistaParaulesProva);
         cP.eliminarIdioma("IdiomaProva");
         try {
             cP.getIdioma("IdiomaProva");
@@ -89,9 +89,9 @@ public class CtrlPersIdiomesTest {
 
     @Test
     public void afegirIdiomaDuplicat() throws Exception {
-        cP.afegirIdioma("IdiomaProva", alfabetProva, "llistaParaulesProva.txt", llistaParaulesProva);
+        cP.afegirIdioma("IdiomaProva", alfabetProva, llistaParaulesProva);
         try {
-            cP.afegirIdioma("IdiomaProva", alfabetProva, "llistaParaulesProva.txt", llistaParaulesProva);
+            cP.afegirIdioma("IdiomaProva", alfabetProva, llistaParaulesProva);
             fail();
         }
         catch (IdiomaJaExisteix e) {
@@ -111,7 +111,7 @@ public class CtrlPersIdiomesTest {
 
     @Test
     public void getIdioma() throws Exception {
-        cP.afegirIdioma("IdiomaProva", alfabetProva, "llistaParaulesProva.txt", llistaParaulesProva);
+        cP.afegirIdioma("IdiomaProva", alfabetProva, llistaParaulesProva);
         Idioma resultat = cP.getIdioma("IdiomaProva");
         assertEquals("IdiomaProva", resultat.getNom());
         assertEquals("LlistaPredIdiomaProva", resultat.getLlistaFreq().getNom());
