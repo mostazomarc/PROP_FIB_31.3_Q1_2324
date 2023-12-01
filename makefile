@@ -50,55 +50,55 @@ executaMain:
 	java -cp ./EXEnoEntrega/Main.jar:./FONTS/lib/json-simple-1.1.jar Presentacio.Main
 
 fulltest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.MasterTestSuite
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.MasterTestSuite
 
 idiomatest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.IdiomaTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.IdiomaTest
 
 alfabettest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.AlfabetTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.AlfabetTest
 
 factoriatest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.FactoriaTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.FactoriaTest
 
 frequenciestest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.LlistaFrequenciesTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.LlistaFrequenciesTest
 
 perfiltest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.PerfilTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.PerfilTest
 
 teclattest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.TeclatTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.TeclatTest
 
 persistenciaFreqtest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersFreqTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersFreqTest
 
 persistenciaPerfiltest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersPerfilTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersPerfilTest
 
 persistenciaTeclatstest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersTeclatsTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersTeclatsTest
 
 persistenciaAlfabetstest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersAlfabetsTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersAlfabetsTest
 
 persistenciaIdiomestest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersIdiomesTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.CtrlPersIdiomesTest
 
 hungariantest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.HungarianAlgorithmTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.HungarianAlgorithmTest
 
 branchandboundtest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.BranchandBoundTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.BranchandBoundTest
 
 greedytest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.GreedyTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.GreedyTest
 
 nodotest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.NodoTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.NodoTest
 
 postest: all
-	java -cp $(JUNIT_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.posTest
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.posTest
 
 exe: jars
 	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/Alfabets
