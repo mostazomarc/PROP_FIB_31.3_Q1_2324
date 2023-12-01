@@ -35,9 +35,9 @@ public class ControladorPresentacio {
         VistaGestionarTeclats vgt = new VistaGestionarTeclats();
     }
 
-    public static void vistaCrearTeclatLlistaPropia() {
-        VistaCrearTeclatLlistaPropia vclp = new VistaCrearTeclatLlistaPropia();
-    }
+    public static void vistaCrearTeclatLlistaPropia() { VistaCrearTeclatLlistaPropia vclp = new VistaCrearTeclatLlistaPropia(); }
+
+    public static void vistaTeclat(char[][] teclat) {VistaTeclat vt = new VistaTeclat(teclat); }
 
     public static void vistaConsultarTeclats()  {
         VistaConsultarTeclats vct = new VistaConsultarTeclats();
@@ -132,7 +132,7 @@ public class ControladorPresentacio {
         return controladorDomini.getNomLListaTeclat(nomt);
     }
 
-    public char[][] consultaTeclat(String nomSeleccio) throws ExcepcionsCreadorTeclat {
+    public static char[][] consultaTeclat(String nomSeleccio) throws ExcepcionsCreadorTeclat {
         return controladorDomini.consultaTeclat(nomSeleccio);
     }
 

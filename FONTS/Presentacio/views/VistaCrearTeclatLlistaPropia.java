@@ -37,8 +37,6 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
     }
 
     private void iniComponents() {
-        System.out.println("S'ha creat exitosament");
-
         iniFrame();
         panelContenidos.setLayout(new FlowLayout());
         iniEnrere();
@@ -149,6 +147,9 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
             int nc = Integer.parseInt(inputNC.getText());
             ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat,nomIdioma,nomLl,nf,nc);
             System.out.println("S'ha creat exitosament");
+            char[][] teclat = ControladorPresentacio.consultaTeclat(nomTeclat);
+            ControladorPresentacio.vistaTeclat(teclat);
+            setVisible(false);
         }
     }
 }

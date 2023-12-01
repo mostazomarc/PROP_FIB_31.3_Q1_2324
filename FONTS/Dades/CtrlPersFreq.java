@@ -53,6 +53,8 @@ public class CtrlPersFreq {
     public void carregarFrequencies() throws Exception {
         Map<String, Integer> novesEntrades = new HashMap<>();
         controlador.novaLlistaPerfil("llista", "catalaFreq.txt", "Català", novesEntrades);
+        controlador.novaLlistaPerfil("llista", "españolFreq.txt", "Español", novesEntrades);
+
 
     }
 
