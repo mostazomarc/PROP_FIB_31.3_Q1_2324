@@ -23,6 +23,7 @@ public class Main{
                         }
                         try {
                             c.iniciaInstancia("Agus"); //comentar amb marc
+                            c.carregarDades();
                         } catch (Exception e) {
                             e.printStackTrace();
                             throw new RuntimeException(e);

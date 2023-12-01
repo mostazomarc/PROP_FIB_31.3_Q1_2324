@@ -28,6 +28,7 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
     private JLabel labelNC = new JLabel("Nombre de columnes del layout");
     private JTextField inputNC = new JTextField(20);
     private JButton Enrere = new JButton("Tornar enrere");
+    private JButton Crear = new JButton("Crear teclat");
     private JPanel panelContenidos = new JPanel();
 
     public VistaCrearTeclatLlistaPropia() {
@@ -36,6 +37,8 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
     }
 
     private void iniComponents() {
+        System.out.println("S'ha creat exitosament");
+
         iniFrame();
         panelContenidos.setLayout(new FlowLayout());
         iniEnrere();
@@ -96,6 +99,8 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
         panelContenidos.add(labelNC, constraints);
         constraints.gridy = 11;
         panelContenidos.add(inputNC, constraints);
+        constraints.gridy = 12;
+        panelContenidos.add(Crear, constraints);
 
     }
 
@@ -117,6 +122,14 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
                 ex.printStackTrace();
             }
         });
+
+        Crear.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
@@ -124,6 +137,18 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
         if (Enrere.equals(source)) {
             ControladorPresentacio.vistaGestionarTeclats();
             setVisible(false);
+        }
+        else if (Crear.equals(source)) {
+            // Extract user input from text fields
+            String nomTeclat = inputNomTeclat.getText();
+
+            String nomIdioma = inputNomIdioma.getText();
+
+            String nomLl = inputNomLl.getText();
+            int nf = Integer.parseInt(inputNF.getText());
+            int nc = Integer.parseInt(inputNC.getText());
+            ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat,nomIdioma,nomLl,nf,nc);
+            System.out.println("S'ha creat exitosament");
         }
     }
 }

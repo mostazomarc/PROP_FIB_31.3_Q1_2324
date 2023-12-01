@@ -8,8 +8,7 @@ import Presentacio.views.*;
 
 public class ControladorPresentacio {
     private VistaTerminal vt;
-    private VistaPrincipal vistaPrincipal;
-    private CtrlDomini controladorDomini;
+    private static CtrlDomini controladorDomini;
 
     //Pre:
     //Post: S'obtenen els controladors de factoria, Domini i es crea i inicialitza una vista de terminal
@@ -19,7 +18,7 @@ public class ControladorPresentacio {
 
     //Pre:
     //Post: S'inicia la presentació amb el perfil corresponent
-    public void iniciaInstancia(String nomPerfil) throws ExcepcionsCreadorTeclat {
+    public void iniciaInstancia(String nomPerfil) throws Exception {
         controladorDomini.iniciaInstancia(nomPerfil);
         VistaPrincipal vp = new VistaPrincipal();
     }
@@ -41,7 +40,7 @@ public class ControladorPresentacio {
     }
 
     public static void vistaConsultarTeclats()  {
-        VistaConsultarTeclats vgt = new VistaConsultarTeclats();
+        VistaConsultarTeclats vct = new VistaConsultarTeclats();
     }
 
     public static void vistaGestionarDades() {
@@ -49,7 +48,7 @@ public class ControladorPresentacio {
     }
 
     public static void vistaConsultarDades() {
-        VistaConsultarDades vgt = new VistaConsultarDades();
+        VistaConsultarDades vcd = new VistaConsultarDades();
     }
 
 
@@ -141,7 +140,7 @@ public class ControladorPresentacio {
         controladorDomini.modificarLayoutTeclat(nomSeleccio, numf, numc);
     }
 
-    public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, Integer n, Integer m) throws ExcepcionsCreadorTeclat {
+    public static void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, Integer n, Integer m) throws ExcepcionsCreadorTeclat {
         controladorDomini.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq, n, m);
     }
 
