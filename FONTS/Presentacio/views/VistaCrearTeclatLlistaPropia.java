@@ -16,11 +16,14 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
     private JLabel labelNomTeclat = new JLabel("Nom del teclat");
     private JTextField inputNomTeclat = new JTextField(20);
 
-    private JLabel labelNomIdioma = new JLabel("Nom de l'idioma");
-    private JTextField inputNomIdioma = new JTextField(20);
+    private JLabel labelNomIdioma = new JLabel("Idioma");
+    private String[] idiomes = ControladorPresentacio.getNomsIdiomes().toArray(new String[0]);
 
-    private JLabel labelNomLl = new JLabel("Nom de la llista de freqüències");
-    private JTextField inputNomLl = new JTextField(20);
+    private JComboBox inputNomIdioma = new JComboBox<>(idiomes);
+
+    private JLabel labelNomLl = new JLabel("Llista de freqüències");
+    private String[] freqs = ControladorPresentacio.getNomLlistesGuardades().toArray(new String[0]);
+    private JComboBox inputNomLl = new JComboBox<>(freqs);
 
     private JLabel labelNF = new JLabel("Nombre de files del layout");
     private JTextField inputNF = new JTextField(20);
@@ -140,9 +143,9 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
             // Extract user input from text fields
             String nomTeclat = inputNomTeclat.getText();
 
-            String nomIdioma = inputNomIdioma.getText();
+            String nomIdioma = (String) inputNomIdioma.getSelectedItem();
 
-            String nomLl = inputNomLl.getText();
+            String nomLl = (String) inputNomLl.getSelectedItem();
             int nf = Integer.parseInt(inputNF.getText());
             int nc = Integer.parseInt(inputNC.getText());
             ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat,nomIdioma,nomLl,nf,nc);

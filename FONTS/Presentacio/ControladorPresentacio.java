@@ -83,7 +83,7 @@ public class ControladorPresentacio {
         controladorDomini.eliminarLlista(nomLlista);
     }
 
-    public List<String> getNomLlistesGuardades() {
+    public static List<String> getNomLlistesGuardades() {
         return controladorDomini.getNomLlistesGuardades();
     }
 
@@ -95,7 +95,7 @@ public class ControladorPresentacio {
         return controladorDomini.consultaLlista(nomSeleccio);
     }
 
-    public Vector<String> consultaIdiomes() {
+    public static Vector<String> consultaIdiomes() {
         return controladorDomini.consultaIdiomes();
     }
 
@@ -123,6 +123,8 @@ public class ControladorPresentacio {
     public List<String> getNomsTeclats() {
         return controladorDomini.getNomsTeclats();
     }
+
+    public static List<String> getNomsIdiomes() {return controladorDomini.getNomsIdiomes();}
 
     public String getNomIdiomaTeclat(String nomt) throws ExcepcionsCreadorTeclat {
         return controladorDomini.getNomIdiomaTeclat(nomt);
