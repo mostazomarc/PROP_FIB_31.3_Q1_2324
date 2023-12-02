@@ -1,5 +1,10 @@
 package Presentacio.views;
 
+import java.util.List;
+import java.util.ArrayList;
+
+
+import Excepcions.LayoutNoValid;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -15,11 +20,12 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
     private JLabel labelNomTeclat = new JLabel("Nom del teclat");
     private JTextField inputNomTeclat = new JTextField(20);
     private JLabel labelNomIdioma = new JLabel("Idioma");
-    private String[] idiomes = ControladorPresentacio.getNomsIdiomes().toArray(new String[0]);
-    private JComboBox inputNomIdioma = new JComboBox<>(idiomes);
+    //private String[] idiomes = ControladorPresentacio.getNomsIdiomes().toArray(new String[0]);
+    private JComboBox inputNomIdioma;
     private JLabel labelNomLl = new JLabel("Llista de freqüències");
-    private String[] freqs = ControladorPresentacio.getNomLlistesGuardades().toArray(new String[0]);
-    private JComboBox inputNomLl = new JComboBox<>(freqs);
+    private String[] freqs = new String[]{"Selecciona llista freqüències"};
+    private JComboBox<String> inputNomLl = new JComboBox<>(freqs);
+
     private JLabel labelNF = new JLabel("Nombre de files del layout");
     private JTextField inputNF = new JTextField(20);
     private JLabel labelNC = new JLabel("Nombre de columnes del layout");
@@ -81,6 +87,9 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
         constraints.gridy = 4;
         panelContenidos.add(labelNomIdioma, constraints);
         constraints.gridy = 5;
+        List<String> idiomes = ControladorPresentacio.getNomsIdiomes();
+        idiomes.add(0, "Selecciona idioma");
+        inputNomIdioma = new JComboBox<>(idiomes.toArray(new String[0]));
         panelContenidos.add(inputNomIdioma, constraints);
         constraints.gridy = 6;
         panelContenidos.add(labelNomLl, constraints);
@@ -125,6 +134,14 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
                 ex.printStackTrace();
             }
         });
+
+        inputNomIdioma.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
@@ -133,12 +150,28 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
             ControladorPresentacio.vistaGestionarTeclats();
             setVisible(false);
         }
+        else if (inputNomIdioma.equals(source)) {
+            String nomIdioma = (String) inputNomIdioma.getSelectedItem();
+            String[] llistes = ControladorPresentacio.getNomLlistesGuardades().toArray(new String[0]);
+
+            List<String> tempList = new ArrayList<>();
+            tempList.add("Selecciona llista freqüències");
+
+            for (String nomLlista : llistes) {
+                if (ControladorPresentacio.getNomIdiomaLlista(nomLlista).equals(nomIdioma)) {
+                    tempList.add(nomLlista);
+                }
+            }
+
+            freqs = tempList.toArray(new String[0]);
+            inputNomLl.setModel(new DefaultComboBoxModel<>(freqs));
+        }
+
         else if (Crear.equals(source)) {
             // Extract user input from text fields
             String nomTeclat = inputNomTeclat.getText();
 
             String nomIdioma = (String) inputNomIdioma.getSelectedItem();
-
             String nomLl = (String) inputNomLl.getSelectedItem();
             int nf = Integer.parseInt(inputNF.getText());
             int nc = Integer.parseInt(inputNC.getText());

@@ -87,7 +87,7 @@ public class ControladorPresentacio {
         return controladorDomini.getNomLlistesGuardades();
     }
 
-    public String getNomIdiomaLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
+    public static String getNomIdiomaLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
         return controladorDomini.getNomIdiomaLlista(nomLlista);
     }
 
