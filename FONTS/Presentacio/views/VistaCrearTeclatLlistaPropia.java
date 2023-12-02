@@ -20,7 +20,6 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
     private String[] idiomes = ControladorPresentacio.getNomsIdiomes().toArray(new String[0]);
 
     private JComboBox inputNomIdioma = new JComboBox<>(idiomes);
-
     private JLabel labelNomLl = new JLabel("Llista de freqüències");
     private String[] freqs = ControladorPresentacio.getNomLlistesGuardades().toArray(new String[0]);
     private JComboBox inputNomLl = new JComboBox<>(freqs);
