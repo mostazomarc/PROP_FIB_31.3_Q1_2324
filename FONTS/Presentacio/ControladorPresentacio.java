@@ -18,12 +18,20 @@ public class ControladorPresentacio {
 
     //Pre:
     //Post: S'inicia la presentació amb el perfil corresponent
-    public void iniciaInstancia(String nomPerfil) throws Exception {
+    public static void iniciaInstancia(String nomPerfil) throws Exception {
         controladorDomini.iniciaInstancia(nomPerfil);
-        VistaPrincipal vp = new VistaPrincipal();
     }
 
-    public static void iniPresentacio() {
+    public static void vistaPerfils() throws Exception {
+        VistaPerfils vp = new VistaPerfils();
+    }
+
+    public static void vistaCrearPerfil() throws Exception {
+        VistaCrearPerfil vcp = new VistaCrearPerfil();
+    }
+
+
+    public static void vistaPrincipal() {
         VistaPrincipal vp = new VistaPrincipal();
     }
 
@@ -53,7 +61,7 @@ public class ControladorPresentacio {
 
 
     //NORMAL
-    public void carregarDades()throws Exception{
+    public static void carregarDades()throws Exception{
         controladorDomini.carregarDadesSistema();
         controladorDomini.carregarDadesPerfil();
     }
@@ -70,7 +78,7 @@ public class ControladorPresentacio {
         return controladorDomini.getEstrategiaActual();
     }
 
-    public List<String> getAllPerfils() {
+    public static List<String> getAllPerfils() {
         return controladorDomini.getAllPerfils();
     }
 

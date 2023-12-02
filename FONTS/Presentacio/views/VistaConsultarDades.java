@@ -5,7 +5,6 @@ import Presentacio.ControladorPresentacio;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -21,7 +20,7 @@ public class VistaConsultarDades extends JFrame {
 
     private void iniComponents() {
         iniFrame();
-        iniButtons();
+        iniEnrere();
 
         //inicialitzar la resta
 
@@ -31,11 +30,15 @@ public class VistaConsultarDades extends JFrame {
     }
 
     private void iniFrame() {
-        setBounds(500,300,1000,600);
-        setResizable(true);
+        setSize(1000, 600);
+        Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (pantalla.width - 1000) / 2;
+        int y = (pantalla.height - 600) / 2;
+        setLocation(x, y);
+        setResizable(false);
     }
 
-    private void iniButtons() {
+    private void iniEnrere() {
 
         panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
         panelContenidos.add(Box.createVerticalGlue());
@@ -70,7 +73,7 @@ public class VistaConsultarDades extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.iniPresentacio();
+            ControladorPresentacio.vistaPrincipal();
             setVisible(false);
         }
     }

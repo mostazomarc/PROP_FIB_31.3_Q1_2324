@@ -55,7 +55,11 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
     }
 
     private void iniFrame() {
-        setBounds(500,300,1000,600);
+        setSize(1000, 600);
+        Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (pantalla.width - 1000) / 2;
+        int y = (pantalla.height - 600) / 2;
+        setLocation(x, y);
         setResizable(false);
     }
 

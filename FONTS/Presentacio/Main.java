@@ -22,8 +22,10 @@ public class Main{
                             throw new RuntimeException(e);
                         }
                         try {
-                            c.iniciaInstancia("Marc"); //comentar amb marc
-                            c.carregarDades();
+                            c.vistaPerfils();
+                            //c.carregarDades();
+
+                            //c.iniciaInstancia("Marc"); //comentar amb marc
                         } catch (Exception e) {
                             e.printStackTrace();
                             throw new RuntimeException(e);

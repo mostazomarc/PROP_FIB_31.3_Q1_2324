@@ -2,32 +2,36 @@ package Presentacio.views;
 
 import Presentacio.ControladorPresentacio;
 
+import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-public class VistaGestionarTeclats extends JFrame {
-
-    private JButton Enrere = new JButton("Tornar al menú principal");
-    private JButton CLP = new JButton("Crear teclat amb llista pròpia");
-    private JButton CLNP = new JButton("Crear teclat sense llista pròpia");
-    private JButton ML = new JButton("Modificar Layout teclat");
-    private JButton E = new JButton("Eliminar teclat");
+public class VistaCrearPerfil extends JFrame {
+    private JButton Enrere = new JButton("Tornar enrere");
     private JPanel panelContenidos = new JPanel();
+    private JLabel labelNomPerfil = new JLabel("Nom");
+    private JTextField inputNomPerfil = new JTextField( 20);
+    private JButton CP = new JButton("Crear perfil");
 
-    public VistaGestionarTeclats () {
+
+    public VistaCrearPerfil () {
         setVisible(true);
         iniComponents();
     }
 
     private void iniComponents() {
         iniFrame();
+        panelContenidos.setLayout(new FlowLayout());
         iniEnrere();
-        iniButtons();
+        iniInput();
         add(panelContenidos, BorderLayout.CENTER);
+
+
+        //inicialitzar la resta
+
 
         //assignar listeneres a cada component
         assign_listenerComponents();
@@ -44,39 +48,30 @@ public class VistaGestionarTeclats extends JFrame {
 
     private void iniEnrere() {
 
-        panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
-        panelContenidos.add(Box.createVerticalGlue());
-        panelContenidos.add(Box.createHorizontalGlue());
-
+        panelContenidos.add(Enrere);
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
-
-        //add(panelContenidos, BorderLayout.CENTER);
     }
 
-    private void iniButtons() {
+    private void iniInput() {
         panelContenidos.setLayout(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL; // Fill the cell horizontally
         constraints.anchor = GridBagConstraints.CENTER; // Center the component within the cell
-        constraints.insets = new Insets(10, 10, 10, 10); // Set spacing between buttons
+        constraints.insets = new Insets(10, 10, 5, 10); // Set spacing between buttons
 
         // Add the buttons to the grid layout
 
         constraints.gridx = 0;
         constraints.gridy = 1;
-        panelContenidos.add(CLP, constraints);
-
+        panelContenidos.add(labelNomPerfil, constraints);
         constraints.gridy = 2;
-        panelContenidos.add(CLNP, constraints);
-
+        panelContenidos.add(inputNomPerfil, constraints);
         constraints.gridy = 3;
-        panelContenidos.add(ML, constraints);
-
-        constraints.gridy = 4;
-        panelContenidos.add(E, constraints);
+        panelContenidos.add(CP, constraints);
     }
+
     /**
      * Assigna els listeners als components corresponents.
      */
@@ -95,15 +90,11 @@ public class VistaGestionarTeclats extends JFrame {
                 ex.printStackTrace();
             }
         });
-
-        CLP.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    actionPerformed_buttons(e);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+        CP.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         });
     }
@@ -111,11 +102,15 @@ public class VistaGestionarTeclats extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaPrincipal();
+            ControladorPresentacio.vistaPerfils();
             setVisible(false);
         }
-        else if (CLP.equals(source)) {
-            ControladorPresentacio.vistaCrearTeclatLlistaPropia();
+        else if (CP.equals(source)) {
+            String nomP = inputNomPerfil.getText();
+            ControladorPresentacio.iniciaInstancia(nomP);
+            ControladorPresentacio.vistaPerfils();
+            List<String> l = ControladorPresentacio.getAllPerfils();
+            System.out.println(l);
             setVisible(false);
         }
     }
