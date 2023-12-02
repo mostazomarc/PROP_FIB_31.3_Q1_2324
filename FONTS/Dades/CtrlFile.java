@@ -24,11 +24,11 @@ public class CtrlFile {
 
     //Pre: filename es el nom d'un arxiu que existeix
     //Post: Retorna totes les linies del fitxer en una llista
-    public List<String> llegirArxiu(String filename) throws Exception {
+    public List<String> llegirArxiu(String filepath) throws Exception {
         LinkedList<String> linies = new LinkedList<String>();
 
         //suposant que el directori d'execució es subgrup
-        FileReader fr = new FileReader("./DATA/" + filename);
+        FileReader fr = new FileReader(filepath);
 
         Scanner scan = new Scanner(fr);
         while (scan.hasNextLine()) linies.add(scan.nextLine());
