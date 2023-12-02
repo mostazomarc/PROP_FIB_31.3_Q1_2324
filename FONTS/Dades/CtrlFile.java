@@ -37,15 +37,16 @@ public class CtrlFile {
 
     /**
      * Llegeix un fitxer de text i retorna les seves linies en una llista
-     * @param filename El nom del fitxer
+     * @param filepath El nom del fitxer
      * @return Una llista amb les linies del fitxer
      * @throws Exception Si el fitxer no existeix
      */
-    public List<String> llegirArxiu(String filename) throws Exception {
+
+    public List<String> llegirArxiu(String filepath) throws Exception {
         LinkedList<String> linies = new LinkedList<String>();
 
         //suposant que el directori d'execució es subgrup
-        FileReader fr = new FileReader("./DATA/" + filename);
+        FileReader fr = new FileReader(filepath);
 
         Scanner scan = new Scanner(fr);
         while (scan.hasNextLine()) linies.add(scan.nextLine());
