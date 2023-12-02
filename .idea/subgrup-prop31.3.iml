@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <output url="file://$MODULE_DIR$/EXE/" />
-    <output-test url="file://$MODULE_DIR$/EXE/test/" />
+    <output url="file://$MODULE_DIR$/EXEnoEntrega/out" />
+    <output-test url="file://$MODULE_DIR$/EXEnoEntrega/out/test/" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/FONTS" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/EXEnoEntrega" />
       <excludeFolder url="file://$MODULE_DIR$/FONTS/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/EXE" />
     </content>
     <content url="file://$MODULE_DIR$/EXE" />
     <orderEntry type="inheritedJdk" />

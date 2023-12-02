@@ -1,0 +1,4 @@
+
+
+
+Saves/: Directory on es guarden els .json amb les dades persistents del sistema

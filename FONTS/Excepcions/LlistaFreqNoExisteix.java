@@ -1,5 +1,10 @@
 package Excepcions;
 
+/**
+ * LlistaFreqNoExisteix es una classe que representa una excepció que es llença quan la llista de freqüències no existeix
+ * <p>LlistaFreqNoExisteix exten la classe ExcepcionsCreadorTeclat</p>
+ * @author Marc Mostazo Gonzalez (marc.mostazo@estudiantat.upc.edu)
+ */
 public class LlistaFreqNoExisteix extends ExcepcionsCreadorTeclat{
 
     public String getTipusExcepcio() {

@@ -16,11 +16,38 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 
+/** LlistaFrequenciesTest es una classe que ens permet testejar les funcions de la classe LlistaFrequencies
+ * <p>
+ * Les funcions que testeja són:
+ * <ul>
+ * <li>creadoraLlistaNom</li>
+ * <li>creadoraLlistaIdiomaJaTePred</li>
+ * <li>creadoraLlistaNomLlista</li>
+ * <li>getNom</li>
+ * <li>getNomIdioma</li>
+ * <li>getFrequencies</li>
+ * </ul>
+ *
+ * @see LlistaFrequencies
+ * @author Marc Mostazo Gonzalez (marc.mostazo@estudiantat.upc.edu)
+ */
 public class LlistaFrequenciesTest {
+    /**
+     * Instancia de IdiomaProva per fer les proves
+     */
     Idioma idiomaProva;
+    /**
+     * Llista de paraules i frequencies per fer les proves
+     */
     private Map<String, Integer> llistaParaulesProva = new HashMap<>();
+    /**
+     * Conjunt de lletres per fer les proves
+     */
     private final Set<Character> lletresProva = new HashSet<Character>();
 
+    /**
+     * Es crea un idiomaProva
+     */
     @Before
     public void omplirLletres() {
         for (char lletra = 'a'; lletra <= 'z'; lletra++) lletresProva.add(lletra);
@@ -28,6 +55,9 @@ public class LlistaFrequenciesTest {
         idiomaProva = new Idioma("ESPAÑOL", AlfabetProva);
     }
 
+    /**
+     * S'omple la llistaParaulesProva
+     */
     @Before
     public void omplirLlistaProva() {
         llistaParaulesProva.put("Hola", 10);
@@ -37,6 +67,9 @@ public class LlistaFrequenciesTest {
         llistaParaulesProva.put("Fideu", 30);
     }
 
+    /**
+     * Comprova que es crea una llista amb nom
+     */
     @Test
     //Creadora LLista amb nom i getNom
     public void creadoraLlistaNom() {
@@ -46,30 +79,35 @@ public class LlistaFrequenciesTest {
         assertEquals(resultat, idiomaProva.getLlistaFreq());
     }
 
-
+    /**
+     * Testeja getNom
+     */
     @Test
-    //Creadora LLista amb nom i getNom
     public void getNom() {
         LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista", idiomaProva);
         assertEquals("NovaLlista", resultat.getNom());
     }
 
-    //Creadora LLista amb nom i getNom
+    /**
+     * Testeja getFrequencies
+     */
     public void getFrequencies() {
         LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista", idiomaProva);
         assertEquals(resultat, idiomaProva.getLlistaFreq());
     }
 
-
-    //Creadora LLista amb nom i getNom
+    /**
+     * Testeja getNomIdioma
+     */
     public void getNomIdioma() {
         LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista", idiomaProva);
         assertEquals("ESPAÑOL", resultat.getNomIdioma());
     }
 
-
+    /**
+     * Comprova que es crea una llista amb nom i idioma que ja té una llista predeterminada
+     */
     @Test
-    //Creadora LLista amb nom i idioma ja té llista Predeterminada
     public void creadoraLlistaIdiomaJaTePred() {
         LlistaFrequencies resultat = new LlistaFrequencies("NovaLlista", idiomaProva);
         LlistaFrequencies resultat2 = new LlistaFrequencies("SegonaLlista", idiomaProva);
@@ -82,6 +120,9 @@ public class LlistaFrequenciesTest {
         assertNotEquals(resultat2, idiomaProva.getLlistaFreq());
     }
 
+    /**
+     * Comprova que es crea una llista amb nom, idioma i llista de paraules i frequencies
+     */
     @Test
     //Creadora LLista amb nom i Llista de paraules i getFrequencies
     public void creadoraLlistaNomLlista() throws ExcepcionsCreadorTeclat {
@@ -103,6 +144,10 @@ public class LlistaFrequenciesTest {
 //    - Crear una lista con una lista vacía
 
 
+    /**
+     * Comprova Excepcio LletraNoInclosa
+     * @throws LletraNoInclosa
+     */
     @Test
     public void llistaLletresNoIdioma() throws ExcepcionsCreadorTeclat {
         llistaParaulesProva.put("Caña", 30); //ficem la lletra ñ no inclosa a l'Alfabet Prova
@@ -114,7 +159,10 @@ public class LlistaFrequenciesTest {
         }
     }
 
-
+    /**
+     * Comprova Excepcio LlistaBuida
+     * @throws LlistaBuida
+     */
     @Test
     public void llistaBuida() throws ExcepcionsCreadorTeclat {
         llistaParaulesProva = new HashMap<>();

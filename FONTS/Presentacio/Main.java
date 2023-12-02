@@ -22,7 +22,7 @@ public class Main{
                             throw new RuntimeException(e);
                         }
                         try {
-                            c.iniciaInstancia("Agus"); //comentar amb marc
+                            c.iniciaInstancia("Marc"); //comentar amb marc
                             c.carregarDades();
                         } catch (Exception e) {
                             e.printStackTrace();

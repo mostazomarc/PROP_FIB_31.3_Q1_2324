@@ -1,27 +1,51 @@
 package Domini;
 
 import Excepcions.ExcepcionsCreadorTeclat;
-import Excepcions.LletraNoInclosa;
 
 import java.util.Set;
 import java.util.Map;
-import java.util.HashSet;
 
+/**
+ * Idioma és una classe que conté un alfabet i una llista de paraules i les seves freqüències predeterminada
+ * @author Arnau Tajahuerce Brulles (arnau.tajahuerce@estudiantat.upc.edu)
+ */
 public class Idioma {
+    /**
+     * El nom de l'idioma
+     */
     private String nom;
+    /**
+     * L'alfabet de l'idioma
+     */
     private Alfabet alfabet;
+    /**
+     * La llista de paraules i freqüències predeterminada de l'idioma
+     */
     private LlistaFrequencies llistaFreqPredeterminada;
 
-    //Pre:
-    //Post: Es crea un Idioma amb nom i alfabet
+    /**
+     * Creadora de Idioma
+     * <p> Crea un idioma amb nom i alfabet</p>
+     * <p> Es necessita que l'alfabet proporcionat existeixi i sigui vàlid</p>
+     * @param nom El nom de l'idioma
+     * @param alfabet L'alfabet de l'idioma
+     */
     public Idioma (String nom, Alfabet alfabet) {
         this.nom = nom;
         this.alfabet = alfabet;
         alfabet.afegirIdioma(nom);
     }
 
-    //Pre:
-    //Post: Es crea un Idioma amb nom, alfabet i una NOVA llista de freqüències predeterimnada
+    /**
+     * Creadora de Idioma
+     * <p> Crea un idioma amb nom, alfabet i llista de paraules i freqüències predeterminada</p>
+     * <p> Es necessita que l'alfabet proporcionat existeixi i sigui vàlid</p>
+     * <p> Es necessita que la llista de paraules i freqüències sigui vàlida</p>
+     * @param nom El nom de l'idioma
+     * @param alfabet L'alfabet de l'idioma
+     * @param llistaParaules La llista de paraules i freqüències predeterminada de l'idioma
+     * @throws ExcepcionsCreadorTeclat Si la llista de paraules no és vàlida
+     */
     public Idioma (String nom, Alfabet alfabet, Map<String, Integer> llistaParaules) throws ExcepcionsCreadorTeclat{
         this.nom = nom;
         this.alfabet = alfabet;
@@ -29,8 +53,6 @@ public class Idioma {
         new LlistaFrequencies("LlistaPred"+nom, this, llistaParaules); //Aquesta creadora ja vincula la llista de freqüències a aquest idioma
     }
 
-    //Pre:
-    //Post: Es crea un Idioma amb nom, alfabet
     public Idioma (String nom, Alfabet alfabet, String nomLlista, Map<String, Integer> llistaParaules) throws ExcepcionsCreadorTeclat {
         this.nom = nom;
         this.alfabet = alfabet;
@@ -38,47 +60,70 @@ public class Idioma {
         new LlistaFrequencies(nomLlista, this, llistaParaules); //Aquesta creadora ja vincula la llista de freqüències a aquest idioma
     }
 
-    //Pre: La llistaFreq existeix
-    //Post: S'afegeix la llistaFreq com a llista de freqüències predeterminada de l'idioma
+
+    /**
+     * Afegeix una llista de paraules i freqüències
+     * <p> Es nececssita que la llista de paraules i freqüències proporcionada existeix i és vàlida</p>
+     * @param llistaFreq La llista de paraules i freqüències predeterminada de l'idioma
+     */
     public void afegirLlistaFreqPredeterminada (LlistaFrequencies llistaFreq) {
         if (llistaFreqPredeterminada == null) llistaFreqPredeterminada = llistaFreq;
     }
 
-    //Pre: La llistaFreq existeix
-    //Post: llistaFreq és ara la nova llista de freqüències predeterminada de l'idioma
+    /**
+     * Canvia la llista de paraules i freqüències predeterminada: es sobrescriu la llista de paraules i freqüències predeterminada anterior
+     * <p> Es necessita que la llista de paraules i freqüències proporcionada existeix i és vàlida</p>
+     * @param llistaFreq La nova llista de paraules i freqüències predeterminada
+     */
     public void canviarLlistaFreqPredeterminada (LlistaFrequencies llistaFreq) {
         llistaFreqPredeterminada = llistaFreq;
     }
 
-    //Retorna el nom de l'idioma
+    /**
+     * Obté el nom de l'idioma
+     * @return El nom de l'idioma
+     */
     public String getNom() {
         return nom;
     }
 
-    //Retorna l'alfabet de l'idioma
+    /**
+     * Obté l'alfabet de l'idioma
+     * @return L'alfabet de l'idioma
+     */
     public Alfabet getAlfabet() { return alfabet; }
 
-    //Retorna les lletres que té l'alfabet de l'idioma
+    /**
+     * Obté les lletres de l'alfabet de l'idioma
+     * @return La llista de lletres de l'alfabet de l'idioma
+     */
     public Set<Character> getLletres() {
         return alfabet.getLletres();
     }
 
-    //Retorna la llista de frequencies de l'idioma
+    /**
+     * Obté la llista de freqüencies predeterminada de l'idioma
+     * @return La llista de freqüencies predeterminada de l'idioma
+     */
     public LlistaFrequencies getLlistaFreq() {
         return llistaFreqPredeterminada;
     }
 
-    //Retorna la llista de paraules amb freqüències de l'idioma
+    /**
+     * Obté la llista de paraules i freqüències predeterminada de l'idioma
+     * @return La llista de paraules i freqüències predeterminada de l'idioma
+     */
     public  Map<String, Integer> getFrequencies() {
         return llistaFreqPredeterminada.getFrequencies();
     }
 
-    //Retorna informació (nom, nom de l'alfabet i nom de la llista de freqüències predeterminada) de l'idioma
+    /**
+     * Obté text amb informació (nom, nom de l'alfabet i nom de la llista de freqüències predeterminada) de l'idioma
+     * @return El text amb la informació de l'alfabet
+     */
     public String getInfo() {
         return "Nom de l'Idioma: " + nom + "    Nom de l'Alfabet associat: " + alfabet.getNomAlfabet() +
                 "    Nom de la Llista de Freqüències predeterminada: " + llistaFreqPredeterminada.getNom();
     }
 
 }
-
-//Classe Programada per: Arnau Tajahuerce

@@ -19,16 +19,53 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 
+/**
+ * CtrlPersFreqTest es una classe que ens permet testejar les funcions de la classe CtrlPersFreq
+ * <p>
+ * Les funcions que testeja són:
+ * <ul>
+ * <li>getControladorUnCopCreat</li>
+ * <li>carregarLlistes</li>
+ * <li>nouPerfil</li>
+ * <li>canviaPerfil</li>
+ * <li>afegirLlistaFreqNomesIdioma</li>
+ * <li>afegirLlistaFreq</li>
+ * <li>eliminaLlistaFreq</li>
+ * <li>afegirLlistaDuplicada</li>
+ * <li>eliminaLlistaInexistent</li>
+ * <li>comprovarUsIdioma</li>
+ * <li>getLlistaFreq</li>
+ * </ul>
+ *
+ * @see CtrlPersFreq
+ * @author Marc Mostazo Gonzalez (marc.mostazo@estudiantat.upc.edu)
+ */
 public class CtrlPersFreqTest {
 
+    /**
+     * Instancia de CtrlPersFreq
+     */
     CtrlPersFreq cP;
-
-
+    /**
+     * Instancia de CtrlDomini
+     */
     CtrlDomini cD;
+    /**
+     * Instancia de IdiomaProva per fer les proves
+     */
     Idioma idiomaProva;
+    /**
+     * Llista de paraules i frequencies per fer les proves
+     */
     private final Map<String, Integer> llistaParaulesProva = new HashMap<>();
+    /**
+     * Conjunt de lletres per fer les proves
+     */
     private final Set<Character> lletresProva = new HashSet<Character>();
 
+    /**
+     * Es crea un idiomaProva
+     */
     @Before
     public void omplirLletres() {
         for (char lletra = 'a'; lletra <= 'z'; lletra++) lletresProva.add(lletra);
@@ -36,6 +73,9 @@ public class CtrlPersFreqTest {
         idiomaProva = new Idioma("ESPAÑOL", AlfabetProva);
     }
 
+    /**
+     * S'omple la llistaParaulesProva
+     */
     @Before
     public void omplirLlistaProva() {
         llistaParaulesProva.put("Hola", 10);
@@ -45,25 +85,36 @@ public class CtrlPersFreqTest {
         llistaParaulesProva.put("Fideu", 30);
     }
 
+    /**
+     * S'obte la instancia de CtrlDomini
+     */
     @Before
     public void getControladorDomini() {
         cD = CtrlDomini.getInstance();
     }
 
+    /**
+     * S'obte la instancia de CtrlPersFreq
+     */
     @Before
     public void getControladorPersistencia() {
         cP = CtrlPersFreq.getInstance(cD);
     }
 
-    //S'eliminen les llistes creades per poder tornarles a crear
+    /**
+     * S'eliminen les llistes creades per poder tornarles a crear
+     */
     @After
-    public void eliminarLlistaProva() throws Exception {
+    public void eliminarLlistaProva() {
         try {
             cP.eliminarLlista("LlistaProva");
         } catch (Exception e) {
         }
     }
 
+    /**
+     * Prova de singleton
+     */
     @Test
     public void getControladorUnCopCreat() {
         assertSame(cP, CtrlPersFreq.getInstance(cD));
@@ -82,43 +133,46 @@ public class CtrlPersFreqTest {
 //        }
 //    }
 
+    /**
+     * Prova de nouPerfil
+     */
     @Test
     public void nouPerfil() {
         assertTrue(true);
     }
 
+    /**
+     * Prova de canviaPerfil
+     */
     @Test
     public void canviaPerfil() {
         assertTrue(true);
     }
 
 
-    @Test
-    public void afegirLlistaFreqNomesIdioma() throws Exception {
-        CtrlPersFreq cP = CtrlPersFreq.getInstance(cD);
-
-        cP.afegirLlistaFreq("LlistaProva", idiomaProva);
-        LlistaFrequencies resultat = cP.getLlistaFreq("LlistaProva");
-        assertEquals("LlistaProva", resultat.getNom());
-        assertEquals("ESPAÑOL", resultat.getNomIdioma());
-    }
-
+    /**
+     * Prova de afegirLlistaFreq
+     */
     @Test
     public void afegirLlistaFreq() throws Exception {
         CtrlPersFreq cP = CtrlPersFreq.getInstance(cD);
-
-        cP.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
+        LlistaFrequencies llista = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+        cP.guardarLlistaFreq(llista);
         LlistaFrequencies resultat = cP.getLlistaFreq("LlistaProva");
         assertEquals("LlistaProva", resultat.getNom());
         assertEquals("ESPAÑOL", resultat.getNomIdioma());
         assertEquals(resultat, idiomaProva.getLlistaFreq());
     }
 
-
+    /**
+     * Prova de eliminaLlistaFreq
+     * @throws Exception
+     */
     @Test
     public void eliminaLlistaFreq() throws Exception {
         CtrlPersFreq cP = CtrlPersFreq.getInstance(cD);
-        cP.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
+        LlistaFrequencies llista = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+        cP.guardarLlistaFreq(llista);
         cP.eliminarLlista("LlistaProva");
         try {
             cP.getLlistaFreq("LlistaProva");
@@ -128,19 +182,26 @@ public class CtrlPersFreqTest {
         }
     }
 
+    /**
+     * Prova de afegirLlistaDuplicada
+     */
     @Test
     public void afegirLlistaDuplicada() throws Exception {
         CtrlPersFreq cP = CtrlPersFreq.getInstance(cD);
-        cP.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
+        LlistaFrequencies llista = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+        cP.guardarLlistaFreq(llista);
         try {
-            cP.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
-            cP.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
+            cP.guardarLlistaFreq(llista);
+            cP.guardarLlistaFreq(llista);
             fail();
         } catch (LlistaFreqJaExisteix e) {
             assertTrue(true);
         }
     }
 
+    /**
+     * Prova de eliminaLlistaInexistent
+     */
     @Test
     public void eliminaLlistaInexistent() throws Exception {
         CtrlPersFreq cP = CtrlPersFreq.getInstance(cD);
@@ -152,11 +213,15 @@ public class CtrlPersFreqTest {
         }
     }
 
+    /**
+     * Prova de comprovarUsIdioma
+     */
     @Test
     public void comprovarUsIdioma() throws Exception {
         CtrlPersFreq cP = CtrlPersFreq.getInstance(cD);
 
-        cP.afegirLlistaFreq("LlistaProva", idiomaProva);
+        LlistaFrequencies llista = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+        cP.guardarLlistaFreq(llista);
         try {
             cP.comprovarUsIdioma("ESPAÑOL");
             fail();
@@ -165,11 +230,15 @@ public class CtrlPersFreqTest {
         }
     }
 
+    /**
+     * Prova de getLlistaFreq
+     */
     @Test
     public void getLlistaFreq() throws Exception {
         CtrlPersFreq cP = CtrlPersFreq.getInstance(cD);
 
-        cP.afegirLlistaFreq("LlistaProva", idiomaProva);
+        LlistaFrequencies llista = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
+        cP.guardarLlistaFreq(llista);
         LlistaFrequencies resultat = cP.getLlistaFreq("LlistaProva");
         assertEquals("LlistaProva", resultat.getNom());
         assertEquals("ESPAÑOL", resultat.getNomIdioma());
