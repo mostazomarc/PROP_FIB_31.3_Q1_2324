@@ -76,8 +76,8 @@ public class ControladorPresentacio {
 
 
     //DADES
-    public void novaLlistaPerfil(String tipusArxiu, String filename, String idioma, Map<String,Integer> novesEntrades) throws Exception{
-        controladorDomini.novaLlistaPerfil(tipusArxiu, filename, idioma, novesEntrades);
+    public void novaLlistaPerfil(String tipusArxiu, String filepath, String idioma, Map<String,Integer> novesEntrades) throws Exception{
+        controladorDomini.novaLlistaPerfil(tipusArxiu, filepath, idioma, novesEntrades);
     }
 
     public void modificarLlistaPerfil(String tipusArxiu, String nomArxiu, String nomllista, Map<String,Integer> novesEntrades) throws Exception {
@@ -108,16 +108,16 @@ public class ControladorPresentacio {
         return controladorDomini.consultaAlfabets();
     }
 
-    public void afegirAlfabet(String filename) throws Exception{
-        controladorDomini.afegirAlfabet(filename);
+    public void afegirAlfabet(String filepath) throws Exception{
+        controladorDomini.afegirAlfabet(filepath);
     }
 
     public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat{
         controladorDomini.eliminarAlfabet(nomAlfabet);
     }
 
-    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws Exception {
-        controladorDomini.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
+    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filepath) throws Exception {
+        controladorDomini.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filepath);
     }
 
     public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {

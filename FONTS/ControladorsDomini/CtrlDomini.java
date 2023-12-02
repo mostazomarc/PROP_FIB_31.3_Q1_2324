@@ -172,11 +172,11 @@ public class CtrlDomini {
     }
 
 
-    //Pre: tipus arxiu es un tipus vàlid i filename existeix i esta en un format vàid
+    //Pre: tipus arxiu es un tipus vàlid i filepath existeix i esta en un format vàid
     //Post: Es llegeix l'informacio de llista de l'arxiu i es retorna
-    public Map<String,Integer> llegirLlistaFreq(String tipusArxiu, String filename) throws Exception {
-        System.out.println("Llegint arxiu "+ filename);
-        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
+    public Map<String,Integer> llegirLlistaFreq(String tipusArxiu, String filepath) throws Exception {
+        System.out.println("Llegint arxiu "+ filepath);
+        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filepath);
         Map<String, Integer> novesEntrades = new HashMap<>();
 
 
@@ -189,19 +189,19 @@ public class CtrlDomini {
         return novesEntrades;
     }
 
-    //Pre: tipus arxiu es un tipus vàlid i filename existeix i esta en un format vàid
-    //Post: S'afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual
-    public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) throws Exception {
-        if (tipusArxiu != "Manual" && tipusArxiu != "Carregada") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
+    //Pre: tipus arxiu es un tipus vàlid i filepath existeix i esta en un format vàid
+    //Post: S'afegeix la informació de l'arxiu de llista de frequencies filepath al Perfil Actual
+    public void novaLlistaPerfil(String tipusArxiu, String filepath, String i , Map<String,Integer> novesEntrades) throws Exception {
+        if (tipusArxiu != "Manual" && tipusArxiu != "Carregada") novesEntrades = llegirLlistaFreq(tipusArxiu,filepath);
         Idioma idiomaLlista = idiomes.getIdioma(i);
-        LlistaFrequencies llista = PerfilActual.afegirLlistaFreq(filename,idiomaLlista,novesEntrades);
+        LlistaFrequencies llista = PerfilActual.afegirLlistaFreq(filepath,idiomaLlista,novesEntrades);
         llistes.guardarLlistaFreq(llista);
     }
 
     //Pre:
     //Post: Es modifica el la llista identidicada per nomLlista amb les dades entrades
-    public void modificarLlistaPerfil(String tipusArxiu, String filename, String nomLlista, Map<String,Integer> novesEntrades) throws Exception {
-        if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
+    public void modificarLlistaPerfil(String tipusArxiu, String filepath, String nomLlista, Map<String,Integer> novesEntrades) throws Exception {
+        if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filepath);
         PerfilActual.modificarLlista(nomLlista, novesEntrades);
     }
 
@@ -246,10 +246,10 @@ public class CtrlDomini {
         teclats.eliminarTeclat(nomTeclat);//ELIMINAR TECLAT DE CONTROLADOR DE PERSISTENCIA
     }
 
-    public void afegirAlfabet(String filename) throws Exception {
-        System.out.println("Llegint arxiu "+ filename +"\n");
-        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
-        alfabets.afegirAlfabet(filename, LlistaLlegida);
+    public void afegirAlfabet(String filepath) throws Exception {
+        System.out.println("Llegint arxiu "+ filepath +"\n");
+        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filepath);
+        alfabets.afegirAlfabet(filepath, LlistaLlegida);
     }
 
     public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat {
@@ -260,9 +260,9 @@ public class CtrlDomini {
         return alfabets.getAlfabet(nom);
     }
 
-    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws Exception {
+    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filepath) throws Exception {
         Alfabet alfabetIdioma = alfabets.getAlfabet(nomAlfabet);
-        Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filename);
+        Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filepath);
         idiomes.afegirIdioma(nomIdioma, alfabetIdioma, novesEntrades);
     }
 
