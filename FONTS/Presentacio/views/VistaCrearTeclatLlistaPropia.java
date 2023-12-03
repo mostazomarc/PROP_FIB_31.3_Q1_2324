@@ -184,6 +184,7 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
             System.out.println("S'ha creat exitosament");
             char[][] teclat = ControladorPresentacio.consultaTeclat(nomTeclat);
             ControladorPresentacio.vistaTeclat(teclat);
+            ControladorPresentacio.guardaEstat();
             setVisible(false);
         }
     }

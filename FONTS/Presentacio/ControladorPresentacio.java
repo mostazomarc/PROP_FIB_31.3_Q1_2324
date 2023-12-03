@@ -73,7 +73,7 @@ public class ControladorPresentacio {
         controladorDomini.carregarDadesPerfil();
     }
 
-    public void guardaEstat() {
+    public static void guardaEstat() {
         controladorDomini.guardaEstat();
     }
 
@@ -140,7 +140,7 @@ public class ControladorPresentacio {
     }
 
     //TECLATS
-    public List<String> getNomsTeclats() {
+    public static List<String> getNomsTeclats() {
         return controladorDomini.getNomsTeclats();
     }
 
