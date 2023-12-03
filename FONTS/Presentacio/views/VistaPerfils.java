@@ -35,6 +35,7 @@ public class VistaPerfils extends JFrame {
     }
 
     private void iniFrame() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (pantalla.width - 1000) / 2;
