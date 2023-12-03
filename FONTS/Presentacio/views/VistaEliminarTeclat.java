@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.List;
 
 public class VistaEliminarTeclat extends JFrame{
     private JButton Enrere = new JButton("Tornar enrere");
@@ -20,6 +21,8 @@ public class VistaEliminarTeclat extends JFrame{
     private void iniComponents() {
         iniFrame();
         iniButtons();
+        iniTeclats();
+        add(panelContenidos, BorderLayout.CENTER);
 
         //inicialitzar la resta
 
@@ -46,9 +49,38 @@ public class VistaEliminarTeclat extends JFrame{
 
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
-
-        add(panelContenidos, BorderLayout.CENTER);
     }
+
+    private void iniTeclats() {
+        List<String> l = ControladorPresentacio.getNomsTeclats();
+
+        panelContenidos.setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(10, 10, 10, 10);
+
+        int yPos = 1;
+        for (String nomT : l) {
+            JButton button = new JButton(nomT);
+            constraints.gridx = 0;
+            constraints.gridy = yPos++;
+            button.setPreferredSize(new Dimension(200, 50));
+
+            button.addActionListener(e -> {
+                try {
+                    ControladorPresentacio.eliminarTeclat(nomT);
+                    ControladorPresentacio.vistaEliminarTeclat();
+                    ControladorPresentacio.guardaEstat();
+                    setVisible(false);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+            panelContenidos.add(button, constraints);
+        }
+    }
+
 
     /**
      * Assigna els listeners als components corresponents.

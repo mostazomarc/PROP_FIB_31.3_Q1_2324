@@ -170,7 +170,7 @@ public class ControladorPresentacio {
         controladorDomini.crearTeclatLlistaIdioma(nomTeclat, nomIdioma, n, m);
     }
 
-    public void eliminarTeclat(String nomSeleccio) throws ExcepcionsCreadorTeclat{
+    public static void eliminarTeclat(String nomSeleccio) throws ExcepcionsCreadorTeclat{
         controladorDomini.eliminarTeclat(nomSeleccio);
     }
 
