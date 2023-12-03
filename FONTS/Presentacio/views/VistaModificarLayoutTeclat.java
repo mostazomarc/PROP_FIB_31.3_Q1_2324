@@ -8,19 +8,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-public class VistaConsultarDades extends JFrame {
-
-    private JButton Enrere = new JButton("Tornar al menú principal");
+public class VistaModificarLayoutTeclat extends JFrame{
+    private JButton Enrere = new JButton("Tornar enrere");
     private JPanel panelContenidos = new JPanel();
 
-    public VistaConsultarDades () {
+    public VistaModificarLayoutTeclat () {
         setVisible(true);
         iniComponents();
     }
 
     private void iniComponents() {
         iniFrame();
-        iniEnrere();
+        iniButtons();
 
         //inicialitzar la resta
 
@@ -39,12 +38,15 @@ public class VistaConsultarDades extends JFrame {
         setResizable(false);
     }
 
-    private void iniEnrere() {
+    private void iniButtons() {
+
         panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
         panelContenidos.add(Box.createVerticalGlue());
         panelContenidos.add(Box.createHorizontalGlue());
+
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
+
         add(panelContenidos, BorderLayout.CENTER);
     }
 
@@ -71,7 +73,7 @@ public class VistaConsultarDades extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaPrincipal();
+            ControladorPresentacio.vistaGestionarTeclats();
             setVisible(false);
         }
     }

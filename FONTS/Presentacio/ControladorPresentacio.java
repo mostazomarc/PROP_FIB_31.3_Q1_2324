@@ -47,6 +47,13 @@ public class ControladorPresentacio {
 
     public static void vistaTeclat(char[][] teclat) {VistaTeclat vt = new VistaTeclat(teclat); }
 
+    public static void vistaCrearTeclatIdioma() { VistaCrearTeclatIdioma vcti = new VistaCrearTeclatIdioma(); }
+
+    public static void vistaModificarLayoutTeclat() { VistaModificarLayoutTeclat vmlt = new VistaModificarLayoutTeclat(); }
+
+    public static void vistaEliminarTeclat() { VistaEliminarTeclat vet = new VistaEliminarTeclat(); }
+
+
     public static void vistaConsultarTeclats()  {
         VistaConsultarTeclats vct = new VistaConsultarTeclats();
     }

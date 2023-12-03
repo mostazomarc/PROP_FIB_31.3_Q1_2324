@@ -97,14 +97,35 @@ public class VistaGestionarTeclats extends JFrame {
             }
         });
 
-        CLP.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    actionPerformed_buttons(e);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+        CLP.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        CLNP.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        ML.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        E.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         });
     }
@@ -117,6 +138,18 @@ public class VistaGestionarTeclats extends JFrame {
         }
         else if (CLP.equals(source)) {
             ControladorPresentacio.vistaCrearTeclatLlistaPropia();
+            setVisible(false);
+        }
+        else if (CLNP.equals(source)) {
+            ControladorPresentacio.vistaCrearTeclatIdioma();
+            setVisible(false);
+        }
+        else if (ML.equals(source)) {
+            ControladorPresentacio.vistaModificarLayoutTeclat();
+            setVisible(false);
+        }
+        else if (E.equals(source)) {
+            ControladorPresentacio.vistaEliminarTeclat();
             setVisible(false);
         }
     }
