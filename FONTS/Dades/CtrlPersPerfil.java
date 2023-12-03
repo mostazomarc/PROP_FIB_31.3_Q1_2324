@@ -182,6 +182,7 @@ public class CtrlPersPerfil {
     private void afegirPerfil(String nomPerfil) throws PerfilJaExisteix {
         if (perfilExisteix(nomPerfil)) throw new PerfilJaExisteix(nomPerfil);
         perfilActual = new Perfil(nomPerfil);
+        guardar();
     }
 
     /**
@@ -240,6 +241,4 @@ public class CtrlPersPerfil {
         }
         return nomsPerfils;
     }
-
-
 }
