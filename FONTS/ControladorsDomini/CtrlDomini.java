@@ -272,6 +272,8 @@ public class CtrlDomini {
      * Afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual com una nova llista de frequencies
      * @param tipusArxiu El tipus d'arxiu
      * @param filename El nom de l'arxiu
+     * @param i El nom de l'idioma
+     * @param novesEntrades El Map de paraules i frequencies
      * @throws Exception Si no es pot llegir l'arxiu o no es pot afegir la llista de frequencies
      */
     public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) throws Exception {

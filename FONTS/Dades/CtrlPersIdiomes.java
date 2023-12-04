@@ -100,6 +100,7 @@ public class CtrlPersIdiomes {
 
     /**
      * Carrega els idiomes del sistema
+     * @throws Exception Si hi ha algun problema a l'hora de carregar els idiomes
      */
     public void carregar() throws Exception {
         System.out.println("Carregant Idiomes");
