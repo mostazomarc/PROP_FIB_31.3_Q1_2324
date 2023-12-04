@@ -5,17 +5,44 @@ import Excepcions.*;
 
 import java.util.*;
 
-
+/**
+ * Teclat és una classe que conté una disposició de teclat, un idioma i una llista de freqüències
+ *
+ * @author Agustí Costabella (agusti.costabella@estudiantat.upc.edu)
+ */
 public class Teclat {
+    /**
+     * El nom del teclat
+     */
     private String nom;
+    /**
+     * El nombre de columnes del teclat
+     */
     private int dimX;
+    /**
+     * El nombre de files del teclat
+     */
     private int dimY;
+    /**
+     * La disposició del teclat
+     */
     private char[][] disposicio;
+    /**
+     * L'idioma del teclat
+     */
     private Idioma idioma;
+    /**
+     * La llista de freqüències del teclat
+     */
     private LlistaFrequencies llistafreq;
 
-    //Pre: n es el nomnbre de files i m el nombre de columnes
-    //Post: si n*m < el nombre de lletres retorna l'excepció LayoutNovalid
+    /**
+     * Comprova que el layout sigui vàlid
+     * @param n El nombre de files
+     * @param m El nombre de columnes
+     * @throws LayoutNoValid Si el layout no és vàlid
+     * @throws LayoutMassaGran Si el layout és massa gran
+     */
     private void comprovaLayoutValid(int n, int m) throws LayoutNoValid, LayoutMassaGran {
         int totalLletres = idioma.getLletres().size();
         int lletresRequerides = n * m;
@@ -31,18 +58,25 @@ public class Teclat {
         }
     }
 
-
-
-
-
-    //Pre: nomidiomallista és el nom de l'idioma de la llista i nomidiomateclat és el nom de l'idioma del teclat
-    //Post: si són idiomes diferents, és a dir, nomidiomallista != nomidiomateclat, retorna l'excepció IdiomesDiferents
+    /**
+     * Comprova que els idiomes siguin iguals entre la llista i el teclat
+     * @param nomidiomallista El nom de l'idioma de la llista
+     * @param nomidiomateclat El nom de l'idioma del teclat
+     * @throws IdiomesDiferents Si els idiomes són diferents
+     */
     private void comprovaIdiomes(String nomidiomallista, String nomidiomateclat) throws IdiomesDiferents {
         if (nomidiomallista != nomidiomateclat) throw new IdiomesDiferents(nomidiomallista, nomidiomateclat);
     }
 
-    //Pre: la llista de freqüències llistafreq és una llista del Perfil, l'idioma i és l'idioma del teclat, nom és el nom del teclat, n és el nombre de files i m el nombre de columnes
-    //Post: Es crea un teclat amb els paràmetres indicats i es comprova que siguin vàlids
+    /**
+     * Creadora de Teclat amb llista de frequencies
+     * @param nom El nom del teclat
+     * @param llistafreq La llista de freqüències del teclat
+     * @param i L'idioma del teclat
+     * @param n El nombre de columnes del teclat
+     * @param m El nombre de files del teclat
+     * @throws ExcepcionsCreadorTeclat Si el layout no és vàlid o els idiomes són diferents
+     */
     public Teclat(String nom, LlistaFrequencies llistafreq, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat{
         comprovaIdiomes(llistafreq.getNomIdioma(),i.getNom());
         this.nom = nom;
@@ -55,8 +89,14 @@ public class Teclat {
         disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
     }
 
-    //Pre: l'idioma i és l'idioma del teclat, nom és el nom del teclat, n és el nombre de files i m el nombre de columnes
-    //Post: Es crea un teclat amb els paràmetres indicats i es comprova que siguin vàlids. En aquest cas la llista de freqüències que s'usa és la predeterminada de l'idioma i
+    /**
+     * Creadora de Teclat amb llista de frequencies predeterminada d'un idioma
+     * @param nom El nom del teclat
+     * @param i L'idioma del teclat
+     * @param n El nombre de columnes del teclat
+     * @param m El nombre de files del teclat
+     * @throws ExcepcionsCreadorTeclat Si el layout no és vàlid
+     */
     public Teclat(String nom, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat{
         this.nom = nom;
         idioma = i;
@@ -69,7 +109,16 @@ public class Teclat {
 
     }
 
-    public Teclat (String nom,LlistaFrequencies llista, Idioma i, int n, int m, char[][] disposicio) throws ExcepcionsCreadorTeclat{
+    /**
+     * Creadora de Teclat amb disposició ja feta
+     * @param nom El nom del teclat
+     * @param llista La llista de freqüències del teclat
+     * @param i L'idioma del teclat
+     * @param n El nombre de columnes del teclat
+     * @param m El nombre de files del teclat
+     * @param disposicio La disposició del teclat
+     */
+    public Teclat (String nom,LlistaFrequencies llista, Idioma i, int n, int m, char[][] disposicio) {
         this.nom = nom;
         idioma = i;
         this.llistafreq = llista;
@@ -78,39 +127,54 @@ public class Teclat {
         dimY = m;
     }
 
-    //Pre:
-    //Post: Retorna el nom de la llista de freqüències
+    /**
+     * Retorna el nom de la llista de freqüències
+     * @return El nom de la llista de freqüències
+     */
     public String getNomLlistaFreq() {return llistafreq.getNom(); }
 
-
-    //Pre:
-    //Post: Retorna el nom del teclat
+    /**
+     * Retorna el nom del teclat
+     * @return El nom del teclat
+     */
     public String getNom() {
         return nom;
     }
 
-    //Pre:
-    //Post: Retorna la disposició de teclat
+    /**
+     * Retorna la disposició de teclat
+     * @return La disposició de teclat
+     */
     public char[][] getDisposicio() {
         return disposicio;
     }
 
-    //Pre:
-    //Post: Retorna el nom de l'idioma del teclat
+    /**
+     * Retorna el nom de l'idioma del teclat
+     * @return El nom de l'idioma del teclat
+     */
     public String getNomIdioma() {
         return idioma.getNom();
     }
 
-    //Pre:
-    //Post: Retorna el nombre de files del teclat
+    /**
+     * Retorna el nombre de files del teclat
+     * @return El nombre de files del teclat
+     */
     public Integer getDimX() {return dimX; }
 
-    //Pre:
-    //Post: Retorna el nombre de columnes del teclat
+    /**
+     * Retorna el nombre de columnes del teclat
+     * @return El nombre de columnes del teclat
+     */
     public Integer getDimY() {return dimY; }
 
-    //Pre: n i m és el nou nombre de files i columnes respectivament
-    //Post: comprova que siguin vàlids i calcula la disposició nova del teclat
+    /**
+     * Modifica el layout del teclat
+     * @param n El nou nombre de files
+     * @param m El nou nombre de columnes
+     * @throws ExcepcionsCreadorTeclat Si el layout no és vàlid
+     */
     public void modificarLayout(int n, int m) throws ExcepcionsCreadorTeclat {
         comprovaLayoutValid(n, m);
         Estrategia estrategia = new BranchandBound();
