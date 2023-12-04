@@ -1,5 +1,8 @@
 package Excepcions;
 
+/**
+ * Excepció que es llença quan el layout és massa gran
+ */
 public class LayoutMassaGran extends ExcepcionsCreadorTeclat {
     public String getTipusExcepcio() {
         return "LayoutMassaGran";

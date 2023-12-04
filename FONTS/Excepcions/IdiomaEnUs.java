@@ -1,5 +1,8 @@
 package Excepcions;
 
+/**
+ * Excepció que es llença quan un idioma esta en us
+ */
 public class IdiomaEnUs extends ExcepcionsCreadorTeclat {
     public String getTipusExcepcio() {
         return "IdiomaEnUs";
