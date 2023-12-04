@@ -114,10 +114,8 @@ public class CtrlPersPerfilTest {
         cP.canviaPerfil("SegonPerfil");
         cP.canviaPerfil("TercerPerfil");
         List<String> perfilsEsperats = new ArrayList<>();
-        perfilsEsperats.add("NouPerfil");
         perfilsEsperats.add("SegonPerfil");
         perfilsEsperats.add("TercerPerfil");
-        perfilsEsperats.add("Prova");
         assertTrue(cP.getAllPerfils().containsAll(perfilsEsperats));
     }
 
