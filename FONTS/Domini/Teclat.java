@@ -14,6 +14,8 @@ public class Teclat {
     private Idioma idioma;
     private LlistaFrequencies llistafreq;
 
+    private Estrategia algorisme;
+
     //Pre: n es el nomnbre de files i m el nombre de columnes
     //Post: si n*m < el nombre de lletres retorna l'excepció LayoutNovalid
     private void comprovaLayoutValid(int n, int m) throws LayoutNoValid, LayoutMassaGran {
@@ -43,7 +45,7 @@ public class Teclat {
 
     //Pre: la llista de freqüències llistafreq és una llista del Perfil, l'idioma i és l'idioma del teclat, nom és el nom del teclat, n és el nombre de files i m el nombre de columnes
     //Post: Es crea un teclat amb els paràmetres indicats i es comprova que siguin vàlids
-    public Teclat(String nom, LlistaFrequencies llistafreq, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat{
+    public Teclat(String nom, LlistaFrequencies llistafreq, Idioma i, int n, int m, String e) throws ExcepcionsCreadorTeclat{
         comprovaIdiomes(llistafreq.getNomIdioma(),i.getNom());
         this.nom = nom;
         idioma = i;
@@ -51,21 +53,21 @@ public class Teclat {
         comprovaLayoutValid(n,m);
         dimX = n;
         dimY = m;
-        Estrategia estrategia = new BranchandBound();
-        disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+        if (e.equals("BranchAndBound")) algorisme = new BranchandBound();
+        disposicio = algorisme.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
     }
 
     //Pre: l'idioma i és l'idioma del teclat, nom és el nom del teclat, n és el nombre de files i m el nombre de columnes
     //Post: Es crea un teclat amb els paràmetres indicats i es comprova que siguin vàlids. En aquest cas la llista de freqüències que s'usa és la predeterminada de l'idioma i
-    public Teclat(String nom, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat{
+    public Teclat(String nom, Idioma i, int n, int m, String e) throws ExcepcionsCreadorTeclat{
         this.nom = nom;
         idioma = i;
         comprovaLayoutValid(n,m);
         dimX = n;
         dimY = m;
         this.llistafreq = i.getLlistaFreq();
-        Estrategia estrategia = new BranchandBound();
-        disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), i.getLletres(), dimX, dimY);
+        if (e.equals("BranchAndBound")) algorisme = new BranchandBound();
+        disposicio = algorisme.calculaDisposicio(this.llistafreq.getFrequencies(), i.getLletres(), dimX, dimY);
 
     }
 

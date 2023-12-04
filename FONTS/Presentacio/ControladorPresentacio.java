@@ -162,12 +162,12 @@ public class ControladorPresentacio {
         controladorDomini.modificarLayoutTeclat(nomSeleccio, numf, numc);
     }
 
-    public static void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, Integer n, Integer m) throws ExcepcionsCreadorTeclat {
-        controladorDomini.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq, n, m);
+    public static void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, Integer n, Integer m, String estrategia) throws ExcepcionsCreadorTeclat {
+        controladorDomini.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq, n, m, estrategia);
     }
 
-    public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, Integer n, Integer m) throws  ExcepcionsCreadorTeclat {
-        controladorDomini.crearTeclatLlistaIdioma(nomTeclat, nomIdioma, n, m);
+    public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, Integer n, Integer m, String estrategia) throws  ExcepcionsCreadorTeclat {
+        controladorDomini.crearTeclatLlistaIdioma(nomTeclat, nomIdioma, n, m, estrategia);
     }
 
     public static void eliminarTeclat(String nomSeleccio) throws ExcepcionsCreadorTeclat{

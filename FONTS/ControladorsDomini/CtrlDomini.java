@@ -294,15 +294,15 @@ public class CtrlDomini {
         return nouTeclat;
     }
     
-    public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m) throws ExcepcionsCreadorTeclat{
+    public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m, String e) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
-        Teclat nouTeclat = PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat, n, m);
+        Teclat nouTeclat = PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat, n, m, e);
         teclats.afegirTeclat(nouTeclat);
 
     }
-    public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, int n, int m) throws ExcepcionsCreadorTeclat{
+    public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, int n, int m, String e) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
-        Teclat nouTeclat = PerfilActual.crearTeclatLlistaIdioma(nomTeclat, idiomaTeclat, n, m);
+        Teclat nouTeclat = PerfilActual.crearTeclatLlistaIdioma(nomTeclat, idiomaTeclat, n, m, e);
         teclats.afegirTeclat(nouTeclat);
     }
 

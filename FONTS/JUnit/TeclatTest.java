@@ -45,7 +45,8 @@ public class TeclatTest {
     public void crearTeclatLlistaPropia() throws ExcepcionsCreadorTeclat {
         int numf = 3;
         int numc = 10;
-        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, numf, numc);
+        String e = "BranchAndBound";
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, numf, numc, e);
         char[][] expected = {{'g','c','f','i','l','o','h','b','k','z'},{'p','r','a','d','e','u','q','t','v','w'}, {'x','y','s','j','n','m', ' ', ' ', ' ', ' '}};
         assertEquals("agus", resultat.getNom());
         assertEquals(numf, (int) resultat.getDimX());
@@ -60,7 +61,8 @@ public class TeclatTest {
     public void crearTeclatLlistaIdioma() throws ExcepcionsCreadorTeclat {
         int numf = 3;
         int numc = 10;
-        Teclat resultat = new Teclat("agus", idiomaProva, numf, numc);
+        String e = "BranchAndBound";
+        Teclat resultat = new Teclat("agus", idiomaProva, numf, numc, e);
         char[][] expected = {{'g','c','f','i','l','o','h','b','k','z'},{'p','r','a','d','e','u','q','t','v','w'}, {'x','y','s','j','n','m', ' ', ' ', ' ', ' '}};
         assertEquals("agus", resultat.getNom());
         assertEquals(numf, (int) resultat.getDimX());
@@ -77,7 +79,7 @@ public class TeclatTest {
     //Post:
     @Test
     public void getNomLlistaFreq() throws ExcepcionsCreadorTeclat {
-        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10, "BranchAndBound");
         assertEquals("LlistaProva", resultat.getNomLlistaFreq());
     }
 
@@ -86,7 +88,7 @@ public class TeclatTest {
     //Post: es retorna el nom del teclat
     @Test
     public void getNom() throws ExcepcionsCreadorTeclat {
-        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10, "BranchAndBound");
         assertEquals("agus", resultat.getNom());
     }
 
@@ -94,7 +96,7 @@ public class TeclatTest {
     //Post: es retorna la disposició de teclat
     @Test
     public void getDisposicio() throws ExcepcionsCreadorTeclat {
-        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10, "BranchAndBound");
         char[][] expected = {{'g','c','f','i','l','o','h','b','k','z'},{'p','r','a','d','e','u','q','t','v','w'}, {'x','y','s','j','n','m', ' ', ' ', ' ', ' '}};
         assertArrayEquals(expected, resultat.getDisposicio());
         assertTrue(true);
@@ -103,25 +105,25 @@ public class TeclatTest {
 
     @Test
     public void getNomIdioma() throws ExcepcionsCreadorTeclat {
-        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10, "BranchAndBound");
         assertEquals("ESPAÑOL", resultat.getNomIdioma());
     }
 
     @Test
     public void getDimX() throws ExcepcionsCreadorTeclat {
-        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10, "BranchAndBound");
         assertEquals(3, (int)resultat.getDimX());
     }
 
     @Test
     public void getDimY() throws ExcepcionsCreadorTeclat {
-        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10, "BranchAndBound");
         assertEquals(10, (int)resultat.getDimY());
     }
 
     @Test
     public void modificarLayout() throws ExcepcionsCreadorTeclat {
-        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10);
+        Teclat resultat = new Teclat("agus", llistaprova, idiomaProva, 3, 10, "BranchAndBound");
         resultat.modificarLayout(3,9);
         assertEquals(3, (int)resultat.getDimX());
         assertEquals(9, (int)resultat.getDimY());

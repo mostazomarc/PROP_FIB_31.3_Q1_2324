@@ -180,7 +180,7 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
             String nomLl = (String) inputNomLl.getSelectedItem();
             int nf = Integer.parseInt(inputNF.getText());
             int nc = Integer.parseInt(inputNC.getText());
-            ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat,nomIdioma,nomLl,nf,nc);
+            ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat,nomIdioma,nomLl,nf,nc,"BranchAndBound");
             System.out.println("S'ha creat exitosament");
             char[][] teclat = ControladorPresentacio.consultaTeclat(nomTeclat);
             ControladorPresentacio.vistaTeclat(teclat);
