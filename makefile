@@ -113,6 +113,9 @@ exe: jars
 clean:
 	rm -r ./EXEnoEntrega/out/*
 
+cleanSaves:
+	rm ./DATA/Saves/*
+
 cleanExe:
 	rm ./EXE/Alfabets/*
 	rm ./EXE/Algorisme/*
