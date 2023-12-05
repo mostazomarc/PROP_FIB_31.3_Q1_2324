@@ -1,25 +1,48 @@
 package Presentacio.views;
 
+import java.util.List;
+import java.util.ArrayList;
+
+
+import Excepcions.LayoutNoValid;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-public class VistaCrearTeclatIdioma extends JFrame{
+public class VistaCrearTeclatIdioma extends JFrame {
+
+    private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
+    private JLabel labelNomTeclat = new JLabel("Nom del teclat");
+    private JTextField inputNomTeclat = new JTextField(20);
+    private JLabel labelNomIdioma = new JLabel("Idioma");
+    //private String[] idiomes = ControladorPresentacio.getNomsIdiomes().toArray(new String[0]);
+    private JComboBox inputNomIdioma;
+    private String[] freqs = new String[]{"Selecciona llista freqüències"};
+    private JLabel labelNF = new JLabel("Nombre de files del layout");
+    private JTextField inputNF = new JTextField(20);
+    private JLabel labelNC = new JLabel("Nombre de columnes del layout");
+    private JTextField inputNC = new JTextField(20);
     private JButton Enrere = new JButton("Tornar enrere");
+    private JButton Crear = new JButton("Crear teclat");
     private JPanel panelContenidos = new JPanel();
 
-    public VistaCrearTeclatIdioma () {
+    public VistaCrearTeclatIdioma() {
         setVisible(true);
         iniComponents();
     }
 
     private void iniComponents() {
         iniFrame();
-        iniButtons();
+        panelContenidos.setLayout(new FlowLayout());
+        iniEnrere();
+        iniInputs();
+        add(panelContenidos, BorderLayout.CENTER);
+
 
         //inicialitzar la resta
 
@@ -38,16 +61,49 @@ public class VistaCrearTeclatIdioma extends JFrame{
         setResizable(false);
     }
 
-    private void iniButtons() {
+    private void iniEnrere() {
 
-        panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
-        panelContenidos.add(Box.createVerticalGlue());
-        panelContenidos.add(Box.createHorizontalGlue());
-
+        panelContenidos.add(Enrere);
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
 
-        add(panelContenidos, BorderLayout.CENTER);
+    }
+
+    private void iniInputs() {
+        panelContenidos.setLayout(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL; // Fill the cell horizontally
+        constraints.anchor = GridBagConstraints.CENTER; // Center the component within the cell
+        constraints.insets = new Insets(10, 10, 5, 10); // Set spacing between buttons
+
+        // Add the buttons to the grid layout
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        panelContenidos.add(labelIntro, constraints);
+        constraints.gridy = 2;
+        panelContenidos.add(labelNomTeclat, constraints);
+        constraints.gridy = 3;
+        panelContenidos.add(inputNomTeclat, constraints);
+        constraints.gridy = 4;
+        panelContenidos.add(labelNomIdioma, constraints);
+        constraints.gridy = 5;
+        List<String> idiomes = ControladorPresentacio.getNomsIdiomes();
+        idiomes.add(0, "Selecciona idioma");
+        inputNomIdioma = new JComboBox<>(idiomes.toArray(new String[0]));
+        panelContenidos.add(inputNomIdioma, constraints);
+        constraints.gridy = 6;
+        panelContenidos.add(labelNF, constraints);
+        constraints.gridy = 7;
+        panelContenidos.add(inputNF, constraints);
+        constraints.gridy = 8;
+        panelContenidos.add(labelNC, constraints);
+        constraints.gridy = 9;
+        panelContenidos.add(inputNC, constraints);
+        constraints.gridy = 10;
+        panelContenidos.add(Crear, constraints);
+
     }
 
     /**
@@ -68,12 +124,41 @@ public class VistaCrearTeclatIdioma extends JFrame{
                 ex.printStackTrace();
             }
         });
+
+        Crear.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        inputNomIdioma.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
             ControladorPresentacio.vistaGestionarTeclats();
+            setVisible(false);
+        }
+
+        else if (Crear.equals(source)) {
+            // Extract user input from text fields
+            String nomTeclat = inputNomTeclat.getText();
+
+            String nomIdioma = (String) inputNomIdioma.getSelectedItem();
+            int nf = Integer.parseInt(inputNF.getText());
+            int nc = Integer.parseInt(inputNC.getText());
+            ControladorPresentacio.crearTeclatLlistaIdioma(nomTeclat,nomIdioma,nf,nc,"BranchAndBound");
+            char[][] teclat = ControladorPresentacio.consultaTeclat(nomTeclat);
+            ControladorPresentacio.vistaTeclat(teclat);
             setVisible(false);
         }
     }

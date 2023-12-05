@@ -166,7 +166,7 @@ public class ControladorPresentacio {
         controladorDomini.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq, n, m, estrategia);
     }
 
-    public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, Integer n, Integer m, String estrategia) throws  ExcepcionsCreadorTeclat {
+    public static void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, Integer n, Integer m, String estrategia) throws  ExcepcionsCreadorTeclat {
         controladorDomini.crearTeclatLlistaIdioma(nomTeclat, nomIdioma, n, m, estrategia);
     }
 

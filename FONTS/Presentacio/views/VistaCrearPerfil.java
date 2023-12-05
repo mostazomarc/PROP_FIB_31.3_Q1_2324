@@ -110,8 +110,6 @@ public class VistaCrearPerfil extends JFrame {
             String nomP = inputNomPerfil.getText();
             ControladorPresentacio.iniciaInstancia(nomP);
             ControladorPresentacio.vistaPerfils();
-            List<String> l = ControladorPresentacio.getAllPerfils();
-            System.out.println(l);
             setVisible(false);
         }
     }
