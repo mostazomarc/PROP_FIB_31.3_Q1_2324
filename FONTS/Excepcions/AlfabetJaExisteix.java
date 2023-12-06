@@ -1,5 +1,8 @@
 package Excepcions;
 
+/**
+ * Excepció que es llença quan un alfabet ja existeix
+ */
 public class AlfabetJaExisteix extends ExcepcionsCreadorTeclat {
     public String getTipusExcepcio() {
         return "AlfabetJaExisteix";

@@ -1,5 +1,8 @@
 package Excepcions;
 
+/**
+ * Excepció que es llença quan un alfabet està en ús per algun idioma
+ */
 public class AlfabetEnUs extends ExcepcionsCreadorTeclat {
     public String getTipusExcepcio() {
         return "AlfabetEnUs";

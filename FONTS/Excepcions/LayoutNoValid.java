@@ -1,5 +1,8 @@
 package Excepcions;
 
+/**
+ * Excepció que es llença quan el layout no és vàlid
+ */
 public class LayoutNoValid extends ExcepcionsCreadorTeclat {
     public String getTipusExcepcio() {
         return "LayoutNoValid";

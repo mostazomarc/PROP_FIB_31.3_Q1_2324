@@ -1,5 +1,8 @@
 package Excepcions;
 
+/**
+ * Excepció que es llença quan un idioma ja existeix
+ */
 public class IdiomaJaExisteix extends ExcepcionsCreadorTeclat {
     public String getTipusExcepcio() {
         return "IdiomaJaExisteix";
