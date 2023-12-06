@@ -85,8 +85,8 @@ public class Teclat {
         comprovaLayoutValid(n,m);
         dimX = n;
         dimY = m;
-        Estrategia estrategia = new BranchandBound();
-        disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+        if (e.equals("BranchAndBound")) algorisme = new BranchandBound();
+        disposicio = algorisme.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
     }
 
     /**
@@ -104,8 +104,8 @@ public class Teclat {
         dimX = n;
         dimY = m;
         this.llistafreq = i.getLlistaFreq();
-        Estrategia estrategia = new BranchandBound();
-        disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), i.getLletres(), dimX, dimY);
+        if (e.equals("BranchAndBound")) algorisme = new BranchandBound();
+        disposicio = algorisme.calculaDisposicio(this.llistafreq.getFrequencies(), i.getLletres(), dimX, dimY);
 
     }
 

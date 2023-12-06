@@ -255,7 +255,7 @@ public class PerfilTest {
     @Test
     public void crearTeclatLlistaPropia() throws Exception {
         perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
-        perfilProva.crearTeclatLlistaPropia("TeclatProva", "LlistaProva", idiomaProva, 3, 10);
+        perfilProva.crearTeclatLlistaPropia("TeclatProva", "LlistaProva", idiomaProva, 3, 10, "BranchAndBound");
         List<String> nomsEsperats = new ArrayList<>();
         nomsEsperats.add("TeclatProva");
         assertEquals(perfilProva.getNomsTeclats(), nomsEsperats);
@@ -267,7 +267,7 @@ public class PerfilTest {
     @Test
     public void crearTeclatLlistaIdioma() throws Exception {
         perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
-        perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
+        perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10, "BranchAndBound");
         List<String> nomsEsperats = new ArrayList<>();
         nomsEsperats.add("TeclatProva");
         assertEquals(perfilProva.getNomsTeclats(), nomsEsperats);
@@ -287,7 +287,7 @@ public class PerfilTest {
     @Test
     public void eliminaTeclat() throws Exception {
         perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
-        perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
+        perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10, "BranchAndBound");
         perfilProva.eliminarTeclat("TeclatProva");
         assertFalse(perfilProva.getNomsTeclats().contains("TeclatProva"));
         assertTrue(perfilProva.getNomsTeclats().isEmpty());
@@ -332,8 +332,8 @@ public class PerfilTest {
     public void teclatsMateixNom() throws Exception {
         perfilProva.afegirLlistaFreq("LlistaProva", idiomaProva, llistaParaulesProva);
         try {
-            perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
-            perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10);
+            perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10, "BranchAndBound");
+            perfilProva.crearTeclatLlistaIdioma("TeclatProva", idiomaProva, 3, 10, "BranchAndBound");
             fail();
         } catch (TeclatJaExisteix e2) {
             assertTrue(true);

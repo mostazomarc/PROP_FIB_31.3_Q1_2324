@@ -279,7 +279,7 @@ public class CtrlDomini {
     public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) throws Exception {
         if (tipusArxiu != "Manual" && tipusArxiu != "Carregada") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
         Idioma idiomaLlista = idiomes.getIdioma(i);
-        LlistaFrequencies llista = PerfilActual.afegirLlistaFreq(filename,idiomaLlista,novesEntrades);
+        LlistaFrequencies llista = PerfilActual.afegirLlistaFreq(filepath,idiomaLlista,novesEntrades);
         llistes.guardarLlistaFreq(llista);
     }
 
@@ -391,7 +391,7 @@ public class CtrlDomini {
      */
     public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws Exception {
         Alfabet alfabetIdioma = alfabets.getAlfabet(nomAlfabet);
-        Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filename);
+        Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filepath);
         idiomes.afegirIdioma(nomIdioma, alfabetIdioma, novesEntrades);
     }
 
@@ -454,7 +454,7 @@ public class CtrlDomini {
      */
     public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
-        Teclat nouTeclat = PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat, n, m);
+        Teclat nouTeclat = PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat, n, m, e);
         teclats.afegirTeclat(nouTeclat);
 
     }
@@ -469,7 +469,7 @@ public class CtrlDomini {
      */
     public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, int n, int m) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
-        Teclat nouTeclat = PerfilActual.crearTeclatLlistaIdioma(nomTeclat, idiomaTeclat, n, m);
+        Teclat nouTeclat = PerfilActual.crearTeclatLlistaIdioma(nomTeclat, idiomaTeclat, n, m, e);
         teclats.afegirTeclat(nouTeclat);
     }
 

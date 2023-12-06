@@ -3,7 +3,8 @@ CLASS_INPUT =	./FONTS/Domini/*.java \
 				./FONTS/Dades/*.java \
 				./FONTS/Stubs/*.java \
 				./FONTS/Excepcions/*.java \
-				./FONTS/Presentacio/*.java
+				./FONTS/Presentacio/*.java \
+				./FONTS/Presentacio/views/*.java
 
 CLASS_OUTPUT =	./EXEnoEntrega/out/
 

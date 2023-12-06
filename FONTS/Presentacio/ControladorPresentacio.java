@@ -1,5 +1,4 @@
 package Presentacio;
-import java.io.FileNotFoundException;
 
 import java.util.*;
 
@@ -28,8 +27,6 @@ public class ControladorPresentacio {
      */
     public ControladorPresentacio() throws Exception {
         controladorDomini = controladorDomini.getInstance();
-        vt = new VistaTerminal(this);
-        vt.inicialitzaTerminal();
     }
 
     /**
@@ -40,6 +37,51 @@ public class ControladorPresentacio {
     public void iniciaInstancia(String nomPerfil) throws Exception{
         controladorDomini.iniciaInstancia(nomPerfil);
     }
+
+    public static void vistaPerfils() throws Exception {
+        VistaPerfils vp = new VistaPerfils();
+    }
+
+    public static void vistaCrearPerfil() throws Exception {
+        VistaCrearPerfil vcp = new VistaCrearPerfil();
+    }
+
+
+    public static void vistaPrincipal() {
+        VistaPrincipal vp = new VistaPrincipal();
+    }
+
+    public static void vistaInfoFuncions()  {
+        VistaInfoFuncions vgt = new VistaInfoFuncions();
+    }
+
+    public static void vistaGestionarTeclats()  {
+        VistaGestionarTeclats vgt = new VistaGestionarTeclats();
+    }
+
+    public static void vistaCrearTeclatLlistaPropia() { VistaCrearTeclatLlistaPropia vclp = new VistaCrearTeclatLlistaPropia(); }
+
+    public static void vistaTeclat(char[][] teclat) {VistaTeclat vt = new VistaTeclat(teclat); }
+
+    public static void vistaCrearTeclatIdioma() { VistaCrearTeclatIdioma vcti = new VistaCrearTeclatIdioma(); }
+
+    public static void vistaModificarLayoutTeclat() { VistaModificarLayoutTeclat vmlt = new VistaModificarLayoutTeclat(); }
+
+    public static void vistaEliminarTeclat() { VistaEliminarTeclat vet = new VistaEliminarTeclat(); }
+
+
+    public static void vistaConsultarTeclats()  {
+        VistaConsultarTeclats vct = new VistaConsultarTeclats();
+    }
+
+    public static void vistaGestionarDades() {
+        VistaGestionarDades vgt = new VistaGestionarDades();
+    }
+
+    public static void vistaConsultarDades() {
+        VistaConsultarDades vcd = new VistaConsultarDades();
+    }
+
 
     //NORMAL
 

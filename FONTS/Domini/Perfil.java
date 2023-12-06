@@ -193,10 +193,10 @@ public class Perfil {
      * @throws TeclatJaExisteix Si el teclat ja existeix
      * @throws LlistaFreqNoExisteix Si la llista no existeix
      */
-    public Teclat crearTeclatLlistaPropia(String NomTeclat, String NomLlista, Idioma idioma, int n, int m) throws ExcepcionsCreadorTeclat {
+    public Teclat crearTeclatLlistaPropia(String NomTeclat, String NomLlista, Idioma idioma, int n, int m, String e) throws ExcepcionsCreadorTeclat {
         comprovaLlistaNoExisteix(NomLlista);
         if (teclats.containsKey(NomTeclat)) throw new TeclatJaExisteix(NomTeclat);
-        teclats.put(NomTeclat, new Teclat(NomTeclat, frequencies.get(NomLlista), idioma, n, m));
+        teclats.put(NomTeclat, new Teclat(NomTeclat, frequencies.get(NomLlista), idioma, n, m, e));
         return teclats.get(NomTeclat);
     }
 
@@ -211,9 +211,9 @@ public class Perfil {
      * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix
      * @throws TeclatJaExisteix Si el teclat ja existeix
      */
-    public Teclat crearTeclatLlistaIdioma(String NomTeclat, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat {
+    public Teclat crearTeclatLlistaIdioma(String NomTeclat, Idioma i, int n, int m, String e) throws ExcepcionsCreadorTeclat {
         if (teclats.containsKey(NomTeclat)) throw new TeclatJaExisteix(NomTeclat);
-        teclats.put(NomTeclat, new Teclat(NomTeclat, i, n, m));
+        teclats.put(NomTeclat, new Teclat(NomTeclat, i, n, m, e));
         return teclats.get(NomTeclat);
     }
 

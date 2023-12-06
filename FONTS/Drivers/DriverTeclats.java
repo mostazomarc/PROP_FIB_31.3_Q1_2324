@@ -138,7 +138,7 @@ public class DriverTeclats {
         System.out.println("Introdueixi el nombre de columnes del layout: ");
         int m = s.nextInt();
         try {
-            controlador.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq, n, m);
+            controlador.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq, n, m, "BranchAndBound");
             char[][] teclat = controlador.consultaTeclat(nomTeclat);
             System.out.println();
             System.out.println("La disposicio del teclat generat ha estat la següent: \n");
@@ -178,7 +178,7 @@ public class DriverTeclats {
         System.out.println("Introdueixi el nombre de columnes del layout: ");
         int m = s.nextInt();
         try {
-            controlador.crearTeclatLlistaIdioma(nomTeclat, nomIdioma, n, m);
+            controlador.crearTeclatLlistaIdioma(nomTeclat, nomIdioma, n, m, "BranchAndBound");
             char[][] teclat = controlador.consultaTeclat(nomTeclat);
             System.out.println();
             System.out.println("La disposició del teclat generat ha estat la següent: \n");

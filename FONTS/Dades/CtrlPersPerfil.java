@@ -167,6 +167,7 @@ public class CtrlPersPerfil {
         try {
             carregar(nomPerfil);
         } catch (PerfilNoExisteix perfilNoExisteix) {
+            System.out.println("Perfil Nou");
             afegirPerfil(nomPerfil);
         }
         return perfilActual;
@@ -240,6 +241,4 @@ public class CtrlPersPerfil {
         }
         return nomsPerfils;
     }
-
-
 }
