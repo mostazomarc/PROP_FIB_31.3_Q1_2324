@@ -452,7 +452,7 @@ public class CtrlDomini {
      * @param m El nombre de columnes
      * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix o no es pot afegir el teclat
      */
-    public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m) throws ExcepcionsCreadorTeclat{
+    public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m, String e) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
         Teclat nouTeclat = PerfilActual.crearTeclatLlistaPropia(nomTeclat, nomLlistaFreq, idiomaTeclat, n, m, e);
         teclats.afegirTeclat(nouTeclat);
@@ -467,7 +467,7 @@ public class CtrlDomini {
      * @param m El nombre de columnes
      * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix o no es pot afegir el teclat
      */
-    public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, int n, int m) throws ExcepcionsCreadorTeclat{
+    public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, int n, int m, String e) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
         Teclat nouTeclat = PerfilActual.crearTeclatLlistaIdioma(nomTeclat, idiomaTeclat, n, m, e);
         teclats.afegirTeclat(nouTeclat);
