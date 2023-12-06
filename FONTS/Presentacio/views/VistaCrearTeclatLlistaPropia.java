@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 
+import Domini.BranchandBound;
 import Excepcions.LayoutNoValid;
 import Presentacio.ControladorPresentacio;
 
@@ -20,7 +21,6 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
     private JLabel labelNomTeclat = new JLabel("Nom del teclat");
     private JTextField inputNomTeclat = new JTextField(20);
     private JLabel labelNomIdioma = new JLabel("Idioma");
-    //private String[] idiomes = ControladorPresentacio.getNomsIdiomes().toArray(new String[0]);
     private JComboBox inputNomIdioma;
     private JLabel labelNomLl = new JLabel("Llista de freqüències");
     private String[] freqs = new String[]{"Selecciona llista freqüències"};
@@ -30,6 +30,8 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
     private JTextField inputNF = new JTextField(20);
     private JLabel labelNC = new JLabel("Nombre de columnes del layout");
     private JTextField inputNC = new JTextField(20);
+    private JLabel labelAlgorisme = new JLabel("Algorisme");
+    private JComboBox inputAlgorisme;
     private JButton Enrere = new JButton("Tornar enrere");
     private JButton Crear = new JButton("Crear teclat");
     private JPanel panelContenidos = new JPanel();
@@ -120,6 +122,12 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
         constraints.gridy = 11;
         panelContenidos.add(inputNC, constraints);
         constraints.gridy = 12;
+        panelContenidos.add(labelAlgorisme, constraints);
+        constraints.gridy = 13;
+        String[] algorismes = {"Selecciona algorisme", "BranchAndBound", "GeneticAlgorithm"};
+        inputAlgorisme= new JComboBox<>(algorismes);
+        panelContenidos.add(inputAlgorisme, constraints);
+        constraints.gridy = 14;
         panelContenidos.add(Crear, constraints);
 
         add(panelContenidos, BorderLayout.CENTER);
@@ -191,7 +199,8 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
             String nomLl = (String) inputNomLl.getSelectedItem();
             int nf = Integer.parseInt(inputNF.getText());
             int nc = Integer.parseInt(inputNC.getText());
-            ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat,nomIdioma,nomLl,nf,nc,"BranchAndBound");
+            String estrategia = (String) inputAlgorisme.getSelectedItem();
+            ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat,nomIdioma,nomLl,nf,nc,estrategia);
             char[][] teclat = ControladorPresentacio.consultaTeclat(nomTeclat);
             ControladorPresentacio.vistaTeclat(teclat);
             setVisible(false);

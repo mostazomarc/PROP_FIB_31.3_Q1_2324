@@ -27,6 +27,9 @@ public class VistaCrearTeclatIdioma extends JFrame {
     private JTextField inputNF = new JTextField(20);
     private JLabel labelNC = new JLabel("Nombre de columnes del layout");
     private JTextField inputNC = new JTextField(20);
+
+    private JLabel labelAlgorisme = new JLabel("Algorisme");
+    private JComboBox inputAlgorisme;
     private JButton Enrere = new JButton("Tornar enrere");
     private JButton Crear = new JButton("Crear teclat");
     private JPanel panelContenidos = new JPanel();
@@ -102,6 +105,12 @@ public class VistaCrearTeclatIdioma extends JFrame {
         constraints.gridy = 9;
         panelContenidos.add(inputNC, constraints);
         constraints.gridy = 10;
+        panelContenidos.add(labelAlgorisme, constraints);
+        constraints.gridy = 11;
+        String[] algorismes = {"Selecciona algorisme", "BranchAndBound", "GeneticAlgorithm"};
+        inputAlgorisme= new JComboBox<>(algorismes);
+        panelContenidos.add(inputAlgorisme, constraints);
+        constraints.gridy = 12;
         panelContenidos.add(Crear, constraints);
 
     }
@@ -156,7 +165,8 @@ public class VistaCrearTeclatIdioma extends JFrame {
             String nomIdioma = (String) inputNomIdioma.getSelectedItem();
             int nf = Integer.parseInt(inputNF.getText());
             int nc = Integer.parseInt(inputNC.getText());
-            ControladorPresentacio.crearTeclatLlistaIdioma(nomTeclat,nomIdioma,nf,nc,"BranchAndBound");
+            String estrategia = (String) inputAlgorisme.getSelectedItem();
+            ControladorPresentacio.crearTeclatLlistaIdioma(nomTeclat,nomIdioma,nf,nc,estrategia);
             char[][] teclat = ControladorPresentacio.consultaTeclat(nomTeclat);
             ControladorPresentacio.vistaTeclat(teclat);
             setVisible(false);
