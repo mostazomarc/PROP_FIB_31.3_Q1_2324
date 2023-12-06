@@ -92,7 +92,7 @@ public class CtrlPersTeclatsTest {
         llistaParaulesProva.put("Menjar", 30);
         llistaParaulesProva.put("Fideu", 30);
         llistaProva = new LlistaFrequencies("LlistaProva", idiomaProva, llistaParaulesProva);
-        teclatProva = new Teclat("nouTeclat", llistaProva, idiomaProva, 3, 10);
+        teclatProva = new Teclat("nouTeclat", llistaProva, idiomaProva, 3, 10, "BranchAndBound");
     }
 
     /**
