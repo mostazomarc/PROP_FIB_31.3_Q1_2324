@@ -262,7 +262,7 @@ public class CtrlDomini {
         if (tipusArxiu == "llista") {
             novesEntrades = llistaToEntrades(novesEntrades,LlistaLlegida);
         }
-         else {
+        else {
             novesEntrades = textToEntrades(novesEntrades,LlistaLlegida);
         }
         return novesEntrades;
@@ -271,13 +271,13 @@ public class CtrlDomini {
     /**
      * Afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual com una nova llista de frequencies
      * @param tipusArxiu El tipus d'arxiu
-     * @param filename El nom de l'arxiu
+     * @param filepath El path de l'arxiu
      * @param i El nom de l'idioma
      * @param novesEntrades El Map de paraules i frequencies
      * @throws Exception Si no es pot llegir l'arxiu o no es pot afegir la llista de frequencies
      */
-    public void novaLlistaPerfil(String tipusArxiu, String filename, String i , Map<String,Integer> novesEntrades) throws Exception {
-        if (tipusArxiu != "Manual" && tipusArxiu != "Carregada") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
+    public void novaLlistaPerfil(String tipusArxiu, String filepath, String i , Map<String,Integer> novesEntrades) throws Exception {
+        if (tipusArxiu != "Manual" && tipusArxiu != "Carregada") novesEntrades = llegirLlistaFreq(tipusArxiu,filepath);
         Idioma idiomaLlista = idiomes.getIdioma(i);
         LlistaFrequencies llista = PerfilActual.afegirLlistaFreq(filepath,idiomaLlista,novesEntrades);
         llistes.guardarLlistaFreq(llista);
@@ -386,10 +386,10 @@ public class CtrlDomini {
      * @param nomIdioma El nom de l'idioma
      * @param nomAlfabet El nom de l'alfabet
      * @param tipusArxiu El tipus d'arxiu
-     * @param filename El nom de l'arxiu
+     * @param filepath El path de l'arxiu
      * @throws Exception Si l'idioma ja existeix o no es pot afegir l'idioma o la llista de frequencies
      */
-    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws Exception {
+    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filepath) throws Exception {
         Alfabet alfabetIdioma = alfabets.getAlfabet(nomAlfabet);
         Map<String, Integer> novesEntrades = llegirLlistaFreq(tipusArxiu, filepath);
         idiomes.afegirIdioma(nomIdioma, alfabetIdioma, novesEntrades);
@@ -517,6 +517,12 @@ public class CtrlDomini {
         }
 
         return sdades;
+    }
+
+
+    public List<String> getNomsIdiomes() {
+        Set<String> noms = idiomes.getIdiomes().keySet();
+        return new ArrayList<>(noms);
     }
 
 }

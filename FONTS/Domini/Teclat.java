@@ -35,6 +35,10 @@ public class Teclat {
      * La llista de freqüències del teclat
      */
     private LlistaFrequencies llistafreq;
+    /**
+     * L'algorisme emprat per a construir el teclat
+     */
+    private Estrategia algorisme;
 
     /**
      * Comprova que el layout sigui vàlid
@@ -77,7 +81,7 @@ public class Teclat {
      * @param m El nombre de files del teclat
      * @throws ExcepcionsCreadorTeclat Si el layout no és vàlid o els idiomes són diferents
      */
-    public Teclat(String nom, LlistaFrequencies llistafreq, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat{
+    public Teclat(String nom, LlistaFrequencies llistafreq, Idioma i, int n, int m, String e) throws ExcepcionsCreadorTeclat{
         comprovaIdiomes(llistafreq.getNomIdioma(),i.getNom());
         this.nom = nom;
         idioma = i;
@@ -97,7 +101,7 @@ public class Teclat {
      * @param m El nombre de files del teclat
      * @throws ExcepcionsCreadorTeclat Si el layout no és vàlid
      */
-    public Teclat(String nom, Idioma i, int n, int m) throws ExcepcionsCreadorTeclat{
+    public Teclat(String nom, Idioma i, int n, int m, String e) throws ExcepcionsCreadorTeclat{
         this.nom = nom;
         idioma = i;
         comprovaLayoutValid(n,m);

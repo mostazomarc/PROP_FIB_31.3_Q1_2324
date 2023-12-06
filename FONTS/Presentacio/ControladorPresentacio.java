@@ -6,7 +6,7 @@ import ControladorsDomini.CtrlDomini;
 import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.LlistaFreqNoExisteix;
 import Excepcions.TeclatNoExisteix;
-
+import Presentacio.views.*;
 /**
  * ControladorPresentacio es la classe que s'encarrega de comunicar la Vista amb el Controlador de Domini
  */
@@ -18,7 +18,7 @@ public class ControladorPresentacio {
     /**
      * Controlador de Domini
      */
-    private CtrlDomini controladorDomini;
+    private static CtrlDomini controladorDomini;
 
     /**
      * Creadora de ControladorPresentacio
@@ -29,12 +29,14 @@ public class ControladorPresentacio {
         controladorDomini = controladorDomini.getInstance();
     }
 
+    public static List<String> getNomsIdiomes() {return controladorDomini.getNomsIdiomes();}
+
     /**
      * Inicia una instancia amb el perfil x
      * @param nomPerfil nom del perfil amb el que s'inicia la instancia
      * @throws Exception si hi ha algun error en la inicialització
      */
-    public void iniciaInstancia(String nomPerfil) throws Exception{
+    public static void iniciaInstancia(String nomPerfil) throws Exception{
         controladorDomini.iniciaInstancia(nomPerfil);
     }
 
@@ -89,7 +91,7 @@ public class ControladorPresentacio {
      * Carrega les dades del sistema i del perfil
      * @throws Exception Si hi ha algun error en carregar les dades
      */
-    public void carregarDades()throws Exception{
+    public static void carregarDades()throws Exception{
         controladorDomini.carregarDadesSistema();
         controladorDomini.carregarDadesPerfil();
     }
@@ -97,7 +99,7 @@ public class ControladorPresentacio {
     /**
      * Guarda les dades del sistema i del perfil
      */
-    public void guardaEstat() {
+    public static void guardaEstat() {
         controladorDomini.guardaEstat();
     }
 
@@ -121,7 +123,7 @@ public class ControladorPresentacio {
      * Obté una llista amb els noms d'usuari dels perfils
      * @return llista amb els noms d'usuari dels perfils
      */
-    public List<String> getAllPerfils() {
+    public static List<String> getAllPerfils() {
         return controladorDomini.getAllPerfils();
     }
 
@@ -164,7 +166,7 @@ public class ControladorPresentacio {
      * Retorna els noms de les llistes de frequencies del Perfil Actual
      * @return Els noms de les llistes de frequencies del Perfil Actual
      */
-    public List<String> getNomLlistesGuardades() {
+    public static List<String> getNomLlistesGuardades() {
         return controladorDomini.getNomLlistesGuardades();
     }
 
@@ -174,7 +176,7 @@ public class ControladorPresentacio {
      * @return El nom de l'idioma de la llista amb nom nomllista
      * @throws LlistaFreqNoExisteix Si la llista amb nom nomLlista no existeix
      */
-    public String getNomIdiomaLlista(String nomLlista) throws LlistaFreqNoExisteix{
+    public static String getNomIdiomaLlista(String nomLlista) throws LlistaFreqNoExisteix{
         return controladorDomini.getNomIdiomaLlista(nomLlista);
     }
 
@@ -248,7 +250,7 @@ public class ControladorPresentacio {
      * Retorna els noms dels teclats del Perfil Actual
      * @return Els noms dels teclats del Perfil Actual
      */
-    public List<String> getNomsTeclats() {
+    public static List<String> getNomsTeclats() {
         return controladorDomini.getNomsTeclats();
     }
 
@@ -278,7 +280,7 @@ public class ControladorPresentacio {
      * @return La disposició de lletres del teclat amb nom nomTeclat
      * @throws ExcepcionsCreadorTeclat Si el teclat amb nom nomTeclat no existeix
      */
-    public char[][] consultaTeclat(String nomSeleccio) throws ExcepcionsCreadorTeclat {
+    public static char[][] consultaTeclat(String nomSeleccio) throws ExcepcionsCreadorTeclat {
         return controladorDomini.consultaTeclat(nomSeleccio);
     }
 
@@ -302,8 +304,8 @@ public class ControladorPresentacio {
      * @param m El nombre de columnes
      * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix o no es pot afegir el teclat
      */
-    public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, Integer n, Integer m) throws ExcepcionsCreadorTeclat {
-        controladorDomini.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq, n, m);
+    public static void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, Integer n, Integer m, String e) throws ExcepcionsCreadorTeclat {
+        controladorDomini.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq, n, m, e);
     }
 
     /**
@@ -314,8 +316,8 @@ public class ControladorPresentacio {
      * @param m El nombre de columnes
      * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix o no es pot afegir el teclat
      */
-    public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, Integer n, Integer m) throws  ExcepcionsCreadorTeclat {
-        controladorDomini.crearTeclatLlistaIdioma(nomTeclat, nomIdioma, n, m);
+    public static void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, Integer n, Integer m, String e) throws  ExcepcionsCreadorTeclat {
+        controladorDomini.crearTeclatLlistaIdioma(nomTeclat, nomIdioma, n, m, e);
     }
 
     /**
@@ -323,7 +325,7 @@ public class ControladorPresentacio {
      * @param nomSeleccio El nom del teclat
      * @throws ExcepcionsCreadorTeclat Si el teclat amb nom nomTeclat no existeix o no es pot eliminar
      */
-    public void eliminarTeclat(String nomSeleccio) throws ExcepcionsCreadorTeclat{
+    public static void eliminarTeclat(String nomSeleccio) throws ExcepcionsCreadorTeclat{
         controladorDomini.eliminarTeclat(nomSeleccio);
     }
 
