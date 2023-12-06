@@ -1,6 +1,5 @@
 package Drivers;
 import Domini.BranchandBound;
-import Domini.Estrategia;
 
 import java.util.*;
 import java.io.*;
@@ -24,8 +23,8 @@ public class DriverAlgorismeQAP {
         int nFilas = 2;
         int nColumnas = 2;
 
-        Estrategia estrategia = new BranchandBound();
-        char [][] matriz = estrategia.calculaDisposicio(
+        BranchandBound b = new BranchandBound();
+        char [][] matriz = b.calculaDisposicio(
                 mapaPalabrasFrec, conjuntoLetras, nFilas, nColumnas);
 
         for (int i = 0; i < matriz.length; ++i) {
