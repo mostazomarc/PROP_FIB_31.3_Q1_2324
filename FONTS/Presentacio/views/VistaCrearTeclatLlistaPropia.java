@@ -41,21 +41,13 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
 
     private void iniComponents() {
         iniFrame();
-        panelContenidos.setLayout(new FlowLayout());
+        iniClose();
         iniEnrere();
         iniInputs();
-        add(panelContenidos, BorderLayout.CENTER);
-
-
-        //inicialitzar la resta
-
-
-        //assignar listeneres a cada component
         assign_listenerComponents();
     }
 
     private void iniFrame() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (pantalla.width - 1000) / 2;
@@ -64,8 +56,27 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
         setResizable(false);
     }
 
-    private void iniEnrere() {
+    private void iniClose() {
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre automático
 
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                int confirmed = JOptionPane.showConfirmDialog(null,
+                        "Estas segur de que vols sortir?", "Confirmació de tancament",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (confirmed == JOptionPane.YES_OPTION) {
+                    ControladorPresentacio.guardaEstat();
+                    dispose();
+                    System.exit(0);
+                }
+            }
+        });
+    }
+
+    private void iniEnrere() {
+        panelContenidos.setLayout(new FlowLayout());
         panelContenidos.add(Enrere);
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
@@ -110,6 +121,8 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
         panelContenidos.add(inputNC, constraints);
         constraints.gridy = 12;
         panelContenidos.add(Crear, constraints);
+
+        add(panelContenidos, BorderLayout.CENTER);
 
     }
 
@@ -173,9 +186,7 @@ public class VistaCrearTeclatLlistaPropia extends JFrame {
         }
 
         else if (Crear.equals(source)) {
-            // Extract user input from text fields
             String nomTeclat = inputNomTeclat.getText();
-
             String nomIdioma = (String) inputNomIdioma.getSelectedItem();
             String nomLl = (String) inputNomLl.getSelectedItem();
             int nf = Integer.parseInt(inputNF.getText());
