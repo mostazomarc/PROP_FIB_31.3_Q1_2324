@@ -38,7 +38,9 @@ public class Teclat {
     /**
      * L'algorisme emprat per a construir el teclat
      */
-    private Estrategia algorisme;
+    private BranchandBound bab;
+
+    private Genetic gen;
 
     /**
      * Comprova que el layout sigui vàlid
@@ -89,8 +91,14 @@ public class Teclat {
         comprovaLayoutValid(n,m);
         dimX = n;
         dimY = m;
-        if (e.equals("BranchAndBound")) algorisme = new BranchandBound();
-        disposicio = algorisme.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+        if (e.equals("BranchAndBound")){
+            bab = new BranchandBound();
+            disposicio = bab.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+        }
+        else if (e.equals("GeneticAlgorithm")){
+            gen = new Genetic();
+            disposicio = gen.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+        }
     }
 
     /**
@@ -108,8 +116,14 @@ public class Teclat {
         dimX = n;
         dimY = m;
         this.llistafreq = i.getLlistaFreq();
-        if (e.equals("BranchAndBound")) algorisme = new BranchandBound();
-        disposicio = algorisme.calculaDisposicio(this.llistafreq.getFrequencies(), i.getLletres(), dimX, dimY);
+        if (e.equals("BranchAndBound")){
+            bab = new BranchandBound();
+            disposicio = bab.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+        }
+        else if (e.equals("GeneticAlgorithm")){
+            gen = new Genetic();
+            disposicio = gen.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+        }
 
     }
 
