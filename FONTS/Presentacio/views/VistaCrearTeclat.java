@@ -199,7 +199,7 @@ public class VistaCrearTeclat extends JFrame {
             String estrategia = (String) inputAlgorisme.getSelectedItem();
             ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat,nomIdioma,nomLl,nf,nc,estrategia);
             char[][] teclat = ControladorPresentacio.consultaTeclat(nomTeclat);
-            ControladorPresentacio.vistaTeclat(teclat, nomTeclat);
+            ControladorPresentacio.vistaTeclat(nomTeclat);
             setVisible(false);
         }
     }

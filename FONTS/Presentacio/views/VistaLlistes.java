@@ -89,7 +89,7 @@ public class VistaLlistes extends JFrame {
 
             button.addActionListener(e -> {
                 try {
-                    //ControladorPresentacio.vistaTeclat(ControladorPresentacio.consultaTeclat(nomT), nomT);
+                    ControladorPresentacio.vistaLlista(nomLl);
                     setVisible(false);
                 } catch (Exception ex) {
                     ex.printStackTrace();

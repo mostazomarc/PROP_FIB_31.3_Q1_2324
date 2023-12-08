@@ -91,7 +91,7 @@ public class VistaTeclats extends JFrame {
 
             button.addActionListener(e -> {
                 try {
-                    ControladorPresentacio.vistaTeclat(ControladorPresentacio.consultaTeclat(nomT), nomT);
+                    ControladorPresentacio.vistaTeclat( nomT);
                     setVisible(false);
                 } catch (Exception ex) {
                     ex.printStackTrace();

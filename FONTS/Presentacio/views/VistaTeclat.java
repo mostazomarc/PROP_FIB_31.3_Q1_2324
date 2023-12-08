@@ -1,5 +1,6 @@
 package Presentacio.views;
 
+import Excepcions.ExcepcionsCreadorTeclat;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -11,19 +12,25 @@ public class VistaTeclat extends JFrame {
     private String nom;
     private JButton Enrere = new JButton("Tornar al menú principal");
     private JPanel panelContenidos = new JPanel();
+    private JPanel panelTeclat = new JPanel();
     private JButton ModificarLayout = new JButton("Modificar Layout teclat");
+    private JLabel labelNF = new JLabel("Número files:");
+    private JLabel labelNC = new JLabel("Número columnes:");
+    private JTextField inputNF = new JTextField(20);
+    private JTextField inputNC = new JTextField(20);
+    private JButton Modificar = new JButton("Modificar");
     private JButton Eliminar = new JButton("Eliminar teclat");
 
-    public VistaTeclat (char[][] teclat, String nomTeclat) {
+    public VistaTeclat (String nomTeclat) throws ExcepcionsCreadorTeclat {
         nom = nomTeclat;
         setVisible(true);
-        iniComponents(teclat);
+        iniComponents();
     }
 
-    private void iniComponents(char[][] teclat) {
+    private void iniComponents() throws ExcepcionsCreadorTeclat {
         iniFrame();
         iniEnrere();
-        iniTeclat(teclat);
+        iniTeclat();
         iniButtons();
 
         assign_listenerComponents();
@@ -53,20 +60,49 @@ public class VistaTeclat extends JFrame {
         constraints.gridy = 1;
         constraints.weighty = 1;
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        ModificarLayout.setPreferredSize(new Dimension(200, 30));
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        ModificarLayout.setPreferredSize(new Dimension(420, 30));
         buttonPanel.add(ModificarLayout);
-        Eliminar.setPreferredSize(new Dimension(200, 30));
+        Eliminar.setPreferredSize(new Dimension(420, 30));
         buttonPanel.add(Eliminar);
+
+        panelContenidos.add(buttonPanel, constraints);
+
+        Modificar.setVisible(false);
+        labelNF.setVisible(false);
+        labelNC.setVisible(false);
+        inputNF.setVisible(false);
+        inputNC.setVisible(false);
+
+        constraints.gridy = 2;
+        labelNF.setPreferredSize(new Dimension(150, 30));
+        buttonPanel.add(labelNF);
+        inputNF.setPreferredSize(new Dimension(100, 30));
+        buttonPanel.add(inputNF);
+
+        panelContenidos.add(buttonPanel, constraints);
+
+        constraints.gridy = 3;
+        labelNC.setPreferredSize(new Dimension(150, 30));
+        buttonPanel.add(labelNC);
+        inputNC.setPreferredSize(new Dimension(100, 30));
+        buttonPanel.add(inputNC);
+
+        panelContenidos.add(buttonPanel, constraints);
+
+        constraints.gridy = 4;
+        Modificar.setPreferredSize(new Dimension(200, 30));
+        buttonPanel.add(Modificar);
         panelContenidos.add(buttonPanel, constraints);
     }
 
 
-    private void iniTeclat(char[][] teclat) {
+    private void iniTeclat() throws ExcepcionsCreadorTeclat {
+        char[][] teclat = ControladorPresentacio.consultaTeclat(nom);
         int rows = teclat.length;
         int cols = teclat[0].length;
 
-        JPanel panelTeclat = new JPanel(new GridLayout(rows, cols, 3, 3));
+        panelTeclat = new JPanel(new GridLayout(rows, cols, 3, 3));
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -106,6 +142,13 @@ public class VistaTeclat extends JFrame {
                 ex.printStackTrace();
             }
         });
+        Modificar.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         Eliminar.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
@@ -122,10 +165,20 @@ public class VistaTeclat extends JFrame {
             setVisible(false);
         }
         else if (ModificarLayout.equals(source)) {
-            ControladorPresentacio.vistaModificarLayoutTeclat();
+            Modificar.setVisible(true);
+            labelNF.setVisible(true);
+            labelNC.setVisible(true);
+            inputNF.setVisible(true);
+            inputNC.setVisible(true);
+        }
+        else if(Modificar.equals(source)) {
+            int nf = Integer.parseInt(inputNF.getText());
+            int nc = Integer.parseInt(inputNC.getText());
+            ControladorPresentacio.modificarLayoutTeclat(nom,nf,nc);
+            ControladorPresentacio.vistaTeclat(nom);
             setVisible(false);
         }
-        else if (Enrere.equals(source)) {
+        else if (Eliminar.equals(source)) {
             ControladorPresentacio.eliminarTeclat(nom);
             setVisible(false);
         }

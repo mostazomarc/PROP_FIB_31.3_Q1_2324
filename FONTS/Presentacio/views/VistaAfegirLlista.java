@@ -8,6 +8,7 @@ import java.util.List;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,30 +18,6 @@ import java.util.Map;
 
 public class VistaAfegirLlista extends JFrame {
 
-//            System.out.println("### Afegir Llista Frequencies ###");
-//        System.out.println("Com la vols afegir?");
-//        System.out.println("1. Text");
-//        System.out.println("2. Llista");
-//        System.out.println("3. Entrada manual");
-//        System.out.println("6. Sortir");
-//    int num = s.nextInt();
-//    netejaTerminal();
-//    Map<String, Integer> novesEntrades = new HashMap<>();
-//
-//        try {
-//
-//        if (num == 1 || num == 2) {
-//            String idioma = selectorIdioma();
-//            System.out.println("Introdueixi el nom de l'arxiu i aseguri's de que es a la carpeta DATA");
-//            String filename = s.next();
-//            if (num == 1) {
-//                controlador.novaLlistaPerfil("text", filename, idioma, novesEntrades);
-//                System.out.println("Afegida la llista a partir de text amb nom: " +filename+ " i idioma: " + idioma);
-//            }
-//            if (num == 2) {
-//                controlador.novaLlistaPerfil("llista", filename, idioma, novesEntrades);
-//                System.out.println("Afegida la llista a partir d'una llista amb nom: " +filename+ " i idioma: " + idioma);
-//            }
 //        } else if (num == 3) {
 //            //llegir manual
 //            String idioma = selectorIdioma();
@@ -146,6 +123,8 @@ public class VistaAfegirLlista extends JFrame {
         importarArxiu.setEnabled(false);
         importarArxiu.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+            fileChooser.setFileFilter(new FileNameExtensionFilter("PROP", "csv", "prop","txt"));
+            fileChooser.setDialogTitle("Selecciona fitxer");
             int returnValue = fileChooser.showOpenDialog(null);
             if (returnValue == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();

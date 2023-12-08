@@ -56,13 +56,15 @@ public class ControladorPresentacio {
 
     public static void vistaCrearTeclat() { VistaCrearTeclat vclp = new VistaCrearTeclat(); }
 
-    public static void vistaTeclat(char[][] teclat, String nom) {VistaTeclat vt = new VistaTeclat(teclat, nom); }
+    public static void vistaTeclat(String nom) throws ExcepcionsCreadorTeclat {VistaTeclat vt = new VistaTeclat(nom); }
 
     public static void vistaModificarLayoutTeclat() { VistaModificarLayoutTeclat vmlt = new VistaModificarLayoutTeclat(); }
 
     public static void vistaEliminarTeclat() { VistaEliminarTeclat vet = new VistaEliminarTeclat(); }
 
     public static void vistaLlistes() { VistaLlistes v = new VistaLlistes(); }
+
+    public static void vistaLlista(String nomLl) throws LlistaFreqNoExisteix { VistaLlista v = new VistaLlista(nomLl); }
 
     public static void vistaAfegirLlista() { VistaAfegirLlista v = new VistaAfegirLlista(); }
 
@@ -91,6 +93,7 @@ public class ControladorPresentacio {
     public static void guardaEstat() {
         controladorDomini.guardaEstat();
     }
+
 
     /**
      * Obté el nom del perfil actual
@@ -147,7 +150,7 @@ public class ControladorPresentacio {
      * @param nomLlista El nom de la llista de frequencies
      * @throws ExcepcionsCreadorTeclat Si la llista amb nom nomLlista no existeix o no es pot eliminar
      */
-    public void eliminarLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
+    public static void eliminarLlista(String nomLlista) throws ExcepcionsCreadorTeclat{
         controladorDomini.eliminarLlista(nomLlista);
     }
 
@@ -175,7 +178,7 @@ public class ControladorPresentacio {
      * @return El Map de paraules i frequencies de la llista amb nom nomSeleccio
      * @throws LlistaFreqNoExisteix Si la llista amb nom nomLlista no existeix
      */
-    public Map<String, Integer> consultaLlista(String nomSeleccio) throws LlistaFreqNoExisteix{
+    public static Map<String, Integer> consultaLlista(String nomSeleccio) throws LlistaFreqNoExisteix{
         return controladorDomini.consultaLlista(nomSeleccio);
     }
 
@@ -280,7 +283,7 @@ public class ControladorPresentacio {
      * @param numc El nombre de columnes
      * @throws ExcepcionsCreadorTeclat Si el teclat amb nom nomTeclat no existeix o no es pot modificar el teclat
      */
-    public void modificarLayoutTeclat(String nomSeleccio, Integer numf, Integer numc) throws ExcepcionsCreadorTeclat {
+    public static void modificarLayoutTeclat(String nomSeleccio, Integer numf, Integer numc) throws ExcepcionsCreadorTeclat {
         controladorDomini.modificarLayoutTeclat(nomSeleccio, numf, numc);
     }
 
