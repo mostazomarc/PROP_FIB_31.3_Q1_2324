@@ -93,6 +93,7 @@ public class CtrlDomini {
     public void carregarDadesSistema() throws Exception{
         alfabets.carregar();
         idiomes.carregar();
+        perfils.carregar();
     }
 
 

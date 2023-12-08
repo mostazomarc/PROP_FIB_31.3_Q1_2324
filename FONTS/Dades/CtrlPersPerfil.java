@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 /**
@@ -37,6 +38,8 @@ public class CtrlPersPerfil {
      * Perfil actual
      */
     private Perfil perfilActual;
+
+    Map<String, Perfil> perfils = new HashMap<>();
 
     /**
      * Creadora de CtrlPersPerfil
@@ -65,58 +68,22 @@ public class CtrlPersPerfil {
      * @return TRUE si existeix un perfil amb nomPerfil, FALSE en cas contrari
      */
     private boolean perfilExisteix(String nomPerfil) {
-        JSONParser jsP = new JSONParser();
-        JSONArray ConjuntPerfils = new JSONArray();
-        boolean trobat = false;
-        try (FileReader rd = new FileReader("./DATA/Saves/UsuarisActius.json")){
-            ConjuntPerfils = (JSONArray) jsP.parse(rd);
-            for (int i = 0; i < ConjuntPerfils.size() && !trobat; ++i){
-                JSONObject next = (JSONObject) ConjuntPerfils.get(i); //Obtenim l'objecte de l'usuari iessim
-                String nomUsuari = ((String)next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
-                if (nomUsuari != null && nomUsuari.equals(nomPerfil)) trobat = true;
-            }
-        } catch (IOException e){
-        }
-        catch (ParseException e) {
-        }
-        return trobat;
-    }
-
-    /**
-     * Carrega els perfils dels arxius on estàn guardats (de moment crea noves, funcionarà al tenir capa de persistencia)
-     * @throws ExcepcionsCreadorTeclat Si no es pot crear el perfil
-     */
-    public void carregarPerfil() throws Exception {
-        controlador.iniciaInstancia("Prova");
+        return perfils.containsKey(nomPerfil);
     }
 
     /**
      * Guarda el perfil actual al .json de perfils
      */
     public void guardar() {
-        System.out.println("Guardant perfil" + perfilActual.getUsuari());
-        JSONParser jsP = new JSONParser();
+        System.out.println("Guardant perfils");
         JSONArray ConjuntPerfils = new JSONArray();
-        try (FileReader rd = new FileReader("./DATA/Saves/UsuarisActius.json")){
-            ConjuntPerfils = (JSONArray) jsP.parse(rd);
-            boolean trobat = false;
-            for (int i = 0; i < ConjuntPerfils.size() && !trobat; ++i){
-                JSONObject next = (JSONObject) ConjuntPerfils.get(i); //Obtenim l'objecte de l'usuari iessim
-                String nomUsuari = ((String)next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
-                if(nomUsuari != null && nomUsuari.equals(perfilActual.getUsuari())){    //Si el nom d'usuari coincideix
-                    ConjuntPerfils.remove(next); //L'esborrem i despres l'afegirem
-                    trobat = true;  //Deixem de recorrer el vector
-                }
-            }
-        } catch (IOException e){
-        }
-        catch (ParseException e) {
-        }
 
-        JSONObject nouUsuari = new JSONObject();
-        nouUsuari.put("nomUsuari", perfilActual.getUsuari());
-        nouUsuari.put("Contrasenya", perfilActual.getContrasenya());
-        ConjuntPerfils.add(nouUsuari);
+        for (Map.Entry<String, Perfil> entry : perfils.entrySet()) { //Per cada perfil
+            JSONObject nouUsuari = new JSONObject();
+            nouUsuari.put("nomUsuari", entry.getValue().getUsuari());
+            nouUsuari.put("Contrasenya", entry.getValue().getContrasenya());
+            ConjuntPerfils.add(nouUsuari);
+        }
         try (FileWriter file = new FileWriter("./DATA/Saves/UsuarisActius.json")) {
             file.write(ConjuntPerfils.toJSONString()); //Escribim el conjunt d'usuaris al fitxer
             file.flush();
@@ -126,34 +93,30 @@ public class CtrlPersPerfil {
 
     /**
      * Carrega el perfil identificat per nomPerfil del .json de perfils
-     * @param nomPerfil El nom del perfil
      * @return El perfil identificat per nomPerfil
      * @throws PerfilNoExisteix Si el perfil no existeix
      */
-    public Perfil carregar(String nomPerfil) throws PerfilNoExisteix {
-        System.out.println("Carregant perfil" + nomPerfil);
+    public void carregar() throws PerfilNoExisteix {
+        System.out.println("Carregant perfils");
         JSONParser jsP = new JSONParser();
         JSONArray ConjuntPerfils = new JSONArray();
+        perfils = new HashMap<>();
         try (FileReader rd = new FileReader("./DATA/Saves/UsuarisActius.json")){
             ConjuntPerfils = (JSONArray) jsP.parse(rd);
-            boolean trobat = false;
-            for (int i = 0; i < ConjuntPerfils.size() && !trobat; ++i){
+            for (int i = 0; i < ConjuntPerfils.size(); ++i){
                 JSONObject next = (JSONObject) ConjuntPerfils.get(i); //Obtenim l'objecte de l'usuari iessim
                 String nomUsuari = ((String)next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
-                if(nomUsuari != null && nomUsuari.equals(nomPerfil)){    //Si el nom d'usuari coincideix
+                if(nomUsuari != null){    //Si el nom d'usuari coincideix
                     String contrasenya = ((String)next.get("Contrasenya"));  //Obtenim la contrasenya de l'usuari iessim
-                    perfilActual = new Perfil(nomUsuari, contrasenya);
-                    trobat = true;  //Deixem de recorrer el vector
+                    Perfil nouPerfil = new Perfil(nomUsuari, contrasenya);
+                    perfils.put(nomUsuari, nouPerfil);
                 }
             }
-            if (!trobat) throw new PerfilNoExisteix(nomPerfil);
         } catch (IOException e){
-            throw new PerfilNoExisteix(nomPerfil);
         }
         catch (ParseException e) {
 
         }
-        return perfilActual;
     }
 
     /**
@@ -163,9 +126,9 @@ public class CtrlPersPerfil {
      * @throws PerfilJaExisteix Si el perfil ja existeix
      */
     public Perfil canviaPerfil(String nomPerfil) throws PerfilJaExisteix {
-        if (perfilActual != null) guardar();
         try {
-            carregar(nomPerfil);
+            if (!perfils.containsKey(nomPerfil)) throw new PerfilNoExisteix(nomPerfil);
+            perfilActual = perfils.get(nomPerfil);
         } catch (PerfilNoExisteix perfilNoExisteix) {
             System.out.println("Perfil Nou");
             afegirPerfil(nomPerfil);
@@ -182,7 +145,7 @@ public class CtrlPersPerfil {
     private void afegirPerfil(String nomPerfil) throws PerfilJaExisteix {
         if (perfilExisteix(nomPerfil)) throw new PerfilJaExisteix(nomPerfil);
         perfilActual = new Perfil(nomPerfil);
-        guardar();
+        perfils.put(nomPerfil, perfilActual);
     }
 
     /**
@@ -192,31 +155,8 @@ public class CtrlPersPerfil {
      * @throws PerfilNoExisteix Si el perfil no existeix
      */
     public Perfil getPerfil(String nomPerfil) throws PerfilNoExisteix{
-        if (!perfilExisteix(nomPerfil)) {
-            if (perfilActual.getUsuari().equals(nomPerfil)) return perfilActual;
-            throw new PerfilNoExisteix(nomPerfil);
-        }
-        JSONParser jsP = new JSONParser();
-        JSONArray ConjuntPerfils = new JSONArray();
-        Perfil perfilTrobat = null;
-        try (FileReader rd = new FileReader("./DATA/Saves/UsuarisActius.json")){
-            ConjuntPerfils = (JSONArray) jsP.parse(rd);
-            boolean trobat = false;
-            for (int i = 0; i < ConjuntPerfils.size() && !trobat; ++i){
-                JSONObject next = (JSONObject) ConjuntPerfils.get(i); //Obtenim l'objecte de l'usuari iessim
-                String nomUsuari = ((String)next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
-                if(nomUsuari != null && nomUsuari.equals(nomPerfil)){    //Si el nom d'usuari coincideix
-                    String contrasenya = ((String)next.get("Contrasenya"));  //Obtenim la contrasenya de l'usuari iessim
-                    trobat = true;  //Deixem de recorrer el vector
-                     perfilTrobat= new Perfil(nomUsuari, contrasenya);
-                }
-            }
-        } catch (IOException e){
-        }
-        catch (ParseException e) {
-        }
-        if (perfilTrobat == null) throw new PerfilNoExisteix(nomPerfil);
-        return perfilTrobat;
+        if (!perfils.containsKey(nomPerfil)) throw new PerfilNoExisteix(nomPerfil);
+        return perfils.get(nomPerfil);
     }
 
 
@@ -225,20 +165,6 @@ public class CtrlPersPerfil {
      * @return El conjunt de noms dels perfils
      */
     public List<String> getAllPerfils() {
-        List<String> nomsPerfils = new ArrayList<>();
-        JSONParser jsP = new JSONParser();
-        JSONArray ConjuntPerfils = new JSONArray();
-        try (FileReader rd = new FileReader("./DATA/Saves/UsuarisActius.json")){
-            ConjuntPerfils = (JSONArray) jsP.parse(rd);
-            for (int i = 0; i < ConjuntPerfils.size(); ++i){
-                JSONObject next = (JSONObject) ConjuntPerfils.get(i); //Obtenim l'objecte de l'usuari iessim
-                String nomUsuari = ((String)next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
-                nomsPerfils.add(nomUsuari);
-            }
-        } catch (IOException e){
-        }
-        catch (ParseException e) {
-        }
-        return nomsPerfils;
+        return new ArrayList<>(perfils.keySet());
     }
 }
