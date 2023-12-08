@@ -1,0 +1,22 @@
+Aquest subdirectori conte el codi dels drivers utilitzats per provar les funcionalitats del programa
+
+MF
+manifets dels jars dels drivers
+
+DriverAlgorismeQAP.java
+codi del driver per provar l'algorisme QAP
+
+DriverDades.java
+codi del driver utilitzar per provar les funcionalitats de dades
+
+DriverDominiv2.java
+codi del driver per provar totes les funcionalitats del sistema
+
+DriverHungarianAlgorithm.java
+codi del driver per provar l'HungarianAlgorithm
+
+DriverLectorFreq.java
+codi del driver per provar CtrlFile i provar que llegeixi fitxers txt correctament
+
+DriverTeclars.java
+codi del driver per provar les funcionalitats de teclats

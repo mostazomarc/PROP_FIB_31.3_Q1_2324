@@ -73,7 +73,7 @@ public class VistaModificarLayoutTeclat extends JFrame{
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaGestionarTeclats();
+            ControladorPresentacio.vistaTeclats();
             setVisible(false);
         }
     }

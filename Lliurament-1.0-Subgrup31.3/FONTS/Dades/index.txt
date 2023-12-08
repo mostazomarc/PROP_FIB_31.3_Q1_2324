@@ -1,0 +1,19 @@
+Aquest subdirectori conte el codi dels controladors de persistencia del sistema i del controlador per llegir arxius txt
+
+CtrlFile.java
+Codi del controlador per llegir arxius txt
+
+CtrlPersAlfabets.java
+Codi del controlador de persistencia dels Alfabets (Stub actualment)
+
+CtrlPersFreq.java
+Codi del controlador de persistencia de les llistes de frequencia (Stub actualment)
+
+CtrlPersIdiomes.java
+Codi del controlador de persistencia dels Idiomes (Stub actualment)
+
+CtrlPersPerfil.java
+Codi del controlador de persistencia dels PErfils (Stub actualment)
+
+CtrlPersTeclats.java
+Codi del controlador de persistencia dels Teclats (Stub actualment)

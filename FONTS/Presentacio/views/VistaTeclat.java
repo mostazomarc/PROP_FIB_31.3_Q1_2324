@@ -8,23 +8,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 public class VistaTeclat extends JFrame {
+    private String nom;
     private JButton Enrere = new JButton("Tornar al menú principal");
     private JPanel panelContenidos = new JPanel();
+    private JButton ModificarLayout = new JButton("Modificar Layout teclat");
+    private JButton Eliminar = new JButton("Eliminar teclat");
 
-    public VistaTeclat (char[][] teclat) {
+    public VistaTeclat (char[][] teclat, String nomTeclat) {
+        nom = nomTeclat;
         setVisible(true);
         iniComponents(teclat);
     }
 
     private void iniComponents(char[][] teclat) {
         iniFrame();
-        iniButtons();
+        iniEnrere();
         iniTeclat(teclat);
+        iniButtons();
 
-        //inicialitzar la resta
-
-
-        //assignar listeneres a cada component
         assign_listenerComponents();
     }
 
@@ -38,7 +39,7 @@ public class VistaTeclat extends JFrame {
         setResizable(false);
     }
 
-    private void iniButtons() {
+    private void iniEnrere() {
 
         panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
         panelContenidos.add(Box.createVerticalGlue());
@@ -46,9 +47,26 @@ public class VistaTeclat extends JFrame {
 
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
-
-        add(panelContenidos, BorderLayout.CENTER);
     }
+
+    private void iniButtons() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.weighty = 1; // Hace que los botones estén en la parte inferior
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10)); // Establece un diseño para los botones
+
+        ModificarLayout.setPreferredSize(new Dimension(200, 30));
+        buttonPanel.add(ModificarLayout);
+
+        Eliminar.setPreferredSize(new Dimension(200, 30));
+        buttonPanel.add(Eliminar);
+
+        panelContenidos.add(buttonPanel, constraints);
+    }
+
 
     private void iniTeclat(char[][] teclat) {
         int rows = teclat.length;
@@ -73,6 +91,7 @@ public class VistaTeclat extends JFrame {
     }
 
 
+
     /**
      * Assigna els listeners als components corresponents.
      */
@@ -91,12 +110,34 @@ public class VistaTeclat extends JFrame {
                 ex.printStackTrace();
             }
         });
+        ModificarLayout.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        Eliminar.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
             ControladorPresentacio.vistaPrincipal();
+            setVisible(false);
+        }
+        else if (ModificarLayout.equals(source)) {
+            ControladorPresentacio.vistaModificarLayoutTeclat();
+            setVisible(false);
+        }
+        else if (Enrere.equals(source)) {
+            ControladorPresentacio.eliminarTeclat(nom);
             setVisible(false);
         }
     }
