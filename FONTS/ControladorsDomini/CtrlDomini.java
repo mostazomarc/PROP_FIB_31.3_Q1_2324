@@ -85,6 +85,10 @@ public class CtrlDomini {
         Estrategia = "BranchAndBound"; //estrategia per defecte
     }
 
+    public void carregaPerfils() {
+        perfils.carregar();
+    }
+
 
     /**
      * Carrega les dades guardades dels alfabets i idiomes a memòria
@@ -93,7 +97,6 @@ public class CtrlDomini {
     public void carregarDadesSistema() throws Exception{
         alfabets.carregar();
         idiomes.carregar();
-        perfils.carregar();
     }
 
 

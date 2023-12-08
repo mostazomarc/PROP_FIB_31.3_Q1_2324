@@ -27,6 +27,7 @@ public class ControladorPresentacio {
      */
     public ControladorPresentacio() throws Exception {
         controladorDomini = controladorDomini.getInstance();
+        controladorDomini.carregaPerfils();
     }
 
     public static List<String> getNomsIdiomes() {return controladorDomini.getNomsIdiomes();}

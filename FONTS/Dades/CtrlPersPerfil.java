@@ -96,7 +96,7 @@ public class CtrlPersPerfil {
      * @return El perfil identificat per nomPerfil
      * @throws PerfilNoExisteix Si el perfil no existeix
      */
-    public void carregar() throws PerfilNoExisteix {
+    public void carregar() {
         System.out.println("Carregant perfils");
         JSONParser jsP = new JSONParser();
         JSONArray ConjuntPerfils = new JSONArray();
@@ -132,6 +132,7 @@ public class CtrlPersPerfil {
         } catch (PerfilNoExisteix perfilNoExisteix) {
             System.out.println("Perfil Nou");
             afegirPerfil(nomPerfil);
+            guardar();
         }
         return perfilActual;
     }
