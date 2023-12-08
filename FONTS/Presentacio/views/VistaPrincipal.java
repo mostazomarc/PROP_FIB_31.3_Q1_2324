@@ -128,14 +128,15 @@ public class VistaPrincipal extends JFrame{
             setVisible(false);
         }
         else if (Llistes.equals(source)) {
+            ControladorPresentacio.vistaLlistes();
             setVisible(false);
         }
         else if (Idiomes.equals(source)) {
-            ControladorPresentacio.vistaGestionarDades();
+            ControladorPresentacio.vistaIdiomes();
             setVisible(false);
         }
         else if (Alfabets.equals(source)) {
-            ControladorPresentacio.vistaConsultarDades();
+            ControladorPresentacio.vistaAlfabets();
             setVisible(false);
         }
     }

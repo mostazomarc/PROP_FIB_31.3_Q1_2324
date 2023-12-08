@@ -40,14 +40,9 @@ public class ControladorPresentacio {
         controladorDomini.iniciaInstancia(nomPerfil);
     }
 
-    public static void vistaPerfils() throws Exception {
-        VistaPerfils vp = new VistaPerfils();
-    }
+    public static void vistaPerfils() throws Exception { VistaPerfils vp = new VistaPerfils();}
 
-    public static void vistaCrearPerfil() throws Exception {
-        VistaCrearPerfil vcp = new VistaCrearPerfil();
-    }
-
+    public static void vistaCrearPerfil() throws Exception { VistaCrearPerfil vcp = new VistaCrearPerfil();}
 
     public static void vistaPrincipal() {
         VistaPrincipal vp = new VistaPrincipal();
@@ -57,9 +52,7 @@ public class ControladorPresentacio {
         VistaInfoFuncions vgt = new VistaInfoFuncions();
     }
 
-    public static void vistaTeclats()  {
-        VistaTeclats vgt = new VistaTeclats();
-    }
+    public static void vistaTeclats()  {VistaTeclats vgt = new VistaTeclats();}
 
     public static void vistaCrearTeclat() { VistaCrearTeclat vclp = new VistaCrearTeclat(); }
 
@@ -69,14 +62,14 @@ public class ControladorPresentacio {
 
     public static void vistaEliminarTeclat() { VistaEliminarTeclat vet = new VistaEliminarTeclat(); }
 
+    public static void vistaLlistes() { VistaLlistes vet = new VistaLlistes(); }
 
-    public static void vistaGestionarDades() {
-        VistaGestionarDades vgt = new VistaGestionarDades();
-    }
+    public static void vistaIdiomes() { VistaIdiomes vet = new VistaIdiomes(); }
 
-    public static void vistaConsultarDades() {
-        VistaConsultarDades vcd = new VistaConsultarDades();
-    }
+    public static void vistaAlfabets() { VistaAlfabets vet = new VistaAlfabets(); }
+
+
+
 
 
     //NORMAL

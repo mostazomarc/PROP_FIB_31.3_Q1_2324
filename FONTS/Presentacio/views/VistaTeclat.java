@@ -40,11 +40,9 @@ public class VistaTeclat extends JFrame {
     }
 
     private void iniEnrere() {
-
         panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
         panelContenidos.add(Box.createVerticalGlue());
         panelContenidos.add(Box.createHorizontalGlue());
-
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
     }
@@ -53,17 +51,13 @@ public class VistaTeclat extends JFrame {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 1;
-        constraints.weighty = 1; // Hace que los botones estén en la parte inferior
-
+        constraints.weighty = 1;
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10)); // Establece un diseño para los botones
-
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         ModificarLayout.setPreferredSize(new Dimension(200, 30));
         buttonPanel.add(ModificarLayout);
-
         Eliminar.setPreferredSize(new Dimension(200, 30));
         buttonPanel.add(Eliminar);
-
         panelContenidos.add(buttonPanel, constraints);
     }
 
@@ -72,7 +66,7 @@ public class VistaTeclat extends JFrame {
         int rows = teclat.length;
         int cols = teclat[0].length;
 
-        JPanel panelTeclat = new JPanel(new GridLayout(rows, cols, 3, 3)); // Grid layout con separación de 5 pixels
+        JPanel panelTeclat = new JPanel(new GridLayout(rows, cols, 3, 3));
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -80,13 +74,9 @@ public class VistaTeclat extends JFrame {
                 panelTeclat.add(btn);
             }
         }
-
-        // Agrega el panelTeclat al panelContenidos
-        panelContenidos.add(Box.createVerticalGlue()); // Esto añade un espacio en blanco
+        panelContenidos.add(Box.createVerticalGlue());
         panelContenidos.add(panelTeclat);
-        panelContenidos.add(Box.createVerticalGlue()); // Esto añade otro espacio en blanco
-
-        // Agrega el panelContenidos al JFrame
+        panelContenidos.add(Box.createVerticalGlue());
         add(panelContenidos, BorderLayout.CENTER);
     }
 
@@ -99,7 +89,6 @@ public class VistaTeclat extends JFrame {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                //pack();
                 revalidate();
             }
         });
