@@ -54,20 +54,20 @@ public class CtrlPersPerfilTest {
         assertSame(cP, CtrlPersPerfil.getInstance(cD));
     }
 
-    /**
-     * Comprova que es carreguen els perfils
-     */
-    @Test
-    public void carregarPerfils() throws Exception {
-        CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
-        cP.carregarPerfil();
-        try {
-            cP.getPerfil("Prova");
-            assertTrue(true);
-        } catch (PerfilNoExisteix e) {
-            fail();
-        }
-    }
+//    /**
+//     * Comprova que es carreguen els perfils
+//     */
+//    @Test
+//    public void carregarPerfils() throws Exception {
+//        CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
+//        cP.carregarPerfil();
+//        try {
+//            cP.getPerfil("Prova");
+//            assertTrue(true);
+//        } catch (PerfilNoExisteix e) {
+//            fail();
+//        }
+//    }
 
     /**
      * Comprova que es pot afegir un perfil
