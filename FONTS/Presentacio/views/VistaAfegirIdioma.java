@@ -16,16 +16,13 @@ import java.util.Map;
 
 public class VistaAfegirIdioma extends JFrame{
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
-    private JLabel labelTipusInput = new JLabel("Com vols afegir la llists?");
-    private ButtonGroup tipusInput = new ButtonGroup();
-    private JRadioButton rtext = new JRadioButton("Importar text");
-    private JRadioButton rllista = new JRadioButton("Importar llista");
-    private JRadioButton rmanual = new JRadioButton("Entrada manual");
-    private JLabel labelNomIdioma = new JLabel("Selecciona l'idioma");
-    private JComboBox inputNomIdioma;
-    private JButton importarArxiu = new JButton("Importar arxiu");
+    private JLabel labelNomIdioma = new JLabel("Introdueix el nom de l'idioma:");
+    private JTextField inputNomIdioma = new JTextField(20);
+    private JButton importarArxiu = new JButton ("Importar llista predeterminada de l'idioma");
+    private JLabel labelNomAlfabet = new JLabel("Selecciona l'alfabet corresponent");
+    private JComboBox inputNomAlfabet = new JComboBox();
     private JButton Enrere = new JButton("Tornar enrere");
-    private JButton Afegir = new JButton("Afegir llista");
+    private JButton Afegir = new JButton("Afegir idioma");
     private JPanel panelContenidos = new JPanel();
     private String filepath;
 
@@ -92,20 +89,17 @@ public class VistaAfegirIdioma extends JFrame{
         constraints.gridy = 2;
         panelContenidos.add(labelNomIdioma, constraints);
         constraints.gridy = 3;
-        List<String> idiomes = ControladorPresentacio.getNomsIdiomes();
-        inputNomIdioma = new JComboBox<>(idiomes.toArray(new String[0]));
         panelContenidos.add(inputNomIdioma, constraints);
         constraints.gridy = 4;
-        panelContenidos.add(labelTipusInput, constraints);
+        panelContenidos.add(importarArxiu, constraints);
         constraints.gridy = 5;
-        tipusInput.add(rllista);
-        tipusInput.add(rtext);
-        tipusInput.add(rmanual);
-        panelContenidos.add(rllista, constraints);
+        panelContenidos.add(labelNomAlfabet, constraints);
         constraints.gridy = 6;
-        panelContenidos.add(rtext, constraints);
+        List<String> alfabets = ControladorPresentacio.getNomsAlfabets();
+        //inputNomIdioma = new JComboBox<>(alfabets);
+        panelContenidos.add(inputNomAlfabet, constraints);
         constraints.gridy = 7;
-        panelContenidos.add(rmanual, constraints);
+        panelContenidos.add(Afegir, constraints);
         constraints.gridy = 8;
         importarArxiu.setEnabled(false);
         importarArxiu.addActionListener(e -> {
@@ -120,11 +114,6 @@ public class VistaAfegirIdioma extends JFrame{
         });
         panelContenidos.add(importarArxiu, constraints);
         constraints.gridy = 9;
-        constraints.gridy = 10;
-        constraints.gridy = 11;
-        constraints.gridy = 12;
-        constraints.gridy = 13;
-        constraints.gridy = 14;
         panelContenidos.add(Afegir, constraints);
 
         add(panelContenidos, BorderLayout.CENTER);
@@ -156,27 +145,6 @@ public class VistaAfegirIdioma extends JFrame{
                 ex.printStackTrace();
             }
         });
-        rllista.addActionListener(e -> {
-            try {
-                actionPerformed_buttons(e);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-        rtext.addActionListener(e -> {
-            try {
-                actionPerformed_buttons(e);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-        rmanual.addActionListener(e -> {
-            try {
-                actionPerformed_buttons(e);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
         Afegir.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
@@ -191,37 +159,6 @@ public class VistaAfegirIdioma extends JFrame{
         if (Enrere.equals(source)) {
             ControladorPresentacio.vistaTeclats();
             setVisible(false);
-        }
-        if (rtext.isSelected() || rllista.isSelected()) {
-            importarArxiu.setEnabled(true);
-        }
-        if (!rtext.isSelected() && !rllista.isSelected()) {
-            importarArxiu.setEnabled(false);
-        }
-        else if (Afegir.equals(source)) {
-            String nomIdioma = (String) inputNomIdioma.getSelectedItem();
-            JRadioButton selectedButton = null;
-
-            if (rllista.isSelected()) {
-                selectedButton = rllista;
-            } else if (rtext.isSelected()) {
-                selectedButton = rtext;
-            } else if (rmanual.isSelected()) {
-                selectedButton = rmanual;
-            }
-
-            if (selectedButton != null) {
-                String tipus = selectedButton.getText();
-                Map<String, Integer> novesEntrades = new HashMap<>();
-                if (selectedButton == rllista || selectedButton == rtext) {
-                    ControladorPresentacio.novaLlistaPerfil(tipus,filepath,nomIdioma,novesEntrades);
-                }
-                else {
-                    //ControladorPresentacio.novaLlistaPerfil();
-                }
-                ControladorPresentacio.vistaLlistes();
-                setVisible(false);
-            }
         }
     }
 }

@@ -22,7 +22,6 @@ public class VistaCrearTeclat extends JFrame {
     private JLabel labelNomLl = new JLabel("Llista de freqüències");
     private String[] freqs = new String[]{"Selecciona llista freqüències"};
     private JComboBox<String> inputNomLl = new JComboBox<>(freqs);
-
     private JLabel labelNF = new JLabel("Nombre de files del layout");
     private JTextField inputNF = new JTextField(20);
     private JLabel labelNC = new JLabel("Nombre de columnes del layout");

@@ -19,7 +19,7 @@ import java.util.Map;
 public class VistaAfegirLlista extends JFrame {
 
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
-    private JLabel labelTipusInput = new JLabel("Com vols afegir la llists?");
+    private JLabel labelTipusInput = new JLabel("Com vols afegir la llista?");
     private ButtonGroup tipusInput = new ButtonGroup();
     private JRadioButton rtext = new JRadioButton("Importar text");
     private JRadioButton rllista = new JRadioButton("Importar llista");
@@ -123,11 +123,6 @@ public class VistaAfegirLlista extends JFrame {
         });
         panelContenidos.add(importarArxiu, constraints);
         constraints.gridy = 9;
-        constraints.gridy = 10;
-        constraints.gridy = 11;
-        constraints.gridy = 12;
-        constraints.gridy = 13;
-        constraints.gridy = 14;
         panelContenidos.add(Afegir, constraints);
 
         add(panelContenidos, BorderLayout.CENTER);
