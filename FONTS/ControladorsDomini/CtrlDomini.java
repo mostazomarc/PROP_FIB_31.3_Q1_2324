@@ -474,13 +474,6 @@ public class CtrlDomini {
     }
 
     /**
-     * Llista els teclats del perfil actual
-     */
-    public void llistarTeclats() {
-        //PerfilActual.llistarTeclats();
-    }
-
-    /**
      * Retorna la disposició de lletres del teclat amb nom nomTeclat
      * @param nomTeclat El nom del teclat
      * @return La disposició de lletres del teclat amb nom nomTeclat
@@ -524,5 +517,19 @@ public class CtrlDomini {
         Set<String> noms = idiomes.getIdiomes().keySet();
         return new ArrayList<>(noms);
     }
+
+    public String consultaIdioma(String nomIdioma) throws IdiomaNoExisteix {
+        return idiomes.getIdioma(nomIdioma).getInfo();
+    }
+
+    public String consultaAlfabet(String nomAlfabet) throws AlfabetNoExisteix {
+        return alfabets.getAlfabet(nomAlfabet).getInfo();
+    }
+
+    public List<String> getNomsAlfabets()  {
+        Set<String> noms = alfabets.getAlfabets().keySet();
+        return new ArrayList<>(noms);
+    }
+
 
 }

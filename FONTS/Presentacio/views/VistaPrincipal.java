@@ -9,10 +9,10 @@ import java.awt.event.*;
 public class VistaPrincipal extends JFrame{
     private JPanel panelContenidos = new JPanel();
     private JButton Info = new JButton("Informació de les funcions");
-    private JButton GT = new JButton("Gestionar Teclats");
-    private JButton CT = new JButton("Consultar Teclats");
-    private JButton GD = new JButton("Gestionar Dades");
-    private JButton CD = new JButton("Consultar Dades");
+    private JButton Teclats = new JButton("Teclats");
+    private JButton Llistes = new JButton("Llistes de freqüències");
+    private JButton Idiomes = new JButton("Idiomes");
+    private JButton Alfabets = new JButton("Alfabets");
 
     private JButton Sortir = new JButton("Sortir");
 
@@ -57,16 +57,16 @@ public class VistaPrincipal extends JFrame{
         panelContenidos.add(Info, constraints);
 
         constraints.gridy = 2;
-        panelContenidos.add(GT, constraints);
+        panelContenidos.add(Teclats, constraints);
 
         constraints.gridy = 3;
-        panelContenidos.add(CT, constraints);
+        panelContenidos.add(Llistes, constraints);
 
         constraints.gridy = 4;
-        panelContenidos.add(GD, constraints);
+        panelContenidos.add(Idiomes, constraints);
 
         constraints.gridy = 5;
-        panelContenidos.add(CD, constraints);
+        panelContenidos.add(Alfabets, constraints);
     }
 
     /**
@@ -87,28 +87,28 @@ public class VistaPrincipal extends JFrame{
                 ex.printStackTrace();
             }
         });
-        GT.addActionListener(e -> {
+        Teclats.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
-        CT.addActionListener(e -> {
+        Llistes.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
-        GD.addActionListener(e -> {
+        Idiomes.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
-        CD.addActionListener(e -> {
+        Alfabets.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
             } catch (Exception ex) {
@@ -123,20 +123,20 @@ public class VistaPrincipal extends JFrame{
             ControladorPresentacio.vistaInfoFuncions();
             setVisible(false);
         }
-        else if (GT.equals(source)) {
-            ControladorPresentacio.vistaGestionarTeclats();
+        else if (Teclats.equals(source)) {
+            ControladorPresentacio.vistaTeclats();
             setVisible(false);
         }
-        else if (CT.equals(source)) {
-            ControladorPresentacio.vistaConsultarTeclats();
+        else if (Llistes.equals(source)) {
+            ControladorPresentacio.vistaLlistes();
             setVisible(false);
         }
-        else if (GD.equals(source)) {
-            ControladorPresentacio.vistaGestionarDades();
+        else if (Idiomes.equals(source)) {
+            ControladorPresentacio.vistaIdiomes();
             setVisible(false);
         }
-        else if (CD.equals(source)) {
-            ControladorPresentacio.vistaConsultarDades();
+        else if (Alfabets.equals(source)) {
+            ControladorPresentacio.vistaAlfabets();
             setVisible(false);
         }
     }

@@ -1,0 +1,10 @@
+Aquest subdirectori conte el codi dels stubs utilitzats per la realitzacio de proves del programa
+
+CreadoraTecaltStub.java
+Stub de la creadora de teclats utilitzat per provar la classe teclat
+
+IdiomaStub.java
+Stub de idioma per provar la classe teclat
+
+LlistaFrequenciesStub.java
+Stub de llista de frequencies utilitzat per provar la clase teclat
