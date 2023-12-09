@@ -1,5 +1,6 @@
 package Presentacio.views;
 
+import Excepcions.AlfabetNoExisteix;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -7,26 +8,26 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.List;
 
-public class VistaIdiomes extends JFrame {
+public class VistaAlfabet extends JFrame {
+    String nom;
     private JButton Enrere = new JButton("Tornar al menú principal");
-    private JButton Afegir = new JButton("Afegir idioma");
     private JPanel panelContenidos = new JPanel();
+    private JTextArea AlfabettextArea = new JTextArea(20, 40);
+    private JScrollPane scrollPanel = new JScrollPane();
+    private JButton Eliminar = new JButton("Eliminar alfabet");
 
-    public VistaIdiomes() {
+    public VistaAlfabet (String nomA) throws AlfabetNoExisteix {
+        nom = nomA;
         setVisible(true);
         iniComponents();
     }
 
-    private void iniComponents() {
+    private void iniComponents() throws AlfabetNoExisteix {
         iniFrame();
-        iniClose();
         iniEnrere();
-        iniIdiomes();
-        add(panelContenidos, BorderLayout.CENTER);
-
-        //assignar listeneres a cada component
+        iniIdioma();
+        iniButtons();
         assign_listenerComponents();
     }
 
@@ -40,65 +41,43 @@ public class VistaIdiomes extends JFrame {
         setResizable(false);
     }
 
-    private void iniClose() {
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre automático
-
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                int confirmed = JOptionPane.showConfirmDialog(null,
-                        "Estas segur de que vols sortir?", "Confirmació de tancament",
-                        JOptionPane.YES_NO_OPTION);
-
-                if (confirmed == JOptionPane.YES_OPTION) {
-                    ControladorPresentacio.guardaEstat();
-                    dispose();
-                    System.exit(0);
-                }
-            }
-        });
-    }
-
     private void iniEnrere() {
-
         panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
         panelContenidos.add(Box.createVerticalGlue());
         panelContenidos.add(Box.createHorizontalGlue());
-
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
-
     }
 
-    private void iniIdiomes() {
-        List<String> l = ControladorPresentacio.getNomsIdiomes();
-        panelContenidos.setLayout(new GridBagLayout());
+    private void iniButtons() {
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.anchor = GridBagConstraints.CENTER;
-        constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 0;
         constraints.gridy = 1;
-        panelContenidos.add(Afegir, constraints);
-        int yPos = 2;
-        for (String nomI : l) {
-            JButton button = new JButton(nomI);
-            constraints.gridx = 0;
-            constraints.gridy = yPos++;
-            button.setPreferredSize(new Dimension(200, 50));
-
-            button.addActionListener(e -> {
-                try {
-                    ControladorPresentacio.vistaIdioma(nomI);
-                    setVisible(false);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            });
-            panelContenidos.add(button, constraints);
-        }
+        constraints.weighty = 1;
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        Eliminar.setPreferredSize(new Dimension(200, 30));
+        buttonPanel.add(Eliminar);
+        panelContenidos.add(buttonPanel, constraints);
     }
 
+
+    private void iniIdioma() throws AlfabetNoExisteix {
+        String info = ControladorPresentacio.consultaAlfabet(nom);
+        AlfabettextArea.setText(info); // Establecer el texto en el JTextArea
+        AlfabettextArea.setEditable(false); // Para evitar la edición
+        AlfabettextArea.setFont(new Font("Arial", Font.PLAIN, 14)); // Cambia la fuente si es necesario
+        AlfabettextArea.setWrapStyleWord(true); // Ajusta el ajuste de palabras
+        AlfabettextArea.setLineWrap(true); // Permite el ajuste de línea
+        AlfabettextArea.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineación horizontal
+        AlfabettextArea.setAlignmentY(Component.CENTER_ALIGNMENT); // Alineación vertical
+
+        scrollPanel.setViewportView(AlfabettextArea);
+        panelContenidos.add(Box.createVerticalGlue());
+        panelContenidos.add(scrollPanel);
+        panelContenidos.add(Box.createVerticalGlue());
+        add(panelContenidos, BorderLayout.CENTER);
+    }
 
     /**
      * Assigna els listeners als components corresponents.
@@ -107,7 +86,6 @@ public class VistaIdiomes extends JFrame {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                //pack();
                 revalidate();
             }
         });
@@ -118,8 +96,7 @@ public class VistaIdiomes extends JFrame {
                 ex.printStackTrace();
             }
         });
-
-        Afegir.addActionListener(e -> {
+        Eliminar.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
             } catch (Exception ex) {
@@ -134,10 +111,10 @@ public class VistaIdiomes extends JFrame {
             ControladorPresentacio.vistaPrincipal();
             setVisible(false);
         }
-        else if (Afegir.equals(source)) {
-            ControladorPresentacio.vistaAfegirIdioma();
+        else if (Eliminar.equals(source)) {
+            ControladorPresentacio.eliminarAlfabet(nom);
+            ControladorPresentacio.vistaAlfabets();
             setVisible(false);
         }
     }
 }
-

@@ -1,10 +1,5 @@
 package Presentacio.views;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-
-
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -14,10 +9,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class VistaAfegirLlista extends JFrame {
-
+public class VistaAfegirIdioma extends JFrame{
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
     private JLabel labelTipusInput = new JLabel("Com vols afegir la llists?");
     private ButtonGroup tipusInput = new ButtonGroup();
@@ -32,7 +29,7 @@ public class VistaAfegirLlista extends JFrame {
     private JPanel panelContenidos = new JPanel();
     private String filepath;
 
-    public VistaAfegirLlista() {
+    public VistaAfegirIdioma() {
         setVisible(true);
         iniComponents();
     }
@@ -228,5 +225,3 @@ public class VistaAfegirLlista extends JFrame {
         }
     }
 }
-
-

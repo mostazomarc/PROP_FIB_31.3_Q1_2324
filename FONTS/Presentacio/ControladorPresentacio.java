@@ -3,9 +3,7 @@ package Presentacio;
 import java.util.*;
 
 import ControladorsDomini.CtrlDomini;
-import Excepcions.ExcepcionsCreadorTeclat;
-import Excepcions.LlistaFreqNoExisteix;
-import Excepcions.TeclatNoExisteix;
+import Excepcions.*;
 import Presentacio.views.*;
 /**
  * ControladorPresentacio es la classe que s'encarrega de comunicar la Vista amb el Controlador de Domini
@@ -41,36 +39,29 @@ public class ControladorPresentacio {
     }
 
     public static void vistaPerfils() throws Exception { VistaPerfils vp = new VistaPerfils();}
-
     public static void vistaCrearPerfil() throws Exception { VistaCrearPerfil vcp = new VistaCrearPerfil();}
-
     public static void vistaPrincipal() {
         VistaPrincipal vp = new VistaPrincipal();
     }
-
     public static void vistaInfoFuncions()  {
         VistaInfoFuncions vgt = new VistaInfoFuncions();
     }
-
     public static void vistaTeclats()  {VistaTeclats vgt = new VistaTeclats();}
-
     public static void vistaCrearTeclat() { VistaCrearTeclat vclp = new VistaCrearTeclat(); }
-
     public static void vistaTeclat(String nom) throws ExcepcionsCreadorTeclat {VistaTeclat vt = new VistaTeclat(nom); }
-
     public static void vistaModificarLayoutTeclat() { VistaModificarLayoutTeclat vmlt = new VistaModificarLayoutTeclat(); }
-
     public static void vistaEliminarTeclat() { VistaEliminarTeclat vet = new VistaEliminarTeclat(); }
-
     public static void vistaLlistes() { VistaLlistes v = new VistaLlistes(); }
-
     public static void vistaLlista(String nomLl) throws LlistaFreqNoExisteix { VistaLlista v = new VistaLlista(nomLl); }
-
     public static void vistaAfegirLlista() { VistaAfegirLlista v = new VistaAfegirLlista(); }
-
     public static void vistaIdiomes() { VistaIdiomes v = new VistaIdiomes(); }
-
+    public static void vistaIdioma(String nomI) throws IdiomaNoExisteix { VistaIdioma v = new VistaIdioma(nomI); }
+    public static void vistaAfegirIdioma() { VistaAfegirIdioma v = new VistaAfegirIdioma(); }
     public static void vistaAlfabets() { VistaAlfabets v = new VistaAlfabets(); }
+    public static void vistaAfegirAlfabet() { VistaAfegirAlfabet v = new VistaAfegirAlfabet(); }
+    public static void vistaAlfabet(String nomA) throws AlfabetNoExisteix { VistaAlfabet v = new VistaAlfabet(nomA); }
+
+
 
 
 
@@ -186,7 +177,7 @@ public class ControladorPresentacio {
      * Retorna la info dels idiomes del sistema
      * @return La info dels idiomes del sistema
      */
-    public Vector<String> consultaIdiomes() {
+    public static Vector<String> consultaIdiomes() {
         return controladorDomini.consultaIdiomes();
     }
 
@@ -194,7 +185,7 @@ public class ControladorPresentacio {
      * Consulta la info dels alfabets guardats al sistema
      * @return La info dels alfabets guardats al sistema
      */
-    public Vector<String> consultaAlfabets() {
+    public static Vector<String> consultaAlfabets() {
         return controladorDomini.consultaAlfabets();
     }
 
@@ -203,7 +194,7 @@ public class ControladorPresentacio {
      * @param filename El nom de l'arxiu
      * @throws Exception Si no es pot llegir l'arxiu o no es pot afegir l'alfabet
      */
-    public void afegirAlfabet(String filename) throws Exception{
+    public static void afegirAlfabet(String filename) throws Exception{
         controladorDomini.afegirAlfabet(filename);
     }
 
@@ -212,7 +203,7 @@ public class ControladorPresentacio {
      * @param nomAlfabet El nom de l'alfabet
      * @throws ExcepcionsCreadorTeclat Si l'alfabet amb nom nomAlfabet no existeix o no es pot eliminar
      */
-    public void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat{
+    public static void eliminarAlfabet(String nomAlfabet) throws ExcepcionsCreadorTeclat{
         controladorDomini.eliminarAlfabet(nomAlfabet);
     }
 
@@ -224,7 +215,7 @@ public class ControladorPresentacio {
      * @param filename El nom de l'arxiu
      * @throws Exception Si l'idioma ja existeix o no es pot afegir l'idioma o la llista de frequencies
      */
-    public void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws Exception {
+    public static void afegirIdioma(String nomIdioma, String nomAlfabet, String tipusArxiu, String filename) throws Exception {
         controladorDomini.afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename);
     }
 
@@ -233,7 +224,7 @@ public class ControladorPresentacio {
      * @param nomIdioma El nom de l'idioma
      * @throws ExcepcionsCreadorTeclat Si l'idioma amb nom nomIdioma no existeix o no es pot eliminar
      */
-    public void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
+    public static void eliminarIdioma(String nomIdioma) throws ExcepcionsCreadorTeclat {
         controladorDomini.eliminarIdioma(nomIdioma);
     }
 
@@ -252,7 +243,7 @@ public class ControladorPresentacio {
      * @return El nom de l'idioma del teclat identificat per nomt
      * @throws TeclatNoExisteix Si el teclat no existeix
      */
-    public String getNomIdiomaTeclat(String nomt) throws ExcepcionsCreadorTeclat {
+    public static String getNomIdiomaTeclat(String nomt) throws ExcepcionsCreadorTeclat {
         return controladorDomini.getNomIdiomaTeclat(nomt);
     }
 
@@ -321,5 +312,15 @@ public class ControladorPresentacio {
         controladorDomini.eliminarTeclat(nomSeleccio);
     }
 
+    public static String consultaIdioma(String nomI) throws IdiomaNoExisteix {
+        return controladorDomini.consultaIdioma(nomI);
+    }
+
+    public static String consultaAlfabet(String nomA) throws AlfabetNoExisteix {
+        return controladorDomini.consultaAlfabet(nomA);
+    }
+    public static List<String> getNomsAlfabets()  {
+        return controladorDomini.getNomsAlfabets();
+    }
 }
 
