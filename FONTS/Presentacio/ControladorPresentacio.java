@@ -50,8 +50,6 @@ public class ControladorPresentacio {
     public static void vistaTeclats()  {VistaTeclats vgt = new VistaTeclats();}
     public static void vistaCrearTeclat() { VistaCrearTeclat vclp = new VistaCrearTeclat(); }
     public static void vistaTeclat(String nom) throws ExcepcionsCreadorTeclat {VistaTeclat vt = new VistaTeclat(nom); }
-    public static void vistaModificarLayoutTeclat() { VistaModificarLayoutTeclat vmlt = new VistaModificarLayoutTeclat(); }
-    public static void vistaEliminarTeclat() { VistaEliminarTeclat vet = new VistaEliminarTeclat(); }
     public static void vistaLlistes() { VistaLlistes v = new VistaLlistes(); }
     public static void vistaLlista(String nomLl) throws LlistaFreqNoExisteix { VistaLlista v = new VistaLlista(nomLl); }
     public static void vistaAfegirLlista() { VistaAfegirLlista v = new VistaAfegirLlista(); }

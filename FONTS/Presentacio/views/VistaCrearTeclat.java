@@ -17,11 +17,10 @@ public class VistaCrearTeclat extends JFrame {
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
     private JLabel labelNomTeclat = new JLabel("Nom del teclat");
     private JTextField inputNomTeclat = new JTextField(20);
-    private JLabel labelNomIdioma = new JLabel("Idioma");
+    private JLabel labelNomIdioma = new JLabel("Selecciona l'idioma");
     private JComboBox inputNomIdioma;
-    private JLabel labelNomLl = new JLabel("Llista de freqüències");
-    private String[] freqs = new String[]{"Selecciona llista freqüències"};
-    private JComboBox<String> inputNomLl = new JComboBox<>(freqs);
+    private JLabel labelNomLl = new JLabel("Selecciona la llista de freqüències");
+    private JComboBox<String> inputNomLl;
     private JLabel labelNF = new JLabel("Nombre de files del layout");
     private JTextField inputNF = new JTextField(20);
     private JLabel labelNC = new JLabel("Nombre de columnes del layout");
@@ -102,8 +101,8 @@ public class VistaCrearTeclat extends JFrame {
         panelContenidos.add(labelNomIdioma, constraints);
         constraints.gridy = 5;
         List<String> idiomes = ControladorPresentacio.getNomsIdiomes();
-        idiomes.add(0, "Selecciona idioma");
         inputNomIdioma = new JComboBox<>(idiomes.toArray(new String[0]));
+        inputNomIdioma.setSelectedIndex(-1);
         panelContenidos.add(inputNomIdioma, constraints);
         constraints.gridy = 6;
         panelContenidos.add(labelNomLl, constraints);
@@ -120,8 +119,9 @@ public class VistaCrearTeclat extends JFrame {
         constraints.gridy = 12;
         panelContenidos.add(labelAlgorisme, constraints);
         constraints.gridy = 13;
-        String[] algorismes = {"Selecciona algorisme", "BranchAndBound", "GeneticAlgorithm"};
+        String[] algorismes = {"BranchAndBound", "GeneticAlgorithm"};
         inputAlgorisme= new JComboBox<>(algorismes);
+        inputAlgorisme.setSelectedIndex(-1);
         panelContenidos.add(inputAlgorisme, constraints);
         constraints.gridy = 14;
         panelContenidos.add(Crear, constraints);
@@ -177,7 +177,6 @@ public class VistaCrearTeclat extends JFrame {
             String[] llistes = ControladorPresentacio.getNomLlistesGuardades().toArray(new String[0]);
 
             List<String> tempList = new ArrayList<>();
-            tempList.add("Selecciona llista freqüències");
 
             for (String nomLlista : llistes) {
                 if (ControladorPresentacio.getNomIdiomaLlista(nomLlista).equals(nomIdioma)) {
@@ -185,8 +184,9 @@ public class VistaCrearTeclat extends JFrame {
                 }
             }
 
-            freqs = tempList.toArray(new String[0]);
+            String[] freqs = tempList.toArray(new String[0]);
             inputNomLl.setModel(new DefaultComboBoxModel<>(freqs));
+            inputNomLl.setSelectedIndex(-1);
         }
 
         else if (Crear.equals(source)) {

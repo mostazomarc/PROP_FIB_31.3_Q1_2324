@@ -13,9 +13,7 @@ public class VistaPrincipal extends JFrame{
     private JButton Llistes = new JButton("Llistes de freqüències");
     private JButton Idiomes = new JButton("Idiomes");
     private JButton Alfabets = new JButton("Alfabets");
-
-    private JButton Sortir = new JButton("Sortir");
-
+    private JButton CanviarPerfil = new JButton("Canviar Perfil");
     private final JMenuBar menuBar = new JMenuBar();
 
     public VistaPrincipal () {
@@ -25,12 +23,9 @@ public class VistaPrincipal extends JFrame{
 
     private void iniComponents() {
         iniFrame();
+        iniClose();
         iniButtons();
         add(panelContenidos, BorderLayout.CENTER);
-        //inicialitzar la resta
-
-
-        //assignar listeneres a cada component
         assign_listenerComponents();
     }
 
@@ -42,6 +37,25 @@ public class VistaPrincipal extends JFrame{
         int y = (pantalla.height - 600) / 2;
         setLocation(x, y);
         setResizable(false);
+    }
+
+    private void iniClose() {
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre automático
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                int confirmed = JOptionPane.showConfirmDialog(null,
+                        "Estas segur de que vols sortir?", "Confirmació de tancament",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (confirmed == JOptionPane.YES_OPTION) {
+                    ControladorPresentacio.guardaEstat();
+                    dispose();
+                    System.exit(0);
+                }
+            }
+        });
     }
 
     private void iniButtons() {
@@ -67,6 +81,9 @@ public class VistaPrincipal extends JFrame{
 
         constraints.gridy = 5;
         panelContenidos.add(Alfabets, constraints);
+
+        constraints.gridy = 6;
+        panelContenidos.add(CanviarPerfil, constraints);
     }
 
     /**
@@ -115,6 +132,13 @@ public class VistaPrincipal extends JFrame{
                 ex.printStackTrace();
             }
         });
+        CanviarPerfil.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
@@ -137,6 +161,10 @@ public class VistaPrincipal extends JFrame{
         }
         else if (Alfabets.equals(source)) {
             ControladorPresentacio.vistaAlfabets();
+            setVisible(false);
+        }
+        else if (CanviarPerfil.equals(source)) {
+            ControladorPresentacio.vistaPerfils();
             setVisible(false);
         }
     }

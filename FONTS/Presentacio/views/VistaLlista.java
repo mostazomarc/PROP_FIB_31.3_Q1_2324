@@ -27,6 +27,7 @@ public class VistaLlista extends JFrame {
 
     private void iniComponents() throws LlistaFreqNoExisteix {
         iniFrame();
+        iniClose();
         iniEnrere();
         iniLlista();
         iniButtons();
@@ -42,6 +43,25 @@ public class VistaLlista extends JFrame {
         int y = (pantalla.height - 600) / 2;
         setLocation(x, y);
         setResizable(false);
+    }
+
+    private void iniClose() {
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre automático
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                int confirmed = JOptionPane.showConfirmDialog(null,
+                        "Estas segur de que vols sortir?", "Confirmació de tancament",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (confirmed == JOptionPane.YES_OPTION) {
+                    ControladorPresentacio.guardaEstat();
+                    dispose();
+                    System.exit(0);
+                }
+            }
+        });
     }
 
     private void iniEnrere() {
