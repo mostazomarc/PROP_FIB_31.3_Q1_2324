@@ -18,7 +18,12 @@ public class VistaAfegirIdioma extends JFrame{
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
     private JLabel labelNomIdioma = new JLabel("Introdueix el nom de l'idioma:");
     private JTextField inputNomIdioma = new JTextField(20);
-    private JButton importarArxiu = new JButton ("Importar llista predeterminada de l'idioma");
+    private JLabel labelImportarLlista = new JLabel("Importar llista de freqüències predeterminada de l'idioma");
+    private JLabel labelTipusArxiu = new JLabel("De quin tipus és l'arxiu ?");
+    private JRadioButton rtext = new JRadioButton("Text");
+    private JRadioButton rllista = new JRadioButton("Llista");
+    private JButton importarArxiu = new JButton ("Importar");
+    private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
     private JLabel labelNomAlfabet = new JLabel("Selecciona l'alfabet corresponent");
     private JComboBox inputNomAlfabet = new JComboBox();
     private JButton Enrere = new JButton("Tornar enrere");
@@ -91,31 +96,23 @@ public class VistaAfegirIdioma extends JFrame{
         constraints.gridy = 3;
         panelContenidos.add(inputNomIdioma, constraints);
         constraints.gridy = 4;
-        panelContenidos.add(importarArxiu, constraints);
+        panelContenidos.add(labelImportarLlista, constraints);
         constraints.gridy = 5;
-        panelContenidos.add(labelNomAlfabet, constraints);
+        panelContenidos.add(labelTipusArxiu, constraints);
         constraints.gridy = 6;
-        List<String> alfabets = ControladorPresentacio.getNomsAlfabets();
-        //inputNomIdioma = new JComboBox<>(alfabets);
-        panelContenidos.add(inputNomAlfabet, constraints);
+        panelContenidos.add(rllista, constraints);
         constraints.gridy = 7;
-        panelContenidos.add(Afegir, constraints);
+        panelContenidos.add(rtext, constraints);
         constraints.gridy = 8;
-        importarArxiu.setEnabled(false);
-        importarArxiu.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-            fileChooser.setFileFilter(new FileNameExtensionFilter("PROP", "csv", "prop","txt"));
-            fileChooser.setDialogTitle("Selecciona fitxer");
-            int returnValue = fileChooser.showOpenDialog(null);
-            if (returnValue == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fileChooser.getSelectedFile();
-                filepath = selectedFile.getAbsolutePath();
-            }
-        });
         panelContenidos.add(importarArxiu, constraints);
         constraints.gridy = 9;
+        panelContenidos.add(labelNomAlfabet, constraints);
+        constraints.gridy = 10;
+        List<String> alfabets = ControladorPresentacio.getNomsAlfabets();
+        inputNomAlfabet = new JComboBox<>(alfabets.toArray(new String[0]));
+        panelContenidos.add(inputNomAlfabet, constraints);
+        constraints.gridy = 11;
         panelContenidos.add(Afegir, constraints);
-
         add(panelContenidos, BorderLayout.CENTER);
 
     }
@@ -138,7 +135,7 @@ public class VistaAfegirIdioma extends JFrame{
                 ex.printStackTrace();
             }
         });
-        inputNomIdioma.addActionListener(e -> {
+        importarArxiu.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
             } catch (Exception ex) {
@@ -158,6 +155,29 @@ public class VistaAfegirIdioma extends JFrame{
         Object source = e.getSource();
         if (Enrere.equals(source)) {
             ControladorPresentacio.vistaTeclats();
+            setVisible(false);
+        }
+        else if (importarArxiu.equals(source)) {
+            fileChooser.setFileFilter(new FileNameExtensionFilter("PROP", "csv", "prop","txt"));
+            fileChooser.setDialogTitle("Selecciona fitxer");
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                filepath = selectedFile.getAbsolutePath();
+            }
+        }
+        else if (Afegir.equals(source)) {
+            JRadioButton selectedButton = null;
+            if (rllista.isSelected()) {
+                selectedButton = rllista;
+            } else if (rtext.isSelected()) {
+                selectedButton = rtext;
+            }
+            String tipus = selectedButton.getText();
+            String nomI = inputNomIdioma.getText();
+            String nomA = (String) inputNomAlfabet.getSelectedItem();
+            ControladorPresentacio.afegirIdioma(nomI,nomA,tipus,filepath);
+            ControladorPresentacio.vistaIdiomes();
             setVisible(false);
         }
     }
