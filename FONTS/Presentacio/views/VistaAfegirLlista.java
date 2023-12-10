@@ -27,6 +27,7 @@ public class VistaAfegirLlista extends JFrame {
     private JLabel labelNomIdioma = new JLabel("Selecciona l'idioma");
     private JComboBox inputNomIdioma;
     private JButton importarArxiu = new JButton("Importar arxiu");
+    private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
     private JButton Enrere = new JButton("Tornar enrere");
     private JButton Afegir = new JButton("Afegir llista");
     private JPanel panelContenidos = new JPanel();
@@ -97,13 +98,11 @@ public class VistaAfegirLlista extends JFrame {
         constraints.gridy = 3;
         List<String> idiomes = ControladorPresentacio.getNomsIdiomes();
         inputNomIdioma = new JComboBox<>(idiomes.toArray(new String[0]));
+        inputNomIdioma.setSelectedIndex(-1);
         panelContenidos.add(inputNomIdioma, constraints);
         constraints.gridy = 4;
         panelContenidos.add(labelTipusInput, constraints);
         constraints.gridy = 5;
-        tipusInput.add(rllista);
-        tipusInput.add(rtext);
-        tipusInput.add(rmanual);
         panelContenidos.add(rllista, constraints);
         constraints.gridy = 6;
         panelContenidos.add(rtext, constraints);
@@ -111,16 +110,6 @@ public class VistaAfegirLlista extends JFrame {
         panelContenidos.add(rmanual, constraints);
         constraints.gridy = 8;
         importarArxiu.setEnabled(false);
-        importarArxiu.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-            fileChooser.setFileFilter(new FileNameExtensionFilter("PROP", "csv", "prop","txt"));
-            fileChooser.setDialogTitle("Selecciona fitxer");
-            int returnValue = fileChooser.showOpenDialog(null);
-            if (returnValue == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fileChooser.getSelectedFile();
-                filepath = selectedFile.getAbsolutePath();
-            }
-        });
         panelContenidos.add(importarArxiu, constraints);
         constraints.gridy = 9;
         panelContenidos.add(Afegir, constraints);
@@ -175,6 +164,13 @@ public class VistaAfegirLlista extends JFrame {
                 ex.printStackTrace();
             }
         });
+        importarArxiu.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         Afegir.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
@@ -195,6 +191,16 @@ public class VistaAfegirLlista extends JFrame {
         }
         if (!rtext.isSelected() && !rllista.isSelected()) {
             importarArxiu.setEnabled(false);
+        }
+        if (importarArxiu.equals(source)) {
+            fileChooser.setFileFilter(new FileNameExtensionFilter("PROP", "csv", "prop","txt"));
+            fileChooser.setDialogTitle("Selecciona fitxer");
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                filepath = selectedFile.getAbsolutePath();
+                //filepath = selectedFile.getName();
+            }
         }
         else if (Afegir.equals(source)) {
             String nomIdioma = (String) inputNomIdioma.getSelectedItem();
