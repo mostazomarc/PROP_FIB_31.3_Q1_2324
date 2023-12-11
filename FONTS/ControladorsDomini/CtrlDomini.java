@@ -53,8 +53,8 @@ public class CtrlDomini {
     private CtrlFile ctrlFreqFile;
 
     private String getNomArxiu(String filepath) {
-        String[] parts = filepath.split("/");
-        String nomArxiu = parts[parts.length-1];
+        File file = new File(filepath);
+        String nomArxiu = file.getName();
         return nomArxiu;
     }
 
