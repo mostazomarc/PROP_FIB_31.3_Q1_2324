@@ -171,7 +171,7 @@ public class VistaCrearTeclat extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaTeclats();
+            ControladorPresentacio.vistaElements("teclats");
             setVisible(false);
         }
         else if (inputNomIdioma.equals(source)) {

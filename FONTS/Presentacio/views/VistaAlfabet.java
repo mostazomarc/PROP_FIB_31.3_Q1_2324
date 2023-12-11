@@ -133,7 +133,7 @@ public class VistaAlfabet extends JFrame {
         }
         else if (Eliminar.equals(source)) {
             ControladorPresentacio.eliminarAlfabet(nom);
-            ControladorPresentacio.vistaAlfabets();
+            ControladorPresentacio.vistaElements("alfabets");
             setVisible(false);
         }
     }

@@ -44,21 +44,19 @@ public class ControladorPresentacio {
     public static void vistaPrincipal() {
         VistaPrincipal vp = new VistaPrincipal();
     }
-    public static void vistaTeclats()  {VistaTeclats vgt = new VistaTeclats();}
+    //public static void vistaTeclats()  {VistaTeclats vgt = new VistaTeclats();}
     public static void vistaCrearTeclat() { VistaCrearTeclat vclp = new VistaCrearTeclat(); }
     public static void vistaTeclat(String nom) throws ExcepcionsCreadorTeclat {VistaTeclat vt = new VistaTeclat(nom); }
-    public static void vistaLlistes() { VistaLlistes v = new VistaLlistes(); }
+    //public static void vistaLlistes() { VistaLlistes v = new VistaLlistes(); }
     public static void vistaLlista(String nomLl) throws LlistaFreqNoExisteix { VistaLlista v = new VistaLlista(nomLl); }
     public static void vistaAfegirLlista() { VistaAfegirLlista v = new VistaAfegirLlista(); }
-    public static void vistaIdiomes() { VistaIdiomes v = new VistaIdiomes(); }
+    //public static void vistaIdiomes() { VistaIdiomes v = new VistaIdiomes(); }
     public static void vistaIdioma(String nomI) throws IdiomaNoExisteix { VistaIdioma v = new VistaIdioma(nomI); }
     public static void vistaAfegirIdioma() { VistaAfegirIdioma v = new VistaAfegirIdioma(); }
-    public static void vistaAlfabets() { VistaAlfabets v = new VistaAlfabets(); }
+    //public static void vistaAlfabets() { VistaAlfabets v = new VistaAlfabets(); }
     public static void vistaAfegirAlfabet() { VistaAfegirAlfabet v = new VistaAfegirAlfabet(); }
     public static void vistaAlfabet(String nomA) throws AlfabetNoExisteix { VistaAlfabet v = new VistaAlfabet(nomA); }
-
-
-
+    public static void vistaElements(String option) { VistaElements v = new VistaElements(option);}
 
 
 

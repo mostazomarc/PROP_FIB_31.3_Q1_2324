@@ -134,7 +134,7 @@ public class VistaAfegirAlfabet extends JFrame{
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaTeclats();
+            ControladorPresentacio.vistaElements("alfabets");
             setVisible(false);
         }
         else if (importarArxiu.equals(source)) {
@@ -148,7 +148,7 @@ public class VistaAfegirAlfabet extends JFrame{
         }
         else if (Afegir.equals(source)) {
             ControladorPresentacio.afegirAlfabet(filepath);
-            ControladorPresentacio.vistaAlfabets();
+            ControladorPresentacio.vistaElements("alfabets");
             setVisible(false);
         }
     }

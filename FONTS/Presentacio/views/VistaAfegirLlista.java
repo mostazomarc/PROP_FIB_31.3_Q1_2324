@@ -101,6 +101,9 @@ public class VistaAfegirLlista extends JFrame {
         inputNomIdioma.setSelectedIndex(-1);
         panelContenidos.add(inputNomIdioma, constraints);
         constraints.gridy = 4;
+        tipusInput.add(rllista);
+        tipusInput.add(rtext);
+        tipusInput.add(rmanual);
         panelContenidos.add(labelTipusInput, constraints);
         constraints.gridy = 5;
         panelContenidos.add(rllista, constraints);
@@ -183,7 +186,7 @@ public class VistaAfegirLlista extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaTeclats();
+            ControladorPresentacio.vistaElements("llistes");
             setVisible(false);
         }
         if (rtext.isSelected() || rllista.isSelected()) {
@@ -223,7 +226,7 @@ public class VistaAfegirLlista extends JFrame {
                 else {
                     //ControladorPresentacio.novaLlistaPerfil();
                 }
-                ControladorPresentacio.vistaLlistes();
+                ControladorPresentacio.vistaElements("llistes");
                 setVisible(false);
             }
         }

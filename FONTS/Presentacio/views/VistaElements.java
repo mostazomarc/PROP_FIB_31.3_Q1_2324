@@ -1,5 +1,6 @@
 package Presentacio.views;
 
+import Excepcions.ExcepcionsCreadorTeclat;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -9,21 +10,24 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.List;
 
-public class VistaLlistes extends JFrame {
+public class VistaElements extends JFrame {
     private JButton Enrere = new JButton("Tornar al menú principal");
-    private JButton Afegir = new JButton("Afegir llista");
+    private JButton Crear = new JButton("Crear");
     private JPanel panelContenidos = new JPanel();
 
-    public VistaLlistes() {
+    private String option;
+
+    public VistaElements(String option) {
+        this.option = option;
         setVisible(true);
-        iniComponents();
+        iniComponents(option);
     }
 
-    private void iniComponents() {
+    private void iniComponents(String option) {
         iniFrame();
         iniClose();
         iniEnrere();
-        iniLlistes();
+        iniContingut(option);
         add(panelContenidos, BorderLayout.CENTER);
 
         //assignar listeneres a cada component
@@ -70,8 +74,24 @@ public class VistaLlistes extends JFrame {
 
     }
 
-    private void iniLlistes() {
-        List<String> l = ControladorPresentacio.getNomLlistesGuardades();
+    private void iniContingut(String option) {
+        List<String> l = null;
+        switch(option) {
+            case "teclats":
+                l = ControladorPresentacio.getNomsTeclats();
+                break;
+            case "llistes":
+                l = ControladorPresentacio.getNomLlistesGuardades();
+                break;
+            case "idiomes":
+                l = ControladorPresentacio.getNomsIdiomes();
+                break;
+            case "alfabets":
+                l = ControladorPresentacio.getNomsAlfabets();
+                break;
+            default:
+                break;
+        }
         panelContenidos.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -79,23 +99,40 @@ public class VistaLlistes extends JFrame {
         constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 0;
         constraints.gridy = 1;
-        panelContenidos.add(Afegir, constraints);
+        panelContenidos.add(Crear, constraints);
         int yPos = 2;
-        for (String nomLl : l) {
-            JButton button = new JButton(nomLl);
-            constraints.gridx = 0;
-            constraints.gridy = yPos++;
-            button.setPreferredSize(new Dimension(200, 50));
 
-            button.addActionListener(e -> {
-                try {
-                    ControladorPresentacio.vistaLlista(nomLl);
-                    setVisible(false);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            });
-            panelContenidos.add(button, constraints);
+        if(l != null) {
+            for (String nom : l) {
+                JButton button = new JButton(nom);
+                constraints.gridx = 0;
+                constraints.gridy = yPos++;
+                button.setPreferredSize(new Dimension(200, 50));
+                button.addActionListener(e -> {
+                    try {
+                        switch(option) {
+                            case "teclats":
+                                ControladorPresentacio.vistaTeclat(nom);
+                                break;
+                            case "llistes":
+                                ControladorPresentacio.vistaLlista(nom);
+                                break;
+                            case "idiomes":
+                                ControladorPresentacio.vistaIdioma(nom);
+                                break;
+                            case "alfabets":
+                                ControladorPresentacio.vistaAlfabet(nom);
+                                break;
+                            default:
+                                break;
+                        }
+                        setVisible(false);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+                panelContenidos.add(button, constraints);
+            }
         }
     }
 
@@ -107,7 +144,6 @@ public class VistaLlistes extends JFrame {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                //pack();
                 revalidate();
             }
         });
@@ -119,7 +155,7 @@ public class VistaLlistes extends JFrame {
             }
         });
 
-        Afegir.addActionListener(e -> {
+        Crear.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
             } catch (Exception ex) {
@@ -134,8 +170,23 @@ public class VistaLlistes extends JFrame {
             ControladorPresentacio.vistaPrincipal();
             setVisible(false);
         }
-        else if (Afegir.equals(source)) {
-            ControladorPresentacio.vistaAfegirLlista();
+        else if (Crear.equals(source)) {
+            switch(option) {
+                case "teclats":
+                    ControladorPresentacio.vistaCrearTeclat();
+                    break;
+                case "llistes":
+                    ControladorPresentacio.vistaAfegirLlista();
+                    break;
+                case "idiomes":
+                    ControladorPresentacio.vistaAfegirIdioma();
+                    break;
+                case "alfabets":
+                    ControladorPresentacio.vistaAfegirAlfabet();
+                    break;
+                default:
+                    break;
+            }
             setVisible(false);
         }
     }

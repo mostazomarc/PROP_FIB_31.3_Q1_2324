@@ -8,14 +8,12 @@ import java.awt.event.*;
 
 public class VistaPrincipal extends JFrame{
     private JPanel panelContenidos = new JPanel();
-    private JButton Info = new JButton("Informació de les funcions");
     private JButton Teclats = new JButton("Teclats");
     private JButton Llistes = new JButton("Llistes de freqüències");
     private JButton Idiomes = new JButton("Idiomes");
     private JButton Alfabets = new JButton("Alfabets");
     private JButton CanviarPerfil = new JButton("Canviar Perfil");
-    private final JMenuBar menuBar = new JMenuBar();
-
+    private JButton EliminarPerfil = new JButton("Eliminar Perfil");
     public VistaPrincipal () {
         setVisible(true);
         iniComponents();
@@ -67,23 +65,24 @@ public class VistaPrincipal extends JFrame{
         constraints.insets = new Insets(10, 10, 10, 10);
 
         constraints.gridx = 0;
-        constraints.gridy = 1;
-        panelContenidos.add(Info, constraints);
 
-        constraints.gridy = 2;
+        constraints.gridy = 1;
         panelContenidos.add(Teclats, constraints);
 
-        constraints.gridy = 3;
+        constraints.gridy = 2;
         panelContenidos.add(Llistes, constraints);
 
-        constraints.gridy = 4;
+        constraints.gridy = 3;
         panelContenidos.add(Idiomes, constraints);
 
-        constraints.gridy = 5;
+        constraints.gridy = 4;
         panelContenidos.add(Alfabets, constraints);
 
-        constraints.gridy = 6;
+        constraints.gridy = 5;
         panelContenidos.add(CanviarPerfil, constraints);
+
+        constraints.gridy = 6;
+        panelContenidos.add(EliminarPerfil, constraints);
     }
 
     /**
@@ -93,15 +92,7 @@ public class VistaPrincipal extends JFrame{
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                //pack();
                 revalidate();
-            }
-        });
-        Info.addActionListener(e -> {
-            try {
-                actionPerformed_buttons(e);
-            } catch (Exception ex) {
-                ex.printStackTrace();
             }
         });
         Teclats.addActionListener(e -> {
@@ -139,27 +130,39 @@ public class VistaPrincipal extends JFrame{
                 ex.printStackTrace();
             }
         });
+        EliminarPerfil.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Teclats.equals(source)) {
-            ControladorPresentacio.vistaTeclats();
+            ControladorPresentacio.vistaElements("teclats");
             setVisible(false);
         }
         else if (Llistes.equals(source)) {
-            ControladorPresentacio.vistaLlistes();
+            ControladorPresentacio.vistaElements("llistes");
             setVisible(false);
         }
         else if (Idiomes.equals(source)) {
-            ControladorPresentacio.vistaIdiomes();
+            ControladorPresentacio.vistaElements("idiomes");
             setVisible(false);
         }
         else if (Alfabets.equals(source)) {
-            ControladorPresentacio.vistaAlfabets();
+            ControladorPresentacio.vistaElements("alfabets");
             setVisible(false);
         }
         else if (CanviarPerfil.equals(source)) {
+            ControladorPresentacio.vistaPerfils();
+            setVisible(false);
+        }
+        else if (EliminarPerfil.equals(source)) {
+            //ControladorPresentacio.eliminaPerfil
             ControladorPresentacio.vistaPerfils();
             setVisible(false);
         }
