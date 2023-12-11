@@ -200,6 +200,7 @@ public class VistaTeclat extends JFrame {
         }
         else if (Eliminar.equals(source)) {
             ControladorPresentacio.eliminarTeclat(nom);
+            ControladorPresentacio.vistaElements("teclats");
             setVisible(false);
         }
     }

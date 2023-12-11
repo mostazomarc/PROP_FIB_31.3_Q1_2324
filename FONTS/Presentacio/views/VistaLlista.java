@@ -154,7 +154,7 @@ public class VistaLlista extends JFrame {
         }
         else if (Eliminar.equals(source)) {
             ControladorPresentacio.eliminarLlista(nom);
-            ControladorPresentacio.vistaLlistes();
+            ControladorPresentacio.vistaElements("llistes");
             setVisible(false);
         }
     }

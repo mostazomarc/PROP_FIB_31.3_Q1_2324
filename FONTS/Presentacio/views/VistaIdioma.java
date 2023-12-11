@@ -133,7 +133,7 @@ public class VistaIdioma extends JFrame {
         }
         else if (Eliminar.equals(source)) {
             ControladorPresentacio.eliminarIdioma(nom);
-            ControladorPresentacio.vistaIdiomes();
+            ControladorPresentacio.vistaElements("idiomes");
             setVisible(false);
         }
     }

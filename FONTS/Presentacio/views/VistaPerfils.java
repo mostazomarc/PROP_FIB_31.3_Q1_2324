@@ -12,8 +12,6 @@ import java.awt.event.ComponentEvent;
 
 
 public class VistaPerfils extends JFrame {
-    private JButton Enrere = new JButton("Tornar al menú principal");
-
     private JButton AP = new JButton("+");
     private JPanel panelContenidos = new JPanel();
 
@@ -25,7 +23,6 @@ public class VistaPerfils extends JFrame {
     private void iniComponents() {
         iniFrame();
         iniClose();
-        iniEnrere();
         iniButtonsPerfils();
 
         //inicialitzar la resta
@@ -64,20 +61,6 @@ public class VistaPerfils extends JFrame {
             }
         });
     }
-
-    private void iniEnrere() {
-
-        panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
-        panelContenidos.add(Box.createVerticalGlue());
-        panelContenidos.add(Box.createHorizontalGlue());
-
-        Enrere.setBounds(0, 0, 200, 20);
-        add(Enrere);
-
-        add(panelContenidos, BorderLayout.CENTER);
-    }
-
-
 
     private void iniButtonsPerfils() {
         List<String> perfiles = ControladorPresentacio.getAllPerfils();
@@ -133,13 +116,6 @@ public class VistaPerfils extends JFrame {
                 revalidate();
             }
         });
-        Enrere.addActionListener(e -> {
-            try {
-                actionPerformed_buttons(e);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
         AP.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
@@ -151,11 +127,6 @@ public class VistaPerfils extends JFrame {
 
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
-        if (Enrere.equals(source)) {
-
-            ControladorPresentacio.vistaPrincipal();
-            setVisible(false);
-        }
         if (AP.equals(source)) {
 
             ControladorPresentacio.vistaCrearPerfil();

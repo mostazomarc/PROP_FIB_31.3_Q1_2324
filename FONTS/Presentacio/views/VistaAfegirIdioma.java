@@ -154,7 +154,7 @@ public class VistaAfegirIdioma extends JFrame{
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaTeclats();
+            ControladorPresentacio.vistaElements("idiomes");
             setVisible(false);
         }
         else if (importarArxiu.equals(source)) {
@@ -177,7 +177,7 @@ public class VistaAfegirIdioma extends JFrame{
             String nomI = inputNomIdioma.getText();
             String nomA = (String) inputNomAlfabet.getSelectedItem();
             ControladorPresentacio.afegirIdioma(nomI,nomA,tipus,filepath);
-            ControladorPresentacio.vistaIdiomes();
+            ControladorPresentacio.vistaElements("idiomes");
             setVisible(false);
         }
     }
