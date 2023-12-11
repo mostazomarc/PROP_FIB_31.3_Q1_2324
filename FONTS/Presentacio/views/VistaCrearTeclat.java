@@ -19,6 +19,10 @@ public class VistaCrearTeclat extends JFrame {
     private JTextField inputNomTeclat = new JTextField(20);
     private JLabel labelNomIdioma = new JLabel("Selecciona l'idioma");
     private JComboBox inputNomIdioma;
+    private JLabel labelULL = new JLabel("Vol seleccionar una llista de freqüències pròpia?");
+    private ButtonGroup resposta = new ButtonGroup();
+    private JRadioButton Si = new JRadioButton("Sí");
+    private JRadioButton No = new JRadioButton("No");
     private JLabel labelNomLl = new JLabel("Selecciona la llista de freqüències");
 
     private String[] freqs = {};
@@ -86,11 +90,9 @@ public class VistaCrearTeclat extends JFrame {
         panelContenidos.setLayout(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL; // Fill the cell horizontally
-        constraints.anchor = GridBagConstraints.CENTER; // Center the component within the cell
-        constraints.insets = new Insets(10, 10, 5, 10); // Set spacing between buttons
-
-        // Add the buttons to the grid layout
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(10, 10, 0, 10);
 
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -107,27 +109,36 @@ public class VistaCrearTeclat extends JFrame {
         inputNomIdioma.setSelectedIndex(-1);
         panelContenidos.add(inputNomIdioma, constraints);
         constraints.gridy = 6;
-        panelContenidos.add(labelNomLl, constraints);
+        panelContenidos.add(labelULL, constraints);
         constraints.gridy = 7;
-        panelContenidos.add(inputNomLl, constraints);
+        resposta.add(Si);
+        resposta.add(No);
+        panelContenidos.add(Si, constraints);
         constraints.gridy = 8;
-        panelContenidos.add(labelNF, constraints);
+        panelContenidos.add(No, constraints);
         constraints.gridy = 9;
-        panelContenidos.add(inputNF, constraints);
+        labelNomLl.setVisible(false);
+        panelContenidos.add(labelNomLl, constraints);
         constraints.gridy = 10;
-        panelContenidos.add(labelNC, constraints);
+        inputNomLl.setVisible(false);
+        panelContenidos.add(inputNomLl, constraints);
         constraints.gridy = 11;
-        panelContenidos.add(inputNC, constraints);
+        panelContenidos.add(labelNF, constraints);
         constraints.gridy = 12;
-        panelContenidos.add(labelAlgorisme, constraints);
+        panelContenidos.add(inputNF, constraints);
         constraints.gridy = 13;
+        panelContenidos.add(labelNC, constraints);
+        constraints.gridy = 14;
+        panelContenidos.add(inputNC, constraints);
+        constraints.gridy = 15;
+        panelContenidos.add(labelAlgorisme, constraints);
+        constraints.gridy = 16;
         String[] algorismes = {"BranchAndBound", "GeneticAlgorithm"};
         inputAlgorisme= new JComboBox<>(algorismes);
         inputAlgorisme.setSelectedIndex(-1);
         panelContenidos.add(inputAlgorisme, constraints);
-        constraints.gridy = 14;
+        constraints.gridy = 17;
         panelContenidos.add(Crear, constraints);
-
         add(panelContenidos, BorderLayout.CENTER);
 
     }
@@ -166,10 +177,33 @@ public class VistaCrearTeclat extends JFrame {
                 ex.printStackTrace();
             }
         });
+        Si.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        No.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
+        if (Si.isSelected()) {
+            labelNomLl.setVisible(true);
+            inputNomLl.setVisible(true);
+        }
+        else {
+            labelNomLl.setVisible(false);
+            inputNomLl.setVisible(false);
+        }
+
         if (Enrere.equals(source)) {
             ControladorPresentacio.vistaElements("teclats");
             setVisible(false);
@@ -194,11 +228,16 @@ public class VistaCrearTeclat extends JFrame {
         else if (Crear.equals(source)) {
             String nomTeclat = inputNomTeclat.getText();
             String nomIdioma = (String) inputNomIdioma.getSelectedItem();
-            String nomLl = (String) inputNomLl.getSelectedItem();
             int nf = Integer.parseInt(inputNF.getText());
             int nc = Integer.parseInt(inputNC.getText());
             String estrategia = (String) inputAlgorisme.getSelectedItem();
-            ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat,nomIdioma,nomLl,nf,nc,estrategia);
+            if (Si.isSelected()) {
+                String nomLl = (String) inputNomLl.getSelectedItem();
+                ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLl, nf, nc, estrategia);
+            }
+            else {
+                ControladorPresentacio.crearTeclatLlistaIdioma(nomTeclat, nomIdioma, nf, nc, estrategia);
+            }
             ControladorPresentacio.vistaTeclat(nomTeclat);
             setVisible(false);
         }

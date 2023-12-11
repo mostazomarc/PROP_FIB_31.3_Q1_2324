@@ -27,6 +27,8 @@ public class VistaAfegirLlista extends JFrame {
     private JLabel labelNomIdioma = new JLabel("Selecciona l'idioma");
     private JComboBox inputNomIdioma;
     private JButton importarArxiu = new JButton("Importar arxiu");
+    private JTextArea llistaManual = new JTextArea();
+    JScrollPane scrollPane = new JScrollPane();
     private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
     private JButton Enrere = new JButton("Tornar enrere");
     private JButton Afegir = new JButton("Afegir llista");
@@ -112,9 +114,15 @@ public class VistaAfegirLlista extends JFrame {
         constraints.gridy = 7;
         panelContenidos.add(rmanual, constraints);
         constraints.gridy = 8;
-        importarArxiu.setEnabled(false);
+        importarArxiu.setVisible(false);
         panelContenidos.add(importarArxiu, constraints);
-        constraints.gridy = 9;
+        scrollPane = new JScrollPane(llistaManual);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setPreferredSize(new Dimension(200, 200)); // Ajusta las dimensiones del JScrollPane
+        scrollPane.setVisible(false);
+        panelContenidos.add(scrollPane, constraints);
+        constraints.gridy = 10;
         panelContenidos.add(Afegir, constraints);
 
         add(panelContenidos, BorderLayout.CENTER);
@@ -190,11 +198,19 @@ public class VistaAfegirLlista extends JFrame {
             setVisible(false);
         }
         if (rtext.isSelected() || rllista.isSelected()) {
-            importarArxiu.setEnabled(true);
+            scrollPane.setVisible(false);
+            importarArxiu.setVisible(true);
         }
-        if (!rtext.isSelected() && !rllista.isSelected()) {
-            importarArxiu.setEnabled(false);
+        else if (rmanual.isSelected()) {
+            System.out.println("activat");
+            importarArxiu.setVisible(false);
+            scrollPane.setVisible(true);
         }
+        else {
+            importarArxiu.setVisible(false);
+            scrollPane.setVisible(false);
+        }
+
         if (importarArxiu.equals(source)) {
             fileChooser.setFileFilter(new FileNameExtensionFilter("PROP", "csv", "prop","txt"));
             fileChooser.setDialogTitle("Selecciona fitxer");
@@ -221,10 +237,23 @@ public class VistaAfegirLlista extends JFrame {
                 String tipus = selectedButton.getText();
                 Map<String, Integer> novesEntrades = new HashMap<>();
                 if (selectedButton == rllista || selectedButton == rtext) {
-                    ControladorPresentacio.novaLlistaPerfil(tipus,filepath,nomIdioma,novesEntrades);
+                    System.out.println(filepath);
+                    ControladorPresentacio.novaLlistaPerfil(tipus, filepath, nomIdioma, novesEntrades);
                 }
-                else {
-                    //ControladorPresentacio.novaLlistaPerfil();
+                else if (selectedButton == rmanual) {
+                    String[] linies = llistaManual.getText().split("\\n"); // Dividir el texto en líneas
+
+                    for (String linea : linies) {
+                        String[] parts = linea.split(" ");
+                        if (parts.length == 2) {
+                            String clau = parts[0];
+                            int valor = Integer.parseInt(parts[1]);
+                            System.out.println(clau + ' ' + valor);
+                            novesEntrades.put(clau, valor);
+                        } else {
+                        }
+                    }
+                    ControladorPresentacio.novaLlistaPerfil(tipus, "/Users/agus/src/prop/subgrup-prop31.3/DATA/LlistatFrequencies.txt", nomIdioma, novesEntrades);
                 }
                 ControladorPresentacio.vistaElements("llistes");
                 setVisible(false);

@@ -14,7 +14,6 @@ public class VistaElements extends JFrame {
     private JButton Enrere = new JButton("Tornar al menú principal");
     private JButton Crear = new JButton("Crear");
     private JPanel panelContenidos = new JPanel();
-
     private String option;
 
     public VistaElements(String option) {
