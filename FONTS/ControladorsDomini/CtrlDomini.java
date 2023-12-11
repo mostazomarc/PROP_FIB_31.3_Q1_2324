@@ -251,15 +251,15 @@ public class CtrlDomini {
     }
 
     /**
-     * Llegeix l'informació de l'arxiu filename i ho passa a llista de frequencies
+     * Llegeix l'informació de l'arxiu filepath i ho passa a llista de frequencies
      * @param tipusArxiu El tipus d'arxiu
-     * @param filename El nom de l'arxiu
+     * @param filepath El nom de l'arxiu
      * @return El Map de paraules i frequencies llegit
      * @throws Exception Si no es pot llegir l'arxiu
      */
-    public Map<String,Integer> llegirLlistaFreq(String tipusArxiu, String filename) throws Exception {
-        System.out.println("Llegint arxiu "+ filename);
-        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
+    public Map<String,Integer> llegirLlistaFreq(String tipusArxiu, String filepath) throws Exception {
+        System.out.println("Llegint arxiu "+ filepath);
+        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filepath);
         Map<String, Integer> novesEntrades = new HashMap<>();
 
 
@@ -273,7 +273,7 @@ public class CtrlDomini {
     }
 
     /**
-     * Afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual com una nova llista de frequencies
+     * Afegeix la informació de l'arxiu de llista de frequencies filepath al Perfil Actual com una nova llista de frequencies
      * @param tipusArxiu El tipus d'arxiu
      * @param filepath El path de l'arxiu
      * @param i El nom de l'idioma
@@ -288,15 +288,15 @@ public class CtrlDomini {
     }
 
     /**
-     * Modifica l'indormació de la llista de frequencies identificada per nomLlista del Perfil Actual amb les noves dades entrades
+     * Modifica l'informació de la llista de frequencies identificada per nomLlista del Perfil Actual amb les noves dades entrades
      * @param tipusArxiu El tipus d'arxiu
-     * @param filename El nom de l'arxiu
+     * @param filepath El nom de l'arxiu
      * @param nomLlista El nom de la llista de frequencies
      * @param novesEntrades El Map de paraules i frequencies
      * @throws Exception Si no es pot llegir l'arxiu o no es pot modificar la llista de frequencies
      */
-    public void modificarLlistaPerfil(String tipusArxiu, String filename, String nomLlista, Map<String,Integer> novesEntrades) throws Exception {
-        if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filename);
+    public void modificarLlistaPerfil(String tipusArxiu, String filepath, String nomLlista, Map<String,Integer> novesEntrades) throws Exception {
+        if (tipusArxiu != "Manual") novesEntrades = llegirLlistaFreq(tipusArxiu,filepath);
         PerfilActual.modificarLlista(nomLlista, novesEntrades);
     }
 
@@ -356,14 +356,14 @@ public class CtrlDomini {
     }
 
     /**
-     * Afegeix l'alfabet de l'arxiu filename al sistema
-     * @param filename El nom de l'arxiu
+     * Afegeix l'alfabet de l'arxiu filepath al sistema
+     * @param filepath El nom de l'arxiu
      * @throws Exception Si no es pot llegir l'arxiu o no es pot afegir l'alfabet
      */
-    public void afegirAlfabet(String filename) throws Exception {
-        System.out.println("Llegint arxiu "+ filename +"\n");
-        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filename);
-        alfabets.afegirAlfabet(filename, LlistaLlegida);
+    public void afegirAlfabet(String filepath) throws Exception {
+        System.out.println("Llegint arxiu "+ filepath +"\n");
+        List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filepath);
+        alfabets.afegirAlfabet(filepath, LlistaLlegida);
     }
 
     /**
