@@ -26,26 +26,26 @@ all:
 
 jars:
 	javac -cp FONTS:$(JSON_JARS) -d $(CLASS_OUTPUT) $(CLASS_INPUT) ./FONTS/Drivers/DriverAlgorismeQAP.java ./FONTS/Drivers/DriverHungarianAlgorithm.java ./FONTS/Drivers/DriverDades.java ./FONTS/Drivers/DriverLectorFreq.java ./FONTS/Drivers/DriverTeclats.java ./FONTS/Drivers/DriverDominiv2.java ./FONTS/Presentacio/Main.java
-	jar cmvf ./FONTS/Drivers/MF/DriverHungarianAlgorithm.mf $(JAR_OUTPUT)DriverHungarianAlgorithm.jar -C $(CLASS_OUTPUT) .
-	jar cmvf ./FONTS/Drivers/MF/DriverAlgorismeQAP.mf $(JAR_OUTPUT)DriverAlgorismeQAP.jar -C $(CLASS_OUTPUT) .
-	jar cmvf ./FONTS/Drivers/MF/DriverDades.mf $(JAR_OUTPUT)DriverDades.jar -C $(CLASS_OUTPUT) .
-	jar cmvf ./FONTS/Drivers/MF/DriverDominiv2.mf $(JAR_OUTPUT)DriverDominiv2.jar -C $(CLASS_OUTPUT) .
-	jar cmvf ./FONTS/Drivers/MF/DriverLectorFreq.mf $(JAR_OUTPUT)DriverLectorFreq.jar -C $(CLASS_OUTPUT) .
-	jar cmvf ./FONTS/Drivers/MF/DriverTeclats.mf $(JAR_OUTPUT)DriverTeclats.jar -C $(CLASS_OUTPUT) .
-	jar cmvf ./FONTS/Drivers/MF/DriverTeclats.mf $(JAR_OUTPUT)DriverTeclats.jar -C $(CLASS_OUTPUT) .
+	jar cmvf ./FONTS/Drivers/MF/DriverHungarianAlgorithm.mf $(JAR_OUTPUT)DriverHungarianAlgorithm.jar -C $(CLASS_OUTPUT) . -C ./FONTS/lib/ .
+	jar cmvf ./FONTS/Drivers/MF/DriverAlgorismeQAP.mf $(JAR_OUTPUT)DriverAlgorismeQAP.jar -C $(CLASS_OUTPUT) . -C ./FONTS/lib/ .
+	jar cmvf ./FONTS/Drivers/MF/DriverDades.mf $(JAR_OUTPUT)DriverDades.jar -C $(CLASS_OUTPUT) . -C ./FONTS/lib/ .
+	jar cmvf ./FONTS/Drivers/MF/DriverDominiv2.mf $(JAR_OUTPUT)DriverDominiv2.jar -C $(CLASS_OUTPUT) . -C ./FONTS/lib/ .
+	jar cmvf ./FONTS/Drivers/MF/DriverLectorFreq.mf $(JAR_OUTPUT)DriverLectorFreq.jar -C $(CLASS_OUTPUT) . -C ./FONTS/lib/ .
+	jar cmvf ./FONTS/Drivers/MF/DriverTeclats.mf $(JAR_OUTPUT)DriverTeclats.jar -C $(CLASS_OUTPUT) . -C ./FONTS/lib/ .
+	jar cmvf ./FONTS/Drivers/MF/DriverTeclats.mf $(JAR_OUTPUT)DriverTeclats.jar -C $(CLASS_OUTPUT) . -C ./FONTS/lib/ .
 	jar cmvf ./FONTS/Presentacio/Main.mf $(JAR_OUTPUT)Main.jar -C $(CLASS_OUTPUT) . -C ./FONTS/lib/ .
 
 executaDriverHungarianAlgorithm:
-	java -jar $(JAR_OUTPUT)DriverHungarianAlgorithm.jar
+	java -cp ./EXEnoEntrega/DriverHungarianAlgorithm.jar:./FONTS/lib/json-simple-1.1.jar Drivers.HungarianAlgorithm
 
 executaDriverDominiv2:
-	java -jar $(JAR_OUTPUT)DriverDominiv2.jar
+	java -cp ./EXEnoEntrega/DriverDominiv2.jar:./FONTS/lib/json-simple-1.1.jar Drivers.DriverDominiv2
 
 executaDriverLector:
-	java -jar $(JAR_OUTPUT)DriverLectorFreq.jar
+	java -cp ./EXEnoEntrega/DriverLectorFreq.jar:./FONTS/lib/json-simple-1.1.jar Drivers.DriverLectorFreq
 
 executaDriverAlgorismeQAP:
-	java -jar $(JAR_OUTPUT)DriverAlgorismeQAP.jar
+	java -cp ./EXEnoEntrega/DriverAlgorismeQAP.jar:./FONTS/lib/json-simple-1.1.jar Drivers.DriverAlgorismeQAP
 
 executaMain:
 	java -cp ./EXEnoEntrega/Main.jar:./FONTS/lib/json-simple-1.1.jar Presentacio.Main
