@@ -10,16 +10,35 @@ public class DriverLectorFreq {
     public void llegirArxiuFreq() throws Exception {
         prova = prova.getInstance();
         System.out.println("Llegint arxiu LlistatFrequencies.txt\n");
-        List<String> LlistaFrequencies = new ArrayList<>();
+        List<String> LlistaLlegida = new ArrayList<>();
         try {
-            LlistaFrequencies = prova.llegirArxiu("LlistatFrequencies.txt");
+            LlistaLlegida = prova.llegirArxiu("/Users/mmostazo/Developer/PROP/subgrup-prop31.3/DATA/catalaFreq.txt");
         } catch (FileNotFoundException e3) {
             System.out.println("ERROR: " + e3.getMessage());
         }
 
-        for (String linia : LlistaFrequencies) {
+        Map<String, Integer> novesEntrades = new HashMap<>();
+        for (String linia : LlistaLlegida) {
             String[] parella = linia.split(" ");
-            System.out.println(parella[0] + " " + parella[1]);
+            int n = parella.length;
+            if (n - 2 >= 0) {
+                String paraula = parella[n - 2];
+                Integer frequencia = Integer.parseInt(parella[n - 1]);
+                //System.out.println(parella[n-2]+ " " + parella[n-1]);
+
+                if (novesEntrades.containsKey(paraula)) {
+                    // Si la paraula ja existeix obtenir frequencia actual
+                    int FrecVella = novesEntrades.get(paraula);
+                    // Sumar la nova vella frequencia a la nova
+                    frequencia += FrecVella;
+                }
+
+                novesEntrades.put(paraula, frequencia);
+            }
+        }
+
+        for (Map.Entry<String, Integer> entry : novesEntrades.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
         }
     }
 
