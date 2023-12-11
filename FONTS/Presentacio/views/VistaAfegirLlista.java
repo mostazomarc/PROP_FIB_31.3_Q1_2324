@@ -89,7 +89,6 @@ public class VistaAfegirLlista extends JFrame {
 
     private void iniInputs() {
         panelContenidos.setLayout(new GridBagLayout());
-
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL; // Fill the cell horizontally
         constraints.anchor = GridBagConstraints.CENTER; // Center the component within the cell
@@ -119,21 +118,23 @@ public class VistaAfegirLlista extends JFrame {
         constraints.gridy = 8;
         importarArxiu.setVisible(false);
         panelContenidos.add(importarArxiu, constraints);
+        constraints.gridy = 9;
+        constraints.weighty = 1;
+        constraints.gridwidth = GridBagConstraints.REMAINDER; // Opcional: hace que el componente se extienda a lo ancho
+        constraints.fill = GridBagConstraints.BOTH; // Opcional: hace que el componente se extienda en ambas direcciones
         scrollPane = new JScrollPane(llistaManual);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setPreferredSize(new Dimension(200, 300)); // Ajusta las dimensiones del JScrollPane
         scrollPane.setVisible(false);
         panelContenidos.add(scrollPane, constraints);
+        constraints.weighty = 0.0;
         constraints.gridy = 10;
-        panelContenidos.add(Afegir, constraints);
-        constraints.gridy = 11;
         labelNomLlista.setVisible(false);
         panelContenidos.add(labelNomLlista, constraints);
-        constraints.gridy = 12;
+        constraints.gridy = 11;
         inputNomLlista.setVisible(false);
         panelContenidos.add(inputNomLlista, constraints);
-        constraints.gridy = 13;
+        constraints.gridy = 12;
         panelContenidos.add(Afegir, constraints);
         add(panelContenidos, BorderLayout.CENTER);
 
@@ -247,6 +248,7 @@ public class VistaAfegirLlista extends JFrame {
                     ControladorPresentacio.novaLlistaPerfil(tipus, filepath, nomIdioma, novesEntrades);
                 }
                 else if (tipus == "Manual") {
+                    String nom = inputNomLlista.getText();
                     String[] linies = llistaManual.getText().split("\\n"); // Dividir el texto en líneas
                     for (String linea : linies) {
                         String[] parts = linea.split(" ");
@@ -257,7 +259,7 @@ public class VistaAfegirLlista extends JFrame {
                             novesEntrades.put(clau, valor);
                         }
                     }
-                    ControladorPresentacio.novaLlistaPerfil(tipus, "nom", nomIdioma, novesEntrades);
+                    ControladorPresentacio.novaLlistaPerfil(tipus, nom, nomIdioma, novesEntrades);
                 }
                 ControladorPresentacio.vistaElements("llistes");
                 setVisible(false);
