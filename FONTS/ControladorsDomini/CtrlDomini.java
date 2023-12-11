@@ -91,6 +91,9 @@ public class CtrlDomini {
         Estrategia = "BranchAndBound"; //estrategia per defecte
     }
 
+    /**
+     * Carrega els perfils de persistencia a memoria
+     */
     public void carregaPerfils() {
         perfils.carregar();
     }
@@ -116,7 +119,7 @@ public class CtrlDomini {
     }
 
     /**
-     * Guarda les dades del perfil: llistes de frequencies i teclats; i les dades dels alfabets i idiomes
+     * Guarda les dades del perfil: llistes de frequencies i teclats; i les dades dels alfabets i idiomes a persistencia.
      */
     public void guardaEstat() {
         llistes.guardar();
