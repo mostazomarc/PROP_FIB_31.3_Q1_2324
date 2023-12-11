@@ -12,8 +12,6 @@ import java.awt.event.ComponentEvent;
 
 
 public class VistaPerfils extends JFrame {
-    private JButton Enrere = new JButton("Tornar al menú principal");
-
     private JButton AP = new JButton("+");
     private JPanel panelContenidos = new JPanel();
 
