@@ -12,7 +12,7 @@ public class DriverLectorFreq {
         System.out.println("Llegint arxiu LlistatFrequencies.txt\n");
         List<String> LlistaLlegida = new ArrayList<>();
         try {
-            LlistaLlegida = prova.llegirArxiu("/Users/mmostazo/Developer/PROP/subgrup-prop31.3/DATA/catalaFreq.txt");
+            LlistaLlegida = prova.llegirArxiu("./DATA/catalaFreq.txt");
         } catch (FileNotFoundException e3) {
             System.out.println("ERROR: " + e3.getMessage());
         }
