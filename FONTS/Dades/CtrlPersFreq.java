@@ -26,9 +26,12 @@ public class CtrlPersFreq {
      */
     private static CtrlPersFreq singletonObject;
 
-    //si canviesis de perfil tindires una nova llista
+
     /**
      * Mapa de llistes de frequencies guardades
+     * <p> La clau és el nom de la llista</p>
+     * <p> El valor és la llista de frequencies</p>
+     * <p> Si canvies de perfil es guarda aquest map i es carrega el del nou perfil</p>
      */
     private Map<String, LlistaFrequencies> frequencies;
 
@@ -65,7 +68,7 @@ public class CtrlPersFreq {
     }
 
     /**
-     * Comprova que la llista identificada per nomLlista existeix
+     * Comprova que la llista identificada per nomLlista existeix i si no ho fa llença una excepció
      * @param nomLlista El nom de la llista
      * @throws LlistaFreqNoExisteix Si la llista no existeix
      */
@@ -74,7 +77,7 @@ public class CtrlPersFreq {
     }
 
     /**
-     * Comprova que la llista identificada per nomLlista ja existeix
+     * Comprova que la llista identificada per nomLlista ja existeix i si ho fa llença una excepció
      * @param nomLlista El nom de la llista
      * @throws LlistaFreqJaExisteix Si la llista ja existeix
      */
@@ -83,7 +86,7 @@ public class CtrlPersFreq {
     }
 
     /**
-     * Guarda les llistes de frequencies del perfil actual
+     * Guarda les llistes de frequencies del perfil actual al .json de persistencia
      */
     public void guardar() {
         System.out.println("Guardant llistes de frequencies");
@@ -136,7 +139,7 @@ public class CtrlPersFreq {
     }
 
     /**
-     * Carrega les llistes de frequencies del perfil actual
+     * Carrega les llistes de frequencies del perfil actual del .json de persistencia
      * @throws Exception Si no es pot carregar
      */
     public void carregar() throws Exception{
@@ -176,7 +179,7 @@ public class CtrlPersFreq {
 
     /**
      * Canvia el perfil actual per un altre
-     * <p> Guarda la llista de llistes del perfil actual i carrega la del perfil nou</p>
+     * <p> Guarda el conjunt de llistes del perfil actual i carrega el del perfil nou</p>
      * @param usuari El nom d'usuari del perfil a canviar
      * @throws Exception Si no es pot canviar
      */
@@ -192,7 +195,7 @@ public class CtrlPersFreq {
 
 
     /**
-     * Afegeix una llista de frequencies
+     * Afegeix una llista de frequencies al conjunt de llistes del perfil actual
      * @param llista La llista de frequencies a afegir
      * @throws LlistaFreqJaExisteix Si la llista ja existeix
      */
@@ -202,7 +205,7 @@ public class CtrlPersFreq {
     }
 
     /**
-     * Elimina una llista de frequencies identificada per nomLlista
+     * Elimina la llista de frequencies identificada per nomLlista del conjunt de llistes del perfil actual
      * @param nomLlista El nom de la llista a eliminar
      * @throws LlistaFreqNoExisteix Si la llista no existeix
      */
@@ -225,6 +228,7 @@ public class CtrlPersFreq {
 
     /**
      * Obté la llista de frequencies identificada per nomLlista
+     * <p> Només comprova al conjunt de llistes del perfil actual</p>
      * @param nomLlista El nom de la llista
      * @return La llista de frequencies identificada per nomLlista
      * @throws LlistaFreqNoExisteix Si la llista no existeix
