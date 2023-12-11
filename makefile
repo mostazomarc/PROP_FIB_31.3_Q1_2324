@@ -101,6 +101,9 @@ nodotest: all
 postest: all
 	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.posTest
 
+inputtest: all
+	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.InputFrequenciesTest
+
 exe: jars
 	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/Alfabets
 	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/Idiomes
