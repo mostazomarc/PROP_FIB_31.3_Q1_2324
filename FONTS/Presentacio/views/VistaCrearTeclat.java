@@ -20,7 +20,9 @@ public class VistaCrearTeclat extends JFrame {
     private JLabel labelNomIdioma = new JLabel("Selecciona l'idioma");
     private JComboBox inputNomIdioma;
     private JLabel labelNomLl = new JLabel("Selecciona la llista de freqüències");
-    private JComboBox<String> inputNomLl;
+
+    private String[] freqs = {};
+    private JComboBox<String> inputNomLl = new JComboBox<>(freqs);
     private JLabel labelNF = new JLabel("Nombre de files del layout");
     private JTextField inputNF = new JTextField(20);
     private JLabel labelNC = new JLabel("Nombre de columnes del layout");
@@ -184,7 +186,7 @@ public class VistaCrearTeclat extends JFrame {
                 }
             }
 
-            String[] freqs = tempList.toArray(new String[0]);
+            freqs = tempList.toArray(new String[0]);
             inputNomLl.setModel(new DefaultComboBoxModel<>(freqs));
             inputNomLl.setSelectedIndex(-1);
         }
@@ -197,7 +199,6 @@ public class VistaCrearTeclat extends JFrame {
             int nc = Integer.parseInt(inputNC.getText());
             String estrategia = (String) inputAlgorisme.getSelectedItem();
             ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat,nomIdioma,nomLl,nf,nc,estrategia);
-            char[][] teclat = ControladorPresentacio.consultaTeclat(nomTeclat);
             ControladorPresentacio.vistaTeclat(nomTeclat);
             setVisible(false);
         }

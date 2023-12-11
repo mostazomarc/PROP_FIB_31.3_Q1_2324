@@ -143,11 +143,7 @@ public class VistaPrincipal extends JFrame{
 
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
-        if (Info.equals(source)) {
-            ControladorPresentacio.vistaInfoFuncions();
-            setVisible(false);
-        }
-        else if (Teclats.equals(source)) {
+        if (Teclats.equals(source)) {
             ControladorPresentacio.vistaTeclats();
             setVisible(false);
         }

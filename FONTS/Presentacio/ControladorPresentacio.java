@@ -44,9 +44,6 @@ public class ControladorPresentacio {
     public static void vistaPrincipal() {
         VistaPrincipal vp = new VistaPrincipal();
     }
-    public static void vistaInfoFuncions()  {
-        VistaInfoFuncions vgt = new VistaInfoFuncions();
-    }
     public static void vistaTeclats()  {VistaTeclats vgt = new VistaTeclats();}
     public static void vistaCrearTeclat() { VistaCrearTeclat vclp = new VistaCrearTeclat(); }
     public static void vistaTeclat(String nom) throws ExcepcionsCreadorTeclat {VistaTeclat vt = new VistaTeclat(nom); }
