@@ -24,6 +24,8 @@ public class VistaAfegirLlista extends JFrame {
     private JRadioButton rtext = new JRadioButton("text");
     private JRadioButton rllista = new JRadioButton("llista");
     private JRadioButton rmanual = new JRadioButton("Manual");
+    private JLabel labelNomLlista = new JLabel("Nom de la llista");
+    private JTextField inputNomLlista = new JTextField(20);
     private JLabel labelNomIdioma = new JLabel("Selecciona l'idioma");
     private JComboBox inputNomIdioma;
     private JButton importarArxiu = new JButton("Importar arxiu");
@@ -34,6 +36,7 @@ public class VistaAfegirLlista extends JFrame {
     private JButton Afegir = new JButton("Afegir llista");
     private JPanel panelContenidos = new JPanel();
     private String filepath;
+    private String tipus = " ";
 
     public VistaAfegirLlista() {
         setVisible(true);
@@ -119,12 +122,19 @@ public class VistaAfegirLlista extends JFrame {
         scrollPane = new JScrollPane(llistaManual);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setPreferredSize(new Dimension(200, 200)); // Ajusta las dimensiones del JScrollPane
+        scrollPane.setPreferredSize(new Dimension(200, 300)); // Ajusta las dimensiones del JScrollPane
         scrollPane.setVisible(false);
         panelContenidos.add(scrollPane, constraints);
         constraints.gridy = 10;
         panelContenidos.add(Afegir, constraints);
-
+        constraints.gridy = 11;
+        labelNomLlista.setVisible(false);
+        panelContenidos.add(labelNomLlista, constraints);
+        constraints.gridy = 12;
+        inputNomLlista.setVisible(false);
+        panelContenidos.add(inputNomLlista, constraints);
+        constraints.gridy = 13;
+        panelContenidos.add(Afegir, constraints);
         add(panelContenidos, BorderLayout.CENTER);
 
     }
@@ -199,16 +209,24 @@ public class VistaAfegirLlista extends JFrame {
         }
         if (rtext.isSelected() || rllista.isSelected()) {
             scrollPane.setVisible(false);
+            labelNomLlista.setVisible(false);
+            inputNomLlista.setVisible(false);
             importarArxiu.setVisible(true);
+            if (rtext.isSelected()) tipus = "text";
+            else tipus = "llista";
         }
         else if (rmanual.isSelected()) {
-            System.out.println("activat");
+            tipus = "Manual";
             importarArxiu.setVisible(false);
             scrollPane.setVisible(true);
+            labelNomLlista.setVisible(true);
+            inputNomLlista.setVisible(true);
         }
         else {
             importarArxiu.setVisible(false);
             scrollPane.setVisible(false);
+            labelNomLlista.setVisible(false);
+            inputNomLlista.setVisible(false);
         }
 
         if (importarArxiu.equals(source)) {
@@ -218,31 +236,18 @@ public class VistaAfegirLlista extends JFrame {
             if (returnValue == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
                 filepath = selectedFile.getAbsolutePath();
-                //filepath = selectedFile.getName();
             }
         }
         else if (Afegir.equals(source)) {
             String nomIdioma = (String) inputNomIdioma.getSelectedItem();
-            JRadioButton selectedButton = null;
 
-            if (rllista.isSelected()) {
-                selectedButton = rllista;
-            } else if (rtext.isSelected()) {
-                selectedButton = rtext;
-            } else if (rmanual.isSelected()) {
-                selectedButton = rmanual;
-            }
-
-            if (selectedButton != null) {
-                String tipus = selectedButton.getText();
+            if (tipus != " ") {
                 Map<String, Integer> novesEntrades = new HashMap<>();
-                if (selectedButton == rllista || selectedButton == rtext) {
-                    System.out.println(filepath);
+                if (tipus == "llista" || tipus == "text") {
                     ControladorPresentacio.novaLlistaPerfil(tipus, filepath, nomIdioma, novesEntrades);
                 }
-                else if (selectedButton == rmanual) {
+                else if (tipus == "Manual") {
                     String[] linies = llistaManual.getText().split("\\n"); // Dividir el texto en líneas
-
                     for (String linea : linies) {
                         String[] parts = linea.split(" ");
                         if (parts.length == 2) {
@@ -250,7 +255,6 @@ public class VistaAfegirLlista extends JFrame {
                             int valor = Integer.parseInt(parts[1]);
                             System.out.println(clau + ' ' + valor);
                             novesEntrades.put(clau, valor);
-                        } else {
                         }
                     }
                     ControladorPresentacio.novaLlistaPerfil(tipus, "nom", nomIdioma, novesEntrades);
