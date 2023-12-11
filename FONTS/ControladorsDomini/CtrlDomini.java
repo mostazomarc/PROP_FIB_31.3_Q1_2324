@@ -52,6 +52,12 @@ public class CtrlDomini {
      */
     private CtrlFile ctrlFreqFile;
 
+    private String getNomArxiu(String filepath) {
+        String[] parts = filepath.split("/");
+        String nomArxiu = parts[parts.length-1];
+        return nomArxiu;
+    }
+
 
     /**
      * Creadora de CtrlDomini
@@ -283,7 +289,8 @@ public class CtrlDomini {
     public void novaLlistaPerfil(String tipusArxiu, String filepath, String i , Map<String,Integer> novesEntrades) throws Exception {
         if (tipusArxiu != "Manual" && tipusArxiu != "Carregada") novesEntrades = llegirLlistaFreq(tipusArxiu,filepath);
         Idioma idiomaLlista = idiomes.getIdioma(i);
-        LlistaFrequencies llista = PerfilActual.afegirLlistaFreq(filepath,idiomaLlista,novesEntrades);
+        String nom = getNomArxiu(filepath);
+        LlistaFrequencies llista = PerfilActual.afegirLlistaFreq(nom,idiomaLlista,novesEntrades);
         llistes.guardarLlistaFreq(llista);
     }
 
@@ -363,7 +370,8 @@ public class CtrlDomini {
     public void afegirAlfabet(String filepath) throws Exception {
         System.out.println("Llegint arxiu "+ filepath +"\n");
         List<String> LlistaLlegida = ctrlFreqFile.llegirArxiu(filepath);
-        alfabets.afegirAlfabet(filepath, LlistaLlegida);
+        String nom = getNomArxiu(filepath);
+        alfabets.afegirAlfabet(nom, LlistaLlegida);
     }
 
     /**
