@@ -194,6 +194,10 @@ public class CtrlPersFreq {
         if (usuariAntic != null) carregar();
     }
 
+    /**
+     * Elimina de la capa de persistencia les llistes del perfil identificat per nomPerfil
+     * @param nomPerfil El nom del perfil a esborrar
+     */
     public void eliminaPerfil(String nomPerfil) {
         System.out.println("Eliminant les llistes del perfil" + nomPerfil);
         JSONParser jsP = new JSONParser();

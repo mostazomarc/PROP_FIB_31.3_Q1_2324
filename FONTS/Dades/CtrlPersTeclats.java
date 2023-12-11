@@ -222,7 +222,7 @@ public class CtrlPersTeclats {
     }
 
     /**
-     * Elimina els teclats del perfil identificat per nomPerfil del conjunt de teclats, si no existeix llença una excepció
+     * Elimina els teclats del perfil identificat per nomPerfil del conjunt de teclats
      * @param nomPerfil El nom del perfil
      */
     public void eliminaPerfil(String nomPerfil) {
