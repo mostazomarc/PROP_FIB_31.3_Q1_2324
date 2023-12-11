@@ -102,6 +102,7 @@ public class CtrlPersTeclats {
      * Guarda els teclats del perfil actual al .json de teclats
      */
     public void guardar() {
+        if (usuari == null) return;
         //guardar teclats de l'usuari
         System.out.println("Guardant Teclats de l'usuari: " + usuari );
         JSONParser jsP = new JSONParser();
@@ -218,6 +219,38 @@ public class CtrlPersTeclats {
     public void eliminarTeclat(String nomTeclat) throws TeclatNoExisteix {
         comprovaTeclatNoExisteix(nomTeclat);
         teclats.remove(nomTeclat);
+    }
+
+    /**
+     * Elimina els teclats del perfil identificat per nomPerfil del conjunt de teclats, si no existeix llença una excepció
+     * @param nomPerfil El nom del perfil
+     */
+    public void eliminaPerfil(String nomPerfil) {
+        if (usuari.equals(nomPerfil)) usuari = null;
+        System.out.println("Eliminant teclats de l'usuari: " + nomPerfil );
+        JSONParser jsP = new JSONParser();
+        JSONArray CjtUsuaris = new JSONArray();
+        try (FileReader rd = new FileReader("./DATA/Saves/TeclatsUsuarisActius.json")){
+            CjtUsuaris = (JSONArray) jsP.parse(rd);
+            boolean trobat = false;
+            for (int i = 0; i < CjtUsuaris.size() && !trobat; ++i){
+                JSONObject next = (JSONObject) CjtUsuaris.get(i); //Obtenim l'objecte de l'usuari iessim
+                String nomUsuari = ((String)next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
+                if(nomUsuari != null && nomUsuari.equals(nomPerfil)){    //Si el nom d'usuari coincideix
+                    CjtUsuaris.remove(next); //L'esborrem i despres l'afegirem
+                    trobat = true;  //Deixem de recorrer el vector
+                }
+            }
+        } catch (IOException e){
+        }
+        catch (ParseException e) {
+        }
+
+        try (FileWriter file = new FileWriter("./DATA/Saves/TeclatsUsuarisActius.json")) {
+            file.write(CjtUsuaris.toJSONString()); //Escribim el conjunt d'usuaris al fitxer
+            file.flush();
+        } catch (IOException e) {
+        }
     }
 
 
