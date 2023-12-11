@@ -287,9 +287,11 @@ public class CtrlDomini {
      * @throws Exception Si no es pot llegir l'arxiu o no es pot afegir la llista de frequencies
      */
     public void novaLlistaPerfil(String tipusArxiu, String filepath, String i , Map<String,Integer> novesEntrades) throws Exception {
-        if (tipusArxiu != "Manual" && tipusArxiu != "Carregada") novesEntrades = llegirLlistaFreq(tipusArxiu,filepath);
+        if (!tipusArxiu.toLowerCase().equals("manual") && !tipusArxiu.toLowerCase().equals("Carregada")) novesEntrades = llegirLlistaFreq(tipusArxiu,filepath);
+        if (!tipusArxiu.toLowerCase().equals("manual") && !tipusArxiu.toLowerCase().equals("Carregada") && !tipusArxiu.toLowerCase().equals("llista") && !tipusArxiu.toLowerCase().equals("text")) throw new TipusArxiuNoSuportat(tipusArxiu);
         Idioma idiomaLlista = idiomes.getIdioma(i);
-        String nom = getNomArxiu(filepath);
+        String nom = filepath;
+        if (!tipusArxiu.toLowerCase().equals("manual")) nom = getNomArxiu(filepath);
         LlistaFrequencies llista = PerfilActual.afegirLlistaFreq(nom,idiomaLlista,novesEntrades);
         llistes.guardarLlistaFreq(llista);
     }
