@@ -20,6 +20,7 @@ public class VistaAfegirIdioma extends JFrame{
     private JTextField inputNomIdioma = new JTextField(20);
     private JLabel labelImportarLlista = new JLabel("Importar llista de freqüències predeterminada de l'idioma");
     private JLabel labelTipusArxiu = new JLabel("De quin tipus és l'arxiu ?");
+    private ButtonGroup tipusInput = new ButtonGroup();
     private JRadioButton rtext = new JRadioButton("Text");
     private JRadioButton rllista = new JRadioButton("Llista");
     private JButton importarArxiu = new JButton ("Importar");
@@ -100,6 +101,8 @@ public class VistaAfegirIdioma extends JFrame{
         constraints.gridy = 5;
         panelContenidos.add(labelTipusArxiu, constraints);
         constraints.gridy = 6;
+        tipusInput.add(rllista);
+        tipusInput.add(rtext);
         panelContenidos.add(rllista, constraints);
         constraints.gridy = 7;
         panelContenidos.add(rtext, constraints);
@@ -110,6 +113,7 @@ public class VistaAfegirIdioma extends JFrame{
         constraints.gridy = 10;
         List<String> alfabets = ControladorPresentacio.getNomsAlfabets();
         inputNomAlfabet = new JComboBox<>(alfabets.toArray(new String[0]));
+        inputNomAlfabet.setSelectedIndex(-1);
         panelContenidos.add(inputNomAlfabet, constraints);
         constraints.gridy = 11;
         panelContenidos.add(Afegir, constraints);
