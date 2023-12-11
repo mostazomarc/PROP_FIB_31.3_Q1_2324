@@ -21,9 +21,9 @@ public class VistaAfegirLlista extends JFrame {
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
     private JLabel labelTipusInput = new JLabel("Com vols afegir la llista?");
     private ButtonGroup tipusInput = new ButtonGroup();
-    private JRadioButton rtext = new JRadioButton("Importar text");
-    private JRadioButton rllista = new JRadioButton("Importar llista");
-    private JRadioButton rmanual = new JRadioButton("Entrada manual");
+    private JRadioButton rtext = new JRadioButton("text");
+    private JRadioButton rllista = new JRadioButton("llista");
+    private JRadioButton rmanual = new JRadioButton("Manual");
     private JLabel labelNomIdioma = new JLabel("Selecciona l'idioma");
     private JComboBox inputNomIdioma;
     private JButton importarArxiu = new JButton("Importar arxiu");
@@ -253,7 +253,7 @@ public class VistaAfegirLlista extends JFrame {
                         } else {
                         }
                     }
-                    ControladorPresentacio.novaLlistaPerfil(tipus, "/Users/agus/src/prop/subgrup-prop31.3/DATA/LlistatFrequencies.txt", nomIdioma, novesEntrades);
+                    ControladorPresentacio.novaLlistaPerfil(tipus, "nom", nomIdioma, novesEntrades);
                 }
                 ControladorPresentacio.vistaElements("llistes");
                 setVisible(false);
