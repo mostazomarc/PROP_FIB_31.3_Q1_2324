@@ -15,10 +15,6 @@ public class Perfil {
      */
     private String Usuari;
     /**
-     * La contrasenya del perfil
-     */
-    private String Contrasenya;
-    /**
      * Les llistes de frequencies del perfil
      */
     private final Map<String, LlistaFrequencies> frequencies;
@@ -26,19 +22,6 @@ public class Perfil {
      * Els teclats creats pel perfil
      */
     private final Map<String, Teclat> teclats;
-
-    /**
-     * Creadora de Perfil
-     * <p> Crea un perfil amb nom d'usuari i contrasenya</p>
-     * @param User El nom d'usuari del perfil
-     * @param pswd La contrasenya del perfil
-     */
-    public Perfil(String User, String pswd) {
-        Usuari = User;
-        Contrasenya = pswd;
-        frequencies = new HashMap<>();
-        teclats = new HashMap<>();
-    }
 
     /**
      * Creadora de Perfil
@@ -78,29 +61,12 @@ public class Perfil {
     }
 
     /**
-     * Obté la contrasenya del perfil
-     * @return La contrasenya del perfil
-     */
-    public String getContrasenya() {
-        return Contrasenya;
-    }
-
-    /**
      * Canvia el nom d'usuari del perfil
      * @param newUs El nou nom d'usuari
      */
     public void canviaUsuari(String newUs) {
         Usuari = newUs;
     }
-
-    /**
-     * Canvia la contrasenya del perfil
-     * @param newCon La nova contrasenya
-     */
-    public void canviaContrasenya(String newCon) {
-        Contrasenya = newCon;
-    }
-
 
     /**
      * Creadora de LlistaFrequencies

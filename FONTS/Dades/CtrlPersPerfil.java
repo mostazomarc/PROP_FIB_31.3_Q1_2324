@@ -84,7 +84,6 @@ public class CtrlPersPerfil {
         for (Map.Entry<String, Perfil> entry : perfils.entrySet()) { //Per cada perfil
             JSONObject nouUsuari = new JSONObject();
             nouUsuari.put("nomUsuari", entry.getValue().getUsuari());
-            nouUsuari.put("Contrasenya", entry.getValue().getContrasenya());
             ConjuntPerfils.add(nouUsuari);
         }
         try (FileWriter file = new FileWriter("./DATA/Saves/UsuarisActius.json")) {
@@ -108,8 +107,7 @@ public class CtrlPersPerfil {
                 JSONObject next = (JSONObject) ConjuntPerfils.get(i); //Obtenim l'objecte de l'usuari iessim
                 String nomUsuari = ((String)next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
                 if(nomUsuari != null){    //Si el nom d'usuari coincideix
-                    String contrasenya = ((String)next.get("Contrasenya"));  //Obtenim la contrasenya de l'usuari iessim
-                    Perfil nouPerfil = new Perfil(nomUsuari, contrasenya);
+                    Perfil nouPerfil = new Perfil(nomUsuari);
                     perfils.put(nomUsuari, nouPerfil);
                 }
             }
