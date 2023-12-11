@@ -39,6 +39,9 @@ public class CtrlPersPerfil {
      */
     private Perfil perfilActual;
 
+    /**
+     * Conjunt de perfils
+     */
     Map<String, Perfil> perfils = new HashMap<>();
 
     /**
@@ -63,7 +66,7 @@ public class CtrlPersPerfil {
     }
 
     /**
-     * Comprova si existeix un perfil amb nomPerfil al .json de perfils
+     * Comprova si existeix un perfil amb nomPerfil al conjunt de perfils carregat
      * @param nomPerfil El nom del perfil
      * @return TRUE si existeix un perfil amb nomPerfil, FALSE en cas contrari
      */
@@ -92,9 +95,7 @@ public class CtrlPersPerfil {
     }
 
     /**
-     * Carrega el perfil identificat per nomPerfil del .json de perfils
-     * @return El perfil identificat per nomPerfil
-     * @throws PerfilNoExisteix Si el perfil no existeix
+     * Carrega els perfils del .json de perfils
      */
     public void carregar() {
         System.out.println("Carregant perfils");
