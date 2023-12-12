@@ -37,7 +37,7 @@ public class CtrlFile {
 
     /**
      * Llegeix un fitxer de text i retorna les seves linies en una llista
-     * @param filepath El nom del fitxer
+     * @param filepath El path del fitxer
      * @return Una llista amb les linies del fitxer
      * @throws Exception Si el fitxer no existeix
      */

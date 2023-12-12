@@ -107,7 +107,7 @@ public class PerfilTest {
      */
     @Before
     public void crearPerfilProva() {
-        perfilProva = new Perfil("Prova", "12345");
+        perfilProva = new Perfil("Prova");
     }
 
     /**
@@ -115,9 +115,8 @@ public class PerfilTest {
      */
     @Test
     public void creadoraPerfilContrasenya() {
-        Perfil perfilResultat = new Perfil("Prova", "12345");
+        Perfil perfilResultat = new Perfil("Prova");
         assertEquals("Prova", perfilResultat.getUsuari());
-        assertEquals("12345", perfilResultat.getContrasenya());
     }
 
     /**
@@ -139,15 +138,6 @@ public class PerfilTest {
     }
 
     /**
-     * Testeja getContrasenya
-     */
-    @Test
-    public void getContrasenya() {
-        Perfil perfilResultat = new Perfil("Prova", "12345");
-        assertEquals("12345", perfilResultat.getContrasenya());
-    }
-
-    /**
      * Testeja canviaUsuari
      */
     @Test
@@ -155,16 +145,6 @@ public class PerfilTest {
         perfilProva.canviaUsuari("newProva");
         assertEquals("newProva", perfilProva.getUsuari());
         assertNotEquals("Prova", perfilProva.getUsuari());
-    }
-
-    /**
-     * Testeja canviaContrasenya
-     */
-    @Test
-    public void canviaContrasenya() {
-        perfilProva.canviaContrasenya("newContrasenya");
-        assertEquals("newContrasenya", perfilProva.getContrasenya());
-        assertNotEquals("12345", perfilProva.getContrasenya());
     }
 
     /**

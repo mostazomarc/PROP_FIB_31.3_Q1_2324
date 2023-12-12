@@ -211,7 +211,7 @@ public class CtrlPersTeclats {
     }
 
     /**
-     * Elimina el teclat identificat per nomTeclat de el conjunt de teclats
+     * Elimina el teclat identificat per nomTeclat del conjunt de teclats, si no existeix llença una excepció
      * @param nomTeclat El nom del teclat
      * @throws TeclatNoExisteix Si el teclat no existeix
      */
@@ -222,7 +222,7 @@ public class CtrlPersTeclats {
 
 
     /**
-     * Comprova que l'idioma identificat per nomIdioma no està en ús en cap teclat
+     * Comprova que l'idioma identificat per nomIdioma no està en ús en cap teclat i si ho està llença una excepció
      * (de moment no comprova teclats d'altres usuaris perquè fa falta capa de persistencia)
      * @param nomIdioma El nom de l'idioma
      * @throws IdiomaEnUs Si l'idioma està en ús per algun teclat
@@ -235,7 +235,7 @@ public class CtrlPersTeclats {
 
 
     /**
-     * Comprova que la llista identificada per nomLlista no està en ús en cap teclat
+     * Comprova que la llista identificada per nomLlista no està en ús en cap teclat i si ho està llença una excepció
      * (de moment no comprova teclats d'altres usuaris perquè fa falta capa de persistencia)
      * @param nomLlista El nom de la llista
      * @throws LlistaFreqEnUs Si la llista està en ús per algun teclat

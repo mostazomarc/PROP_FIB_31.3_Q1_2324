@@ -52,9 +52,14 @@ public class CtrlDomini {
      */
     private CtrlFile ctrlFreqFile;
 
+    /**
+     * Retorna el nom de l'arxiu del filepath
+     * @param filepath El path de l'arxiu
+     * @return El nom de l'arxiu del filepath
+     */
     private String getNomArxiu(String filepath) {
-        String[] parts = filepath.split("/");
-        String nomArxiu = parts[parts.length-1];
+        File file = new File(filepath);
+        String nomArxiu = file.getName();
         return nomArxiu;
     }
 
@@ -91,6 +96,9 @@ public class CtrlDomini {
         Estrategia = "BranchAndBound"; //estrategia per defecte
     }
 
+    /**
+     * Carrega els perfils de persistencia a memoria
+     */
     public void carregaPerfils() {
         perfils.carregar();
     }
@@ -116,7 +124,7 @@ public class CtrlDomini {
     }
 
     /**
-     * Guarda les dades del perfil: llistes de frequencies i teclats; i les dades dels alfabets i idiomes
+     * Guarda les dades del perfil: llistes de frequencies i teclats; i les dades dels alfabets i idiomes a persistencia.
      */
     public void guardaEstat() {
         llistes.guardar();
@@ -287,11 +295,13 @@ public class CtrlDomini {
      * @throws Exception Si no es pot llegir l'arxiu o no es pot afegir la llista de frequencies
      */
     public void novaLlistaPerfil(String tipusArxiu, String filepath, String i , Map<String,Integer> novesEntrades) throws Exception {
-        if (!tipusArxiu.toLowerCase().equals("manual") && !tipusArxiu.toLowerCase().equals("Carregada")) novesEntrades = llegirLlistaFreq(tipusArxiu,filepath);
-        if (!tipusArxiu.toLowerCase().equals("manual") && !tipusArxiu.toLowerCase().equals("Carregada") && !tipusArxiu.toLowerCase().equals("llista") && !tipusArxiu.toLowerCase().equals("text")) throw new TipusArxiuNoSuportat(tipusArxiu);
-        Idioma idiomaLlista = idiomes.getIdioma(i);
+        if (!tipusArxiu.toLowerCase().equals("manual") && !tipusArxiu.toLowerCase().equals("carregada") && !tipusArxiu.toLowerCase().equals("llista") && !tipusArxiu.toLowerCase().equals("text")) throw new TipusArxiuNoSuportat(tipusArxiu);
         String nom = filepath;
-        if (!tipusArxiu.toLowerCase().equals("manual")) nom = getNomArxiu(filepath);
+        if (!tipusArxiu.toLowerCase().equals("manual") && !tipusArxiu.toLowerCase().equals("carregada")) {
+            novesEntrades = llegirLlistaFreq(tipusArxiu,filepath);
+            nom = getNomArxiu(filepath);
+        }
+        Idioma idiomaLlista = idiomes.getIdioma(i);
         LlistaFrequencies llista = PerfilActual.afegirLlistaFreq(nom,idiomaLlista,novesEntrades);
         llistes.guardarLlistaFreq(llista);
     }
