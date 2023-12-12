@@ -317,5 +317,9 @@ public class ControladorPresentacio {
         return controladorDomini.getNomsAlfabets();
     }
 
+    public static void eliminaPerfil() throws ExcepcionsCreadorTeclat {
+        controladorDomini.eliminaPerfil();
+    }
+
 }
 

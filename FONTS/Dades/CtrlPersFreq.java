@@ -89,6 +89,7 @@ public class CtrlPersFreq {
      * Guarda les llistes de frequencies del perfil actual al .json de persistencia
      */
     public void guardar() {
+        if (usuari == null) return;
         System.out.println("Guardant llistes de frequencies");
         //guardar totes les llistes
         JSONParser jsP = new JSONParser();
@@ -193,6 +194,37 @@ public class CtrlPersFreq {
         if (usuariAntic != null) carregar();
     }
 
+    /**
+     * Elimina de la capa de persistencia les llistes del perfil identificat per nomPerfil
+     * @param nomPerfil El nom del perfil a esborrar
+     */
+    public void eliminaPerfil(String nomPerfil) {
+        System.out.println("Eliminant les llistes del perfil" + nomPerfil);
+        if (usuari.equals(nomPerfil)) usuari = null;
+        JSONParser jsP = new JSONParser();
+        JSONArray CjtUsuaris = new JSONArray();
+        try (FileReader rd = new FileReader("./DATA/Saves/LlistesUsuarisActius.json")){
+            CjtUsuaris = (JSONArray) jsP.parse(rd);
+            boolean trobat = false;
+            for (int i = 0; i < CjtUsuaris.size() && !trobat; ++i){
+                JSONObject next = (JSONObject) CjtUsuaris.get(i); //Obtenim l'objecte de l'usuari iessim
+                String nomUsuari = ((String)next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
+                if(nomUsuari != null && nomUsuari.equals(nomPerfil)){    //Si el nom d'usuari coincideix
+                    CjtUsuaris.remove(next); //L'esborrem i despres l'afegirem
+                    trobat = true;  //Deixem de recorrer el vector
+                }
+            }
+        } catch (IOException e){
+        }
+        catch (ParseException e) {
+        }
+
+        try (FileWriter file = new FileWriter("./DATA/Saves/LlistesUsuarisActius.json")) {
+            file.write(CjtUsuaris.toJSONString()); //Escribim el conjunt d'usuaris al fitxer
+            file.flush();
+        } catch (IOException e) {
+        }
+    }
 
     /**
      * Afegeix una llista de frequencies al conjunt de llistes del perfil actual

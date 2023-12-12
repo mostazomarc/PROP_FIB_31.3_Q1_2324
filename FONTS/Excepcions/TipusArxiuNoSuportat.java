@@ -1,7 +1,7 @@
 package Excepcions;
 
 /**
- * Excepció que es llença quan un alfabet està en ús per algun idioma
+ * Excepció que es llença quan el tipus d'arxiu no es suportat
  */
 public class TipusArxiuNoSuportat extends ExcepcionsCreadorTeclat {
     public String getTipusExcepcio() {
