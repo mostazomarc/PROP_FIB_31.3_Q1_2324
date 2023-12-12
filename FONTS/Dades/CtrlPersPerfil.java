@@ -154,8 +154,10 @@ public class CtrlPersPerfil {
      * @throws PerfilNoExisteix Si el perfil no existeix
      */
     public void eliminaPerfil(String nom) throws PerfilNoExisteix{
+        System.out.println("Eliminant perfil " + nom);
         if (!perfilExisteix(nom)) throw new PerfilNoExisteix(nom);
         perfils.remove(nom);
+        if (perfilActual.getUsuari().equals(nom)) perfilActual = null;
     }
 
     /**
