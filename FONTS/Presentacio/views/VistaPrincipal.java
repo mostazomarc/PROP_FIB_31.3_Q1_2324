@@ -174,7 +174,6 @@ public class VistaPrincipal extends JFrame{
             setVisible(false);
         }
         else if (EliminarPerfil.equals(source)) {
-            //AQUI BOBO HAS DELIMINAR
             ControladorPresentacio.eliminaPerfil();
             ControladorPresentacio.vistaPerfils();
             setVisible(false);

@@ -126,7 +126,7 @@ public class ControladorPresentacio {
      * @param novesEntrades El Map de paraules i frequencies
      * @throws Exception Si no es pot llegir l'arxiu o no es pot modificar la llista de frequencies
      */
-    public void modificarLlistaPerfil(String tipusArxiu, String nomArxiu, String nomllista, Map<String,Integer> novesEntrades) throws Exception {
+    public static void modificarLlistaPerfil(String tipusArxiu, String nomArxiu, String nomllista, Map<String,Integer> novesEntrades) throws Exception {
         controladorDomini.modificarLlistaPerfil(tipusArxiu, nomArxiu, nomllista, novesEntrades);
     }
 

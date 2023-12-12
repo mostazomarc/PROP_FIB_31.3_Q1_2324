@@ -4,20 +4,27 @@ import Excepcions.LlistaFreqNoExisteix;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
 import java.util.Map;
 
 public class VistaLlista extends JFrame {
-    String nom;
+    private String nom;
     private JButton Enrere = new JButton("Tornar al menú principal");
     private JPanel panelContenidos = new JPanel();
     private JTextArea LlistatextArea = new JTextArea(20, 40);
     private JScrollPane scrollPanel = new JScrollPane();
     private JButton ModificarLlista = new JButton("Modificar llista");
     private JButton Eliminar = new JButton("Eliminar llista");
+    private JButton ImportarArxiu = new JButton("Importar arxiu");
+    private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+    private String filepath;
+
 
     public VistaLlista (String nomLl) throws LlistaFreqNoExisteix {
         nom = nomLl;
@@ -82,6 +89,8 @@ public class VistaLlista extends JFrame {
         buttonPanel.add(ModificarLlista);
         Eliminar.setPreferredSize(new Dimension(200, 30));
         buttonPanel.add(Eliminar);
+        ImportarArxiu.setPreferredSize(new Dimension(200, 30));
+        buttonPanel.add(Eliminar);
         panelContenidos.add(buttonPanel, constraints);
     }
 
@@ -133,6 +142,13 @@ public class VistaLlista extends JFrame {
                 ex.printStackTrace();
             }
         });
+        ImportarArxiu.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         Eliminar.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
@@ -145,9 +161,18 @@ public class VistaLlista extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (ModificarLlista.equals(source)) {
-            LlistatextArea.setEditable(true);
+            ImportarArxiu.setVisible(true);
         }
-        if (Enrere.equals(source)) {
+        else if(ImportarArxiu.equals(source)) {
+            fileChooser.setFileFilter(new FileNameExtensionFilter("PROP", "csv", "prop","txt"));
+            fileChooser.setDialogTitle("Selecciona fitxer");
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                filepath = selectedFile.getAbsolutePath();
+            }
+        }
+        else if (Enrere.equals(source)) {
             ControladorPresentacio.vistaPrincipal();
             setVisible(false);
         }

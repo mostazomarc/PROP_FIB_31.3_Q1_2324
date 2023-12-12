@@ -10,7 +10,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 public class VistaAlfabet extends JFrame {
-    String nom;
+    private String nom;
     private JButton Enrere = new JButton("Tornar al menú principal");
     private JPanel panelContenidos = new JPanel();
     private JTextArea AlfabettextArea = new JTextArea(20, 40);
