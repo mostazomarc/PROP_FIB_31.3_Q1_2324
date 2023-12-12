@@ -24,11 +24,6 @@ public class VistaPerfils extends JFrame {
         iniFrame();
         iniClose();
         iniButtonsPerfils();
-
-        //inicialitzar la resta
-
-
-        //assignar listeneres a cada component
         assign_listenerComponents();
     }
 

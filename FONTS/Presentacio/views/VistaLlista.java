@@ -31,7 +31,6 @@ public class VistaLlista extends JFrame {
         iniEnrere();
         iniLlista();
         iniButtons();
-
         assign_listenerComponents();
     }
 

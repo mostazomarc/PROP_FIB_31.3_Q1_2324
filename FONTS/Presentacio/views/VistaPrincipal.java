@@ -23,7 +23,6 @@ public class VistaPrincipal extends JFrame{
         iniFrame();
         iniClose();
         iniButtons();
-        add(panelContenidos, BorderLayout.CENTER);
         assign_listenerComponents();
     }
 
@@ -83,6 +82,8 @@ public class VistaPrincipal extends JFrame{
 
         constraints.gridy = 6;
         panelContenidos.add(Sortir, constraints);
+
+        add(panelContenidos, BorderLayout.CENTER);
     }
 
     /**
