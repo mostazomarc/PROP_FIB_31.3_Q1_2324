@@ -1,3 +1,0 @@
-hola 1
-aloha 2
-ha 3
