@@ -316,5 +316,6 @@ public class ControladorPresentacio {
     public static List<String> getNomsAlfabets()  {
         return controladorDomini.getNomsAlfabets();
     }
+
 }
 
