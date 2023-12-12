@@ -24,7 +24,7 @@ public class VistaPerfils extends JFrame {
         iniFrame();
         iniClose();
         iniButtonsPerfils();
-        assign_listenerComponents();
+        assignListenersComponents();
     }
 
     private void iniFrame() {
@@ -103,7 +103,7 @@ public class VistaPerfils extends JFrame {
     /**
      * Assigna els listeners als components corresponents.
      */
-    private void assign_listenerComponents() {
+    private void assignListenersComponents() {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -113,14 +113,14 @@ public class VistaPerfils extends JFrame {
         });
         AP.addActionListener(e -> {
             try {
-                actionPerformed_buttons(e);
+                actionPerformedButtons(e);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
     }
 
-    public void actionPerformed_buttons (ActionEvent e) throws Exception {
+    public void actionPerformedButtons(ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (AP.equals(source)) {
 

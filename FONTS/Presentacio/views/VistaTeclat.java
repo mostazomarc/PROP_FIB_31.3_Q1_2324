@@ -33,7 +33,6 @@ public class VistaTeclat extends JFrame {
         iniEnrere();
         iniTeclat();
         iniButtons();
-
         assign_listenerComponents();
     }
 

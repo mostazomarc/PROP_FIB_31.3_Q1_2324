@@ -25,16 +25,8 @@ public class VistaCrearPerfil extends JFrame {
     private void iniComponents() {
         iniFrame();
         iniClose();
-        panelContenidos.setLayout(new FlowLayout());
         iniEnrere();
         iniInput();
-        add(panelContenidos, BorderLayout.CENTER);
-
-
-        //inicialitzar la resta
-
-
-        //assignar listeneres a cada component
         assign_listenerComponents();
     }
 
@@ -68,7 +60,7 @@ public class VistaCrearPerfil extends JFrame {
     }
 
     private void iniEnrere() {
-
+        panelContenidos.setLayout(new FlowLayout());
         panelContenidos.add(Enrere);
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
@@ -76,14 +68,10 @@ public class VistaCrearPerfil extends JFrame {
 
     private void iniInput() {
         panelContenidos.setLayout(new GridBagLayout());
-
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL; // Fill the cell horizontally
         constraints.anchor = GridBagConstraints.CENTER; // Center the component within the cell
         constraints.insets = new Insets(10, 10, 5, 10); // Set spacing between buttons
-
-        // Add the buttons to the grid layout
-
         constraints.gridx = 0;
         constraints.gridy = 1;
         panelContenidos.add(labelNomPerfil, constraints);
@@ -91,6 +79,7 @@ public class VistaCrearPerfil extends JFrame {
         panelContenidos.add(inputNomPerfil, constraints);
         constraints.gridy = 3;
         panelContenidos.add(CP, constraints);
+        add(panelContenidos, BorderLayout.CENTER);
     }
 
     /**
