@@ -1,0 +1,11 @@
+Aquest directori conté tota la documentació a entregar per a la segona entrega del
+projecte de l'assignatura de PROP de la FIB, curs 2022-2023 Q1.
+
+Continguts del directori:
+# DiagramaDomini.:Diagrama de classes de la capa de Domini.
+
+# DiagramaPersistencia.: Diagrama de classes de la capa de Persistència.
+
+# DiagramaPresentació.: Diagrama de classes de la capa de Presentació.
+
+# Documentació_2a_Entrega.pdf: Document amb descripcions de les classes, estructures de dades i algorismes del sistema.
