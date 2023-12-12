@@ -1,1 +1,1 @@
-[{"nomUsuari":"NouPerfil","teclats":[]},{"nomUsuari":"holi","teclats":[]},{"nomUsuari":"David","teclats":[]},{"nomUsuari":"Pere","teclats":[]},{"nomUsuari":null,"teclats":[]},{"nomUsuari":null,"teclats":[]},{"nomUsuari":"Agus","teclats":[]},{"nomUsuari":"Marc","teclats":[]}]
+[{"nomUsuari":"Marc","teclats":[{"nomIdioma":"Català","disposicio":[["b","f","g","ç","e","p","i","c","j","z"],["h","k","q","l","d","n","m","a","s","t"],["u","v","w","o","r","x","y"," "," "," "]],"nomLlistaFreq":"novaLlista","dimY":10,"nomTeclat":"NouTeclat","dimX":3}]}]
