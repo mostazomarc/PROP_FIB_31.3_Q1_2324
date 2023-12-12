@@ -24,9 +24,7 @@ public class VistaCrearTeclat extends JFrame {
     private JRadioButton Si = new JRadioButton("Sí");
     private JRadioButton No = new JRadioButton("No");
     private JLabel labelNomLl = new JLabel("Selecciona la llista de freqüències");
-
-    private String[] freqs = {};
-    private JComboBox<String> inputNomLl = new JComboBox<>(freqs);
+    private JComboBox<String> inputNomLl = new JComboBox<>();
     private JLabel labelNF = new JLabel("Nombre de files del layout");
     private JTextField inputNF = new JTextField(20);
     private JLabel labelNC = new JLabel("Nombre de columnes del layout");
@@ -220,7 +218,7 @@ public class VistaCrearTeclat extends JFrame {
                 }
             }
 
-            freqs = tempList.toArray(new String[0]);
+            String[] freqs = tempList.toArray(new String[0]);
             inputNomLl.setModel(new DefaultComboBoxModel<>(freqs));
             inputNomLl.setSelectedIndex(-1);
         }

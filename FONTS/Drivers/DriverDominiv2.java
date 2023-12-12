@@ -20,6 +20,8 @@ public class DriverDominiv2 {
         dDades = new DriverDades();
         try {
             controlador.carregarDadesSistema();
+            controlador.carregaPerfils();
+            controlador.iniciaInstancia("Prova");
             controlador.carregarDadesPerfil();
             System.out.println("Inicia sessió: " + "Prova");
         } catch (PerfilJaExisteix e1 ) {
@@ -90,6 +92,11 @@ public class DriverDominiv2 {
         else if (num== 6) {
             canviarPerfil();
         }
+        else if (num== 7) {
+            controlador.guardaEstat();
+            System.out.println("S'ha sortit del driver");
+        }
+        else System.out.println("El numero introduit no correspon a cap funcionalitat");
         if (num!= 7) {
             System.out.println("################Presioni Enter per continuar...####################");
             s.nextLine();

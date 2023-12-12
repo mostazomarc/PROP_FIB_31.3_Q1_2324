@@ -52,9 +52,14 @@ public class CtrlDomini {
      */
     private CtrlFile ctrlFreqFile;
 
+    /**
+     * Retorna el nom de l'arxiu del filepath
+     * @param filepath El path de l'arxiu
+     * @return El nom de l'arxiu del filepath
+     */
     private String getNomArxiu(String filepath) {
-        String[] parts = filepath.split("/");
-        String nomArxiu = parts[parts.length-1];
+        File file = new File(filepath);
+        String nomArxiu = file.getName();
         return nomArxiu;
     }
 

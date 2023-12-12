@@ -27,9 +27,6 @@ public class VistaElements extends JFrame {
         iniClose();
         iniEnrere();
         iniContingut(option);
-        add(panelContenidos, BorderLayout.CENTER);
-
-        //assignar listeneres a cada component
         assign_listenerComponents();
     }
 
@@ -133,6 +130,7 @@ public class VistaElements extends JFrame {
                 panelContenidos.add(button, constraints);
             }
         }
+        add(panelContenidos, BorderLayout.CENTER);
     }
 
 

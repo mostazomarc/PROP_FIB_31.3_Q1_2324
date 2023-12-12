@@ -27,7 +27,7 @@ public class VistaAlfabet extends JFrame {
         iniFrame();
         iniClose();
         iniEnrere();
-        iniIdioma();
+        iniAlfabet();
         iniButtons();
         assign_listenerComponents();
     }
@@ -82,7 +82,7 @@ public class VistaAlfabet extends JFrame {
     }
 
 
-    private void iniIdioma() throws AlfabetNoExisteix {
+    private void iniAlfabet() throws AlfabetNoExisteix {
         String info = ControladorPresentacio.consultaAlfabet(nom);
         AlfabettextArea.setText(info); // Establecer el texto en el JTextArea
         AlfabettextArea.setEditable(false); // Para evitar la edición

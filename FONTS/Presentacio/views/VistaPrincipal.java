@@ -13,6 +13,7 @@ public class VistaPrincipal extends JFrame{
     private JButton Idiomes = new JButton("Idiomes");
     private JButton Alfabets = new JButton("Alfabets");
     private JButton CanviarPerfil = new JButton("Canviar Perfil");
+    private JButton EliminarPerfil = new JButton("Eliminar Perfil");
     private JButton Sortir = new JButton("Sortir");
     public VistaPrincipal () {
         setVisible(true);
@@ -23,7 +24,6 @@ public class VistaPrincipal extends JFrame{
         iniFrame();
         iniClose();
         iniButtons();
-        add(panelContenidos, BorderLayout.CENTER);
         assign_listenerComponents();
     }
 
@@ -82,7 +82,12 @@ public class VistaPrincipal extends JFrame{
         panelContenidos.add(CanviarPerfil, constraints);
 
         constraints.gridy = 6;
+        panelContenidos.add(EliminarPerfil, constraints);
+
+        constraints.gridy = 7;
         panelContenidos.add(Sortir, constraints);
+
+        add(panelContenidos, BorderLayout.CENTER);
     }
 
     /**
@@ -130,6 +135,13 @@ public class VistaPrincipal extends JFrame{
                 ex.printStackTrace();
             }
         });
+        EliminarPerfil.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         Sortir.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
@@ -158,6 +170,11 @@ public class VistaPrincipal extends JFrame{
             setVisible(false);
         }
         else if (CanviarPerfil.equals(source)) {
+            ControladorPresentacio.vistaPerfils();
+            setVisible(false);
+        }
+        else if (EliminarPerfil.equals(source)) {
+            //AQUI BOBO HAS DELIMINAR
             ControladorPresentacio.vistaPerfils();
             setVisible(false);
         }
