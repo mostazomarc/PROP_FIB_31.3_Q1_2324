@@ -200,6 +200,7 @@ public class CtrlPersFreq {
      */
     public void eliminaPerfil(String nomPerfil) {
         System.out.println("Eliminant les llistes del perfil" + nomPerfil);
+        usuari = null;
         JSONParser jsP = new JSONParser();
         JSONArray CjtUsuaris = new JSONArray();
         try (FileReader rd = new FileReader("./DATA/Saves/LlistesUsuarisActius.json")){
