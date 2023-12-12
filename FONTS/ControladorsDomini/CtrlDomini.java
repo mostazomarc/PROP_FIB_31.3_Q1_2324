@@ -146,13 +146,14 @@ public class CtrlDomini {
     }
 
     /**
-     * Elimina el perfil amb nom nom i totes les seves llistes i teclats
-     * @param nom El nom del perfil
+     * Elimina el perfilActual i totes les seves llistes i teclats
      */
-    public void eliminaPerfil(String nom) throws ExcepcionsCreadorTeclat {
+    public void eliminaPerfil() throws ExcepcionsCreadorTeclat {
+        String nom = PerfilActual.getUsuari();
         perfils.eliminaPerfil(nom);
         llistes.eliminaPerfil(nom);
         teclats.eliminaPerfil(nom);
+        PerfilActual = null;
     }
 
     /**
