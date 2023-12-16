@@ -147,6 +147,10 @@ public class VistaAfegirAlfabet extends JFrame{
             }
         }
         else if (Afegir.equals(source)) {
+            if (filepath == null) {
+                ControladorPresentacio.mostraAvis("No has seleccionat cap fitxer");
+                return;
+            }
             ControladorPresentacio.afegirAlfabet(filepath);
             ControladorPresentacio.vistaElements("alfabets");
             setVisible(false);
