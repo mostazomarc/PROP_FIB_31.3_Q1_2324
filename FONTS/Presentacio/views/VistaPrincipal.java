@@ -1,5 +1,6 @@
 package Presentacio.views;
 
+import Excepcions.ExcepcionsCreadorTeclat;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -174,7 +175,11 @@ public class VistaPrincipal extends JFrame{
             setVisible(false);
         }
         else if (EliminarPerfil.equals(source)) {
-            ControladorPresentacio.eliminaPerfil();
+            try {
+                ControladorPresentacio.eliminaPerfil();
+            } catch (ExcepcionsCreadorTeclat e1) {
+                ControladorPresentacio.mostraError(e1.getMessage());
+            }
             ControladorPresentacio.vistaPerfils();
             setVisible(false);
         }
