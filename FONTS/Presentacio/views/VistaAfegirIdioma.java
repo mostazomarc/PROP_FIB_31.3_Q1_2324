@@ -177,9 +177,25 @@ public class VistaAfegirIdioma extends JFrame{
             } else if (rtext.isSelected()) {
                 selectedButton = rtext;
             }
+            if (selectedButton == null) {
+                ControladorPresentacio.mostraAvis("Selecciona el tipus d'arxiu");
+                return;
+            }
             String tipus = selectedButton.getText();
             String nomI = inputNomIdioma.getText();
+            if (nomI.equals("")) {
+                ControladorPresentacio.mostraAvis("No has introduit cap nom d'idioma");
+                return;
+            }
             String nomA = (String) inputNomAlfabet.getSelectedItem();
+            if (nomA == null) {
+                ControladorPresentacio.mostraAvis("Selecciona un alfabet");
+                return;
+            }
+            if (filepath == null) {
+                ControladorPresentacio.mostraAvis("Importa un arxiu");
+                return;
+            }
             ControladorPresentacio.afegirIdioma(nomI,nomA,tipus,filepath);
             ControladorPresentacio.vistaElements("idiomes");
             setVisible(false);
