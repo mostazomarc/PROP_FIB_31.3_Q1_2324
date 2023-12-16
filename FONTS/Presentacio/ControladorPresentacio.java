@@ -34,6 +34,10 @@ public class ControladorPresentacio {
         JOptionPane.showMessageDialog(null, missatge, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    public static void mostraAvis(String missatge) {
+        JOptionPane.showMessageDialog(null, missatge, "Avis", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     public static List<String> getNomsIdiomes() {return controladorDomini.getNomsIdiomes();}
 
     /**
