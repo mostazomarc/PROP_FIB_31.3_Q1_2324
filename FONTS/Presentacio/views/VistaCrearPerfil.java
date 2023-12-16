@@ -117,6 +117,10 @@ public class VistaCrearPerfil extends JFrame {
         }
         else if (CP.equals(source)) {
             String nomP = inputNomPerfil.getText();
+            if (nomP.equals("")) {
+                ControladorPresentacio.mostraAvis("No has introduit cap nom de perfil");
+                return;
+            }
             ControladorPresentacio.iniciaInstancia(nomP);
             ControladorPresentacio.vistaPerfils();
             setVisible(false);
