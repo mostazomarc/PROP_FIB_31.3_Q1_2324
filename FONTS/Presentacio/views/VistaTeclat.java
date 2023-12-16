@@ -177,7 +177,7 @@ public class VistaTeclat extends JFrame {
         });
     }
 
-    public void actionPerformed_buttons (ActionEvent e) throws Exception {
+    public void actionPerformed_buttons (ActionEvent e) throws ExcepcionsCreadorTeclat {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
             ControladorPresentacio.vistaPrincipal();
@@ -191,11 +191,15 @@ public class VistaTeclat extends JFrame {
             inputNC.setVisible(true);
         }
         else if(Modificar.equals(source)) {
-            int nf = Integer.parseInt(inputNF.getText());
-            int nc = Integer.parseInt(inputNC.getText());
-            ControladorPresentacio.modificarLayoutTeclat(nom,nf,nc);
-            ControladorPresentacio.vistaTeclat(nom);
-            setVisible(false);
+            try {
+                int nf = Integer.parseInt(inputNF.getText());
+                int nc = Integer.parseInt(inputNC.getText());
+                ControladorPresentacio.modificarLayoutTeclat(nom, nf, nc);
+                ControladorPresentacio.vistaTeclat(nom);
+                setVisible(false);
+            }catch (ExcepcionsCreadorTeclat ex) {
+                ControladorPresentacio.mostraError(ex.getMessage());
+            }
         }
         else if (Eliminar.equals(source)) {
             ControladorPresentacio.eliminarTeclat(nom);

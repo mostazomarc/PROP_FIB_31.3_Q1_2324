@@ -59,7 +59,9 @@ public class Teclat {
             int posbuides = n*m - totalLletres;
             if (posbuides > 0) {
                 if (n == 1 && m > totalLletres) throw new LayoutMassaGran(totalLletres, n, m);
-                else if (posbuides > m) throw new LayoutMassaGran(totalLletres, n, m);
+                else if (m == 1 && n > totalLletres) throw new LayoutMassaGran(totalLletres, n, m);
+                else if (n == m && posbuides >= n) throw new LayoutMassaGran(totalLletres, n, m);
+                else if (posbuides >= m) throw new LayoutMassaGran(totalLletres, n, m);
             }
         }
     }

@@ -238,8 +238,8 @@ public class VistaCrearTeclat extends JFrame {
                 setVisible(false);
             }
         }
-        catch (TeclatJaExisteix e1) {
-            ControladorPresentacio.mostraError(e1.getMessage());
+        catch (ExcepcionsCreadorTeclat ex) {
+            ControladorPresentacio.mostraError(ex.getMessage());
         }
     }
 }
