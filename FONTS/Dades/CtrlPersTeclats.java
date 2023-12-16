@@ -298,27 +298,6 @@ public class CtrlPersTeclats {
         for (Map.Entry<String, Teclat> llista : teclats.entrySet()) {
             if (llista.getValue().getNomLlistaFreq().equals(nomLlista)) throw new LlistaFreqEnUs(nomLlista);
         }
-        //comprovar us de la llista nomLlista en els teclats del .json
-        JSONParser jsP = new JSONParser();
-        JSONArray CjtUsuaris = new JSONArray();
-        try (FileReader rd = new FileReader("./DATA/Saves/TeclatsUsuarisActius.json")){
-            CjtUsuaris = (JSONArray) jsP.parse(rd);
-            for (int i = 0; i < CjtUsuaris.size(); ++i){
-                JSONObject next = (JSONObject) CjtUsuaris.get(i); //Obtenim l'objecte de l'usuari iessim
-                String nomUsuari = ((String)next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
-                if(nomUsuari != null && !nomUsuari.equals(usuari)){    //Si el nom d'usuari coincideix
-                    JSONArray teclatsUsuari = (JSONArray) next.get("teclats");
-                    for (int j = 0; j < teclatsUsuari.size(); ++j) {
-                        JSONObject nextTeclat = (JSONObject) teclatsUsuari.get(j);
-                        String nomLlistaTeclat = ((String) nextTeclat.get("nomLlistaFreq"));
-                        if (nomLlistaTeclat.equals(nomLlista)) throw new LlistaFreqEnUs(nomLlista);
-                    }
-                }
-            }
-        } catch (IOException e){
-        }
-        catch (ParseException e) {
-        }
     }
 
     /**
