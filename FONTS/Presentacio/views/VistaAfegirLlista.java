@@ -289,6 +289,8 @@ public class VistaAfegirLlista extends JFrame {
                 } else ControladorPresentacio.mostraAvis("No s'ha seleccionat cap tipus d'entrada");
             } catch (ExcepcionsCreadorTeclat ex) {
                 ControladorPresentacio.mostraError(ex.getMessage());
+            } catch (NumberFormatException ex) {
+                ControladorPresentacio.mostraError("El format de les freqüències no és correcte");
             }
         }
     }
