@@ -5,6 +5,8 @@ import java.util.*;
 import ControladorsDomini.CtrlDomini;
 import Excepcions.*;
 import Presentacio.views.*;
+import javax.swing.JOptionPane;
+
 /**
  * ControladorPresentacio es la classe que s'encarrega de comunicar la Vista amb el Controlador de Domini
  */
@@ -26,6 +28,10 @@ public class ControladorPresentacio {
     public ControladorPresentacio() throws Exception {
         controladorDomini = controladorDomini.getInstance();
         controladorDomini.carregaPerfils();
+    }
+
+    public static void mostraError(String missatge) {
+        JOptionPane.showMessageDialog(null, missatge, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     public static List<String> getNomsIdiomes() {return controladorDomini.getNomsIdiomes();}
