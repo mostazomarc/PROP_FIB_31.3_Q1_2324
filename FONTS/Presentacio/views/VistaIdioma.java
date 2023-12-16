@@ -1,5 +1,6 @@
 package Presentacio.views;
 
+import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.IdiomaNoExisteix;
 import Presentacio.ControladorPresentacio;
 
@@ -132,7 +133,11 @@ public class VistaIdioma extends JFrame {
             setVisible(false);
         }
         else if (Eliminar.equals(source)) {
-            ControladorPresentacio.eliminarIdioma(nom);
+            try {
+                ControladorPresentacio.eliminarIdioma(nom);
+            } catch (ExcepcionsCreadorTeclat e1) {
+                ControladorPresentacio.mostraError(e1.getMessage());
+            }
             ControladorPresentacio.vistaElements("idiomes");
             setVisible(false);
         }

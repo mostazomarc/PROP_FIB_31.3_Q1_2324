@@ -1,6 +1,7 @@
 package Presentacio.views;
 
 import Excepcions.AlfabetNoExisteix;
+import Excepcions.ExcepcionsCreadorTeclat;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -132,7 +133,11 @@ public class VistaAlfabet extends JFrame {
             setVisible(false);
         }
         else if (Eliminar.equals(source)) {
-            ControladorPresentacio.eliminarAlfabet(nom);
+            try {
+                ControladorPresentacio.eliminarAlfabet(nom);
+            } catch (ExcepcionsCreadorTeclat e1) {
+                ControladorPresentacio.mostraError(e1.getMessage());
+            }
             ControladorPresentacio.vistaElements("alfabets");
             setVisible(false);
         }
