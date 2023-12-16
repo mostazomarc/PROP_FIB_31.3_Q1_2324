@@ -1,5 +1,6 @@
 package Presentacio.views;
 
+import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.LlistaFreqNoExisteix;
 import Presentacio.ControladorPresentacio;
 
@@ -177,7 +178,11 @@ public class VistaLlista extends JFrame {
             setVisible(false);
         }
         else if (Eliminar.equals(source)) {
-            ControladorPresentacio.eliminarLlista(nom);
+            try {
+                ControladorPresentacio.eliminarLlista(nom);
+            } catch (ExcepcionsCreadorTeclat e1) {
+                ControladorPresentacio.mostraError(e1.getMessage());
+            }
             ControladorPresentacio.vistaElements("llistes");
             setVisible(false);
         }
