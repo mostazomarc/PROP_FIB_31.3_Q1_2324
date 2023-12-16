@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 
+import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.TeclatJaExisteix;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -191,53 +193,53 @@ public class VistaCrearTeclat extends JFrame {
         });
     }
 
-    public void actionPerformed_buttons (ActionEvent e) throws Exception {
-        Object source = e.getSource();
-        if (Si.isSelected()) {
-            labelNomLl.setVisible(true);
-            inputNomLl.setVisible(true);
-        }
-        else {
-            labelNomLl.setVisible(false);
-            inputNomLl.setVisible(false);
-        }
-
-        if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaElements("teclats");
-            setVisible(false);
-        }
-        else if (inputNomIdioma.equals(source)) {
-            String nomIdioma = (String) inputNomIdioma.getSelectedItem();
-            String[] llistes = ControladorPresentacio.getNomLlistesGuardades().toArray(new String[0]);
-
-            List<String> tempList = new ArrayList<>();
-
-            for (String nomLlista : llistes) {
-                if (ControladorPresentacio.getNomIdiomaLlista(nomLlista).equals(nomIdioma)) {
-                    tempList.add(nomLlista);
-                }
-            }
-
-            String[] freqs = tempList.toArray(new String[0]);
-            inputNomLl.setModel(new DefaultComboBoxModel<>(freqs));
-            inputNomLl.setSelectedIndex(-1);
-        }
-
-        else if (Crear.equals(source)) {
-            String nomTeclat = inputNomTeclat.getText();
-            String nomIdioma = (String) inputNomIdioma.getSelectedItem();
-            int nf = Integer.parseInt(inputNF.getText());
-            int nc = Integer.parseInt(inputNC.getText());
-            String estrategia = (String) inputAlgorisme.getSelectedItem();
+    public void actionPerformed_buttons (ActionEvent e)  throws ExcepcionsCreadorTeclat {
+        try {
+            Object source = e.getSource();
             if (Si.isSelected()) {
-                String nomLl = (String) inputNomLl.getSelectedItem();
-                ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLl, nf, nc, estrategia);
+                labelNomLl.setVisible(true);
+                inputNomLl.setVisible(true);
+            } else {
+                labelNomLl.setVisible(false);
+                inputNomLl.setVisible(false);
             }
-            else {
-                ControladorPresentacio.crearTeclatLlistaIdioma(nomTeclat, nomIdioma, nf, nc, estrategia);
+
+            if (Enrere.equals(source)) {
+                ControladorPresentacio.vistaElements("teclats");
+                setVisible(false);
+            } else if (inputNomIdioma.equals(source)) {
+                String nomIdioma = (String) inputNomIdioma.getSelectedItem();
+                String[] llistes = ControladorPresentacio.getNomLlistesGuardades().toArray(new String[0]);
+
+                List<String> tempList = new ArrayList<>();
+
+                for (String nomLlista : llistes) {
+                    if (ControladorPresentacio.getNomIdiomaLlista(nomLlista).equals(nomIdioma)) {
+                        tempList.add(nomLlista);
+                    }
+                }
+
+                String[] freqs = tempList.toArray(new String[0]);
+                inputNomLl.setModel(new DefaultComboBoxModel<>(freqs));
+                inputNomLl.setSelectedIndex(-1);
+            } else if (Crear.equals(source)) {
+                String nomTeclat = inputNomTeclat.getText();
+                String nomIdioma = (String) inputNomIdioma.getSelectedItem();
+                int nf = Integer.parseInt(inputNF.getText());
+                int nc = Integer.parseInt(inputNC.getText());
+                String estrategia = (String) inputAlgorisme.getSelectedItem();
+                if (Si.isSelected()) {
+                    String nomLl = (String) inputNomLl.getSelectedItem();
+                    ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLl, nf, nc, estrategia);
+                } else {
+                    ControladorPresentacio.crearTeclatLlistaIdioma(nomTeclat, nomIdioma, nf, nc, estrategia);
+                }
+                ControladorPresentacio.vistaTeclat(nomTeclat);
+                setVisible(false);
             }
-            ControladorPresentacio.vistaTeclat(nomTeclat);
-            setVisible(false);
+        }
+        catch (TeclatJaExisteix e1) {
+            ControladorPresentacio.mostraError(e1.getMessage());
         }
     }
 }
