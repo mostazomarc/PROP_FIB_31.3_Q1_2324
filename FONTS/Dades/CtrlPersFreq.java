@@ -256,6 +256,27 @@ public class CtrlPersFreq {
         for (Map.Entry<String, LlistaFrequencies> llista : frequencies.entrySet()) {
             if (llista.getValue().getNomIdioma().equals(nomIdioma) && !llista.getValue().getNom().equals("LlistaPred"+nomIdioma)) throw new IdiomaEnUs(nomIdioma);
         }
+        //comprovar us idioma a les llistes del .json
+        JSONParser jsP = new JSONParser();
+        JSONArray CjtUsuaris = new JSONArray();
+        try (FileReader rd = new FileReader("./DATA/Saves/LlistesUsuarisActius.json")){
+            CjtUsuaris = (JSONArray) jsP.parse(rd);
+            for (int i = 0; i < CjtUsuaris.size(); ++i){
+                JSONObject next = (JSONObject) CjtUsuaris.get(i); //Obtenim l'objecte de l'usuari iessim
+                String nomUsuari = ((String)next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
+                if(nomUsuari != null && !nomUsuari.equals(usuari)){    //Si el nom d'usuari coincideix
+                    JSONArray llistesUsuari = (JSONArray) next.get("llistes");
+                    for (int j = 0; j < llistesUsuari.size(); ++j) {
+                        JSONObject nextLlista = (JSONObject) llistesUsuari.get(j);
+                        String nomIdiomaLlista = ((String) nextLlista.get("nomIdioma"));
+                        if (nomIdiomaLlista.equals(nomIdioma)) throw new IdiomaEnUs(nomIdioma);
+                    }
+                }
+            }
+        } catch (IOException e){
+        }
+        catch (ParseException e) {
+        }
     }
 
     /**
