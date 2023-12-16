@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
+import Excepcions.ExcepcionsCreadorTeclat;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -242,27 +243,30 @@ public class VistaAfegirLlista extends JFrame {
         else if (Afegir.equals(source)) {
             String nomIdioma = (String) inputNomIdioma.getSelectedItem();
 
-            if (tipus != " ") {
-                Map<String, Integer> novesEntrades = new HashMap<>();
-                if (tipus == "llista" || tipus == "text") {
-                    ControladorPresentacio.novaLlistaPerfil(tipus, filepath, nomIdioma, novesEntrades);
-                }
-                else if (tipus == "Manual") {
-                    String nom = inputNomLlista.getText();
-                    String[] linies = llistaManual.getText().split("\\n"); // Dividir el texto en líneas
-                    for (String linea : linies) {
-                        String[] parts = linea.split(" ");
-                        if (parts.length == 2) {
-                            String clau = parts[0];
-                            int valor = Integer.parseInt(parts[1]);
-                            System.out.println(clau + ' ' + valor);
-                            novesEntrades.put(clau, valor);
+            try {
+                if (tipus != " ") {
+                    Map<String, Integer> novesEntrades = new HashMap<>();
+                    if (tipus == "llista" || tipus == "text") {
+                        ControladorPresentacio.novaLlistaPerfil(tipus, filepath, nomIdioma, novesEntrades);
+                    } else if (tipus == "Manual") {
+                        String nom = inputNomLlista.getText();
+                        String[] linies = llistaManual.getText().split("\\n"); // Dividir el texto en líneas
+                        for (String linea : linies) {
+                            String[] parts = linea.split(" ");
+                            if (parts.length == 2) {
+                                String clau = parts[0];
+                                int valor = Integer.parseInt(parts[1]);
+                                System.out.println(clau + ' ' + valor);
+                                novesEntrades.put(clau, valor);
+                            }
                         }
+                        ControladorPresentacio.novaLlistaPerfil(tipus, nom, nomIdioma, novesEntrades);
                     }
-                    ControladorPresentacio.novaLlistaPerfil(tipus, nom, nomIdioma, novesEntrades);
+                    ControladorPresentacio.vistaElements("llistes");
+                    setVisible(false);
                 }
-                ControladorPresentacio.vistaElements("llistes");
-                setVisible(false);
+            } catch (ExcepcionsCreadorTeclat ex) {
+                ControladorPresentacio.mostraError(ex.getMessage());
             }
         }
     }
