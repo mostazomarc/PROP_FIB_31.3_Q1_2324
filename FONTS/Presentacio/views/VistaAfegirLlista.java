@@ -242,14 +242,30 @@ public class VistaAfegirLlista extends JFrame {
         }
         else if (Afegir.equals(source)) {
             String nomIdioma = (String) inputNomIdioma.getSelectedItem();
-
+            //comprova que s'ha seleccionat un idioma
+            if (nomIdioma == null) {
+                ControladorPresentacio.mostraAvis("No s'ha seleccionat cap idioma");
+                return;
+            }
             try {
                 if (tipus != " ") {
                     Map<String, Integer> novesEntrades = new HashMap<>();
                     if (tipus == "llista" || tipus == "text") {
+                        //comprova si s'ha seleccionat un arxiu
+                        if (filepath == null) {
+                            ControladorPresentacio.mostraAvis("No s'ha seleccionat cap arxiu");
+                            return;
+                        }
                         ControladorPresentacio.novaLlistaPerfil(tipus, filepath, nomIdioma, novesEntrades);
                     } else if (tipus == "Manual") {
                         String nom = inputNomLlista.getText();
+
+                        // comprova que s'ha introduit el nom
+                        if (nom.equals("")) {
+                            ControladorPresentacio.mostraAvis("No s'ha introduit cap nom");
+                            return;
+                        }
+
                         String[] linies = llistaManual.getText().split("\\n"); // Dividir el texto en líneas
                         for (String linea : linies) {
                             String[] parts = linea.split(" ");
@@ -260,11 +276,17 @@ public class VistaAfegirLlista extends JFrame {
                                 novesEntrades.put(clau, valor);
                             }
                         }
+
+                        //comprova si n'hi ha entrada manual
+                        if (novesEntrades.isEmpty()) {
+                            ControladorPresentacio.mostraAvis("No s'ha introduit cap entrada");
+                            return;
+                        }
                         ControladorPresentacio.novaLlistaPerfil(tipus, nom, nomIdioma, novesEntrades);
                     }
                     ControladorPresentacio.vistaElements("llistes");
                     setVisible(false);
-                }
+                } else ControladorPresentacio.mostraAvis("No s'ha seleccionat cap tipus d'entrada");
             } catch (ExcepcionsCreadorTeclat ex) {
                 ControladorPresentacio.mostraError(ex.getMessage());
             }
