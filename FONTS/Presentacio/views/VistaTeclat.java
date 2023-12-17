@@ -13,13 +13,13 @@ public class VistaTeclat extends JFrame {
     private JButton Enrere = new JButton("Tornar al menú principal");
     private JPanel panelContenidos = new JPanel();
     private JPanel panelTeclat = new JPanel();
-    private JButton ModificarLayout = new JButton("Modificar Layout teclat");
+    private JButton ModificarLayout = new JButton("Modificar Layout");
     private JLabel labelNF = new JLabel("Número files:");
     private JLabel labelNC = new JLabel("Número columnes:");
     private JTextField inputNF = new JTextField(20);
     private JTextField inputNC = new JTextField(20);
     private JButton Modificar = new JButton("Modificar");
-    private JButton Eliminar = new JButton("Eliminar teclat");
+    private JButton Eliminar = new JButton("Eliminar");
 
     public VistaTeclat (String nomTeclat) throws ExcepcionsCreadorTeclat {
         nom = nomTeclat;

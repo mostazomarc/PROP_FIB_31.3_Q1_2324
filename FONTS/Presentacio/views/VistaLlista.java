@@ -4,6 +4,7 @@ import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.LlistaFreqNoExisteix;
 import Presentacio.ControladorPresentacio;
 
+import javax.naming.ldap.Control;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -21,15 +22,15 @@ public class VistaLlista extends JFrame {
     private JPanel panelContenidos = new JPanel();
     private JTextArea LlistatextArea = new JTextArea(20, 40);
     private JScrollPane scrollPanel = new JScrollPane();
-    private JButton ModificarLlista = new JButton("Modificar llista");
-    private JButton Eliminar = new JButton("Eliminar llista");
-    private JButton Editar = new JButton("Editar llista");
+    private JButton ModificarLlista = new JButton("Modificar");
+    private JButton Eliminar = new JButton("Eliminar");
+    private JButton Editar = new JButton("Editar");
     private JButton ImportarArxiu = new JButton("Importar arxiu");
     private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
     private JComboBox InputTipusArxiu;
     private JLabel labelArxiu = new JLabel("Selecciona el tipus d'arxiu i importa el fitxer");
-
     private JButton Modificar = new JButton("Modificar");
+    private JButton Guardar = new JButton("Guardar Canvis");
     private String filepath;
 
 
@@ -92,9 +93,11 @@ public class VistaLlista extends JFrame {
         constraints.weighty = 1;
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        ModificarLlista.setPreferredSize(new Dimension(420, 30));
+        ModificarLlista.setPreferredSize(new Dimension(300, 30));
         buttonPanel.add(ModificarLlista);
-        Eliminar.setPreferredSize(new Dimension(420, 30));
+        Editar.setPreferredSize(new Dimension(300, 30));
+        buttonPanel.add(Editar);
+        Eliminar.setPreferredSize(new Dimension(300, 30));
         buttonPanel.add(Eliminar);
         labelArxiu.setPreferredSize(new Dimension(300, 30));
         labelArxiu.setVisible(false);
@@ -111,6 +114,9 @@ public class VistaLlista extends JFrame {
         Modificar.setPreferredSize(new Dimension(200, 30));
         Modificar.setVisible(false);
         buttonPanel.add(Modificar);
+        Guardar.setPreferredSize(new Dimension(200, 30));
+        Guardar.setVisible(false);
+        buttonPanel.add(Guardar);
         panelContenidos.add(buttonPanel, constraints);
     }
 
@@ -120,7 +126,7 @@ public class VistaLlista extends JFrame {
         LlistatextArea.setEditable(false);
         StringBuilder contingut = new StringBuilder();
         for (Map.Entry<String, Integer> entry : llista.entrySet()) {
-            contingut.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+            contingut.append(entry.getKey()).append(" ").append(entry.getValue()).append("\n");
         }
         LlistatextArea.setText(contingut.toString());
         scrollPanel = new JScrollPane(LlistatextArea);
@@ -176,6 +182,20 @@ public class VistaLlista extends JFrame {
                 ex.printStackTrace();
             }
         });
+        Editar.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        Guardar.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         Eliminar.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
@@ -192,6 +212,26 @@ public class VistaLlista extends JFrame {
             InputTipusArxiu.setVisible(true);
             labelArxiu.setVisible(true);
             Modificar.setVisible(true);
+        }
+        else if (Editar.equals(source)) {
+            Guardar.setVisible(true);
+            LlistatextArea.setEditable(true);
+        }
+        else if (Guardar.equals(source)) {
+            Map<String, Integer> novesEntrades = new HashMap<>();
+            String[] linies = LlistatextArea.getText().split("\\n"); // Dividir el texto en líneas
+            for (String linea : linies) {
+                String[] parts = linea.split(" ");
+                if (parts.length == 2) {
+                    String clau = parts[0];
+                    int valor = Integer.parseInt(parts[1]);
+                    if (novesEntrades.containsKey(clau)) valor += novesEntrades.get(clau);
+                    novesEntrades.put(clau, valor);
+                }
+            }
+            ControladorPresentacio.modificarLlistaPerfil("Manual",filepath,nom,novesEntrades);
+            ControladorPresentacio.vistaLlista(nom);
+            setVisible(false);
         }
         else if(ImportarArxiu.equals(source)) {
             fileChooser.setFileFilter(new FileNameExtensionFilter("PROP", "csv", "prop","txt"));

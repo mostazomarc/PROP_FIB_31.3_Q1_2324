@@ -16,7 +16,7 @@ public class VistaAlfabet extends JFrame {
     private JPanel panelContenidos = new JPanel();
     private JTextArea AlfabettextArea = new JTextArea(20, 40);
     private JScrollPane scrollPanel = new JScrollPane();
-    private JButton Eliminar = new JButton("Eliminar alfabet");
+    private JButton Eliminar = new JButton("Eliminar");
 
     public VistaAlfabet (String nomA) throws AlfabetNoExisteix {
         nom = nomA;

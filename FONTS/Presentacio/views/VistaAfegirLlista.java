@@ -272,7 +272,7 @@ public class VistaAfegirLlista extends JFrame {
                             if (parts.length == 2) {
                                 String clau = parts[0];
                                 int valor = Integer.parseInt(parts[1]);
-                                System.out.println(clau + ' ' + valor);
+                                if (novesEntrades.containsKey(clau)) valor += novesEntrades.get(clau);
                                 novesEntrades.put(clau, valor);
                             }
                         }

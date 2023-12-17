@@ -16,7 +16,7 @@ public class VistaIdioma extends JFrame {
     private JPanel panelContenidos = new JPanel();
     private JTextArea IdiomatextArea = new JTextArea(20, 40);
     private JScrollPane scrollPanel = new JScrollPane();
-    private JButton Eliminar = new JButton("Eliminar idioma");
+    private JButton Eliminar = new JButton("Eliminar");
 
     public VistaIdioma (String nomI) throws IdiomaNoExisteix {
         nom = nomI;
