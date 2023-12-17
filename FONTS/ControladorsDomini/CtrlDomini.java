@@ -140,6 +140,7 @@ public class CtrlDomini {
      * @throws Exception Si no es pot iniciar sessió amb el perfil
      */
     public void iniciaInstancia(String nom) throws Exception{
+        perfils.carregar();
         PerfilActual = perfils.canviaPerfil(nom);
         llistes.canviaPerfil(nom);
         teclats.canviaPerfil(nom);
