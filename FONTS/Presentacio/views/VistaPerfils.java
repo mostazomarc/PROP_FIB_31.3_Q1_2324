@@ -104,7 +104,7 @@ public class VistaPerfils extends JFrame {
                 try {
                     ControladorPresentacio.iniciaInstancia(perfil);
                     ControladorPresentacio.vistaPrincipal();
-                    ControladorPresentacio.carregarDades();
+                    //ControladorPresentacio.carregarDades(); //quan carregues un perfil ja carrega les dades d'aquest
                     setVisible(false);
                 } catch (Exception ex) {
                     ex.printStackTrace();

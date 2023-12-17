@@ -95,7 +95,7 @@ public class CtrlPersTeclats {
         this.usuari = usuari;
         teclats = new HashMap<>();
         //carregar llistes del usuari nou
-        if (usuariAntic != null) carregar();
+        carregar();
     }
 
     /**

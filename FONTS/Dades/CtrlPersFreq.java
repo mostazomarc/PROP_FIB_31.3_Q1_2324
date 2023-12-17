@@ -174,7 +174,8 @@ public class CtrlPersFreq {
             }
         } catch (IOException e) {
         } catch (ParseException e) {
-
+        } catch (LlistaFreqJaExisteix e) {
+            System.out.println("La llista ja estaba carregada");
         }
     }
 
@@ -191,7 +192,7 @@ public class CtrlPersFreq {
         this.usuari = usuari;
         frequencies = new HashMap<>();
         //carregar llistes del usuari nou
-        if (usuariAntic != null) carregar();
+        carregar();
     }
 
     /**

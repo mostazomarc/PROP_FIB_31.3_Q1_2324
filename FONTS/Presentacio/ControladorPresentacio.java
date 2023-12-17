@@ -28,6 +28,7 @@ public class ControladorPresentacio {
     public ControladorPresentacio() throws Exception {
         controladorDomini = controladorDomini.getInstance();
         controladorDomini.carregaPerfils();
+        controladorDomini.carregarDadesSistema();
     }
 
     public static void mostraError(String missatge) {
