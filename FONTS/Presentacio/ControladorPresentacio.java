@@ -90,7 +90,7 @@ public class ControladorPresentacio {
      * Obté el nom del perfil actual
      * @return nom del perfil actual
      */
-    public String getPerfilActual() {
+    public static String getPerfilActual() {
         return controladorDomini.getPerfilActual();
     }
 
@@ -98,7 +98,7 @@ public class ControladorPresentacio {
      * Obté el nom de l'estratègia actual
      * @return nom de l'estratègia actual
      */
-    public String getEstrategiaActual() {
+    public static String getEstrategiaActual() {
         return controladorDomini.getEstrategiaActual();
     }
 

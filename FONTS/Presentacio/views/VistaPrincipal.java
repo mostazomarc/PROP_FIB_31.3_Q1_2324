@@ -15,6 +15,7 @@ public class VistaPrincipal extends JFrame{
     private JButton Alfabets = new JButton("Alfabets");
     private JButton CanviarPerfil = new JButton("Canviar Perfil");
     private JButton EliminarPerfil = new JButton("Eliminar Perfil");
+    private JLabel labelSessio;
     private JButton Sortir = new JButton("Sortir");
     public VistaPrincipal () {
         setVisible(true);
@@ -58,6 +59,13 @@ public class VistaPrincipal extends JFrame{
     }
 
     private void iniButtons() {
+        panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
+        panelContenidos.add(Box.createVerticalGlue());
+        panelContenidos.add(Box.createHorizontalGlue());
+        labelSessio = new JLabel("Sessió inciada com a: " + ControladorPresentacio.getPerfilActual());
+        labelSessio.setBounds(5, 0, 200, 20);
+        add(labelSessio);
+
         panelContenidos.setLayout(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();

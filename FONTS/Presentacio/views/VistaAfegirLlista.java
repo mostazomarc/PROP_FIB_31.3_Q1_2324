@@ -270,7 +270,7 @@ public class VistaAfegirLlista extends JFrame {
                         for (String linea : linies) {
                             String[] parts = linea.split(" ");
                             if (parts.length == 2) {
-                                String clau = parts[0];
+                                String clau = parts[0].toLowerCase();
                                 int valor = Integer.parseInt(parts[1]);
                                 if (novesEntrades.containsKey(clau)) valor += novesEntrades.get(clau);
                                 novesEntrades.put(clau, valor);

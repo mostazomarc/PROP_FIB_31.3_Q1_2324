@@ -208,14 +208,22 @@ public class VistaLlista extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (ModificarLlista.equals(source)) {
-            ImportarArxiu.setVisible(true);
-            InputTipusArxiu.setVisible(true);
-            labelArxiu.setVisible(true);
-            Modificar.setVisible(true);
+            boolean estatActual = ImportarArxiu.isVisible();
+            ImportarArxiu.setVisible(!estatActual);
+            InputTipusArxiu.setVisible(!estatActual);
+            labelArxiu.setVisible(!estatActual);
+            Modificar.setVisible(!estatActual);
+            Guardar.setVisible(false);
+            LlistatextArea.setEditable(false);
         }
         else if (Editar.equals(source)) {
-            Guardar.setVisible(true);
-            LlistatextArea.setEditable(true);
+            boolean estatActual = Guardar.isVisible();
+            Guardar.setVisible(!estatActual);
+            LlistatextArea.setEditable(!estatActual);
+            ImportarArxiu.setVisible(false);
+            InputTipusArxiu.setVisible(false);
+            labelArxiu.setVisible(false);
+            Modificar.setVisible(false);
         }
         else if (Guardar.equals(source)) {
             Map<String, Integer> novesEntrades = new HashMap<>();
@@ -223,7 +231,7 @@ public class VistaLlista extends JFrame {
             for (String linea : linies) {
                 String[] parts = linea.split(" ");
                 if (parts.length == 2) {
-                    String clau = parts[0];
+                    String clau = parts[0].toLowerCase();
                     int valor = Integer.parseInt(parts[1]);
                     if (novesEntrades.containsKey(clau)) valor += novesEntrades.get(clau);
                     novesEntrades.put(clau, valor);
@@ -256,11 +264,11 @@ public class VistaLlista extends JFrame {
         else if (Eliminar.equals(source)) {
             try {
                 ControladorPresentacio.eliminarLlista(nom);
-            } catch (ExcepcionsCreadorTeclat e1) {
+                ControladorPresentacio.vistaElements("llistes");
+                setVisible(false);
+            } catch (Exception e1) {
                 ControladorPresentacio.mostraError(e1.getMessage());
             }
-            ControladorPresentacio.vistaElements("llistes");
-            setVisible(false);
         }
     }
 

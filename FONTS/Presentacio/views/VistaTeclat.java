@@ -184,11 +184,12 @@ public class VistaTeclat extends JFrame {
             setVisible(false);
         }
         else if (ModificarLayout.equals(source)) {
-            Modificar.setVisible(true);
-            labelNF.setVisible(true);
-            labelNC.setVisible(true);
-            inputNF.setVisible(true);
-            inputNC.setVisible(true);
+            boolean estatActual = Modificar.isVisible();
+            Modificar.setVisible(!estatActual);
+            labelNF.setVisible(!estatActual);
+            labelNC.setVisible(!estatActual);
+            inputNF.setVisible(!estatActual);
+            inputNC.setVisible(!estatActual);
         }
         else if(Modificar.equals(source)) {
             try {

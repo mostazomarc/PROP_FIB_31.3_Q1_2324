@@ -5,6 +5,7 @@ import Presentacio.ControladorPresentacio;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
@@ -14,6 +15,9 @@ import java.awt.event.ComponentEvent;
 public class VistaPerfils extends JFrame {
     private JButton AP = new JButton("+");
     private JPanel panelContenidos = new JPanel();
+
+    private JLabel titol = new JLabel("<< BENVINGUT A TECLATOR >>");
+    private JLabel subtitol = new JLabel("Inicia sessió prement el perfil");
 
     public VistaPerfils () {
         setVisible(true);
@@ -36,6 +40,26 @@ public class VistaPerfils extends JFrame {
         setLocation(x, y);
         setResizable(false);
 
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(30, 0, 20, 0);
+
+        titol.setFont(new Font("Monospaced", Font.ITALIC, 24));
+        titol.setHorizontalAlignment(SwingConstants.CENTER); // Centrar el texto horizontalmente
+        panel.add(titol, constraints);
+
+        constraints.gridy = 1;
+        constraints.insets = new Insets(0, 0, 0, 0);
+
+        subtitol.setFont(new Font("Monospaced", Font.ITALIC, 16));
+        subtitol.setHorizontalAlignment(SwingConstants.CENTER); // Centrar el texto horizontalmente
+        panel.add(subtitol, constraints);
+
+        add(panel, BorderLayout.NORTH);
     }
 
     private void iniClose() {
@@ -78,8 +102,8 @@ public class VistaPerfils extends JFrame {
             constraints.gridx++; // Incrementar el índice X para el próximo botón
             button.addActionListener(e -> {
                 try {
-                    ControladorPresentacio.vistaPrincipal();
                     ControladorPresentacio.iniciaInstancia(perfil);
+                    ControladorPresentacio.vistaPrincipal();
                     ControladorPresentacio.carregarDades();
                     setVisible(false);
                 } catch (Exception ex) {
