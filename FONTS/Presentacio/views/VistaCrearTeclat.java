@@ -193,7 +193,7 @@ public class VistaCrearTeclat extends JFrame {
         });
     }
 
-    public void actionPerformed_buttons (ActionEvent e)  throws ExcepcionsCreadorTeclat {
+    public void actionPerformed_buttons (ActionEvent e)  throws Exception {
         try {
             Object source = e.getSource();
             if (Si.isSelected()) {
@@ -240,6 +240,8 @@ public class VistaCrearTeclat extends JFrame {
         }
         catch (ExcepcionsCreadorTeclat ex) {
             ControladorPresentacio.mostraError(ex.getMessage());
+        } catch (NumberFormatException ex) {
+            ControladorPresentacio.mostraError("No és correcte el format del número de files i/o columnes, ha d'introduir un número en els dos camps");
         }
     }
 }

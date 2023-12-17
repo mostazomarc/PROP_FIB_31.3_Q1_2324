@@ -125,7 +125,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Modifica l'indormació de la llista de frequencies identificada per nomLlista del Perfil Actual amb les noves dades entrades
+     * Modifica l'informació de la llista de frequencies identificada per nomLlista del Perfil Actual amb les noves dades entrades
      * @param tipusArxiu El tipus d'arxiu
      * @param nomArxiu El nom de l'arxiu
      * @param nomllista El nom de la llista de frequencies

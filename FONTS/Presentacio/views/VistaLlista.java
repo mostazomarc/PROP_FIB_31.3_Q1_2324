@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 public class VistaLlista extends JFrame {
@@ -22,8 +23,13 @@ public class VistaLlista extends JFrame {
     private JScrollPane scrollPanel = new JScrollPane();
     private JButton ModificarLlista = new JButton("Modificar llista");
     private JButton Eliminar = new JButton("Eliminar llista");
+    private JButton Editar = new JButton("Editar llista");
     private JButton ImportarArxiu = new JButton("Importar arxiu");
     private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+    private JComboBox InputTipusArxiu;
+    private JLabel labelArxiu = new JLabel("Selecciona el tipus d'arxiu i importa el fitxer");
+
+    private JButton Modificar = new JButton("Modificar");
     private String filepath;
 
 
@@ -86,12 +92,25 @@ public class VistaLlista extends JFrame {
         constraints.weighty = 1;
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        ModificarLlista.setPreferredSize(new Dimension(200, 30));
+        ModificarLlista.setPreferredSize(new Dimension(420, 30));
         buttonPanel.add(ModificarLlista);
-        Eliminar.setPreferredSize(new Dimension(200, 30));
+        Eliminar.setPreferredSize(new Dimension(420, 30));
         buttonPanel.add(Eliminar);
+        labelArxiu.setPreferredSize(new Dimension(300, 30));
+        labelArxiu.setVisible(false);
+        buttonPanel.add(labelArxiu);
+        String[] tipus = {"text", "llista", "Manual"};
+        InputTipusArxiu = new JComboBox<>(tipus);
+        InputTipusArxiu.setPreferredSize(new Dimension(100, 30));
+        InputTipusArxiu.setSelectedIndex(-1);
+        InputTipusArxiu.setVisible(false);
+        buttonPanel.add(InputTipusArxiu);
         ImportarArxiu.setPreferredSize(new Dimension(200, 30));
-        buttonPanel.add(Eliminar);
+        ImportarArxiu.setVisible(false);
+        buttonPanel.add(ImportarArxiu);
+        Modificar.setPreferredSize(new Dimension(200, 30));
+        Modificar.setVisible(false);
+        buttonPanel.add(Modificar);
         panelContenidos.add(buttonPanel, constraints);
     }
 
@@ -150,6 +169,13 @@ public class VistaLlista extends JFrame {
                 ex.printStackTrace();
             }
         });
+        Modificar.addActionListener(e -> {
+            try {
+                actionPerformed_buttons(e);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         Eliminar.addActionListener(e -> {
             try {
                 actionPerformed_buttons(e);
@@ -163,6 +189,9 @@ public class VistaLlista extends JFrame {
         Object source = e.getSource();
         if (ModificarLlista.equals(source)) {
             ImportarArxiu.setVisible(true);
+            InputTipusArxiu.setVisible(true);
+            labelArxiu.setVisible(true);
+            Modificar.setVisible(true);
         }
         else if(ImportarArxiu.equals(source)) {
             fileChooser.setFileFilter(new FileNameExtensionFilter("PROP", "csv", "prop","txt"));
@@ -175,6 +204,13 @@ public class VistaLlista extends JFrame {
         }
         else if (Enrere.equals(source)) {
             ControladorPresentacio.vistaPrincipal();
+            setVisible(false);
+        }
+        else if (Modificar.equals(source)) {
+            String tipusarxiu = (String) InputTipusArxiu.getSelectedItem();
+            Map<String, Integer> novesEntrades = new HashMap<>();
+            ControladorPresentacio.modificarLlistaPerfil(tipusarxiu,nom,filepath,novesEntrades);
+            ControladorPresentacio.vistaLlista(nom);
             setVisible(false);
         }
         else if (Eliminar.equals(source)) {
