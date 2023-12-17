@@ -474,7 +474,9 @@ public class CtrlDomini {
      */
     public Teclat afegirTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m, char[][] disposicio) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
-        LlistaFrequencies llista = llistes.getLlistaFreq(nomLlistaFreq);
+        LlistaFrequencies llista;
+        if (!nomLlistaFreq.startsWith("LlistaPred")) llista = llistes.getLlistaFreq(nomLlistaFreq);
+        else llista = idiomaTeclat.getLlistaFreq();
         Teclat nouTeclat = PerfilActual.afegirTeclat(nomTeclat, llista, idiomaTeclat, n, m, disposicio);
         return nouTeclat;
     }
