@@ -115,7 +115,6 @@ public class VistaTeclat extends JFrame {
         panelContenidos.add(buttonPanel, constraints);
     }
 
-
     private void iniTeclat() throws ExcepcionsCreadorTeclat {
         char[][] teclat = ControladorPresentacio.consultaTeclat(nom);
         int rows = teclat.length;
@@ -134,8 +133,6 @@ public class VistaTeclat extends JFrame {
         panelContenidos.add(Box.createVerticalGlue());
         add(panelContenidos, BorderLayout.CENTER);
     }
-
-
 
     /**
      * Assigna els listeners als components corresponents.
@@ -210,5 +207,4 @@ public class VistaTeclat extends JFrame {
             setVisible(false);
         }
     }
-
 }

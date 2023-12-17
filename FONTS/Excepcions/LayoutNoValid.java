@@ -8,6 +8,6 @@ public class LayoutNoValid extends ExcepcionsCreadorTeclat {
         return "LayoutNoValid";
     }
 
-    public LayoutNoValid(int size, int n, int m) {super("Layout No Valid: el nombre de lletres =  " + size  + " supera les " +n*m+ " posicions disponibles" );}
+    public LayoutNoValid(int size, int n, int m) {super("Layout No Valid: el layout és massa petit, no caben les " + size  + " lletres en el teclat de " +n+ " files i "+ m +" columnes, prova amb un layout més gran" );}
 
 }
