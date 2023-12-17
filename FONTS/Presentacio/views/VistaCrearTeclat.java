@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Objects;
 
 public class VistaCrearTeclat extends JFrame {
 
@@ -207,7 +208,8 @@ public class VistaCrearTeclat extends JFrame {
             if (Enrere.equals(source)) {
                 ControladorPresentacio.vistaElements("teclats");
                 setVisible(false);
-            } else if (inputNomIdioma.equals(source)) {
+            }
+            else if (inputNomIdioma.equals(source)) {
                 String nomIdioma = (String) inputNomIdioma.getSelectedItem();
                 String[] llistes = ControladorPresentacio.getNomLlistesGuardades().toArray(new String[0]);
 
@@ -222,12 +224,25 @@ public class VistaCrearTeclat extends JFrame {
                 String[] freqs = tempList.toArray(new String[0]);
                 inputNomLl.setModel(new DefaultComboBoxModel<>(freqs));
                 inputNomLl.setSelectedIndex(-1);
-            } else if (Crear.equals(source)) {
+            }
+            else if (Crear.equals(source)) {
                 String nomTeclat = inputNomTeclat.getText();
+                if (Objects.equals(nomTeclat, "")) {
+                    ControladorPresentacio.mostraAvis("No s'ha introduït cap nom");
+                    return;
+                }
                 String nomIdioma = (String) inputNomIdioma.getSelectedItem();
+                if (Objects.equals(nomIdioma, null)) {
+                    ControladorPresentacio.mostraAvis("No s'ha seleccionat cap idioma");
+                    return;
+                }
                 int nf = Integer.parseInt(inputNF.getText());
                 int nc = Integer.parseInt(inputNC.getText());
                 String estrategia = (String) inputAlgorisme.getSelectedItem();
+                if (Objects.equals(estrategia, null)) {
+                    ControladorPresentacio.mostraAvis("No s'ha seleccionat cap estrategia");
+                    return;
+                }
                 if (Si.isSelected()) {
                     String nomLl = (String) inputNomLl.getSelectedItem();
                     ControladorPresentacio.crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLl, nf, nc, estrategia);
