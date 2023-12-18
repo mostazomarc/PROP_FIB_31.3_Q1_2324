@@ -128,13 +128,13 @@ public class ControladorPresentacio {
     /**
      * Modifica l'informació de la llista de frequencies identificada per nomLlista del Perfil Actual amb les noves dades entrades
      * @param tipusArxiu El tipus d'arxiu
-     * @param nomArxiu El nom de l'arxiu
+     * @param pathArxiu El path de l'arxiu
      * @param nomllista El nom de la llista de frequencies
      * @param novesEntrades El Map de paraules i frequencies
      * @throws Exception Si no es pot llegir l'arxiu o no es pot modificar la llista de frequencies
      */
-    public static void modificarLlistaPerfil(String tipusArxiu, String nomArxiu, String nomllista, Map<String,Integer> novesEntrades) throws Exception {
-        controladorDomini.modificarLlistaPerfil(tipusArxiu, nomArxiu, nomllista, novesEntrades);
+    public static void modificarLlistaPerfil(String tipusArxiu, String pathArxiu, String nomllista, Map<String,Integer> novesEntrades) throws Exception {
+        controladorDomini.modificarLlistaPerfil(tipusArxiu, pathArxiu, nomllista, novesEntrades);
     }
 
     /**

@@ -102,7 +102,7 @@ public class VistaLlista extends JFrame {
         labelArxiu.setPreferredSize(new Dimension(300, 30));
         labelArxiu.setVisible(false);
         buttonPanel.add(labelArxiu);
-        String[] tipus = {"text", "llista", "Manual"};
+        String[] tipus = {"text", "llista"};
         InputTipusArxiu = new JComboBox<>(tipus);
         InputTipusArxiu.setPreferredSize(new Dimension(100, 30));
         InputTipusArxiu.setSelectedIndex(-1);
@@ -256,8 +256,20 @@ public class VistaLlista extends JFrame {
         }
         else if (Modificar.equals(source)) {
             String tipusarxiu = (String) InputTipusArxiu.getSelectedItem();
+            if (tipusarxiu == null) {
+                ControladorPresentacio.mostraAvis("No has seleccionat cap tipus d'arxiu");
+                return;
+            }
+            if (filepath == null) {
+                ControladorPresentacio.mostraAvis("No has seleccionat cap fitxer");
+                return;
+            }
             Map<String, Integer> novesEntrades = new HashMap<>();
-            ControladorPresentacio.modificarLlistaPerfil(tipusarxiu,nom,filepath,novesEntrades);
+            try {
+                ControladorPresentacio.modificarLlistaPerfil(tipusarxiu, filepath, nom, novesEntrades);
+            } catch (ExcepcionsCreadorTeclat e1) {
+                ControladorPresentacio.mostraError(e1.getMessage());
+            }
             ControladorPresentacio.vistaLlista(nom);
             setVisible(false);
         }
