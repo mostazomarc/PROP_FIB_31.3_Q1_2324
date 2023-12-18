@@ -1,5 +1,6 @@
 package Presentacio.views;
 
+import Excepcions.ExcepcionsCreadorTeclat;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -151,7 +152,12 @@ public class VistaAfegirAlfabet extends JFrame{
                 ControladorPresentacio.mostraAvis("No has seleccionat cap fitxer");
                 return;
             }
-            ControladorPresentacio.afegirAlfabet(filepath);
+            try {
+                ControladorPresentacio.afegirAlfabet(filepath);
+            } catch (ExcepcionsCreadorTeclat e1) {
+                ControladorPresentacio.mostraError(e1.getMessage());
+                return;
+            }
             ControladorPresentacio.vistaElements("alfabets");
             setVisible(false);
         }
