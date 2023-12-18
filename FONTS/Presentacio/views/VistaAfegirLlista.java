@@ -6,6 +6,7 @@ import java.util.List;
 
 
 import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.FormatNoValid;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -42,6 +43,20 @@ public class VistaAfegirLlista extends JFrame {
     public VistaAfegirLlista() {
         setVisible(true);
         iniComponents();
+    }
+
+    /**
+     * Retorna ture si la paraula és un número
+     * @param paraula La paraula a comprovar
+     * @return True si la paraula és un número, false altrament
+     */
+    private static boolean esNumero(String paraula) {
+        try {
+            Double.parseDouble(paraula);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private void iniComponents() {
@@ -265,12 +280,12 @@ public class VistaAfegirLlista extends JFrame {
                             ControladorPresentacio.mostraAvis("No s'ha introduit cap nom");
                             return;
                         }
-
                         String[] linies = llistaManual.getText().split("\\n"); // Dividir el texto en líneas
                         for (String linea : linies) {
                             String[] parts = linea.split(" ");
                             if (parts.length == 2) {
                                 String clau = parts[0].toLowerCase();
+                                if (esNumero(clau)) throw new FormatNoValid("Paraula +  frequència");
                                 int valor = Integer.parseInt(parts[1]);
                                 if (novesEntrades.containsKey(clau)) valor += novesEntrades.get(clau);
                                 novesEntrades.put(clau, valor);

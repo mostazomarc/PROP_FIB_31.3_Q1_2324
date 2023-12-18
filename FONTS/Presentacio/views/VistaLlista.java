@@ -1,6 +1,7 @@
 package Presentacio.views;
 
 import Excepcions.ExcepcionsCreadorTeclat;
+import Excepcions.FormatNoValid;
 import Excepcions.LlistaFreqNoExisteix;
 import Presentacio.ControladorPresentacio;
 
@@ -14,6 +15,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 
 public class VistaLlista extends JFrame {
@@ -22,9 +24,9 @@ public class VistaLlista extends JFrame {
     private JPanel panelContenidos = new JPanel();
     private JTextArea LlistatextArea = new JTextArea(20, 40);
     private JScrollPane scrollPanel = new JScrollPane();
-    private JButton ModificarLlista = new JButton("Modificar");
+    private JButton ModificarLlista = new JButton("Modificar amb fitxer");
     private JButton Eliminar = new JButton("Eliminar");
-    private JButton Editar = new JButton("Editar");
+    private JButton Editar = new JButton("Editar manualment");
     private JButton ImportarArxiu = new JButton("Importar arxiu");
     private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
     private JComboBox InputTipusArxiu;
@@ -38,6 +40,20 @@ public class VistaLlista extends JFrame {
         nom = nomLl;
         setVisible(true);
         iniComponents();
+    }
+
+    /**
+     * Retorna ture si la paraula és un número
+     * @param paraula La paraula a comprovar
+     * @return True si la paraula és un número, false altrament
+     */
+    private static boolean esNumero(String paraula) {
+        try {
+            Double.parseDouble(paraula);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private void iniComponents() throws LlistaFreqNoExisteix {
@@ -227,17 +243,24 @@ public class VistaLlista extends JFrame {
         }
         else if (Guardar.equals(source)) {
             Map<String, Integer> novesEntrades = new HashMap<>();
-            String[] linies = LlistatextArea.getText().split("\\n"); // Dividir el texto en líneas
-            for (String linea : linies) {
-                String[] parts = linea.split(" ");
-                if (parts.length == 2) {
-                    String clau = parts[0].toLowerCase();
-                    int valor = Integer.parseInt(parts[1]);
-                    if (novesEntrades.containsKey(clau)) valor += novesEntrades.get(clau);
-                    novesEntrades.put(clau, valor);
+            try {
+                String[] linies = LlistatextArea.getText().split("\\n"); // Dividir el texto en líneas
+                for (String linea : linies) {
+                    String[] parts = linea.split(" ");
+                    if (parts.length == 2) {
+                        String clau = parts[0].toLowerCase();
+                        if (esNumero(clau)) throw new FormatNoValid("Paraula +  frequència");
+                        int valor = Integer.parseInt(parts[1]);
+                        if (novesEntrades.containsKey(clau)) valor += novesEntrades.get(clau);
+                        novesEntrades.put(clau, valor);
+                    }
                 }
+                ControladorPresentacio.modificarLlistaPerfil("Manual", filepath, nom, novesEntrades);
+            } catch (ExcepcionsCreadorTeclat e1) {
+                ControladorPresentacio.mostraError(e1.getMessage());
+            } catch (NumberFormatException e2) {
+                ControladorPresentacio.mostraError("El format de les freqüències no és correcte");
             }
-            ControladorPresentacio.modificarLlistaPerfil("Manual",filepath,nom,novesEntrades);
             ControladorPresentacio.vistaLlista(nom);
             setVisible(false);
         }
