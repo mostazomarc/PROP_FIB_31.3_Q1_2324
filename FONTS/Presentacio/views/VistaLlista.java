@@ -255,6 +255,10 @@ public class VistaLlista extends JFrame {
                         novesEntrades.put(clau, valor);
                     }
                 }
+                if (novesEntrades.isEmpty()) {
+                    ControladorPresentacio.mostraAvis("No s'ha introduit cap entrada");
+                    return;
+                }
                 ControladorPresentacio.modificarLlistaPerfil("Manual", filepath, nom, novesEntrades);
             } catch (ExcepcionsCreadorTeclat e1) {
                 ControladorPresentacio.mostraError(e1.getMessage());
