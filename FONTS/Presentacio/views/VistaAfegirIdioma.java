@@ -10,9 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class VistaAfegirIdioma extends JFrame{
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
@@ -29,7 +27,7 @@ public class VistaAfegirIdioma extends JFrame{
     private JComboBox inputNomAlfabet = new JComboBox();
     private JButton Enrere = new JButton("Tornar enrere");
     private JButton Afegir = new JButton("Afegir idioma");
-    private JPanel panelContenidos = new JPanel();
+    private JPanel panellContinguts = new JPanel();
     private String filepath;
 
     public VistaAfegirIdioma() {
@@ -74,15 +72,15 @@ public class VistaAfegirIdioma extends JFrame{
     }
 
     private void iniEnrere() {
-        panelContenidos.setLayout(new FlowLayout());
-        panelContenidos.add(Enrere);
+        panellContinguts.setLayout(new FlowLayout());
+        panellContinguts.add(Enrere);
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
 
     }
 
     private void iniInputs() {
-        panelContenidos.setLayout(new GridBagLayout());
+        panellContinguts.setLayout(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL; // Fill the cell horizontally
@@ -91,33 +89,33 @@ public class VistaAfegirIdioma extends JFrame{
 
         constraints.gridx = 0;
         constraints.gridy = 1;
-        panelContenidos.add(labelIntro, constraints);
+        panellContinguts.add(labelIntro, constraints);
         constraints.gridy = 2;
-        panelContenidos.add(labelNomIdioma, constraints);
+        panellContinguts.add(labelNomIdioma, constraints);
         constraints.gridy = 3;
-        panelContenidos.add(inputNomIdioma, constraints);
+        panellContinguts.add(inputNomIdioma, constraints);
         constraints.gridy = 4;
-        panelContenidos.add(labelImportarLlista, constraints);
+        panellContinguts.add(labelImportarLlista, constraints);
         constraints.gridy = 5;
-        panelContenidos.add(labelTipusArxiu, constraints);
+        panellContinguts.add(labelTipusArxiu, constraints);
         constraints.gridy = 6;
         tipusInput.add(rllista);
         tipusInput.add(rtext);
-        panelContenidos.add(rllista, constraints);
+        panellContinguts.add(rllista, constraints);
         constraints.gridy = 7;
-        panelContenidos.add(rtext, constraints);
+        panellContinguts.add(rtext, constraints);
         constraints.gridy = 8;
-        panelContenidos.add(importarArxiu, constraints);
+        panellContinguts.add(importarArxiu, constraints);
         constraints.gridy = 9;
-        panelContenidos.add(labelNomAlfabet, constraints);
+        panellContinguts.add(labelNomAlfabet, constraints);
         constraints.gridy = 10;
         List<String> alfabets = ControladorPresentacio.getNomsAlfabets();
         inputNomAlfabet = new JComboBox<>(alfabets.toArray(new String[0]));
         inputNomAlfabet.setSelectedIndex(-1);
-        panelContenidos.add(inputNomAlfabet, constraints);
+        panellContinguts.add(inputNomAlfabet, constraints);
         constraints.gridy = 11;
-        panelContenidos.add(Afegir, constraints);
-        add(panelContenidos, BorderLayout.CENTER);
+        panellContinguts.add(Afegir, constraints);
+        add(panellContinguts, BorderLayout.CENTER);
 
     }
 

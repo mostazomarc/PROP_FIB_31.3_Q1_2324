@@ -1,6 +1,5 @@
 package Presentacio.views;
 
-import Excepcions.ExcepcionsCreadorTeclat;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -13,7 +12,7 @@ import java.util.List;
 public class VistaElements extends JFrame {
     private JButton Enrere = new JButton("Tornar al menú principal");
     private JButton Crear = new JButton("Crear");
-    private JPanel panelContenidos = new JPanel();
+    private JPanel panellContinguts = new JPanel();
     private String option;
 
     public VistaElements(String option) {
@@ -61,9 +60,9 @@ public class VistaElements extends JFrame {
 
     private void iniEnrere() {
 
-        panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
-        panelContenidos.add(Box.createVerticalGlue());
-        panelContenidos.add(Box.createHorizontalGlue());
+        panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
+        panellContinguts.add(Box.createVerticalGlue());
+        panellContinguts.add(Box.createHorizontalGlue());
 
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
@@ -88,14 +87,14 @@ public class VistaElements extends JFrame {
             default:
                 break;
         }
-        panelContenidos.setLayout(new GridBagLayout());
+        panellContinguts.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 0;
         constraints.gridy = 1;
-        panelContenidos.add(Crear, constraints);
+        panellContinguts.add(Crear, constraints);
         int yPos = 2;
 
         if(l != null) {
@@ -127,10 +126,10 @@ public class VistaElements extends JFrame {
                         ex.printStackTrace();
                     }
                 });
-                panelContenidos.add(button, constraints);
+                panellContinguts.add(button, constraints);
             }
         }
-        add(panelContenidos, BorderLayout.CENTER);
+        add(panellContinguts, BorderLayout.CENTER);
     }
 
 

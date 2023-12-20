@@ -13,7 +13,7 @@ import java.awt.event.ComponentEvent;
 public class VistaIdioma extends JFrame {
     private String nom;
     private JButton Enrere = new JButton("Tornar al menú principal");
-    private JPanel panelContenidos = new JPanel();
+    private JPanel panellContinguts = new JPanel();
     private JTextArea IdiomatextArea = new JTextArea(20, 40);
     private JScrollPane scrollPanel = new JScrollPane();
     private JButton Eliminar = new JButton("Eliminar");
@@ -63,9 +63,9 @@ public class VistaIdioma extends JFrame {
     }
 
     private void iniEnrere() {
-        panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
-        panelContenidos.add(Box.createVerticalGlue());
-        panelContenidos.add(Box.createHorizontalGlue());
+        panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
+        panellContinguts.add(Box.createVerticalGlue());
+        panellContinguts.add(Box.createHorizontalGlue());
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
     }
@@ -79,7 +79,7 @@ public class VistaIdioma extends JFrame {
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         Eliminar.setPreferredSize(new Dimension(200, 30));
         buttonPanel.add(Eliminar);
-        panelContenidos.add(buttonPanel, constraints);
+        panellContinguts.add(buttonPanel, constraints);
     }
 
 
@@ -94,10 +94,10 @@ public class VistaIdioma extends JFrame {
         IdiomatextArea.setAlignmentY(Component.CENTER_ALIGNMENT); // Alineación vertical
 
         scrollPanel.setViewportView(IdiomatextArea);
-        panelContenidos.add(Box.createVerticalGlue());
-        panelContenidos.add(scrollPanel);
-        panelContenidos.add(Box.createVerticalGlue());
-        add(panelContenidos, BorderLayout.CENTER);
+        panellContinguts.add(Box.createVerticalGlue());
+        panellContinguts.add(scrollPanel);
+        panellContinguts.add(Box.createVerticalGlue());
+        add(panellContinguts, BorderLayout.CENTER);
     }
 
     /**

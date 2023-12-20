@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class VistaPrincipal extends JFrame{
-    private JPanel panelContenidos = new JPanel();
+    private JPanel panellContinguts = new JPanel();
     private JButton Teclats = new JButton("Teclats");
     private JButton Llistes = new JButton("Llistes de freqüències");
     private JButton Idiomes = new JButton("Idiomes");
@@ -59,14 +59,14 @@ public class VistaPrincipal extends JFrame{
     }
 
     private void iniButtons() {
-        panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
-        panelContenidos.add(Box.createVerticalGlue());
-        panelContenidos.add(Box.createHorizontalGlue());
+        panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
+        panellContinguts.add(Box.createVerticalGlue());
+        panellContinguts.add(Box.createHorizontalGlue());
         labelSessio = new JLabel("Sessió inciada com a: " + ControladorPresentacio.getPerfilActual());
         labelSessio.setBounds(5, 0, 200, 20);
         add(labelSessio);
 
-        panelContenidos.setLayout(new GridBagLayout());
+        panellContinguts.setLayout(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -76,27 +76,27 @@ public class VistaPrincipal extends JFrame{
         constraints.gridx = 0;
 
         constraints.gridy = 1;
-        panelContenidos.add(Teclats, constraints);
+        panellContinguts.add(Teclats, constraints);
 
         constraints.gridy = 2;
-        panelContenidos.add(Llistes, constraints);
+        panellContinguts.add(Llistes, constraints);
 
         constraints.gridy = 3;
-        panelContenidos.add(Idiomes, constraints);
+        panellContinguts.add(Idiomes, constraints);
 
         constraints.gridy = 4;
-        panelContenidos.add(Alfabets, constraints);
+        panellContinguts.add(Alfabets, constraints);
 
         constraints.gridy = 5;
-        panelContenidos.add(CanviarPerfil, constraints);
+        panellContinguts.add(CanviarPerfil, constraints);
 
         constraints.gridy = 6;
-        panelContenidos.add(EliminarPerfil, constraints);
+        panellContinguts.add(EliminarPerfil, constraints);
 
         constraints.gridy = 7;
-        panelContenidos.add(Sortir, constraints);
+        panellContinguts.add(Sortir, constraints);
 
-        add(panelContenidos, BorderLayout.CENTER);
+        add(panellContinguts, BorderLayout.CENTER);
     }
 
     /**

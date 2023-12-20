@@ -5,7 +5,6 @@ import Presentacio.ControladorPresentacio;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
@@ -14,7 +13,7 @@ import java.awt.event.ComponentEvent;
 
 public class VistaPerfils extends JFrame {
     private JButton AP = new JButton("+");
-    private JPanel panelContenidos = new JPanel();
+    private JPanel panellContinguts = new JPanel();
 
     private JLabel titol = new JLabel("<< BENVINGUT A TECLATOR >>");
     private JLabel subtitol = new JLabel("Inicia sessió prement el perfil");
@@ -117,10 +116,10 @@ public class VistaPerfils extends JFrame {
         panelBotones.add(AP, constraints);
 
 
-        panelContenidos.setLayout(new BorderLayout());
-        panelContenidos.add(panelBotones, BorderLayout.CENTER);
+        panellContinguts.setLayout(new BorderLayout());
+        panellContinguts.add(panelBotones, BorderLayout.CENTER);
 
-        add(panelContenidos, BorderLayout.CENTER);
+        add(panellContinguts, BorderLayout.CENTER);
     }
 
 

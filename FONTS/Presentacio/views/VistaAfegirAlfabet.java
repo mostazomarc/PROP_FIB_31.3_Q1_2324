@@ -14,8 +14,6 @@ import java.io.File;
 
 public class VistaAfegirAlfabet extends JFrame{
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
-    private JLabel labelNomAlfabet = new JLabel("Introdueix el nom de l'alfabet:");
-    private JTextField inputNomAlfabet = new JTextField(20);
     private JLabel labelImportarAlfabet = new JLabel("Importa l'alfabet");
     private JButton importarArxiu = new JButton ("Importar");
     private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -85,14 +83,10 @@ public class VistaAfegirAlfabet extends JFrame{
         constraints.gridy = 1;
         panelContenidos.add(labelIntro, constraints);
         constraints.gridy = 2;
-        panelContenidos.add(labelNomAlfabet, constraints);
-        constraints.gridy = 3;
-        panelContenidos.add(inputNomAlfabet, constraints);
-        constraints.gridy = 4;
         panelContenidos.add(labelImportarAlfabet, constraints);
-        constraints.gridy = 5;
+        constraints.gridy = 3;
         panelContenidos.add(importarArxiu, constraints);
-        constraints.gridy = 7;
+        constraints.gridy = 4;
         panelContenidos.add(Afegir, constraints);
         add(panelContenidos, BorderLayout.CENTER);
 

@@ -11,7 +11,7 @@ import java.awt.event.ComponentEvent;
 public class VistaTeclat extends JFrame {
     private String nom;
     private JButton Enrere = new JButton("Tornar al menú principal");
-    private JPanel panelContenidos = new JPanel();
+    private JPanel panellContinguts = new JPanel();
     private JPanel panelTeclat = new JPanel();
     private JButton ModificarLayout = new JButton("Modificar Layout");
     private JLabel labelNF = new JLabel("Número files:");
@@ -66,9 +66,9 @@ public class VistaTeclat extends JFrame {
     }
 
     private void iniEnrere() {
-        panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
-        panelContenidos.add(Box.createVerticalGlue());
-        panelContenidos.add(Box.createHorizontalGlue());
+        panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
+        panellContinguts.add(Box.createVerticalGlue());
+        panellContinguts.add(Box.createHorizontalGlue());
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
     }
@@ -85,7 +85,7 @@ public class VistaTeclat extends JFrame {
         Eliminar.setPreferredSize(new Dimension(420, 30));
         buttonPanel.add(Eliminar);
 
-        panelContenidos.add(buttonPanel, constraints);
+        panellContinguts.add(buttonPanel, constraints);
 
         Modificar.setVisible(false);
         labelNF.setVisible(false);
@@ -99,7 +99,7 @@ public class VistaTeclat extends JFrame {
         inputNF.setPreferredSize(new Dimension(100, 30));
         buttonPanel.add(inputNF);
 
-        panelContenidos.add(buttonPanel, constraints);
+        panellContinguts.add(buttonPanel, constraints);
 
         constraints.gridy = 3;
         labelNC.setPreferredSize(new Dimension(150, 30));
@@ -107,15 +107,20 @@ public class VistaTeclat extends JFrame {
         inputNC.setPreferredSize(new Dimension(100, 30));
         buttonPanel.add(inputNC);
 
-        panelContenidos.add(buttonPanel, constraints);
+        panellContinguts.add(buttonPanel, constraints);
 
         constraints.gridy = 4;
         Modificar.setPreferredSize(new Dimension(200, 30));
         buttonPanel.add(Modificar);
-        panelContenidos.add(buttonPanel, constraints);
+        panellContinguts.add(buttonPanel, constraints);
     }
 
     private void iniTeclat() throws ExcepcionsCreadorTeclat {
+        JLabel labelNom = new JLabel(nom);
+        labelNom.setFont(new Font("Monospaced", Font.BOLD, 16));
+        panellContinguts.add(labelNom);
+
+
         char[][] teclat = ControladorPresentacio.consultaTeclat(nom);
         int rows = teclat.length;
         int cols = teclat[0].length;
@@ -128,10 +133,10 @@ public class VistaTeclat extends JFrame {
                 panelTeclat.add(btn);
             }
         }
-        panelContenidos.add(Box.createVerticalGlue());
-        panelContenidos.add(panelTeclat);
-        panelContenidos.add(Box.createVerticalGlue());
-        add(panelContenidos, BorderLayout.CENTER);
+        panellContinguts.add(Box.createVerticalGlue());
+        panellContinguts.add(panelTeclat);
+        panellContinguts.add(Box.createVerticalGlue());
+        add(panellContinguts, BorderLayout.CENTER);
     }
 
     /**

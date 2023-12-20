@@ -5,7 +5,6 @@ import Excepcions.FormatNoValid;
 import Excepcions.LlistaFreqNoExisteix;
 import Presentacio.ControladorPresentacio;
 
-import javax.naming.ldap.Control;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -15,13 +14,12 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.Map;
 
 public class VistaLlista extends JFrame {
     private String nom;
     private JButton Enrere = new JButton("Tornar al menú principal");
-    private JPanel panelContenidos = new JPanel();
+    private JPanel panellContinguts = new JPanel();
     private JTextArea LlistatextArea = new JTextArea(20, 40);
     private JScrollPane scrollPanel = new JScrollPane();
     private JButton ModificarLlista = new JButton("Modificar amb fitxer");
@@ -95,9 +93,9 @@ public class VistaLlista extends JFrame {
     }
 
     private void iniEnrere() {
-        panelContenidos.setLayout(new BoxLayout(panelContenidos, BoxLayout.Y_AXIS));
-        panelContenidos.add(Box.createVerticalGlue());
-        panelContenidos.add(Box.createHorizontalGlue());
+        panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
+        panellContinguts.add(Box.createVerticalGlue());
+        panellContinguts.add(Box.createHorizontalGlue());
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
     }
@@ -133,11 +131,15 @@ public class VistaLlista extends JFrame {
         Guardar.setPreferredSize(new Dimension(200, 30));
         Guardar.setVisible(false);
         buttonPanel.add(Guardar);
-        panelContenidos.add(buttonPanel, constraints);
+        panellContinguts.add(buttonPanel, constraints);
     }
 
 
     private void iniLlista() throws LlistaFreqNoExisteix {
+        JLabel labelNom = new JLabel(nom);
+        labelNom.setFont(new Font("Monospaced", Font.BOLD, 16));
+        panellContinguts.add(labelNom);
+
         Map<String, Integer> llista = ControladorPresentacio.consultaLlista(nom);
         LlistatextArea.setEditable(false);
         StringBuilder contingut = new StringBuilder();
@@ -153,8 +155,8 @@ public class VistaLlista extends JFrame {
         constraints.weighty = 1;
         constraints.anchor = GridBagConstraints.NORTHWEST;
 
-        panelContenidos.add(scrollPanel, constraints);
-        add(panelContenidos, BorderLayout.CENTER);
+        panellContinguts.add(scrollPanel, constraints);
+        add(panellContinguts, BorderLayout.CENTER);
 
         scrollPanel.getVerticalScrollBar().setValue(0); // Hace que la barra comience arriba
 

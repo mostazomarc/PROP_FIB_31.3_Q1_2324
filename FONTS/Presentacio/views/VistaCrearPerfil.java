@@ -2,7 +2,6 @@ package Presentacio.views;
 
 import Presentacio.ControladorPresentacio;
 
-import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +10,7 @@ import java.awt.event.ComponentEvent;
 
 public class VistaCrearPerfil extends JFrame {
     private JButton Enrere = new JButton("Tornar enrere");
-    private JPanel panelContenidos = new JPanel();
+    private JPanel panellContinguts = new JPanel();
     private JLabel labelNomPerfil = new JLabel("Nom");
     private JTextField inputNomPerfil = new JTextField( 20);
     private JButton CP = new JButton("Crear perfil");
@@ -60,26 +59,26 @@ public class VistaCrearPerfil extends JFrame {
     }
 
     private void iniEnrere() {
-        panelContenidos.setLayout(new FlowLayout());
-        panelContenidos.add(Enrere);
+        panellContinguts.setLayout(new FlowLayout());
+        panellContinguts.add(Enrere);
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
     }
 
     private void iniInput() {
-        panelContenidos.setLayout(new GridBagLayout());
+        panellContinguts.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL; // Fill the cell horizontally
         constraints.anchor = GridBagConstraints.CENTER; // Center the component within the cell
         constraints.insets = new Insets(10, 10, 5, 10); // Set spacing between buttons
         constraints.gridx = 0;
         constraints.gridy = 1;
-        panelContenidos.add(labelNomPerfil, constraints);
+        panellContinguts.add(labelNomPerfil, constraints);
         constraints.gridy = 2;
-        panelContenidos.add(inputNomPerfil, constraints);
+        panellContinguts.add(inputNomPerfil, constraints);
         constraints.gridy = 3;
-        panelContenidos.add(CP, constraints);
-        add(panelContenidos, BorderLayout.CENTER);
+        panellContinguts.add(CP, constraints);
+        add(panellContinguts, BorderLayout.CENTER);
     }
 
     /**

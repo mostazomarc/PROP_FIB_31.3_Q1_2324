@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 
 import Excepcions.ExcepcionsCreadorTeclat;
-import Excepcions.TeclatJaExisteix;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -36,7 +35,7 @@ public class VistaCrearTeclat extends JFrame {
     private JComboBox inputAlgorisme;
     private JButton Enrere = new JButton("Tornar enrere");
     private JButton Crear = new JButton("Crear teclat");
-    private JPanel panelContenidos = new JPanel();
+    private JPanel panellContinguts = new JPanel();
 
     public VistaCrearTeclat() {
         setVisible(true);
@@ -80,15 +79,15 @@ public class VistaCrearTeclat extends JFrame {
     }
 
     private void iniEnrere() {
-        panelContenidos.setLayout(new FlowLayout());
-        panelContenidos.add(Enrere);
+        panellContinguts.setLayout(new FlowLayout());
+        panellContinguts.add(Enrere);
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
 
     }
 
     private void iniInputs() {
-        panelContenidos.setLayout(new GridBagLayout());
+        panellContinguts.setLayout(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -97,50 +96,50 @@ public class VistaCrearTeclat extends JFrame {
 
         constraints.gridx = 0;
         constraints.gridy = 1;
-        panelContenidos.add(labelIntro, constraints);
+        panellContinguts.add(labelIntro, constraints);
         constraints.gridy = 2;
-        panelContenidos.add(labelNomTeclat, constraints);
+        panellContinguts.add(labelNomTeclat, constraints);
         constraints.gridy = 3;
-        panelContenidos.add(inputNomTeclat, constraints);
+        panellContinguts.add(inputNomTeclat, constraints);
         constraints.gridy = 4;
-        panelContenidos.add(labelNomIdioma, constraints);
+        panellContinguts.add(labelNomIdioma, constraints);
         constraints.gridy = 5;
         List<String> idiomes = ControladorPresentacio.getNomsIdiomes();
         inputNomIdioma = new JComboBox<>(idiomes.toArray(new String[0]));
         inputNomIdioma.setSelectedIndex(-1);
-        panelContenidos.add(inputNomIdioma, constraints);
+        panellContinguts.add(inputNomIdioma, constraints);
         constraints.gridy = 6;
-        panelContenidos.add(labelULL, constraints);
+        panellContinguts.add(labelULL, constraints);
         constraints.gridy = 7;
         resposta.add(Si);
         resposta.add(No);
-        panelContenidos.add(Si, constraints);
+        panellContinguts.add(Si, constraints);
         constraints.gridy = 8;
-        panelContenidos.add(No, constraints);
+        panellContinguts.add(No, constraints);
         constraints.gridy = 9;
         labelNomLl.setVisible(false);
-        panelContenidos.add(labelNomLl, constraints);
+        panellContinguts.add(labelNomLl, constraints);
         constraints.gridy = 10;
         inputNomLl.setVisible(false);
-        panelContenidos.add(inputNomLl, constraints);
+        panellContinguts.add(inputNomLl, constraints);
         constraints.gridy = 11;
-        panelContenidos.add(labelNF, constraints);
+        panellContinguts.add(labelNF, constraints);
         constraints.gridy = 12;
-        panelContenidos.add(inputNF, constraints);
+        panellContinguts.add(inputNF, constraints);
         constraints.gridy = 13;
-        panelContenidos.add(labelNC, constraints);
+        panellContinguts.add(labelNC, constraints);
         constraints.gridy = 14;
-        panelContenidos.add(inputNC, constraints);
+        panellContinguts.add(inputNC, constraints);
         constraints.gridy = 15;
-        panelContenidos.add(labelAlgorisme, constraints);
+        panellContinguts.add(labelAlgorisme, constraints);
         constraints.gridy = 16;
         String[] algorismes = {"BranchAndBound", "GeneticAlgorithm"};
         inputAlgorisme= new JComboBox<>(algorismes);
         inputAlgorisme.setSelectedIndex(-1);
-        panelContenidos.add(inputAlgorisme, constraints);
+        panellContinguts.add(inputAlgorisme, constraints);
         constraints.gridy = 17;
-        panelContenidos.add(Crear, constraints);
-        add(panelContenidos, BorderLayout.CENTER);
+        panellContinguts.add(Crear, constraints);
+        add(panellContinguts, BorderLayout.CENTER);
 
     }
 

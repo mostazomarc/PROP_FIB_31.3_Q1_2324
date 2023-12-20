@@ -36,7 +36,7 @@ public class VistaAfegirLlista extends JFrame {
     private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
     private JButton Enrere = new JButton("Tornar enrere");
     private JButton Afegir = new JButton("Afegir llista");
-    private JPanel panelContenidos = new JPanel();
+    private JPanel panellContinguts = new JPanel();
     private String filepath;
     private String tipus = " ";
 
@@ -96,15 +96,15 @@ public class VistaAfegirLlista extends JFrame {
     }
 
     private void iniEnrere() {
-        panelContenidos.setLayout(new FlowLayout());
-        panelContenidos.add(Enrere);
+        panellContinguts.setLayout(new FlowLayout());
+        panellContinguts.add(Enrere);
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
 
     }
 
     private void iniInputs() {
-        panelContenidos.setLayout(new GridBagLayout());
+        panellContinguts.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL; // Fill the cell horizontally
         constraints.anchor = GridBagConstraints.CENTER; // Center the component within the cell
@@ -112,28 +112,28 @@ public class VistaAfegirLlista extends JFrame {
 
         constraints.gridx = 0;
         constraints.gridy = 1;
-        panelContenidos.add(labelIntro, constraints);
+        panellContinguts.add(labelIntro, constraints);
         constraints.gridy = 2;
-        panelContenidos.add(labelNomIdioma, constraints);
+        panellContinguts.add(labelNomIdioma, constraints);
         constraints.gridy = 3;
         List<String> idiomes = ControladorPresentacio.getNomsIdiomes();
         inputNomIdioma = new JComboBox<>(idiomes.toArray(new String[0]));
         inputNomIdioma.setSelectedIndex(-1);
-        panelContenidos.add(inputNomIdioma, constraints);
+        panellContinguts.add(inputNomIdioma, constraints);
         constraints.gridy = 4;
         tipusInput.add(rllista);
         tipusInput.add(rtext);
         tipusInput.add(rmanual);
-        panelContenidos.add(labelTipusInput, constraints);
+        panellContinguts.add(labelTipusInput, constraints);
         constraints.gridy = 5;
-        panelContenidos.add(rllista, constraints);
+        panellContinguts.add(rllista, constraints);
         constraints.gridy = 6;
-        panelContenidos.add(rtext, constraints);
+        panellContinguts.add(rtext, constraints);
         constraints.gridy = 7;
-        panelContenidos.add(rmanual, constraints);
+        panellContinguts.add(rmanual, constraints);
         constraints.gridy = 8;
         importarArxiu.setVisible(false);
-        panelContenidos.add(importarArxiu, constraints);
+        panellContinguts.add(importarArxiu, constraints);
         constraints.gridy = 9;
         constraints.weighty = 1;
         constraints.gridwidth = GridBagConstraints.REMAINDER; // Opcional: hace que el componente se extienda a lo ancho
@@ -142,17 +142,17 @@ public class VistaAfegirLlista extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVisible(false);
-        panelContenidos.add(scrollPane, constraints);
+        panellContinguts.add(scrollPane, constraints);
         constraints.weighty = 0.0;
         constraints.gridy = 10;
         labelNomLlista.setVisible(false);
-        panelContenidos.add(labelNomLlista, constraints);
+        panellContinguts.add(labelNomLlista, constraints);
         constraints.gridy = 11;
         inputNomLlista.setVisible(false);
-        panelContenidos.add(inputNomLlista, constraints);
+        panellContinguts.add(inputNomLlista, constraints);
         constraints.gridy = 12;
-        panelContenidos.add(Afegir, constraints);
-        add(panelContenidos, BorderLayout.CENTER);
+        panellContinguts.add(Afegir, constraints);
+        add(panellContinguts, BorderLayout.CENTER);
 
     }
 
