@@ -183,6 +183,18 @@ public class Perfil {
         return teclats.get(NomTeclat);
     }
 
+    /**
+     * Afegeix un teclat carregat al perfil (creantlo amb la info carregada)
+     * @param nomTeclat El nom del teclat
+     * @param llista La llista de frequencies del teclat
+     * @param i L'idioma del teclat
+     * @param n El nombre de files del teclat
+     * @param m El nombre de columnes del teclat
+     * @param estrategia L'estrategia del teclat
+     * @param disposicio La disposicio del teclat
+     * @return El teclat creat
+     * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix
+     */
     public Teclat afegirTeclat(String nomTeclat, LlistaFrequencies llista, Idioma i, int n, int m,String estrategia, char[][] disposicio) throws ExcepcionsCreadorTeclat {
         if (teclats.containsKey(nomTeclat)) throw new TeclatJaExisteix(nomTeclat);
         Teclat nouTeclat = new Teclat(nomTeclat,llista,i,n,m,estrategia,disposicio);

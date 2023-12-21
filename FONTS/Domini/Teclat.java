@@ -196,7 +196,7 @@ public class Teclat {
     public Integer getDimY() {return dimY; }
 
     /**
-     * Modifica el layout del teclat
+     * Modifica el layout del teclat amb l'estrategia amb la ques va crear
      * @param n El nou nombre de files
      * @param m El nou nombre de columnes
      * @throws ExcepcionsCreadorTeclat Si el layout no és vàlid

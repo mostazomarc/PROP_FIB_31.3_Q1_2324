@@ -119,7 +119,7 @@ public class CtrlPersPerfil {
     }
 
     /**
-     * Crea/carrega i guarda un perfil
+     * Canvia a un perfil del conjunt de perfils
      * @param nomPerfil El nom del perfil
      * @return El perfil creat/carregat
      * @throws PerfilJaExisteix Si el perfil ja existeix
@@ -132,7 +132,7 @@ public class CtrlPersPerfil {
 
 
     /**
-     * Crea i guarda un perfil
+     * Crea, guarda un perfil i canvia a ell
      * @param nomPerfil El nom del perfil
      * @throws PerfilJaExisteix Si el perfil ja existeix
      */
