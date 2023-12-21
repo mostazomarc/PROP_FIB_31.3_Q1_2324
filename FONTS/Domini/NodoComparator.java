@@ -15,7 +15,7 @@ public class NodoComparator implements Comparator<Nodo> {
      * Sobrescriu el compare entre dos nodes
      * @param o1 El primer node
      * @param o2 El segon node
-     * @return Positiu
+     * @return Positiu si O2 te cota superior a O1, 0 si iguals i sino negatiu.
      */
     @Override
     public int compare(Nodo o1, Nodo o2) {

@@ -15,7 +15,7 @@ public class Nodo_genetic_Comparator implements Comparator<Nodo_genetic> {
      * Sobrescriu el compare entre dos nodes genètics
      * @param o1 El primer node genètic
      * @param o2 El segon node genètic
-     * @return Positiu
+     * @return Positiu si O1 te fitness superior a O2, 0 si iguals i sino negatiu.
      */
     @Override
     public int compare(Nodo_genetic o1, Nodo_genetic o2) {
