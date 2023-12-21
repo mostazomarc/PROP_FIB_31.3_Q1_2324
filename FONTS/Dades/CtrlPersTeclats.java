@@ -168,10 +168,10 @@ public class CtrlPersTeclats {
             CjtUsuaris = (JSONArray) jsP.parse(rd);
             boolean trobat = false;
             for (int i = 0; i < CjtUsuaris.size() && !trobat; ++i) {
-                System.out.println("Carregant teclats de l'usuari: " + usuari);
                 JSONObject next = (JSONObject) CjtUsuaris.get(i); //Obtenim l'objecte de l'usuari iessim
                 String nomUsuari = ((String) next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
                 if (nomUsuari != null && nomUsuari.equals(usuari)) {    //Si el nom d'usuari coincideix
+                    System.out.println("Carregant teclats de l'usuari: " + usuari);
                     trobat = true;
                     JSONArray teclatsUsuari = (JSONArray) next.get("teclats");
                     for (int j = 0; j < teclatsUsuari.size(); ++j) {
