@@ -96,13 +96,14 @@ public class VistaTeclat extends JFrame {
         JPanel lowerButtonsPanel = new JPanel();
         lowerButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        labelNF.setPreferredSize(new Dimension(120, 30));
+        labelNF.setPreferredSize(new Dimension(100, 30));
         labelNF.setVisible(false);
         lowerButtonsPanel.add(labelNF);
 
         inputNF.setPreferredSize(new Dimension(30, 30));
         inputNF.setVisible(false);
         lowerButtonsPanel.add(inputNF);
+        lowerButtonsPanel.add(Box.createRigidArea(new Dimension(20,0)));
 
         labelNC.setPreferredSize(new Dimension(120, 30));
         labelNC.setVisible(false);
@@ -123,6 +124,10 @@ public class VistaTeclat extends JFrame {
     }
 
     private void iniTeclat() throws ExcepcionsCreadorTeclat {
+        char[][] teclat = ControladorPresentacio.consultaTeclat(nom);
+        int files = teclat.length;
+        int columnes = teclat[0].length;
+
         JLabel labelNom = new JLabel(nom);
         labelNom.setFont(new Font("Monospaced", Font.BOLD, 16));
         labelNom.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -133,16 +138,20 @@ public class VistaTeclat extends JFrame {
         labelNomLlista.setAlignmentX(Component.CENTER_ALIGNMENT);
         labelNomLlista.setAlignmentY(Component.CENTER_ALIGNMENT);
 
+        JLabel labelLayout = new JLabel("Layout: " + files + " files x " + columnes + " columnes" );
+        labelLayout.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        labelLayout.setAlignmentX(Component.CENTER_ALIGNMENT);
+        labelLayout.setAlignmentY(Component.CENTER_ALIGNMENT);
+
         JPanel upperPanel = new JPanel();
         upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.Y_AXIS));
         upperPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacio entre labelNom y labelNomLlista
         upperPanel.add(labelNom);
         upperPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacio entre labelNom y labelNomLlista
         upperPanel.add(labelNomLlista);
+        upperPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio entre labelNomLlista y Enrere
+        upperPanel.add(labelLayout);
         upperPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacio entre labelNomLlista y Enrere
-        //upperPanel.add(Enrere);
-
-        char[][] teclat = ControladorPresentacio.consultaTeclat(nom);
 
         JPanel keyboard = new JPanel();
         keyboard.setLayout(new GridBagLayout());
