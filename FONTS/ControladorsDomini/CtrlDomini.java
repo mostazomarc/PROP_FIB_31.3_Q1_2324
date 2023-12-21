@@ -134,11 +134,21 @@ public class CtrlDomini {
      * @param nom El nom del perfil
      * @throws Exception Si no es pot iniciar sessió amb el perfil
      */
-    public void iniciaInstancia(String nom) throws Exception{
-        perfils.carregar();
-        PerfilActual = perfils.canviaPerfil(nom);
+    private void iniciaInstancia(String nom) throws Exception{
         llistes.canviaPerfil(nom);
         teclats.canviaPerfil(nom);
+    }
+
+    public void crearPerfil(String nom) throws Exception{
+        perfils.carregar();
+        PerfilActual = perfils.afegirPerfil(nom);
+        iniciaInstancia(nom);
+    }
+
+    public void canviarPerfil(String nom) throws Exception {
+        perfils.carregar();
+        PerfilActual = perfils.canviaPerfil(nom);
+        iniciaInstancia(nom);
     }
 
     /**

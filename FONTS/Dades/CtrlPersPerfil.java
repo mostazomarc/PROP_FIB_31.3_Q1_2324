@@ -136,12 +136,12 @@ public class CtrlPersPerfil {
      * @param nomPerfil El nom del perfil
      * @throws PerfilJaExisteix Si el perfil ja existeix
      */
-    public void afegirPerfil(String nomPerfil) throws ExcepcionsCreadorTeclat {
+    public Perfil afegirPerfil(String nomPerfil) throws ExcepcionsCreadorTeclat {
         if (perfilExisteix(nomPerfil)) throw new PerfilJaExisteix(nomPerfil);
         perfilActual = new Perfil(nomPerfil);
         perfils.put(nomPerfil, perfilActual);
         guardar();
-        canviaPerfil(nomPerfil);
+        return canviaPerfil(nomPerfil);
     }
 
     /**
