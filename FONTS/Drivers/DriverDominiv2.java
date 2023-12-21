@@ -132,11 +132,11 @@ public class DriverDominiv2 {
                 }
                 else System.out.println("No s'han fet canvis");
             }
-        } catch (PerfilJaExisteix e1 ) {
+        } /*catch (PerfilJaExisteix e1 ) {
             System.out.println("ERROR: " + e1.getMessage());
-        } catch (PerfilNoExisteix e2 ) {
+        }  catch (PerfilNoExisteix e2 ) {
             System.out.println("ERROR: " + e2.getMessage());
-        } catch (Exception e) {
+        }*/ catch (Exception e) {
             e.printStackTrace();
         }
     }
