@@ -2,3 +2,6 @@ Aquest directori conte el codi dels controladors de la capa de domi
 
 CtrlDomini.java
 Es el codi del controlador de la capa de domini encarregat de cominicarse amb les capes de presentacio i dades
+
+package-info.java
+ - conte la info per el JavaDoc del package

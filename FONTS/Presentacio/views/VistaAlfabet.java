@@ -14,7 +14,7 @@ public class VistaAlfabet extends JFrame {
     private String nom;
     private JButton Enrere = new JButton("Tornar al menú principal");
     private JPanel panellContinguts = new JPanel();
-    private JTextArea AlfabettextArea = new JTextArea(20, 40);
+    private JTextArea AlfabettextArea = new JTextArea();
     private JScrollPane scrollPanel = new JScrollPane();
     private JButton Eliminar = new JButton("Eliminar");
 

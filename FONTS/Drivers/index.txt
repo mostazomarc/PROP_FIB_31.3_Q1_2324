@@ -20,3 +20,6 @@ codi del driver per provar CtrlFile i provar que llegeixi fitxers txt correctame
 
 DriverTeclars.java
 codi del driver per provar les funcionalitats de teclats
+
+package-info.java
+ - conte la info per el JavaDoc del package

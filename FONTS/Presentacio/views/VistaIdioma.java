@@ -14,7 +14,7 @@ public class VistaIdioma extends JFrame {
     private String nom;
     private JButton Enrere = new JButton("Tornar al menú principal");
     private JPanel panellContinguts = new JPanel();
-    private JTextArea IdiomatextArea = new JTextArea(20, 40);
+    private JTextArea IdiomatextArea = new JTextArea();
     private JScrollPane scrollPanel = new JScrollPane();
     private JButton Eliminar = new JButton("Eliminar");
 
@@ -85,14 +85,12 @@ public class VistaIdioma extends JFrame {
 
     private void iniIdioma() throws IdiomaNoExisteix {
         String info = ControladorPresentacio.consultaIdioma(nom);
-        IdiomatextArea.setText(info); // Establecer el texto en el JTextArea
-        IdiomatextArea.setEditable(false); // Para evitar la edición
-        IdiomatextArea.setFont(new Font("Arial", Font.PLAIN, 14)); // Cambia la fuente si es necesario
-        IdiomatextArea.setWrapStyleWord(true); // Ajusta el ajuste de palabras
-        IdiomatextArea.setLineWrap(true); // Permite el ajuste de línea
-        IdiomatextArea.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineación horizontal
-        IdiomatextArea.setAlignmentY(Component.CENTER_ALIGNMENT); // Alineación vertical
-
+        IdiomatextArea.setAlignmentX(CENTER_ALIGNMENT);
+        IdiomatextArea.setText(info);
+        IdiomatextArea.setEditable(false);
+        IdiomatextArea.setFont(new Font("Arial", Font.PLAIN, 14));
+        IdiomatextArea.setWrapStyleWord(true);
+        IdiomatextArea.setLineWrap(true);
         scrollPanel.setViewportView(IdiomatextArea);
         panellContinguts.add(Box.createVerticalGlue());
         panellContinguts.add(scrollPanel);

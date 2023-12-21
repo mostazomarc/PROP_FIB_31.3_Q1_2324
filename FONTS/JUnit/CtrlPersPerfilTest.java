@@ -3,8 +3,10 @@ package JUnit;
 import ControladorsDomini.CtrlDomini;
 import Dades.CtrlPersPerfil;
 import Domini.Perfil;
+import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.PerfilJaExisteix;
 import Excepcions.PerfilNoExisteix;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,6 +47,39 @@ public class CtrlPersPerfilTest {
     }
 
     /**
+     * Elimina els perfils usats
+     */
+    @After
+    public void eliminaPerfils() {
+        CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
+        try {
+            cP.eliminaPerfil("SegonPerfil");
+        } catch (PerfilNoExisteix perfilNoExisteix) {
+            //No cal fer res
+        }
+        try {
+            cP.eliminaPerfil("TercerPerfil");
+        } catch (PerfilNoExisteix perfilNoExisteix) {
+            //No cal fer res
+        }
+        try {
+            cP.eliminaPerfil("SegonPerfil");
+        } catch (PerfilNoExisteix perfilNoExisteix) {
+            //No cal fer res
+        }
+        try {
+            cP.eliminaPerfil("NouPerfil");
+        } catch (PerfilNoExisteix perfilNoExisteix) {
+            //No cal fer res
+        }
+        try {
+            cP.eliminaPerfil("Prova");
+        } catch (PerfilNoExisteix perfilNoExisteix) {
+            //No cal fer res
+        }
+    }
+
+    /**
      * Comprova que el controlador de perfil només es crea un cop
      */
     @Test
@@ -75,7 +110,7 @@ public class CtrlPersPerfilTest {
     @Test
     public void afegirPerfil() throws Exception {
         CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
-        cP.canviaPerfil("NouPerfil");
+        cP.afegirPerfil("NouPerfil");
         Perfil perfil = cP.getPerfil("NouPerfil");
         assertEquals(perfil.getUsuari(), "NouPerfil");
     }
@@ -86,7 +121,7 @@ public class CtrlPersPerfilTest {
     @Test
     public void getPerfil() throws Exception {
         CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
-        cP.canviaPerfil("NouPerfil");
+        cP.afegirPerfil("NouPerfil");
         Perfil perfil = cP.getPerfil("NouPerfil");
         assertEquals(perfil.getUsuari(), "NouPerfil");
     }
@@ -111,12 +146,34 @@ public class CtrlPersPerfilTest {
     @Test
     public void getAllPerfils() throws Exception {
         CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
-        cP.canviaPerfil("SegonPerfil");
-        cP.canviaPerfil("TercerPerfil");
+        cP.afegirPerfil("SegonPerfil");
+        cP.afegirPerfil("TercerPerfil");
         List<String> perfilsEsperats = new ArrayList<>();
         perfilsEsperats.add("SegonPerfil");
         perfilsEsperats.add("TercerPerfil");
         assertTrue(cP.getAllPerfils().containsAll(perfilsEsperats));
+    }
+
+    /**
+     * Comprova que es pot canviar de perfil
+     */
+    @Test
+    public void canviarPerfils() throws Exception {
+        CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
+        cP.afegirPerfil("SegonPerfil");
+        cP.afegirPerfil("TercerPerfil");
+        cP.canviaPerfil("SegonPerfil");
+        assertTrue("SegonPerfil".equals(cP.getPerfilActual().getUsuari()));
+    }
+
+    /**
+     * Comprova que no es pot crear un perfil duplicat
+     */
+    @Test(expected=PerfilJaExisteix.class)
+    public void perfilDuplicat() throws ExcepcionsCreadorTeclat {
+        CtrlPersPerfil cP = CtrlPersPerfil.getInstance(cD);
+        cP.afegirPerfil("Prova");
+        cP.afegirPerfil("Prova");
     }
 
 }

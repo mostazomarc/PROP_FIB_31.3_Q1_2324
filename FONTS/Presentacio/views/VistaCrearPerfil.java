@@ -1,5 +1,6 @@
 package Presentacio.views;
 
+import Excepcions.ExcepcionsCreadorTeclat;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -115,14 +116,18 @@ public class VistaCrearPerfil extends JFrame {
             setVisible(false);
         }
         else if (CP.equals(source)) {
-            String nomP = inputNomPerfil.getText();
-            if (nomP.equals("")) {
-                ControladorPresentacio.mostraAvis("No has introduit cap nom de perfil");
-                return;
+            try {
+                String nomP = inputNomPerfil.getText();
+                if (nomP.equals("")) {
+                    ControladorPresentacio.mostraAvis("No has introduit cap nom de perfil");
+                    return;
+                }
+                ControladorPresentacio.creaPerfil(nomP);
+                ControladorPresentacio.vistaPerfils();
+                setVisible(false);
+            } catch (ExcepcionsCreadorTeclat ex) {
+                ControladorPresentacio.mostraError(ex.getMessage());
             }
-            ControladorPresentacio.iniciaInstancia(nomP);
-            ControladorPresentacio.vistaPerfils();
-            setVisible(false);
         }
     }
 }

@@ -12,10 +12,6 @@ import javax.swing.JOptionPane;
  */
 public class ControladorPresentacio {
     /**
-     * Vista de terminal
-     */
-    private VistaTerminal vt;
-    /**
      * Controlador de Domini
      */
     private static CtrlDomini controladorDomini;
@@ -42,12 +38,21 @@ public class ControladorPresentacio {
     public static List<String> getNomsIdiomes() {return controladorDomini.getNomsIdiomes();}
 
     /**
-     * Inicia una instancia amb el perfil x
-     * @param nomPerfil nom del perfil amb el que s'inicia la instancia
+     * Crea un perfil amb nom nomPerfil i inicia la seva instància
+     * @param nomPerfil nom del perfil a crear i amb el que s'inicia la instancia
      * @throws Exception si hi ha algun error en la inicialització
      */
-    public static void iniciaInstancia(String nomPerfil) throws Exception{
-        controladorDomini.iniciaInstancia(nomPerfil);
+    public static void creaPerfil(String nomPerfil) throws Exception{
+        controladorDomini.crearPerfil(nomPerfil);
+    }
+
+    /**
+     * Canvia el perfil actual per el perfil amb nom nomPerfil
+     * @param nomPerfil nom del perfil a canviar
+     * @throws Exception si hi ha algun error en la inicialització
+     */
+    public static void canviarPerfil(String nomPerfil) throws Exception{
+        controladorDomini.canviarPerfil(nomPerfil);
     }
 
     public static void vistaPerfils() throws Exception { VistaPerfils vp = new VistaPerfils();}
@@ -93,14 +98,6 @@ public class ControladorPresentacio {
      */
     public static String getPerfilActual() {
         return controladorDomini.getPerfilActual();
-    }
-
-    /**
-     * Obté el nom de l'estratègia actual
-     * @return nom de l'estratègia actual
-     */
-    public static String getEstrategiaActual() {
-        return controladorDomini.getEstrategiaActual();
     }
 
     /**
@@ -254,7 +251,7 @@ public class ControladorPresentacio {
      * @return El nom de la llista de frequencies del teclat identificat per nomt
      * @throws TeclatNoExisteix Si el teclat no existeix
      */
-    public String getNomLListaTeclat(String nomt) throws ExcepcionsCreadorTeclat {
+    public static String getNomLListaTeclat(String nomt) throws ExcepcionsCreadorTeclat {
         return controladorDomini.getNomLListaTeclat(nomt);
     }
 
@@ -327,6 +324,7 @@ public class ControladorPresentacio {
     public static void eliminaPerfil() throws ExcepcionsCreadorTeclat {
         controladorDomini.eliminaPerfil();
     }
+
 
 }
 

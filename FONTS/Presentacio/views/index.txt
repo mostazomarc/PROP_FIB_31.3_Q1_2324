@@ -1,0 +1,28 @@
+Subdirectori que conté el codi de les vistes del programa
+
+package-info.java
+ - conte la info per el JavaDoc del package
+
+VistaAfegirAlfabet.java
+
+VistaAfegirIdioma.java
+
+VistaAfegirLlista.java
+
+VistaAlfabet.java
+
+VistaCrearPerfil.java
+
+VistaCrearTeclat.java
+
+VistaElements.java
+
+VistaIdioma.java
+
+VistaLlista.java
+
+VistaPerfils.java
+
+VistaPrincipal.java
+
+VistaTeclat.java

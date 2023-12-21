@@ -118,7 +118,16 @@ public class VistaTeclat extends JFrame {
     private void iniTeclat() throws ExcepcionsCreadorTeclat {
         JLabel labelNom = new JLabel(nom);
         labelNom.setFont(new Font("Monospaced", Font.BOLD, 16));
+        labelNom.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel labelNomLlista = new JLabel("Llista de freqüències: " + ControladorPresentacio.getNomLListaTeclat(nom));
+        labelNomLlista.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        labelNomLlista.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
         panellContinguts.add(labelNom);
+        panellContinguts.add(Box.createVerticalGlue());
+        panellContinguts.add(labelNomLlista);
 
 
         char[][] teclat = ControladorPresentacio.consultaTeclat(nom);

@@ -1,0 +1,12 @@
+Subdirectori amb la informació guardada a la capa de persistencia del sistema
+
+AlfabetsSistema.json
+ - Conté la informació guardada dels alfabets del sistema
+IdiomesSistema.json
+ - Conté la informació guardada dels idiomes del sistema
+LlistesUsuarisActius.json
+ - Conté la informació guardada de les llistes dels usuaris actius del sistema
+TeclatsUsuarisActius.json
+ - Conté la informació guardada dels teclats dels usuaris actius del sistema
+UsuarisActius.json
+ - Conté la informació guardada dels usuaris actius del sistema

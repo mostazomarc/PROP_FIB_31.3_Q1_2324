@@ -4,16 +4,19 @@ CtrlFile.java
 Codi del controlador per llegir arxius txt
 
 CtrlPersAlfabets.java
-Codi del controlador de persistencia dels Alfabets (Stub actualment)
+Codi del controlador de persistencia dels Alfabets
 
 CtrlPersFreq.java
-Codi del controlador de persistencia de les llistes de frequencia (Stub actualment)
+Codi del controlador de persistencia de les llistes de frequencia
 
 CtrlPersIdiomes.java
-Codi del controlador de persistencia dels Idiomes (Stub actualment)
+Codi del controlador de persistencia dels Idiomes
 
 CtrlPersPerfil.java
-Codi del controlador de persistencia dels PErfils (Stub actualment)
+Codi del controlador de persistencia dels PErfils
 
 CtrlPersTeclats.java
-Codi del controlador de persistencia dels Teclats (Stub actualment)
+Codi del controlador de persistencia dels Teclats
+
+package-info.java
+ - conte la info per el JavaDoc del package

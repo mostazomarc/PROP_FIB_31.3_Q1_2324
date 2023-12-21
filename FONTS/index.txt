@@ -1,23 +1,29 @@
 En aquest subdirectori es troben tots els codis de les classes del sistema, segueix l'estructura de packages,
-tambe conte el makefile per compilar els drivers
+també conte el makefile per compilar/executar el projecte
 
-ControladorsDomini
+ControladorsDomini/
 Conte el .java del controlador de domini encarregat de comunicarse amb les altres capes
 
-Dades
+Dades/
 Conte els .java dels controladors de persistencia de les classes del sistema i el controlador per llegir arxius de txt
 
-Drivers
+Drivers/
 Conte els .java dels drivers que s'usen per provar les funcionalitats del sistema
 
-Excepcions
+Excepcions/
 Conte els .java de les excepcions que hem creat per cada sistema
 
-JUnit
+JUnit/
 Conte el .java dels tests usats per provar les diferemts classes del sistema
 
-lib
-Conte les llibreries necessaries per executar els tests, junit i hamcrest-core
+lib/
+Conte les llibreries necessaries per executar els tests, junit i hamcrest-core; i per utilitzar els .json.
 
-Stubs
+Presentacio/
+Conte els .java de les classes de la capa de presentacio
+
+Stubs/
 Conte els stubs utilitzats per provar el programa
+
+makefile
+Conte les ordres per compilar i executar el projecte

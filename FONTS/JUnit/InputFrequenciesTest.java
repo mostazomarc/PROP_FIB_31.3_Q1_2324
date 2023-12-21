@@ -23,7 +23,7 @@ public class  InputFrequenciesTest {
     @Before
     public void setUpBeforeClass() throws Exception {
         System.out.println("Comencen els tests de InputFrequencies");
-        cDomini.iniciaInstancia("PerfilProva");
+        cDomini.crearPerfil("PerfilProva");
         cDomini.afegirAlfabet("./DATA/alfabetCatala.txt");
         cDomini.afegirIdioma("Català", "AlfabetCatala" , "llista", "./DATA/catalaFreq.txt");
     }
