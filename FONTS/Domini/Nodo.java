@@ -4,13 +4,36 @@ import java.util.*;
 
 import Domini.pos;
 
+/**
+ * Nodo és una classe que conté una disposició del teclat i la seva cota, representa cada solució parcial del algoritme Branch and Bound
+ *
+ * @author Francisco Torredemer (francisco.torredemer@estudiantat.upc.edu)
+ */
+
+
 public class Nodo {
 
+    /**
+     * Matriu amb la disposició del node
+     */
     public char[][] layout;
+
+    /**
+     * El valor que té la disposició
+     */
     public double cota;
 
+    /**
+     * Mapa amb cada lletra del abecedari utilitzada a la disposició del node i la seva posició al teclat
+     */
     public Map<Character, pos> letres_usades;
 
+    /**
+     * Creadora del node
+     * @param matriz La matriu que igualarem el layout del node
+     * @param cota El valor que igualarem la cota del node
+     * @param ini Les lletres utilitzades amb la seva posició a les que igualarem al node
+     */
     public Nodo(char[][] matriz, double cota, Map<Character, pos> ini) {
         this.layout = new char[matriz.length][matriz[0].length];
         for(int i = 0; i < matriz.length; i++){
@@ -21,6 +44,15 @@ public class Nodo {
         letres_usades = new HashMap<>(ini);
 
     }
+
+    /**
+     * Retorna si la posició és vàlida al teclat
+     * @param i la fila de la posició
+     * @param j la columna de la posició
+     * @param n_columnas el nombre de columnes del teclat
+     * @param n el nombre de lletres del abecedari
+     * @return cert o fals segons la validesa de la posició al teclat
+     */
 
     private boolean pos_valida(Integer i, Integer j, Integer n_columnas, Integer n){
         return ((i*n_columnas) + j) < n;
@@ -38,6 +70,15 @@ public class Nodo {
 
         return suma;
     }
+
+    /**
+     * Retorna el càlcul del terme 1 de la disposició actual
+     * @param letra_pos Mapa amb cada lletra amb la seva posició a les matrius de trànsit i distància
+     * @param n_columnas el nombre de columnes del teclat
+     * @param Mat_dist Matriu de distàncies per cada parell de posicions al teclat
+     * @param Mat_traf Matriu de freqüències per cada parell de lletres al abecedari
+     * @return El terme 1 calculat com double
+     */
 
     public double calcular_termino_1(Map<Character, Integer> letra_pos, int n_columnas, double[][] Mat_dist, double[][] Mat_traf){
         double termino_1 = 0.0;
@@ -59,6 +100,18 @@ public class Nodo {
         }
         return termino_1;
     }
+
+    /**
+     * Retorna el càlcul de la matriu C1 de la disposició actual
+     * @param m És el nombre de lletres del abecedari encara no utilitzades
+     * @param pos_libres vector que guarda les posicions lliures a la disposició actual
+     * @param letras_libres Vector que guarda les lletres del abecedari encara no utilitzades a la disposició actual
+     * @param letra_pos Mapa amb cada lletra amb la seva posició a les matrius de trànsit i distància
+     * @param n_columnas el nombre de columnes del teclat
+     * @param Mat_dist Matriu de distàncies per cada parell de posicions al teclat
+     * @param Mat_traf Matriu de freqüències per cada parell de lletres al abecedari
+     * @return La matriu C1 en una matriu de doubles
+     */
 
     public double[][] calculo_C1(int m, ArrayList<pos> pos_libres, ArrayList<Character> letras_libres, Map<Character, Integer> letra_pos, int n_columnas, double[][] Mat_dist, double[][] Mat_traf){
         double[][] Mat_c1 = new double[m][m];
@@ -100,6 +153,17 @@ public class Nodo {
         }
         return Mat_c1;
     }
+
+    /**
+     * Retorna el càlcul de la matriu C2 de la disposició actual
+     * @param m És el nombre de lletres del abecedari encara no utilitzades
+     * @param pos_libres vector amb les posicions lliures a la disposició actual
+     * @param letras_libres Vector amb les lletres del abecedari encara no utilitzades a la disposició actual
+     * @param letra_pos Mapa amb cada lletra amb la seva posició a les matrius de trànsit i distància
+     * @param Mat_dist Matriu de distàncies per cada parell de posicions al teclat
+     * @param Mat_traf Matriu de freqüències per cada parell de lletres al abecedari
+     * @return La matriu C2 en una matriu de doubles
+     */
 
     public double[][] calculo_C2(int m, ArrayList<pos> pos_libres, ArrayList<Character> letras_libres, Map<Character, Integer> letra_pos, double[][] Mat_dist, double[][] Mat_traf){
         double[][] Mat_c2 = new double[m][m];
@@ -150,7 +214,15 @@ public class Nodo {
         return Mat_c2;
     }
 
-
+    /**
+     * Retorna el càlcul del terme 2 de la disposició actual
+     * @param m És el nombre de lletres del abecedari encara no utilitzades
+     * @param letra_pos Mapa amb cada lletra amb la seva posició a les matrius de trànsit i distància
+     * @param n_columnas el nombre de columnes del teclat
+     * @param Mat_dist Matriu de distàncies per cada parell de posicions al teclat
+     * @param Mat_traf Matriu de freqüències per cada parell de lletres al abecedari
+     * @return El terme 2 en un double, la assignació lineal óptima de la matriu C1 més C2.
+     */
 
     public double calcular_termino_2(int m, Map<Character, Integer> letra_pos, int n_columnas, double[][] Mat_dist, double[][] Mat_traf){
         double coste_termino_2 = 0.0;
@@ -181,7 +253,13 @@ public class Nodo {
     }
 
 
-
+    /**
+     * Iguala la cota del node a la suma del terme 1 més el terme 2
+     * @param letra_pos Mapa amb cada lletra amb la seva posició a les matrius de trànsit i distància
+     * @param n_columnas el nombre de columnes del teclat
+     * @param Mat_dist Matriu de distàncies per cada parell de posicions al teclat
+     * @param Mat_traf Matriu de freqüències per cada parell de lletres al abecedari
+     */
 
     public void calcular_cota(Map<Character, Integer> letra_pos, int n_columnas, double[][] Mat_dist, double[][] Mat_traf){
         //Cálculo término 1

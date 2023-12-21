@@ -8,18 +8,49 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Iterator;
 
+/**
+ * Greedy és una classe per trobar una solució inicial bona per el algoritme genètic.
+ *
+ * @author Francisco Torredemer (francisco.torredemer@estudiantat.upc.edu)
+ */
+
+
 public class Greedy {
 
     //Atributs
 
+    /**
+     * Pitjor posició del teclat segons ditàncies
+     */
     int peor_posicion;
+
+    /**
+     * Millor posició del teclat segons ditàncies
+     */
     int mejor_posicion;
 
+    /**
+     * LLetra més freqüent del abecedari
+     */
     char mas_frec;
+
+    /**
+     * LLetra menys freqüent del abecedari
+     */
     char menos_frec;
 
 
     //Métodes
+
+    /**
+     * Retorna un node amb la disposició inicial segons l'algoritme Greedy
+     * @param mat_traf Matriu de freqüències de les lletres del abecedari
+     * @param mat_dist Matriu de distàncies de les posicions del teclat
+     * @param n_filas el nombre de files del teclat
+     * @param n_col el nombre de columnes del teclat
+     * @param lletres les lletres del abecedari
+     * @return Node amb el paràmetre layout inicialitzat a la solució inicial amb Greedy
+     */
     public Nodo solucion_inicial(double[][] mat_traf, double[][] mat_dist, int n_filas, int n_col, Set<Character> lletres){
         char[][] matriz_inicial = new char[n_filas][n_col];
         for(int i = 0; i < n_filas; i++) {

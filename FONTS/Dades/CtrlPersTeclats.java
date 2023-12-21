@@ -143,6 +143,7 @@ public class CtrlPersTeclats {
             nouTeclat.put("disposicio", disposicio);
             nouTeclat.put("dimX", llista.getValue().getDimX());
             nouTeclat.put("dimY", llista.getValue().getDimY());
+            nouTeclat.put("estrategia", llista.getValue().getNomEstrategia());
 
             teclatsUsuari.add(nouTeclat);
         }
@@ -167,10 +168,10 @@ public class CtrlPersTeclats {
             CjtUsuaris = (JSONArray) jsP.parse(rd);
             boolean trobat = false;
             for (int i = 0; i < CjtUsuaris.size() && !trobat; ++i) {
-                System.out.println("Carregant teclats de l'usuari: " + usuari);
                 JSONObject next = (JSONObject) CjtUsuaris.get(i); //Obtenim l'objecte de l'usuari iessim
                 String nomUsuari = ((String) next.get("nomUsuari"));  //Obtenim el nom d'usuari de l'usuari iessim
                 if (nomUsuari != null && nomUsuari.equals(usuari)) {    //Si el nom d'usuari coincideix
+                    System.out.println("Carregant teclats de l'usuari: " + usuari);
                     trobat = true;
                     JSONArray teclatsUsuari = (JSONArray) next.get("teclats");
                     for (int j = 0; j < teclatsUsuari.size(); ++j) {
@@ -179,6 +180,7 @@ public class CtrlPersTeclats {
                         System.out.println("Carregant Teclat " + nomTeclat);
                         String nomIdioma = ((String) nextTeclat.get("nomIdioma"));
                         String nomLlistaFreq = ((String) nextTeclat.get("nomLlistaFreq"));
+                        String estrategia = ((String) nextTeclat.get("estrategia"));
                         int dimX = ((Long) nextTeclat.get("dimX")).intValue();
                         int dimY = ((Long) nextTeclat.get("dimY")).intValue();
                         JSONArray disposicio = (JSONArray) nextTeclat.get("disposicio");
@@ -189,7 +191,7 @@ public class CtrlPersTeclats {
                                 disposicioTeclat[k][l] = ((String) fila.get(l)).charAt(0);
                             }
                         }
-                        Teclat t = controlador.afegirTeclat(nomTeclat, nomIdioma, nomLlistaFreq, dimX, dimY, disposicioTeclat);
+                        Teclat t = controlador.afegirTeclat(nomTeclat, nomIdioma, nomLlistaFreq, dimX, dimY, estrategia, disposicioTeclat);
                         teclats.put(nomTeclat, t);
                     }
                 }

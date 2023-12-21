@@ -134,11 +134,31 @@ public class CtrlDomini {
      * @param nom El nom del perfil
      * @throws Exception Si no es pot iniciar sessió amb el perfil
      */
-    public void iniciaInstancia(String nom) throws Exception{
-        perfils.carregar();
-        PerfilActual = perfils.canviaPerfil(nom);
+    private void iniciaInstancia(String nom) throws Exception{
         llistes.canviaPerfil(nom);
         teclats.canviaPerfil(nom);
+    }
+
+    /**
+     * Crea un perfil amb nom nom i inicia la seva instancia
+     * @param nom El nom del perfil
+     * @throws Exception Si no es pot crear el perfil
+     */
+    public void crearPerfil(String nom) throws Exception{
+        perfils.carregar();
+        PerfilActual = perfils.afegirPerfil(nom);
+        iniciaInstancia(nom);
+    }
+
+    /**
+     * Canvia el perfil actual al perfil amb nom nom i inicia la seva instancia
+     * @param nom El nom del perfil
+     * @throws Exception Si no es pot canviar el perfil
+     */
+    public void canviarPerfil(String nom) throws Exception {
+        perfils.carregar();
+        PerfilActual = perfils.canviaPerfil(nom);
+        iniciaInstancia(nom);
     }
 
     /**
@@ -456,15 +476,16 @@ public class CtrlDomini {
      * @param n El nombre de files
      * @param m El nombre de columnes
      * @param disposicio La disposició de lletres
+     * @param estrategia L'estrategia per confeccionar el teclat
      * @return El teclat creat
      * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix o no es pot afegir el teclat
      */
-    public Teclat afegirTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m, char[][] disposicio) throws ExcepcionsCreadorTeclat{
+    public Teclat afegirTeclat(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m, String estrategia, char[][] disposicio) throws ExcepcionsCreadorTeclat{
         Idioma idiomaTeclat = idiomes.getIdioma(nomIdioma);
         LlistaFrequencies llista;
         if (!nomLlistaFreq.startsWith("LlistaPred")) llista = llistes.getLlistaFreq(nomLlistaFreq);
         else llista = idiomaTeclat.getLlistaFreq();
-        Teclat nouTeclat = PerfilActual.afegirTeclat(nomTeclat, llista, idiomaTeclat, n, m, disposicio);
+        Teclat nouTeclat = PerfilActual.afegirTeclat(nomTeclat, llista, idiomaTeclat, n, m, estrategia, disposicio);
         return nouTeclat;
     }
 

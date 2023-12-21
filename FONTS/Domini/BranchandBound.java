@@ -13,16 +13,40 @@ import Domini.pos;
 import Domini.NodoComparator;
 import Domini.Greedy;
 
+/**
+ * Branchandbound és una subclasse de Estratègia que conté l'algoritme branch and bound per calcular la disposició del teclat
+ *
+ * @author Francisco Torredemer (francisco.torredemer@estudiantat.upc.edu)
+ */
+
 public class BranchandBound extends Estrategia {
     // Atributos
-    private Teclat keyboard;
-    private double[][] Mat_dist; //Matriz de distancia entre las ubicaciones
-    private double[][] Mat_traf;  //Matriz de tráfico entre las instalaciones
-    private char[][] best_sol;  //Layout resultante del algoritmo
+    //private Teclat keyboard;
+
+    /**
+     * Matriu de distàncies de les posicions del teclat
+     */
+    private double[][] Mat_dist;
+
+    /**
+     * Matriu de freqüències de les lletres del abecedari
+     */
+    private double[][] Mat_traf;
+
+    /**
+     * Matriu on es guarda el resultat final
+     */
+    private char[][] best_sol;
 
     //Métodos
 
-
+    /**
+     * Mètode que realitza el algoritme branch and bound
+     * @param n_filas el nombre de files del teclat
+     * @param n_columnas el nombre de columnes del teclat
+     * @param lletres Les lletres del abecedari
+     * @param letra_pos cada lletra amb la seva posició a les matrius
+     */
     private void algoritm_bab(int n_filas, int n_columnas, Set<Character> lletres, Map<Character, Integer> letra_pos){
         PriorityQueue<Nodo> q = new PriorityQueue<>(new NodoComparator());
         boolean finalizar = false;
@@ -83,6 +107,14 @@ public class BranchandBound extends Estrategia {
 
     }
 
+    /**
+     * Mètode que calcula la disposició del teclat
+     * @param palabrasFrec les paraules amb les seves freqüències
+     * @param lletres les lletres del abecedari
+     * @param n_filas el nombre de files del teclat
+     * @param n_columnas el nombre de columnes del teclat
+     * @return la matriu de disposició resultant de l'algoritme Branch and Bound
+     */
     @Override
     public char[][] calculaDisposicio(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas) {
         //declaramos una solucion inicial

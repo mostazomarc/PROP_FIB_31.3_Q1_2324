@@ -122,7 +122,7 @@ public class VistaCrearPerfil extends JFrame {
                     ControladorPresentacio.mostraAvis("No has introduit cap nom de perfil");
                     return;
                 }
-                ControladorPresentacio.iniciaInstancia(nomP);
+                ControladorPresentacio.creaPerfil(nomP);
                 ControladorPresentacio.vistaPerfils();
                 setVisible(false);
             } catch (ExcepcionsCreadorTeclat ex) {

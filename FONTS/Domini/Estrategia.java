@@ -6,10 +6,19 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Genetic és una classe abstracta que calcula la disposició del teclat segons quin algoritme sigui
+ *
+ * @author Francisco Torredemer (francisco.torredemer@estudiantat.upc.edu)
+ */
+
 abstract class Estrategia {
-    private String nom;
 
-
+    /**
+     * Retorna el caràcter passat per paràmetre sense accents ni signes
+     * @param c El caràcter al qual quitarem signes
+     * @return la matriu de disposició resultant de l'algoritme
+     */
     public static String quitarTilde(char c) {
         String s = String.valueOf(c);
         String normalized = Normalizer.normalize(s, Normalizer.Form.NFD);
@@ -17,8 +26,14 @@ abstract class Estrategia {
         Matcher matcher = pattern.matcher(normalized);
         return matcher.replaceAll("");
     }
-    //Inicializa la matriz de tráfico
-    //Inicializa la matriz de tráfico
+
+    /**
+     * Inicialitza la matriu de freqüències del algoritme
+     * @param palabrasFrec les paraules amb les seves freqüències
+     * @param lletres cada lletra del abecedari amb la seva posició a la matriu
+     * @param n el nombre de lletres del abecedari
+     * @return la matriu de freqüències calculada
+     */
     public double[][] calculaMatTraf(Map<String, Integer> palabrasFrec, Map<Character, Integer> lletres, int n) {
 
 
@@ -55,7 +70,13 @@ abstract class Estrategia {
         return trafficMatrix;
     }
 
-    //Inicializa la matriz de distancias
+    /**
+     * Inicialitza la matriu de distàncies del algoritme
+     * @param n el nombre de lletres del abecedari
+     * @param n_filas el nombre de files del teclat
+     * @param n_columnas el nombre de columnes del teclat
+     * @return la matriu de distàncies calculada
+     */
     public double[][] calculaMatDist( int n, int n_filas, int n_columnas) {
         //inicializada a 0 por defecto
         double[][] distanceMatrix = new double[n][n];
@@ -86,11 +107,29 @@ abstract class Estrategia {
         return distanceMatrix;
     }
 
+    /**
+     * Retorna si la posició és vàlida al teclat
+     * @param i la fila de la posició
+     * @param j la columna de la posició
+     * @param n_columnas el nombre de columnes del teclat
+     * @param n el nombre de lletres del abecedari
+     * @return cert o fals segons la validesa de la posició al teclat
+     */
+
     public boolean pos_valida(Integer i, Integer j, Integer n_columnas, Integer n){
         return ((i*n_columnas) + j) < n;
     }
 
 
-
+    /**
+     * Mètode abstracte que calcula la disposició del teclat
+     * @param palabrasFrec les paraules amb les seves freqüències
+     * @param lletres les lletres del abecedari
+     * @param n_filas el nombre de files del teclat
+     * @param n_columnas el nombre de columnes del teclat
+     * @return la matriu de disposició resultant segons l'algoritme que sigui
+     */
     abstract char[][] calculaDisposicio(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas);
 }
+
+//Francisco Torredemer

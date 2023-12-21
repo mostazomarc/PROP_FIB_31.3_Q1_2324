@@ -101,7 +101,7 @@ public class VistaPerfils extends JFrame {
             constraints.gridx++; // Incrementar el índice X para el próximo botón
             button.addActionListener(e -> {
                 try {
-                    ControladorPresentacio.iniciaInstancia(perfil);
+                    ControladorPresentacio.canviarPerfil(perfil);
                     ControladorPresentacio.vistaPrincipal();
                     //ControladorPresentacio.carregarDades(); //quan carregues un perfil ja carrega les dades d'aquest
                     setVisible(false);

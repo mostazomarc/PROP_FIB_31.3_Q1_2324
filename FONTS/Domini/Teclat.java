@@ -38,7 +38,7 @@ public class Teclat {
     /**
      * L'algorisme emprat per a construir el teclat
      */
-    private Estrategia estrategia;
+    private String estrategia;
 
     /**
      * Comprova que el layout sigui vàlid
@@ -91,13 +91,13 @@ public class Teclat {
         comprovaLayoutValid(n,m);
         dimX = n;
         dimY = m;
+        estrategia = e;
         if (e.equals("BranchAndBound")){
-            estrategia = new BranchandBound();
+            disposicio = new BranchandBound().calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);;
         }
         else if (e.equals("GeneticAlgorithm")){
-            estrategia = new Genetic();
+            disposicio =new Genetic().calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
         }
-        disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
 
     }
 
@@ -116,13 +116,13 @@ public class Teclat {
         dimX = n;
         dimY = m;
         this.llistafreq = i.getLlistaFreq();
+        estrategia = e;
         if (e.equals("BranchAndBound")){
-            estrategia = new BranchandBound();
+            disposicio = new BranchandBound().calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);;
         }
         else if (e.equals("GeneticAlgorithm")){
-            estrategia = new Genetic();
+            disposicio =new Genetic().calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
         }
-        disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
     }
 
     /**
@@ -132,15 +132,17 @@ public class Teclat {
      * @param i L'idioma del teclat
      * @param n El nombre de columnes del teclat
      * @param m El nombre de files del teclat
+     * @param estrategia L'estrategia utilitzada per a crear el teclat
      * @param disposicio La disposició del teclat
      */
-    public Teclat (String nom,LlistaFrequencies llista, Idioma i, int n, int m, char[][] disposicio) {
+    public Teclat (String nom,LlistaFrequencies llista, Idioma i, int n, int m, String estrategia, char[][] disposicio) {
         this.nom = nom;
         idioma = i;
         this.llistafreq = llista;
         this.disposicio = disposicio;
         dimX = n;
         dimY = m;
+        this.estrategia = estrategia;
     }
 
     /**
@@ -174,6 +176,14 @@ public class Teclat {
     }
 
     /**
+     * Retorna el nom de l'estrategia utilitzada en la creació del teclat
+     * @return El nom de l'estrategia utilitzada en la creació del teclat
+     */
+    public String getNomEstrategia() {
+        return estrategia;
+    }
+
+    /**
      * Retorna el nombre de files del teclat
      * @return El nombre de files del teclat
      */
@@ -186,7 +196,7 @@ public class Teclat {
     public Integer getDimY() {return dimY; }
 
     /**
-     * Modifica el layout del teclat
+     * Modifica el layout del teclat amb l'estrategia amb la ques va crear
      * @param n El nou nombre de files
      * @param m El nou nombre de columnes
      * @throws ExcepcionsCreadorTeclat Si el layout no és vàlid
@@ -195,7 +205,12 @@ public class Teclat {
         comprovaLayoutValid(n, m);
         dimX = n;
         dimY = m;
-        disposicio = this.estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), n, m);
+        if (estrategia.equals("BranchAndBound")){
+            disposicio = new BranchandBound().calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);;
+        }
+        else if (estrategia.equals("GeneticAlgorithm")){
+            disposicio =new Genetic().calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+        }
     }
 }
 

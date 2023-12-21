@@ -3,11 +3,33 @@ package Domini;
 import java.util.*;
 
 
+/**
+ * Nodo_genetic és una classe que conté una disposició del teclat i el seu fitness(cota), representa cada membre de la població del algoritme genètic
+ *
+ * @author Francisco Torredemer (francisco.torredemer@estudiantat.upc.edu)
+ */
+
+
 public class Nodo_genetic {
 
+    /**
+     * Disposició del teclat, per cada lletra la seva posició
+     */
     public Map<Character, Integer> disposicio;
+    /**
+     * Disposició del teclat, per cada posició la seva lletra
+     */
     public Map<Integer, Character> pos_letra;
+
+    /**
+     * Fitness(cota) de la dispoció del teclat
+     */
     public double fitness;
+
+    /**
+     * Modifica el layout del node a un completament aleatori
+     * @param lletres Les lletres del abecedari
+     */
 
     public void disposicio_random(Set<Character> lletres){
         List<Character> lista_random = new ArrayList<>(lletres);
@@ -23,6 +45,12 @@ public class Nodo_genetic {
         this.pos_letra = pos_letra;
     }
 
+    /**
+     * Comprova si un altre node o objecte és igual al node
+     * @param obj El objecte a comparar amb el node
+     * @return Si el objecte és igual al node o no
+     */
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -37,6 +65,10 @@ public class Nodo_genetic {
                 && Objects.equals(pos_letra, otroNodo.pos_letra)
                 && Objects.equals(fitness, otroNodo.fitness);
     }
+
+    /**
+     * Modifica la disposició del node, intercanvia 2 posicions
+     */
 
     public void mutacion(){
         int tamany = disposicio.size();
@@ -68,6 +100,12 @@ public class Nodo_genetic {
         pos_letra.put(p1, letra_2);
     }
 
+    /**
+     * Creua els dos nodes pares en el layout del fill
+     * @param n1 És el node pare 1
+     * @param n2 És el node pare 2
+     */
+
 
     public void crossover(Nodo_genetic n1, Nodo_genetic n2){
         int tamany = n1.disposicio.size();
@@ -94,7 +132,7 @@ public class Nodo_genetic {
             pos_letra_fill.put(i, letra);
         }
         //creamos una cola para guardar las posiciones que hemos de completar en el hijo
-        Queue<Integer> cola = new LinkedList<>();
+            Queue<Integer> cola = new LinkedList<>();
 
         //recorremos las posiciones del punto de corte 2 hasta el final del padre n2
         for(int i = (punto_corte2 + 1); i < tamany; ++i){
@@ -120,6 +158,12 @@ public class Nodo_genetic {
         this.pos_letra = pos_letra_fill;
     }
 
+    /**
+     * Calcula el fitness del node
+     * @param Mat_dist La matriu de distàncies de les posicions del teclat
+     * @param Mat_traf La matriu de freqüències de les lletres del teclat
+     * @param letra_pos Map amb la posició de cada lletra a les matrius anteriors
+     */
 
     public void calcular_fitness(double[][] Mat_dist, double[][] Mat_traf, Map<Character, Integer> letra_pos){
         double suma = 0.0;
@@ -143,3 +187,5 @@ public class Nodo_genetic {
         this.fitness = 1.0/suma;
     }
 }
+
+//Francisco Torredemer
