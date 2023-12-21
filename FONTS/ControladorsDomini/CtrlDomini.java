@@ -139,12 +139,22 @@ public class CtrlDomini {
         teclats.canviaPerfil(nom);
     }
 
+    /**
+     * Crea un perfil amb nom nom i inicia la seva instancia
+     * @param nom El nom del perfil
+     * @throws Exception Si no es pot crear el perfil
+     */
     public void crearPerfil(String nom) throws Exception{
         perfils.carregar();
         PerfilActual = perfils.afegirPerfil(nom);
         iniciaInstancia(nom);
     }
 
+    /**
+     * Canvia el perfil actual al perfil amb nom nom i inicia la seva instancia
+     * @param nom El nom del perfil
+     * @throws Exception Si no es pot canviar el perfil
+     */
     public void canviarPerfil(String nom) throws Exception {
         perfils.carregar();
         PerfilActual = perfils.canviaPerfil(nom);
@@ -466,6 +476,7 @@ public class CtrlDomini {
      * @param n El nombre de files
      * @param m El nombre de columnes
      * @param disposicio La disposició de lletres
+     * @param estrategia L'estrategia per confeccionar el teclat
      * @return El teclat creat
      * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix o no es pot afegir el teclat
      */
