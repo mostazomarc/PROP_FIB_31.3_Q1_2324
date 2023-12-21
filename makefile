@@ -124,7 +124,11 @@ clean:
 	rm -r ./EXEnoEntrega/out/*
 
 cleanSaves:
-	rm ./DATA/Saves/*
+	rm ./DATA/Saves/AlfabetsSistema.json
+	rm ./DATA/Saves/IdiomesSistema.json
+	rm ./DATA/Saves/LlistesUsuarisActius.json
+	rm ./DATA/Saves/TeclatsusuarisActius.json
+	rm ./DATA/Saves/UsuarisActius.json
 
 cleanExe1:
 	rm ./EXE1/Alfabets/*
@@ -135,6 +139,9 @@ cleanExe1:
 	rm ./EXE1/LlistaFrequencies/*
 	rm ./EXE1/Perfil/*
 	rm ./EXE1/Teclats/*
+
+cleanExe:
+	rm ./EXE/Main/Main.jar
 
 distclean:
 	rm -r ./EXEnoEntrega/*
