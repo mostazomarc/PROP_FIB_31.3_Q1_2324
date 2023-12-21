@@ -3,19 +3,42 @@ package Domini;
 import java.util.*;
 
 import Domini.Nodo_genetic;
+
+/**
+ * Genetic és una subclasse de Estratègia que conté l'algoritme genetic per calcular la disposició del teclat
+ *
+ * @author Francisco Torredemer (francisco.torredemer@estudiantat.upc.edu)
+ */
+
 public class Genetic extends Estrategia{
     // Atributos
+
+    /**
+     * Matriu de distàncies de les posicions del teclat
+     */
     private double[][] Mat_dist; //Matriz de distancia entre las ubicaciones
+
+    /**
+     * Matriu de freqüències de les lletres del abecedari
+     */
     private double[][] Mat_traf;  //Matriz de tráfico entre las instalaciones
 
+    /**
+     * Matriu on es guarda el resultat final
+     */
     private char[][] best_sol;  //Layout resultante del algoritmo
 
+    /**
+     * La població actual de solucions
+     */
     TreeSet<Nodo_genetic> poblacion;
-
-
 
     //Métodos
 
+    /**
+     * Retorna un node de la població amb més probabilitats a major fitness
+     * @return El node seleccionat amb el mètode ruleta
+     */
     public Nodo_genetic seleccion_ruleta(){
         //sumamos el fitness total
         double suma = 0.0;
@@ -43,12 +66,26 @@ public class Genetic extends Estrategia{
         return null;
     }
 
+    /**
+     * Retorna true segons la probabilitat passada per paràmetre
+     * @param prob La probabilitat del 0 al 1 de retornar true
+     * @return cert o fals segons les probabilitats.
+     */
+
     public static boolean probabilidad(double prob) {
         Random random = new Random();
         double numeroAleatorio = random.nextDouble();
         return numeroAleatorio < prob;
     }
 
+    /**
+     * Mètode que realitza el algoritme genètic
+     * @param lletres Les lletres del abecedari
+     * @param letra_pos cada lletra amb la seva posició a les matrius
+     * @param n_filas el nombre de files del teclat
+     * @param n_columnas el nombre de columnes del teclat
+     * @return la matriu de disposició resultant de l'algoritme
+     */
     public char[][] algoritme_genetic(Set<Character> lletres, Map<Character, Integer> letra_pos, int n_filas, int n_columnas){
 
         int n = lletres.size();
@@ -140,6 +177,15 @@ public class Genetic extends Estrategia{
         }
         return solucio;
     }
+
+    /**
+     * Mètode que calcula la disposició del teclat
+     * @param palabrasFrec les paraules amb les seves freqüències
+     * @param lletres les lletres del abecedari
+     * @param n_filas el nombre de files del teclat
+     * @param n_columnas el nombre de columnes del teclat
+     * @return la matriu de disposició resultant de l'algoritme genètic
+     */
 
     @Override
     public char[][] calculaDisposicio(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas) {
