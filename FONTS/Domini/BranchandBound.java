@@ -46,7 +46,6 @@ public class BranchandBound extends Estrategia {
      * @param n_columnas el nombre de columnes del teclat
      * @param lletres Les lletres del abecedari
      * @param letra_pos cada lletra amb la seva posició a les matrius
-     * @return la matriu de disposició resultant de l'algoritme
      */
     private void algoritm_bab(int n_filas, int n_columnas, Set<Character> lletres, Map<Character, Integer> letra_pos){
         PriorityQueue<Nodo> q = new PriorityQueue<>(new NodoComparator());
@@ -108,6 +107,14 @@ public class BranchandBound extends Estrategia {
 
     }
 
+    /**
+     * Mètode que calcula la disposició del teclat
+     * @param palabrasFrec les paraules amb les seves freqüències
+     * @param lletres les lletres del abecedari
+     * @param n_filas el nombre de files del teclat
+     * @param n_columnas el nombre de columnes del teclat
+     * @return la matriu de disposició resultant de l'algoritme Branch and Bound
+     */
     @Override
     public char[][] calculaDisposicio(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas) {
         //declaramos una solucion inicial

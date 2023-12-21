@@ -131,3 +131,5 @@ abstract class Estrategia {
      */
     abstract char[][] calculaDisposicio(Map<String, Integer> palabrasFrec, Set<Character> lletres, int n_filas, int n_columnas);
 }
+
+//Francisco Torredemer

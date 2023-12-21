@@ -4,7 +4,7 @@ import java.util.*;
 
 
 /**
- * Nodo_genetic és una classe que conté una disposició del teclat i el seu fitness(cota)
+ * Nodo_genetic és una classe que conté una disposició del teclat i el seu fitness(cota), representa cada membre de la població del algoritme genètic
  *
  * @author Francisco Torredemer (francisco.torredemer@estudiantat.upc.edu)
  */
@@ -187,3 +187,5 @@ public class Nodo_genetic {
         this.fitness = 1.0/suma;
     }
 }
+
+//Francisco Torredemer

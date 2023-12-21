@@ -210,3 +210,5 @@ public class Genetic extends Estrategia{
         return this.best_sol;
     }
 }
+
+//Francisco Torredemer
