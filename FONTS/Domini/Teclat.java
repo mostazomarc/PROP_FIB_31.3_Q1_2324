@@ -132,15 +132,17 @@ public class Teclat {
      * @param i L'idioma del teclat
      * @param n El nombre de columnes del teclat
      * @param m El nombre de files del teclat
+     * @param estrategia L'estrategia utilitzada per a crear el teclat
      * @param disposicio La disposició del teclat
      */
-    public Teclat (String nom,LlistaFrequencies llista, Idioma i, int n, int m, char[][] disposicio) {
+    public Teclat (String nom,LlistaFrequencies llista, Idioma i, int n, int m, String estrategia, char[][] disposicio) {
         this.nom = nom;
         idioma = i;
         this.llistafreq = llista;
         this.disposicio = disposicio;
         dimX = n;
         dimY = m;
+        this.estrategia = estrategia;
     }
 
     /**
