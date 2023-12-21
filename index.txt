@@ -18,7 +18,10 @@ Conte els fitxers executables (.class) de totes les classes que permeten provar 
 implementades. Hi ha subdirectoris per a cada un dels tipus de classes: controladors, dades, domini, drivers,
 excepcions que segueixen l'estructura determinada dels packages.
 
+EXEnoEntrega:
+Conté els .class de les classes compilades del programa i els executables .jar que s'hauràn de moure a la carpeta EXE per l'entrega
+
 FONTS:
 Codi de les classes de domini associades a les funcionalitats principals implementades fins al moment. Inclou tambe
-els tests JUnit i el makefile. Tots els fitxers estan dins dels subdirectoris que segueixen l'estructura de packages, perque el
+els tests JUnit, el makefile i les llibreries necessaries. Tots els fitxers estan dins dels subdirectoris que segueixen l'estructura de packages, perque el
 codi sigui recompilable directament.
