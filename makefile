@@ -18,7 +18,7 @@ JUNIT_TESTS = ./FONTS/JUnit/*.java
 
 EXE = ./EXE/
 
-
+EXE1 = ./EXE1/
 
 all:
 	javac -d $(CLASS_OUTPUT) -cp FONTS:$(JSON_JARS) $(CLASS_INPUT)
@@ -49,6 +49,9 @@ executaDriverAlgorismeQAP:
 
 executaMain:
 	java -cp ./EXEnoEntrega/Main.jar:./FONTS/lib/json-simple-1.1.jar Presentacio.Main
+
+executaMainExe:
+	java -cp ./EXE/Main/Main.jar:./FONTS/lib/json-simple-1.1.jar Presentacio.Main
 
 fulltest: all
 	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.MasterTestSuite
@@ -104,15 +107,18 @@ postest: all
 inputtest: all
 	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.InputFrequenciesTest
 
+exe1: jars
+	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE1)/Alfabets
+	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE1)/Idiomes
+	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE1)/LlistaFrequencies
+	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE1)/Perfil
+	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE1)/Teclats
+	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(JAR_OUTPUT)/DriverLectorFreq.jar $(EXE1)/CtrlFile
+	cp $(JAR_OUTPUT)/DriverAlgorismeQAP.jar $(EXE1)/Algorisme
+	cp $(JAR_OUTPUT)/DriverHungarianAlgorithm.jar $(EXE1)/HungarianAlgorithm
+
 exe: jars
-	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/Alfabets
-	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/Idiomes
-	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/LlistaFrequencies
-	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/Perfil
-	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE)/Teclats
-	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(JAR_OUTPUT)/DriverLectorFreq.jar $(EXE)/CtrlFile
-	cp $(JAR_OUTPUT)/DriverAlgorismeQAP.jar $(EXE)/Algorisme
-	cp $(JAR_OUTPUT)/DriverHungarianAlgorithm.jar $(EXE)/HungarianAlgorithm
+	cp $(JAR_OUTPUT)/Main.jar $(EXE)/Main
 
 clean:
 	rm -r ./EXEnoEntrega/out/*
@@ -120,15 +126,15 @@ clean:
 cleanSaves:
 	rm ./DATA/Saves/*
 
-cleanExe:
-	rm ./EXE/Alfabets/*
-	rm ./EXE/Algorisme/*
-	rm ./EXE/CtrlFile/*
-	rm ./EXE/HungarianAlgorithm/*
-	rm ./EXE/Idiomes/*
-	rm ./EXE/LlistaFrequencies/*
-	rm ./EXE/Perfil/*
-	rm ./EXE/Teclats/*
+cleanExe1:
+	rm ./EXE1/Alfabets/*
+	rm ./EXE1/Algorisme/*
+	rm ./EXE1/CtrlFile/*
+	rm ./EXE1/HungarianAlgorithm/*
+	rm ./EXE1/Idiomes/*
+	rm ./EXE1/LlistaFrequencies/*
+	rm ./EXE1/Perfil/*
+	rm ./EXE1/Teclats/*
 
 distclean:
 	rm -r ./EXEnoEntrega/*
