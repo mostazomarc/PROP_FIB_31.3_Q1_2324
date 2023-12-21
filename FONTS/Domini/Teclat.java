@@ -38,9 +38,7 @@ public class Teclat {
     /**
      * L'algorisme emprat per a construir el teclat
      */
-    private BranchandBound bab;
-
-    private Genetic gen;
+    private Estrategia estrategia;
 
     /**
      * Comprova que el layout sigui vàlid
@@ -94,13 +92,13 @@ public class Teclat {
         dimX = n;
         dimY = m;
         if (e.equals("BranchAndBound")){
-            bab = new BranchandBound();
-            disposicio = bab.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+            estrategia = new BranchandBound();
         }
         else if (e.equals("GeneticAlgorithm")){
-            gen = new Genetic();
-            disposicio = gen.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+            estrategia = new Genetic();
         }
+        disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+
     }
 
     /**
@@ -119,14 +117,12 @@ public class Teclat {
         dimY = m;
         this.llistafreq = i.getLlistaFreq();
         if (e.equals("BranchAndBound")){
-            bab = new BranchandBound();
-            disposicio = bab.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+            estrategia = new BranchandBound();
         }
         else if (e.equals("GeneticAlgorithm")){
-            gen = new Genetic();
-            disposicio = gen.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
+            estrategia = new Genetic();
         }
-
+        disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), dimX, dimY);
     }
 
     /**
@@ -197,10 +193,9 @@ public class Teclat {
      */
     public void modificarLayout(int n, int m) throws ExcepcionsCreadorTeclat {
         comprovaLayoutValid(n, m);
-        Estrategia estrategia = new BranchandBound();
         dimX = n;
         dimY = m;
-        disposicio = estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), n, m);
+        disposicio = this.estrategia.calculaDisposicio(this.llistafreq.getFrequencies(), idioma.getLletres(), n, m);
     }
 }
 

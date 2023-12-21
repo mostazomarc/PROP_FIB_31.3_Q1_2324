@@ -254,7 +254,7 @@ public class ControladorPresentacio {
      * @return El nom de la llista de frequencies del teclat identificat per nomt
      * @throws TeclatNoExisteix Si el teclat no existeix
      */
-    public String getNomLListaTeclat(String nomt) throws ExcepcionsCreadorTeclat {
+    public static String getNomLListaTeclat(String nomt) throws ExcepcionsCreadorTeclat {
         return controladorDomini.getNomLListaTeclat(nomt);
     }
 
