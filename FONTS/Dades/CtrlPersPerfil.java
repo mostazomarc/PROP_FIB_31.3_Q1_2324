@@ -154,6 +154,7 @@ public class CtrlPersPerfil {
         if (!perfilExisteix(nom)) throw new PerfilNoExisteix(nom);
         if (perfilActual != null && perfilActual.getUsuari().equals(nom)) perfilActual = null;
         perfils.remove(nom);
+        guardar();
     }
 
     /**
