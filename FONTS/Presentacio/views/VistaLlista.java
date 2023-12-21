@@ -136,13 +136,19 @@ public class VistaLlista extends JFrame {
 
 
     private void iniLlista() throws LlistaFreqNoExisteix {
-        panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS)); // Establecer el layout
-        JLabel labelNom = new JLabel(nom); // Crear el JLabel con el nombre
+        JLabel labelNom = new JLabel(nom);
         labelNom.setFont(new Font("Monospaced", Font.BOLD, 16));
+        labelNom.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        JLabel labelNomIdioma = new JLabel("Idioma: " + ControladorPresentacio.getNomIdiomaLlista(nom));
+        labelNomIdioma.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        labelNomIdioma.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
         panellContinguts.add(labelNom);
-        labelNom.setFont(new Font("Monospaced", Font.BOLD, 16));
-        panellContinguts.add(labelNom);
+        panellContinguts.add(Box.createVerticalGlue());
+        panellContinguts.add(labelNomIdioma);
+        panellContinguts.add(Box.createVerticalGlue());
 
         Map<String, Integer> llista = ControladorPresentacio.consultaLlista(nom);
         LlistatextArea.setEditable(false);

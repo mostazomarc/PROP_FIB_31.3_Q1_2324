@@ -20,10 +20,6 @@ public class CtrlDomini {
      */
     private Perfil PerfilActual;
     /**
-     * Estrategia utilitzada en la fabricació del teclat
-     */
-    private String Estrategia;
-    /**
      * Controlador de Persistencia de Perfils registrats
      */
     private CtrlPersPerfil perfils;
@@ -93,7 +89,6 @@ public class CtrlDomini {
         alfabets = CtrlPersAlfabets.getInstance(this);
         idiomes = CtrlPersIdiomes.getInstance(this);
         teclats = CtrlPersTeclats.getInstance(this);
-        Estrategia = "BranchAndBound"; //estrategia per defecte
     }
 
     /**
@@ -171,14 +166,6 @@ public class CtrlDomini {
      */
     public String getPerfilActual() {
         return PerfilActual.getUsuari();
-    }
-
-    /**
-     * Retorna el nom de l'estrategia per fer la distribució de teclat
-     * @return El nom de l'estrategia per fer la distribució de teclat
-     */
-    public String getEstrategiaActual() {
-        return Estrategia;
     }
 
     /**
@@ -568,6 +555,5 @@ public class CtrlDomini {
         Set<String> noms = alfabets.getAlfabets().keySet();
         return new ArrayList<>(noms);
     }
-
 
 }

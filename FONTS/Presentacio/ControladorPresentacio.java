@@ -96,14 +96,6 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Obté el nom de l'estratègia actual
-     * @return nom de l'estratègia actual
-     */
-    public static String getEstrategiaActual() {
-        return controladorDomini.getEstrategiaActual();
-    }
-
-    /**
      * Obté una llista amb els noms d'usuari dels perfils
      * @return llista amb els noms d'usuari dels perfils
      */
@@ -327,6 +319,7 @@ public class ControladorPresentacio {
     public static void eliminaPerfil() throws ExcepcionsCreadorTeclat {
         controladorDomini.eliminaPerfil();
     }
+
 
 }
 

@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 abstract class Estrategia {
+    private String nom;
 
 
     public static String quitarTilde(char c) {
