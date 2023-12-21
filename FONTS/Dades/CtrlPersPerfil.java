@@ -124,15 +124,9 @@ public class CtrlPersPerfil {
      * @return El perfil creat/carregat
      * @throws PerfilJaExisteix Si el perfil ja existeix
      */
-    public Perfil canviaPerfil(String nomPerfil) throws PerfilJaExisteix {
-        try {
-            if (!perfils.containsKey(nomPerfil)) throw new PerfilNoExisteix(nomPerfil);
-            perfilActual = perfils.get(nomPerfil);
-        } catch (PerfilNoExisteix perfilNoExisteix) {
-            System.out.println("Perfil Nou");
-            afegirPerfil(nomPerfil);
-            guardar();
-        }
+    public Perfil canviaPerfil(String nomPerfil) throws PerfilNoExisteix {
+        if (!perfils.containsKey(nomPerfil)) throw new PerfilNoExisteix(nomPerfil);
+        perfilActual = perfils.get(nomPerfil);
         return perfilActual;
     }
 
@@ -142,10 +136,12 @@ public class CtrlPersPerfil {
      * @param nomPerfil El nom del perfil
      * @throws PerfilJaExisteix Si el perfil ja existeix
      */
-    private void afegirPerfil(String nomPerfil) throws PerfilJaExisteix {
+    public void afegirPerfil(String nomPerfil) throws ExcepcionsCreadorTeclat {
         if (perfilExisteix(nomPerfil)) throw new PerfilJaExisteix(nomPerfil);
         perfilActual = new Perfil(nomPerfil);
         perfils.put(nomPerfil, perfilActual);
+        guardar();
+        canviaPerfil(nomPerfil);
     }
 
     /**
@@ -156,8 +152,8 @@ public class CtrlPersPerfil {
     public void eliminaPerfil(String nom) throws PerfilNoExisteix{
         System.out.println("Eliminant perfil " + nom);
         if (!perfilExisteix(nom)) throw new PerfilNoExisteix(nom);
+        if (perfilActual != null && perfilActual.getUsuari().equals(nom)) perfilActual = null;
         perfils.remove(nom);
-        if (perfilActual.getUsuari().equals(nom)) perfilActual = null;
     }
 
     /**
@@ -169,6 +165,14 @@ public class CtrlPersPerfil {
     public Perfil getPerfil(String nomPerfil) throws PerfilNoExisteix{
         if (!perfils.containsKey(nomPerfil)) throw new PerfilNoExisteix(nomPerfil);
         return perfils.get(nomPerfil);
+    }
+
+    /**
+     * Obté el perfil actual
+     * @return El perfil actual null si no hi ha cap perfil actual
+     */
+    public Perfil getPerfilActual() throws PerfilNoExisteix{
+        return perfilActual;
     }
 
 
