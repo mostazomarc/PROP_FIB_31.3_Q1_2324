@@ -159,6 +159,7 @@ public class VistaTeclat extends JFrame {
         GridBagConstraints c = new GridBagConstraints();
         c.anchor = GridBagConstraints.CENTER;
         c.weightx = 1d;
+        String v;
 
         for (int row = 0; row < teclat.length; ++row) {
             panelTeclat = new JPanel(new GridBagLayout());
@@ -166,9 +167,12 @@ public class VistaTeclat extends JFrame {
             c.gridy = row;
 
             for (int col = 0; col < teclat[row].length; ++col) {
-                JButton b = new JButton(String.valueOf(teclat[row][col]));
-                b.setPreferredSize(new Dimension(50, 50));
-                panelTeclat.add(b);
+                v = String.valueOf(teclat[row][col]);
+                if (!v.isBlank()) {
+                    JButton b = new JButton(v);
+                    b.setPreferredSize(new Dimension(60, 60));
+                    panelTeclat.add(b);
+                }
             }
 
             keyboard.add(panelTeclat, c);
