@@ -136,7 +136,11 @@ public class VistaLlista extends JFrame {
 
 
     private void iniLlista() throws LlistaFreqNoExisteix {
-        JLabel labelNom = new JLabel(nom);
+        panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS)); // Establecer el layout
+        JLabel labelNom = new JLabel(nom); // Crear el JLabel con el nombre
+        labelNom.setFont(new Font("Monospaced", Font.BOLD, 16));
+
+        panellContinguts.add(labelNom);
         labelNom.setFont(new Font("Monospaced", Font.BOLD, 16));
         panellContinguts.add(labelNom);
 
