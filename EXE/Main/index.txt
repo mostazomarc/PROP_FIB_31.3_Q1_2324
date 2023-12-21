@@ -1,0 +1,4 @@
+Subdirectori amb el .jar de l'entrega 3
+
+Main.jar
+ - Executable del programa per l'entrega 3

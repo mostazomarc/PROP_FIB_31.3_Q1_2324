@@ -1,10 +1,16 @@
-Aquest subdirectori conte el codi de les classes de la capa de presentacio (AQUESTA NO CONTA PER AQUESTA ENTREGA)
+Aquest subdirectori conte el codi de les classes de la capa de presentacio
+
+/Views
+ - Conté el codi de les vistes del programa
 
 ControladorPresentacio.java
-Codi del controlador de presentacio encarregat de la comunicacio entre capes
+ - Codi del controlador de presentacio encarregat de la comunicacio entre capes
 
 Main.java
-Main del programa
+ - Main del programa
 
-VistaTerminal.java
-Codi de la vista de terminal de la presentacio del sistema
+Main.mf
+- Manifest del programa
+
+package-info.java
+ - conte la info per el JavaDoc del package

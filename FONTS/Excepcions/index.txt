@@ -9,6 +9,9 @@ Excepcio per indicar que un alfabet no existeix
 AlfabetJaExisteix.java
 Excepcio per indicar que un alfabet ja existeix
 
+CapPerfilGuardat.java
+Excepcio per indicar que no hi ha cap perfil guardat
+
 CaracterInvalid.java
 Excepcio per indicar que un caracter es invalid
 
@@ -51,6 +54,9 @@ Excepcio per indicar que una llista de frequencies ja existeix
 
 LlistaFreqNoExisteix.java
 Excepcio per indicar que una llista de frequencies no existeix
+
+package-info.java
+ - conte la info per el JavaDoc del package
 
 PerfilJaExisteix.java
 Excepcio per indicar que un perfil ja existeix

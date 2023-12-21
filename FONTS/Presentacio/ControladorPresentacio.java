@@ -12,10 +12,6 @@ import javax.swing.JOptionPane;
  */
 public class ControladorPresentacio {
     /**
-     * Vista de terminal
-     */
-    private VistaTerminal vt;
-    /**
      * Controlador de Domini
      */
     private static CtrlDomini controladorDomini;
