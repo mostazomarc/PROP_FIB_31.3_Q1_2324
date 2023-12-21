@@ -38,22 +38,22 @@ jarsDrivers:
 	jar cmvf ./FONTS/Drivers/MF/DriverTeclats.mf $(JAR_OUTPUT)DriverTeclats.jar -C $(CLASS_OUTPUT) . -C ./FONTS/lib/ .
 	jar cmvf ./FONTS/Drivers/MF/DriverTeclats.mf $(JAR_OUTPUT)DriverTeclats.jar -C $(CLASS_OUTPUT) . -C ./FONTS/lib/ .
 
-executaDriverHungarianAlgorithm:
+executaDriverHungarianAlgorithm: jarsDrivers
 	java -cp ./EXEnoEntrega/DriverHungarianAlgorithm.jar:./FONTS/lib/json-simple-1.1.jar Drivers.HungarianAlgorithm
 
-executaDriverDominiv2:
+executaDriverDominiv2: jarsDrivers
 	java -cp ./EXEnoEntrega/DriverDominiv2.jar:./FONTS/lib/json-simple-1.1.jar Drivers.DriverDominiv2
 
-executaDriverLector:
+executaDriverLector: jarsDrivers
 	java -cp ./EXEnoEntrega/DriverLectorFreq.jar:./FONTS/lib/json-simple-1.1.jar Drivers.DriverLectorFreq
 
-executaDriverAlgorismeQAP:
+executaDriverAlgorismeQAP: jarsDrivers
 	java -cp ./EXEnoEntrega/DriverAlgorismeQAP.jar:./FONTS/lib/json-simple-1.1.jar Drivers.DriverAlgorismeQAP
 
-executaMain:
+executaMain: jars
 	java -cp ./EXEnoEntrega/Main.jar:./FONTS/lib/json-simple-1.1.jar Presentacio.Main
 
-executaMainExe:
+executaMainExe: exe
 	java -cp ./EXE/Main/Main.jar:./FONTS/lib/json-simple-1.1.jar Presentacio.Main
 
 fulltest: all
