@@ -231,7 +231,7 @@ public class VistaTeclat extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaElements("teclats");
+            ControladorPresentacio.vistaElements("Teclats");
             setVisible(false);
         }
         else if (ModificarLayout.equals(source)) {
@@ -257,12 +257,12 @@ public class VistaTeclat extends JFrame {
         }
         else if (Eliminar.equals(source)) {
             int confirmed = JOptionPane.showConfirmDialog(null,
-                    "Estàs seguro de que vols eliminar el teclat?", "Confirmació d'eliminación",
+                    "Estàs segur de que vols eliminar el teclat?", "Confirmació d'eliminación",
                     JOptionPane.YES_NO_OPTION);
 
             if (confirmed == JOptionPane.YES_OPTION) {
                 ControladorPresentacio.eliminarTeclat(nom);
-                ControladorPresentacio.vistaElements("teclats");
+                ControladorPresentacio.vistaElements("Teclats");
                 setVisible(false);
             }
         }

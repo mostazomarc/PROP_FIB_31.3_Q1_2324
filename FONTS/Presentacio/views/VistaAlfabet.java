@@ -129,7 +129,7 @@ public class VistaAlfabet extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaElements("alfabets");
+            ControladorPresentacio.vistaElements("Alfabets");
             setVisible(false);
         }
         else if (Eliminar.equals(source)) {
@@ -140,7 +140,7 @@ public class VistaAlfabet extends JFrame {
             if (confirmed == JOptionPane.YES_OPTION) {
                 try {
                     ControladorPresentacio.eliminarAlfabet(nom);
-                    ControladorPresentacio.vistaElements("alfabets");
+                    ControladorPresentacio.vistaElements("Alfabets");
                     setVisible(false);
                 } catch (ExcepcionsCreadorTeclat e1) {
                     ControladorPresentacio.mostraError(e1.getMessage());

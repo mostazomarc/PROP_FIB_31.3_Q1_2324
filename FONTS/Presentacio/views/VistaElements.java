@@ -11,7 +11,7 @@ import java.util.List;
 
 public class VistaElements extends JFrame {
     private JButton Enrere = new JButton("Tornar al menú principal");
-    private JButton Crear = new JButton("Crear");
+    private JButton Crear;
     private JPanel panellContinguts = new JPanel();
     private String option;
 
@@ -32,6 +32,7 @@ public class VistaElements extends JFrame {
     private void iniFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
+        setTitle(option);
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (pantalla.width - 1000) / 2;
         int y = (pantalla.height - 600) / 2;
@@ -71,18 +72,23 @@ public class VistaElements extends JFrame {
 
     private void iniContingut(String option) {
         List<String> l = null;
+        String el = "";
         switch(option) {
-            case "teclats":
+            case "Teclats":
                 l = ControladorPresentacio.getNomsTeclats();
+                el = "Teclat";
                 break;
-            case "llistes":
+            case "Llistes":
                 l = ControladorPresentacio.getNomLlistesGuardades();
+                el = "Llista";
                 break;
-            case "idiomes":
+            case "Idiomes":
                 l = ControladorPresentacio.getNomsIdiomes();
+                el = "Idioma";
                 break;
-            case "alfabets":
+            case "Alfabets":
                 l = ControladorPresentacio.getNomsAlfabets();
+                el = "Alfabet";
                 break;
             default:
                 break;
@@ -94,6 +100,7 @@ public class VistaElements extends JFrame {
         constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 0;
         constraints.gridy = 1;
+        Crear = new JButton("Crear " + el);
         panellContinguts.add(Crear, constraints);
         int yPos = 2;
 
@@ -106,16 +113,16 @@ public class VistaElements extends JFrame {
                 button.addActionListener(e -> {
                     try {
                         switch(option) {
-                            case "teclats":
+                            case "Teclats":
                                 ControladorPresentacio.vistaTeclat(nom);
                                 break;
-                            case "llistes":
+                            case "Llistes":
                                 ControladorPresentacio.vistaLlista(nom);
                                 break;
-                            case "idiomes":
+                            case "Idiomes":
                                 ControladorPresentacio.vistaIdioma(nom);
                                 break;
-                            case "alfabets":
+                            case "Alfabets":
                                 ControladorPresentacio.vistaAlfabet(nom);
                                 break;
                             default:
@@ -168,16 +175,16 @@ public class VistaElements extends JFrame {
         }
         else if (Crear.equals(source)) {
             switch(option) {
-                case "teclats":
+                case "Teclats":
                     ControladorPresentacio.vistaCrearTeclat();
                     break;
-                case "llistes":
+                case "Llistes":
                     ControladorPresentacio.vistaAfegirLlista();
                     break;
-                case "idiomes":
+                case "Idiomes":
                     ControladorPresentacio.vistaAfegirIdioma();
                     break;
-                case "alfabets":
+                case "Alfabets":
                     ControladorPresentacio.vistaAfegirAlfabet();
                     break;
                 default:

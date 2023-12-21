@@ -291,7 +291,7 @@ public class VistaLlista extends JFrame {
             }
         }
         else if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaElements("llistes");
+            ControladorPresentacio.vistaElements("Llistes");
             setVisible(false);
         }
         else if (Modificar.equals(source)) {
@@ -321,7 +321,7 @@ public class VistaLlista extends JFrame {
             if (confirmed == JOptionPane.YES_OPTION) {
                 try {
                     ControladorPresentacio.eliminarLlista(nom);
-                    ControladorPresentacio.vistaElements("llistes");
+                    ControladorPresentacio.vistaElements("Llistes");
                     setVisible(false);
                 } catch (Exception e1) {
                     ControladorPresentacio.mostraError(e1.getMessage());

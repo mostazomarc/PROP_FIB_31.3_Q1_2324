@@ -37,6 +37,7 @@ public class VistaPrincipal extends JFrame{
         int y = (pantalla.height - 600) / 2;
         setLocation(x, y);
         setResizable(false);
+        setTitle("Menú Principal");
     }
 
     private void iniClose() {
@@ -165,19 +166,19 @@ public class VistaPrincipal extends JFrame{
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Teclats.equals(source)) {
-            ControladorPresentacio.vistaElements("teclats");
+            ControladorPresentacio.vistaElements("Teclats");
             setVisible(false);
         }
         else if (Llistes.equals(source)) {
-            ControladorPresentacio.vistaElements("llistes");
+            ControladorPresentacio.vistaElements("Llistes");
             setVisible(false);
         }
         else if (Idiomes.equals(source)) {
-            ControladorPresentacio.vistaElements("idiomes");
+            ControladorPresentacio.vistaElements("Idiomes");
             setVisible(false);
         }
         else if (Alfabets.equals(source)) {
-            ControladorPresentacio.vistaElements("alfabets");
+            ControladorPresentacio.vistaElements("Alfabets");
             setVisible(false);
         }
         else if (CanviarPerfil.equals(source)) {

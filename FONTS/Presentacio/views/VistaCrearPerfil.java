@@ -38,6 +38,7 @@ public class VistaCrearPerfil extends JFrame {
         int y = (pantalla.height - 600) / 2;
         setLocation(x, y);
         setResizable(false);
+        setTitle("Crear Perfil");
     }
 
     private void iniClose() {

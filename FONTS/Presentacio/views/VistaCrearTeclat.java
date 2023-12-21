@@ -57,6 +57,7 @@ public class VistaCrearTeclat extends JFrame {
         int y = (pantalla.height - 600) / 2;
         setLocation(x, y);
         setResizable(false);
+        setTitle("Crear Teclat");
     }
 
     private void iniClose() {
@@ -205,7 +206,7 @@ public class VistaCrearTeclat extends JFrame {
             }
 
             if (Enrere.equals(source)) {
-                ControladorPresentacio.vistaElements("teclats");
+                ControladorPresentacio.vistaElements("Teclats");
                 setVisible(false);
             }
             else if (inputNomIdioma.equals(source)) {

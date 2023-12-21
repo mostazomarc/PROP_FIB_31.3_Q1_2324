@@ -74,6 +74,7 @@ public class VistaAfegirLlista extends JFrame {
         int y = (pantalla.height - 600) / 2;
         setLocation(x, y);
         setResizable(false);
+        setTitle("Afegir Llista");
     }
 
     private void iniClose() {
@@ -221,7 +222,7 @@ public class VistaAfegirLlista extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaElements("llistes");
+            ControladorPresentacio.vistaElements("Llistes");
             setVisible(false);
         }
         if (rtext.isSelected() || rllista.isSelected()) {
@@ -299,7 +300,7 @@ public class VistaAfegirLlista extends JFrame {
                         }
                         ControladorPresentacio.novaLlistaPerfil(tipus, nom, nomIdioma, novesEntrades);
                     }
-                    ControladorPresentacio.vistaElements("llistes");
+                    ControladorPresentacio.vistaElements("Llistes");
                     setVisible(false);
                 } else ControladorPresentacio.mostraAvis("No s'ha seleccionat cap tipus d'entrada");
             } catch (ExcepcionsCreadorTeclat ex) {

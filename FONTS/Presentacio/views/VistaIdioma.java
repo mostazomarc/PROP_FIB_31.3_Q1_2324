@@ -127,7 +127,7 @@ public class VistaIdioma extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaElements("idiomes");
+            ControladorPresentacio.vistaElements("Idiomes");
             setVisible(false);
         }
         else if (Eliminar.equals(source)) {
@@ -138,7 +138,7 @@ public class VistaIdioma extends JFrame {
             if (confirmed == JOptionPane.YES_OPTION) {
                 try {
                     ControladorPresentacio.eliminarIdioma(nom);
-                    ControladorPresentacio.vistaElements("idiomes");
+                    ControladorPresentacio.vistaElements("Idiomes");
                     setVisible(false);
                 } catch (ExcepcionsCreadorTeclat e1) {
                     ControladorPresentacio.mostraError(e1.getMessage());
