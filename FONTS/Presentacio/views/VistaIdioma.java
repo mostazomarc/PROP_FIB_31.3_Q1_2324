@@ -12,7 +12,7 @@ import java.awt.event.ComponentEvent;
 
 public class VistaIdioma extends JFrame {
     private String nom;
-    private JButton Enrere = new JButton("Tornar al menú principal");
+    private JButton Enrere = new JButton("Tornar enrere");
     private JPanel panellContinguts = new JPanel();
     private JTextArea IdiomatextArea = new JTextArea();
     private JScrollPane scrollPanel = new JScrollPane();
@@ -127,19 +127,24 @@ public class VistaIdioma extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaPrincipal();
-            setVisible(false);
-        }
-        else if (Eliminar.equals(source)) {
-            try {
-                ControladorPresentacio.eliminarIdioma(nom);
-            } catch (ExcepcionsCreadorTeclat e1) {
-                ControladorPresentacio.mostraError(e1.getMessage());
-            }
             ControladorPresentacio.vistaElements("idiomes");
             setVisible(false);
         }
-    }
+        else if (Eliminar.equals(source)) {
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Estàs segur de que vols eliminar aquest idioma?", "Confirmació d'eliminació",
+                    JOptionPane.YES_NO_OPTION);
 
+            if (confirmed == JOptionPane.YES_OPTION) {
+                try {
+                    ControladorPresentacio.eliminarIdioma(nom);
+                    ControladorPresentacio.vistaElements("idiomes");
+                    setVisible(false);
+                } catch (ExcepcionsCreadorTeclat e1) {
+                    ControladorPresentacio.mostraError(e1.getMessage());
+                }
+            }
+        }
+    }
 }
 

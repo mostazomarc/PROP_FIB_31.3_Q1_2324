@@ -8,16 +8,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+
+import static java.lang.Math.max;
+
 public class VistaTeclat extends JFrame {
     private String nom;
-    private JButton Enrere = new JButton("Tornar al menú principal");
+    private JButton Enrere = new JButton("Tornar enrere");
     private JPanel panellContinguts = new JPanel();
     private JPanel panelTeclat = new JPanel();
     private JButton ModificarLayout = new JButton("Modificar Layout");
     private JLabel labelNF = new JLabel("Número files:");
     private JLabel labelNC = new JLabel("Número columnes:");
-    private JTextField inputNF = new JTextField(20);
-    private JTextField inputNC = new JTextField(20);
+    private JTextField inputNF = new JTextField(10);
+    private JTextField inputNC = new JTextField(10);
     private JButton Modificar = new JButton("Modificar");
     private JButton Eliminar = new JButton("Eliminar");
 
@@ -74,79 +77,107 @@ public class VistaTeclat extends JFrame {
     }
 
     private void iniButtons() {
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.weighty = 1;
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        ModificarLayout.setPreferredSize(new Dimension(420, 30));
-        buttonPanel.add(ModificarLayout);
-        Eliminar.setPreferredSize(new Dimension(420, 30));
-        buttonPanel.add(Eliminar);
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
 
-        panellContinguts.add(buttonPanel, constraints);
+        JPanel upperButtonsPanel = new JPanel();
+        upperButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        buttonsPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacio entre labelNom y labelNomLlista
 
-        Modificar.setVisible(false);
+
+        ModificarLayout.setPreferredSize(new Dimension(350, 30));
+        upperButtonsPanel.add(ModificarLayout);
+
+        Eliminar.setPreferredSize(new Dimension(350, 30));
+        upperButtonsPanel.add(Eliminar);
+
+        buttonsPanel.add(upperButtonsPanel);
+
+        JPanel lowerButtonsPanel = new JPanel();
+        lowerButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        labelNF.setPreferredSize(new Dimension(120, 30));
         labelNF.setVisible(false);
-        labelNC.setVisible(false);
+        lowerButtonsPanel.add(labelNF);
+
+        inputNF.setPreferredSize(new Dimension(30, 30));
         inputNF.setVisible(false);
+        lowerButtonsPanel.add(inputNF);
+
+        labelNC.setPreferredSize(new Dimension(120, 30));
+        labelNC.setVisible(false);
+        lowerButtonsPanel.add(labelNC);
+
+        inputNC.setPreferredSize(new Dimension(30, 30));
         inputNC.setVisible(false);
+        lowerButtonsPanel.add(inputNC);
 
-        constraints.gridy = 2;
-        labelNF.setPreferredSize(new Dimension(150, 30));
-        buttonPanel.add(labelNF);
-        inputNF.setPreferredSize(new Dimension(100, 30));
-        buttonPanel.add(inputNF);
+        Modificar.setPreferredSize(new Dimension(150, 30));
+        Modificar.setVisible(false);
+        lowerButtonsPanel.add(Modificar);
 
-        panellContinguts.add(buttonPanel, constraints);
+        buttonsPanel.add(lowerButtonsPanel);
+        buttonsPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacio entre labelNom y labelNomLlista
 
-        constraints.gridy = 3;
-        labelNC.setPreferredSize(new Dimension(150, 30));
-        buttonPanel.add(labelNC);
-        inputNC.setPreferredSize(new Dimension(100, 30));
-        buttonPanel.add(inputNC);
-
-        panellContinguts.add(buttonPanel, constraints);
-
-        constraints.gridy = 4;
-        Modificar.setPreferredSize(new Dimension(200, 30));
-        buttonPanel.add(Modificar);
-        panellContinguts.add(buttonPanel, constraints);
+        add(buttonsPanel, BorderLayout.SOUTH);
     }
 
     private void iniTeclat() throws ExcepcionsCreadorTeclat {
         JLabel labelNom = new JLabel(nom);
         labelNom.setFont(new Font("Monospaced", Font.BOLD, 16));
         labelNom.setAlignmentX(Component.CENTER_ALIGNMENT);
+        labelNom.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         JLabel labelNomLlista = new JLabel("Llista de freqüències: " + ControladorPresentacio.getNomLListaTeclat(nom));
         labelNomLlista.setFont(new Font("Monospaced", Font.PLAIN, 12));
         labelNomLlista.setAlignmentX(Component.CENTER_ALIGNMENT);
+        labelNomLlista.setAlignmentY(Component.CENTER_ALIGNMENT);
 
-        panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
-        panellContinguts.add(labelNom);
-        panellContinguts.add(Box.createVerticalGlue());
-        panellContinguts.add(labelNomLlista);
-
+        JPanel upperPanel = new JPanel();
+        upperPanel.setLayout(new BoxLayout(upperPanel, BoxLayout.Y_AXIS));
+        upperPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacio entre labelNom y labelNomLlista
+        upperPanel.add(labelNom);
+        upperPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacio entre labelNom y labelNomLlista
+        upperPanel.add(labelNomLlista);
+        upperPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacio entre labelNomLlista y Enrere
+        //upperPanel.add(Enrere);
 
         char[][] teclat = ControladorPresentacio.consultaTeclat(nom);
-        int rows = teclat.length;
-        int cols = teclat[0].length;
 
-        panelTeclat = new JPanel(new GridLayout(rows, cols, 3, 3));
+        JPanel keyboard = new JPanel();
+        keyboard.setLayout(new GridBagLayout());
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                JButton btn = new JButton(String.valueOf(teclat[i][j]));
-                panelTeclat.add(btn);
+        GridBagConstraints c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.CENTER;
+        c.weightx = 1d;
+
+        for (int row = 0; row < teclat.length; ++row) {
+            panelTeclat = new JPanel(new GridBagLayout());
+
+            c.gridy = row;
+
+            for (int col = 0; col < teclat[row].length; ++col) {
+                JButton b = new JButton(String.valueOf(teclat[row][col]));
+                b.setPreferredSize(new Dimension(50, 50));
+                panelTeclat.add(b);
             }
+
+            keyboard.add(panelTeclat, c);
         }
-        panellContinguts.add(Box.createVerticalGlue());
-        panellContinguts.add(panelTeclat);
-        panellContinguts.add(Box.createVerticalGlue());
-        add(panellContinguts, BorderLayout.CENTER);
+
+        // Crear el panel que contendrá el área del teclado
+        JPanel keyboardPanel = new JPanel(new BorderLayout());
+        keyboardPanel.add(new JScrollPane(keyboard), BorderLayout.CENTER);
+
+        // Agregar el panel del botón "Enrere" y el área del teclado al contenedor principal
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(upperPanel, BorderLayout.NORTH);
+        mainPanel.add(keyboardPanel, BorderLayout.CENTER);
+
+        // Agregar el contenedor principal al frame
+        add(mainPanel);
     }
+
 
     /**
      * Assigna els listeners als components corresponents.
@@ -191,7 +222,7 @@ public class VistaTeclat extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaPrincipal();
+            ControladorPresentacio.vistaElements("teclats");
             setVisible(false);
         }
         else if (ModificarLayout.equals(source)) {
@@ -216,9 +247,16 @@ public class VistaTeclat extends JFrame {
             }
         }
         else if (Eliminar.equals(source)) {
-            ControladorPresentacio.eliminarTeclat(nom);
-            ControladorPresentacio.vistaElements("teclats");
-            setVisible(false);
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Estàs seguro de que vols eliminar el teclat?", "Confirmació d'eliminación",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirmed == JOptionPane.YES_OPTION) {
+                ControladorPresentacio.eliminarTeclat(nom);
+                ControladorPresentacio.vistaElements("teclats");
+                setVisible(false);
+            }
         }
+
     }
 }

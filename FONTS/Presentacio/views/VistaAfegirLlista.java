@@ -23,9 +23,9 @@ public class VistaAfegirLlista extends JFrame {
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
     private JLabel labelTipusInput = new JLabel("Com vols afegir la llista?");
     private ButtonGroup tipusInput = new ButtonGroup();
-    private JRadioButton rtext = new JRadioButton("text");
-    private JRadioButton rllista = new JRadioButton("llista");
-    private JRadioButton rmanual = new JRadioButton("Manual");
+    private JRadioButton rtext = new JRadioButton("Importar text");
+    private JRadioButton rllista = new JRadioButton("Importar llista");
+    private JRadioButton rmanual = new JRadioButton("Introduir manualment");
     private JLabel labelNomLlista = new JLabel("Nom de la llista");
     private JTextField inputNomLlista = new JTextField(20);
     private JLabel labelNomIdioma = new JLabel("Selecciona l'idioma");

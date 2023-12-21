@@ -15,7 +15,7 @@ import java.io.File;
 public class VistaAfegirAlfabet extends JFrame{
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
     private JLabel labelImportarAlfabet = new JLabel("Importa l'alfabet");
-    private JButton importarArxiu = new JButton ("Importar");
+    private JButton importarArxiu = new JButton ("Importar arxiu");
     private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
     private JButton Enrere = new JButton("Tornar enrere");
     private JButton Afegir = new JButton("Afegir alfabet");

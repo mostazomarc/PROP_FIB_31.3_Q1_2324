@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class VistaLlista extends JFrame {
     private String nom;
-    private JButton Enrere = new JButton("Tornar al menú principal");
+    private JButton Enrere = new JButton("Tornar enrere");
     private JPanel panellContinguts = new JPanel();
     private JTextArea LlistatextArea = new JTextArea(20, 40);
     private JScrollPane scrollPanel = new JScrollPane();
@@ -106,6 +106,7 @@ public class VistaLlista extends JFrame {
         constraints.gridy = 1;
         constraints.weighty = 1;
         JPanel buttonPanel = new JPanel();
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         ModificarLlista.setPreferredSize(new Dimension(300, 30));
         buttonPanel.add(ModificarLlista);
@@ -146,9 +147,9 @@ public class VistaLlista extends JFrame {
 
         panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
         panellContinguts.add(labelNom);
-        panellContinguts.add(Box.createVerticalGlue());
+        panellContinguts.add(Box.createRigidArea(new Dimension(0, 20))); // Espacio entre labelNom y labelNomLlista
         panellContinguts.add(labelNomIdioma);
-        panellContinguts.add(Box.createVerticalGlue());
+        panellContinguts.add(Box.createRigidArea(new Dimension(0, 20))); // Espacio entre labelNom y labelNomLlista
 
         Map<String, Integer> llista = ControladorPresentacio.consultaLlista(nom);
         LlistatextArea.setEditable(false);
@@ -290,7 +291,7 @@ public class VistaLlista extends JFrame {
             }
         }
         else if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaPrincipal();
+            ControladorPresentacio.vistaElements("llistes");
             setVisible(false);
         }
         else if (Modificar.equals(source)) {
@@ -313,15 +314,20 @@ public class VistaLlista extends JFrame {
             setVisible(false);
         }
         else if (Eliminar.equals(source)) {
-            try {
-                ControladorPresentacio.eliminarLlista(nom);
-                ControladorPresentacio.vistaElements("llistes");
-                setVisible(false);
-            } catch (Exception e1) {
-                ControladorPresentacio.mostraError(e1.getMessage());
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Estàs segur de que vols eliminar aquesta llista?", "Confirmació d'eliminació",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirmed == JOptionPane.YES_OPTION) {
+                try {
+                    ControladorPresentacio.eliminarLlista(nom);
+                    ControladorPresentacio.vistaElements("llistes");
+                    setVisible(false);
+                } catch (Exception e1) {
+                    ControladorPresentacio.mostraError(e1.getMessage());
+                }
             }
         }
     }
-
 }
 

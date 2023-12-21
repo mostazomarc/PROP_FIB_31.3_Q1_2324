@@ -14,14 +14,14 @@ import java.util.List;
 
 public class VistaAfegirIdioma extends JFrame{
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
-    private JLabel labelNomIdioma = new JLabel("Introdueix el nom de l'idioma:");
+    private JLabel labelNomIdioma = new JLabel("Nom de l'idioma:");
     private JTextField inputNomIdioma = new JTextField(20);
-    private JLabel labelImportarLlista = new JLabel("Importar llista de freqüències predeterminada de l'idioma");
+    private JLabel labelImportarLlista = new JLabel("Importa la llista de freqüències predeterminada de l'idioma");
     private JLabel labelTipusArxiu = new JLabel("De quin tipus és l'arxiu ?");
     private ButtonGroup tipusInput = new ButtonGroup();
     private JRadioButton rtext = new JRadioButton("Text");
     private JRadioButton rllista = new JRadioButton("Llista");
-    private JButton importarArxiu = new JButton ("Importar");
+    private JButton importarArxiu = new JButton ("Importar arxiu");
     private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
     private JLabel labelNomAlfabet = new JLabel("Selecciona l'alfabet corresponent");
     private JComboBox inputNomAlfabet = new JComboBox();

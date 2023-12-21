@@ -91,8 +91,10 @@ public class VistaPrincipal extends JFrame{
         panellContinguts.add(CanviarPerfil, constraints);
 
         constraints.gridy = 6;
+        EliminarPerfil.setFont(new Font("Lucida Grande",Font.BOLD, 12));
         panellContinguts.add(EliminarPerfil, constraints);
 
+        Sortir.setFont(new Font("Lucida Grande", Font.BOLD, 12));
         constraints.gridy = 7;
         panellContinguts.add(Sortir, constraints);
 
@@ -182,19 +184,34 @@ public class VistaPrincipal extends JFrame{
             ControladorPresentacio.vistaPerfils();
             setVisible(false);
         }
+
         else if (EliminarPerfil.equals(source)) {
-            try {
-                ControladorPresentacio.eliminaPerfil();
-            } catch (ExcepcionsCreadorTeclat e1) {
-                ControladorPresentacio.mostraError(e1.getMessage());
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Estàs segur de que vols eliminar el perfil?", "Confirmació d'eliminació de perfil",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirmed == JOptionPane.YES_OPTION) {
+                try {
+                    ControladorPresentacio.eliminaPerfil();
+                    ControladorPresentacio.vistaPerfils();
+                    setVisible(false);
+                } catch (ExcepcionsCreadorTeclat e1) {
+                    ControladorPresentacio.mostraError(e1.getMessage());
+                }
             }
-            ControladorPresentacio.vistaPerfils();
-            setVisible(false);
         }
+
         else if (Sortir.equals(source)) {
-            ControladorPresentacio.guardaEstat();
-            dispose();
-            System.exit(0);
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Estas segur de que vols sortir?", "Confirmació de tancament",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirmed == JOptionPane.YES_OPTION) {
+                ControladorPresentacio.guardaEstat();
+                dispose();
+                System.exit(0);
+            }
         }
+
     }
 }

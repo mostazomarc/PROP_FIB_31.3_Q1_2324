@@ -12,7 +12,7 @@ import java.awt.event.ComponentEvent;
 
 public class VistaAlfabet extends JFrame {
     private String nom;
-    private JButton Enrere = new JButton("Tornar al menú principal");
+    private JButton Enrere = new JButton("Tornar enrere");
     private JPanel panellContinguts = new JPanel();
     private JTextArea AlfabettextArea = new JTextArea();
     private JScrollPane scrollPanel = new JScrollPane();
@@ -129,17 +129,23 @@ public class VistaAlfabet extends JFrame {
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
-            ControladorPresentacio.vistaPrincipal();
+            ControladorPresentacio.vistaElements("alfabets");
             setVisible(false);
         }
         else if (Eliminar.equals(source)) {
-            try {
-                ControladorPresentacio.eliminarAlfabet(nom);
-            } catch (ExcepcionsCreadorTeclat e1) {
-                ControladorPresentacio.mostraError(e1.getMessage());
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Estàs segur de que vols eliminar aquest alfabet?", "Confirmació d'eliminació",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirmed == JOptionPane.YES_OPTION) {
+                try {
+                    ControladorPresentacio.eliminarAlfabet(nom);
+                    ControladorPresentacio.vistaElements("alfabets");
+                    setVisible(false);
+                } catch (ExcepcionsCreadorTeclat e1) {
+                    ControladorPresentacio.mostraError(e1.getMessage());
+                }
             }
-            ControladorPresentacio.vistaElements("alfabets");
-            setVisible(false);
         }
     }
 }
