@@ -17,8 +17,14 @@ LlistaFrequencies.java
  - conte el codi de la classe LlistaFrequencies
 Nodo.java
  - conte el codi de la classe Nodo (node)
+Nodo_genetic.java
+ - conte el codi de la classe Nodo_genetic (node per l'algorisme genètic)
+Nodo_genetic_Comparator.java
+ - conte el codi de la classe Nodo_genetic_Comparator (node comparador per l'algorisme genètic)
 NodoComparator.java
  - conte el codi de la classe NodoComparator (node comparador)
+package-info.java
+ - conte la info per el JavaDoc del package
 Perfil.java
  - conte el codi de la classe Perfil
 pos.java

@@ -52,6 +52,9 @@ Excepcio per indicar que una llista de frequencies ja existeix
 LlistaFreqNoExisteix.java
 Excepcio per indicar que una llista de frequencies no existeix
 
+package-info.java
+ - conte la info per el JavaDoc del package
+
 PerfilJaExisteix.java
 Excepcio per indicar que un perfil ja existeix
 
