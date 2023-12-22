@@ -4,7 +4,6 @@ import Domini.*;
 import Domini.LlistaFrequencies;
 import Excepcions.ExcepcionsCreadorTeclat;
 import Excepcions.LletraNoInclosa;
-import Stubs.*;
 
 import static org.junit.Assert.*;
 
