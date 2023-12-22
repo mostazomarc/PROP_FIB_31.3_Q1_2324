@@ -10,6 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+/**
+ * Aquesta vista és l’encarregada de mostrar la informació de l’idioma amb el nom indicat a l’atribut de la classe.
+ * Aquesta està formada per una àrea de text la qual es mostra el nom de l’idioma, el nom de l’alfabet de l’idioma i el
+ * nom de la llista de freqüències predeterminada de l’idioma. També inclou un botó per poder eliminar aquest idioma
+ * del sistema i un altre per tornar enrere.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
 public class VistaIdioma extends JFrame {
     private String nom;
     private JButton Enrere = new JButton("Tornar enrere");

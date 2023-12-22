@@ -18,6 +18,16 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.Map;
 
+/**
+ * Aquesta vista és l’encarregada de crear una llista de freqüències. Aquesta està formada per un desplegable que permet
+ * seleccionar l’idioma de la llista de freqüències. També s’ha de seleccionar amb 3 radiobuttons si és de tipus “importar
+ * llista”, “importar text” o “manualment”. En cas de seleccionar manualment, s’obre un quadre de text per escriure la
+ * llista de les paraules i freqüències. A més a més, s’indica un camp clarament per introduir el nom de la llista de
+ * freqüències que es vol crear. Altrament, apareix un botó per importar l'arxiu. Finalment, es pot fer click a un altre
+ * botó per crear la llista de freqüències. També s’inclou un botó que permet tornar a la vista anterior.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
 public class VistaAfegirLlista extends JFrame {
 
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");

@@ -10,6 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+/**
+ * Aquesta vista és l’encarregada de mostrar la informació de l’alfabet amb el nom indicat a l’atribut de la classe.
+ * Aquesta està formada per una àrea de text la qual es mostra el nom de l’alfabet, el nombre de lletres de l’alfabet i
+ * aquestes. També inclou un botó per poder eliminar aquest alfabet del sistema i un altre per tornar a la vista anterior.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
 public class VistaAlfabet extends JFrame {
     private String nom;
     private JButton Enrere = new JButton("Tornar enrere");

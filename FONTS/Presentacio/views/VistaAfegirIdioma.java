@@ -12,6 +12,15 @@ import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.util.List;
 
+/**
+ * Aquesta vista és l’encarregada de crear un idioma. S’indica un camp clarament per introduir el nom de l’idioma que
+ * es vol crear. També mitjançant un botó es permet importar l’arxiu que conté la llista de freqüències predeterminada
+ * de l’idioma i seleccionar amb 2 radiobuttons si és de tipus “Llista” o “Text”. A més a més s’inclou un desplegable
+ * per poder triar l’alfabet de l’idioma. Finalment, es pot fer click a un altre botó per crear l’idioma. També s’inclou
+ * un botó que permet tornar a la vista anterior.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
 public class VistaAfegirIdioma extends JFrame{
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
     private JLabel labelNomIdioma = new JLabel("Nom de l'idioma:");

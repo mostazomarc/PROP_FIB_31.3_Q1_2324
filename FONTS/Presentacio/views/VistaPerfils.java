@@ -10,7 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-
+/**
+ * Aquesta vista és la primera que apareix en executar el nostre sistema. Consisteix en un menú amb el títol del nostre
+ * sistema i tot seguit una llista horitzontal de botons que són els perfils que hi ha al sistema. També apareix un botó
+ * per afegir un perfil nou. Ens hem inspirat en aplicacions com Netflix i Prime Video a l’hora de crear aquesta vista,
+ * ja que partim d’un compte i arran d’aquest es poden crear diversos perfils, cadascun independent de l’altre.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
 public class VistaPerfils extends JFrame {
     private JButton AP = new JButton("+");
     private JPanel panellContinguts = new JPanel();

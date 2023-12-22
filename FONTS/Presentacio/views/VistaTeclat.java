@@ -11,14 +11,24 @@ import java.awt.event.ComponentEvent;
 
 import static java.lang.Math.max;
 
+/**
+ * Aquesta vista és l’encarregada de mostrar la informació del teclat amb el nom indicat a l’atribut de la classe. En
+ * aquesta es mostra la disposició del teclat (formada per un conjunt de botons col·locats per n files i m columnes on
+ * cadascun dels botons té una lletra de l’alfabet de l’idioma del teclat. També mostra la llista de freqüències que
+ * s'ha utilitzat i el layout actual. També inclou un botó per poder eliminar aquest teclat del sistema, un altre per
+ * modificar el layout i un altre per tornar enrere.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
+
 public class VistaTeclat extends JFrame {
     private String nom;
     private JButton Enrere = new JButton("Tornar enrere");
     private JPanel panellContinguts = new JPanel();
     private JPanel panelTeclat = new JPanel();
     private JButton ModificarLayout = new JButton("Modificar Layout");
-    private JLabel labelNF = new JLabel("Número files:");
-    private JLabel labelNC = new JLabel("Número columnes:");
+    private JLabel labelNF = new JLabel("Nombre files:");
+    private JLabel labelNC = new JLabel("Nombre columnes:");
     private JTextField inputNF = new JTextField(10);
     private JTextField inputNC = new JTextField(10);
     private JButton Modificar = new JButton("Modificar");
@@ -178,16 +188,13 @@ public class VistaTeclat extends JFrame {
             keyboard.add(panelTeclat, c);
         }
 
-        // Crear el panel que contendrá el área del teclado
         JPanel keyboardPanel = new JPanel(new BorderLayout());
         keyboardPanel.add(new JScrollPane(keyboard), BorderLayout.CENTER);
 
-        // Agregar el panel del botón "Enrere" y el área del teclado al contenedor principal
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(upperPanel, BorderLayout.NORTH);
         mainPanel.add(keyboardPanel, BorderLayout.CENTER);
 
-        // Agregar el contenedor principal al frame
         add(mainPanel);
     }
 

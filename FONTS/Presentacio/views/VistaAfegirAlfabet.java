@@ -12,6 +12,13 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
 
+/**
+ * Aquesta vista és l’encarregada de crear un alfabet. Aquesta està formada per un botó que permet seleccionar l’arxiu
+ * que conté les lletres de l’alfabet que es vol crear. Un cop importat l’arxiu, es pot fer click a un altre botó per
+ * crear l’alfabet. També s’inclou un botó que permet tornar a la vista anterior.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
 public class VistaAfegirAlfabet extends JFrame{
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
     private JLabel labelImportarAlfabet = new JLabel("Importa l'alfabet");

@@ -16,6 +16,14 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Aquesta vista és l’encarregada de mostrar la informació de l’idioma amb el nom indicat a l’atribut de la classe.
+ * Aquesta està formada per un àrea de text la qual es mostren les totes les paraules i les seves freqüències de la
+ * llista de freqüències. També inclou un botó per poder eliminar aquesta llista de freqüències del sistema i un altre
+ * per tornar enrere.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
 public class VistaLlista extends JFrame {
     private String nom;
     private JButton Enrere = new JButton("Tornar enrere");

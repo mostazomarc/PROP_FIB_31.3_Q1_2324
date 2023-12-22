@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Teclat és una classe que conté una disposició de teclat, un idioma i una llista de freqüències
  *
- * @author Agustí Costabella (agusti.costabella@estudiantat.upc.edu)
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
  */
 public class Teclat {
     /**

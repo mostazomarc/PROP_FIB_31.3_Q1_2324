@@ -7,6 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Aquesta vista és l’encarregada de mostrar el menú principal del sistema i apareix just després de triar un perfil.
+ * Aquesta està formada per un conjunt de 6 botons. Els 4 primers et porten a vistes diferents per gestionar (crear/eliminar/modificar)
+ * les diferents dades del sistema (Teclats, Llistes de freqüències, Idiomes i Alfabets), el cinquè permet tornar a la
+ * vista dels perfils per canviar de perfil, el sisè per a eliminar el perfil l i l’últim permet sortir de l’aplicació.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
 public class VistaPrincipal extends JFrame{
     private JPanel panellContinguts = new JPanel();
     private JButton Teclats = new JButton("Teclats");

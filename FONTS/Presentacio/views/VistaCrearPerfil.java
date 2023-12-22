@@ -9,6 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+/**
+ * Aquesta vista és l’encarregada de crear un perfil. Demana que s’introdueixi el nom i consta d’un botó per a crear-lo.
+ * Després de crear-lo, retorna a la pantalla inicial amb tots els perfils.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
 public class VistaCrearPerfil extends JFrame {
     private JButton Enrere = new JButton("Tornar enrere");
     private JPanel panellContinguts = new JPanel();

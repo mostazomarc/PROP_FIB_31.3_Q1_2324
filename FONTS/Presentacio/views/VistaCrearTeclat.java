@@ -14,6 +14,17 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.Objects;
 
+/**
+ * Aquesta vista és l’encarregada de crear un teclat. S’indica un camp clarament per introduir el nom del teclat que es
+ * vol crear. També hi ha un desplegable que permet seleccionar l’idioma del teclat. També s’ha de seleccionar amb 2
+ * radiobuttons es vol crear el teclat amb una llista de freqüències pròpia o no. En cas de seleccionar Sí, apareix un
+ * desplegable que permet seleccionar la llista de freqüències. A continuació hi ha dos camps per introduir el nombre
+ * de files i columnes del teclat. També hi ha un desplegable que permet seleccionar quins dels dos algorismes utilitzar
+ * per a la creació del teclat. Finalment, es pot fer click a un altre botó per crear el teclat. També s’inclou un botó
+ * que permet tornar a la vista anterior.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
 public class VistaCrearTeclat extends JFrame {
 
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");

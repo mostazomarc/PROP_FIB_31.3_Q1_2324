@@ -9,6 +9,13 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.List;
 
+/**
+ * Aquesta vista serveix per crear i llistar verticalment els elements de les classes: Teclats, LlistaFreqüències,
+ * Idiomes i Alfabets de manera que es mostren tants botons com elements de la classe hi hagi. Llista i crea els elements
+ * d’una determinada classe segons el paràmetre option.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
 public class VistaElements extends JFrame {
     private JButton Enrere = new JButton("Tornar al menú principal");
     private JButton Crear;
