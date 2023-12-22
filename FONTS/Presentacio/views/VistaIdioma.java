@@ -19,11 +19,35 @@ import java.awt.event.ComponentEvent;
  * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
  */
 public class VistaIdioma extends JFrame {
+
+    /**
+     * És el nom de l’idioma, per a dur a terme la seva consulta.
+     */
     private String nom;
+
+    /**
+     * Botó per tornar enrere.
+     */
     private JButton Enrere = new JButton("Tornar enrere");
+
+    /**
+     * Panell de continguts.
+     */
     private JPanel panellContinguts = new JPanel();
+
+    /**
+     * Àrea de text que mostra l’idioma.
+     */
     private JTextArea IdiomatextArea = new JTextArea();
+
+    /**
+     *  Panell que conté l’àrea de text de l’idioma.
+     */
     private JScrollPane scrollPanel = new JScrollPane();
+
+    /**
+     * Botó per eliminar l’Idioma.
+     */
     private JButton Eliminar = new JButton("Eliminar");
 
     /**

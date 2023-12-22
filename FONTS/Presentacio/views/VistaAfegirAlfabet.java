@@ -20,13 +20,45 @@ import java.io.File;
  * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
  */
 public class VistaAfegirAlfabet extends JFrame{
+
+    /**
+     * Text que demana que s’introdueixin les dades.
+     */
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
+
+    /**
+     * Text que demana importar un alfabet
+     */
     private JLabel labelImportarAlfabet = new JLabel("Importa l'alfabet");
+
+    /**
+     * Botó per importar un arxiu.
+     */
     private JButton importarArxiu = new JButton ("Importar arxiu");
+
+    /**
+     * Vista del directori home per importar un arxiu.
+     */
     private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+    /**
+     * Botó per tornar enrere
+     */
     private JButton Enrere = new JButton("Tornar enrere");
+
+    /**
+     * Botó per afegir l’alfabet
+     */
     private JButton Afegir = new JButton("Afegir alfabet");
-    private JPanel panelContenidos = new JPanel();
+
+    /**
+     * Panell de continguts.
+     */
+    private JPanel panellContinguts = new JPanel();
+
+    /**
+     * Filepath de l’arxiu importat.
+     */
     private String filepath;
 
     /**
@@ -88,8 +120,8 @@ public class VistaAfegirAlfabet extends JFrame{
      * Inicialitza el botó per tornar enrere.
      */
     private void iniEnrere() {
-        panelContenidos.setLayout(new FlowLayout());
-        panelContenidos.add(Enrere);
+        panellContinguts.setLayout(new FlowLayout());
+        panellContinguts.add(Enrere);
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
 
@@ -99,7 +131,7 @@ public class VistaAfegirAlfabet extends JFrame{
      * Inicialitza els camps d’entrada.
      */
     private void iniInputs() {
-        panelContenidos.setLayout(new GridBagLayout());
+        panellContinguts.setLayout(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL; // Fill the cell horizontally
@@ -108,14 +140,14 @@ public class VistaAfegirAlfabet extends JFrame{
 
         constraints.gridx = 0;
         constraints.gridy = 1;
-        panelContenidos.add(labelIntro, constraints);
+        panellContinguts.add(labelIntro, constraints);
         constraints.gridy = 2;
-        panelContenidos.add(labelImportarAlfabet, constraints);
+        panellContinguts.add(labelImportarAlfabet, constraints);
         constraints.gridy = 3;
-        panelContenidos.add(importarArxiu, constraints);
+        panellContinguts.add(importarArxiu, constraints);
         constraints.gridy = 4;
-        panelContenidos.add(Afegir, constraints);
-        add(panelContenidos, BorderLayout.CENTER);
+        panellContinguts.add(Afegir, constraints);
+        add(panellContinguts, BorderLayout.CENTER);
 
     }
 

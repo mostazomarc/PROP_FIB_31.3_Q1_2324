@@ -19,10 +19,25 @@ import java.awt.event.ComponentEvent;
  * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
  */
 public class VistaPerfils extends JFrame {
+
+    /**
+     * Botó per canviar a la vista VistaCrearPerfil.
+     */
     private JButton AP = new JButton("+");
+
+    /**
+     * Panell de continguts.
+     */
     private JPanel panellContinguts = new JPanel();
 
+    /**
+     * Títol del sistema.
+     */
     private JLabel titol = new JLabel("<< BENVINGUT A TECLATOR >>");
+
+    /**
+     * Subtítol del sistema.
+     */
     private JLabel subtitol = new JLabel("Inicia sessió prement el perfil");
 
     /**

@@ -18,11 +18,35 @@ import java.awt.event.ComponentEvent;
  * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
  */
 public class VistaAlfabet extends JFrame {
+
+    /**
+     * És el nom de l’alfabet, per a dur a terme la seva consulta.
+     */
     private String nom;
+
+    /**
+     * Botó per tornar enrere.
+     */
     private JButton Enrere = new JButton("Tornar enrere");
+
+    /**
+     *  Panell de continguts.
+     */
     private JPanel panellContinguts = new JPanel();
+
+    /**
+     * Àrea de text que mostra l’alfabet.
+     */
     private JTextArea AlfabettextArea = new JTextArea();
+
+    /**
+     * Panell que conté l’àrea de text de l’alfabet.
+     */
     private JScrollPane scrollPanel = new JScrollPane();
+
+    /**
+     * Botó per eliminar l’alfabet.
+     */
     private JButton Eliminar = new JButton("Eliminar");
 
     /**

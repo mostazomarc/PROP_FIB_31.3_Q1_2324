@@ -16,11 +16,32 @@ import java.awt.event.ComponentEvent;
  * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
  */
 public class VistaCrearPerfil extends JFrame {
+
+    /**
+     * Botó per tornar enrere.
+     */
     private JButton Enrere = new JButton("Tornar enrere");
+
+    /**
+     * Panell de continguts.
+     */
     private JPanel panellContinguts = new JPanel();
+
+    /**
+     * Text que demana el nom del perfil.
+     */
     private JLabel labelNomPerfil = new JLabel("Nom");
+
+    /**
+     * Camp de text per introduir el nom del perfil.
+     */
     private JTextField inputNomPerfil = new JTextField( 20);
+
+    /**
+     * Botó per crear el nou perfil.
+     */
     private JButton CP = new JButton("Crear perfil");
+
 
     /**
      * Constructora de la vista.

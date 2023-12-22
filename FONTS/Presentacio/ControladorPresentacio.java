@@ -310,18 +310,39 @@ public class ControladorPresentacio {
         controladorDomini.eliminarTeclat(nomSeleccio);
     }
 
+    /**
+     * Consulta la informació de l'idioma identificat per nomI
+     * @param nomI El nom de l'idioma
+     * @return La informació de l'idioma identificat per nomI
+     * @throws IdiomaNoExisteix
+     */
     public static String consultaIdioma(String nomI) throws IdiomaNoExisteix {
         return controladorDomini.consultaIdioma(nomI);
     }
 
+    /**
+     * Consulta la informació de l'alfabet identificat per nomA
+     * @param nomA El nom de l'alfabet
+     * @return La informació de l'alfabet identidicat per nomA
+     * @throws AlfabetNoExisteix
+     */
     public static String consultaAlfabet(String nomA) throws AlfabetNoExisteix {
         return controladorDomini.consultaAlfabet(nomA);
     }
+
+    /**
+     * Obté una llista amb els noms dels alfabets.
+     * @return llista amb els noms dels alfabets.
+     */
     public static List<String> getNomsAlfabets()  {
         return controladorDomini.getNomsAlfabets();
     }
 
-    public static void eliminaPerfil() throws ExcepcionsCreadorTeclat {
+    /**
+     * Elimina el perfil actual i la seva informació relacionada.
+     * @throws ExcepcionsCreadorTeclat Si el perfil
+     */
+    public static void eliminaPerfil() throws ExcepcionsCreadorTeclat{
         controladorDomini.eliminaPerfil();
     }
 

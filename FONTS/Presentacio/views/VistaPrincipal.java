@@ -16,14 +16,50 @@ import java.awt.event.*;
  * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
  */
 public class VistaPrincipal extends JFrame{
+
+    /**
+     * Panell de continguts.
+     */
     private JPanel panellContinguts = new JPanel();
+
+    /**
+     * Botó per anar a la vista de teclats.
+     */
     private JButton Teclats = new JButton("Teclats");
+
+    /**
+     * Botó per anar a la vista de llistes.
+     */
     private JButton Llistes = new JButton("Llistes de freqüències");
+
+    /**
+     * Botó per anar a la vista d’Idiomes
+     */
     private JButton Idiomes = new JButton("Idiomes");
+
+    /**
+     * Botó per anar a la vista d’alfabets.
+     */
     private JButton Alfabets = new JButton("Alfabets");
+
+    /**
+     *  Botó per canviar de perfil.
+     */
     private JButton CanviarPerfil = new JButton("Canviar Perfil");
+
+    /**
+     *  Botó per eliminar el perfil.
+     */
     private JButton EliminarPerfil = new JButton("Eliminar Perfil");
+
+    /**
+     * Text que mostra el perfil que ha obert la sessió.
+     */
     private JLabel labelSessio;
+
+    /**
+     * Botó per sortir del sistema.
+     */
     private JButton Sortir = new JButton("Sortir");
 
     /**

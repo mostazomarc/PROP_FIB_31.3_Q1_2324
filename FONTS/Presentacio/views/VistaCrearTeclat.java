@@ -27,25 +27,105 @@ import java.util.Objects;
  */
 public class VistaCrearTeclat extends JFrame {
 
+
+    /**
+     * Text que demana que s’introdueixin les dades.
+     */
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
+
+    /**
+     * Text que demana el nom del teclat.
+     */
     private JLabel labelNomTeclat = new JLabel("Nom del teclat");
+
+    /**
+     * Camp de text per introduir el nom del teclat.
+     */
     private JTextField inputNomTeclat = new JTextField(20);
+
+    /**
+     * Text que demana seleccionar l’idioma del teclat.
+     */
     private JLabel labelNomIdioma = new JLabel("Selecciona l'idioma");
+
+    /**
+     * Desplegable que permet seleccionar un dels idiomes.
+     */
     private JComboBox inputNomIdioma;
+
+    /**
+     * Text que demana si es vol utilitzar una llista de freqüències propia.
+     */
     private JLabel labelULL = new JLabel("Vol seleccionar una llista de freqüències pròpia?");
+
+    /**
+     * Conjunt de botons d’opció.
+     */
     private ButtonGroup resposta = new ButtonGroup();
+
+    /**
+     * Botó d’opció Sí.
+     */
     private JRadioButton Si = new JRadioButton("Sí");
+
+    /**
+     * Botó d’opció No.
+     */
     private JRadioButton No = new JRadioButton("No");
+
+    /**
+     * Text que demana la llista si ha respost que Sí.
+     */
     private JLabel labelNomLl = new JLabel("Selecciona la llista de freqüències");
+
+    /**
+     * Desplegable per seleccionar la llista de freqüències si ha respost que Sí.
+     */
     private JComboBox<String> inputNomLl = new JComboBox<>();
+
+    /**
+     * Text que demana el nombre de files del teclat.
+     */
     private JLabel labelNF = new JLabel("Nombre de files del layout");
+
+    /**
+     * Camp de text per introduir el número de files del teclat.
+     */
     private JTextField inputNF = new JTextField(20);
+
+    /**
+     * Text que demana el número de columnes del teclat.
+     */
     private JLabel labelNC = new JLabel("Nombre de columnes del layout");
+
+    /**
+     * Camp de text per introduir el número de columnes del teclat.
+     */
     private JTextField inputNC = new JTextField(20);
+
+    /**
+     * Text que demana seleccionar un algorisme.
+     */
     private JLabel labelAlgorisme = new JLabel("Algorisme");
+
+    /**
+     * Desplegable que permet seleccionar un dels dos algorismes.
+     */
     private JComboBox inputAlgorisme;
+
+    /**
+     * Botó per tornar enrere.
+     */
     private JButton Enrere = new JButton("Tornar enrere");
+
+    /**
+     * Botó per crear el teclat.
+     */
     private JButton Crear = new JButton("Crear teclat");
+
+    /**
+     * Panell de continguts.
+     */
     private JPanel panellContinguts = new JPanel();
 
     /**
