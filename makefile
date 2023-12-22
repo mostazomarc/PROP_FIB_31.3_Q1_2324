@@ -53,7 +53,7 @@ executaDriverAlgorismeQAP: jarsDrivers
 executaMain: jars
 	java -cp ./EXEnoEntrega/Main.jar:./FONTS/lib/json-simple-1.1.jar Presentacio.Main
 
-executaMainExe: exe
+executaMainExe:
 	java -cp ./EXE/Main/Main.jar:./FONTS/lib/json-simple-1.1.jar Presentacio.Main
 
 fulltest: all
@@ -110,7 +110,7 @@ postest: all
 inputtest: all
 	java -cp $(JUNIT_JARS):$(JSON_JARS):$(CLASS_OUTPUT) org.junit.runner.JUnitCore JUnit.InputFrequenciesTest
 
-exe1: jars
+exe1: jarsDrivers
 	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE1)/Alfabets
 	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE1)/Idiomes
 	cp $(JAR_OUTPUT)/DriverDades.jar $(JAR_OUTPUT)/DriverTeclats.jar $(JAR_OUTPUT)/DriverDominiv2.jar $(EXE1)/LlistaFrequencies

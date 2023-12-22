@@ -13,6 +13,23 @@ Projecte de l'assignatura PROP de la FIB.
 - agusti.costabella@estudiantat.upc.edu
 - francisco.torredemer@estudiantat.upc.edu
 
+## Instruccions per compilar i executar projecte
+- **Compilar**
+  - Per compilar el projecte **al directori `./EXE/Main` (directori entrega)** s'ha de fer `make exe` al directori root
+  - Per compilar el projecte **fora del directori `./EXE/` (fora del directori d'entrega)** s'ha de fer `make jars` al directori root
+  - Per compilar el projecte **sense fer executables** s'ha de fer `make all` al directori root
+  - Per compilar els drivers s'ha de fer `make jarsDrivers` al directori root
+- **Executar**
+  - Per executar el projecte **del directori `./EXE/Main` (directori entrega)** s'ha de fer `make executaMainExe` al directori root
+  - Per **compilar i executar** el projecte **fora del directori `./EXE/` (fora del directori d'entrega)** s'ha de fer `make executaMain` al directori root
+  - Per executar els drivers s'ha de fer `make executaDriver'NomDriver'` al directori root
+
+## Instruccions per netejar el projecte
+  - Per netejar les **classes compilades** del projecte s'ha de fer `make clean` al directori root
+  - Per netejar els **fitxers amb dades del sistema** s'ha de fer `make cleanSaves` al directori root
+  - Per netejar **l'executable del projecte** a `./EXE/Main` s'ha de fer `make cleanExe` al directori root
+  - Per netejar **tots els arxius comilats a `./EXEnoEntrega/`** s'ha de fer `make distclean` al directori root
+
 # Estructura del Projecte
 
 - **DATA/**
