@@ -145,7 +145,6 @@ public class VistaPerfils extends JFrame {
         add(panellContinguts, BorderLayout.CENTER);
     }
 
-
     /**
      * Assigna els listeners als components corresponents.
      */

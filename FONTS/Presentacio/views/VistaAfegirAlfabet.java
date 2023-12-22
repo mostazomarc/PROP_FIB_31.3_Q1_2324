@@ -95,6 +95,9 @@ public class VistaAfegirAlfabet extends JFrame{
 
     }
 
+    /**
+     * Inicialitza els camps d’entrada.
+     */
     private void iniInputs() {
         panelContenidos.setLayout(new GridBagLayout());
 
@@ -150,6 +153,11 @@ public class VistaAfegirAlfabet extends JFrame{
         });
     }
 
+    /**
+     * Dirigeix les accions en funció del botó premut.
+     * @param e L'esdeveniment que activa aquesta funció
+     * @throws Exception
+     */
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {

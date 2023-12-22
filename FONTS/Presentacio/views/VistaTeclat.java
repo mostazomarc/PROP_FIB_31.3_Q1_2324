@@ -102,7 +102,9 @@ public class VistaTeclat extends JFrame {
         add(Enrere);
     }
 
-
+    /**
+     * Inicialitza els botons d’eliminar i modificar el layout del teclat
+     */
     private void iniButtons() {
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
@@ -150,6 +152,10 @@ public class VistaTeclat extends JFrame {
         add(buttonsPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Inicialtiza el panell que representa el teclat en una matriu de botons.
+     * @throws ExcepcionsCreadorTeclat Si el teclat identificat per nom no existeix
+     */
     private void iniTeclat() throws ExcepcionsCreadorTeclat {
         char[][] teclat = ControladorPresentacio.consultaTeclat(nom);
         int files = teclat.length;

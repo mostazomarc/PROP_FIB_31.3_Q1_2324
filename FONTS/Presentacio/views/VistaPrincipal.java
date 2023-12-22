@@ -9,7 +9,7 @@ import java.awt.event.*;
 
 /**
  * Aquesta vista és l’encarregada de mostrar el menú principal del sistema i apareix just després de triar un perfil.
- * Aquesta està formada per un conjunt de 6 botons. Els 4 primers et porten a vistes diferents per gestionar (crear/eliminar/modificar)
+ * Aquesta està formada per un conjunt de 7 botons. Els 4 primers et porten a vistes diferents per gestionar (crear/eliminar/modificar)
  * les diferents dades del sistema (Teclats, Llistes de freqüències, Idiomes i Alfabets), el cinquè permet tornar a la
  * vista dels perfils per canviar de perfil, el sisè per a eliminar el perfil l i l’últim permet sortir de l’aplicació.
  *
@@ -81,6 +81,9 @@ public class VistaPrincipal extends JFrame{
         });
     }
 
+    /**
+     * Inicialitza els set botons del menú principal
+     */
     private void iniButtons() {
         panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
         panellContinguts.add(Box.createVerticalGlue());

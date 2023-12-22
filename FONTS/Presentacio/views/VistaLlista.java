@@ -158,7 +158,10 @@ public class VistaLlista extends JFrame {
         panellContinguts.add(buttonPanel, constraints);
     }
 
-
+    /**
+     * Inicialitza el panell i l’àrea de text que mostra la llista
+     * @throws LlistaFreqNoExisteix Si la llista de freqüències identificada per nom no existeix
+     */
     private void iniLlista() throws LlistaFreqNoExisteix {
         JLabel labelNom = new JLabel(nom);
         labelNom.setFont(new Font("Monospaced", Font.BOLD, 16));

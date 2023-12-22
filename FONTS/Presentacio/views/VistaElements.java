@@ -36,10 +36,11 @@ public class VistaElements extends JFrame {
      * corresponents.
      */
     private void iniComponents(String option) {
+        this.option = option;
         iniFrame();
         iniClose();
         iniEnrere();
-        iniContingut(option);
+        iniContingut();
         assign_listenerComponents();
     }
 
@@ -93,7 +94,10 @@ public class VistaElements extends JFrame {
 
     }
 
-    private void iniContingut(String option) {
+    /**
+     * Inicialitza la llista vertical dels botons que representen un element respectivament i el botó de Crear.
+     */
+    private void iniContingut() {
         List<String> l = null;
         String el = "";
         switch(option) {

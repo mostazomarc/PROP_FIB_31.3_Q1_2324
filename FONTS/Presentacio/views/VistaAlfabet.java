@@ -93,6 +93,9 @@ public class VistaAlfabet extends JFrame {
         add(Enrere);
     }
 
+    /**
+     * Inicialitza el botó d’eliminar alfabet.
+     */
     private void iniButtons() {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -105,7 +108,10 @@ public class VistaAlfabet extends JFrame {
         panellContinguts.add(buttonPanel, constraints);
     }
 
-
+    /**
+     * Inicialitza l’àrea de text que mostra l’alfabet
+     * @throws AlfabetNoExisteix Si l'alfabet identificat per nom no existeix
+     */
     private void iniAlfabet() throws AlfabetNoExisteix {
         String info = ControladorPresentacio.consultaAlfabet(nom);
         AlfabettextArea.setText(info); // Establecer el texto en el JTextArea

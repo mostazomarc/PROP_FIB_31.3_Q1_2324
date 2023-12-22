@@ -106,7 +106,10 @@ public class VistaIdioma extends JFrame {
         panellContinguts.add(buttonPanel, constraints);
     }
 
-
+    /**
+     * Inicialitza l’àrea de text que mostra l’idioma.
+     * @throws IdiomaNoExisteix Si l'idioma identificat per nom no existeix
+     */
     private void iniIdioma() throws IdiomaNoExisteix {
         String info = ControladorPresentacio.consultaIdioma(nom);
         IdiomatextArea.setAlignmentX(CENTER_ALIGNMENT);

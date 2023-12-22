@@ -130,6 +130,9 @@ public class VistaAfegirLlista extends JFrame {
 
     }
 
+    /**
+     * Inicialitza els camps d’entrada.
+     */
     private void iniInputs() {
         panellContinguts.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();

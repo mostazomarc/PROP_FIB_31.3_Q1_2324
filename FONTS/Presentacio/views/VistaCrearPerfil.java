@@ -88,6 +88,9 @@ public class VistaCrearPerfil extends JFrame {
         add(Enrere);
     }
 
+    /**
+     * Inicialitza els textos i camps d’entrada.
+     */
     private void iniInput() {
         panellContinguts.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
