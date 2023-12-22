@@ -24,8 +24,8 @@ public class  InputFrequenciesTest {
     public void setUpBeforeClass() throws Exception {
         System.out.println("Comencen els tests de InputFrequencies");
         cDomini.crearPerfil("PerfilProva");
-        cDomini.afegirAlfabet("./DATA/alfabetCatala.txt");
-        cDomini.afegirIdioma("Català", "AlfabetCatala" , "llista", "./DATA/catalaFreq.txt");
+        cDomini.afegirAlfabet("./DATA/Alfabets/alfabetCatala.txt");
+        cDomini.afegirIdioma("Català", "AlfabetCatala" , "llista", "./DATA/LlistesFrequencies/catalaFreq.txt");
     }
 
     @Before
@@ -33,7 +33,7 @@ public class  InputFrequenciesTest {
         CtrlFile prova = CtrlFile.getInstance();
         List<String> LlistaLlegida = new ArrayList<>();
         try {
-            LlistaLlegida = prova.llegirArxiu("./DATA/catalaFreq.txt");
+            LlistaLlegida = prova.llegirArxiu("./DATA/LlistesFrequencies/catalaFreq.txt");
         } catch (FileNotFoundException e3) {
             System.out.println("ERROR: " + e3.getMessage());
         }
@@ -67,7 +67,7 @@ public class  InputFrequenciesTest {
     @Test
     public void testInputFrequencies() throws Exception {
         Map<String, Integer> novesEntrades = new HashMap<String, Integer>();
-        cDomini.novaLlistaPerfil("llista", "./DATA/catalaFreq.txt", "Català", novesEntrades);
+        cDomini.novaLlistaPerfil("llista", "./DATA/LlistesFrequencies/catalaFreq.txt", "Català", novesEntrades);
         Map<String, Integer > result = cDomini.consultaLlista("catalaFreq.txt");
         imprimirLlista(result);
         assertEquals(novesEntradesLlegidesAPart, result);
