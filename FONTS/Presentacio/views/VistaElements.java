@@ -17,9 +17,25 @@ import java.util.List;
  * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
  */
 public class VistaElements extends JFrame {
+
+    /**
+     * Botó per tornar enrere.
+     */
     private JButton Enrere = new JButton("Tornar al menú principal");
+
+    /**
+     * Botó per crear un nou element del tipus corresponent.
+     */
     private JButton Crear;
+
+    /**
+     * Panell de continguts.
+     */
     private JPanel panellContinguts = new JPanel();
+
+    /**
+     * Tipus d’element (teclat, llista, alfabets, idiomes)
+     */
     private String option;
 
     /**

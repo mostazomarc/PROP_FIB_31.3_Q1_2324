@@ -22,16 +22,60 @@ import static java.lang.Math.max;
  */
 
 public class VistaTeclat extends JFrame {
+
+    /**
+     * És el nom del teclat, per a dur a terme la seva consulta.
+     */
     private String nom;
+
+    /**
+     *  Botó per tornar enrere.
+     */
     private JButton Enrere = new JButton("Tornar enrere");
+
+    /**
+     * Panell de continguts.
+     */
     private JPanel panellContinguts = new JPanel();
+
+    /**
+     * Panell que mostra el teclat.
+     */
     private JPanel panelTeclat = new JPanel();
+
+    /**
+     * Botó per a modificar el layout del teclat.
+     */
     private JButton ModificarLayout = new JButton("Modificar Layout");
+
+    /**
+     * Text que demana el número de files del teclat.
+     */
     private JLabel labelNF = new JLabel("Nombre files:");
+
+    /**
+     * Text que demana el número de columnes del teclat.
+     */
     private JLabel labelNC = new JLabel("Nombre columnes:");
+
+    /**
+     * Camp de text per introduir el número de files del teclat.
+     */
     private JTextField inputNF = new JTextField(10);
+
+    /**
+     * Camp de text per introduir el número de columnes del teclat.
+     */
     private JTextField inputNC = new JTextField(10);
+
+    /**
+     * Botó per modificar el layout del teclat.
+     */
     private JButton Modificar = new JButton("Modificar");
+
+    /**
+     * Botó per eliminar el teclat.
+     */
     private JButton Eliminar = new JButton("Eliminar");
 
     /**

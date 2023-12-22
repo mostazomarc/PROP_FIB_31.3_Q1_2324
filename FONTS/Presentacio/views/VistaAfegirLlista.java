@@ -30,24 +30,99 @@ import java.util.Map;
  */
 public class VistaAfegirLlista extends JFrame {
 
+    /**
+     * Text que demana que s’introdueixin les dades.
+     */
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
+
+    /**
+     * Text que demana el tipus d’entrada de la llista.
+     */
     private JLabel labelTipusInput = new JLabel("Com vols afegir la llista?");
+
+    /**
+     * Conjunt de botons d’opció.
+     */
     private ButtonGroup tipusInput = new ButtonGroup();
+
+    /**
+     * Botó d’opció text.
+     */
     private JRadioButton rtext = new JRadioButton("Importar text");
+
+    /**
+     * Botó d’opció llista.
+     */
     private JRadioButton rllista = new JRadioButton("Importar llista");
+
+    /**
+     * Botó d’opció manual.
+     */
     private JRadioButton rmanual = new JRadioButton("Introduir manualment");
+
+    /**
+     * Text que demana el nom de la llista si és entrada manual.
+     */
     private JLabel labelNomLlista = new JLabel("Nom de la llista");
+
+    /**
+     * Camp de text per introduir el nom de la llista si és entrada manual.
+     */
     private JTextField inputNomLlista = new JTextField(20);
+
+    /**
+     * Text que demana el nom de l’idioma.
+     */
     private JLabel labelNomIdioma = new JLabel("Selecciona l'idioma");
+
+    /**
+     * Selector de l’idioma.
+     */
     private JComboBox inputNomIdioma;
+
+    /**
+     * Botó per a importar l’arxiu si és entrada tipus text o llista.
+     */
     private JButton importarArxiu = new JButton("Importar arxiu");
+
+    /**
+     * Àrea de text per introduir la llista manualment.
+     */
     private JTextArea llistaManual = new JTextArea();
+
+    /**
+     * Panell que mostra la llista manual.
+     */
     JScrollPane scrollPane = new JScrollPane();
+
+    /**
+     * Vista del directori home per importar un arxiu.
+     */
     private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+    /**
+     * Botó per tornar enrere.
+     */
     private JButton Enrere = new JButton("Tornar enrere");
+
+    /**
+     * Botó per afegir la llista.
+     */
     private JButton Afegir = new JButton("Afegir llista");
+
+    /**
+     * Panell de continguts.
+     */
     private JPanel panellContinguts = new JPanel();
+
+    /**
+     * Filepath de l’arxiu importat.
+     */
     private String filepath;
+
+    /**
+     * Indica el tipus d’entrada de la llista (llista, text o manual).
+     */
     private String tipus = " ";
 
     /**

@@ -25,20 +25,80 @@ import java.util.Map;
  * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
  */
 public class VistaLlista extends JFrame {
+
+    /**
+     * És el nom de la llista de freqüències, per a dur a terme la seva consulta.
+     */
     private String nom;
+
+    /**
+     * Botó per tornar enrere.
+     */
     private JButton Enrere = new JButton("Tornar enrere");
+
+    /**
+     * Panell de continguts.
+     */
     private JPanel panellContinguts = new JPanel();
+
+    /**
+     * Àrea de text que mostra la llista.
+     */
     private JTextArea LlistatextArea = new JTextArea(20, 40);
+
+    /**
+     * Panell que conté l’àrea de text de la llista.
+     */
     private JScrollPane scrollPanel = new JScrollPane();
+
+    /**
+     * Botó per modificar la llista.
+     */
     private JButton ModificarLlista = new JButton("Modificar amb fitxer");
+
+    /**
+     * Botó per eliminar la llista.
+     */
     private JButton Eliminar = new JButton("Eliminar");
+
+    /**
+     * Botó per editar la llista
+     */
     private JButton Editar = new JButton("Editar manualment");
+
+    /**
+     * Botó per importar un arxiu
+     */
     private JButton ImportarArxiu = new JButton("Importar arxiu");
+
+    /**
+     * Vista del directori home per importar un arxiu.
+     */
     private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+    /**
+     * Selector per seleccionar el tipus d'arxiu a importar.
+     */
     private JComboBox InputTipusArxiu;
+
+    /**
+     * Text que pregunta el tipus d'arxiu que s'importarà.
+     */
     private JLabel labelArxiu = new JLabel("Selecciona el tipus d'arxiu i importa el fitxer");
+
+    /**
+     * Botó per confirmar la modificació.
+     */
     private JButton Modificar = new JButton("Modificar");
+
+    /**
+     * Botó per guardar els canvis.
+     */
     private JButton Guardar = new JButton("Guardar Canvis");
+
+    /**
+     * Filepath de l’arxiu importat.
+     */
     private String filepath;
 
     /**

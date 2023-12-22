@@ -23,21 +23,85 @@ import java.util.List;
  * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
  */
 public class VistaAfegirIdioma extends JFrame{
+
+    /**
+     * Text que demana que s’introdueixin les dades.
+     */
     private JLabel labelIntro = new JLabel("Introdueix les següents dades:");
+
+    /**
+     * Text que demana el nom de l’idioma.
+     */
     private JLabel labelNomIdioma = new JLabel("Nom de l'idioma:");
+
+    /**
+     * Camp de text per introduir l’idioma.
+     */
     private JTextField inputNomIdioma = new JTextField(20);
+
+    /**
+     * Text que demana que s’importi la llista de freqüències predeterminada de l’idioma.
+     */
     private JLabel labelImportarLlista = new JLabel("Importa la llista de freqüències predeterminada de l'idioma");
+
+    /**
+     * Text que pregunta de quin tipus és l’arxiu que s’importarà.
+     */
     private JLabel labelTipusArxiu = new JLabel("De quin tipus és l'arxiu ?");
+
+    /**
+     * Conjunt de botons d’opció.
+     */
     private ButtonGroup tipusInput = new ButtonGroup();
+
+    /**
+     * Botó d’opció text.
+     */
     private JRadioButton rtext = new JRadioButton("Text");
+
+    /**
+     * Botó d’opció llista.
+     */
     private JRadioButton rllista = new JRadioButton("Llista");
+
+    /**
+     * Botó per importar l’arxiu.
+     */
     private JButton importarArxiu = new JButton ("Importar arxiu");
+
+    /**
+     * Vista del directori home per importar un arxiu.
+     */
     private JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+    /**
+     * Text que demana l’alfabet de l’idioma.
+     */
     private JLabel labelNomAlfabet = new JLabel("Selecciona l'alfabet corresponent");
+
+    /**
+     * Selector per a seleccionar l’alfabet.
+     */
     private JComboBox inputNomAlfabet = new JComboBox();
+
+    /**
+     * Botó per tornar enrere.
+     */
     private JButton Enrere = new JButton("Tornar enrere");
+
+    /**
+     * Botó per afegir l’idioma.
+     */
     private JButton Afegir = new JButton("Afegir idioma");
+
+    /**
+     * Panell de continguts.
+     */
     private JPanel panellContinguts = new JPanel();
+
+    /**
+     * Filepath de l’arxiu importat.
+     */
     private String filepath;
 
     /**
