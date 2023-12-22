@@ -1,5 +1,6 @@
 package Presentacio.views;
 
+import Excepcions.ExcepcionsCreadorTeclat;
 import Presentacio.ControladorPresentacio;
 
 import javax.swing.*;
@@ -292,7 +293,12 @@ public class VistaAfegirIdioma extends JFrame{
                 ControladorPresentacio.mostraAvis("Importa un arxiu");
                 return;
             }
-            ControladorPresentacio.afegirIdioma(nomI,nomA,tipus,filepath);
+            try {
+                ControladorPresentacio.afegirIdioma(nomI, nomA, tipus, filepath);
+            } catch (ExcepcionsCreadorTeclat e1) {
+                ControladorPresentacio.mostraError(e1.getMessage());
+                return;
+            }
             ControladorPresentacio.vistaElements("Idiomes");
             setVisible(false);
         }
