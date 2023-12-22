@@ -2,18 +2,66 @@ package Domini;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+/**
+ * Aquesta classe fa referència a l’algorisme hongarès. En aquest cas, s’utilitza per calcular
+ * a partir d’una matriu de costs, on cada fila és una lletra i cada columna és una posició del teclat,
+ * l’assignació òptima, de tal manera que el cost d’assignar a totes les lletres a una determinada posició
+ * sigui mínim.
+ *
+ * @author Agustí Costabella Moreno (agusti.costabella@estudiantat.upc.edu)
+ */
 public class HungarianAlgorithm {
-    public double[][] matriu; // matriu inicial (matriu de costos)
-    public double [][] copiamatriu;
-    // vectors copiamatriuiliars per construir la matriu
+    /**
+     * Matriu que s’utilitza per a fer els càlculs de l’assignació òptima. És una matriu quadrada.
+     */
+    public double[][] matriu;
+
+    /**
+     * Matriu original, s’utilitza per a obtenir els costs inicials de cada posició,
+     * ja que l’altre matriu es va modificant al llarg de l’execució.
+     */
+    public double[][] copiamatriu;
+
+    /**
+     * Vector de 0 o 1. Indica si hi ha un zero a la fila.
+     * Si és 1 hi ha un zero marcat, altrament no.
+     */
     public int[] zeroFila;
+
+    /**
+     * Vector de 0 o 1. Indica si hi ha un zero a la columna.
+     * Si és 1 hi ha un zero marcat, altrament no.
+     */
     public int[] zeroColumna;
+
+    /**
+     * Vector de 0 o 1. Indica si la fila està coberta.
+     * Si és 1 està coberta, altrament no.
+     */
     public int[] filaCoberta;
+
+    /**
+     * Vector de 0 o 1. Indica si la columna està coberta.
+     * Si és 1 està coberta, altrament no.
+     */
     public int[] columnaCoberta;
+
+    /**
+     * Guarda les posicions dels zeros “estrella”. Indica la columna del zero “estrella.
+     */
     public int[] zerosEstrellaEnFila;
+
+    /**
+     * S’obté a partir de la suma dels costos assignats de manera òptima.
+     */
     public double valoroptim;
 
-    //Pre: La matriu es quadrada, és a dir, matriu.length == matriu[0].length
+    /**
+     * Matriu que s’utilitza per a fer els càlculs de l’assignació òptima. És una matriu quadrada.
+     *
+     * @param matriu Matriu d'entrada per a càlculs d'assignació òptima.
+     */
     public HungarianAlgorithm(double[][] matriu) {
         valoroptim = 0;
         copiamatriu = new double [matriu.length][matriu.length];
@@ -35,8 +83,11 @@ public class HungarianAlgorithm {
         Arrays.fill(zeroColumna, -1);
     }
 
-    //Pre:
-    //Post: retorna el valor òptim, és a dir, la suma total dels costs de l'assignació òptima
+    /**
+     * Elimina tots els marcats, reinicialitza vectors i calcula l’assignació òptima.
+     *
+     * @return El valor òptim de l'assignació.
+     */
     public double trobarAssignacioOptima() {
         pas1();    // redueix la matriu
         pas2();    // marca els zeros independents
@@ -71,8 +122,11 @@ public class HungarianAlgorithm {
         return valoroptim;
     }
 
-    //Pre:
-    //Post: retorna true si totes les columnes estan cobertes, false en cas contrari
+    /**
+     * Retorna true si totes les columnes estan cobertes, false en cas contrari.
+     *
+     * @return Cert si totes les columnes estan cobertes, fals altrament.
+     */
     private boolean totesLesColumnesEstanCobertes() {
         for (int i : columnaCoberta) {
             if (i == 0) {
@@ -154,7 +208,8 @@ public class HungarianAlgorithm {
 
     /**
      * Pas 4:
-     * Troba el 0 i  el marca com a "0*". Retorna la posicio del 0*
+     * Troba el 0 i el marca com a "0*".
+     * @return La posició del 0*
      */
     public int[] pas4() {
         for (int i = 0; i < matriu.length; i++) {
@@ -172,7 +227,8 @@ public class HungarianAlgorithm {
 
     /**
      * Pas 5:
-     * Crea una cadena K de "Zeros" i "0*" zeroPrincipal => primer zero no cobert
+     * Crea una cadena K de "Zeros" i "0*"
+     * @param zeroPrincipal El primer zero no cobert
      */
     public void pas5(int[] zeroPrincipal) {
         int i = zeroPrincipal[0];

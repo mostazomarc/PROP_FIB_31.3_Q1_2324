@@ -81,6 +81,7 @@ public class Teclat {
      * @param i L'idioma del teclat
      * @param n El nombre de columnes del teclat
      * @param m El nombre de files del teclat
+     * @param e L'estratègia emprada en la construcció del teclat
      * @throws ExcepcionsCreadorTeclat Si el layout no és vàlid o els idiomes són diferents
      */
     public Teclat(String nom, LlistaFrequencies llistafreq, Idioma i, int n, int m, String e) throws ExcepcionsCreadorTeclat{
@@ -107,6 +108,7 @@ public class Teclat {
      * @param i L'idioma del teclat
      * @param n El nombre de columnes del teclat
      * @param m El nombre de files del teclat
+     * @param e L'estratègia emprada en la construcció del teclat
      * @throws ExcepcionsCreadorTeclat Si el layout no és vàlid
      */
     public Teclat(String nom, Idioma i, int n, int m, String e) throws ExcepcionsCreadorTeclat{
