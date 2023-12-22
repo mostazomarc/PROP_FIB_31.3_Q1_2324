@@ -25,11 +25,19 @@ public class VistaPrincipal extends JFrame{
     private JButton EliminarPerfil = new JButton("Eliminar Perfil");
     private JLabel labelSessio;
     private JButton Sortir = new JButton("Sortir");
+
+    /**
+     * Constructora de la vista.
+     */
     public VistaPrincipal () {
         setVisible(true);
         iniComponents();
     }
 
+    /**
+     * Defineix i afegeix els components i els seus contenidors, les característiques del JFrame i associa els listeners
+     * corresponents.
+     */
     private void iniComponents() {
         iniFrame();
         iniClose();
@@ -37,6 +45,9 @@ public class VistaPrincipal extends JFrame{
         assign_listenerComponents();
     }
 
+    /**
+     * Inicialitza el marc de la vista.
+     */
     private void iniFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
@@ -48,6 +59,9 @@ public class VistaPrincipal extends JFrame{
         setTitle("Menú Principal");
     }
 
+    /**
+     * Inicialitza el botó per sortir del programa.
+     */
     private void iniClose() {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre automático
 
@@ -171,6 +185,11 @@ public class VistaPrincipal extends JFrame{
         });
     }
 
+    /**
+     * Dirigeix les accions en funció del botó premut.
+     * @param e L'esdeveniment que activa aquesta funció
+     * @throws Exception
+     */
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Teclats.equals(source)) {

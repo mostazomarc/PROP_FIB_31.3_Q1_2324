@@ -25,11 +25,18 @@ public class VistaPerfils extends JFrame {
     private JLabel titol = new JLabel("<< BENVINGUT A TECLATOR >>");
     private JLabel subtitol = new JLabel("Inicia sessió prement el perfil");
 
+    /**
+     * Constructora de la vista.
+     */
     public VistaPerfils () {
         setVisible(true);
         iniComponents();
     }
 
+    /**
+     * Defineix i afegeix els components i els seus contenidors, les característiques del JFrame i associa els listeners
+     * corresponents.
+     */
     private void iniComponents() {
         iniFrame();
         iniClose();
@@ -37,6 +44,9 @@ public class VistaPerfils extends JFrame {
         assignListenersComponents();
     }
 
+    /**
+     * Inicialitza el marc de la vista, el tìtol i subtítol d'aquesta.
+     */
     private void iniFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
@@ -68,6 +78,9 @@ public class VistaPerfils extends JFrame {
         add(panel, BorderLayout.NORTH);
     }
 
+    /**
+     * Inicialitza el botó per sortir del programa.
+     */
     private void iniClose() {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre automático
 
@@ -87,6 +100,9 @@ public class VistaPerfils extends JFrame {
         });
     }
 
+    /**
+     * Inicialitza els botons dels perfils i el d’afegir un nou perfil.
+     */
     private void iniButtonsPerfils() {
         List<String> perfiles = ControladorPresentacio.getAllPerfils();
 
@@ -150,6 +166,11 @@ public class VistaPerfils extends JFrame {
         });
     }
 
+    /**
+     * Dirigeix les accions en funció del botó premut.
+     * @param e L'esdeveniment que activa aquesta funció
+     * @throws Exception
+     */
     public void actionPerformedButtons(ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (AP.equals(source)) {

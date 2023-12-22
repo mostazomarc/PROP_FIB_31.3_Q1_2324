@@ -34,12 +34,19 @@ public class VistaTeclat extends JFrame {
     private JButton Modificar = new JButton("Modificar");
     private JButton Eliminar = new JButton("Eliminar");
 
+    /**
+     * Constructora de la vista.
+     */
     public VistaTeclat (String nomTeclat) throws ExcepcionsCreadorTeclat {
         nom = nomTeclat;
         setVisible(true);
         iniComponents();
     }
 
+    /**
+     * Defineix i afegeix els components i els seus contenidors, les característiques del JFrame i associa els listeners
+     * corresponents.
+     */
     private void iniComponents() throws ExcepcionsCreadorTeclat {
         iniFrame();
         iniClose();
@@ -49,6 +56,9 @@ public class VistaTeclat extends JFrame {
         assign_listenerComponents();
     }
 
+    /**
+     * Inicialitza el marc de la vista.
+     */
     private void iniFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
@@ -59,6 +69,9 @@ public class VistaTeclat extends JFrame {
         setResizable(false);
     }
 
+    /**
+     * Inicialitza el botó per sortir del programa.
+     */
     private void iniClose() {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre automático
 
@@ -78,6 +91,9 @@ public class VistaTeclat extends JFrame {
         });
     }
 
+    /**
+     * Inicialitza el botó per tornar enrere.
+     */
     private void iniEnrere() {
         panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
         panellContinguts.add(Box.createVerticalGlue());
@@ -85,6 +101,7 @@ public class VistaTeclat extends JFrame {
         Enrere.setBounds(0, 0, 200, 20);
         add(Enrere);
     }
+
 
     private void iniButtons() {
         JPanel buttonsPanel = new JPanel();
@@ -239,6 +256,11 @@ public class VistaTeclat extends JFrame {
         });
     }
 
+    /**
+     * Dirigeix les accions en funció del botó premut.
+     * @param e L'esdeveniment que activa aquesta funció
+     * @throws Exception
+     */
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {
@@ -277,6 +299,5 @@ public class VistaTeclat extends JFrame {
                 setVisible(false);
             }
         }
-
     }
 }

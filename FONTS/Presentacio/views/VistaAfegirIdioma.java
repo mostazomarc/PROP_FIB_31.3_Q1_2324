@@ -39,11 +39,18 @@ public class VistaAfegirIdioma extends JFrame{
     private JPanel panellContinguts = new JPanel();
     private String filepath;
 
+    /**
+     * Constructora de la vista.
+     */
     public VistaAfegirIdioma() {
         setVisible(true);
         iniComponents();
     }
 
+    /**
+     * Defineix i afegeix els components i els seus contenidors, les característiques del JFrame i associa els listeners
+     * corresponents.
+     */
     private void iniComponents() {
         iniFrame();
         iniClose();
@@ -52,6 +59,9 @@ public class VistaAfegirIdioma extends JFrame{
         assign_listenerComponents();
     }
 
+    /**
+     * Inicialitza el marc de la vista.
+     */
     private void iniFrame() {
         setSize(1000, 600);
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
@@ -62,6 +72,9 @@ public class VistaAfegirIdioma extends JFrame{
         setTitle("Afegir Idioma");
     }
 
+    /**
+     * Inicialitza el botó per sortir del programa.
+     */
     private void iniClose() {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre automático
 
@@ -81,6 +94,9 @@ public class VistaAfegirIdioma extends JFrame{
         });
     }
 
+    /**
+     * Inicialitza el botó per tornar enrere.
+     */
     private void iniEnrere() {
         panellContinguts.setLayout(new FlowLayout());
         panellContinguts.add(Enrere);
@@ -163,6 +179,11 @@ public class VistaAfegirIdioma extends JFrame{
         });
     }
 
+    /**
+     * Dirigeix les accions en funció del botó premut.
+     * @param e L'esdeveniment que activa aquesta funció
+     * @throws Exception
+     */
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {

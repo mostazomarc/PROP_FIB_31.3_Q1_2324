@@ -22,12 +22,19 @@ public class VistaElements extends JFrame {
     private JPanel panellContinguts = new JPanel();
     private String option;
 
+    /**
+     * Constructora de la vista.
+     */
     public VistaElements(String option) {
         this.option = option;
         setVisible(true);
         iniComponents(option);
     }
 
+    /**
+     * Defineix i afegeix els components i els seus contenidors, les característiques del JFrame i associa els listeners
+     * corresponents.
+     */
     private void iniComponents(String option) {
         iniFrame();
         iniClose();
@@ -36,6 +43,9 @@ public class VistaElements extends JFrame {
         assign_listenerComponents();
     }
 
+    /**
+     * Inicialitza el marc de la vista.
+     */
     private void iniFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
@@ -47,6 +57,9 @@ public class VistaElements extends JFrame {
         setResizable(false);
     }
 
+    /**
+     * Inicialitza el botó per sortir del programa.
+     */
     private void iniClose() {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre automático
 
@@ -66,6 +79,9 @@ public class VistaElements extends JFrame {
         });
     }
 
+    /**
+     * Inicialitza el botó per tornar enrere.
+     */
     private void iniEnrere() {
 
         panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
@@ -174,6 +190,11 @@ public class VistaElements extends JFrame {
         });
     }
 
+    /**
+     * Dirigeix les accions en funció del botó premut.
+     * @param e L'esdeveniment que activa aquesta funció
+     * @throws Exception
+     */
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (Enrere.equals(source)) {

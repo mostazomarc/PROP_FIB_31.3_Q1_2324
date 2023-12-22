@@ -41,7 +41,9 @@ public class VistaLlista extends JFrame {
     private JButton Guardar = new JButton("Guardar Canvis");
     private String filepath;
 
-
+    /**
+     * Constructora de la vista.
+     */
     public VistaLlista (String nomLl) throws LlistaFreqNoExisteix {
         nom = nomLl;
         setVisible(true);
@@ -62,6 +64,10 @@ public class VistaLlista extends JFrame {
         }
     }
 
+    /**
+     * Defineix i afegeix els components i els seus contenidors, les característiques del JFrame i associa els listeners
+     * corresponents.
+     */
     private void iniComponents() throws LlistaFreqNoExisteix {
         iniFrame();
         iniClose();
@@ -71,6 +77,9 @@ public class VistaLlista extends JFrame {
         assign_listenerComponents();
     }
 
+    /**
+     * Inicialitza el marc de la vista.
+     */
     private void iniFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
@@ -81,6 +90,9 @@ public class VistaLlista extends JFrame {
         setResizable(false);
     }
 
+    /**
+     * Inicialitza el botó per sortir del programa.
+     */
     private void iniClose() {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Evita el cierre automático
 
@@ -100,6 +112,9 @@ public class VistaLlista extends JFrame {
         });
     }
 
+    /**
+     * Inicialitza el botó per tornar enrere.
+     */
     private void iniEnrere() {
         panellContinguts.setLayout(new BoxLayout(panellContinguts, BoxLayout.Y_AXIS));
         panellContinguts.add(Box.createVerticalGlue());
@@ -242,6 +257,11 @@ public class VistaLlista extends JFrame {
         });
     }
 
+    /**
+     * Dirigeix les accions en funció del botó premut.
+     * @param e L'esdeveniment que activa aquesta funció
+     * @throws Exception
+     */
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
         if (ModificarLlista.equals(source)) {
