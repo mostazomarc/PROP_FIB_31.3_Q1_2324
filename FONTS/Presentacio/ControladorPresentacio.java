@@ -8,7 +8,7 @@ import Presentacio.views.*;
 import javax.swing.JOptionPane;
 
 /**
- * ControladorPresentacio es la classe que s'encarrega de comunicar la Vista amb el Controlador de Domini
+ * ControladorPresentacio es la classe que s'encarrega de comunicar les Vistes amb el Controlador de Domini
  */
 public class ControladorPresentacio {
     /**
@@ -18,7 +18,7 @@ public class ControladorPresentacio {
 
     /**
      * Creadora de ControladorPresentacio
-     * <p> S'obté el controlador de Domini i es crea i inicialitza una vista de terminal </p>
+     * <p> S'obté el controlador de Domini i es carrega la info del sistema </p>
      * @throws Exception si hi ha algun error en la inicialització
      */
     public ControladorPresentacio() throws Exception {
@@ -27,18 +27,30 @@ public class ControladorPresentacio {
         controladorDomini.carregarDadesSistema();
     }
 
+    /**
+     * Mostra un missatge d'error amb missatge missatge
+     * @param missatge El missatge a mostrar
+     */
     public static void mostraError(String missatge) {
         JOptionPane.showMessageDialog(null, missatge, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Mostra un missatge d'avis amb missatge missatge
+     * @param missatge El missatge a mostrar
+     */
     public static void mostraAvis(String missatge) {
         JOptionPane.showMessageDialog(null, missatge, "Avis", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Crida la funció getNomsIdiomes() del controlador de dominii
+     * @return llista amb els noms dels idiomes del sistema
+     */
     public static List<String> getNomsIdiomes() {return controladorDomini.getNomsIdiomes();}
 
     /**
-     * Crea un perfil amb nom nomPerfil i inicia la seva instància
+     * Crida la funció creaPerfil(nomPerfil) del controlador de domini
      * @param nomPerfil nom del perfil a crear i amb el que s'inicia la instancia
      * @throws Exception si hi ha algun error en la inicialització
      */
@@ -47,7 +59,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Canvia el perfil actual per el perfil amb nom nomPerfil
+     * Crida la funció canviarPerfil(nomPerfil) del controlador de domini
      * @param nomPerfil nom del perfil a canviar
      * @throws Exception si hi ha algun error en la inicialització
      */
@@ -55,19 +67,70 @@ public class ControladorPresentacio {
         controladorDomini.canviarPerfil(nomPerfil);
     }
 
-    public static void vistaPerfils() throws Exception { VistaPerfils vp = new VistaPerfils();}
-    public static void vistaCrearPerfil() throws Exception { VistaCrearPerfil vcp = new VistaCrearPerfil();}
+    /**
+     * Mostra en pantalla la vistaPerfils
+     */
+    public static void vistaPerfils() { VistaPerfils vp = new VistaPerfils();}
+    /**
+     * Mostra en pantalla la vistaCrearPerfil
+     */
+    public static void vistaCrearPerfil() { VistaCrearPerfil vcp = new VistaCrearPerfil();}
+    /**
+     * Mostra en pantalla la vistaPrincipal
+     */
     public static void vistaPrincipal() {
         VistaPrincipal vp = new VistaPrincipal();
     }
+    /**
+     * Mostra en pantalla la vistaCrearTeclat
+     */
     public static void vistaCrearTeclat() { VistaCrearTeclat vclp = new VistaCrearTeclat(); }
+
+    /**
+     * Mostra en pantalla la vistaTeclat
+     * @param nom nom del teclat a mostrar
+     * @throws ExcepcionsCreadorTeclat Si el teclat amb nom nom no existeix o hi ha algun problema en carregar-lo
+     */
     public static void vistaTeclat(String nom) throws ExcepcionsCreadorTeclat {VistaTeclat vt = new VistaTeclat(nom); }
+
+    /**
+     * Mostra en pantalla la vistaLlista
+     * @param nomLl nom de la llista a mostrar
+     * @throws LlistaFreqNoExisteix Si la llista amb nom nomLl no existeix
+     */
     public static void vistaLlista(String nomLl) throws LlistaFreqNoExisteix { VistaLlista v = new VistaLlista(nomLl); }
+
+    /**
+     * Mostra en pantalla la vistaAfegirLlista
+     */
     public static void vistaAfegirLlista() { VistaAfegirLlista v = new VistaAfegirLlista(); }
+
+    /**
+     * Mostra en pantalla la vistaIdioma
+     * @param nomI nom de l'idioma a mostrar
+     * @throws IdiomaNoExisteix Si l'idioma amb nom nomI no existeix
+     */
     public static void vistaIdioma(String nomI) throws IdiomaNoExisteix { VistaIdioma v = new VistaIdioma(nomI); }
+
+    /**
+     * Mostra en pantalla la vistaAfegirIdioma
+     */
     public static void vistaAfegirIdioma() { VistaAfegirIdioma v = new VistaAfegirIdioma(); }
+    /**
+     * Mostra en pantalla la vistaAfegirAlfabet
+     */
     public static void vistaAfegirAlfabet() { VistaAfegirAlfabet v = new VistaAfegirAlfabet(); }
+    /**
+     * Mostra en pantalla la vistaAlfabet
+     * @param nomA nom de l'alfabet a mostrar
+     * @throws AlfabetNoExisteix Si l'alfabet amb nom nomA no existeix
+     */
     public static void vistaAlfabet(String nomA) throws AlfabetNoExisteix { VistaAlfabet v = new VistaAlfabet(nomA); }
+
+    /**
+     * Mostra en pantalla la vistaElements
+     * @param option El tipus d'element a mostrar
+     */
     public static void vistaElements(String option) { VistaElements v = new VistaElements(option);}
 
 
@@ -76,7 +139,7 @@ public class ControladorPresentacio {
     //NORMAL
 
     /**
-     * Carrega les dades del sistema i del perfil
+     * Crida les funcions carregarDadesSistema() i carregarDadesPerfil() del controlador de domini
      * @throws Exception Si hi ha algun error en carregar les dades
      */
     public static void carregarDades()throws Exception{
@@ -85,7 +148,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Guarda les dades del sistema i del perfil
+     * Crida la funció guardaEstat() del controlador de domini
      */
     public static void guardaEstat() {
         controladorDomini.guardaEstat();
@@ -93,7 +156,7 @@ public class ControladorPresentacio {
 
 
     /**
-     * Obté el nom del perfil actual
+     * Criada la funció getPerfilActual() del controlador de domini
      * @return nom del perfil actual
      */
     public static String getPerfilActual() {
@@ -101,7 +164,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Obté una llista amb els noms d'usuari dels perfils
+     * Crida la funció getAllPerfils() del controlador de domini
      * @return llista amb els noms d'usuari dels perfils
      */
     public static List<String> getAllPerfils() {
@@ -111,7 +174,7 @@ public class ControladorPresentacio {
 
     //DADES
     /**
-     * Afegeix la informació de l'arxiu de llista de frequencies filename al Perfil Actual com una nova llista de frequencies
+     * Crida la funció novaLlistaPerfil(tipusArxiu, filepath, idioma, novesEntrades) del controlador de domini
      * @param tipusArxiu El tipus d'arxiu
      * @param filepath El path de l'arxiu
      * @param idioma El nom de l'idioma
@@ -123,7 +186,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Modifica l'informació de la llista de frequencies identificada per nomLlista del Perfil Actual amb les noves dades entrades
+     * Crida la funció modificarLlistaPerfil(tipusArxiu, pathArxiu, nomllista, novesEntrades) del controlador de domini
      * @param tipusArxiu El tipus d'arxiu
      * @param pathArxiu El path de l'arxiu
      * @param nomllista El nom de la llista de frequencies
@@ -135,7 +198,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Elimina la llista de frequencies amb nom nomLlista del Perfil Actual
+     * Crida la funció eliminarLlista(nomLlista) del controlador de domini
      * @param nomLlista El nom de la llista de frequencies
      * @throws ExcepcionsCreadorTeclat Si la llista amb nom nomLlista no existeix o no es pot eliminar
      */
@@ -144,7 +207,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Retorna els noms de les llistes de frequencies del Perfil Actual
+     * Crida la funció getNomLlistesGuardades() del controlador de domini
      * @return Els noms de les llistes de frequencies del Perfil Actual
      */
     public static List<String> getNomLlistesGuardades() {
@@ -152,7 +215,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Retorna el nom de l'idioma de la llista amb nom nomllista
+     * Crida la funció getNomIdiomaLlista(nomLlista) del controlador de domini
      * @param nomLlista El nom de la llista de frequencies
      * @return El nom de l'idioma de la llista amb nom nomllista
      * @throws LlistaFreqNoExisteix Si la llista amb nom nomLlista no existeix
@@ -162,7 +225,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Retorna el Map de paraules i frequencies de la llista amb nom nomSeleccio
+     * Crida la funció consultaLlista(nomSeleccio) del controlador de domini
      * @param nomSeleccio El nom de la llista de frequencies
      * @return El Map de paraules i frequencies de la llista amb nom nomSeleccio
      * @throws LlistaFreqNoExisteix Si la llista amb nom nomLlista no existeix
@@ -172,7 +235,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Retorna la info dels idiomes del sistema
+     * Crida la funció consultaIdiomes() del controlador de domini
      * @return La info dels idiomes del sistema
      */
     public static Vector<String> consultaIdiomes() {
@@ -180,7 +243,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Consulta la info dels alfabets guardats al sistema
+     * Crida la funció consultaAlfabets() del controlador de domini
      * @return La info dels alfabets guardats al sistema
      */
     public static Vector<String> consultaAlfabets() {
@@ -188,7 +251,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Afegeix l'alfabet de l'arxiu filename al sistema
+     * Crida la funció afegirAlfabet(filename) del controlador de domini
      * @param filename El nom de l'arxiu
      * @throws Exception Si no es pot llegir l'arxiu o no es pot afegir l'alfabet
      */
@@ -197,7 +260,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Elimina l'alfabet amb nom nomAlfabet del sistema
+     * Crida la funció eliminarAlfabet(nomAlfabet) del controlador de domini
      * @param nomAlfabet El nom de l'alfabet
      * @throws ExcepcionsCreadorTeclat Si l'alfabet amb nom nomAlfabet no existeix o no es pot eliminar
      */
@@ -206,7 +269,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Afegeix l'idioma amb nom nomIdioma, alfabet amb nom nomAlfabet i llista de frequencies creada amb les dades entrades
+     * Crida la funció afegirIdioma(nomIdioma, nomAlfabet, tipusArxiu, filename) del controlador de domini
      * @param nomIdioma El nom de l'idioma
      * @param nomAlfabet El nom de l'alfabet
      * @param tipusArxiu El tipus d'arxiu
@@ -218,7 +281,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Elimina l'idioma amb nom nomIdioma del sistema
+     * Crida la funció eliminarIdioma(nomIdioma) del controlador de domini
      * @param nomIdioma El nom de l'idioma
      * @throws ExcepcionsCreadorTeclat Si l'idioma amb nom nomIdioma no existeix o no es pot eliminar
      */
@@ -228,7 +291,7 @@ public class ControladorPresentacio {
 
     //TECLATS
     /**
-     * Retorna els noms dels teclats del Perfil Actual
+     * Crida la funció getNomsTeclats() del controlador de domini
      * @return Els noms dels teclats del Perfil Actual
      */
     public static List<String> getNomsTeclats() {
@@ -236,7 +299,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Retorna el nom de l'idioma del teclat identificat per nomt
+     * Crida la funció getNomIdiomaTeclat(nomt) del controlador de domini
      * @param nomt El nom del teclat
      * @return El nom de l'idioma del teclat identificat per nomt
      * @throws TeclatNoExisteix Si el teclat no existeix
@@ -246,7 +309,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Retorna el nom de la llista de frequencies del teclat identificat per nomt
+     * Crida la funció getNomLListaTeclat(nomt) del controlador de domini
      * @param nomt El nom del teclat
      * @return El nom de la llista de frequencies del teclat identificat per nomt
      * @throws TeclatNoExisteix Si el teclat no existeix
@@ -256,7 +319,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Retorna la disposició de lletres del teclat amb nom nomTeclat
+     * Crida la funció consultaTeclat(nomTeclat) del controlador de domini
      * @param nomSeleccio El nom del teclat
      * @return La disposició de lletres del teclat amb nom nomTeclat
      * @throws ExcepcionsCreadorTeclat Si el teclat amb nom nomTeclat no existeix
@@ -266,7 +329,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Modifica el layout del teclat identificat per nomTeclat amb n files i m columnes
+     * Crida la funció modificarLayoutTeclat(nomSeleccio, numf, numc) del controlador de domini
      * @param nomSeleccio El nom del teclat
      * @param numf El nombre de files
      * @param numc El nombre de columnes
@@ -277,7 +340,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Afegeix i crea un teclat amb nom nomTeclat, idioma amb nom nomIdioma, llista de frequencies amb nom nomLlistaFreq, n files i m columnes
+     * Crida la funció crearTeclatLlistaPropia(nomTeclat, nomIdioma, nomLlistaFreq, n, m, e) del controlador de domini
      * @param nomTeclat El nom del teclat
      * @param nomIdioma El nom de l'idioma
      * @param nomLlistaFreq El nom de la llista de frequencies
@@ -290,7 +353,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Afegeix i crea un teclat amb nom nomTeclat, idioma amb nom nomIdioma, la llista de l'idioma, n files i m columnes
+     * Crida la funció crearTeclatLlistaIdioma(nomTeclat, nomIdioma, n, m, e) del controlador de domini
      * @param nomTeclat El nom del teclat
      * @param nomIdioma El nom de l'idioma
      * @param n El nombre de files
@@ -302,7 +365,7 @@ public class ControladorPresentacio {
     }
 
     /**
-     * Elimina el teclat amb nom nomTeclat del Perfil Actual
+     * Crida la funció eliminarTeclat(nomSeleccio) del controlador de domini
      * @param nomSeleccio El nom del teclat
      * @throws ExcepcionsCreadorTeclat Si el teclat amb nom nomTeclat no existeix o no es pot eliminar
      */
@@ -310,17 +373,38 @@ public class ControladorPresentacio {
         controladorDomini.eliminarTeclat(nomSeleccio);
     }
 
+    /**
+     * Crida la funció consultaIdioma(nomI) del controlador de domini
+     * @param nomI El nom de l'idioma
+     * @return La info de l'idioma amb nom nomI
+     * @throws IdiomaNoExisteix Si l'idioma amb nom nomI no existeix
+     */
     public static String consultaIdioma(String nomI) throws IdiomaNoExisteix {
         return controladorDomini.consultaIdioma(nomI);
     }
 
+    /**
+     * Crida la funció consultaAlfabet(nomA) del controlador de domini
+     * @param nomA El nom de l'alfabet
+     * @return La info de l'alfabet amb nom nomA
+     * @throws AlfabetNoExisteix Si l'alfabet amb nom nomA no existeix
+     */
     public static String consultaAlfabet(String nomA) throws AlfabetNoExisteix {
         return controladorDomini.consultaAlfabet(nomA);
     }
+
+    /**
+     * Crida la funció getNomsAlfabets() del controlador de domini
+     * @return Els noms dels alfabets del sistema
+     */
     public static List<String> getNomsAlfabets()  {
         return controladorDomini.getNomsAlfabets();
     }
 
+    /**
+     * Crida la funció eliminaPerfil() del controlador de domini
+     * @throws ExcepcionsCreadorTeclat Si no es pot eliminar el perfil
+     */
     public static void eliminaPerfil() throws ExcepcionsCreadorTeclat {
         controladorDomini.eliminaPerfil();
     }
