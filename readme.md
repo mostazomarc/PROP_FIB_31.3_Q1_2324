@@ -41,7 +41,7 @@ Projecte de l'assignatura PROP de la FIB.
   - Per netejar les **classes compilades** del projecte s'ha de fer `make clean` al directori root
   - Per netejar els **fitxers amb dades del sistema** s'ha de fer `make cleanSaves` al directori root
   - Per netejar **l'executable del projecte** a `./EXE/Main` s'ha de fer `make cleanExe` al directori root
-  - Per netejar **tots els arxius comilats a `./EXEnoEntrega/`** s'ha de fer `make distclean` al directori root
+  - Per netejar **tots els arxius comilats** a `./EXEnoEntrega/` s'ha de fer `make distclean` al directori root
 
 # Estructura del Projecte
 
