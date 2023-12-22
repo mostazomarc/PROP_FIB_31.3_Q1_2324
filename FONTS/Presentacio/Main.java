@@ -13,7 +13,7 @@ import java.awt.event.*;
  * <p> Inicia el controlador presentació i la primera vista del programa</p>
  */
 public class Main{
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args)  throws Exception{
         javax.swing.SwingUtilities.invokeLater (
                 new Runnable() {
                     public void run() {

@@ -51,6 +51,8 @@ public class VistaAlfabet extends JFrame {
 
     /**
      * Constructora de la vista.
+     * @param nomA El nom de l'alfabet
+     * @throws AlfabetNoExisteix Si no existeix l'alfabet identificat per nom
      */
     public VistaAlfabet (String nomA) throws AlfabetNoExisteix {
         nom = nomA;
@@ -61,6 +63,7 @@ public class VistaAlfabet extends JFrame {
     /**
      * Defineix i afegeix els components i els seus contenidors, les característiques del JFrame i associa els listeners
      * corresponents.
+     * @throws AlfabetNoExisteix Si no existeix l'alfabet identificat per nom
      */
     private void iniComponents() throws AlfabetNoExisteix {
         iniFrame();
@@ -138,13 +141,13 @@ public class VistaAlfabet extends JFrame {
      */
     private void iniAlfabet() throws AlfabetNoExisteix {
         String info = ControladorPresentacio.consultaAlfabet(nom);
-        AlfabettextArea.setText(info); // Establecer el texto en el JTextArea
-        AlfabettextArea.setEditable(false); // Para evitar la edición
-        AlfabettextArea.setFont(new Font("Arial", Font.PLAIN, 14)); // Cambia la fuente si es necesario
-        AlfabettextArea.setWrapStyleWord(true); // Ajusta el ajuste de palabras
-        AlfabettextArea.setLineWrap(true); // Permite el ajuste de línea
-        AlfabettextArea.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineación horizontal
-        AlfabettextArea.setAlignmentY(Component.CENTER_ALIGNMENT); // Alineación vertical
+        AlfabettextArea.setText(info);
+        AlfabettextArea.setEditable(false);
+        AlfabettextArea.setFont(new Font("Arial", Font.PLAIN, 14));
+        AlfabettextArea.setWrapStyleWord(true);
+        AlfabettextArea.setLineWrap(true);
+        AlfabettextArea.setAlignmentX(Component.CENTER_ALIGNMENT);
+        AlfabettextArea.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         scrollPanel.setViewportView(AlfabettextArea);
         panellContinguts.add(Box.createVerticalGlue());
@@ -182,7 +185,7 @@ public class VistaAlfabet extends JFrame {
     /**
      * Dirigeix les accions en funció del botó premut.
      * @param e L'esdeveniment que activa aquesta funció
-     * @throws Exception
+     * @throws Exception Si l'alfabet identificat per nom no existeix
      */
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
