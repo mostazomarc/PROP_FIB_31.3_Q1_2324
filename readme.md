@@ -1,6 +1,8 @@
 # PROP_FIB
 Projecte de l'assignatura PROP de la FIB.
 
+> Repositori GitLab: https://repo.fib.upc.es/grau-prop/subgrup-prop31.3
+
 ## Participants
 - Mostazo González, Marc
 - Tajahuerce Brulles, Arnau
@@ -15,6 +17,7 @@ Projecte de l'assignatura PROP de la FIB.
 
 > Les seguents instruccions són per utilitzar el makefile del root del projecte, tot i que, les que serveixen per compilar són aplicables al makefile del directori `./FONTS`.
 ## Instruccions per compilar i executar el projecte
+> Per executar l'entrega fer `java -cp ./EXE/Main/Main.jar:./FONTS/lib/json-simple-1.1.jar Presentacio.Main` al directori root
 - **Compilar**
   - **Entregable**
     - Per compilar el projecte **al directori `./EXE/Main` (directori entrega)** s'ha de fer `make exe` al directori root
