@@ -355,7 +355,7 @@ public class VistaCrearTeclat extends JFrame {
                 int nc = Integer.parseInt(inputNC.getText());
                 String estrategia = (String) inputAlgorisme.getSelectedItem();
                 if (Objects.equals(estrategia, null)) {
-                    ControladorPresentacio.mostraAvis("No s'ha seleccionat cap estrategia");
+                    ControladorPresentacio.mostraAvis("No s'ha seleccionat cap algorisme");
                     return;
                 }
                 if (Si.isSelected()) {
