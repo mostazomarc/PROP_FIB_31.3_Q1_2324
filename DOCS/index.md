@@ -1,0 +1,5 @@
+## DOCS/
+Aquest directori conté tota la documentació de la 3a entrega.
+
+- **Javadoc/**
+    - Aquest directori conté la documentació de la 3a entrega en format Javadoc.
