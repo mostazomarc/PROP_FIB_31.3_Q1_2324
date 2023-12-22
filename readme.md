@@ -14,7 +14,7 @@ Projecte de l'assignatura PROP de la FIB.
 - francisco.torredemer@estudiantat.upc.edu
 
 > Les seguents instruccions són per utilitzar el makefile del root del projecte, tot i que, les que serveixen per compilar són aplicables al makefile del directori `./FONTS`.
-## Instruccions per compilar i executar projecte
+## Instruccions per compilar i executar el projecte
 - **Compilar**
   - **Entregable**
     - Per compilar el projecte **al directori `./EXE/Main` (directori entrega)** s'ha de fer `make exe` al directori root
