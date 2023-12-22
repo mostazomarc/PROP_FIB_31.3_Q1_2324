@@ -165,6 +165,11 @@ public class Genetic extends Estrategia{
 
         //la mejor solución a la que hemos llegado
         char[][] solucio = new char[n_filas][n_columnas];
+        for(int i = 0; i < n_filas; ++i){
+            for(int j = 0; j < n_columnas; ++j){
+                solucio[i][j] = ' ';
+            }
+        }
         Nodo_genetic mejor_nodo = poblacion.first();
 
         for(Map.Entry<Character, Integer> entry : mejor_nodo.disposicio.entrySet()){
