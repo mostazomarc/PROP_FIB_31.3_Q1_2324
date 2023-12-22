@@ -1,1 +1,1 @@
-[{"nomUsuari":"Agus","teclats":[]},{"nomUsuari":"Arnau","teclats":[]},{"nomUsuari":"Paco","teclats":[]},{"nomUsuari":"Marc","teclats":[{"nomIdioma":"Català","disposicio":[["z","q","l","s","u","b","k"],["y","t","a","e","r","g","ç"],["h","v","n","i","o","p","w"],["j","m","d","f","c","x"," "]],"estrategia":"BranchAndBound","nomLlistaFreq":"LlistaPredCatalà","dimY":7,"nomTeclat":"agus","dimX":4}]}]
+[{"nomUsuari":"Agus","teclats":[]},{"nomUsuari":"Paco","teclats":[]},{"nomUsuari":"Arnau","teclats":[]},{"nomUsuari":"Carles","teclats":[]},{"nomUsuari":"Marc","teclats":[]}]
