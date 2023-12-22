@@ -22,8 +22,6 @@ Conte les llibreries necessaries per executar els tests, junit i hamcrest-core; 
 Presentacio/
 Conte els .java de les classes de la capa de presentacio
 
-Stubs/
-Conte els stubs utilitzats per provar el programa
 
 makefile
 Conte les ordres per compilar i executar el projecte
