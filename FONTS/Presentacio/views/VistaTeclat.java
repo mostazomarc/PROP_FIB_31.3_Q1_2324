@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-import static java.lang.Math.max;
+
 
 /**
  * Aquesta vista és l’encarregada de mostrar la informació del teclat amb el nom indicat a l’atribut de la classe. En
@@ -338,7 +338,7 @@ public class VistaTeclat extends JFrame {
             }catch (ExcepcionsCreadorTeclat ex) {
                 ControladorPresentacio.mostraError(ex.getMessage());
             }catch (NumberFormatException ex) {
-                ControladorPresentacio.mostraError("No és correcte el format del número de files i/o columnes, ha d'introduir un número en els dos camps");
+                ControladorPresentacio.mostraError("No és correcte el format del número de files i/o columnes, ha d'introduir un nombre en els dos camps");
             }
         }
         else if (Eliminar.equals(source)) {
