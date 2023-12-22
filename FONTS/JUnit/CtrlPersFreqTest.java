@@ -152,6 +152,7 @@ public class CtrlPersFreqTest {
 
     /**
      * Prova de afegirLlistaFreq
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void afegirLlistaFreq() throws Exception {
@@ -166,7 +167,7 @@ public class CtrlPersFreqTest {
 
     /**
      * Prova de eliminaLlistaFreq
-     * @throws Exception
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void eliminaLlistaFreq() throws Exception {
@@ -184,6 +185,7 @@ public class CtrlPersFreqTest {
 
     /**
      * Prova de afegirLlistaDuplicada
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void afegirLlistaDuplicada() throws Exception {
@@ -201,6 +203,7 @@ public class CtrlPersFreqTest {
 
     /**
      * Prova de eliminaLlistaInexistent
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void eliminaLlistaInexistent() throws Exception {
@@ -215,6 +218,7 @@ public class CtrlPersFreqTest {
 
     /**
      * Prova de comprovarUsIdioma
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void comprovarUsIdioma() throws Exception {
@@ -232,6 +236,7 @@ public class CtrlPersFreqTest {
 
     /**
      * Prova de getLlistaFreq
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void getLlistaFreq() throws Exception {

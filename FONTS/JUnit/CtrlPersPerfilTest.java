@@ -106,6 +106,7 @@ public class CtrlPersPerfilTest {
 
     /**
      * Comprova que es pot afegir un perfil
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void afegirPerfil() throws Exception {
@@ -117,6 +118,7 @@ public class CtrlPersPerfilTest {
 
     /**
      * Comprova que es pot obtenir un perfil
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void getPerfil() throws Exception {
@@ -128,6 +130,7 @@ public class CtrlPersPerfilTest {
 
     /**
      * Comprova que no es pot obtenir un perfil inexistent
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void getPerfilInexistent() throws Exception {
@@ -142,6 +145,7 @@ public class CtrlPersPerfilTest {
 
     /**
      * Comprova que es poden obtenir tots els perfils
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void getAllPerfils() throws Exception {
@@ -156,6 +160,7 @@ public class CtrlPersPerfilTest {
 
     /**
      * Comprova que es pot canviar de perfil
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void canviarPerfils() throws Exception {
@@ -168,6 +173,7 @@ public class CtrlPersPerfilTest {
 
     /**
      * Comprova que no es pot crear un perfil duplicat
+     * @throws ExcepcionsCreadorTeclat Si salta una excepció
      */
     @Test(expected=PerfilJaExisteix.class)
     public void perfilDuplicat() throws ExcepcionsCreadorTeclat {

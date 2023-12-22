@@ -83,6 +83,7 @@ public class CtrlPersTeclatsTest {
 
     /**
      * S'omple la llistaParaulesProva y es crea una llista i un teclat de prova
+     * @throws Exception Si salta una excepció
      */
     @Before
     public void CrearTeclat() throws Exception {
@@ -113,6 +114,7 @@ public class CtrlPersTeclatsTest {
 
     /**
      * S'eliminen les llistes creades per poder tornarles a crear
+     * @throws Exception Si salta una excepció
      */
     @After
     public void eliminarLlistaProva() throws Exception {
@@ -142,6 +144,7 @@ public class CtrlPersTeclatsTest {
 
     /**
      * Comprova que es pot afegir un teclat
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void afegirTeclat() throws Exception {
@@ -154,6 +157,7 @@ public class CtrlPersTeclatsTest {
 
     /**
      * Comprova que no es pot afegir un teclat duplicat
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void afegirTeclatDuplicat() throws Exception {
@@ -168,6 +172,7 @@ public class CtrlPersTeclatsTest {
 
     /**
      * Comprova que es pot eliminar un teclat
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void eliminaTeclat() throws Exception {
@@ -183,6 +188,7 @@ public class CtrlPersTeclatsTest {
 
     /**
      * Comprova que no es pot eliminar un teclat inexistent
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void eliminaTeclatInexistent() throws Exception {
@@ -196,6 +202,7 @@ public class CtrlPersTeclatsTest {
 
     /**
      * Comprova la funció comprovarUsIdioma
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void comprovarUsIdioma() throws Exception {
@@ -210,6 +217,7 @@ public class CtrlPersTeclatsTest {
 
     /**
      * Comprova la funció comprovarUsLlista
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void comprovarUsLlista() throws Exception {
@@ -224,6 +232,7 @@ public class CtrlPersTeclatsTest {
 
     /**
      * Comprova que es pot obtenir un teclat
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void getTeclat() throws Exception {
@@ -236,6 +245,7 @@ public class CtrlPersTeclatsTest {
 
     /**
      * Comprova que no es pot obtenir un teclat inexistent
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void getTeclatInexistent() throws Exception {

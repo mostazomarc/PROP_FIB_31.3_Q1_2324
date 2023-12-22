@@ -149,6 +149,7 @@ public class PerfilTest {
 
     /**
      * Testeja afegirLlistaFreq
+     * @throws ExcepcionsCreadorTeclat Si salta una excepció
      */
     @Test
     public void afegirLlistaFreq() throws ExcepcionsCreadorTeclat {
@@ -161,6 +162,7 @@ public class PerfilTest {
 
     /**
      * Testeja crearLlistaFreq
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void crearLlistaFreq() throws Exception {
@@ -176,6 +178,7 @@ public class PerfilTest {
 
     /**
      * Testeja eliminarLlistaFreq
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void eliminarLlistaFreq() throws Exception {
@@ -190,6 +193,7 @@ public class PerfilTest {
 
     /**
      * Testeja getNomAllLlistes
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void getNomAllLlistes() throws Exception {
@@ -212,6 +216,7 @@ public class PerfilTest {
 
     /**
      * Testeja getNomIdiomaLlista
+     * @throws ExcepcionsCreadorTeclat Si salta una excepció
      */
     @Test
     public void getNomIdiomaLlista() throws ExcepcionsCreadorTeclat {
@@ -221,6 +226,7 @@ public class PerfilTest {
 
     /**
      * Testeja consultarLlista
+     * @throws ExcepcionsCreadorTeclat Si salta una excepció
      */
     @Test
     public void consultarLlista() throws ExcepcionsCreadorTeclat {
@@ -231,6 +237,7 @@ public class PerfilTest {
 
     /**
      * Testeja crearTeclatLlistaPropia
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void crearTeclatLlistaPropia() throws Exception {
@@ -243,6 +250,7 @@ public class PerfilTest {
 
     /**
      * Testeja crearTeclatLlistaIdioma
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void crearTeclatLlistaIdioma() throws Exception {
@@ -263,6 +271,7 @@ public class PerfilTest {
 
     /**
      * Testeja eliminarTeclat
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void eliminaTeclat() throws Exception {
@@ -275,6 +284,7 @@ public class PerfilTest {
 
     /**
      * Testeja modificarllista
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void modificarllista() throws Exception {
@@ -293,6 +303,7 @@ public class PerfilTest {
 
     /**
      * Testeja excepcio crear dos llistes amb el mateix nom
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void llistesMateixNom() throws Exception {
@@ -307,6 +318,7 @@ public class PerfilTest {
 
     /**
      * Testeja excepcio crear dos teclats amb el mateix nom
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void teclatsMateixNom() throws Exception {
@@ -324,7 +336,7 @@ public class PerfilTest {
      * Testeja excepcio eliminar teclat que no existeix
      */
     @Test
-    public void eliminaTeclatInexistent() throws Exception {
+    public void eliminaTeclatInexistent() {
         try {
             perfilProva.eliminarTeclat("teclat");
             fail();
@@ -335,6 +347,7 @@ public class PerfilTest {
 
     /**
      * Testeja excepcio eliminar llista que no existeix
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void eliminaLlistaInexistent() throws Exception {
@@ -349,6 +362,7 @@ public class PerfilTest {
 
     /**
      * Testeja excepcio modificar llista que no existeix
+     * @throws Exception Si salta una excepció
      */
     @Test
     public void modificaLlistaInexistent() throws Exception {

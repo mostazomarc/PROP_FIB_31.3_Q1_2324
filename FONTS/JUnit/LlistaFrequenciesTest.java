@@ -122,6 +122,7 @@ public class LlistaFrequenciesTest {
 
     /**
      * Comprova que es crea una llista amb nom, idioma i llista de paraules i frequencies
+     * @throws ExcepcionsCreadorTeclat Si salta una excepció
      */
     @Test
     //Creadora LLista amb nom i Llista de paraules i getFrequencies
@@ -146,7 +147,7 @@ public class LlistaFrequenciesTest {
 
     /**
      * Comprova Excepcio LletraNoInclosa
-     * @throws LletraNoInclosa
+     * @throws ExcepcionsCreadorTeclat Si salta una excepció
      */
     @Test
     public void llistaLletresNoIdioma() throws ExcepcionsCreadorTeclat {
@@ -161,7 +162,7 @@ public class LlistaFrequenciesTest {
 
     /**
      * Comprova Excepcio LlistaBuida
-     * @throws LlistaBuida
+     * @throws ExcepcionsCreadorTeclat Si salta una excepció
      */
     @Test
     public void llistaBuida() throws ExcepcionsCreadorTeclat {
