@@ -97,8 +97,6 @@ Projecte de l'assignatura PROP de la FIB.
             - Conte les llibreries necessàries per executar els tests, junit i hamcrest-core; i per utilitzar els `.json`.
         - **Presentacio/**
             - Conte els `.java` de les classes de la capa de presentació.
-        - **Stubs/**
-            - Conte els stubs utilitzats per provar el programa.
         - **makefile**
             - Conte les ordres per compilar i executar el projecte.
 
