@@ -250,7 +250,7 @@ public class VistaAfegirIdioma extends JFrame{
     /**
      * Dirigeix les accions en funció del botó premut.
      * @param e L'esdeveniment que activa aquesta funció
-     * @throws Exception
+     * @throws Exception Si hi ha algun problema
      */
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();

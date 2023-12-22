@@ -183,9 +183,8 @@ public class VistaPerfils extends JFrame {
     /**
      * Dirigeix les accions en funció del botó premut.
      * @param e L'esdeveniment que activa aquesta funció
-     * @throws Exception
      */
-    public void actionPerformedButtons(ActionEvent e) throws Exception {
+    public void actionPerformedButtons(ActionEvent e) {
         Object source = e.getSource();
         if (AP.equals(source)) {
 

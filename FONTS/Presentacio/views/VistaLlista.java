@@ -102,7 +102,9 @@ public class VistaLlista extends JFrame {
     private String filepath;
 
     /**
-     * Constructora de la vista.
+     * Contructora de la vista.
+     * @param nomLl El nom de la llista de freqüències
+     * @throws LlistaFreqNoExisteix Si la llista de freqüències identificada per nom no existeix
      */
     public VistaLlista (String nomLl) throws LlistaFreqNoExisteix {
         nom = nomLl;
@@ -127,7 +129,10 @@ public class VistaLlista extends JFrame {
     /**
      * Defineix i afegeix els components i els seus contenidors, les característiques del JFrame i associa els listeners
      * corresponents.
+     * @throws LlistaFreqNoExisteix Si la llista de freqüències identificada per nom no existeix
      */
+
+
     private void iniComponents() throws LlistaFreqNoExisteix {
         iniFrame();
         iniClose();
@@ -183,6 +188,9 @@ public class VistaLlista extends JFrame {
         add(Enrere);
     }
 
+    /**
+     * Inicialitza els botons de modificar llista, editar manualment, i eliminar
+     */
     private void iniButtons() {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -323,7 +331,7 @@ public class VistaLlista extends JFrame {
     /**
      * Dirigeix les accions en funció del botó premut.
      * @param e L'esdeveniment que activa aquesta funció
-     * @throws Exception
+     * @throws Exception Si hi ha algun problema
      */
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();

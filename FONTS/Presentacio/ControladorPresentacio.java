@@ -55,8 +55,8 @@ public class ControladorPresentacio {
         controladorDomini.canviarPerfil(nomPerfil);
     }
 
-    public static void vistaPerfils() throws Exception { VistaPerfils vp = new VistaPerfils();}
-    public static void vistaCrearPerfil() throws Exception { VistaCrearPerfil vcp = new VistaCrearPerfil();}
+    public static void vistaPerfils()  { VistaPerfils vp = new VistaPerfils();}
+    public static void vistaCrearPerfil()  { VistaCrearPerfil vcp = new VistaCrearPerfil();}
     public static void vistaPrincipal() {
         VistaPrincipal vp = new VistaPrincipal();
     }
