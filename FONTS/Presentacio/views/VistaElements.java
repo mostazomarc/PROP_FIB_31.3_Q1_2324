@@ -40,19 +40,19 @@ public class VistaElements extends JFrame {
 
     /**
      * Constructora de la vista.
+     * @param option L'opció de la vista. Hi ha 4: Teclats, Llistes, Idiomes i Alfabets
      */
     public VistaElements(String option) {
         this.option = option;
         setVisible(true);
-        iniComponents(option);
+        iniComponents();
     }
 
     /**
      * Defineix i afegeix els components i els seus contenidors, les característiques del JFrame i associa els listeners
      * corresponents.
      */
-    private void iniComponents(String option) {
-        this.option = option;
+    private void iniComponents() {
         iniFrame();
         iniClose();
         iniEnrere();
@@ -213,7 +213,7 @@ public class VistaElements extends JFrame {
     /**
      * Dirigeix les accions en funció del botó premut.
      * @param e L'esdeveniment que activa aquesta funció
-     * @throws Exception
+     * @throws Exception Si hi ha algun problema
      */
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();

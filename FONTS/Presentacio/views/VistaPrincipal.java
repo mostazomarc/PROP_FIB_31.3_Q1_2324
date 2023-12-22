@@ -227,9 +227,8 @@ public class VistaPrincipal extends JFrame{
     /**
      * Dirigeix les accions en funció del botó premut.
      * @param e L'esdeveniment que activa aquesta funció
-     * @throws Exception
      */
-    public void actionPerformed_buttons (ActionEvent e) throws Exception {
+    public void actionPerformed_buttons (ActionEvent e)  {
         Object source = e.getSource();
         if (Teclats.equals(source)) {
             ControladorPresentacio.vistaElements("Teclats");

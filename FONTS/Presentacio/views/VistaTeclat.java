@@ -80,6 +80,8 @@ public class VistaTeclat extends JFrame {
 
     /**
      * Constructora de la vista.
+     * @param nomTeclat El nom del teclat
+     * @throws ExcepcionsCreadorTeclat Si el teclat identificat per nom no existeix
      */
     public VistaTeclat (String nomTeclat) throws ExcepcionsCreadorTeclat {
         nom = nomTeclat;
@@ -90,6 +92,7 @@ public class VistaTeclat extends JFrame {
     /**
      * Defineix i afegeix els components i els seus contenidors, les característiques del JFrame i associa els listeners
      * corresponents.
+     * @throws ExcepcionsCreadorTeclat Si el teclat identificat per nom no existeix
      */
     private void iniComponents() throws ExcepcionsCreadorTeclat {
         iniFrame();
@@ -309,7 +312,7 @@ public class VistaTeclat extends JFrame {
     /**
      * Dirigeix les accions en funció del botó premut.
      * @param e L'esdeveniment que activa aquesta funció
-     * @throws Exception
+     * @throws Exception Si hi ha algun problema
      */
     public void actionPerformed_buttons (ActionEvent e) throws Exception {
         Object source = e.getSource();
