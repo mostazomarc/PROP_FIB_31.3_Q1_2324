@@ -346,6 +346,7 @@ public class ControladorPresentacio {
      * @param nomLlistaFreq El nom de la llista de frequencies
      * @param n El nombre de files
      * @param m El nombre de columnes
+     * @param e El nom de l'estrategia
      * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix o no es pot afegir el teclat
      */
     public static void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, Integer n, Integer m, String e) throws ExcepcionsCreadorTeclat {
@@ -358,6 +359,7 @@ public class ControladorPresentacio {
      * @param nomIdioma El nom de l'idioma
      * @param n El nombre de files
      * @param m El nombre de columnes
+     * @param e El nom de l'estrategia
      * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix o no es pot afegir el teclat
      */
     public static void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, Integer n, Integer m, String e) throws  ExcepcionsCreadorTeclat {

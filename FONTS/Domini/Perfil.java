@@ -154,6 +154,7 @@ public class Perfil {
      * @param idioma L'idioma del teclat
      * @param n El nombre de files del teclat
      * @param m El nombre de columnes del teclat
+     * @param e L'estrategia del teclat
      * @return El teclat creat
      * @throws ExcepcionsCreadorTeclat Si la llista no existeix o si el teclat ja existeix
      * @throws TeclatJaExisteix Si el teclat ja existeix
@@ -173,6 +174,7 @@ public class Perfil {
      * @param i L'idioma del teclat
      * @param n El nombre de files del teclat
      * @param m El nombre de columnes del teclat
+     * @param e L'estrategia del teclat
      * @return El teclat creat
      * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix
      * @throws TeclatJaExisteix Si el teclat ja existeix

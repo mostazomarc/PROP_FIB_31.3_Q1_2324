@@ -163,7 +163,7 @@ public class CtrlDomini {
 
     /**
      * Elimina el perfilActual i totes les seves llistes i teclats
-     * @throws ExcepcionsCreadorTeclat
+     * @throws ExcepcionsCreadorTeclat Si no es pot eliminar el perfil
      */
     public void eliminaPerfil() throws ExcepcionsCreadorTeclat {
         String nom = PerfilActual.getUsuari();
@@ -497,6 +497,7 @@ public class CtrlDomini {
      * @param nomLlistaFreq El nom de la llista de frequencies
      * @param n El nombre de files
      * @param m El nombre de columnes
+     * @param e L'estrategia per confeccionar el teclat
      * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix o no es pot afegir el teclat
      */
     public void crearTeclatLlistaPropia(String nomTeclat, String nomIdioma, String nomLlistaFreq, int n, int m, String e) throws ExcepcionsCreadorTeclat{
@@ -512,6 +513,7 @@ public class CtrlDomini {
      * @param nomIdioma El nom de l'idioma
      * @param n El nombre de files
      * @param m El nombre de columnes
+     * @param e L'estrategia per confeccionar el teclat
      * @throws ExcepcionsCreadorTeclat Si el teclat ja existeix o no es pot afegir el teclat
      */
     public void crearTeclatLlistaIdioma(String nomTeclat, String nomIdioma, int n, int m, String e) throws ExcepcionsCreadorTeclat{

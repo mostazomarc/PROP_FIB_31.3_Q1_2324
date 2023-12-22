@@ -122,7 +122,7 @@ public class CtrlPersPerfil {
      * Canvia a un perfil del conjunt de perfils
      * @param nomPerfil El nom del perfil
      * @return El perfil creat/carregat
-     * @throws PerfilJaExisteix Si el perfil ja existeix
+     * @throws PerfilNoExisteix Si el perfil no existeix
      */
     public Perfil canviaPerfil(String nomPerfil) throws PerfilNoExisteix {
         if (!perfils.containsKey(nomPerfil)) throw new PerfilNoExisteix(nomPerfil);
@@ -135,6 +135,7 @@ public class CtrlPersPerfil {
      * Crea, guarda un perfil i canvia a ell
      * @param nomPerfil El nom del perfil
      * @throws PerfilJaExisteix Si el perfil ja existeix
+     * @return El perfil creat
      */
     public Perfil afegirPerfil(String nomPerfil) throws ExcepcionsCreadorTeclat {
         if (perfilExisteix(nomPerfil)) throw new PerfilJaExisteix(nomPerfil);
@@ -171,6 +172,7 @@ public class CtrlPersPerfil {
     /**
      * Obté el perfil actual
      * @return El perfil actual null si no hi ha cap perfil actual
+     * @throws PerfilNoExisteix Si el perfil no existeix
      */
     public Perfil getPerfilActual() throws PerfilNoExisteix{
         return perfilActual;
